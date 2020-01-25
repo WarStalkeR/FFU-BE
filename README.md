@@ -1,7 +1,7 @@
 # Fight For Universe: Bleeding Edge
 **Fight For Universe: Bleeding Edge** is a mod that extends original **Shortest Trip to Earth** in many different ways. Gameplay was changed considerably, new features that game never had, were implemented and some original features that were not used (such as reactor overcharge) were re-implemented back. Mod currently in beta release, which means that I've implemented everything I wanted, but there are still some bug fixing and balancing issues that might arise.
 
-### Bleeding Edge Features:
+#### Bleeding Edge Features:
 **Total Gameplay Rebalance** - every ship, module and crew-member got their stats and parameters changed, categorized, specialized and assigned specific role.
 **Tactical Space Battles** - with rebalance of all space battles between ships became slow paced and more profitable. Now you have time to send boarding parties while sipping tea.
 **Modules Specialization & Roles** - every module type is specialized and assigned strict category and role. No more useless module types.
