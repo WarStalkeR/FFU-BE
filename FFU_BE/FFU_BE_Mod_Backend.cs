@@ -332,20 +332,20 @@ namespace RST.UI {
 		private extern void orig_Update();
 		//Spam Reduction Timers & Modified Interface
 		private void Update() {
-			//FFU_BE_Mod_Performance.timePassedOrganics += Time.unscaledDeltaTime;
-			//FFU_BE_Mod_Performance.timePassedFuel += Time.unscaledDeltaTime;
-			//FFU_BE_Mod_Performance.timePassedMetals += Time.unscaledDeltaTime;
-			//FFU_BE_Mod_Performance.timePassedSynthetics += Time.unscaledDeltaTime;
-			//FFU_BE_Mod_Performance.timePassedExplosives += Time.unscaledDeltaTime;
-			//FFU_BE_Mod_Performance.timePassedExotics += Time.unscaledDeltaTime;
-			//FFU_BE_Mod_Performance.timePassedCredits += Time.unscaledDeltaTime;
-			//if (FFU_BE_Mod_Performance.timePassedOrganics > 10000f) FFU_BE_Mod_Performance.timePassedOrganics = 50f;
-			//if (FFU_BE_Mod_Performance.timePassedFuel > 10000f) FFU_BE_Mod_Performance.timePassedFuel = 50f;
-			//if (FFU_BE_Mod_Performance.timePassedMetals > 10000f) FFU_BE_Mod_Performance.timePassedMetals = 50f;
-			//if (FFU_BE_Mod_Performance.timePassedSynthetics > 10000f) FFU_BE_Mod_Performance.timePassedSynthetics = 50f;
-			//if (FFU_BE_Mod_Performance.timePassedExplosives > 10000f) FFU_BE_Mod_Performance.timePassedExplosives = 50f;
-			//if (FFU_BE_Mod_Performance.timePassedExotics > 10000f) FFU_BE_Mod_Performance.timePassedExotics = 50f;
-			//if (FFU_BE_Mod_Performance.timePassedCredits > 10000f) FFU_BE_Mod_Performance.timePassedCredits = 50f;
+			FFU_BE_Mod_Backend.timePassedOrganics += Time.unscaledDeltaTime;
+			FFU_BE_Mod_Backend.timePassedFuel += Time.unscaledDeltaTime;
+			FFU_BE_Mod_Backend.timePassedMetals += Time.unscaledDeltaTime;
+			FFU_BE_Mod_Backend.timePassedSynthetics += Time.unscaledDeltaTime;
+			FFU_BE_Mod_Backend.timePassedExplosives += Time.unscaledDeltaTime;
+			FFU_BE_Mod_Backend.timePassedExotics += Time.unscaledDeltaTime;
+			FFU_BE_Mod_Backend.timePassedCredits += Time.unscaledDeltaTime;
+			if (FFU_BE_Mod_Backend.timePassedOrganics > 10000f) FFU_BE_Mod_Backend.timePassedOrganics = 50f;
+			if (FFU_BE_Mod_Backend.timePassedFuel > 10000f) FFU_BE_Mod_Backend.timePassedFuel = 50f;
+			if (FFU_BE_Mod_Backend.timePassedMetals > 10000f) FFU_BE_Mod_Backend.timePassedMetals = 50f;
+			if (FFU_BE_Mod_Backend.timePassedSynthetics > 10000f) FFU_BE_Mod_Backend.timePassedSynthetics = 50f;
+			if (FFU_BE_Mod_Backend.timePassedExplosives > 10000f) FFU_BE_Mod_Backend.timePassedExplosives = 50f;
+			if (FFU_BE_Mod_Backend.timePassedExotics > 10000f) FFU_BE_Mod_Backend.timePassedExotics = 50f;
+			if (FFU_BE_Mod_Backend.timePassedCredits > 10000f) FFU_BE_Mod_Backend.timePassedCredits = 50f;
 			orig_Update();
 			researchCreditsBonus.text = FFU_BE_Mod_Technology.GetCraftChanceText().Replace("MK-", string.Empty).Replace(": ", string.Empty).Replace("I", string.Empty).Replace("V", string.Empty).Replace("X", string.Empty);
 			for (int i = 0; i < researchCreditsBonus.transform.childCount; i++) researchCreditsBonus.transform.GetChild(i).gameObject.SetActive(false);
@@ -425,58 +425,58 @@ namespace RST.UI {
 				return result;
 			}
 			private void FireRaisingText(GameObject posGO, int value, int lastValue, List<string> reasons, string name) {
-				/*ResourceValueGroup pData = PlayerDatas.Me != null ? PlayerDatas.Me.Resources : ResourceValueGroup.Empty;
+				ResourceValueGroup pData = PlayerDatas.Me != null ? PlayerDatas.Me.Resources : ResourceValueGroup.Empty;
 				switch (name) {
 					case "organics":
-					if (FFU_BE_ModPerformance.timePassedOrganics >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_ModPerformance.timePassedOrganics = 0f;
-						lastValue = FFU_BE_ModPerformance.lastValueOrganics;
-						FFU_BE_ModPerformance.lastValueOrganics = (int)pData.organics;
+					if (FFU_BE_Mod_Backend.timePassedOrganics >= FFU_BE_Defs.timePassedCycle) {
+						FFU_BE_Mod_Backend.timePassedOrganics = 0f;
+						lastValue = FFU_BE_Mod_Backend.lastValueOrganics;
+						FFU_BE_Mod_Backend.lastValueOrganics = (int)pData.organics;
 					} else return;
 					break;
 					case "fuel":
-					if (FFU_BE_ModPerformance.timePassedFuel >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_ModPerformance.timePassedFuel = 0f;
-						lastValue = FFU_BE_ModPerformance.lastValueFuel;
-						FFU_BE_ModPerformance.lastValueFuel = (int)pData.fuel;
+					if (FFU_BE_Mod_Backend.timePassedFuel >= FFU_BE_Defs.timePassedCycle) {
+						FFU_BE_Mod_Backend.timePassedFuel = 0f;
+						lastValue = FFU_BE_Mod_Backend.lastValueFuel;
+						FFU_BE_Mod_Backend.lastValueFuel = (int)pData.fuel;
 					} else return;
 					break;
 					case "metals":
-					if (FFU_BE_ModPerformance.timePassedMetals >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_ModPerformance.timePassedMetals = 0f;
-						lastValue = FFU_BE_ModPerformance.lastValueMetals;
-						FFU_BE_ModPerformance.lastValueMetals = (int)pData.metals;
+					if (FFU_BE_Mod_Backend.timePassedMetals >= FFU_BE_Defs.timePassedCycle) {
+						FFU_BE_Mod_Backend.timePassedMetals = 0f;
+						lastValue = FFU_BE_Mod_Backend.lastValueMetals;
+						FFU_BE_Mod_Backend.lastValueMetals = (int)pData.metals;
 					} else return;
 					break;
 					case "synthetics":
-					if (FFU_BE_ModPerformance.timePassedSynthetics >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_ModPerformance.timePassedSynthetics = 0f;
-						lastValue = FFU_BE_ModPerformance.lastValueSynthetics;
-						FFU_BE_ModPerformance.lastValueSynthetics = (int)pData.synthetics;
+					if (FFU_BE_Mod_Backend.timePassedSynthetics >= FFU_BE_Defs.timePassedCycle) {
+						FFU_BE_Mod_Backend.timePassedSynthetics = 0f;
+						lastValue = FFU_BE_Mod_Backend.lastValueSynthetics;
+						FFU_BE_Mod_Backend.lastValueSynthetics = (int)pData.synthetics;
 					} else return;
 					break;
 					case "explosives":
-					if (FFU_BE_ModPerformance.timePassedExplosives >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_ModPerformance.timePassedExplosives = 0f;
-						lastValue = FFU_BE_ModPerformance.lastValueExplosives;
-						FFU_BE_ModPerformance.lastValueExplosives = (int)pData.explosives;
+					if (FFU_BE_Mod_Backend.timePassedExplosives >= FFU_BE_Defs.timePassedCycle) {
+						FFU_BE_Mod_Backend.timePassedExplosives = 0f;
+						lastValue = FFU_BE_Mod_Backend.lastValueExplosives;
+						FFU_BE_Mod_Backend.lastValueExplosives = (int)pData.explosives;
 					} else return;
 					break;
 					case "exotics":
-					if (FFU_BE_ModPerformance.timePassedExotics >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_ModPerformance.timePassedExotics = 0f;
-						lastValue = FFU_BE_ModPerformance.lastValueExotics;
-						FFU_BE_ModPerformance.lastValueExotics = (int)pData.exotics;
+					if (FFU_BE_Mod_Backend.timePassedExotics >= FFU_BE_Defs.timePassedCycle) {
+						FFU_BE_Mod_Backend.timePassedExotics = 0f;
+						lastValue = FFU_BE_Mod_Backend.lastValueExotics;
+						FFU_BE_Mod_Backend.lastValueExotics = (int)pData.exotics;
 					} else return;
 					break;
 					case "credits":
-					if (FFU_BE_ModPerformance.timePassedCredits >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_ModPerformance.timePassedCredits = 0f;
-						lastValue = FFU_BE_ModPerformance.lastValueCredits;
-						FFU_BE_ModPerformance.lastValueCredits = (int)pData.credits;
+					if (FFU_BE_Mod_Backend.timePassedCredits >= FFU_BE_Defs.timePassedCycle) {
+						FFU_BE_Mod_Backend.timePassedCredits = 0f;
+						lastValue = FFU_BE_Mod_Backend.lastValueCredits;
+						FFU_BE_Mod_Backend.lastValueCredits = (int)pData.credits;
 					} else return;
 					break;
-				}*/
+				}
 				if (lastValue >= 0) {
 					string text = "";
 					if (reasons != null) {

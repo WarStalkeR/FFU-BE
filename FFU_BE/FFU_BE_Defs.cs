@@ -45,6 +45,7 @@ namespace FFU_Bleeding_Edge {
 		public static List<ShipModule> prefabModdedModulesList = new List<ShipModule>();
 		public static List<SpacePod> prefabModdedSpacePodsList = new List<SpacePod>();
 		public static List<HandWeapon> prefabModdedFirearmsList = new List<HandWeapon>();
+		public static List<DamageToken> prefabDamageTokensList = new List<DamageToken>();
 		public static IDictionary<int, int> equippedCrewFirearms = new Dictionary<int, int>();
 		public static IDictionary<int, int> craftingProficiency = new Dictionary<int, int>();
 		public static int[] techLevel = new int[] { 0, 1500, 3500, 6000, 10000, 16000, 24000, 34000, 46000, 60000 };
@@ -125,7 +126,7 @@ namespace FFU_Bleeding_Edge {
 		public static int shipMaxEvasionLimit = 95;
 		public static int stationCapacityMult = 20;
 		public static int resultNumbersMult = 10;
-		public static int maxStorageCapacity = 90;
+		public static int maxStorageCapacity = 72;
 		public static float shipModuleHealthMult = 3f;
 		public static float shipModuleUnpackTime = 60f;
 		public static float shipModuleCraftTime = 120f;
@@ -187,6 +188,7 @@ namespace FFU_Bleeding_Edge {
 				Debug.LogWarning("Loading modded data and custom variables for the first time...");
 				InitGameTextUpdate();
 				InitShipDoorsUpdate();
+				InitDamageTokensPrefabList();
 				InitDamageDealersPrefabList();
 				FFU_BE_Mod_Crewmembers.InitFirearmsList();
 				FFU_BE_Mod_Crewmembers.InitCrewTypesList();
@@ -219,6 +221,12 @@ namespace FFU_Bleeding_Edge {
 				}
 				firstRun = false;
 				RecalculateEnergyEmission();
+			}
+		}
+		public static void InitDamageTokensPrefabList() {
+			foreach (DamageToken damageToken in Resources.FindObjectsOfTypeAll<DamageToken>()) {
+				if (damageToken.repairCostPerPoint.metals > 10) damageToken.repairCostPerPoint.metals = 10;
+				prefabDamageTokensList.Add(damageToken);
 			}
 		}
 		public static void InitDamageDealersPrefabList() {

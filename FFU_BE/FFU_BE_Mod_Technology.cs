@@ -1482,7 +1482,19 @@ namespace RST.PlaymakerAction {
 					FFU_BE_Mod_Modules.ApplyModuleChanges(shipModule);
 					FFU_BE_Mod_Technology.ApplyInitialModuleTier(shipModule);
 					FFU_BE_Mod_Modules.ApplyRelativeNewHealth(shipModule, healthPercent);
-					if (shipModule.Storage != null) shipModule.Storage.slotCount = FFU_BE_Defs.shipCurrentStorageCap > 0 ? FFU_BE_Defs.shipCurrentStorageCap : shipModule.Storage.slotCount;
+					if (shipModule.Storage != null) {
+						shipModule.Storage.slotCount = FFU_BE_Defs.shipCurrentStorageCap > 0 ? FFU_BE_Defs.shipCurrentStorageCap : shipModule.Storage.slotCount;
+						foreach (Transform item in shipModule.Storage.storage) {
+							if (FFU_BE_Defs.debugMode) Debug.LogWarning("Stored Module: " + item.name);
+							if (item.GetComponent<ShipModule>() != null) {
+								float storedHealthPercent = FFU_BE_Mod_Modules.GetRelativeHealth(item.GetComponent<ShipModule>());
+								FFU_BE_Mod_Modules.ApplyModuleEffects(item.GetComponent<ShipModule>());
+								FFU_BE_Mod_Modules.ApplyModuleChanges(item.GetComponent<ShipModule>());
+								FFU_BE_Mod_Technology.ApplyInitialModuleTier(item.GetComponent<ShipModule>());
+								FFU_BE_Mod_Modules.ApplyRelativeNewHealth(item.GetComponent<ShipModule>(), storedHealthPercent);
+							}
+						}
+					}
 				}
 				if (shipModule.displayName.Contains("bossweapon") && shipModule.InstanceId > 0 && shipModule.Ownership.GetOwner() == Ownership.Owner.Me) {
 					shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;

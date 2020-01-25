@@ -825,7 +825,7 @@ namespace RST.UI {
 		private extern void orig_Update();
 		//Resize List of Modules based on Resolution
 		private void Update() {
-			maxItemsToFit = (float)(Screen.height / 75) - 1;
+			maxItemsToFit = (float)(Screen.height / 75) - 2;
 			orig_Update();
 		}
 	}
@@ -850,9 +850,9 @@ namespace RST.UI {
 			}
 			ShipModule craftableModulePrefab = item.craftableModulePrefab;
 			if (craftableModulePrefab != null) {
-				text.text = string.Format(Localization.TT("Craft {0}"), craftableModulePrefab.displayName);
 				hoverableModule.HoverModule = craftableModulePrefab;
 				avatarRenderer.sprite = craftableModulePrefab.image;
+				text.text = string.Format(Localization.TT("Craft {0}"), craftableModulePrefab.displayName.Replace("<color=", "\n<color="));
 				hoverable.hoverText = Localization.TT(FFU_BE_Mod_Information.GetCraftableModuleDescription(craftableModulePrefab));
 				if (isUpgradeGroup.activeSelf) isUpgradeGroup.SetActive(false);
 				if (isDowngradeGroup.activeSelf) isDowngradeGroup.SetActive(false);
@@ -893,12 +893,14 @@ namespace RST.UI {
 		private extern void orig_Update();
 		[MonoModIgnore] private ShipModule m;
 		[MonoModIgnore] private void SafeUpdateField(Text text, string value) { }
+		[MonoModIgnore] private void SafeUpdateField(Text text, float value, ref float prevValue, string format = "{0}") { }
 		//Selected Module Full Information Window
 		private void Update() {
 			orig_Update();
 			exoticsProdText.transform.parent.parent.gameObject.SetActive(false);
 			if (m != null) health.horizontalOverflow = HorizontalWrapMode.Overflow;
 			if (m != null && m.Ownership.GetOwner() == Ownership.Owner.Me && iconHover.Hovered) iconHover.hoverText = FFU_BE_Mod_Information.GetSelectedModuleExactData(m);
+			//for (int i = 0; i < exoticsProdText.transform.parent.parent.childCount; i++) Debug.LogWarning("exoticsProdText.GetChild(" + i + "): " + exoticsProdText.transform.parent.parent.GetChild(i).name);
 		}
 		//Greenhouse Interface Fix
 		private void DoGarden() {
@@ -906,7 +908,7 @@ namespace RST.UI {
 			GardenSkillEffects gardenSkillEffects = WorldRules.Instance.gardenSkillEffects;
 			int gardenProduction = gardenSkillEffects.EffectiveOrganicsProduction(m);
 			bool gardenProduces = gardenProduction > 0;
-			SafeUpdateField(gardenOrganicsProdCurText, gardenProduces ? string.Format("<color=lime>^{0}/100{1}</color>", gardenProduction, Localization.TT("ru")) : null);
+			SafeUpdateField(gardenOrganicsProdCurText, gardenProduces ? string.Format("<color=lime>{0}/100{1}</color>", gardenProduction, Localization.TT("ru")) : null);
 			int totalGardenProduction = gardenSkillEffects.skillPointBonusProduction * (int)m.GardenModule.producedPerSkillPoint.organics;
 			SafeUpdateField(gardenOrganicsProdBonusText, totalGardenProduction + "/100" + Localization.TT("ru") + " " + Localization.TT("per"));
 			removesOpResCons.SetActive(true);
@@ -917,7 +919,7 @@ namespace RST.UI {
 			ScienceSkillEffects scienceSkillEffects = WorldRules.Instance.scienceSkillEffects;
 			int labProduciton = scienceSkillEffects.EffectiveCreditsProduction(m);
 			bool labProduces = labProduciton > 0;
-			SafeUpdateField(researchCreditsProdCurText, labProduces ? string.Format("<color=lime>^{0}/100{1}</color>", labProduciton, Localization.TT("ru")) : null);
+			SafeUpdateField(researchCreditsProdCurText, labProduces ? string.Format("<color=lime>{0}/100{1}</color>", labProduciton, Localization.TT("ru")) : null);
 			int totalLabProduction = scienceSkillEffects.skillPointBonusProduction * (int)m.Research.producedPerSkillPoint.credits;
 			SafeUpdateField(researchCreditsProdBonusText, totalLabProduction + "/100" + Localization.TT("ru") + " " + Localization.TT("per"));
 		}
