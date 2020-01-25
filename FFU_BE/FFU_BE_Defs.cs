@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using System;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
@@ -689,16 +690,18 @@ namespace FFU_Bleeding_Edge {
 			else return null;
 		}
 		public static void RecalculateEnergyEmission() {
-			if (PlayerDatas.Me != null && PlayerDatas.Me.Flagship != null) {
-				energyEmission = 0;
-				foreach (ModuleSlotRoot slotRoot in PlayerDatas.Me.Flagship.ModuleSlotRoots) {
-					if (slotRoot.Module != null && !slotRoot.Module.IsPacked && !slotRoot.Module.IsUnpacking)
-						energyEmission += GetModuleEnergyEmission(slotRoot.Module);
-					if (debugMode) Debug.LogWarning(slotRoot.Module.name + ": " + GetModuleEnergyEmission(slotRoot.Module));
+			try {
+				if (PlayerDatas.Me != null && PlayerDatas.Me.Flagship != null) {
+					energyEmission = 0;
+					foreach (ModuleSlotRoot slotRoot in PlayerDatas.Me.Flagship.ModuleSlotRoots) {
+						if (slotRoot != null && slotRoot.Module != null && !slotRoot.Module.IsPacked && !slotRoot.Module.IsUnpacking)
+							energyEmission += GetModuleEnergyEmission(slotRoot.Module);
+						if (debugMode) Debug.LogWarning(slotRoot.Module.name + ": " + GetModuleEnergyEmission(slotRoot.Module));
+					}
+					energyEmission *= GetFlagshipEmissionModifier();
+					if (energyEmission < 100f) energyEmission = 100f;
 				}
-				energyEmission *= GetFlagshipEmissionModifier();
-				if (energyEmission < 100f) energyEmission = RstRandom.Range(80f, 120f);
-			}
+			} catch { }
 		}
 		public static float GetFlagshipEmissionModifier() {
 			if (PlayerDatas.Me != null && PlayerDatas.Me.Flagship != null) return 1f + PlayerDatas.Me.Flagship.ModuleSlotRoots.Count / 100f;

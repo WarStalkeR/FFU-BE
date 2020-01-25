@@ -833,7 +833,7 @@ namespace RST.UI {
 		[MonoModIgnore] private bool confirmSlotDowngrade;
 		[MonoModIgnore] private ModuleSlotActionsPanel.Item Item;
 		//Prefab Module Full Information Window
-		/*public void FillWithDataFrom(ModuleSlotActionsPanel.Item item, ResourceValueGroup pr) {
+		public void FillWithDataFrom(ModuleSlotActionsPanel.Item item, ResourceValueGroup pr) {
 			Item = item;
 			base.gameObject.SetActive(true);
 			confirmSlotDowngrade = false;
@@ -841,30 +841,31 @@ namespace RST.UI {
 			if (slotUpgrade != null) {
 				hoverableModule.HoverModule = null;
 				avatarRenderer.sprite = slotUpgrade.UpgradeToSlotPrefab.avatar;
+				hoverable.hoverText = Localization.TT(slotUpgrade.UpgradeToSlotPrefab.description);
 				if (isUpgradeGroup.activeSelf != !slotUpgrade.isDowngrade) isUpgradeGroup.SetActive(!slotUpgrade.isDowngrade);
 				if (isDowngradeGroup.activeSelf != slotUpgrade.isDowngrade) isDowngradeGroup.SetActive(slotUpgrade.isDowngrade);
 				if (isCraftGroup.activeSelf) isCraftGroup.SetActive(false);
 				if (costLabel.activeSelf != !slotUpgrade.isDowngrade) costLabel.SetActive(!slotUpgrade.isDowngrade);
 				if (gainLabel.activeSelf != slotUpgrade.isDowngrade) gainLabel.SetActive(slotUpgrade.isDowngrade);
 			}
-			bool flag = false;
 			ShipModule craftableModulePrefab = item.craftableModulePrefab;
 			if (craftableModulePrefab != null) {
 				text.text = string.Format(Localization.TT("Craft {0}"), craftableModulePrefab.displayName);
-				hoverable.hoverText = Localization.TT(FFU_BE_Mod_Information.GetCraftableModuleDescription(craftableModulePrefab));
 				hoverableModule.HoverModule = craftableModulePrefab;
 				avatarRenderer.sprite = craftableModulePrefab.image;
+				hoverable.hoverText = Localization.TT(FFU_BE_Mod_Information.GetCraftableModuleDescription(craftableModulePrefab));
 				if (isUpgradeGroup.activeSelf) isUpgradeGroup.SetActive(false);
 				if (isDowngradeGroup.activeSelf) isDowngradeGroup.SetActive(false);
 				if (!isCraftGroup.activeSelf) isCraftGroup.SetActive(true);
 				if (!costLabel.activeSelf) costLabel.SetActive(true);
 				if (gainLabel.activeSelf) gainLabel.SetActive(false);
-				flag = true;
+				hoverable.enabled = true;
 			}
-			if (hoverable.enabled != !flag) hoverable.enabled = !flag;
-			if (hoverableModule.enabled != flag) hoverableModule.enabled = flag;
+			hoverableModule.enabled = false;
+			hoverable.enabled = true;
 			Refresh(pr);
-		}*/
+		}
+		//Prefab Module Full Information Window
 		public void Refresh(ResourceValueGroup pr) {
 			ModuleSlotActionsPanel.Item item = Item;
 			if (item == null) return;
