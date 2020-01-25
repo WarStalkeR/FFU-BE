@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
-using System.IO;
-using RST.UI;
-using System;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
@@ -101,6 +98,7 @@ namespace FFU_Bleeding_Edge {
 		public static bool summonEnforcerFleet = false;
 		public static int discoveryScanLevel = 0;
 		public static int discoveryFleetsLevel = 0;
+		public static int shipCurrentStorageCap = 0;
 		public static float scanFrequency = 1600f;
 		public static float energyEmission = 300f;
 		public static float distanceTraveledInPeace = 0f;
@@ -126,6 +124,7 @@ namespace FFU_Bleeding_Edge {
 		public static int shipMaxEvasionLimit = 95;
 		public static int stationCapacityMult = 20;
 		public static int resultNumbersMult = 10;
+		public static int maxStorageCapacity = 100;
 		public static float shipModuleHealthMult = 3f;
 		public static float shipModuleUnpackTime = 60f;
 		public static float shipModuleCraftTime = 120f;
@@ -180,6 +179,7 @@ namespace FFU_Bleeding_Edge {
 				ES2.Save((Dictionary<int, int>)craftingProficiency, "start.es2?tag=craftingProficiency");
 				ES2.Save(summonEnforcerFleet, "start.es2?tag=summonEnforcerFleet");
 				ES2.Save(summonAttempted, "start.es2?tag=summonAttempted");
+				if (shipCurrentStorageCap > 0) ES2.Save(shipCurrentStorageCap, "start.es2?tag=shipCurrentStorageCap");
 				RecalculateEnergyEmission();
 			}
 			if (firstRun) {
@@ -206,6 +206,7 @@ namespace FFU_Bleeding_Edge {
 				if (ES2.Exists("start.es2?tag=discoveryFleetsLevel")) discoveryFleetsLevel = ES2.Load<int>("start.es2?tag=discoveryFleetsLevel");
 				if (ES2.Exists("start.es2?tag=summonEnforcerFleet")) summonEnforcerFleet = ES2.Load<bool>("start.es2?tag=summonEnforcerFleet");
 				if (ES2.Exists("start.es2?tag=summonAttempted")) summonAttempted = ES2.Load<bool>("start.es2?tag=summonAttempted");
+				if (ES2.Exists("start.es2?tag=shipCurrentStorageCap")) shipCurrentStorageCap = ES2.Load<int>("start.es2?tag=shipCurrentStorageCap");
 				if (ES2.Exists("permanent.es2?tag=discoveredModuleIDs")) discoveredModuleIDs = ES2.LoadList<int>("permanent.es2?tag=discoveredModuleIDs");
 				else ES2.Save<int>(discoveredModuleIDs, "permanent.es2?tag=discoveredModuleIDs");
 				if (goFullASMD) {

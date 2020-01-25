@@ -1482,6 +1482,7 @@ namespace RST.PlaymakerAction {
 					FFU_BE_Mod_Modules.ApplyModuleChanges(shipModule);
 					FFU_BE_Mod_Technology.ApplyInitialModuleTier(shipModule);
 					FFU_BE_Mod_Modules.ApplyRelativeNewHealth(shipModule, healthPercent);
+					if (shipModule.Storage != null) shipModule.Storage.slotCount = FFU_BE_Defs.shipCurrentStorageCap > 0 ? FFU_BE_Defs.shipCurrentStorageCap : shipModule.Storage.slotCount;
 				}
 				if (shipModule.displayName.Contains("bossweapon") && shipModule.InstanceId > 0 && shipModule.Ownership.GetOwner() == Ownership.Owner.Me) {
 					shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;

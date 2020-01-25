@@ -520,6 +520,36 @@ namespace RST.UI {
 			FFU_BE_Defs.RecalculateEnergyEmission();
 		}
 	}
+	public class patch_StoragePanel : StoragePanel {
+		[MonoModIgnore] private HoverableUI upgradeButtonHover;
+		//Modified Max Storage Capacity Upgrade
+		public void UpdateUpgradeButton(Ownership.Owner resourcesGoTo) {
+			PlayerData playerData = PlayerDatas.Get(resourcesGoTo);
+			ResourceValueGroup r = (playerData != null) ? playerData.Resources : ResourceValueGroup.Empty;
+			WorldRules instance = WorldRules.Instance;
+			StorageModule storageModule = GetStorageModule(resourcesGoTo, false);
+			bool canIncrease = storageModule != null && storageModule.slotCount < FFU_BE_Defs.maxStorageCapacity;
+			bool hasResources = instance.storageUpgradeCost.CheckHasEnough(r);
+			if (!canIncrease) upgradeButtonHover.hoverText = MonoBehaviourExtended.TT("Maximum slot count reached");
+			else if (!hasResources) upgradeButtonHover.hoverText = MonoBehaviourExtended.TT("Not enough resources for upgrading");
+			else upgradeButtonHover.hoverText = "";
+			upgradeButton.interactable = storageModule != null && canIncrease && hasResources;
+		}
+		//Modified Max Storage Capacity Upgrade
+		public static void Upgrade() {
+			PlayerData me = PlayerDatas.Me;
+			StorageModule storageModule = GetStorageModule(Ownership.Owner.Me, false);
+			if (me == null || storageModule == null) return;
+			WorldRules instance = WorldRules.Instance;
+			if (storageModule.slotCount < FFU_BE_Defs.maxStorageCapacity) {
+				ResourceValueGroup storageUpgradeCost = WorldRules.Instance.storageUpgradeCost;
+				if (storageUpgradeCost.ConsumeFrom(me, 1f, Localization.tt("storage upgrade"))) {
+					FFU_BE_Defs.shipCurrentStorageCap = storageModule.slotCount + 1;
+					storageModule.slotCount++;
+				}
+			}
+		}
+	}
 }
 
 namespace RST.PlaymakerAction {
