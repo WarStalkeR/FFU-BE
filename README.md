@@ -15,7 +15,7 @@
 
 
 ## Installation
-1) To play this mod you need to acquire BepInEx bleeding edge build from here: https://builds.bepis.io/projects/bepinex_be (I've used #186, i.e. 5.0.1.186, but I'm pretty sure any of them can be used).  
+1) To enjoy this mod you need to acquire BepInEx bleeding edge build from here: https://builds.bepis.io/projects/bepinex_be (I've used #186, i.e. 5.0.1.186, but I'm pretty sure any of them can be used).  
 2) Unpack (and configure it, if you want something specific).  
 3) Download Runtime MonoMod Loader from BepInEx from here: https://github.com/BepInEx/BepInEx.MonoMod.Loader  
 4) Download MonoMod (NET3.5) version based on what is permited in MonoMod Loader from here: https://github.com/MonoMod/MonoMod/releases  
