@@ -124,7 +124,7 @@ namespace FFU_Bleeding_Edge {
 		public static int shipMaxEvasionLimit = 95;
 		public static int stationCapacityMult = 20;
 		public static int resultNumbersMult = 10;
-		public static int maxStorageCapacity = 100;
+		public static int maxStorageCapacity = 90;
 		public static float shipModuleHealthMult = 3f;
 		public static float shipModuleUnpackTime = 60f;
 		public static float shipModuleCraftTime = 120f;
