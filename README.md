@@ -1,5 +1,5 @@
-# Fight For Universe: Bleeding Edge
-**Fight For Universe: Bleeding Edge** is a mod that extends original **Shortest Trip to Earth** in many different ways. Gameplay was changed considerably, new features that game never had, were implemented and some original features that were not used (such as reactor overcharge) were re-implemented back. Mod currently in beta release, which means that I've implemented everything I wanted, but there are still some bug fixing and balancing issues that might arise.
+## Fight For Universe: Bleeding Edge
+**Fight For Universe: Bleeding Edge** is a mod that extends original **Shortest Trip to Earth** in many different ways. Gameplay was changed considerably, new features that game never had were implemented, and some original features that were not used (such as reactor overcharge) were re-implemented back. Mod currently in beta release, which means that I've implemented everything I wanted, but there are still some bug fixing and balancing issues that might arise.
 
 
 ## Bleeding Edge Features:
