@@ -625,7 +625,7 @@ namespace FFU_Bleeding_Edge {
 			shipModule.Weapon.resourcesPerShot.metals = 0;
 			shipModule.Weapon.resourcesPerShot.exotics = 0;
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var shipModule_Weapon_ProjectileOrBeamPrefab_pointDefPriority = AccessTools.FieldRefAccess<Projectile, int>(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile, "pointDefPriority");
+			var shipModule_Weapon_ProjectileOrBeamPrefab_pointDefPriority = shipModule.Weapon.ProjectileOrBeamPrefab as Projectile != null ? AccessTools.FieldRefAccess<Projectile, int>(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile, "pointDefPriority") : 0;
 			switch (Core.GetOriginalName(shipModule.name)) {
 				case "weapon DIY Rockets x1":
 				shipModule.displayName = "Rust Jigsaw <color=#" + colorRocketLan + "ff>Rocket</color> Launcher";

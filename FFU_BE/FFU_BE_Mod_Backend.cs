@@ -4,6 +4,7 @@
 #pragma warning disable CS0626
 #pragma warning disable CS0649
 #pragma warning disable CS0108
+#pragma warning disable CS0414
 
 using System;
 using System.Text.RegularExpressions;
@@ -37,27 +38,6 @@ namespace FFU_Bleeding_Edge {
 }
 
 namespace RST {
-	public class patch_PlayerFleet : PlayerFleet {
-		//Increase Damage From Asteroids
-		private void DoAsteroidHit(Ship playerShip) {
-			if (hitAudio != null) AudioSource.PlayOneShot(hitAudio);
-			if (hitCausesFire && playerShip != null) {
-				if (playerShip.Fire != null) playerShip.Fire.SetFireAtRandomPos();
-				hitDamageToShip = UnityEngine.Random.Range(5, 75 + 1);
-				playerShip.TakeDamage(hitDamageToShip);
-			}
-			string line = string.Format(Localization.TT("Ship was hit by an asteroid. HP -{0}"), hitDamageToShip);
-			StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, line);
-			ComchannelTip.Instance?.NotifyAboutAsteroidHit();
-		}
-	}
-	public class patch_WarpModule : WarpModule {
-		//Tier dependent Instant Warp Mode
-		private bool UpdateCountdown() {
-			float speedMultiplier = Module.TurnedOnAndIsWorking ? (1f / WorldRules.Instance.warpSkillEffects.EffectiveSkillMultiplier(Module, true)) : 0f;
-			return reloadTimer.Update(Mathf.Max(speedMultiplier * (PerFrameCache.IsGoodSituation ? 10f : 1f), 1f));
-		}
-	}
 	public class patch_WeaponModule : WeaponModule {
 		[MonoModIgnore] private Ship ParentShip;
 		[MonoModIgnore] private float shotTimer;
@@ -348,14 +328,6 @@ namespace RST.UI {
 			return hasUsableStorage & hasEnoughForPayingCraftingCost & craftNotDisabled;
 		}
 	}
-	public class patch_ModuleSlotActionsPanel : ModuleSlotActionsPanel {
-		private extern void orig_Update();
-		//Resize List of Modules based on Resolution
-		private void Update() {
-			maxItemsToFit = (float)(Screen.height / 75) - 1;
-			orig_Update();
-		}
-	}
 	public class patch_PlayerPanel : PlayerPanel {
 		private extern void orig_Update();
 		//Spam Reduction Timers & Modified Interface
@@ -376,7 +348,7 @@ namespace RST.UI {
 			//if (FFU_BE_Mod_Performance.timePassedCredits > 10000f) FFU_BE_Mod_Performance.timePassedCredits = 50f;
 			orig_Update();
 			researchCreditsBonus.text = FFU_BE_Mod_Technology.GetCraftChanceText().Replace("MK-", string.Empty).Replace(": ", string.Empty).Replace("I", string.Empty).Replace("V", string.Empty).Replace("X", string.Empty);
-			for (int i = 0; i < researchCreditsBonus.transform.childCount; i++) Debug.LogWarning("researchCreditsBonus.GetChild(" + i + "): " + researchCreditsBonus.transform.GetChild(i).ToString());
+			for (int i = 0; i < researchCreditsBonus.transform.childCount; i++) researchCreditsBonus.transform.GetChild(i).gameObject.SetActive(false);
 		}
 		//Update Research Pop-Up to Show Modified Data
 		private static string BuildResearchCreditsBonusHover(int researchCreditsBonus) {
@@ -528,6 +500,26 @@ namespace RST.UI {
 			}
 		}
 	}
+	public class patch_ModuleActionsPanel : ModuleActionsPanel {
+		private extern void orig_StoreModule();
+		private extern void orig_ModuleOvercharge();
+		private extern void orig_PowerToggleChanged(bool newValue);
+		//Recalculate Ship's Signature on Storing Module
+		private void StoreModule() {
+			orig_StoreModule();
+			FFU_BE_Defs.RecalculateEnergyEmission();
+		}
+		//Recalculate Ship's Signature on Overcharging Module
+		private void ModuleOvercharge() {
+			orig_ModuleOvercharge();
+			FFU_BE_Defs.RecalculateEnergyEmission();
+		}
+		//Recalculate Ship's Signature on Powering Module
+		private void PowerToggleChanged(bool newValue) {
+			orig_PowerToggleChanged(newValue);
+			FFU_BE_Defs.RecalculateEnergyEmission();
+		}
+	}
 }
 
 namespace RST.PlaymakerAction {
@@ -647,6 +639,21 @@ namespace RST.PlaymakerAction {
 		public override void OnEnter() {
 			firstRunFate.Value = FFU_BE_Defs.newStartingFateBonus;
 			orig_OnEnter();
+		}
+	}
+	public class patch_CrewOperatesModule : CrewOperatesModule {
+		public extern void orig_OnEnter();
+		public extern void orig_OnExit();
+		[MonoModIgnore] private Crewmember crew;
+		//Recalculate Ship's Signature on Crew's Entry
+		public override void OnEnter() {
+			orig_OnEnter();
+			if (crew != null) if (crew.Ownership.GetOwner() == Ownership.Owner.Me) FFU_BE_Defs.RecalculateEnergyEmission();
+		}
+		//Recalculate Ship's Signature on Crew's Exit
+		public override void OnExit() {
+			orig_OnExit();
+			if (crew != null) if (crew.Ownership.GetOwner() == Ownership.Owner.Me) FFU_BE_Defs.RecalculateEnergyEmission();
 		}
 	}
 }

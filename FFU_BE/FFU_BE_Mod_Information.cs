@@ -821,6 +821,14 @@ namespace RST {
 }
 
 namespace RST.UI {
+	public class patch_ModuleSlotActionsPanel : ModuleSlotActionsPanel {
+		private extern void orig_Update();
+		//Resize List of Modules based on Resolution
+		private void Update() {
+			maxItemsToFit = (float)(Screen.height / 75) - 1;
+			orig_Update();
+		}
+	}
 	public class patch_ModuleSlotListItem : ModuleSlotListItem {
 		[MonoModIgnore] private bool confirmSlotDowngrade;
 		[MonoModIgnore] private ModuleSlotActionsPanel.Item Item;
@@ -911,6 +919,27 @@ namespace RST.UI {
 			SafeUpdateField(researchCreditsProdCurText, labProduces ? string.Format("<color=lime>^{0}/100{1}</color>", labProduciton, Localization.TT("ru")) : null);
 			int totalLabProduction = scienceSkillEffects.skillPointBonusProduction * (int)m.Research.producedPerSkillPoint.credits;
 			SafeUpdateField(researchCreditsProdBonusText, totalLabProduction + "/100" + Localization.TT("ru") + " " + Localization.TT("per"));
+		}
+		//Show Updated Crew Damage in Weapon Panel
+		private void DoWeaponCrewDmg(WeaponModule w, ShootAtDamageDealer.CrewDmgLevel crewDmgLevel) {
+			dmgToCrewTextHover.hoverText = "Chance to damage all crew members within area of effect by shown amount.";
+			string crewDmgText = w.magazineSize + "x" + w.ProjectileOrBeamPrefab.GetDamage(w).doorDmg;
+			switch (crewDmgLevel) {
+				case ShootAtDamageDealer.CrewDmgLevel.None: SafeUpdateField(dmgToCrewText, Localization.TT("None (0%)")); break;
+				case ShootAtDamageDealer.CrewDmgLevel.Low: SafeUpdateField(dmgToCrewText, Localization.TT(crewDmgText + " (" + (int)Core.CrewHitChance.Low + "%)")); break;
+				case ShootAtDamageDealer.CrewDmgLevel.Default: SafeUpdateField(dmgToCrewText, Localization.TT(crewDmgText + " (" + (int)Core.CrewHitChance.Medium + "%)")); break;
+				case ShootAtDamageDealer.CrewDmgLevel.High: SafeUpdateField(dmgToCrewText, Localization.TT(crewDmgText + " (" + (int)Core.CrewHitChance.High + "%)")); break;
+			}
+		}
+		//Show Update Fire Ignition Chance in Weapon Panel
+		private void DoWeaponFireChance(ShootAtDamageDealer.FireChanceLevel fireChanceLevel) {
+			fireChanceHover.hoverText = "Chance to ignite fire in every tile within area of effect.";
+			switch (fireChanceLevel) {
+				case ShootAtDamageDealer.FireChanceLevel.None: SafeUpdateField(fireChanceText, Localization.TT("None (0%)")); break;
+				case ShootAtDamageDealer.FireChanceLevel.Low: SafeUpdateField(fireChanceText, Localization.TT("Low (" + (int)Core.FireIgniteChance.Low + "%)")); break;
+				case ShootAtDamageDealer.FireChanceLevel.Default: SafeUpdateField(fireChanceText, Localization.TT("Medium (" + (int)Core.FireIgniteChance.Medium + "%)")); break;
+				case ShootAtDamageDealer.FireChanceLevel.High: SafeUpdateField(fireChanceText, Localization.TT("High (" + (int)Core.FireIgniteChance.High + "%)")); break;
+			}
 		}
 	}
 	public class patch_CrewDataSubpanel : CrewDataSubpanel {

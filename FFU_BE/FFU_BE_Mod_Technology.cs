@@ -13,6 +13,7 @@ using HarmonyLib;
 using FFU_Bleeding_Edge;
 using System.Linq;
 using RST.UI;
+using System.Text;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Technology {
@@ -1219,6 +1220,40 @@ namespace FFU_Bleeding_Edge {
 }
 
 namespace RST {
+	public class patch_ModuleSlot : ModuleSlot {
+		public bool DoCraft(ShipModule prefab) {
+			if (!CanCraft(prefab)) return false;
+			ModuleSlotRoot moduleSlotRoot = ModuleSlotRoot;
+			Instantiate moduleCreator = moduleSlotRoot.ModuleCreator;
+			moduleCreator.DoDestroy();
+			moduleCreator.Prefab = prefab.gameObject;
+			moduleCreator.DoInstantiate();
+			ShipModule module = moduleSlotRoot.Module;
+			if (!FFU_BE_Defs.IsCraftedToStorage(module)) module.Pack();
+			if (!FFU_BE_Defs.IsCraftedToStorage(module)) module.StartUnpacking(true);
+			FFU_BE_Mod_Technology.ApplyPlayerModuleTier(module);
+			FFU_BE_Mod_Modules.ApplyMaxNewHealth(module);
+			if (FFU_BE_Defs.IsCraftedToStorage(module)) {
+				var shipStorage = PlayerDatas.Me.Flagship.Modules.Find(x => x.type == ShipModule.Type.Storage);
+				if (shipStorage != null && shipStorage.Storage != null && !shipStorage.Storage.IsFull) shipStorage.Storage.AddToStorage(module.gameObject);
+			} else FFU_BE_Defs.RecalculateEnergyEmission();
+			StringBuilder newlyCraftedItemDeployedMessage = RstShared.StringBuilder;
+			string craftingConsumedResources = ""
+				+ (module.craftCost.organics > 0 ? "-" + module.craftCost.organics + " organics " : "")
+				+ (module.craftCost.fuel > 0 ? "-" + module.craftCost.fuel + " fuel " : "")
+				+ (module.craftCost.metals > 0 ? "-" + module.craftCost.metals + " metals " : "")
+				+ (module.craftCost.synthetics > 0 ? "-" + module.craftCost.synthetics + " synthetics " : "")
+				+ (module.craftCost.explosives > 0 ? "-" + module.craftCost.explosives + " explosives " : "")
+				+ (module.craftCost.exotics > 0 ? "-" + module.craftCost.exotics + " exotics " : "");
+			if (module.craftCost.IsEmpty) craftingConsumedResources = "nothing";
+			newlyCraftedItemDeployedMessage.AppendFormat(MonoBehaviourExtended.TT("Crafted {0}. Used {1}"), module.DisplayNameLocalized, craftingConsumedResources);
+			StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, newlyCraftedItemDeployedMessage.ToString());
+			if (FFU_BE_Defs.debugMode) Debug.LogWarning("Crafted: " + module.name + " [" + module.PrefabId + "]");
+			if (prefab.Effects.unpackedPrefab != null) UnityEngine.Object.Instantiate(prefab.Effects.unpackedPrefab, base.transform.position, base.transform.rotation);
+			FFU_BE_Defs.AddModuleCraftingProficiency(module);
+			return true;
+		}
+	}
 	public class patch_AddResourcesToShip : AddResourcesToShip {
 		//Apply Modified Ship Parameters on Spawn
 		public bool DoAfterShipSpawn(Ship ship) {

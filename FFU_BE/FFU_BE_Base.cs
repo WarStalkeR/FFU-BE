@@ -46,8 +46,6 @@ namespace FFU_Bleeding_Edge {
 					IniFile modConfig = new IniFile();
 					modConfig.Load(appDataPath + modConfDir + modConfFile);
 					string modConfigLog = "Loading mod configuration from " + appDataPath + modConfDir + modConfFile;
-					if (modConfig["Settings"]["enableModdedContent"].TryConvertBool(out FFU_BE_Defs.enableModdedContent)) modConfigLog += "\n > " + ("Property \"enableModdedContent\" loaded with value: " + FFU_BE_Defs.enableModdedContent.ToString());
-					else { FFU_BE_Defs.enableModdedContent = true; modConfigLog += "\n > " + ("Property \"enableModdedContent\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.enableModdedContent.ToString()); }
 					if (modConfig["Settings"]["advancedWelcomePopup"].TryConvertBool(out FFU_BE_Defs.advancedWelcomePopup)) modConfigLog += "\n > " + ("Property \"advancedWelcomePopup\" loaded with value: " + FFU_BE_Defs.advancedWelcomePopup.ToString());
 					else { FFU_BE_Defs.advancedWelcomePopup = false; modConfigLog += "\n > " + ("Property \"advancedWelcomePopup\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.advancedWelcomePopup.ToString()); }
 					if (modConfig["Settings"]["restartUnlocksEverything"].TryConvertBool(out FFU_BE_Defs.restartUnlocksEverything)) modConfigLog += "\n > " + ("Property \"restartUnlocksEverything\" loaded with value: " + FFU_BE_Defs.restartUnlocksEverything.ToString());
@@ -126,7 +124,6 @@ namespace FFU_Bleeding_Edge {
 					Debug.LogWarning("Mod configuration file doesn't exists!");
 					Debug.LogWarning("Creating template mod configuration file at " + appDataPath + modConfDir + modConfFile);
 					IniFile modConfig = new IniFile();
-					modConfig["Settings"]["enableModdedContent"] = true;
 					modConfig["Settings"]["advancedWelcomePopup"] = false;
 					modConfig["Settings"]["restartUnlocksEverything"] = false;
 					modConfig["Settings"]["allModulesCraftable"] = false;

@@ -37,6 +37,7 @@ namespace FFU_Bleeding_Edge {
 		public static float moduleRepairAcceleration = 25f;
 		public static float shipHullRepairAcceleration = 15f;
 		public static List<int> updatedShips = new List<int>();
+		public static List<int> updatedCrews = new List<int>();
 		public static List<Ship> prefabShipsList = new List<Ship>();
 		public static List<Beam> prefabBeamRaysList = new List<Beam>();
 		public static List<Projectile> prefabProjectilesList = new List<Projectile>();

@@ -14,6 +14,8 @@ using RST;
 using HarmonyLib;
 using System.IO;
 using FFU_Bleeding_Edge;
+using System.Text;
+using System.Linq;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Modules {
@@ -554,11 +556,13 @@ namespace FFU_Bleeding_Edge {
 
 namespace RST {
 	public class patch_ShipModule : ShipModule {
-		[MonoModIgnore] private void Unpack() { }
+		private extern void orig_Unpack();
 		[MonoModIgnore] private void UnpackShared() { }
 		[MonoModIgnore] public float UnpackTime { get; private set; }
 		[MonoModIgnore] public bool IsUnpacking { get; private set; }
 		[MonoModIgnore] private CountdownTimer unpackTimer = new CountdownTimer();
+		[MonoModIgnore] private static void ScrapGetResources(PlayerResource resource, int amount, StringBuilder logLineSb) { }
+		[MonoModIgnore] private static void ScrapGetCredits(PlayerData pd, int amount, StringBuilder logLineSb) { }
 		//Tactical Unpack Times
 		public void StartUnpacking(bool useCraftTime) {
 			UnpackShared();
@@ -577,6 +581,54 @@ namespace RST {
 			base.transform.SetParent(shop.buyableModulesContainer.transform);
 			Pack();
 			base.transform.position = new Vector3(10000f, 0f, 0f);
+		}
+		//Recalculate Ship's Signature on Module Unpack
+		private void Unpack() {
+			orig_Unpack();
+			FFU_BE_Defs.RecalculateEnergyEmission();
+		}
+		//Multiple Features Implementations on Scrap Module
+		public void Scrap(PlayerData resourcesGoTo, bool addLogLine) {
+			float moduleHealthPercent = FFU_BE_Mod_Modules.GetRelativeHealth(this);
+			if (resourcesGoTo != null) {
+				scrapGet *= moduleHealthPercent;
+				StringBuilder stringBuilder = null;
+				if (addLogLine) {
+					stringBuilder = RstShared.StringBuilder;
+					stringBuilder.AppendFormat(MonoBehaviourExtended.TT("Scrapped {0}. Got"), DisplayNameLocalized);
+				}
+				ScrapGetResources(resourcesGoTo.Organics, (int)scrapGet.organics, stringBuilder);
+				ScrapGetResources(resourcesGoTo.Fuel, (int)scrapGet.fuel, stringBuilder);
+				ScrapGetResources(resourcesGoTo.Metals, (int)scrapGet.metals, stringBuilder);
+				ScrapGetResources(resourcesGoTo.Synthetics, (int)scrapGet.synthetics, stringBuilder);
+				ScrapGetResources(resourcesGoTo.Explosives, (int)scrapGet.explosives, stringBuilder);
+				ScrapGetResources(resourcesGoTo.Exotics, (int)scrapGet.exotics, stringBuilder);
+				ScrapGetCredits(resourcesGoTo, (int)scrapGet.credits, stringBuilder);
+				if (addLogLine) {
+					if (scrapGet.IsEmpty) stringBuilder.Append(' ').Append(MonoBehaviourExtended.TT("nothing"));
+					StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, stringBuilder.ToString());
+				}
+			}
+			if (type != ShipModule.Type.ResourcePack && !name.Contains("artifact")) FFU_BE_Defs.researchProgress += costCreditsInShop * moduleHealthPercent / 1000f;
+			if (name.Contains("artifact") && displayName.Contains("Cache")) FFU_BE_Mod_Crewmembers.ApplyCacheToCrewInRange(this);
+			else if (name.Contains("artifact") && !displayName.Contains("Cache")) FFU_BE_Defs.researchProgress += (costCreditsInShop + scrapGet.credits) * moduleHealthPercent / 40f;
+			if (!IsPacked) FFU_BE_Defs.RecalculateEnergyEmission();
+			if (FFU_BE_Defs.IsAllowedModuleCategory(this) && !FFU_BE_Defs.discoveredModuleIDs.Contains(PrefabId) && !FFU_BE_Defs.unresearchedModuleIDs.ToList().Contains(PrefabId)) {
+				FFU_BE_Defs.unresearchedModuleIDs.Add(PrefabId);
+				if (FFU_BE_Defs.moduleResearchGoal == 0 && FFU_BE_Defs.unresearchedModuleIDs.Count > 0) {
+					ShipModule refModule = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == FFU_BE_Defs.unresearchedModuleIDs.ToList().First());
+					FFU_BE_Defs.moduleResearchGoal = refModule.costCreditsInShop / 10 * (refModule.type == ShipModule.Type.Weapon_Nuke || displayName.Contains("Cache") ? 10 : 1);
+				}
+				StringBuilder newItemInResearchQueueMessage = RstShared.StringBuilder;
+				newItemInResearchQueueMessage.AppendFormat(MonoBehaviourExtended.TT("{0} is not listed in crafting database! Adding to reverse engineering queue..."), FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == PrefabId).DisplayNameLocalized);
+				StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, newItemInResearchQueueMessage.ToString());
+				if (FFU_BE_Defs.debugMode) Debug.LogWarning("Discovered new module: [" + PrefabId + "] " + FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == PrefabId).name + "! Adding to reverse engineering queue...");
+			}
+			if (Container != null) PlayerResource.RedistributeAllTo(Container, Ownership.GetOwner());
+			base.enabled = false;
+			UnityEngine.Object.Destroy(base.gameObject);
+			GameObject gameObject = (!IsPacked) ? Effects.scrappedPrefab : ((!InStorage) ? Effects.scrappedPackedPrefab : null);
+			if (gameObject != null) UnityEngine.Object.Instantiate(gameObject, base.transform.position, base.transform.rotation);
 		}
 	}
 }

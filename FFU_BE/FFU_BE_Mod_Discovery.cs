@@ -353,21 +353,66 @@ namespace FFU_Bleeding_Edge {
 }
 
 namespace RST {
+	public class patch_PlayerFleet : PlayerFleet {
+		//Increase Damage From Asteroids
+		private void DoAsteroidHit(Ship playerShip) {
+			if (hitAudio != null) AudioSource.PlayOneShot(hitAudio);
+			if (hitCausesFire && playerShip != null) {
+				if (playerShip.Fire != null) playerShip.Fire.SetFireAtRandomPos();
+				hitDamageToShip = UnityEngine.Random.Range(5, 75 + 1);
+				playerShip.TakeDamage(hitDamageToShip);
+			}
+			string line = string.Format(Localization.TT("Ship was hit by an asteroid. HP -{0}"), hitDamageToShip);
+			StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, line);
+			ComchannelTip.Instance?.NotifyAboutAsteroidHit();
+		}
+		//Research & Peaceful Distance from Warp Gate
+		public bool WarpUsingWarpGate(WarpGate wg) {
+			if (wg == null) return false;
+			if (wg.Destination == null) return false;
+			Vector2 shipPos = transform.position;
+			Vector2 starPos = wg.Destination.arrivals.transform.position;
+			float warpedDistance = Vector2.Distance(starPos, shipPos);
+			FFU_BE_Mod_Discovery.ProduceResourcesFromWarp(warpedDistance);
+			if (!WarningsVisualizer.PlayerFleetJammedWarning) FFU_BE_Mod_Discovery.CalculateProgressFromWarp(warpedDistance);
+			if (!WarningsVisualizer.PlayerFleetJammedWarning) FFU_BE_Defs.distanceTraveledInPeace += warpedDistance;
+			if (wg.Destination.arrivals != null) {
+				base.transform.SetParent(wg.Destination.arrivals.transform);
+				SetPosition(wg.Destination.arrivals.transform.position);
+			} else {
+				base.transform.SetParent(wg.Destination.transform);
+				SetPosition(wg.Destination.transform.position);
+			}
+			return true;
+		}
+		//Research & Peaceful Distance from Warp Drive
+		public bool WarpToStar(Star targetStar) {
+			if (targetStar == null) return false;
+			Vector2 shipPos = transform.position;
+			Vector2 starPos = targetStar.transform.position;
+			float warpedDistance = Vector2.Distance(starPos, shipPos);
+			FFU_BE_Mod_Discovery.ProduceResourcesFromWarp(warpedDistance);
+			if (!WarningsVisualizer.PlayerFleetJammedWarning) FFU_BE_Mod_Discovery.CalculateProgressFromWarp(warpedDistance);
+			if (!WarningsVisualizer.PlayerFleetJammedWarning) FFU_BE_Defs.distanceTraveledInPeace += warpedDistance;
+			Vector2 targetPos = ((Vector2)base.transform.position - (Vector2)targetStar.transform.position).normalized * 45f + (Vector2)targetStar.transform.position;
+			WarpModule usableWarpModule = GetUsableWarpModule();
+			if (usableWarpModule == null) return false;
+			return usableWarpModule.StartWarpingTo(targetPos, targetStar.transform, false);
+		}
+	}
 	public class patch_WarningsVisualizer : WarningsVisualizer {
 		private extern void orig_UpdateData();
 		//Remove Modules and Upgrades Notification Icon
 		private void UpdateData() {
+			orig_UpdateData();
 			if (moduleSlotUpgradesAvailable != null) moduleSlotUpgradesAvailable = null;
 			if (moduleCraftsAvailable != null) moduleCraftsAvailable = null;
-			orig_UpdateData();
 		}
 		//Null Reference Exception Patch-Fix
 		public static bool PlayerFleetJammedWarning {
 			get {
 				try { return PlayerFleet.Instance != null && PlayerFleet.Instance.IsJammed; } 
 				catch { return true; }
-				//if (PlayerFleet.Instance != null) return PlayerFleet.Instance.IsJammed;
-				//return false;
 			}
 		}
 		//Advanced Warp Drive Jamming Feature
@@ -376,6 +421,32 @@ namespace RST {
 			try { return PerFrameCache.CachedShips.Exists((Ship s) => s != null && s.disablesEnemyWarp && s.Ownership.GetOwner() == enemyOwner) ||
 				(forOwner == Ownership.Owner.Me && WarningsVisualizer.PlayerFleetJammedWarning && FFU_BE_Defs.distanceTraveledInPeace < 5f);
 			} catch { return PerFrameCache.CachedShips.Exists((Ship s) => s != null && s.disablesEnemyWarp && s.Ownership.GetOwner() == enemyOwner); }
+		}
+	}
+	public class patch_WarpModule : WarpModule {
+		[MonoModIgnore] public Vector2 Destination { get; private set; }
+		[MonoModIgnore] public Transform DestinationNewParent { get; private set; }
+		[MonoModIgnore] private void SetAnimState(bool warpIsLoading, bool destroyIntviewShipToo, float warpLoadDuration) { }
+		//Tier dependent Instant Warp Mode
+		private bool UpdateCountdown() {
+			float speedMultiplier = Module.TurnedOnAndIsWorking ? (1f / WorldRules.Instance.warpSkillEffects.EffectiveSkillMultiplier(Module, true)) : 0f;
+			return reloadTimer.Update(Mathf.Max(speedMultiplier * (PerFrameCache.IsGoodSituation ? 10f : 1f), 1f));
+		}
+		//Hostile Attention Check after Warping
+		private void EndWarping(bool success, bool destroyIntviewShipToo) {
+			ShipModule module = Module;
+			if (!success && activationFuel != 0) {
+				PlayerData playerData = PlayerDatas.Get(module.Ownership.GetOwner());
+				if (playerData != null) {
+					playerData.Fuel.Add(activationFuel, MonoBehaviourExtended.tt("warp activation"));
+				}
+			}
+			reloadTimer.Restart(reloadInterval);
+			Destination = Vector2.zero;
+			DestinationNewParent = null;
+			module.turnedOn = false;
+			SetAnimState(false, destroyIntviewShipToo, 0f);
+			FFU_BE_Mod_Discovery.HostileAttentionCheck();
 		}
 	}
 	public class patch_EngineModule : EngineModule {

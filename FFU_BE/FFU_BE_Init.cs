@@ -1,5 +1,6 @@
 ﻿#pragma warning disable IDE1006
 #pragma warning disable CS0626
+#pragma warning disable CS0414
 
 using MonoMod;
 using UnityEngine;

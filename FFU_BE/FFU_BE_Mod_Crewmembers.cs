@@ -1399,7 +1399,7 @@ namespace RST {
 						}
 					}
 				}
-				FFU_BE_Defs.updatedShips.Add(ship.InstanceId);
+				FFU_BE_Defs.updatedCrews.Add(ship.InstanceId);
 			}
 			return true;
 		}
