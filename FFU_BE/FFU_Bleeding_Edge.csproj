@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6379AF9B-D1C2-451A-9BFD-D950FAC4C72C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FFU_Bleeding_Edge</RootNamespace>
+    <AssemblyName>FFU_Bleeding_Edge</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\BepInEx\core\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ES2">
+      <HintPath>..\..\..\Data\Managed\ES2.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>..\..\..\BepInEx\core\Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MonoMod">
+      <HintPath>..\..\..\BepInEx\core\MonoMod.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour">
+      <HintPath>..\..\..\BepInEx\core\MonoMod.RuntimeDetour.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PlayMaker">
+      <HintPath>..\..\..\Data\Managed\PlayMaker.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>..\..\..\Data\Managed\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>..\..\..\Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>..\..\..\Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\Data\Managed\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule">
+      <HintPath>..\..\..\Data\Managed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FFU_BE_Defs.cs" />
+    <Compile Include="FFU_BE_Base.cs" />
+    <Compile Include="FFU_BE_Init.cs" />
+    <Compile Include="FFU_BE_Mod_Discovery.cs" />
+    <Compile Include="FFU_BE_Mod_Spaceships.cs" />
+    <Compile Include="FFU_BE_Mod_Backend.cs" />
+    <Compile Include="FFU_BE_Mod_Crewmembers.cs" />
+    <Compile Include="FFU_BE_Mod_Information.cs" />
+    <Compile Include="FFU_BE_Mod_Modules.cs" />
+    <Compile Include="FFU_BE_Mod_Technology.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Helpers\Core.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Helpers\Delegates.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Helpers\IniFile.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Helpers\Mathx.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Helpers\WordWrap.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Armors.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Bridges.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Converters.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_CryoBays.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Decoys.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Decryptors.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Drives.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Engines.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Greenhouses.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_HealthBays.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Laboratories.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Miscellaneous.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Nukes.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_PassiveECMs.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_PointDefences.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Reactors.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_ResPacks.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Sensors.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Shields.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Storages.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Modules\FFU_BE_Prefab_Weapons.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)..\..\BepInEx\monomod\Assembly-CSharp.FFU_BE.mm.dll" /Y</PostBuildEvent>
+  </PropertyGroup>
+</Project>
