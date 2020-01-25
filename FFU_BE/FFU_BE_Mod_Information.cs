@@ -908,7 +908,7 @@ namespace RST.UI {
 			ScienceSkillEffects scienceSkillEffects = WorldRules.Instance.scienceSkillEffects;
 			int labProduciton = scienceSkillEffects.EffectiveCreditsProduction(m);
 			bool labProduces = labProduciton > 0;
-			SafeUpdateField(researchCreditsProdCurText, labProduces ? string.Format("<color=lime>▲{0}/100{1}</color>", labProduciton, Localization.TT("ru")) : null);
+			SafeUpdateField(researchCreditsProdCurText, labProduces ? string.Format("<color=lime>^{0}/100{1}</color>", labProduciton, Localization.TT("ru")) : null);
 			int totalLabProduction = scienceSkillEffects.skillPointBonusProduction * (int)m.Research.producedPerSkillPoint.credits;
 			SafeUpdateField(researchCreditsProdBonusText, totalLabProduction + "/100" + Localization.TT("ru") + " " + Localization.TT("per"));
 		}
