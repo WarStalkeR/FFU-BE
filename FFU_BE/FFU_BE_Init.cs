@@ -5,6 +5,8 @@
 using MonoMod;
 using UnityEngine;
 using FFU_Bleeding_Edge;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace RST.UI {
 	public class patch_MenuPanel : MenuPanel {
@@ -19,21 +21,32 @@ namespace RST.UI {
 namespace RST {
 	public class patch_GameLoader : GameLoader {
 		[MonoModIgnore] private bool StartWaitingForGameLoad;
-		[MonoModIgnore] private void ResetNoClicked() { }
-		[MonoModIgnore] private void StartClicked() { }
-		[MonoModIgnore] private void ResetClicked() { }
-		private void OnEnable() {
-			ES2.Save(true, "game.es2?tag=afterEaResetAvailable");
+		[MonoModIgnore] private static bool WelcomeScreenShown;
+		private IEnumerator LoadSequence() {
+			yield return null;
+			if (!PrefabFinder.IsLoaded) {
+				GameObject gameIsLoadingInstance = Instantiate(gameIsLoadingPrefab);
+				yield return PrefabFinder.Load();
+				Destroy(gameIsLoadingInstance);
+			}
 			FFU_BE_Base.LoadModConfiguration();
 			FFU_BE_Defs.LoadBleedingEdgeWelcome();
-			welcomeGroup.SetActive(!FFU_BE_Defs.advancedWelcomePopup);
-			eaWelcomeGroup.SetActive(FFU_BE_Defs.advancedWelcomePopup);
-			start.onClick.AddListener(StartClicked);
-			eaStart.onClick.AddListener(StartClicked);
-			eaDiscardPermanently.onClick.AddListener(DiscardPermanentlyClicked);
-			eaReset.onClick.AddListener(ResetClicked);
-			eaResetYes.onClick.AddListener(ResetYesClicked);
-			eaResetNo.onClick.AddListener(ResetNoClicked);
+			StartWaitingForGameLoad = false;
+			yield return null;
+			yield return null;
+			yield return ScreenFader.FadeOut();
+			if (!WelcomeScreenShown) {
+				welcomeGroup.SetActive(!FFU_BE_Defs.advancedWelcomePopup);
+				eaWelcomeGroup.SetActive(FFU_BE_Defs.advancedWelcomePopup);
+				eaResetConfirmGroup.SetActive(false);
+				yield return ScreenFader.FadeIn();
+				while (!StartWaitingForGameLoad) yield return null;
+				WelcomeScreenShown = true;
+			}
+			start.gameObject.SetActive(false);
+			Instantiate(gameIsLoadingPrefab);
+			SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+			Destroy(gameObject);
 		}
 		private void ResetYesClicked() {
 			eaResetConfirmGroup.SetActive(false);
