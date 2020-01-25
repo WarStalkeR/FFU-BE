@@ -1,8 +1,20 @@
-## Fight For Universe: Bleeding Edge
+## Installation
+1) To play this mod you need to acquire BepInEx bleeding edge build from here: https://builds.bepis.io/projects/bepinex_be (I've used #186, i.e. 5.0.1.186, but I'm pretty sure any of them can be used).  
+2) Unpack (and configure it, if you want something specific).  
+3) Download Runtime MonoMod Loader from BepInEx from here: https://github.com/BepInEx/BepInEx.MonoMod.Loader  
+4) Download MonoMod (NET3.5) version based on what is permited in MonoMod Loader from here: https://github.com/MonoMod/MonoMod/releases  
+5) Add all missing references in BepInEx.MonoMod.Loader project from MonoMod and compile it.  
+6) Copy compiled "BepInEx.MonoMod.Loader.dll" into "BepInEx\patchers\" folder.  
+7) Rename "MonoMod.exe" into "MonoMod.dll" and copy it into "BepInEx\core\" folder.  
+8) Ensure that "BepInEx" folder and all relevant files such as "winhttp.dll" present in game's root directory.  
+9) Rename compiled DLL from this project into "Assembly-CSharp.FFU_BE.mm.dll" and copy it into "BepInEx\monomod\" folder.  
+
+
+## Description
 **Fight For Universe: Bleeding Edge** is a mod that extends original **Shortest Trip to Earth** in many different ways. Gameplay was changed considerably, new features that game never had were implemented, and some original features that were not used (such as reactor overcharge) were re-implemented back. Mod currently in beta release, which means that I've implemented everything I wanted, but there are still some bug fixing and balancing issues that might arise.
 
 
-## Bleeding Edge Features:
+## Features
 **Total Gameplay Rebalance** - every ship, module and crew-member got their stats and parameters changed, categorized, specialized and assigned specific role.  
 **Tactical Space Battles** - with rebalance of all space battles between ships became slow paced and more profitable. Now you have time to send boarding parties while sipping tea.  
 **Modules Specialization & Roles** - every module type is specialized and assigned strict category and role. No more useless module types.  
