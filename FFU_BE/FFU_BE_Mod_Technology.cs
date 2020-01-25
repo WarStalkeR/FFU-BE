@@ -57,8 +57,11 @@ namespace FFU_Bleeding_Edge {
 		}
 		public static Core.BonusMod GetInitialModuleModifier(ShipModule shipModule) {
 			float rolledValue = RstRandom.Range(0f, 1f);
-			if (!WorldRules.Impermanent.ironman) {
-				if (rolledValue >= 0.5f) return GetRandomPositiveBonus(shipModule);
+			if (WorldRules.Impermanent.beginnerStartingBonus) {
+				if (rolledValue >= 0.25f) return GetRandomPositiveBonus(shipModule);
+				else return Core.BonusMod.None;
+			} else if (!WorldRules.Impermanent.ironman) {
+				if (rolledValue >= 0.50f) return GetRandomPositiveBonus(shipModule);
 				else return Core.BonusMod.None;
 			} else {
 				if (rolledValue >= 0.75f) return GetRandomPositiveBonus(shipModule);
@@ -67,12 +70,16 @@ namespace FFU_Bleeding_Edge {
 		}
 		public static Core.BonusMod GetPlayerModuleModifier(ShipModule shipModule) {
 			float rolledValue = FFU_BE_Defs.GetModuleCraftingProficiency(shipModule) * 0.5f + RstRandom.Range(0f, 1f) * 0.5f;
-			if (!WorldRules.Impermanent.ironman) {
+			if (WorldRules.Impermanent.beginnerStartingBonus) {
+				if (rolledValue >= 0f && rolledValue <= 0.10f) return GetRandomNegativeBonus(shipModule);
+				else if (rolledValue >= 0.25f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
+				else return Core.BonusMod.None;
+			} else if(!WorldRules.Impermanent.ironman) {
 				if (rolledValue >= 0f && rolledValue <= 0.25f) return GetRandomNegativeBonus(shipModule);
-				else if (rolledValue >= 0.5f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
+				else if (rolledValue >= 0.50f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
 				else return Core.BonusMod.None;
 			} else {
-				if (rolledValue >= 0f && rolledValue <= 0.5f) return GetRandomNegativeBonus(shipModule);
+				if (rolledValue >= 0f && rolledValue <= 0.50f) return GetRandomNegativeBonus(shipModule);
 				else if (rolledValue >= 0.75f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
 				else return Core.BonusMod.None;
 			}
@@ -88,13 +95,17 @@ namespace FFU_Bleeding_Edge {
 			int enemyForceLevel = FFU_BE_Defs.discoveryFleetsLevel + 1;
 			int chosenTechLevel = enemyTechLevel > enemyForceLevel ? enemyTechLevel : enemyForceLevel;
 			float rolledValue = RstRandom.Range(0f, 1f) * 0.5f + chosenTechLevel / 20f;
-			if (!WorldRules.Impermanent.ironman) {
+			if (WorldRules.Impermanent.beginnerStartingBonus) {
+				if (rolledValue >= 0f && rolledValue <= 0.50f) return GetRandomNegativeBonus(shipModule);
+				else if (rolledValue >= 0.90f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
+				else return Core.BonusMod.None;
+			} else if (!WorldRules.Impermanent.ironman) {
 				if (rolledValue >= 0f && rolledValue <= 0.35f) return GetRandomNegativeBonus(shipModule);
 				else if (rolledValue >= 0.75f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
 				else return Core.BonusMod.None;
 			} else {
 				if (rolledValue >= 0f && rolledValue <= 0.15f) return GetRandomNegativeBonus(shipModule);
-				else if (rolledValue >= 0.5f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
+				else if (rolledValue >= 0.50f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
 				else return Core.BonusMod.None;
 			}
 		}
