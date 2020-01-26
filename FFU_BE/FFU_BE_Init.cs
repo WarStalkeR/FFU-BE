@@ -23,13 +23,13 @@ namespace RST {
 		[MonoModIgnore] private bool StartWaitingForGameLoad;
 		[MonoModIgnore] private static bool WelcomeScreenShown;
 		private IEnumerator LoadSequence() {
+			FFU_BE_Base.LoadModConfiguration();
 			yield return null;
 			if (!PrefabFinder.IsLoaded) {
 				GameObject gameIsLoadingInstance = Instantiate(gameIsLoadingPrefab);
 				yield return PrefabFinder.Load();
 				Destroy(gameIsLoadingInstance);
 			}
-			FFU_BE_Base.LoadModConfiguration();
 			FFU_BE_Defs.LoadBleedingEdgeWelcome();
 			StartWaitingForGameLoad = false;
 			yield return null;
