@@ -168,9 +168,10 @@ namespace FFU_Bleeding_Edge {
 			int healthBoost = 5 + (int)Math.Round((float)FFU_BE_Mod_Technology.GetModuleTier(shipModule) / 2 - 0.001f);
 			int healthLimit = 25 + (int)FFU_BE_Mod_Technology.GetModuleTier(shipModule) * 20;
 			int availableSets = 3 + (int)Math.Round((float)FFU_BE_Mod_Technology.GetModuleTier(shipModule) / 2 - 0.001f);
+			ShipModule refSource = PerFrameCache.CachedModules.Find(x => x.type == ShipModule.Type.Engine && x.Ownership.GetOwner() == Ownership.Owner.Me);
 			ShipModule refModule = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId);
 			foreach (Crewmember cachedCrewmember in PerFrameCache.CachedCrewmembers) {
-				if (refModule != null & availableSets > 0 && cachedCrewmember.Ownership.GetOwner() == Ownership.Owner.Me && Vector2.Distance(shipModule.transform.position, cachedCrewmember.transform.position) <= FFU_BE_Defs.equipmentChangeDist) {
+				if (refSource != null && refModule != null & availableSets > 0 && cachedCrewmember.Ownership.GetOwner() == Ownership.Owner.Me && Vector2.Distance(refSource.transform.position, cachedCrewmember.transform.position) <= FFU_BE_Defs.equipmentChangeDist) {
 					if (refModule.name == "artifactmodule tec 33 biostasis nice worm" && cachedCrewmember.type == Crewmember.Type.Drone) {
 						if (cachedCrewmember.MaxHealth < healthLimit) cachedCrewmember.MaxHealth += healthBoost;
 						StringBuilder cacheUsedMessage = RstShared.StringBuilder;
