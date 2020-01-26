@@ -7,13 +7,13 @@ using UnityEngine.UI;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "0.9.6.0";
+		public static string modVersion = "0.9.6.1";
 		//Internal Variables
 		public static bool firstRun = true;
 		public static bool firstInst = true;
 		public static bool goFullASMD = false;
 		public static bool debugMode = false;
-		public static bool visualDebug = true;
+		public static bool visualDebug = false;
 		public static bool canSpawnCrew = true;
 		public static bool dumpObjectLists = false;
 		public static bool dumpInstructions = false;

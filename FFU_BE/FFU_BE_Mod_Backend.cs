@@ -4,6 +4,7 @@
 #pragma warning disable CS0626
 #pragma warning disable CS0649
 #pragma warning disable CS0108
+#pragma warning disable CS0169
 #pragma warning disable CS0414
 
 using System;
@@ -42,7 +43,6 @@ namespace RST {
 		[MonoModIgnore] private Ship ParentShip;
 		[MonoModIgnore] private float shotTimer;
 		[MonoModIgnore] private int shotsToMake;
-		[MonoModIgnore] private int BarrelTipCount;
 		[MonoModIgnore] private float preshootTimer;
 		[MonoModIgnore] public bool shotMade { get; private set; }
 		[MonoModIgnore] private bool DoLoadAndAim() { return false; }
@@ -74,7 +74,7 @@ namespace RST {
 		private void Update() {
 			if (shotsToMake > 0) {
 				if (shotTimer <= 0f) {
-					int barrelTipIndex = BarrelTipCount - shotsToMake;
+					int barrelTipIndex = (magazineSize - shotsToMake) % Mathf.Max(barrelTips.Count(), 1);
 					CreateDamageDealer(barrelTipIndex, shotsToMake == magazineSize);
 					shotsToMake--;
 					shotTimer = shotInterval;
