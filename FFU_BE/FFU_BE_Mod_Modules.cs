@@ -630,5 +630,16 @@ namespace RST {
 			GameObject gameObject = (!IsPacked) ? Effects.scrappedPrefab : ((!InStorage) ? Effects.scrappedPackedPrefab : null);
 			if (gameObject != null) UnityEngine.Object.Instantiate(gameObject, base.transform.position, base.transform.rotation);
 		}
+		//Extensive Damage from Overcharge
+		public bool StartOvercharge() {
+			if (!OverchargeAvailable) return false;
+			WorldRules instance = WorldRules.Instance;
+			if (RstRandom.value <= instance.moduleOverchargeDamageChance) TakeDamage(UnityEngine.Random.Range(1, MaxHealth / 3));
+			if (RstRandom.value <= instance.moduleOverchargeOverloadChance) TryCauseOverload(UnityEngine.Random.Range(1f, 60f));
+			if (RstRandom.value <= instance.moduleOverchargeFireChance) if (Ship != null && Ship.Fire != null) Ship.Fire.SetFireAt(base.transform.position);
+			overchargeTimer.Restart(overchargeSeconds);
+			if (type == Type.Engine) if (Ship != null) UnityEngine.Object.Instantiate(VisualSettings.Instance.shipDodgeEffectPrefab, Ship.transform);
+			return true;
+		}
 	}
 }
