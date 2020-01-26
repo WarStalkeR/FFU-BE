@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
-using System;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
+		public static string modVersion = "0.9.6.0";
 		//Internal Variables
 		public static bool firstRun = true;
 		public static bool firstInst = true;

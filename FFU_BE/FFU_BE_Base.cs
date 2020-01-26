@@ -41,6 +41,7 @@ namespace FFU_Bleeding_Edge {
 			if (!string.IsNullOrEmpty(appDataPath)) {
 				string modConfDir = @"ModsConf\";
 				string modConfFile = @"FFU_Bleeding_Edge.ini";
+				Debug.LogWarning("Initializing mod configuration for Fight For Universe: Bleeding Edge v" + FFU_BE_Defs.modVersion);
 				if (!Directory.Exists(appDataPath + modConfDir)) Directory.CreateDirectory(appDataPath + modConfDir);
 				if (File.Exists(appDataPath + modConfDir + modConfFile)) {
 					IniFile modConfig = new IniFile();
