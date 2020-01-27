@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "0.9.6.1";
+		public static string modVersion = "0.9.6.2";
 		//Internal Variables
 		public static bool firstRun = true;
 		public static bool firstInst = true;
