@@ -69,35 +69,35 @@ namespace FFU_Bleeding_Edge {
 			switch (Core.GetOriginalName(shipModule.name)) {
 				case "artifactmodule tec 33 biostasis nice worm":
 				shipModule.displayName = "Mechanical <color=#" + colorCache + "ff>Upgrades</color> Cache";
-				shipModule.description = "Upgrades cache that contains upgrades sets that increase health of drones and robots by certain amount. To equip: pack it, bring crew close to module storage and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Upgrades cache that contains upgrades sets that increase health of drones and robots by certain amount. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 500f, exotics = 10f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 11 biostasis":
 				shipModule.displayName = "Biological <color=#" + colorCache + "ff>Implants</color> Cache";
-				shipModule.description = "Implants cache that contains implant sets that increase health of biological crew members by certain amount. To equip: pack it, bring crew close to module storage and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Implants cache that contains implant sets that increase health of biological crew members by certain amount. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, organics = 500f, exotics = 10f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 50;
 				break;
 				case "artifactmodule tec 17 broken screen gizmo, data":
 				shipModule.displayName = "CQC Class <color=#" + colorCache + "ff>Weapons</color> Cache";
-				shipModule.description = "Weapon cache that contains full sets of Power Fists, Dual Welders, Napalm Guns and Toxic Guns. To equip: pack it, bring crew close to module storage and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Weapon cache that contains full sets of Power Fists, Dual Welders, Napalm Guns and Toxic Guns. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 500f, synthetics = 500f, explosives = 500f, exotics = 15f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 25 broken screen gizmo":
 				shipModule.displayName = "Kinetic Type <color=#" + colorCache + "ff>Weapons</color> Cache";
-				shipModule.description = "Weapon cache that contains full sets of Revolvers, Pistols, SMGs, Shotguns, Rifles, Autocannon, Breacher Cannons and Railguns. To equip: pack it, bring crew close to module storage and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Weapon cache that contains full sets of Revolvers, Pistols, SMGs, Shotguns, Rifles, Autocannon, Breacher Cannons and Railguns. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 1250f, synthetics = 250f, explosives = 500f, exotics = 10f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 32 broken container gizmo":
 				shipModule.displayName = "Laser Type <color=#" + colorCache + "ff>Weapons</color> Cache";
-				shipModule.description = "Weapon cache that contains full sets of Laser Pistols, Laser Rifles and Laser Cannons. To equip: pack it, bring crew close to module storage and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Weapon cache that contains full sets of Laser Pistols, Laser Rifles and Laser Cannons. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 750f, synthetics = 1250f, exotics = 15f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule.powerConsumed = 0;
@@ -105,7 +105,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "artifactmodule tec 37 ripped quarter of a dome":
 				shipModule.displayName = "Energy Type <color=#" + colorCache + "ff>Weapons</color> Cache";
-				shipModule.description = "Weapon cache that contains full sets of Blaster Pistols, Blaster Rifles, Warp Ray Guns and Particle Guns. To equip: pack it, bring crew close to module storage and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Weapon cache that contains full sets of Blaster Pistols, Blaster Rifles, Warp Ray Guns and Particle Guns. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 750f, synthetics = 1250f, exotics = 20f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule.powerConsumed = 0;
@@ -113,21 +113,21 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "artifactmodule tec 36 broken gizmo":
 				shipModule.displayName = "Backup Class <color=#" + colorCache + "ff>Weapons</color> Cache";
-				shipModule.description = "Weapon cache that contains full sets Revolvers, Assault Pistols and Laser Pistols. To equip: pack it, bring crew close to module storage and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Weapon cache that contains full sets Revolvers, Assault Pistols and Laser Pistols. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 750f, synthetics = 250f, explosives = 250f, exotics = 5f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 34 data core grammofon":
 				shipModule.displayName = "Tactical Class <color=#" + colorCache + "ff>Weapons</color> Cache";
-				shipModule.description = "Weapon cache that contains full sets Assault SMGs, Assault Rifles, Assault Shotguns and Laser Rifles. To equip: pack it, bring crew close to module storage and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Weapon cache that contains full sets Assault SMGs, Assault Rifles, Assault Shotguns and Laser Rifles. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 1250f, synthetics = 500f, explosives = 500f, exotics = 15f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 35 data core makk":
 				shipModule.displayName = "Assault Class <color=#" + colorCache + "ff>Weapons</color> Cache";
-				shipModule.description = "Weapon cache that contains full sets Autocannons, Breacher Cannons, Assault Railguns and Laser Cannons. To equip: pack it, bring crew close to module storage and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Weapon cache that contains full sets Autocannons, Breacher Cannons, Assault Railguns and Laser Cannons. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 2000f, synthetics = 1000f, explosives = 1000f, exotics = 25f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;

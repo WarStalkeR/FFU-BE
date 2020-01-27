@@ -25,7 +25,7 @@ namespace FFU_Bleeding_Edge {
 		public static bool createModulesCSV = false;
 		public static int wordWrapLimit = 50;
 		public static int moduleRepairCost = 2;
-		public static int blackMarketMult = 1111;
+		public static int blackMarketMult = 111;
 		public static float timePassedCycle = 4f;
 		public static float shieldBonusMult = 4f;
 		public static float researchProgress = 0f;

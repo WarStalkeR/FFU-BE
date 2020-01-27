@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FFU_Bleeding_Edge {
 	public class Core {
@@ -60,6 +61,11 @@ namespace FFU_Bleeding_Edge {
 			int index = UnityEngine.Random.Range(0, genericList.Count);
 			if (genericList.Count > 0) return genericList[index];
 			else return fallbackVar;
+		}
+		public static T RandomItemFromList<T>(List<T> genericList) {
+			if (genericList.Count > 1) return genericList[UnityEngine.Random.Range(0, genericList.Count)];
+			else if (genericList.Count == 1) return genericList.First();
+			else return default;
 		}
 		public enum CrewHitChance {
 			None = 0,
