@@ -9,7 +9,6 @@ using MonoMod;
 using System.Collections.Generic;
 using UnityEngine;
 using RST;
-using HarmonyLib;
 using System.Linq;
 using RST.UI;
 using System.Text;
@@ -355,7 +354,7 @@ namespace FFU_Bleeding_Edge {
 namespace RST {
 	public class patch_PlayerFleet : PlayerFleet {
 		//Increase Damage From Asteroids
-		private void DoAsteroidHit(Ship playerShip) {
+		[MonoModReplace] private void DoAsteroidHit(Ship playerShip) {
 			if (hitAudio != null) AudioSource.PlayOneShot(hitAudio);
 			if (hitCausesFire && playerShip != null) {
 				if (playerShip.Fire != null) playerShip.Fire.SetFireAtRandomPos();
@@ -367,7 +366,7 @@ namespace RST {
 			ComchannelTip.Instance?.NotifyAboutAsteroidHit();
 		}
 		//Research & Peaceful Distance from Warp Gate
-		public bool WarpUsingWarpGate(WarpGate wg) {
+		[MonoModReplace] public bool WarpUsingWarpGate(WarpGate wg) {
 			if (wg == null) return false;
 			if (wg.Destination == null) return false;
 			Vector2 shipPos = transform.position;
@@ -386,7 +385,7 @@ namespace RST {
 			return true;
 		}
 		//Research & Peaceful Distance from Warp Drive
-		public bool WarpToStar(Star targetStar) {
+		[MonoModReplace] public bool WarpToStar(Star targetStar) {
 			if (targetStar == null) return false;
 			Vector2 shipPos = transform.position;
 			Vector2 starPos = targetStar.transform.position;
@@ -416,7 +415,7 @@ namespace RST {
 			}
 		}
 		//Advanced Warp Drive Jamming Feature
-		public static bool WarpIsDisabledForOwner(Ownership.Owner forOwner) {
+		[MonoModReplace] public static bool WarpIsDisabledForOwner(Ownership.Owner forOwner) {
 			Ownership.Owner enemyOwner = Ownership.GetOpposite(forOwner);
 			try { return PerFrameCache.CachedShips.Exists((Ship s) => s != null && s.disablesEnemyWarp && s.Ownership.GetOwner() == enemyOwner) ||
 				(forOwner == Ownership.Owner.Me && WarningsVisualizer.PlayerFleetJammedWarning && FFU_BE_Defs.distanceTraveledInPeace < 5f);
@@ -428,12 +427,12 @@ namespace RST {
 		[MonoModIgnore] public Transform DestinationNewParent { get; private set; }
 		[MonoModIgnore] private void SetAnimState(bool warpIsLoading, bool destroyIntviewShipToo, float warpLoadDuration) { }
 		//Tier dependent Instant Warp Mode
-		private bool UpdateCountdown() {
+		[MonoModReplace] private bool UpdateCountdown() {
 			float speedMultiplier = Module.TurnedOnAndIsWorking ? (1f / WorldRules.Instance.warpSkillEffects.EffectiveSkillMultiplier(Module, true)) : 0f;
 			return reloadTimer.Update(Mathf.Max(speedMultiplier * (PerFrameCache.IsGoodSituation ? 10f : 1f), 1f));
 		}
 		//Hostile Attention Check after Warping
-		private void EndWarping(bool success, bool destroyIntviewShipToo) {
+		[MonoModReplace] private void EndWarping(bool success, bool destroyIntviewShipToo) {
 			ShipModule module = Module;
 			if (!success && activationFuel != 0) {
 				PlayerData playerData = PlayerDatas.Get(module.Ownership.GetOwner());

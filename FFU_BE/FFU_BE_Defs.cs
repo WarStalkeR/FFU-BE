@@ -253,6 +253,7 @@ namespace FFU_Bleeding_Edge {
 			foreach (Text txt in Resources.FindObjectsOfTypeAll<Text>()) {
 				if (txt.name.Contains("WeaponIgnoresShieldValue")) txt.text = "Shield Bypass";
 				if (txt.name.Contains("WeaponNeverDeflectsValue")) txt.text = "Deflect Ignore";
+				//Debug.LogWarning(txt.name + ": " + txt.text);
 			}
 		}
 		public static void LoadBleedingEdgeWelcome() {

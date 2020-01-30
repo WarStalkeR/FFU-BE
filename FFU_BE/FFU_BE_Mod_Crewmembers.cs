@@ -11,7 +11,6 @@ using RST;
 using RST.UI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using UnityEngine;
 using FFU_Bleeding_Edge;
@@ -1230,7 +1229,7 @@ namespace RST {
 	public class patch_Crewmember : Crewmember {
 		[MonoModIgnore] public SpacePod SpacePodInstance { get; private set; }
 		//Skill Efficiency Limit
-		public int GetEffectiveSkill(Skill skill) {
+		[MonoModReplace] public int GetEffectiveSkill(Skill skill) {
 			int effectiveSkill = GetSkill(skill);
 			if (effectiveSkill > 0) {
 				if (!Hungry) return Mathf.Clamp(effectiveSkill, 1, 10);
@@ -1239,7 +1238,7 @@ namespace RST {
 			return 0;
 		}
 		//Auto Level Up Skill Overflow Fix
-		private static void AutoLevelUp(Crewmember c) {
+		[MonoModReplace] private static void AutoLevelUp(Crewmember c) {
 			if (c.unusedSkillPoints > 0) {
 				Skill prioritySkill = Skill.None;
 				switch (c.role) {
@@ -1355,7 +1354,7 @@ namespace RST {
 			}
 		}
 		//Kill Boarding Party when Leaving Ship
-		public void EnterPod() {
+		[MonoModReplace] public void EnterPod() {
 			if (name.Contains("ShortLifeSpan")) {
 				SpacePodInstance.gameObject.Destroy();
 				gameObject.Destroy();
@@ -1368,7 +1367,7 @@ namespace RST {
 			base.transform.SetParent(PlayerDatas.Instance?.transform);
 		}
 		//Allow Drones Skill Points Allocation
-		public bool CanLevelUpSkill(Skill skill, int inc) {
+		[MonoModReplace] public bool CanLevelUpSkill(Skill skill, int inc) {
 			if (skill == Skill.Presence || skill == Skill.None || inc <= 0) {
 				return false;
 			}
@@ -1393,7 +1392,7 @@ namespace RST {
 			Fsm.SendEvent("assign to store");
 		}
 		//Update Crew Parameters Assigned to Ships
-		public void BuyableAssignToShip(Ship ship, Ship.TaskArea spawnArea, Ship.TaskArea initialMoveToArea) {
+		[MonoModReplace] public void BuyableAssignToShip(Ship ship, Ship.TaskArea spawnArea, Ship.TaskArea initialMoveToArea) {
 			base.gameObject.SetActive(true);
 			Ownership.SetOwner(ship.Ownership.GetOwner());
 			FFU_BE_Mod_Crewmembers.ApplyCrewChanges(this);
@@ -1483,7 +1482,7 @@ namespace RST.PlaymakerAction {
 		[MonoModIgnore] private bool done;
 		[MonoModIgnore] private GameObject loadingInstance;
 		//Drones Receive Skill Points & No Overflow
-		public override void OnUpdate() {
+		[MonoModReplace] public override void OnUpdate() {
 			if (done) return;
 			Sector sector = CreateIfNeeded.Do(levelPrefab.Value.GetComponent<Sector>());
 			sector.transform.SetParent(base.Fsm.GameObject.transform);

@@ -94,12 +94,12 @@ namespace FFU_Bleeding_Edge {
 
 namespace RST {
 	public class patch_Ship : Ship {
-		[MonoModIgnore] private bool flyTo;
-		[MonoModIgnore] private bool exploding;
-		[MonoModIgnore] private Vector2 flyToPos;
-		[MonoModIgnore] private float explosionTimer;
-		[MonoModIgnore] private bool doAfterSpawnDone;
-		[MonoModIgnore] private int doAfterSpawnCounter;
+		//[MonoModIgnore] private bool flyTo;
+		//[MonoModIgnore] private bool exploding;
+		//[MonoModIgnore] private Vector2 flyToPos;
+		//[MonoModIgnore] private float explosionTimer;
+		//[MonoModIgnore] private bool doAfterSpawnDone;
+		//[MonoModIgnore] private int doAfterSpawnCounter;
 		[MonoModIgnore] private bool prevIsSelfDestructing;
 		[MonoModIgnore] private void CompleteFlyTo() { }
 		[MonoModIgnore] private void UpdateExplosion() { }
@@ -122,7 +122,7 @@ namespace RST {
 			return Mathf.Clamp(finalEvasion, 0, FFU_BE_Defs.shipMaxEvasionLimit);
 		}
 		//Enforce Ship Self-Destruct Timer
-		private void DoSelfDestruct() {
+		[MonoModReplace] private void DoSelfDestruct() {
 			bool isSelfDestructing = IsSelfDestructing;
 			if (prevIsSelfDestructing != isSelfDestructing) {
 				if (isSelfDestructing) selfDestructTimer.Restart(WorldRules.Instance.shipSelfDestructTime);
@@ -131,8 +131,8 @@ namespace RST {
 			if (!isSelfDestructing && prevIsSelfDestructing) selfDestructTimer.Restart(WorldRules.Instance.shipSelfDestructTime);
 			if (isSelfDestructing && selfDestructTimer.Update(1f)) TakeDamage(int.MaxValue);
 		}
-		//Collections to List Fix
-		private void Update() {
+		//Collections ToList() Fix
+		/*[MonoModReplace] private void Update() {
 			if (flyTo) {
 				if (!(Vector2.Distance(base.transform.position, flyToPos) < 0.1f)) {
 					if (!RstTime.IsPaused) base.transform.position = Vector2.Lerp(base.transform.position, flyToPos, 0.55f);
@@ -144,7 +144,7 @@ namespace RST {
 			if (doAfterSpawnCounter >= 0) {
 				if (doAfterSpawnCounter == 0 && !doAfterSpawnDone) {
 					List<IDoAfterShipSpawn> registeredChildren = GetRegisteredChildren<IDoAfterShipSpawn>();
-					foreach (IDoAfterShipSpawn item in registeredChildren.ToList()) item.DoAfterShipSpawn(this);
+					foreach (IDoAfterShipSpawn item in registeredChildren) item.DoAfterShipSpawn(this);
 					DestroyAll(registeredChildren);
 					Ownership.Owner owner = Ownership.GetOwner();
 					if (owner == Ownership.Owner.Enemy) ShipAction.Do(this, ShipAction.Action.TurnAllModulesOn);
@@ -196,9 +196,9 @@ namespace RST {
 				}
 			} else AiSendSomeoneToExtinguishFire();
 			if (exploding) UpdateExplosion();
-		}
+		}*/
 		//All Modules Lootable (Depends on their Integrity)
-		private void LeaveLootModules() {
+		[MonoModReplace] private void LeaveLootModules() {
 			int[] leaveLootModuleCounts = WorldRules.Instance.shipExplosionParams.leaveLootModuleCounts;
 			if (!WorldRules.Impermanent.shipModuleLootDisabled && leaveLootModuleCounts.Length != 0 && Ownership.GetOwner() != Ownership.Owner.Me) {
 				List<ShipModule> droppedModulesList = Modules.FindAll((ShipModule m) => m != null && !m.IsDead && m.type != ShipModule.Type.Storage && !FFU_BE_Defs.IsProhibitedModule(m));
@@ -214,7 +214,7 @@ namespace RST {
 			}
 		}
 		//Remove Temporary Modifiers & Make Boss Weapons Useless
-		private static void DetatchModule(ShipModule module) {
+		[MonoModReplace] private static void DetatchModule(ShipModule module) {
 			if (module == null) return;
 			CrewAssignmentSpot[] operatorSpots = module.operatorSpots;
 			for (int i = 0; i < operatorSpots.Length; i++) operatorSpots[i].UnassignCrew();

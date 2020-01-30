@@ -47,10 +47,11 @@ namespace RST {
 		[MonoModIgnore] public bool shotMade { get; private set; }
 		[MonoModIgnore] private bool DoLoadAndAim() { return false; }
 		[MonoModIgnore] public bool inShootSequence { get; private set; }
+		[MonoModIgnore] private int BarrelTipCount => Mathf.Max(barrelTips.Length, 1);
 		[MonoModIgnore] public float SecondsSinceLastTargetSwitch { get; private set; }
 		[MonoModIgnore] private ShootAtDamageDealer CreateDamageDealer(int barrelTipIndex, bool isFirstInVolley) { return null; }
 		//Min Aim Angle based on Weapon Type
-		public float CalculateAimAngle(Vector2 targetPos) {
+		[MonoModReplace] public float CalculateAimAngle(Vector2 targetPos) {
 			if (accuracy == 0) return 0f;
 			float num = 1f;
 			Collider2D[] colliders = RstShared.Colliders16;
@@ -71,10 +72,10 @@ namespace RST {
 			else return Mathf.Clamp(gunnerySkillEffects.EffectiveAngle(this) * (1f / shipAccuracyBonus), 4f, 90f);
 		}
 		//Use All Weapon Barrels Consequently
-		private void Update() {
+		[MonoModReplace] private void Update() {
 			if (shotsToMake > 0) {
 				if (shotTimer <= 0f) {
-					int barrelTipIndex = (magazineSize - shotsToMake) % Mathf.Max(barrelTips.Count(), 1);
+					int barrelTipIndex = (magazineSize - shotsToMake) % BarrelTipCount;
 					CreateDamageDealer(barrelTipIndex, shotsToMake == magazineSize);
 					shotsToMake--;
 					shotTimer = shotInterval;
@@ -122,7 +123,7 @@ namespace RST {
 	}
 	public class patch_ShootAtDamageDealer : ShootAtDamageDealer {
 		//Overload Shield Gens/Caps from Damage
-		protected void DoShieldHit(Shield shield) {
+		[MonoModReplace] protected void DoShieldHit(Shield shield) {
 			if (shield == null) return;
 			if (shield.ShieldPoints < damage.shieldDmg) {
 				Ship ship = shield.Ship;
@@ -139,7 +140,7 @@ namespace RST {
 			}
 		}
 		//Improved Boarding/Spawner Nukes Mechanic
-		protected void DoHit(Collider2D[] hits, int hitCount, Vector2 hitPos) {
+		[MonoModReplace] protected void DoHit(Collider2D[] hits, int hitCount, Vector2 hitPos) {
 			Collider2D collider2D = null;
 			for (int i = 0; i < hitCount; i++) {
 				Collider2D collider2D2 = hits[i];
@@ -200,12 +201,12 @@ namespace RST {
 	}
 	public class patch_RepairSkillEffects : RepairSkillEffects {
 		//Speed Up Hull Repair Time
-		public float GetShipHpRepairTime(Crewmember c, bool considerAccelTime) {
+		[MonoModReplace] public float GetShipHpRepairTime(Crewmember c, bool considerAccelTime) {
 			float timeMult = (considerAccelTime && PerFrameCache.IsGoodSituation) ? FFU_BE_Defs.shipHullRepairAcceleration : 1f;
 			return FFU_BE_Defs.shipHullRepairTime * TimeMultiplier(c) / timeMult;
 		}
 		//Speed Up Module Repair Time
-		public float GetModuleHpRepairTime(Crewmember c, bool considerAccelTime) {
+		[MonoModReplace] public float GetModuleHpRepairTime(Crewmember c, bool considerAccelTime) {
 			float timeMult = (considerAccelTime && PerFrameCache.IsGoodSituation) ? FFU_BE_Defs.moduleRepairAcceleration : 1f;
 			return FFU_BE_Defs.moduleRepairTime * TimeMultiplier(c) / timeMult;
 		}
@@ -217,7 +218,7 @@ namespace RST {
 	public class patch_Shop : Shop {
 		[MonoModIgnore] private bool wasLoaded;
 		//Increased Station Resource Capacity
-		private void Start() {
+		[MonoModReplace] private void Start() {
 			if (!wasLoaded) {
 				moduleCommissionFeeSeed = RstRandom.positiveIntValue;
 				if (crewStation) {
@@ -273,7 +274,7 @@ namespace RST {
 	}
 	public class patch_WorldRules : WorldRules {
 		//Alternative Fire Chance Levels
-		public float GetFireChancePercent(ShootAtDamageDealer.FireChanceLevel level) {
+		[MonoModReplace] public float GetFireChancePercent(ShootAtDamageDealer.FireChanceLevel level) {
 			switch (level) {
 				case ShootAtDamageDealer.FireChanceLevel.Low: return (float)Core.FireIgniteChance.High;
 				case ShootAtDamageDealer.FireChanceLevel.Default: return (float)Core.FireIgniteChance.Medium;
@@ -289,7 +290,7 @@ namespace RST.UI {
 		[MonoModIgnore] private ShipModule resPackPrefab;
 		[MonoModIgnore] private PlayerResource GetPlayerResource(PlayerData pd) { return null; }
 		//Consume Full Cost on Resource Pack From Action Panel
-		private bool ResPackCraftCheck(out int resToPack, out ResourceValueGroup cost, out ResourceValueGroup packValue, out bool hasUsableStorage, out bool hasEnoughForPayingCraftingCost, out bool craftNotDisabled) {
+		[MonoModReplace] private bool ResPackCraftCheck(out int resToPack, out ResourceValueGroup cost, out ResourceValueGroup packValue, out bool hasUsableStorage, out bool hasEnoughForPayingCraftingCost, out bool craftNotDisabled) {
 			PlayerData me = PlayerDatas.Me;
 			PlayerResource playerResource = GetPlayerResource(me);
 			resToPack = 0;
@@ -351,7 +352,7 @@ namespace RST.UI {
 			for (int i = 0; i < researchCreditsBonus.transform.childCount; i++) researchCreditsBonus.transform.GetChild(i).gameObject.SetActive(false);
 		}
 		//Update Research Pop-Up to Show Modified Data
-		private static string BuildResearchCreditsBonusHover(int researchCreditsBonus) {
+		[MonoModReplace] private static string BuildResearchCreditsBonusHover(int researchCreditsBonus) {
 			if (FFU_BE_Defs.unresearchedModuleIDs.ToList().Count > 2 && Input.GetKeyDown(KeyCode.PageUp) && !Input.GetKeyDown(KeyCode.PageDown)) FFU_BE_Mod_Technology.RotateResearchListForward();
 			if (FFU_BE_Defs.unresearchedModuleIDs.ToList().Count > 2 && !Input.GetKeyDown(KeyCode.PageUp) && Input.GetKeyDown(KeyCode.PageDown)) FFU_BE_Mod_Technology.RotateResearchListBackward();
 			string currentEnergyEmission = "<b>Flagship Energy Emission</b>: " + string.Format("{0:0.#}", FFU_BE_Defs.energyEmission) + "m³" + "\n";
@@ -400,7 +401,7 @@ namespace RST.UI {
 			[MonoModIgnore] public bool Show(int curValue, Text text, GameObject changeShowPos, List<string> changeReasons, string name) { return false; }
 			[MonoModIgnore] public bool Show(int curValue, int maxValue, Text text, GameObject changeShowPos, Image bar, LayoutElement maxBar, Texture2D specter, string name) { return false; }
 			[MonoModIgnore] public bool Show(int curValue, int maxValue, Text text, GameObject changeShowPos, string name) { return false; }
-			private bool PrivateShow(int curValue, int maxValue, int ifCurValueLowerThanThisThenMakeItRed, Text text, GameObject changeShowPos, List<string> reasons, Image bar, LayoutElement maxBar, Texture2D specter, string name) {
+			[MonoModReplace] private bool PrivateShow(int curValue, int maxValue, int ifCurValueLowerThanThisThenMakeItRed, Text text, GameObject changeShowPos, List<string> reasons, Image bar, LayoutElement maxBar, Texture2D specter, string name) {
 				bool result = false;
 				if (text != null) {
 					if (lastValue != curValue || lastMaxValue != maxValue) {
@@ -424,7 +425,7 @@ namespace RST.UI {
 				}
 				return result;
 			}
-			private void FireRaisingText(GameObject posGO, int value, int lastValue, List<string> reasons, string name) {
+			[MonoModReplace] private void FireRaisingText(GameObject posGO, int value, int lastValue, List<string> reasons, string name) {
 				ResourceValueGroup pData = PlayerDatas.Me != null ? PlayerDatas.Me.Resources : ResourceValueGroup.Empty;
 				switch (name) {
 					case "organics":
@@ -523,7 +524,7 @@ namespace RST.UI {
 	public class patch_StoragePanel : StoragePanel {
 		[MonoModIgnore] private HoverableUI upgradeButtonHover;
 		//Modified Max Storage Capacity Upgrade
-		public void UpdateUpgradeButton(Ownership.Owner resourcesGoTo) {
+		[MonoModReplace] public void UpdateUpgradeButton(Ownership.Owner resourcesGoTo) {
 			PlayerData playerData = PlayerDatas.Get(resourcesGoTo);
 			ResourceValueGroup r = (playerData != null) ? playerData.Resources : ResourceValueGroup.Empty;
 			WorldRules instance = WorldRules.Instance;
@@ -536,7 +537,7 @@ namespace RST.UI {
 			upgradeButton.interactable = storageModule != null && canIncrease && hasResources;
 		}
 		//Modified Max Storage Capacity Upgrade
-		public static void Upgrade() {
+		[MonoModReplace] public static void Upgrade() {
 			PlayerData me = PlayerDatas.Me;
 			StorageModule storageModule = GetStorageModule(Ownership.Owner.Me, false);
 			if (me == null || storageModule == null) return;
@@ -575,7 +576,7 @@ namespace RST.PlaymakerAction {
 		[MonoModIgnore] private PlayMakerFSM fsm;
 		[MonoModIgnore] private AudioPlayWithFade.Ctx audioCtx;
 		//Increased Resource Numbers for Results
-		private void Start() {
+		[MonoModReplace] private void Start() {
 			started = true;
 			fsm = CreateIfNeeded.Do(UISkin.Instance.resultsPrefab);
 			FsmVariables fsmVariables = fsm.FsmVariables;

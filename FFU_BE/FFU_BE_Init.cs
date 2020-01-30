@@ -22,7 +22,7 @@ namespace RST {
 	public class patch_GameLoader : GameLoader {
 		[MonoModIgnore] private bool StartWaitingForGameLoad;
 		[MonoModIgnore] private static bool WelcomeScreenShown;
-		private IEnumerator LoadSequence() {
+		[MonoModReplace] private IEnumerator LoadSequence() {
 			FFU_BE_Base.LoadModConfiguration();
 			yield return null;
 			if (!PrefabFinder.IsLoaded) {
@@ -48,7 +48,7 @@ namespace RST {
 			SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
 			Destroy(gameObject);
 		}
-		private void ResetYesClicked() {
+		[MonoModReplace] private void ResetYesClicked() {
 			eaResetConfirmGroup.SetActive(false);
 			SavegameManager.DeleteAllSavedDataExceptProfileUID();
 			Debug.LogWarning("Deleted all saved data and preferences");
@@ -61,7 +61,7 @@ namespace RST {
 			}
 			StartWaitingForGameLoad = true;
 		}
-		private void DiscardPermanentlyClicked() {
+		[MonoModReplace] private void DiscardPermanentlyClicked() {
 			Debug.LogWarning("Top tier module crafting licenses granted!");
 			FFU_BE_Defs.goFullASMD = true;
 			StartWaitingForGameLoad = true;

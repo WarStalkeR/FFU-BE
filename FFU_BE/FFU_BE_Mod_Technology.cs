@@ -1232,7 +1232,7 @@ namespace FFU_Bleeding_Edge {
 
 namespace RST {
 	public class patch_ModuleSlot : ModuleSlot {
-		public bool DoCraft(ShipModule prefab) {
+		[MonoModReplace] public bool DoCraft(ShipModule prefab) {
 			if (!CanCraft(prefab)) return false;
 			ModuleSlotRoot moduleSlotRoot = ModuleSlotRoot;
 			Instantiate moduleCreator = moduleSlotRoot.ModuleCreator;
@@ -1476,6 +1476,12 @@ namespace RST.PlaymakerAction {
 					foreach (int discoveredModuleID in FFU_BE_Defs.discoveredModuleIDs.ToList()) ModuleSlotActionsPanel.altCraftableModulePrefabs.Add(FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == discoveredModuleID));
 					ModuleSlotActionsPanel.altCraftableModulePrefabs.Sort((ShipModule x, ShipModule y) => FFU_BE_Defs.SortAllModules(x).CompareTo(FFU_BE_Defs.SortAllModules(y)));
 				}
+				foreach (Fleet fleet in Resources.FindObjectsOfTypeAll<Fleet>().ToList()) {
+					if (fleet.name.Contains("MustExpireAfterMeeting")) {
+						fleet.speed = 60f;
+						break;
+					}
+				}
 				FFU_BE_Defs.firstInst = false;
 			}
 			Debug.LogWarning("Game loaded! Applying tiered module parameters...");
@@ -1531,7 +1537,7 @@ namespace RST.PlaymakerAction {
 	public class patch_PoiWaitForPlayer : PoiWaitForPlayer {
 		[MonoModIgnore] private POI poi;
 		//Recalculate Black Market Module Price
-		private void TryToVisit() {
+		[MonoModReplace] private void TryToVisit() {
 			if (!RstMutexes.TryToLock(ref RstShared.eventLockHolder, poi)) return;
 			POI.LockFleet(poi);
 			poi.LongRangeScanned = true;

@@ -564,7 +564,7 @@ namespace RST {
 		[MonoModIgnore] private static void ScrapGetResources(PlayerResource resource, int amount, StringBuilder logLineSb) { }
 		[MonoModIgnore] private static void ScrapGetCredits(PlayerData pd, int amount, StringBuilder logLineSb) { }
 		//Tactical Unpack Times
-		public void StartUnpacking(bool useCraftTime) {
+		[MonoModReplace] public void StartUnpacking(bool useCraftTime) {
 			UnpackShared();
 			UnpackTime = useCraftTime ? FFU_BE_Defs.shipModuleCraftTime : FFU_BE_Defs.shipModuleUnpackTime;
 			if (UnpackTime == 0f) { Unpack(); return; }
@@ -588,7 +588,7 @@ namespace RST {
 			FFU_BE_Defs.RecalculateEnergyEmission();
 		}
 		//Multiple Features Implementations on Scrap Module
-		public void Scrap(PlayerData resourcesGoTo, bool addLogLine) {
+		[MonoModReplace] public void Scrap(PlayerData resourcesGoTo, bool addLogLine) {
 			float moduleHealthPercent = FFU_BE_Mod_Modules.GetRelativeHealth(this);
 			if (resourcesGoTo != null) {
 				scrapGet *= moduleHealthPercent;
@@ -631,7 +631,7 @@ namespace RST {
 			if (gameObject != null) UnityEngine.Object.Instantiate(gameObject, base.transform.position, base.transform.rotation);
 		}
 		//Extensive Damage from Overcharge
-		public bool StartOvercharge() {
+		[MonoModReplace] public bool StartOvercharge() {
 			if (!OverchargeAvailable) return false;
 			WorldRules instance = WorldRules.Instance;
 			if (RstRandom.value <= instance.moduleOverchargeDamageChance) TakeDamage(UnityEngine.Random.Range(1, MaxHealth / 3));

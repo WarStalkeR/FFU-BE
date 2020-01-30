@@ -808,13 +808,13 @@ namespace FFU_Bleeding_Edge {
 namespace RST {
 	public class patch_ScienceSkillEffects : ScienceSkillEffects {
 		//Allow Laboratory Modules to Produce All Types
-		public int EffectiveCreditsProduction(ShipModule m) {
+		[MonoModReplace] public int EffectiveCreditsProduction(ShipModule m) {
 			return EffectiveSkillPoints(m) * skillPointBonusProduction;
 		}
 	}
 	public class patch_GardenSkillEffects : GardenSkillEffects {
 		//Allow Greenhouse Modules to Produce All Types
-		public int EffectiveOrganicsProduction(ShipModule m) {
+		[MonoModReplace] public int EffectiveOrganicsProduction(ShipModule m) {
 			return EffectiveSkillPoints(m) * skillPointBonusProduction;
 		}
 	}
@@ -833,7 +833,7 @@ namespace RST.UI {
 		[MonoModIgnore] private bool confirmSlotDowngrade;
 		[MonoModIgnore] private ModuleSlotActionsPanel.Item Item;
 		//Prefab Module Full Information Window
-		public void FillWithDataFrom(ModuleSlotActionsPanel.Item item, ResourceValueGroup pr) {
+		[MonoModReplace] public void FillWithDataFrom(ModuleSlotActionsPanel.Item item, ResourceValueGroup pr) {
 			Item = item;
 			base.gameObject.SetActive(true);
 			confirmSlotDowngrade = false;
@@ -866,7 +866,7 @@ namespace RST.UI {
 			Refresh(pr);
 		}
 		//Prefab Module Full Information Window
-		public void Refresh(ResourceValueGroup pr) {
+		[MonoModReplace] public void Refresh(ResourceValueGroup pr) {
 			ModuleSlotActionsPanel.Item item = Item;
 			if (item == null) return;
 			ModuleSlot.Upgrade slotUpgrade = item.slotUpgrade;
@@ -900,10 +900,9 @@ namespace RST.UI {
 			exoticsProdText.transform.parent.parent.gameObject.SetActive(false);
 			if (m != null) health.horizontalOverflow = HorizontalWrapMode.Overflow;
 			if (m != null && m.Ownership.GetOwner() == Ownership.Owner.Me && iconHover.Hovered) iconHover.hoverText = FFU_BE_Mod_Information.GetSelectedModuleExactData(m);
-			//for (int i = 0; i < exoticsProdText.transform.parent.parent.childCount; i++) Debug.LogWarning("exoticsProdText.GetChild(" + i + "): " + exoticsProdText.transform.parent.parent.GetChild(i).name);
 		}
 		//Greenhouse Interface Fix
-		private void DoGarden() {
+		[MonoModReplace] private void DoGarden() {
 			SafeUpdateField(crewText, m.CurrentLocalOpsCount + "/" + m.operatorSpots.Length);
 			GardenSkillEffects gardenSkillEffects = WorldRules.Instance.gardenSkillEffects;
 			int gardenProduction = gardenSkillEffects.EffectiveOrganicsProduction(m);
@@ -914,7 +913,7 @@ namespace RST.UI {
 			removesOpResCons.SetActive(true);
 		}
 		//Laboratory Interface Fix
-		private void DoResearch() {
+		[MonoModReplace] private void DoResearch() {
 			SafeUpdateField(crewText, m.CurrentLocalOpsCount + "/" + m.operatorSpots.Length);
 			ScienceSkillEffects scienceSkillEffects = WorldRules.Instance.scienceSkillEffects;
 			int labProduciton = scienceSkillEffects.EffectiveCreditsProduction(m);
@@ -924,21 +923,21 @@ namespace RST.UI {
 			SafeUpdateField(researchCreditsProdBonusText, totalLabProduction + "/100" + Localization.TT("ru") + " " + Localization.TT("per"));
 		}
 		//Show Updated Crew Damage in Weapon Panel
-		private void DoWeaponCrewDmg(WeaponModule w, ShootAtDamageDealer.CrewDmgLevel crewDmgLevel) {
+		[MonoModReplace] private void DoWeaponCrewDmg(WeaponModule w, ShootAtDamageDealer.CrewDmgLevel crewDmgLevel) {
 			dmgToCrewTextHover.hoverText = "Chance to damage all crew members within area of effect by shown amount.";
 			string crewDmgText = w.magazineSize + "x" + w.ProjectileOrBeamPrefab.GetDamage(w).doorDmg;
 			switch (crewDmgLevel) {
-				case ShootAtDamageDealer.CrewDmgLevel.None: SafeUpdateField(dmgToCrewText, Localization.TT("None (0%)")); break;
+				case ShootAtDamageDealer.CrewDmgLevel.None: SafeUpdateField(dmgToCrewText, Localization.TT("None (" + (int)Core.CrewHitChance.None + "%)")); break;
 				case ShootAtDamageDealer.CrewDmgLevel.Low: SafeUpdateField(dmgToCrewText, Localization.TT(crewDmgText + " (" + (int)Core.CrewHitChance.Low + "%)")); break;
 				case ShootAtDamageDealer.CrewDmgLevel.Default: SafeUpdateField(dmgToCrewText, Localization.TT(crewDmgText + " (" + (int)Core.CrewHitChance.Medium + "%)")); break;
 				case ShootAtDamageDealer.CrewDmgLevel.High: SafeUpdateField(dmgToCrewText, Localization.TT(crewDmgText + " (" + (int)Core.CrewHitChance.High + "%)")); break;
 			}
 		}
 		//Show Update Fire Ignition Chance in Weapon Panel
-		private void DoWeaponFireChance(ShootAtDamageDealer.FireChanceLevel fireChanceLevel) {
+		[MonoModReplace] private void DoWeaponFireChance(ShootAtDamageDealer.FireChanceLevel fireChanceLevel) {
 			fireChanceHover.hoverText = "Chance to ignite fire in every tile within area of effect.";
 			switch (fireChanceLevel) {
-				case ShootAtDamageDealer.FireChanceLevel.None: SafeUpdateField(fireChanceText, Localization.TT("None (0%)")); break;
+				case ShootAtDamageDealer.FireChanceLevel.None: SafeUpdateField(fireChanceText, Localization.TT("None (" + (int)Core.FireIgniteChance.None + "%)")); break;
 				case ShootAtDamageDealer.FireChanceLevel.Low: SafeUpdateField(fireChanceText, Localization.TT("Low (" + (int)Core.FireIgniteChance.Low + "%)")); break;
 				case ShootAtDamageDealer.FireChanceLevel.Default: SafeUpdateField(fireChanceText, Localization.TT("Medium (" + (int)Core.FireIgniteChance.Medium + "%)")); break;
 				case ShootAtDamageDealer.FireChanceLevel.High: SafeUpdateField(fireChanceText, Localization.TT("High (" + (int)Core.FireIgniteChance.High + "%)")); break;
