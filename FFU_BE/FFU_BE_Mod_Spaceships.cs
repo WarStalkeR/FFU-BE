@@ -14,6 +14,8 @@ using UnityEngine;
 using FFU_Bleeding_Edge;
 using RST.PlaymakerAction;
 using System.Linq;
+using UnityEngine.EventSystems;
+using System.Text;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Spaceships {
@@ -23,42 +25,62 @@ namespace FFU_Bleeding_Edge {
 				switch (ship.name) {
 					case "01 Tigerfish":
 					ship.MaxHealthAdd = 300;
+					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 150));
+					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Industrial Door"));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "02 Nuke Runner":
 					ship.MaxHealthAdd = 250;
+					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 250));
+					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Security Door"));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "03 Weirdship":
 					ship.MaxHealthAdd = 330;
+					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 75));
+					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Organic Door"));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "04 Rogue Rat":
 					ship.MaxHealthAdd = 280;
+					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 125));
+					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Scrap Door"));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "05 Gardenship":
 					ship.MaxHealthAdd = 380;
+					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 175));
+					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Pressure Door"));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "06 Atlas":
 					ship.MaxHealthAdd = 470;
+					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 225));
+					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Reinforced Door"));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "07 Bluestar MK III scientific":
 					ship.MaxHealthAdd = 520;
+					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 275));
+					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "High-Tech Door"));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "08 Roundship":
 					ship.MaxHealthAdd = 420;
+					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 200));
+					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Carapace Door"));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "10 Endurance":
 					ship.MaxHealthAdd = 600;
+					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 500));
+					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Blast Door"));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "BattleTiger":
 					ship.MaxHealthAdd = 700;
+					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 350));
+					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Shielded Door"));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					default: break;
@@ -252,6 +274,49 @@ namespace RST {
 			module.transform.position = new Vector3(10000f, 0f, 0f);
 			module.transform.rotation = Quaternion.identity;
 			module.Ownership.SetOwner(Ownership.Owner.Inherit);
+		}
+	}
+	public class patch_Door : Door {
+		[MonoModIgnore] private PlayMakerFSM Fsm => GetCachedComponent<PlayMakerFSM>(true);
+		[MonoModIgnore] private static List<Crewmember> tmpCrewList = new List<Crewmember>();
+		//Repair Door when clicking Left Mouse Button
+		public void OnPointerClick(PointerEventData eventData) {
+			if (eventData.button == Settings.SelectButton) {
+				if (Ownership.GetOwner() == Ownership.Owner.Me && !HasFullHealth && PerFrameCache.IsGoodSituation) {
+					int repairAmount = (MaxHealth - Health) >= 10 ? 10 : MaxHealth - Health;
+					if (FFU_BE_Defs.doorRepairCost.CheckHasEnough(PlayerDatas.Me, repairAmount * FFU_BE_Defs.GetDifficultyModifier())) {
+						FFU_BE_Defs.doorRepairCost.ConsumeFrom(PlayerDatas.Me, repairAmount * FFU_BE_Defs.GetDifficultyModifier(), Localization.tt("door repair"));
+						Heal(repairAmount);
+					}
+				}
+				SelectionManager.Select(base.gameObject);
+			} else if (eventData.button == Settings.ActionButton) {
+				if (PlayerCanLockThis()) Fsm.SendEvent("cmd action");
+				else if (Crewmember.GetSelectedPlayerCrewThatCanTarget(tmpCrewList, this)) {
+					UnityEngine.Object.Instantiate(VisualSettings.Instance.crewAttackFeedbackPrefab, base.transform.position, Quaternion.identity);
+					foreach (Crewmember tmpCrew in tmpCrewList) tmpCrew.Attack(base.gameObject, true);
+				} else MonoBehaviourExtended.ExecuteEventUpInHierarchy(base.gameObject, eventData, ExecuteEvents.pointerClickHandler);
+			}
+		}
+		public string HoverText {
+			get {
+				StringBuilder stringBuilder = RstShared.StringBuilder;
+				stringBuilder.Append(MonoBehaviourExtended.TT("Door")).Append('\n').Append(MonoBehaviourExtended.TT("HP")).Append(": ").AppendColoredHealth(this);
+				if (IsLocked) stringBuilder.Append('\n').Append(MonoBehaviourExtended.TT("<color=lime>Locked</color>"));
+				if (!HasFullHealth) {
+					int lackingHealth = MaxHealth - Health;
+					stringBuilder.Append("\n\n").Append(MonoBehaviourExtended.TT("Full Repair Cost: "));
+					if (Ownership.GetOwner() == Ownership.Owner.Me) {
+						stringBuilder.Append('\n').Append(" > Metals: ").Append("<color=red>").Append(lackingHealth * FFU_BE_Defs.doorRepairCost.metals * FFU_BE_Defs.GetDifficultyModifier()).Append("</color>");
+						stringBuilder.Append('\n').Append(" > Synthetics: ").Append("<color=red>").Append(lackingHealth * FFU_BE_Defs.doorRepairCost.synthetics * FFU_BE_Defs.GetDifficultyModifier()).Append("</color>");
+					} else {
+						stringBuilder.Append('\n').Append(" > Metals: ").Append("<color=red>").Append(lackingHealth * FFU_BE_Defs.doorRepairCost.metals).Append("</color>");
+						stringBuilder.Append('\n').Append(" > Synthetics: ").Append("<color=red>").Append(lackingHealth * FFU_BE_Defs.doorRepairCost.synthetics).Append("</color>");
+					}
+					stringBuilder.Append("\n\n").Append("Click to repair.");
+				}
+				return stringBuilder.ToString();
+			}
 		}
 	}
 }

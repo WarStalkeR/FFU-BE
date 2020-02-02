@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "0.9.6.1";
+		public static string modVersion = "0.9.6.2";
 		//Internal Variables
 		public static bool firstRun = true;
 		public static bool firstInst = true;
@@ -26,6 +26,7 @@ namespace FFU_Bleeding_Edge {
 		public static int wordWrapLimit = 50;
 		public static int moduleRepairCost = 2;
 		public static int blackMarketMult = 111;
+		public static int pointsPerBarItem = 20;
 		public static float timePassedCycle = 4f;
 		public static float shieldBonusMult = 4f;
 		public static float researchProgress = 0f;
@@ -34,6 +35,8 @@ namespace FFU_Bleeding_Edge {
 		public static float shipHullRepairTime = 5f;
 		public static float moduleRepairAcceleration = 25f;
 		public static float shipHullRepairAcceleration = 15f;
+		public static float permanentModuleDamageChance = 0.20f;
+		public static float permanentModuleDamagePercent = 0.15f;
 		public static List<int> updatedShips = new List<int>();
 		public static List<int> updatedCrews = new List<int>();
 		public static List<Ship> prefabShipsList = new List<Ship>();
@@ -48,6 +51,8 @@ namespace FFU_Bleeding_Edge {
 		public static List<DamageToken> prefabDamageTokensList = new List<DamageToken>();
 		public static IDictionary<int, int> equippedCrewFirearms = new Dictionary<int, int>();
 		public static IDictionary<int, int> craftingProficiency = new Dictionary<int, int>();
+		public static IDictionary<int, int> doorShipPrefabsHealth = new Dictionary<int, int>();
+		public static IDictionary<int, string> doorShipPrefabsName = new Dictionary<int, string>();
 		public static int[] techLevel = new int[] { 0, 1500, 3500, 6000, 10000, 16000, 24000, 34000, 46000, 60000 };
 		public static List<int> discoveredModuleIDs = new List<int>(new int[] { 760167696, 453797399, 1581569285,
 			345284781, 813048445, 124199597, 92356131, 430038657, 2146165248, 533676501, 858424257, 821254137,
@@ -107,6 +112,7 @@ namespace FFU_Bleeding_Edge {
 		public static float[] scanResolution = new float[] { 5000f, 3000f, 1500f, 1000f, 500f };
 		public static int[] killedFleetsTrigger = new int[] { 3, 6, 10, 15, 21, 27, 34, 42, 50 };
 		public static int[] timesInterceptedByEnforcers = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		public static ResourceValueGroup doorRepairCost = new ResourceValueGroup { metals = 2f, synthetics = 4f };
 		//Configuration Variables
 		public static bool advancedWelcomePopup = false;
 		public static bool restartUnlocksEverything = false;
@@ -250,9 +256,199 @@ namespace FFU_Bleeding_Edge {
 			}
 		}
 		public static void InitGameTextUpdate() {
+			string colorLaserEmt = "ffff60";
+			string colorBeamEmt = "ff9060";
+			string colorHeatRay = "ff6060";
+			string colorEnergyRay = "0090ff";
+			string colorExoticRay = "9060ff";
+			string colorNukeKin = "add8e6";
+			string colorNukeEnr = "0080ff";
+			string colorNukeThr = "ff8040";
+			string colorNukeTac = "ffff00";
+			string colorNukeChm = "008000";
+			string colorNukeBrd = "8060ff";
+			string colorNukeStr = "ff0000";
 			foreach (Text txt in Resources.FindObjectsOfTypeAll<Text>()) {
 				if (txt.name.Contains("WeaponIgnoresShieldValue")) txt.text = "Shield Bypass";
 				if (txt.name.Contains("WeaponNeverDeflectsValue")) txt.text = "Deflect Ignore";
+				if (txt.name == "Text" && txt.text == "Quick start") txt.text = "Basic Controls";
+				if (txt.name == "quick start" && txt.text == "Quick Start") txt.text = "Basic Controls";
+				if (txt.name == "quick start 2" && txt.text == "Quick Start 2") txt.text = "Basic Information";
+				if (txt.name == "assignments" && txt.text == "Crew roles") txt.text = "Crew Roles (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Crew roles panel") txt.text = "Crew Roles Panel (FFU:BE)";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Crew roles panel allows you to give orders to crew very quickly"))
+					txt.text = "Crew roles panel allows you to give orders to crew very quickly" + "\n\n" +
+					"Clicking on the \" + \" sign next to a specific role (such as \"repairs\" or \"weapons\") sends the unoccupied crew with best skill to take care of it (to repair damage or operate weapons)." + "\n\n" +
+					"Only unoccupied crew can be assigned. You will have to unassign crew first to make them available to new roles." + "\n\n" +
+					"Drones & pets can be assigned to limited activities only. If a drone and living entity have the same skill level, a drone will be assigned first." + "\n\n" +
+					"<color=lime>" + "Drones and living entities spawned by <color=orange>Boarding Nukes</color> are temporary and will disappear once they try to leave the ship." + "</color>";
+				if (txt.name == "all controls" && txt.text == "All keyboard shortcuts") txt.text = "Keyboard Shortcuts";
+				if (txt.name == "Text" && txt.text == "All keyboard shortcuts") txt.text = "Keyboard Shortcuts";
+				if (txt.name == "accelerated time" && txt.text == "Accelerated time") txt.text = "Accelerated Time (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Accelerated time") txt.text = "Accelerated Time (FFU:BE)";
+				if (txt.name == "DescriptionText" && txt.text.Contains("The speed of crew walking, repairing, healing or do"))
+					txt.text = "The speed of crew walking, repairing, healing or doing other things will accelerate when there are no threats." + "\n\n" +
+					"In case of hostiles, fires or leaks, time will revert back to normal speed automatically." + "\n\n" +
+					"<color=lime>" + "It should be noted that accelerated time (or lack of it) will not affect productivity of Laboratories, Greenhouses and Resource Converters." + "</color>";
+				if (txt.name == "warp" && txt.text == "Sector view basics (warp)") txt.text = "Sector Navigation Basics";
+				if (txt.name == "Text" && txt.text == "Sector view basics") txt.text = "Sector Navigation Basics";
+				if (txt.name == "warp 2" && txt.text == "Sector view detials (warp)") txt.text = "Sector Navigation Details";
+				if (txt.name == "Text" && txt.text == "Sector view details") txt.text = "Sector Navigation Details";
+				if (txt.name == "permanent damage" && txt.text == "Permanent damage") txt.text = "Permanent Damage";
+				if (txt.name == "Text" && txt.text == "Permanent damage") txt.text = "Permanent Damage";
+				if (txt.name == "stealthdetection" && txt.text == "Stealth detection") txt.text = "Stealth Detection";
+				if (txt.name == "Text" && txt.text == "Stealth detection") txt.text = "Stealth Detection";
+				if (txt.name == "asteroids" && txt.text == "Asteroids") txt.text = "Asteroid Fields";
+				if (txt.name == "Text" && txt.text == "Asteroids") txt.text = "Asteroid Fields";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Concentrated asteroid clusters have increased risk") && !txt.text.Contains("While moving, your ship could get"))
+					txt.text = "Concentrated asteroid clusters have increased risk of impacts. Asteroid clusters with perceived " +
+					"value have a special asteroid icon and can be mined. Weapons, point-defences and integrity modules improve " +
+					"asteroid defence only if turned on.";
+				if (txt.name == "modules" && txt.text == "Weapons & Other Modules") txt.text = "Module Slots/Interfaces";
+				if (txt.name == "Text" && txt.text == "Weapons & other modules") txt.text = "Module Slots/Interfaces";
+				if (txt.name == "upgrades" && txt.text == "Slot upgrades") txt.text = "Module Slot Upgrades";
+				if (txt.name == "Text" && txt.text == "Module slot upgrades") txt.text = "Module Slot Upgrades";
+				if (txt.name == "crafting" && txt.text == "Crafting modules") txt.text = "Module Crafting (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Crafting modules") txt.text = "Module Crafting (FFU:BE)";
+				if (txt.name == "GeneralText" && txt.text.Contains("DIY modules can be crafted inside empty weapon slots"))
+					txt.text = "<color=lime>" + "As long as you have reverse engineered module and have required " +
+					"resources you can craft any module you want into any free compatible slot/interface on your ship. " +
+					"<color=orange>Reverse engineering</color> process will start once module is scrapped. It will progress as long " +
+					"as you have up and running <color=orange>Research Laboratory</color>. Scrapping other modules will also boost " +
+					"reverse engineering process slightly. Depending on your <color=orange>research progress</color> and " +
+					"<color=orange>module crafting proficiency</color>, crafted module might have different tiers and modifiers." + "</color>";
+				if (txt.name == "CraftreacText" && txt.text.Contains("You can use crafting to save yourself after losing an important"))
+					txt.text = "<color=lime>" + "Possible Module Tiers (MK): I, II, III, IV, V, VI, VII, VIII, IX, X." +
+					"\n" + "<color=orange>Sustained</color>/<color=red>Unstable</color> Mod: affects power consumption." +
+					"\n" + "<color=orange>Reinforced</color>/<color=red>Fragile</color> Mod: affects module's durability." +
+					"\n" + "<color=orange>Efficient</color>/<color=red>Inefficient</color> Mod: affects resources consumption." +
+					"\n" + "<color=orange>Precise</color>/<color=red>Inhibited</color> Mod: affects weapon's accuracy." +
+					"\n" + "<color=orange>Rapid</color>/<color=red>Disrupted</color> Mod: affects weapon's rate of fire." +
+					"\n" + "<color=orange>Enhanced</color>/<color=red>Deficient</color> Mod: affects core functionality." +
+					"\n" + "<color=orange>Durable</color>/<color=red>Brittle</color> Mod: affects armor or container capacity." +
+					"\n" + "<color=orange>Persistent</color>/<color=red>Volatile</color> Mod: affects shielding properties." + "</color>";
+				if (txt.name == "CraftpackText" && txt.text.Contains("For a small extra cost, you can craft resource packages"))
+					txt.text = "<color=lime>" + "In addition, excess resources can be packed into <color=orange>Resources Packs</color> that will be automatically sent to your storage." + "</color>";
+				if (txt.name == "turning off modules" && txt.text == "Turning off modules") txt.text = "Energy Emission (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Turning off modules") txt.text = "Energy Emission (FFU:BE)";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Modules can be turned off from the power switch"))
+					txt.text = "<color=lime>" + "Every once in a while, during your peaceful (and potentially productive) flight local forces will try to scan for your ship's location. " +
+					"Will local forces manage to triangulate your location and send <color=orange>Interdiction Fleet</color> mainly depends on <color=orange>Energy Emission</color> levels of your flagship. " +
+					"Current Energy Emission value can checked by hovering your mouse over <color=orange>Research Icon</color> at the <color=orange>Economy</color> Panel." + "\n\n" +
+					"Every active/powered module at your ship (except <color=orange>ECM Arrays</color> and <color=orange>Stealth Generators</color>) will only increase your Energy Emission levels. " +
+					"Bigger ships will produce greater Energy Emission for same amount of active/powered modules. Only <color=orange>ECM Arrays</color> and <color=orange>Stealth Generators</color> can reduce " +
+					"Energy Emission levels of your flagship. Flagship always will generate at least <color=orange>100m³</color> Energy Emission. In addition, modules that were powered down manually will not emit any energy." + "\n\n" +
+					"Local forces have 5 scan precision levels. Every time local forces will fail to triangulate your location, scan <color=orange>precision</color> will increase, until it will reach <color=orange>maximum</color> level. " +
+					"These scan precision levels are 5000nm, 3000nm, 1500nm, 1000nm and 500nm. Triangulation <color=orange>success chance</color> equals to your current <color=orange>energy emission</color> levels " +
+					"divided by the <color=orange>scan precision</color>." + "</color>";
+				if (txt.name == "module damage" && txt.text == "Module Damage") txt.text = "Module Damage & Repair";
+				if (txt.name == "Text" && txt.text == "Module damage") txt.text = "Module Damage & Repair";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Damaged modules are covered with red highlight"))
+					txt.text = "Damaged modules are covered with red highlight and cannot be used until they are repaired." + "\n\n" +
+					"Repair modules by selecting a crewmember and then R-clicking on a damaged module." + "\n\n" +
+					"Damaged modules can be repaired for <color=lime>2 synthetics</color> per module hitpoint." + "\n\n" +
+					"Crewmembers have varying repair skills, affecting the time needed for repair.";
+				if (txt.name == "permanent module damage" && txt.text == "Permanent module damage") txt.text = "Critical Hit Effects (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Permanent module damage") txt.text = "Critical Hit Effects (FFU:BE)";
+				if (txt.name == "GeneralText" && txt.text.Contains("There is a chance that if module gets damaged"))
+					txt.text = "There is a chance for module to get critically damaged on hit. If module gets critically damaged, its " +
+					"maximum durability will be permanently reduced. Permanent reduction percentage depends on chosen difficulty.";
+				if (txt.name == "XtText" && txt.text.Contains("You can see how many times module max hitpoints have been"))
+					txt.text = "You can see how many times module received critical damage by the number of X-es on it." + "\n\n" +
+					"<color=lime>" + "Module Critical Damage Chance on Hit:" + "\n" +
+					"<color=orange>Beginner</color> Difficulty: 0%" + "\n" +
+					"<color=orange>Challenging</color> Difficulty: 20%" + "\n" +
+					"<color=orange>Hardcore</color> Difficulty: 40%" + "\n\n" +
+					"Durability Reduction per Critical Damage:" + "\n" +
+					"<color=orange>Beginner</color> Difficulty: 0%" + "\n" +
+					"<color=orange>Challenging</color> Difficulty: 15%" + "\n" +
+					"<color=orange>Hardcore</color> Difficulty: 30%" + "</color>";
+				if (txt.name == "weapontypes" && txt.text == "Weapon types") txt.text = "Weapon Types (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Ship Combat & Weapon Types") txt.text = "Weapon Types & Classes (FFU:BE)";
+				if (txt.name == "Headline" && txt.text == "Energy weapons") txt.text = "Energy Emission Weapons";
+				if (txt.name == "Text" && txt.text.Contains("Best accuracy of all weapon types"))
+					txt.text = "- <color=#" + colorLaserEmt + "ff>Lasers</color>: low power and fast reload." + "\n" +
+					"- <color=#" + colorBeamEmt + "ff>Beams</color>: moderate power and medium reload." + "\n" +
+					"- <color=#" + colorHeatRay + "ff>Heat Rays</color>: good for setting things on fire." + "\n" +
+					"- <color=#" + colorEnergyRay + "ff>Disruptors</color>: low damage, but great EMP effect." + "\n" +
+					"- <color=#" + colorExoticRay + "ff>Exotic Rays</color>: most ultimate & expensive damage." + "\n" +
+					"- Lack AoE and proper anti-personnel damage.";
+				if (txt.name == "Headline" && txt.text == "Missiles") txt.text = "Rocket Launcher Weapons";
+				if (txt.name == "Text" && txt.text.Contains("Fragile projectiles, vulnerable to point-defences"))
+					txt.text = "- Ignore shields and negate deflection." + "\n" +
+					"- Varied accuracy, long reload and great AoE." + "\n" +
+					"- Slow projectile speed and vulnerable to CIWS." + "\n" +
+					"- Requires a lot of resources to print rockets." + "\n" +
+					"- Varied (fragile to armored) rocket durability." + "\n" +
+					"- Expensive to maintain, but universal in use.";
+				if (txt.name == "Headline" && txt.text == "Cannons") txt.text = "High-Caliber Kinetic Weapons";
+				if (txt.name == "Text" && txt.text.Contains("Usually have more hitpoints than other modules"))
+					txt.text = "- Ignore shields, but can be deflected." + "\n" +
+					"- Greater durability than other weapons." + "\n" +
+					"- Moderate reload, salvo, damage, AoE & speed." + "\n" +
+					"- Various payloads grant tactical advantage." + "\n" +
+					"- Require multiple resources to operate." + "\n" +
+					"- Low energy consumption & vulnerable to CIWS.";
+				if (txt.name == "Headline" && txt.text == "Gatling guns") txt.text = "Low-Caliber Kinetic Weapons";
+				if (txt.name == "Text" && txt.text.Contains("Lowest accuracy of all weapons"))
+					txt.text = "- Ignore shields, but can be deflected." + "\n" +
+					"- Good reload, speed and large salvos." + "\n" +
+					"- Lacking per projectile damage and AoE." + "\n" +
+					"- Various payloads grant tactical advantage." + "\n" +
+					"- Low energy and resource consumption." + "\n" +
+					"- Very low accuracy & vulnerable to CIWS.";
+				if (txt.name == "Headline" && txt.text == "Projectile weapons, sniper cannons") txt.text = "Electromagnetic Acceleration Weapons";
+				if (txt.name == "Text" && txt.text.Contains("Medium or high accuracy"))
+					txt.text = "- Ignore shields and negate deflection." + "\n" +
+					"- High energy & low resources consumption." + "\n" +
+					"- Very accurate and great module damage." + "\n" +
+					"- Slow reload, high speed & moderate reload." + "\n" +
+					"- Various payloads grant tactical advantage." + "\n" +
+					"- Durable projectiles allow to bypass CIWS.";
+				if (txt.name == "Headline" && txt.text == "EMP weapons") txt.text = "Energy/Kinetic Hybrid Weapons";
+				if (txt.name == "Text" && txt.text.Contains("Overload modules of unshielded ships"))
+					txt.text = "- Negate deflection, but stopped by shields." + "\n" +
+					"- High energy & low resources consumption." + "\n" +
+					"- Moderate reload, salvo, damage, AoE & speed." + "\n" +
+					"- Can't be targeted and intercepted by CIWS." + "\n" +
+					"- Cause EMP damage in area of effect on impact." + "\n" +
+					"- Rapid-fire variants have very low accuracy.";
+				if (txt.name == "Headline" && txt.text == "Capital Missiles (nukes)") txt.text = "Anti-Ship/Ship-to-Ship Capital Ordnance";
+				if (txt.name == "Text" && txt.text.Contains("Missile itself travels slowly and takes more"))
+					txt.text = "- <color=#" + colorNukeEnr + "ff>Energy</color>: anti-shield nuke that EMPs everything." + "\n" +
+					"- <color=#" + colorNukeThr + "ff>Thermal</color>: possibly can set entire ship on fire." + "\n" +
+					"- <color=#" + colorNukeTac + "ff>Tactical</color>: cheap & low-yield source of damage." + "\n" +
+					"- <color=#" + colorNukeChm + "ff>Chemical</color>: perfect for sanitizing entire ship." + "\n" +
+					"- <color=#" + colorNukeBrd + "ff>Boarding</color>: delivers guests without tea & cookies." + "\n" +
+					"- <color=#" + colorNukeStr + "ff>Strategic</color>: ultimate, but blocked by shields.";
+				if (txt.name == "Headline" && txt.text == "Special weapons") txt.text = "Additional Weapon Systems Information";
+				if (txt.name == "Text" && txt.text.Contains("Various rare weapons with a variety of special"))
+					txt.text = "- <color=#" + colorNukeKin + "ff>Kinetic</color> nukes are more like an oversized kinetic projectiles, than nukes. But they are cheap." + "\n" +
+					"- All capital missiles are single use items. Some of them are very expensive. Use them wisely." + "\n" +
+					"- Some weapons can't be properly categorized, because they are too unique to fit anywhere.";
+				if (txt.name == "battle" && txt.text == "Battle 1") txt.text = "Battle Tactics Basics";
+				if (txt.name == "Text" && txt.text == "Battle 1") txt.text = "Battle Tactics Basics";
+				if (txt.name == "battle 2" && txt.text == "Battle 2") txt.text = "Battle Tactics Details";
+				if (txt.name == "Text" && txt.text == "Battle 2") txt.text = "Battle Tactics Details";
+				if (txt.name == "survivebattles" && txt.text == "Surviving battles") txt.text = "Surviving Battles";
+				if (txt.name == "Text" && txt.text == "How to survive battles") txt.text = "Surviving Battles";
+				if (txt.name == "battle escape" && txt.text == "Escaping From Battles") txt.text = "Escape & Retreat (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Escaping from battles") txt.text = "Escape & Retreat (FFU:BE)";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Remember that it is better to escape a battle"))
+					txt.text = "Remember that it is better to escape a battle rather than die fighting. Because you always can return and fight it out later." + "\n\n" +
+					"Warp drive recharge time is not accelerated, when you are in battle or within active detection range of hostile fleets." + "\n\n" +
+					"You can retreat from battles only by spinning up and activating the warp drive. Warp drives need fuel, power and operating crew to work." + "\n\n" +
+					"<color=lime>" + "However, some hostile fleets has ability to completely <color=orange>jam</color> or <color=orange>scramble</color> your warp drive, thus leaving you no choice, but to " +
+					"fight to the bitter end. This is especially true for <color=orange>Interdiction Fleets</color> sent by <color=orange>Local Forces</color> that aware of your presence in the sector." + "</color>";
+				if (txt.name == "doors" && txt.text == "Doors") txt.text = "Doors & Airlocks (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Doors") txt.text = "Doors & Airlocks (FFU:BE)";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Many ships have doors which can be locked"))
+					txt.text = "Many ships are divided into multiple sections & segments. Doors & hatches between these sections & segments " +
+					"allow crew members access them. All doors can be locked/unlocked by clicking RMB (Right Mouse Button) on it, if you're owner. " +
+					"Locking door/hatch prevents enemies from entering into the section/segment. Also, locked door/hatch prevents fire from spreading." + "\n\n" +
+					"<color=lime>" + "If your flagship is not in battle and not pursued by enemy fleet, you can repair doors. Repair doors by clicking " +
+					"<color=orange>Left Mouse Button</color> on them. Each click can repair up to 10 hit points. Repairing each " +
+					"door hit point costs <color=orange>2 metals</color> and <color=orange>4 synthetics</color> by default." + "</color>";
 				//Debug.LogWarning(txt.name + ": " + txt.text);
 			}
 		}
@@ -272,12 +468,22 @@ namespace FFU_Bleeding_Edge {
 					" - Module Reversing, Research & Tiers" + "\n" +
 					" - Local Forces Awareness & Response" + "\n" +
 					" - Reworked Boarding & Module Looting" + "\n" +
-					" - Tactical Pacing & Many Other Changes" + "\n" +
+					" - New Mod Features Help (<color=orange>F1</color> hotkey)" + "\n" +
 					"\n" + "Special thanks goes to <color=#4fd376>Interactive Fate</color> for creating this art piece and helping me with modding it, thus allowing me to make this unforgiving mod for it.";
 				if (txt.text.ToLower().Contains("we offer you an opportunity to unlock"))
 					txt.text = "<size=14>\nCongratulations! You found a secret cow level. Nah, I'm kidding, there is no cow level. If you found this page, it means you probably already know about mod's configuration file existence." + "\n\n" +
 					"Anyway, you can <color=#3366ff>reset all data and just unlock all ships</color> or <color=#ff3333>reset all data and unlock all ships with all perks</color> depending on mod's configuration. To do it just follow (no, not a white rabbit) IDKFA and take the pill.\n</size>";
 			}
+		}
+		public static float GetDifficultyModifier() {
+			if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
+			else if (WorldRules.Impermanent.ironman) return 2f;
+			else return 1f;
+		}
+		public static int GetDifficultySetting() {
+			if (WorldRules.Impermanent.beginnerStartingBonus) return 1;
+			else if (WorldRules.Impermanent.ironman) return 3;
+			else return 2;
 		}
 		public static int SortAllModules(ShipModule shipModule) {
 			switch (shipModule.type) {
@@ -703,9 +909,11 @@ namespace FFU_Bleeding_Edge {
 				if (PlayerDatas.Me != null && PlayerDatas.Me.Flagship != null) {
 					energyEmission = 0;
 					foreach (ModuleSlotRoot slotRoot in PlayerDatas.Me.Flagship.ModuleSlotRoots) {
-						if (slotRoot != null && slotRoot.Module != null && !slotRoot.Module.IsPacked && !slotRoot.Module.IsUnpacking)
-							energyEmission += GetModuleEnergyEmission(slotRoot.Module);
-						if (debugMode) Debug.LogWarning(slotRoot.Module.name + ": " + GetModuleEnergyEmission(slotRoot.Module));
+						try {
+							if (slotRoot != null && slotRoot.Module != null && !slotRoot.Module.IsPacked && !slotRoot.Module.IsUnpacking)
+								energyEmission += GetModuleEnergyEmission(slotRoot.Module);
+							if (debugMode) Debug.LogWarning(slotRoot.Module.name + ": " + GetModuleEnergyEmission(slotRoot.Module));
+						} catch { }
 					}
 					energyEmission *= GetFlagshipEmissionModifier();
 					if (energyEmission < 100f) energyEmission = 100f;
@@ -713,7 +921,7 @@ namespace FFU_Bleeding_Edge {
 			} catch { }
 		}
 		public static float GetFlagshipEmissionModifier() {
-			if (PlayerDatas.Me != null && PlayerDatas.Me.Flagship != null) return 1f + PlayerDatas.Me.Flagship.ModuleSlotRoots.Count / 100f;
+			if (PlayerDatas.Me != null && PlayerDatas.Me.Flagship != null) return 1f + (PlayerDatas.Me.Flagship.ModuleSlotRoots.Count * GetDifficultyModifier()) / 100f;
 			else return 1f;
 		}
 		public static float GetIntruderCountFromName(ShootAtDamageDealer damageDealer) {

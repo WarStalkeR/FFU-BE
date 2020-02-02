@@ -276,9 +276,9 @@ namespace RST {
 		//Alternative Fire Chance Levels
 		[MonoModReplace] public float GetFireChancePercent(ShootAtDamageDealer.FireChanceLevel level) {
 			switch (level) {
-				case ShootAtDamageDealer.FireChanceLevel.Low: return (float)Core.FireIgniteChance.High;
+				case ShootAtDamageDealer.FireChanceLevel.High: return (float)Core.FireIgniteChance.High;
 				case ShootAtDamageDealer.FireChanceLevel.Default: return (float)Core.FireIgniteChance.Medium;
-				case ShootAtDamageDealer.FireChanceLevel.High: return (float)Core.FireIgniteChance.Low;
+				case ShootAtDamageDealer.FireChanceLevel.Low: return (float)Core.FireIgniteChance.Low;
 				default: return 0f;
 			}
 		}
@@ -408,8 +408,16 @@ namespace RST.UI {
 						FireRaisingText(changeShowPos, curValue, lastValue, reasons, (!string.IsNullOrEmpty(name)) ? MonoBehaviourExtended.TT(name).ToLowerInvariant() : null);
 						string valueText = (curValue < ifCurValueLowerThanThisThenMakeItRed) ? ("<color=red>" + curValue + "</color>") : curValue.ToString();
 						text.text = (maxValue != int.MaxValue) ? (valueText + " / " + maxValue) : valueText;
-						if (bar != null) bar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (curValue * bar.sprite.rect.width > Screen.width - 750 - (Screen.width - 750) % bar.sprite.rect.width) ? (Screen.width - 750 - (Screen.width - 750) % bar.sprite.rect.width) : (curValue * bar.sprite.rect.width));
-						if (maxBar != null) maxBar.preferredWidth = (maxValue * bar.sprite.rect.width > Screen.width - 750 - (Screen.width - 750) % bar.sprite.rect.width) ? (Screen.width - 750 - (Screen.width - 750) % bar.sprite.rect.width) : (maxValue * bar.sprite.rect.width);
+						if (bar != null) {
+							int shortCurValue = curValue / FFU_BE_Defs.pointsPerBarItem;
+							float barWidthLimit = Screen.width - 750 - (Screen.width - 750) % bar.sprite.rect.width;
+							bar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, shortCurValue * bar.sprite.rect.width > barWidthLimit ? barWidthLimit : (shortCurValue * bar.sprite.rect.width));
+						}
+						if (maxBar != null) {
+							int shortMaxValue = maxValue / FFU_BE_Defs.pointsPerBarItem;
+							float maxBarWidthLimit = Screen.width - 750 - (Screen.width - 750) % bar.sprite.rect.width;
+							maxBar.preferredWidth = shortMaxValue * bar.sprite.rect.width > maxBarWidthLimit ? maxBarWidthLimit : (shortMaxValue * bar.sprite.rect.width);
+						}
 						timer = 0f;
 						lastValue = curValue;
 						lastMaxValue = maxValue;
@@ -522,6 +530,7 @@ namespace RST.UI {
 		}
 	}
 	public class patch_StoragePanel : StoragePanel {
+		//private extern void orig_Update();
 		[MonoModIgnore] private HoverableUI upgradeButtonHover;
 		//Modified Max Storage Capacity Upgrade
 		[MonoModReplace] public void UpdateUpgradeButton(Ownership.Owner resourcesGoTo) {
@@ -550,6 +559,17 @@ namespace RST.UI {
 				}
 			}
 		}
+		//Change Interface Width
+		//private void Update() {
+		//	orig_Update();
+		//	Debug.LogWarning("Storage X Size: " + (transform as RectTransform)?.sizeDelta.x);
+		//	Debug.LogWarning("Storage Y Size: " + (transform as RectTransform)?.sizeDelta.y);
+		//	//Debug.LogWarning("Child Count: " + transform.childCount);
+		//	//foreach (var item in transform.childCount) {
+		//	//	Debug.LogWarning(item.name);
+		//	//	this.transform.
+		//	//}
+		//}
 	}
 }
 

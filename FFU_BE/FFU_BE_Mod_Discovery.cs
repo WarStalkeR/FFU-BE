@@ -139,7 +139,7 @@ namespace FFU_Bleeding_Edge {
 						ambusherFleet.name += "MustExpireAfterMeeting";
 						if (playerFleet.warpAudioClip != null) ambusherFleet.AI.AudioSource.PlayOneShot(playerFleet.warpAudioClip);
 						foreach (TimePanelControls timePanelControls in Resources.FindObjectsOfTypeAll<TimePanelControls>()) if (WorldRules.Impermanent.ironman) Delegated.dDoSlowMotion(timePanelControls); else Delegated.dDoPause(timePanelControls);
-						StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, "Warning! You've drawn too much attention from local forces! Enemy enforcement fleet has warped in and pursuing us at high speed!");
+						StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, "Warning! You've drawn too much attention from local forces! Enemy interdiction fleet has warped in and pursuing us at high speed!");
 						if (FFU_BE_Defs.debugMode) Debug.LogWarning("Hostile fleet came to intercept player's fleet at Hostile Awareness Level " + string.Format("{0:0}", FFU_BE_Defs.distanceTraveledInPeace));
 						FFU_BE_Defs.timesInterceptedByEnforcers[sectorInstance.number - 1]++;
 						while (FFU_BE_Defs.timesInterceptedByEnforcers[sectorInstance.number - 1] > FFU_BE_Defs.killedFleetsTrigger[FFU_BE_Defs.discoveryFleetsLevel] && FFU_BE_Defs.discoveryFleetsLevel < (FFU_BE_Defs.killedFleetsTrigger.Length - 1)) FFU_BE_Defs.discoveryFleetsLevel++;

@@ -472,6 +472,9 @@ namespace FFU_Bleeding_Edge {
 			int currHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "health");
 			return Mathf.Min(1.0f, currHealth / maxHealth);
 		}
+		public static float GetRelativeHealth(Door door) {
+			return Mathf.Min(1.0f, door.Health / door.MaxHealth);
+		}
 		private static void WeaponListCreateCSV(List<ShipModule> shipModulesList) {
 			if (File.Exists(FFU_BE_Base.appDataPath + @"ModsConf\FFU_Bleeding_Edge_Weapons.csv")) File.Delete(FFU_BE_Base.appDataPath + @"ModsConf\FFU_Bleeding_Edge_Weapons.csv");
 			using (StreamWriter shipModulesListFile = new StreamWriter(FFU_BE_Base.appDataPath + @"ModsConf\FFU_Bleeding_Edge_Weapons.csv")) {
@@ -557,9 +560,11 @@ namespace FFU_Bleeding_Edge {
 namespace RST {
 	public class patch_ShipModule : ShipModule {
 		private extern void orig_Unpack();
+		[MonoModIgnore] private int maxHealth;
 		[MonoModIgnore] private void UnpackShared() { }
 		[MonoModIgnore] public float UnpackTime { get; private set; }
 		[MonoModIgnore] public bool IsUnpacking { get; private set; }
+		[MonoModIgnore] public int MaxHealthLostCount { get; private set; }
 		[MonoModIgnore] private CountdownTimer unpackTimer = new CountdownTimer();
 		[MonoModIgnore] private static void ScrapGetResources(PlayerResource resource, int amount, StringBuilder logLineSb) { }
 		[MonoModIgnore] private static void ScrapGetCredits(PlayerData pd, int amount, StringBuilder logLineSb) { }
@@ -586,6 +591,22 @@ namespace RST {
 		private void Unpack() {
 			orig_Unpack();
 			FFU_BE_Defs.RecalculateEnergyEmission();
+		}
+		//Do Permanent Damage to Module on Higher Difficulties
+		public void TakeDamage(ShootAtDamageDealer.Damage dd, Vector2 hitPos) {
+			if (type == Type.Storage) return;
+			TakeDamage(dd.moduleDmg);
+			if (dd.moduleOverloadSeconds > 0) TryCauseOverload(dd.moduleOverloadSeconds);
+			if (dd.moduleDmg > 0 && Health > 0 && WorldRules.Impermanent.playerModulesTakeMaxHpDamage && Ownership.GetOwner() == Ownership.Owner.Me && RstRandom.value < (FFU_BE_Defs.permanentModuleDamageChance * FFU_BE_Defs.GetDifficultyModifier())) {
+				int permanentDamage = Mathf.CeilToInt(maxHealth * FFU_BE_Defs.permanentModuleDamagePercent);
+				if (permanentDamage > 0) {
+					int damageAmount = (permanentDamage >= Health) ? (Health - 1) : permanentDamage;
+					TakeDamage(damageAmount);
+					maxHealth -= permanentDamage;
+					StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, string.Format(MonoBehaviourExtended.TT("Critical module damage! {0} max hitpoints reduced by {1}"), DisplayNameLocalized, permanentDamage));
+					MaxHealthLostCount++;
+				}
+			}
 		}
 		//Multiple Features Implementations on Scrap Module
 		[MonoModReplace] public void Scrap(PlayerData resourcesGoTo, bool addLogLine) {

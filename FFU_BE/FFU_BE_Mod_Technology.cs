@@ -45,9 +45,7 @@ namespace FFU_Bleeding_Edge {
 		public static void ApplyEnemyModuleTier(ShipModule shipModule) {
 			int enemyTechLevel = GetEnemyTechLevel();
 			Core.BonusMod rolledMod = GetEnemyModuleModifier(shipModule);
-			int enemyForceLevel = FFU_BE_Defs.discoveryFleetsLevel + 1;
-			int chosenTechLevel = enemyTechLevel > enemyForceLevel ? enemyTechLevel : enemyForceLevel;
-			int rolledTier = Mathf.Clamp(Random.Range(chosenTechLevel - 1, chosenTechLevel + 2), 1, 10);
+			int rolledTier = Mathf.Clamp(Random.Range(enemyTechLevel - 1, enemyTechLevel + 2), 1, 10);
 			if (!shipModule.name.Contains("MK-") || !ModuleHasModifier(shipModule)) SetModuleModifier(shipModule, rolledTier, rolledMod);
 			if (shipModule.name.Contains("MK-") && ModuleHasModifier(shipModule)) ApplyModuleModifiedStatsAndParameters(shipModule);
 		}
@@ -56,33 +54,28 @@ namespace FFU_Bleeding_Edge {
 			ApplyModuleModifiedStatsAndParameters(shipModule);
 		}
 		public static Core.BonusMod GetInitialModuleModifier(ShipModule shipModule) {
-			float rolledValue = RstRandom.Range(0f, 1f);
-			if (WorldRules.Impermanent.beginnerStartingBonus) {
-				if (rolledValue >= 0.25f) return GetRandomPositiveBonus(shipModule);
-				else return Core.BonusMod.None;
-			} else if (!WorldRules.Impermanent.ironman) {
-				if (rolledValue >= 0.50f) return GetRandomPositiveBonus(shipModule);
-				else return Core.BonusMod.None;
-			} else {
-				if (rolledValue >= 0.75f) return GetRandomPositiveBonus(shipModule);
-				else return Core.BonusMod.None;
+			float initLimit = 0.50f;
+			switch (FFU_BE_Defs.GetDifficultySetting()) {
+				case 1: initLimit = 0.25f; break;
+				case 2: initLimit = 0.50f; break;
+				case 3: initLimit = 0.75f; break;
 			}
+			float rolledValue = RstRandom.Range(0f, 1f);
+			if (rolledValue >= initLimit) return GetRandomPositiveBonus(shipModule);
+			else return Core.BonusMod.None;
 		}
 		public static Core.BonusMod GetPlayerModuleModifier(ShipModule shipModule) {
-			float rolledValue = FFU_BE_Defs.GetModuleCraftingProficiency(shipModule) * 0.5f + RstRandom.Range(0f, 1f) * 0.5f;
-			if (WorldRules.Impermanent.beginnerStartingBonus) {
-				if (rolledValue >= 0f && rolledValue <= 0.10f) return GetRandomNegativeBonus(shipModule);
-				else if (rolledValue >= 0.25f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
-				else return Core.BonusMod.None;
-			} else if(!WorldRules.Impermanent.ironman) {
-				if (rolledValue >= 0f && rolledValue <= 0.25f) return GetRandomNegativeBonus(shipModule);
-				else if (rolledValue >= 0.50f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
-				else return Core.BonusMod.None;
-			} else {
-				if (rolledValue >= 0f && rolledValue <= 0.50f) return GetRandomNegativeBonus(shipModule);
-				else if (rolledValue >= 0.75f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
-				else return Core.BonusMod.None;
+			float negLimit = 0.25f;
+			float posLimit = 0.50f;
+			switch(FFU_BE_Defs.GetDifficultySetting()) {
+				case 1: negLimit = 0.10f; posLimit = 0.25f; break;
+				case 2: negLimit = 0.25f; posLimit = 0.50f; break;
+				case 3: negLimit = 0.50f; posLimit = 0.75f; break;
 			}
+			float rolledValue = FFU_BE_Defs.GetModuleCraftingProficiency(shipModule) * 0.5f + RstRandom.Range(0f, 1f) * 0.5f;
+			if (rolledValue >= 0f && rolledValue <= negLimit) return GetRandomNegativeBonus(shipModule);
+			else if (rolledValue >= posLimit && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
+			else return Core.BonusMod.None;
 		}
 		public static Core.BonusMod GetRandomModuleModifier(ShipModule shipModule) {
 			float rolledValue = RstRandom.Range(0f, 1f);
@@ -91,23 +84,20 @@ namespace FFU_Bleeding_Edge {
 			else return Core.BonusMod.None;
 		}
 		public static Core.BonusMod GetEnemyModuleModifier(ShipModule shipModule) {
+			float negLimit = 0.35f;
+			float posLimit = 0.75f;
+			switch (FFU_BE_Defs.GetDifficultySetting()) {
+				case 1: negLimit = 0.50f; posLimit = 0.90f; break;
+				case 2: negLimit = 0.35f; posLimit = 0.75f; break;
+				case 3: negLimit = 0.15f; posLimit = 0.15f; break;
+			}
 			int enemyTechLevel = GetEnemyTechLevel();
 			int enemyForceLevel = FFU_BE_Defs.discoveryFleetsLevel + 1;
 			int chosenTechLevel = enemyTechLevel > enemyForceLevel ? enemyTechLevel : enemyForceLevel;
 			float rolledValue = RstRandom.Range(0f, 1f) * 0.5f + chosenTechLevel / 20f;
-			if (WorldRules.Impermanent.beginnerStartingBonus) {
-				if (rolledValue >= 0f && rolledValue <= 0.50f) return GetRandomNegativeBonus(shipModule);
-				else if (rolledValue >= 0.90f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
-				else return Core.BonusMod.None;
-			} else if (!WorldRules.Impermanent.ironman) {
-				if (rolledValue >= 0f && rolledValue <= 0.35f) return GetRandomNegativeBonus(shipModule);
-				else if (rolledValue >= 0.75f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
-				else return Core.BonusMod.None;
-			} else {
-				if (rolledValue >= 0f && rolledValue <= 0.15f) return GetRandomNegativeBonus(shipModule);
-				else if (rolledValue >= 0.50f && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
-				else return Core.BonusMod.None;
-			}
+			if (rolledValue >= 0f && rolledValue <= negLimit) return GetRandomNegativeBonus(shipModule);
+			else if (rolledValue >= posLimit && rolledValue <= 1f) return GetRandomPositiveBonus(shipModule);
+			else return Core.BonusMod.None;
 		}
 		public static int GetPlayerTechLevel() {
 			int techLevel = 1;
@@ -127,7 +117,7 @@ namespace FFU_Bleeding_Edge {
 			return Mathf.Clamp(Sector.Instance.number, 1, 10);
 		}
 		public static int GetEnemyTechLevel() {
-			return (int)Mathf.Clamp((GetPlayerTechLevel() + GetSectorTechLevel()) / 2f + 0.5f, 1f, 10f);
+			return (int)Mathf.Clamp(Mathf.Max((GetPlayerTechLevel() + GetSectorTechLevel()) / 2f + 0.49999f, FFU_BE_Defs.discoveryFleetsLevel + 1), 1f, 10f);
 		}
 		public static string GetCraftChanceText() {
 			float researchValue = FFU_BE_Defs.researchProgress;
@@ -1098,13 +1088,14 @@ namespace FFU_Bleeding_Edge {
 			}
 			var refModuleMaxHealth = AccessTools.FieldRefAccess<ShipModule, int>(refModule, "maxHealth");
 			var instModuleMaxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
+			var healthLossModifier =  Mathf.Max(Mathf.Pow(1 - FFU_BE_Defs.permanentModuleDamagePercent * FFU_BE_Defs.GetDifficultyModifier(), shipModule.MaxHealthLostCount), 0.05f);
 			if (shipModule.powerConsumed > 0) shipModule.powerConsumed = Mathf.RoundToInt(refModule.powerConsumed * GetTierBonus(moduleTier, Core.BonusType.Reduced));
-			if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) instModuleMaxHealth = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default));
+			if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) instModuleMaxHealth = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) * healthLossModifier);
 			switch (moduleMofidier) {
 				case Core.BonusMod.Sustained: if (shipModule.powerConsumed > 0) shipModule.powerConsumed = Mathf.RoundToInt(refModule.powerConsumed * GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f); break;
 				case Core.BonusMod.Unstable: if (shipModule.powerConsumed > 0) shipModule.powerConsumed = Mathf.RoundToInt(refModule.powerConsumed * GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f); break;
-				case Core.BonusMod.Reinforced: if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) instModuleMaxHealth = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) * 2f); break;
-				case Core.BonusMod.Fragile: if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) instModuleMaxHealth = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) / 2f); break;
+				case Core.BonusMod.Reinforced: if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) instModuleMaxHealth = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) * 2f * healthLossModifier); break;
+				case Core.BonusMod.Fragile: if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) instModuleMaxHealth = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) / 2f * healthLossModifier); break;
 			}
 			shipModule.costCreditsInShop = Mathf.RoundToInt(refModule.costCreditsInShop * GetTierBonus(moduleTier, Core.BonusType.Extreme));
 		}
@@ -1292,17 +1283,22 @@ namespace RST {
 				return true;
 			}
 			if (ship != null && ship.Ownership.GetOwner() == Ownership.Owner.Enemy && !FFU_BE_Defs.updatedShips.Contains(ship.InstanceId)) {
-				FFU_BE_Defs.InitShipDoorsUpdate();
+				int enemyTechLevel = FFU_BE_Mod_Technology.GetEnemyTechLevel();
+				int newDoorHealth = (int)(35 * FFU_BE_Defs.GetDifficultyModifier() * enemyTechLevel);
+				foreach (Door door in ship.Doors) {
+					AccessTools.FieldRefAccess<Door, int>(door, "maxHealth") = newDoorHealth;
+					AccessTools.FieldRefAccess<Door, int>(door, "health") = newDoorHealth;
+				}
 				Debug.LogWarning("Enemy ship spawned: [" + ship.InstanceId + "] " + ship.displayName + "! Applying tier upgrades in " + 
-					FFU_BE_Mod_Technology.GetTierCodeText(Mathf.Clamp(FFU_BE_Mod_Technology.GetEnemyTechLevel() - 1, 1, 10)) + " ~ " + 
-					FFU_BE_Mod_Technology.GetTierCodeText(Mathf.Clamp(FFU_BE_Mod_Technology.GetEnemyTechLevel() + 1, 1, 10)) + " range...");
+					FFU_BE_Mod_Technology.GetTierCodeText(Mathf.Clamp(enemyTechLevel - 1, 1, 10)) + " ~ " + 
+					FFU_BE_Mod_Technology.GetTierCodeText(Mathf.Clamp(enemyTechLevel + 1, 1, 10)) + " range...");
 				ship.Organics += Mathf.RoundToInt((ship.MaxOrganics - ship.Organics) * Random.Range(0.45f, 0.85f));
 				ship.Fuel += Mathf.RoundToInt((ship.MaxFuel - ship.Fuel) * Random.Range(0.45f, 0.85f));
 				ship.Synthetics += Mathf.RoundToInt((ship.MaxSynthetics - ship.Synthetics) * Random.Range(0.45f, 0.85f));
 				ship.Metals += Mathf.RoundToInt((ship.MaxMetals - ship.Metals) * Random.Range(0.45f, 0.85f));
 				ship.Explosives += Mathf.RoundToInt((ship.MaxExplosives - ship.Explosives) * Random.Range(0.45f, 0.85f));
 				ship.Exotics += Mathf.RoundToInt((ship.MaxExotics - ship.Exotics) * Random.Range(0.45f, 0.85f));
-				ship.MaxHealthAdd = Mathf.RoundToInt(ship.MaxHealthAdd * FFU_BE_Defs.enemyShipHullHealthMult * (Sector.Instance != null ? 0.5f + FFU_BE_Mod_Technology.GetEnemyTechLevel() / 2f : 1f));
+				ship.MaxHealthAdd = Mathf.RoundToInt(ship.MaxHealthAdd * FFU_BE_Defs.enemyShipHullHealthMult * (Sector.Instance != null ? 0.5f + enemyTechLevel / 2f : 1f));
 				bool shipLacksOrganics = false;
 				bool shipLacksFuel = false;
 				bool shipLacksSynthetics = false;
@@ -1485,7 +1481,6 @@ namespace RST.PlaymakerAction {
 				FFU_BE_Defs.firstInst = false;
 			}
 			Debug.LogWarning("Game loaded! Applying tiered module parameters...");
-			if (PerFrameCache.IsGoodSituation) FFU_BE_Defs.InitShipDoorsUpdate();
 			foreach (Ship spaceShip in PerFrameCache.CachedShips) {
 				if (spaceShip.Ownership.GetOwner() == Ownership.Owner.Me)
 					if (FFU_BE_Defs.prefabShipsList.Find(x => x.PrefabId == spaceShip.PrefabId) != null)

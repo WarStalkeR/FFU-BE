@@ -88,7 +88,7 @@ namespace FFU_Bleeding_Edge {
 				case "dronebay 0 diy":
 				shipModule.displayName = "Makeshift <color=#" + colorDrone + "ff>Drone Bay</color>";
 				shipModule.Medbay.secondsPerHp = 5f;
-				shipModule.Medbay.resourcesPerHp.synthetics = 75f;
+				shipModule.Medbay.resourcesPerHp.synthetics = 15f;
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 250f, synthetics = 150f, exotics = 1f };
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 10;
@@ -96,7 +96,7 @@ namespace FFU_Bleeding_Edge {
 				case "dronebay 1 basic":
 				shipModule.displayName = "Industrial <color=#" + colorDrone + "ff>Drone Bay</color>";
 				shipModule.Medbay.secondsPerHp = 1f;
-				shipModule.Medbay.resourcesPerHp.synthetics = 25f;
+				shipModule.Medbay.resourcesPerHp.synthetics = 5f;
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 40;
@@ -104,7 +104,7 @@ namespace FFU_Bleeding_Edge {
 				case "medbay0 diy":
 				shipModule.displayName = "Makeshift <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 10f;
-				shipModule.Medbay.resourcesPerHp.organics = 75f;
+				shipModule.Medbay.resourcesPerHp.organics = 15f;
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 250f, synthetics = 150f, exotics = 1f };
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 10;
@@ -112,7 +112,7 @@ namespace FFU_Bleeding_Edge {
 				case "medbay1 Rat":
 				shipModule.displayName = "Ancient <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 7f;
-				shipModule.Medbay.resourcesPerHp.organics = 75f;
+				shipModule.Medbay.resourcesPerHp.organics = 15f;
 				shipModule.craftCost = new ResourceValueGroup { fuel = 100f, metals = 750f, synthetics = 500f, exotics = 2f };
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 15;
@@ -120,7 +120,7 @@ namespace FFU_Bleeding_Edge {
 				case "medbay2 startversion":
 				shipModule.displayName = "Nanite <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 5f;
-				shipModule.Medbay.resourcesPerHp.organics = 60f;
+				shipModule.Medbay.resourcesPerHp.organics = 12f;
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 1500f, synthetics = 1000f, exotics = 5f };
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 20;
@@ -128,7 +128,7 @@ namespace FFU_Bleeding_Edge {
 				case "medbay3 nanorepair":
 				shipModule.displayName = "Modern <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 3f;
-				shipModule.Medbay.resourcesPerHp.organics = 50f;
+				shipModule.Medbay.resourcesPerHp.organics = 10f;
 				shipModule.craftCost = new ResourceValueGroup { fuel = 350f, metals = 2000f, synthetics = 1250f, exotics = 10f };
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 30;
@@ -136,7 +136,7 @@ namespace FFU_Bleeding_Edge {
 				case "medbay5 biofluid bath":
 				shipModule.displayName = "Aura <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 5f;
-				shipModule.Medbay.resourcesPerHp.organics = 35f;
+				shipModule.Medbay.resourcesPerHp.organics = 7f;
 				shipModule.craftCost = new ResourceValueGroup { fuel = 350f, metals = 2000f, synthetics = 1250f, exotics = 10f };
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 35;
@@ -144,7 +144,7 @@ namespace FFU_Bleeding_Edge {
 				case "medbay6 biological":
 				shipModule.displayName = "Biotic <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 5f;
-				shipModule.Medbay.resourcesPerHp.organics = 35f;
+				shipModule.Medbay.resourcesPerHp.organics = 7f;
 				shipModule.craftCost = new ResourceValueGroup { fuel = 350f, organics = 2000f, synthetics = 1250f, exotics = 10f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 25;
@@ -152,7 +152,7 @@ namespace FFU_Bleeding_Edge {
 				case "medbay4 stem celler":
 				shipModule.displayName = "Genesis <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 1f;
-				shipModule.Medbay.resourcesPerHp.organics = 25f;
+				shipModule.Medbay.resourcesPerHp.organics = 5f;
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 40;
