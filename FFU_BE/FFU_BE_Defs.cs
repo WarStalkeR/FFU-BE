@@ -68,8 +68,7 @@ namespace FFU_Bleeding_Edge {
 			1276182160, /* Phased Stealth Generator */
 			171954197,  /* Multi-Phased Sensor Array */
 			738383846,  /* Quantum ECM Array */
-			383658151,  /* Industrial Drone Bay */
-			1304112764, /* Genesis Medical Bay */
+			1304112764, /* Genesis Restoration Bay */
 			1699316752, /* Antimatter Reactor */
 			426751082,  /* Capital XSM Multicontainer */
 			1165288718, /* Capital FEO Multicontainer */
@@ -449,6 +448,41 @@ namespace FFU_Bleeding_Edge {
 					"<color=lime>" + "If your flagship is not in battle and not pursued by enemy fleet, you can repair doors. Repair doors by clicking " +
 					"<color=orange>Left Mouse Button</color> on them. Each click can repair up to 10 hit points. Repairing each " +
 					"door hit point costs <color=orange>2 metals</color> and <color=orange>4 synthetics</color> by default." + "</color>";
+				if (txt.name == "log" && txt.text == "Log Messages") txt.text = "Ship Messages Log";
+				if (txt.name == "Text" && txt.text == "Log messages") txt.text = "Ship Messages Log";
+				if (txt.name == "DescriptionText" && txt.text.Contains("The log console shows what's going on in"))
+					txt.text = "This console keeps logs of all events that happened in the ship or in its vicinity. Whether somebody died, " +
+					"container started leaking starfuel, planetary defenses launched nukes, what was eaten on dinner or if reactor is about " +
+					"to reach meltdown point and tear ship apart, all these things will be logged." + "\n\n" +
+					"If the message is logged in <color=red>red</color>, it means event is a negative one, while " +
+					"if it is logged in <color=lime>green</color>, it means that was positive even.";
+				if (txt.name == "crew" && txt.text == "Crew") txt.text = "Detailed Crew Information";
+				if (txt.name == "Text" && txt.text == "Crew") txt.text = "Detailed Crew Information";
+				if (txt.name == "crewhealth" && txt.text == "Crew health") txt.text = "Healing & Repair (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Crew health") txt.text = "Healing & Repair (FFU:BE)";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Send crew into medbay to heal damage"))
+					txt.text = "Wounded crew can be healed in Medical Bays. Damaged drones can be repaired in Drone Bays. " +
+					"Healing crew members and pets requires organics, while repairing drones requires synthetics. As alternative, " +
+					"wounder crew members and pets can be sent to heal in Cryodream and Cryosleep bays, but it might take a long time.";
+				if (txt.name == "Text" && txt.text.Contains("Send crew into medbay to heal damage"))
+					txt.text = "Healing Bays, Drone Bays and Restoration Bays provide fast way to bring all crew members to optimal state, but for a price.";
+				if (txt.name == "Text" && txt.text.Contains("Crew in cryosleep do not consume organics"))
+					txt.text = "Cryodream Bays and Cryosleep Bays also can heal crew members and pets, albeit at much slower pace. Sadly, this doesn't apply to drones.";
+				if (txt.name == "intruders" && txt.text == "Intruders") txt.text = "Crew & Intruders (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Intruders") txt.text = "Crew & Intruders (FFU:BE)";
+				if (txt.name == "DescriptionText" && txt.text.Contains("To increase crew survivability against"))
+					txt.text = "Sometimes, at any point during your peaceful adventure you might get uninvited visitors at your ship. " +
+					"It can be Pirates, Slavers, Bounty Hunters, Mad Scientists, Loan Sharks and bona fide hungry Xenomorphs. " +
+					"Anyway, whoever they are, you don't want them on your ship and it is unlikely that they will leave on their own, " +
+					"even if you will share your last pack of cookies with them. Thus, you need to convince them to leave though the most " +
+					"classic method of all: hail of bullets and napalm." + "\n\n" +
+					"<color=lime>" + "You can strengthen your crew though various means. Beside maxing out their <color=orange>Hand Weapons Skill</color>, " +
+					"you also can increases their maximum health by applying <color=orange>Biological Implants Cache</color> (for biological crew) or " +
+					"<color=orange>Mechanical Upgrades Cache</color> (for mechanical crew). You also can change crew personal weapons by opening various " +
+					"<color=orange>Weapon Caches</color> that suit your requirements. In short, you can buff your crew members to such levels that even " +
+					"Duke Nukem will nod at them with deep respect." + "</color>" + "\n\n" +
+					"To increase crew survivability against enemy combatants, it is highly advised to position them to shoot from behind corners. " +
+					"Also, please do remember that Hand Weapons can damage ship modules as well, thus beware of any skirmishes near reactors.";
 				//Debug.LogWarning(txt.name + ": " + txt.text);
 			}
 		}
@@ -1158,6 +1192,7 @@ namespace FFU_Bleeding_Edge {
 					string lookupType = "";
 					if (refModule.displayName.Contains("Drone")) lookupType = "Drone";
 					else if (refModule.displayName.Contains("Medical")) lookupType = "Medical";
+					else if (refModule.displayName.Contains("Restoration")) lookupType = "Restoration";
 					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_HealthBays.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(lookupType)).ToList();
 					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
 					else {

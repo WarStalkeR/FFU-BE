@@ -10,6 +10,7 @@ using MonoMod;
 using RST;
 using RST.UI;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -201,22 +202,28 @@ namespace FFU_Bleeding_Edge {
 			string moodMessage = GetMoodTextFromWeapon(refWeapon.name);
 			StringBuilder cacheUsedMessage = null;
 			List<string> availableWeapons = new List<string>();
-			foreach (Crewmember cachedCrewmember in PerFrameCache.CachedCrewmembers) {
-				if (refSource != null && refModule != null & availableSets > 0 && cachedCrewmember.Ownership.GetOwner() == Ownership.Owner.Me && Vector2.Distance(refSource.transform.position, cachedCrewmember.transform.position) <= FFU_BE_Defs.equipmentChangeDist) {
+			foreach (Crewmember cachedCrewmember in PerFrameCache.CachedCrewmembers.Where(x => x.Ownership.GetOwner() == Ownership.Owner.Me && Vector2.Distance(refSource.transform.position, x.transform.position) <= FFU_BE_Defs.equipmentChangeDist)) {
+				if (refSource != null && refModule != null & availableSets > 0) {
 					switch (refModule.name) {
 						case "artifactmodule tec 33 biostasis nice worm":
 						if (cachedCrewmember.type == Crewmember.Type.Drone) {
 							cacheUsedMessage = RstShared.StringBuilder;
-							cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} was upgraded with new mechanical upgrades and now has {1} health in total!"), cachedCrewmember.DisplayNameLocalized, cachedCrewmember.MaxHealth);
-							StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
-							availableSets--;
+							if (cachedCrewmember.MaxHealth <= healthLimit) {
+								cachedCrewmember.MaxHealth += healthBoost;
+								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} was upgraded with new mechanical upgrades and now has {1} health in total!"), cachedCrewmember.DisplayNameLocalized, cachedCrewmember.MaxHealth);
+								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
+								availableSets--;
+							}
 						} break;
 						case "artifactmodule tec 11 biostasis":
 						if (cachedCrewmember.type == Crewmember.Type.Regular || cachedCrewmember.type == Crewmember.Type.Pet) {
 							cacheUsedMessage = RstShared.StringBuilder;
-							cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} was enhanced with new biological implants and now has {1} health in total!"), cachedCrewmember.DisplayNameLocalized, cachedCrewmember.MaxHealth);
-							StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
-							availableSets--;
+							if (cachedCrewmember.MaxHealth <= healthLimit) {
+								cachedCrewmember.MaxHealth += healthBoost;
+								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} was enhanced with new biological implants and now has {1} health in total!"), cachedCrewmember.DisplayNameLocalized, cachedCrewmember.MaxHealth);
+								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
+								availableSets--;
+							}
 						} break;
 						case "artifactmodule tec 17 broken screen gizmo, data":
 						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {

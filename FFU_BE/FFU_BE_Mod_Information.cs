@@ -204,7 +204,8 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case ShipModule.Type.Dronebay:
 				case ShipModule.Type.Medbay:
-				moduleData += "Type: " + FFU_BE_Mod_Technology.GetModuleGenText(shipModule) + " Gen. " + (shipModule.Medbay.resourcesPerHp.organics > 0 ? "Crew Medical Bay" : (shipModule.Medbay.resourcesPerHp.synthetics > 0 ? "Drone Repair Bay" : "Unidentified Health Bay")) + "\n";
+				moduleData += "Type: " + FFU_BE_Mod_Technology.GetModuleGenText(shipModule) + " Gen. " + (shipModule.Medbay.resourcesPerHp.organics > 0 && shipModule.Medbay.resourcesPerHp.synthetics > 0 ? "Restoration Bay" : 
+					(shipModule.Medbay.resourcesPerHp.organics > 0 ? "Crew Medical Bay" : (shipModule.Medbay.resourcesPerHp.synthetics > 0 ? "Drone Repair Bay" : "Unidentified Health Bay"))) + "\n";
 				moduleData += "Modifier: " + FFU_BE_Mod_Technology.GetModuleModText(shipModule) + "\n";
 				moduleData += shipModule.Medbay.secondsPerHp > 0 && shipModule.Medbay.resourcesPerHp.organics > 0 ? "Medbay Crew Capacity: " + shipModule.OperatorSpots.Length + "\n" : "";
 				moduleData += shipModule.Medbay.secondsPerHp > 0 && shipModule.Medbay.resourcesPerHp.organics > 0 ? "Medbay Healing Speed: " + shipModule.Medbay.secondsPerHp + "s" + "\n" : "";
@@ -588,7 +589,8 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case ShipModule.Type.Dronebay:
 				case ShipModule.Type.Medbay:
-				newDescription += "Type: " + (shipModule.Medbay.resourcesPerHp.organics > 0 ? "Crew Medical Bay" : (shipModule.Medbay.resourcesPerHp.synthetics > 0 ? "Drone Repair Bay" : "Unidentified Health Bay")) + "\n";
+				newDescription += "Type: " + (shipModule.Medbay.resourcesPerHp.organics > 0 && shipModule.Medbay.resourcesPerHp.synthetics > 0 ? "Restoration Bay" : 
+					(shipModule.Medbay.resourcesPerHp.organics > 0 ? "Crew Medical Bay" : (shipModule.Medbay.resourcesPerHp.synthetics > 0 ? "Drone Repair Bay" : "Unidentified Health Bay"))) + "\n";
 				if (FFU_BE_Defs.allModuleProps) newDescription += "Module Identifier: " + shipModule.name + "\n";
 				if (FFU_BE_Defs.allModuleProps) newDescription += "Module Prefab ID: " + shipModule.PrefabId + "\n";
 				newDescription += shipModule.Medbay.secondsPerHp > 0 && shipModule.Medbay.resourcesPerHp.organics > 0 ? "Medbay Crew Capacity: " + shipModule.OperatorSpots.Length + "\n" : "";

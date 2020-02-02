@@ -240,28 +240,28 @@ namespace FFU_Bleeding_Edge {
 		}
 		public static string GetModuleTypeName(ShipModule shipModule) {
 			switch (shipModule.type) {
-				case ShipModule.Type.Weapon: return ("Weapon Armament");
-				case ShipModule.Type.ResearchLab: return ("Research Lab");
-				case ShipModule.Type.Engine: return ("Ship Engine");
-				case ShipModule.Type.ResourcePack: return ("Resource Pack");
-				case ShipModule.Type.Sensor: return ("Navigation Sensor");
-				case ShipModule.Type.Bridge: return ("Command Bridge");
-				case ShipModule.Type.ShieldGen: return ("Shield Generator");
-				case ShipModule.Type.Warp: return ("Warp Drive");
-				case ShipModule.Type.Reactor: return ("Energy Reactor");
-				case ShipModule.Type.Medbay: return ("Medical Bay");
-				case ShipModule.Type.Weapon_Nuke: return ("Capital Missile");
-				case ShipModule.Type.MaterialsConverter: return ("Materials Converter");
-				case ShipModule.Type.Container: return ("Storage Container");
-				case ShipModule.Type.Cryosleep: return ("Cryosleep Pod");
-				case ShipModule.Type.Dronebay: return ("Drone Repair Bay");
-				case ShipModule.Type.Garden: return ("Greenhouse/Growery");
-				case ShipModule.Type.StealthDecryptor: return ("Stealth Decryptor");
-				case ShipModule.Type.PassiveECM: return ("Passive ECM");
-				case ShipModule.Type.Integrity: return ("Integrity Armor");
-				case ShipModule.Type.PointDefence: return ("Point Defence");
-				case ShipModule.Type.Decoy: return ("Decoy Module");
-				default: return ("Unkown/Uncategorized");
+				case ShipModule.Type.Weapon: return "Weapon Armament";
+				case ShipModule.Type.ResearchLab: return "Research Lab";
+				case ShipModule.Type.Engine: return "Ship Engine";
+				case ShipModule.Type.ResourcePack: return "Resource Pack";
+				case ShipModule.Type.Sensor: return "Navigation Sensor";
+				case ShipModule.Type.Bridge: return "Command Bridge";
+				case ShipModule.Type.ShieldGen: return "Shield Generator";
+				case ShipModule.Type.Warp: return "Warp Drive";
+				case ShipModule.Type.Reactor: return "Energy Reactor";
+				case ShipModule.Type.Medbay: return "Medical Bay";
+				case ShipModule.Type.Weapon_Nuke: return "Capital Missile";
+				case ShipModule.Type.MaterialsConverter: return "Materials Converter";
+				case ShipModule.Type.Container: return "Storage Container";
+				case ShipModule.Type.Cryosleep: return "Cryosleep Pod";
+				case ShipModule.Type.Dronebay: return "Drone Repair Bay";
+				case ShipModule.Type.Garden: return "Greenhouse/Growery";
+				case ShipModule.Type.StealthDecryptor: return "Stealth Decryptor";
+				case ShipModule.Type.PassiveECM: return "Passive ECM";
+				case ShipModule.Type.Integrity: return "Integrity Armor";
+				case ShipModule.Type.PointDefence: return "Point Defense";
+				case ShipModule.Type.Decoy: return "Decoy Module";
+				default: return "Unknown/Uncategorized";
 			}
 		}
 		private static void SortModuleByType(ShipModule shipModule) {

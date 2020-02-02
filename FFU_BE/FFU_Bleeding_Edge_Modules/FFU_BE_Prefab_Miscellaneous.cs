@@ -69,14 +69,14 @@ namespace FFU_Bleeding_Edge {
 			switch (Core.GetOriginalName(shipModule.name)) {
 				case "artifactmodule tec 33 biostasis nice worm":
 				shipModule.displayName = "Mechanical <color=#" + colorCache + "ff>Upgrades</color> Cache";
-				shipModule.description = "Upgrades cache that contains upgrades sets that increase health of drones and robots by certain amount. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Upgrades cache that contains upgrades sets that increase health of drones and robots by certain amount. To apply: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 500f, exotics = 10f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 11 biostasis":
 				shipModule.displayName = "Biological <color=#" + colorCache + "ff>Implants</color> Cache";
-				shipModule.description = "Implants cache that contains implant sets that increase health of biological crew members by certain amount. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Implants cache that contains implant sets that increase health of biological crew members by certain amount. To apply: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, organics = 500f, exotics = 10f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 50;
