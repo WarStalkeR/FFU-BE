@@ -44,7 +44,7 @@ namespace FFU_Bleeding_Edge {
 					case "04 Rogue Rat":
 					ship.MaxHealthAdd = 280;
 					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 125));
-					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Scrap Door"));
+					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Metal Scrap Door"));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "05 Gardenship":
@@ -73,8 +73,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case "10 Endurance":
 					ship.MaxHealthAdd = 600;
-					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 500));
-					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Blast Door"));
+					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 475));
+					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Heavy Blast Door"));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "BattleTiger":

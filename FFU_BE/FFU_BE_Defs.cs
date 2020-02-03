@@ -443,7 +443,7 @@ namespace FFU_Bleeding_Edge {
 				if (txt.name == "Text" && txt.text == "Doors") txt.text = "Doors & Airlocks (FFU:BE)";
 				if (txt.name == "DescriptionText" && txt.text.Contains("Many ships have doors which can be locked"))
 					txt.text = "Many ships are divided into multiple sections & segments. Doors & hatches between these sections & segments " +
-					"allow crew members access them. All doors can be locked/unlocked by clicking RMB (Right Mouse Button) on it, if you're owner. " +
+					"allow crewmembers access them. All doors can be locked/unlocked by clicking RMB (Right Mouse Button) on it, if you're owner. " +
 					"Locking door/hatch prevents enemies from entering into the section/segment. Also, locked door/hatch prevents fire from spreading." + "\n\n" +
 					"<color=lime>" + "If your flagship is not in battle and not pursued by enemy fleet, you can repair doors. Repair doors by clicking " +
 					"<color=orange>Left Mouse Button</color> on them. Each click can repair up to 10 hit points. Repairing each " +
@@ -462,12 +462,12 @@ namespace FFU_Bleeding_Edge {
 				if (txt.name == "Text" && txt.text == "Crew health") txt.text = "Healing & Repair (FFU:BE)";
 				if (txt.name == "DescriptionText" && txt.text.Contains("Send crew into medbay to heal damage"))
 					txt.text = "Wounded crew can be healed in Medical Bays. Damaged drones can be repaired in Drone Bays. " +
-					"Healing crew members and pets requires organics, while repairing drones requires synthetics. As alternative, " +
-					"wounder crew members and pets can be sent to heal in Cryodream and Cryosleep bays, but it might take a long time.";
+					"Healing crewmembers and pets requires organics, while repairing drones requires synthetics. As alternative, " +
+					"wounder crewmembers and pets can be sent to heal in Cryodream and Cryosleep bays, but it might take a long time.";
 				if (txt.name == "Text" && txt.text.Contains("Send crew into medbay to heal damage"))
-					txt.text = "Healing Bays, Drone Bays and Restoration Bays provide fast way to bring all crew members to optimal state, but for a price.";
+					txt.text = "Healing Bays, Drone Bays and Restoration Bays provide fast way to bring all crewmembers to optimal state, but for a price.";
 				if (txt.name == "Text" && txt.text.Contains("Crew in cryosleep do not consume organics"))
-					txt.text = "Cryodream Bays and Cryosleep Bays also can heal crew members and pets, albeit at much slower pace. Sadly, this doesn't apply to drones.";
+					txt.text = "Cryodream Bays and Cryosleep Bays also can heal crewmembers and pets, albeit at much slower pace. Sadly, this doesn't apply to drones.";
 				if (txt.name == "intruders" && txt.text == "Intruders") txt.text = "Crew & Intruders (FFU:BE)";
 				if (txt.name == "Text" && txt.text == "Intruders") txt.text = "Crew & Intruders (FFU:BE)";
 				if (txt.name == "DescriptionText" && txt.text.Contains("To increase crew survivability against"))
@@ -479,10 +479,95 @@ namespace FFU_Bleeding_Edge {
 					"<color=lime>" + "You can strengthen your crew though various means. Beside maxing out their <color=orange>Hand Weapons Skill</color>, " +
 					"you also can increases their maximum health by applying <color=orange>Biological Implants Cache</color> (for biological crew) or " +
 					"<color=orange>Mechanical Upgrades Cache</color> (for mechanical crew). You also can change crew personal weapons by opening various " +
-					"<color=orange>Weapon Caches</color> that suit your requirements. In short, you can buff your crew members to such levels that even " +
+					"<color=orange>Weapon Caches</color> that suit your requirements. In short, you can buff your crewmembers to such levels that even " +
 					"Duke Nukem will nod at them with deep respect." + "</color>" + "\n\n" +
 					"To increase crew survivability against enemy combatants, it is highly advised to position them to shoot from behind corners. " +
 					"Also, please do remember that Hand Weapons can damage ship modules as well, thus beware of any skirmishes near reactors.";
+				if (txt.name == "multiplecrew" && txt.text == "Managing multiple crew") txt.text = "Managing Ship Personnel";
+				if (txt.name == "Text" && txt.text == "Managing multiple crew") txt.text = "Managing Ship Personnel";
+				if (txt.name == "resources" && txt.text == "Resources") txt.text = "Supplies & Resources";
+				if (txt.name == "Text" && txt.text == "Resources") txt.text = "Supplies & Resources";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Basic resources are organics, fuel"))
+					txt.text = "Basic resources, such as Organics, Starfuel, Metals, Synthetics, Explosives and Exotics that required to " +
+					"sustain day-to-day ship's operations. Lacking any of them may result in very unexpected consequences and very expected " +
+					"end of your voyage. Be sure to alway keep your eye on their levels or at very least keep in store backup Resource Pack " +
+					"of each resource in your Storage." + "\n\n" +
+					"<color=lime>" + "When playing Fight For <color=orange>Universe: Bleeding Edge</color> modification for " +
+					"<color=orange>Shortest Trip to Earth</color>, you will need a lot of them, because you will use them often, " +
+					"especially when switching to next tier of ship modules or using resource hungry weapons." + "</color>";
+				if (txt.name == "organics" && txt.text == "Organics") txt.text = "Organic Substances";
+				if (txt.name == "Text" && txt.text == "Organics") txt.text = "Organic Substances";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Most crewmembers consume organics as food"))
+					txt.text = "Organic substances are base material that can be easily converted into food, water, air and other recreational " +
+					"substances through ship's built-in systems. Running out of organic substances will reduce crewmembers skill efficiency by 50%. " +
+					"While traveling with empty organics storage, your crewmembers will lose health due to the hunger and lack of necessary supplies." + "\n\n" +
+					"<color=lime>" + "There are a couple of ways to ensure that you have a stable supply of organics substances. The most effective " +
+					"one is constantly active <color=orange>Greenhouse Module</color>. Others include harvesting organics from planets with ecosystems, buying it from " +
+					"trade stations or organics traders and looting it from hostile ships." + "</color>";
+				if (txt.name == "fuel" && txt.text == "Fuel") txt.text = "High Energy Starfuel";
+				if (txt.name == "Text" && txt.text == "Fuel") txt.text = "High Energy Starfuel";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Fuel is mostly consumed by warping between"))
+					txt.text = "High Energy Starfuel, also known as Starfuel or just Fuel allows hungry Reactor Modules and Engine Modules " +
+					"to generate enough output and thrust power to move your ships in direction of your choice. Warp Drives also require fuel " +
+					"to initiate HyperJump to the location of your choice. Sometimes fuel also consumed for exploration and other EVA activities." + "\n\n" +
+					"<color=lime>" + "Most basic way to acquire steady supply of fuel is to convert organics and synthetics into fuel via <color=orange>Fuel " +
+					"Refinery</color> module. As for how to produce organics and synthetics, please read relevant entries in Help Section (F1). In " +
+					"addition, fuel can be acquired through harvesting it from Gas Giants, buying it from trade stations or fuel traders and looting " +
+					"it from hostile ships." + "</color>";
+				if (txt.name == "refuel" && txt.text == "Refueling") txt.text = "Refueling Options";
+				if (txt.name == "Text" && txt.text == "Options for gaining fuel") txt.text = "Refueling Options";
+				if (txt.name == "metals" && txt.text == "Metals") txt.text = "Metals & Composites";
+				if (txt.name == "Text" && txt.text == "Metals") txt.text = "Metals & Composites";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Metals are the most common resource"))
+					txt.text = "Metals, Metal Composites and Noble Metals are one of the basic resources. Although they aren't critically important as " +
+					"organics and starfuel, they are still very important, especially when it comes to construction, crafting, hull repair and ammunition " +
+					"printing (especially for Electromagnetic Acceleration Weapons). Sometimes metals also consumed during expeditions, when assembly " +
+					"of specialized EVA equipment is needed." + "\n\n" +
+					"<color=lime>" + "Metals can be produced via <color=orange>Blast Furnace</color> module, by consuming synthetics, explosives and " +
+					"minor amount of exotic matter. Information about acquisition of synthetics, explosives and exotics can be found in relevant entries " +
+					"of the Help Section (F1). In addition, metals can be acquired through processing of rich asteroids, buying it from trade stations or " +
+					"metal traders and looting it from hostile ships after battles." + "</color>";
+				if (txt.name == "synthetics" && txt.text == "Synthetics") txt.text = "Synthetic Compounds";
+				if (txt.name == "Text" && txt.text == "Synthetics") txt.text = "Synthetic Compounds";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Synthethics is a general category for all kinds"))
+					txt.text = "Synthetics is a general category for all kinds of ceramics, plastics, electronic components, artificial substances and " +
+					"consumer goods. Just as metals, synthetics aren't critically important, but still very important when it comes to module repairs, " +
+					"drones maintenance, modules crafting and printing some types of ammunitions. Synthetics also can be used during some EVA events " +
+					"that require crewmembers to print some temporary equipment or single use ammunition." + "\n\n" +
+					"<color=lime>" + "Synthetics can be easily produced by <color=orange>Synthetics Printer</color> module, as long as you have constant " +
+					"supply of organics for it. Please refer to \"Organic Substances\" entry in Help Section (F1) for this. In addition, you can acquire " +
+					"synthetics from some EVA events, trade stations, synthetics traders and even by looting it from hostile ships after battles." + "</color>";
+				if (txt.name == "explosives" && txt.text == "Explosives") txt.text = "Explosive Materials";
+				if (txt.name == "Text" && txt.text == "Explosives") txt.text = "Explosive Materials";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Explosives are used as ammo for most"))
+					txt.text = "Explosive materials is a basic resource and is epitome of creativity and sentient ingenuity of how to deliver peace and " +
+					"democracy to all other sentient (and not so much) species that don't cherish or respect them. Mostly used to print all kinds of " +
+					"ammunition for non-energy weapons, especially resource hungry rocket launcher platforms. The Mothership AI also uses explosives " +
+					"automatically to print mines, cheap missiles and bombs during conflict events that happen off-screen." + "\n\n" +
+					"<color=lime>" + "As long as you got steady supply of synthetics and starfuel you can easily produce explosives via <color=orange>" +
+					"Ordnance Factory</color> module. Regarding synthetics and starfuel production you can read relevant entries in Help Section (F1). " +
+					"You also can acquire explosives from some EVA events, buy from trade stations or explosive traders and even loot it from hostile " +
+					"ships." + "</color>";
+				if (txt.name == "exotics" && txt.text == "Exotic Substances") txt.text = "Rare & Exotic Matter";
+				if (txt.name == "Text" && txt.text == "Exotics") txt.text = "Rare & Exotic Matter";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Exotics are most useful for crafting"))
+					txt.text = "Exotic matter is universal category of resources that includes Antimatter, various kinds of Dark Matter, miniature " +
+					"chunks of Neutron and Pulsar stars, and everything else that defies known laws of physics and very expensive to acquire. Often used " +
+					"in production of high-tech components, crafting of exotic modules, printing of specialized ammunition and even as alternative " +
+					"currency to the xenodata credits. Also exotic matter is core component of any warp drive module." + "\n\n" +
+					"<color=lime>" + "Unlike other resources, exotic matter is very difficult to acquire. Beside inefficient production via <color=orange>" +
+					"Exotics XMT-Purifier</color> module, exotic matter can be acquired from specialized <color=orange>Laboratories</color>, exotic " +
+					"<color=orange>Greenhouses</color>, warp animal remains and rarely by looting hostile ships after battles." + "</color>";
+				if (txt.name == "credits" && txt.text == "(Xeno)Data Credits") txt.text = "Xenodata Credits";
+				if (txt.name == "Text" && txt.text == "(Xeno)Data credits") txt.text = "Xenodata Credits";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Xenodata credits, usually called just"))
+					txt.text = "Xenodata credits, also known as xenodata or just credits. It is the most respected form of intergalactic currency. " +
+					"It uses a semi-intelligent digital algorithm to convert any data with knowledge value into a universally priced form, thus almost " +
+					"any exploration brings some sort of revenue in form of xenodata." + "\n\n" +
+					"<color=lime>" + "There are multiple way to earn credits, beside exploration. Actively working <color=orange>Laboratories</color> " +
+					"and <color=orange>Cryodream Bays</color> will generate xenodata during travel, <color=orange>Quantum Processor</color> module " +
+					"can convert exotic matter into xenodata after deep analysis, albeit inefficiently. You also can acquire credits by selling resources " +
+					"or by looting remains of hostile ships after battles." + "</color>";
 				//Debug.LogWarning(txt.name + ": " + txt.text);
 			}
 		}
@@ -502,7 +587,7 @@ namespace FFU_Bleeding_Edge {
 					" - Module Reversing, Research & Tiers" + "\n" +
 					" - Local Forces Awareness & Response" + "\n" +
 					" - Reworked Boarding & Module Looting" + "\n" +
-					" - New Mod Features Help (<color=orange>F1</color> hotkey)" + "\n" +
+					" - Mod Added Features Info (<color=orange>F1</color> hotkey)" + "\n" +
 					"\n" + "Special thanks goes to <color=#4fd376>Interactive Fate</color> for creating this art piece and helping me with modding it, thus allowing me to make this unforgiving mod for it.";
 				if (txt.text.ToLower().Contains("we offer you an opportunity to unlock"))
 					txt.text = "<size=14>\nCongratulations! You found a secret cow level. Nah, I'm kidding, there is no cow level. If you found this page, it means you probably already know about mod's configuration file existence." + "\n\n" +

@@ -926,7 +926,7 @@ namespace RST.UI {
 		}
 		//Show Updated Crew Damage in Weapon Panel
 		[MonoModReplace] private void DoWeaponCrewDmg(WeaponModule w, ShootAtDamageDealer.CrewDmgLevel crewDmgLevel) {
-			dmgToCrewTextHover.hoverText = "Chance to damage all crew members within area of effect by shown amount.";
+			dmgToCrewTextHover.hoverText = "Chance to damage all crewmembers within area of effect by shown amount.";
 			string crewDmgText = w.magazineSize + "x" + w.ProjectileOrBeamPrefab.GetDamage(w).doorDmg;
 			switch (crewDmgLevel) {
 				case ShootAtDamageDealer.CrewDmgLevel.None: SafeUpdateField(dmgToCrewText, Localization.TT("None (" + (int)Core.CrewHitChance.None + "%)")); break;
@@ -949,7 +949,7 @@ namespace RST.UI {
 	public class patch_CrewDataSubpanel : CrewDataSubpanel {
 		private extern void orig_Update();
 		[MonoModIgnore] private Crewmember c;
-		//Crew Member Weapon Full Information Window
+		//Crewmember Weapon Full Information Window
 		private void Update() {
 			orig_Update();
 			if (c != null) health.horizontalOverflow = HorizontalWrapMode.Overflow;

@@ -545,7 +545,7 @@ namespace FFU_Bleeding_Edge {
 				targetCrew.moveSpeed = 2.2f;
 				break;
 				case "Combat Drone Humanoid":
-				targetCrew.description = "Light tactical droid. Very versatile and capable of performing same operations as any normal crew member. Fire-resistant body.";
+				targetCrew.description = "Light tactical droid. Very versatile and capable of performing same operations as any normal crewmember. Fire-resistant body.";
 				if (targetCrew.skills.bridge < 1) targetCrew.skills.bridge = 1;
 				if (targetCrew.skills.gunnery < 1) targetCrew.skills.gunnery = 1;
 				if (targetCrew.skills.handWeapon < 1) targetCrew.skills.handWeapon = 1;
@@ -1185,7 +1185,7 @@ namespace FFU_Bleeding_Edge {
 		}
 		public static void InitCrewTypesList() {
 			foreach (Crewmember crewmember in Resources.FindObjectsOfTypeAll<Crewmember>()) {
-				if (FFU_BE_Defs.dumpObjectLists) Debug.Log("Crew Member: [" + crewmember.name + "] (" + crewmember.PrefabId + ") " + crewmember.displayName + " (Speed: " + crewmember.moveSpeed + ")");
+				if (FFU_BE_Defs.dumpObjectLists) Debug.Log("Crewmember: [" + crewmember.name + "] (" + crewmember.PrefabId + ") " + crewmember.displayName + " (Speed: " + crewmember.moveSpeed + ")");
 				ModifyCrewmemberProperties(crewmember, crewmember);
 				FFU_BE_Defs.prefabModdedCrewList.Add(crewmember);
 			}

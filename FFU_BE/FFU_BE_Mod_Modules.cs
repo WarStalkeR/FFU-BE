@@ -54,7 +54,7 @@ namespace FFU_Bleeding_Edge {
 		public static void ApplySlotChanges(ModuleSlot moduleSlot) {
 			if (moduleSlot.name.Contains("Bridge slot")) {
 				moduleSlot.displayName = "Bridge Interface";
-				moduleSlot.description = "Allows installation and interfacing with Bridge-type modules that allow crew members to operate ship.";
+				moduleSlot.description = "Allows installation and interfacing with Bridge-type modules that allow crewmembers to operate ship.";
 				moduleSlot.shipMaxHealthAdd = 50;
 			} else if (moduleSlot.name.Contains("Warp slot")) {
 				moduleSlot.displayName = "FTL Interface";

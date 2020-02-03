@@ -76,7 +76,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "artifactmodule tec 11 biostasis":
 				shipModule.displayName = "Biological <color=#" + colorCache + "ff>Implants</color> Cache";
-				shipModule.description = "Implants cache that contains implant sets that increase health of biological crew members by certain amount. To apply: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Implants cache that contains implant sets that increase health of biological crewmembers by certain amount. To apply: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, organics = 500f, exotics = 10f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 50;
