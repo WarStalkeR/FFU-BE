@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "0.9.6.2";
+		public static string modVersion = "0.9.6.5";
 		//Internal Variables
 		public static bool firstRun = true;
 		public static bool firstInst = true;
@@ -51,8 +51,9 @@ namespace FFU_Bleeding_Edge {
 		public static List<DamageToken> prefabDamageTokensList = new List<DamageToken>();
 		public static IDictionary<int, int> equippedCrewFirearms = new Dictionary<int, int>();
 		public static IDictionary<int, int> craftingProficiency = new Dictionary<int, int>();
-		public static IDictionary<int, int> doorShipPrefabsHealth = new Dictionary<int, int>();
-		public static IDictionary<int, string> doorShipPrefabsName = new Dictionary<int, string>();
+		public static IDictionary<int, int> shipPrefabsDoorHealth = new Dictionary<int, int>();
+		public static IDictionary<int, string> shipPrefabsDoorName = new Dictionary<int, string>();
+		public static IDictionary<int, int> shipPrefabsStorageSize = new Dictionary<int, int>();
 		public static int[] techLevel = new int[] { 0, 1500, 3500, 6000, 10000, 16000, 24000, 34000, 46000, 60000 };
 		public static List<int> discoveredModuleIDs = new List<int>(new int[] { 760167696, 453797399, 1581569285,
 			345284781, 813048445, 124199597, 92356131, 430038657, 2146165248, 533676501, 858424257, 821254137,
@@ -132,7 +133,7 @@ namespace FFU_Bleeding_Edge {
 		public static int shipMaxEvasionLimit = 95;
 		public static int stationCapacityMult = 20;
 		public static int resultNumbersMult = 10;
-		public static int maxStorageCapacity = 72;
+		public static int maxStorageCapacity = 120;
 		public static float shipModuleHealthMult = 3f;
 		public static float shipModuleUnpackTime = 60f;
 		public static float shipModuleCraftTime = 120f;
@@ -193,7 +194,7 @@ namespace FFU_Bleeding_Edge {
 			if (firstRun) {
 				Debug.LogWarning("Loading modded data and custom variables for the first time...");
 				InitGameTextUpdate();
-				InitShipDoorsUpdate();
+				InitGameInterfaceUpdate();
 				InitDamageTokensPrefabList();
 				InitDamageDealersPrefabList();
 				FFU_BE_Mod_Crewmembers.InitFirearmsList();
@@ -229,6 +230,11 @@ namespace FFU_Bleeding_Edge {
 				RecalculateEnergyEmission();
 			}
 		}
+		public static void InitGameInterfaceUpdate() {
+			foreach (GridLayoutGroup gridLayoutGroup in Resources.FindObjectsOfTypeAll<GridLayoutGroup>()) {
+				if (gridLayoutGroup.name == "Grid" && gridLayoutGroup.constraintCount == 6) gridLayoutGroup.constraintCount = 12;
+			}
+		}
 		public static void InitDamageTokensPrefabList() {
 			foreach (DamageToken damageToken in Resources.FindObjectsOfTypeAll<DamageToken>()) {
 				if (damageToken.repairCostPerPoint.metals > 10) damageToken.repairCostPerPoint.metals = 10;
@@ -251,8 +257,8 @@ namespace FFU_Bleeding_Edge {
 		}
 		public static void InitShipDoorsUpdate() {
 			foreach (Door door in Resources.FindObjectsOfTypeAll<Door>()) {
-				AccessTools.FieldRefAccess<Door, int>(door, "maxHealth") = 275;
-				AccessTools.FieldRefAccess<Door, int>(door, "health") = 275;
+				AccessTools.FieldRefAccess<Door, int>(door, "maxHealth") = 150;
+				AccessTools.FieldRefAccess<Door, int>(door, "health") = 150;
 			}
 		}
 		public static void InitGameTextUpdate() {

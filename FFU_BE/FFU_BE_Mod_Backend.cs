@@ -556,7 +556,6 @@ namespace RST.UI {
 		}
 	}
 	public class patch_StoragePanel : StoragePanel {
-		//private extern void orig_Update();
 		[MonoModIgnore] private HoverableUI upgradeButtonHover;
 		//Modified Max Storage Capacity Upgrade
 		[MonoModReplace] public void UpdateUpgradeButton(Ownership.Owner resourcesGoTo) {
@@ -585,17 +584,6 @@ namespace RST.UI {
 				}
 			}
 		}
-		//Change Interface Width
-		//private void Update() {
-		//	orig_Update();
-		//	Debug.LogWarning("Storage X Size: " + (transform as RectTransform)?.sizeDelta.x);
-		//	Debug.LogWarning("Storage Y Size: " + (transform as RectTransform)?.sizeDelta.y);
-		//	//Debug.LogWarning("Child Count: " + transform.childCount);
-		//	//foreach (var item in transform.childCount) {
-		//	//	Debug.LogWarning(item.name);
-		//	//	this.transform.
-		//	//}
-		//}
 	}
 }
 

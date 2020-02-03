@@ -25,62 +25,72 @@ namespace FFU_Bleeding_Edge {
 				switch (ship.name) {
 					case "01 Tigerfish":
 					ship.MaxHealthAdd = 300;
-					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 150));
-					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Industrial Door"));
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 150));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Industrial Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 24));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "02 Nuke Runner":
 					ship.MaxHealthAdd = 250;
-					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 250));
-					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Security Door"));
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 250));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Security Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 30));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "03 Weirdship":
 					ship.MaxHealthAdd = 330;
-					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 75));
-					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Organic Door"));
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 75));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Organic Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 18));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "04 Rogue Rat":
 					ship.MaxHealthAdd = 280;
-					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 125));
-					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Metal Scrap Door"));
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 125));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Metal Scrap Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 36));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "05 Gardenship":
 					ship.MaxHealthAdd = 380;
-					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 175));
-					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Pressure Door"));
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 175));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Pressure Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 24));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "06 Atlas":
 					ship.MaxHealthAdd = 470;
-					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 225));
-					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Reinforced Door"));
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 225));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Reinforced Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 36));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "07 Bluestar MK III scientific":
 					ship.MaxHealthAdd = 520;
-					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 275));
-					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "High-Tech Door"));
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 275));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "High-Tech Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 42));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "08 Roundship":
 					ship.MaxHealthAdd = 420;
-					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 200));
-					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Carapace Door"));
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 200));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Carapace Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 48));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "10 Endurance":
 					ship.MaxHealthAdd = 600;
-					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 475));
-					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Heavy Blast Door"));
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 475));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Heavy Blast Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 60));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					case "BattleTiger":
 					ship.MaxHealthAdd = 700;
-					FFU_BE_Defs.doorShipPrefabsHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 350));
-					FFU_BE_Defs.doorShipPrefabsName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Shielded Door"));
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 350));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Shielded Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 48));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
 					default: break;
@@ -301,7 +311,7 @@ namespace RST {
 		public string HoverText {
 			get {
 				StringBuilder stringBuilder = RstShared.StringBuilder;
-				stringBuilder.Append(MonoBehaviourExtended.TT("Door")).Append('\n').Append(MonoBehaviourExtended.TT("HP")).Append(": ").AppendColoredHealth(this);
+				stringBuilder.Append(MonoBehaviourExtended.TT(DisplayNameLocalized)).Append('\n').Append(MonoBehaviourExtended.TT("HP")).Append(": ").AppendColoredHealth(this);
 				if (IsLocked) stringBuilder.Append('\n').Append(MonoBehaviourExtended.TT("<color=lime>Locked</color>"));
 				if (!HasFullHealth) {
 					int lackingHealth = MaxHealth - Health;

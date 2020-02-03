@@ -1270,6 +1270,14 @@ namespace RST {
 				if (ship.Metals < ship.MaxMetals * 0.25) ship.Metals += Mathf.RoundToInt((ship.MaxMetals - ship.Metals) * Random.Range(0.25f, 0.45f));
 				if (ship.Explosives < ship.MaxExplosives * 0.25) ship.Explosives += Mathf.RoundToInt((ship.MaxExplosives - ship.Explosives) * Random.Range(0.25f, 0.45f));
 				if (ship.Exotics < ship.MaxExotics * 0.25) ship.Exotics += Mathf.RoundToInt((ship.MaxExotics - ship.Exotics) * Random.Range(0.25f, 0.45f));
+				foreach (Door shipDoor in ship.Doors) {
+					if (FFU_BE_Defs.shipPrefabsDoorName.ContainsKey(ship.PrefabId))
+						shipDoor.displayName = FFU_BE_Defs.shipPrefabsDoorName[ship.PrefabId];
+					if (FFU_BE_Defs.shipPrefabsDoorHealth.ContainsKey(ship.PrefabId)) {
+						AccessTools.FieldRefAccess<Door, int>(shipDoor, "maxHealth") = FFU_BE_Defs.shipPrefabsDoorHealth[ship.PrefabId];
+						AccessTools.FieldRefAccess<Door, int>(shipDoor, "health") = FFU_BE_Defs.shipPrefabsDoorHealth[ship.PrefabId];
+					}
+				}
 				foreach (ShipModule shipModule in ship.Modules) {
 					if (shipModule.InstanceId > 0) {
 						float healthPercent = FFU_BE_Mod_Modules.GetRelativeHealth(shipModule);
@@ -1277,6 +1285,10 @@ namespace RST {
 						FFU_BE_Mod_Modules.ApplyModuleChanges(shipModule);
 						FFU_BE_Mod_Technology.ApplyInitialModuleTier(shipModule);
 						FFU_BE_Mod_Modules.ApplyRelativeNewHealth(shipModule, healthPercent);
+						if (shipModule.Storage != null && FFU_BE_Defs.shipPrefabsStorageSize.ContainsKey(ship.PrefabId)) {
+							FFU_BE_Defs.shipCurrentStorageCap = FFU_BE_Defs.shipPrefabsStorageSize[ship.PrefabId];
+							shipModule.Storage.slotCount = FFU_BE_Defs.shipPrefabsStorageSize[ship.PrefabId];
+						}
 					}
 				}
 				FFU_BE_Defs.updatedShips.Add(ship.InstanceId);
@@ -1285,9 +1297,10 @@ namespace RST {
 			if (ship != null && ship.Ownership.GetOwner() == Ownership.Owner.Enemy && !FFU_BE_Defs.updatedShips.Contains(ship.InstanceId)) {
 				int enemyTechLevel = FFU_BE_Mod_Technology.GetEnemyTechLevel();
 				int newDoorHealth = (int)(35 * FFU_BE_Defs.GetDifficultyModifier() * enemyTechLevel);
-				foreach (Door door in ship.Doors) {
-					AccessTools.FieldRefAccess<Door, int>(door, "maxHealth") = newDoorHealth;
-					AccessTools.FieldRefAccess<Door, int>(door, "health") = newDoorHealth;
+				foreach (Door shipDoor in ship.Doors) {
+					shipDoor.displayName = "Sturdy Door " + FFU_BE_Mod_Technology.GetTierCodeText(enemyTechLevel);
+					AccessTools.FieldRefAccess<Door, int>(shipDoor, "maxHealth") = newDoorHealth;
+					AccessTools.FieldRefAccess<Door, int>(shipDoor, "health") = newDoorHealth;
 				}
 				Debug.LogWarning("Enemy ship spawned: [" + ship.InstanceId + "] " + ship.displayName + "! Applying tier upgrades in " + 
 					FFU_BE_Mod_Technology.GetTierCodeText(Mathf.Clamp(enemyTechLevel - 1, 1, 10)) + " ~ " + 
@@ -1482,10 +1495,23 @@ namespace RST.PlaymakerAction {
 			}
 			Debug.LogWarning("Game loaded! Applying tiered module parameters...");
 			foreach (Ship spaceShip in PerFrameCache.CachedShips) {
-				if (spaceShip.Ownership.GetOwner() == Ownership.Owner.Me)
+				if (spaceShip.Ownership.GetOwner() == Ownership.Owner.Me) {
 					if (FFU_BE_Defs.prefabShipsList.Find(x => x.PrefabId == spaceShip.PrefabId) != null)
 						if (FFU_BE_Defs.prefabShipsList.Find(x => x.PrefabId == spaceShip.PrefabId).MaxHealthAdd > spaceShip.MaxHealthAdd)
 							spaceShip.MaxHealthAdd = FFU_BE_Defs.prefabShipsList.Find(x => x.PrefabId == spaceShip.PrefabId).MaxHealthAdd;
+					foreach (Door shipDoor in spaceShip.Doors) {
+						if (FFU_BE_Defs.shipPrefabsDoorName.ContainsKey(spaceShip.PrefabId)) shipDoor.displayName = FFU_BE_Defs.shipPrefabsDoorName[spaceShip.PrefabId];
+						if (FFU_BE_Defs.shipPrefabsDoorHealth.ContainsKey(spaceShip.PrefabId)) AccessTools.FieldRefAccess<Door, int>(shipDoor, "maxHealth") = FFU_BE_Defs.shipPrefabsDoorHealth[spaceShip.PrefabId];
+					}
+				}
+				if (spaceShip.Ownership.GetOwner() == Ownership.Owner.Enemy) {
+					int enemyTechLevel = FFU_BE_Mod_Technology.GetEnemyTechLevel();
+					int newDoorHealth = (int)(35 * FFU_BE_Defs.GetDifficultyModifier() * enemyTechLevel);
+					foreach (Door shipDoor in spaceShip.Doors) {
+						shipDoor.displayName = "Sturdy Door " + FFU_BE_Mod_Technology.GetTierCodeText(enemyTechLevel);
+						AccessTools.FieldRefAccess<Door, int>(shipDoor, "maxHealth") = newDoorHealth;
+					}
+				}
 			}
 			foreach (ShipModule shipModule in PerFrameCache.CachedModules) {
 				if (shipModule.InstanceId > 0) {

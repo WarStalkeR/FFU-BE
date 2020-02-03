@@ -377,7 +377,7 @@ namespace FFU_Bleeding_Edge {
 				case "storage container 3x4":
 				shipModule.displayName = "Modular Storage Compartment";
 				shipModule.description = "Universal storage unit that stores disassembled modules in highly compact form and requires quite some time to assemble them back. Also holds answer to the Ultimate Question of Life, the Universe, and Everything.";
-				shipModule.Storage.slotCount = 42;
+				shipModule.Storage.slotCount = 12;
 				shipModule.Storage.gridWorldSpacing = 0.0064f;
 				shipModule.type = ShipModule.Type.Storage;
 				shipModule_maxHealth = 1000;
