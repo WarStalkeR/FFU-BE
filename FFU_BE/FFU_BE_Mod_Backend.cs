@@ -283,6 +283,32 @@ namespace RST {
 			}
 		}
 	}
+	public class patch_SOSBeacon : SOSBeacon {
+		[MonoModIgnore] private float timer;
+		[MonoModIgnore] private float chosenWaitTime;
+		//Triggering SOS might empower Local Forces.
+		[MonoModReplace] private void Update() {
+			if (timer > chosenWaitTime) {
+				PlayerFleet fleetInstance = PlayerFleet.Instance;
+				Sector sectorInstance = Sector.Instance;
+				if (fleetInstance != null && sectorInstance != null) {
+					GameObject gameObject = GameObjectPool.TakeRandomPrefab<GameObject>(sectorInstance.sosPoiPrefabOrPool);
+					if (gameObject != null && fleetInstance != null) {
+						Vector2 a = fleetInstance.transform.position;
+						Vector2 a2 = (UnityEngine.Random.value < 0.5f) ? new Vector2(0f, (UnityEngine.Random.value < 0.5f) ? 1 : (-1)) : new Vector2((UnityEngine.Random.value < 0.5f) ? 1 : (-1), 0f);
+						Vector2 v = a + a2 * spawnDistanceFromPlayer;
+						UnityEngine.Object.Instantiate(gameObject, v, Quaternion.identity, fleetInstance.transform.parent);
+						PlayerData me = PlayerDatas.Me;
+						if (RstRandom.value <= FFU_BE_Defs.empowerLocalForcesChance)
+							FFU_BE_Defs.timesInterceptedByEnforcers[sectorInstance.number - 1]++;
+						if (me != null) me.sosUseCount++;
+					}
+				}
+				UnityEngine.Object.Destroy(base.gameObject);
+			}
+			if (RstShared.eventLockHolder == null) timer += Time.deltaTime;
+		}
+	}
 }
 
 namespace RST.UI {

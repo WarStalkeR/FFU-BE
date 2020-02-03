@@ -111,6 +111,7 @@ namespace FFU_Bleeding_Edge {
 		public static float[] scanResolution = new float[] { 5000f, 3000f, 1500f, 1000f, 500f };
 		public static int[] killedFleetsTrigger = new int[] { 3, 6, 10, 15, 21, 27, 34, 42, 50 };
 		public static int[] timesInterceptedByEnforcers = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		public static float empowerLocalForcesChance = 0.45f;
 		public static ResourceValueGroup doorRepairCost = new ResourceValueGroup { metals = 2f, synthetics = 4f };
 		//Configuration Variables
 		public static bool advancedWelcomePopup = false;
@@ -437,8 +438,9 @@ namespace FFU_Bleeding_Edge {
 					txt.text = "Remember that it is better to escape a battle rather than die fighting. Because you always can return and fight it out later." + "\n\n" +
 					"Warp drive recharge time is not accelerated, when you are in battle or within active detection range of hostile fleets." + "\n\n" +
 					"You can retreat from battles only by spinning up and activating the warp drive. Warp drives need fuel, power and operating crew to work." + "\n\n" +
-					"<color=lime>" + "However, some hostile fleets has ability to completely <color=orange>jam</color> or <color=orange>scramble</color> your warp drive, thus leaving you no choice, but to " +
-					"fight to the bitter end. This is especially true for <color=orange>Interdiction Fleets</color> sent by <color=orange>Local Forces</color> that aware of your presence in the sector." + "</color>";
+					"<color=lime>" + "However, some hostile fleets has ability to completely <color=orange>scramble</color> your warp drive, thus leaving you no " +
+					"choice, but to fight to the bitter end. This is especially true for <color=orange>Interdiction Fleets</color> sent by <color=orange>Local Forces" +
+					"</color> that aware of your presence in the sector." + "</color>";
 				if (txt.name == "doors" && txt.text == "Doors") txt.text = "Doors & Airlocks (FFU:BE)";
 				if (txt.name == "Text" && txt.text == "Doors") txt.text = "Doors & Airlocks (FFU:BE)";
 				if (txt.name == "DescriptionText" && txt.text.Contains("Many ships have doors which can be locked"))
@@ -516,6 +518,18 @@ namespace FFU_Bleeding_Edge {
 					"it from hostile ships." + "</color>";
 				if (txt.name == "refuel" && txt.text == "Refueling") txt.text = "Refueling Options";
 				if (txt.name == "Text" && txt.text == "Options for gaining fuel") txt.text = "Refueling Options";
+				if (txt.name == "Text" && txt.text.Contains("Use converter modules (if you have them) to convert"))
+					txt.text = "1. Use converter modules (if you have them) to convert organics or other resources into fuel.";
+				if (txt.name == "Text" && txt.text.Contains("Harvest fuel from gas giants or explore"))
+					txt.text = "2. Harvest fuel from gas giants or explore star system objects (such as shipwrecks or planets).";
+				if (txt.name == "Text" && txt.text.Contains("Use xenodata credits to buy fuel from"))
+					txt.text = "3. Use your credits to buy fuel from trade stations or resource traders.";
+				if (txt.name == "Text" && txt.text.Contains("Scrap modules or nukes that give fuel"))
+					txt.text = "4. Scrap modules or nukes that give fuel as scrap value.";
+				if (txt.name == "Text" && txt.text.Contains("Fight hostile fleets to gain fuel"))
+					txt.text = "5. Fight hostile fleets to gain fuel as loot.";
+				if (txt.name == "Text" && txt.text.Contains("Activate the SOS signal and hope"))
+					txt.text = "6. Activate the SOS signal and hope for a trade ship that sells fuel.";
 				if (txt.name == "metals" && txt.text == "Metals") txt.text = "Metals & Composites";
 				if (txt.name == "Text" && txt.text == "Metals") txt.text = "Metals & Composites";
 				if (txt.name == "DescriptionText" && txt.text.Contains("Metals are the most common resource"))
@@ -568,7 +582,59 @@ namespace FFU_Bleeding_Edge {
 					"and <color=orange>Cryodream Bays</color> will generate xenodata during travel, <color=orange>Quantum Processor</color> module " +
 					"can convert exotic matter into xenodata after deep analysis, albeit inefficiently. You also can acquire credits by selling resources " +
 					"or by looting remains of hostile ships after battles." + "</color>";
-				//Debug.LogWarning(txt.name + ": " + txt.text);
+				if (txt.name == "fate points" && txt.text == "Fate Points") txt.text = "Fate Points & Destiny";
+				if (txt.name == "Text" && txt.text == "Fate points") txt.text = "Fate Points & Destiny";
+				if (txt.name == "saveresources" && txt.text == "Saving resources") txt.text = "Additional Mod Info (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Saving resources") txt.text = "Additional Mod Information (FFU:BE)";
+				if (txt.name == "Text" && txt.text.Contains("To save organics, send unused crewmembers into crysoleep"))
+					txt.text = "<color=lime>" + "Research Progress: research progress defines tier of modules, when they are crafted. It increases " +
+					"only when you have active and crewed <color=orange>Laboratory</color> module(s) on your ship. Working crewmembers' <color=orange>" +
+					"Science Skill</color> level considerably affects speed of the research progress." + "</color>";
+				if (txt.name == "Text" && txt.text.Contains("Garden modules produce organics while travelling"))
+					txt.text = "<color=lime>" + "Crafting Proficiency: every time you craft module, even if result is inferior, crafting proficiency " +
+					"of that module increases. With increase in crafting proficiency of the module, there is higher chance for module to get <color=orange>" +
+					"positive</color> modifier and lower chance to get <color=orange>negative</color> modifier." + "</color>";
+				if (txt.name == "Text" && txt.text.Contains("Material convertors convert different resources"))
+					txt.text = "<color=lime>" + "Reverse Engineering: every time you scrap module, if it's blueprint isn't stored in the database, " +
+					"you will attempt to reverse engineer it (unless you already on it). You also can rotate reverse engineering query " +
+					"with <color=orange>PAGE UP</color> and <color=orange>PAGE DOWN</color> while mouse is hovering over research icon." + "</color>";
+				if (txt.name == "Text" && txt.text.Contains("During battles, try using more energy weapons"))
+					txt.text = "<color=lime>" + "Local Forces Strength: every time you defeat <color=orange>Interdiction Fleet</color> that came " +
+					"to intercept you, Military Strength of Local Forces slightly rises. Known strength levels: " + 
+					FFU_BE_Mod_Discovery.GetHostileFleetsLevel(0) + ", " + FFU_BE_Mod_Discovery.GetHostileFleetsLevel(1) + ", " +
+					FFU_BE_Mod_Discovery.GetHostileFleetsLevel(2) + ", " + FFU_BE_Mod_Discovery.GetHostileFleetsLevel(3) + ", " +
+					FFU_BE_Mod_Discovery.GetHostileFleetsLevel(4) + ", " + FFU_BE_Mod_Discovery.GetHostileFleetsLevel(5) + ", " +
+					FFU_BE_Mod_Discovery.GetHostileFleetsLevel(6) + ", " + FFU_BE_Mod_Discovery.GetHostileFleetsLevel(7) + ", " +
+					FFU_BE_Mod_Discovery.GetHostileFleetsLevel(8) + " and " + FFU_BE_Mod_Discovery.GetHostileFleetsLevel(9) + ".</color>";
+				if (txt.name == "shop" && txt.text == "Trade Stations") txt.text = "Trade Stations & Traders";
+				if (txt.name == "Text" && txt.text == "Trade stations") txt.text = "Trade Stations & Traders";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Trade stations are a good place to sell resources"))
+					txt.text = "Trade stations are a good place to sell resources for credits. Some stations also sell ship repair " +
+					"services, modules and crew. It is cheaper to repair your ship in stations than manually by crew." + "\n\n" +
+					"If you need extra credits to buy something, consider scrapping less useful modules and selling the gained resources. Modules " +
+					"cannot be sold whole and must be scrapped into raw resources before selling.";
+				if (txt.name == "SOS" && txt.text == "SOS Signal") txt.text = "SOS Signal Beacon (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "SOS signal") txt.text = "SOS Signal Beacon";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Not enough fuel for warping to next starsystem?"))
+					txt.text = "Not enough organics and life support system is about to give in? Not enough fuel for warping to next star " +
+					"system? Not enough metals to repair hull that is about to break apart? Not enough synthetics to fix leaking reactor? Last " +
+					"explosive ordnance were spent 5 light years ago?" + "\n\n" +
+					"Worry not! Just active SOS Signal Beacon and hope the one that will detect it is peaceful trader and not another " +
+					"bloodthirsty warp creature or band of angry slavers that haven't seen profit for last 42 years." + "\n\n" +
+					"<color=lime>" + "Be warned, every time you activate SOS Signal Beacon, there is a chance that <color=orange>Military " +
+					"Strength</color> of the <color=orange>Local Forces</color> might rise, as they might mistake your SOS Signal as trapping " +
+					"attempt, sign for invasion start or even hidden illegal contraband notification." + "</color>";
+				if (txt.name == "pirates" && txt.text == "Space Pirates") txt.text = "Space Pirates & Slavers";
+				if (txt.name == "Text" && txt.text == "Space pirates") txt.text = "Space Pirates & Slavers";
+				if (txt.name == "DescriptionText" && txt.text.Contains("Pirates are individuals who"))
+					txt.text = "Pirates are individuals who (even after all the technological progress) have still not learned the basics " +
+					"of respecting the safety of other sentients. And Slavers are individuals who have still not learned basics of living " +
+					"rights of other sentients. Neither of them deserves respect." + "\n\n" +
+					"However, pirates and slavers are still very useful part of society, especially as a source of information about other " +
+					"pirates, their hideouts and legitimate loot filled with resources, credits, rare exotic substances and even unknown " +
+					"artifacts. As result, hunting down Pirates and Slavers earns not only respect and bounty, but also various " +
+					"resources salvaged from wrecks of their ships.";
+				if (dumpObjectLists) Debug.LogWarning("[Game Text] " + txt.name + ": " + txt.text);
 			}
 		}
 		public static void LoadBleedingEdgeWelcome() {
@@ -580,18 +646,23 @@ namespace FFU_Bleeding_Edge {
 				if (txt.text.ToLower().Contains("yes, reset progress and unlock all ships")) txt.text = "TAKE THE " + (restartUnlocksEverything ? "RED" : "BLUE") + " PILL";
 				if (txt.text.ToLower().Contains("visit the steam forums if you have questions"))
 					txt.text = "If you see this message, it means that you've installed <color=orange>Fight For Universe: Bleeding Edge</color> " +
-					"mod for <color=#4fd376>Shortest Trip to Earth</color>, because original amount of <color=#cc0000>death and desperation</color> was not enough and you decided to go full IDDQD." + "\n\n" +
-					"Bleeding Edge Main Features:" + "\n" +
-					" - Completely New In-Game Mechanics" + "\n" +
-					" - Modules, Crew & Firearms Rebalance" + "\n" +
-					" - Module Reversing, Research & Tiers" + "\n" +
-					" - Local Forces Awareness & Response" + "\n" +
-					" - Reworked Boarding & Module Looting" + "\n" +
-					" - Mod Added Features Info (<color=orange>F1</color> hotkey)" + "\n" +
-					"\n" + "Special thanks goes to <color=#4fd376>Interactive Fate</color> for creating this art piece and helping me with modding it, thus allowing me to make this unforgiving mod for it.";
+					"mod for <color=#4fd376>Shortest Trip to Earth</color>, because original amount of <color=#cc0000>death and desperation</color> " +
+					"was not enough and you decided to go full IDDQD." + "\n\n" +
+						"Bleeding Edge Main Features:" + "\n" +
+						" - Completely New In-Game Mechanics" + "\n" +
+						" - Modules, Crew & Firearms Rebalance" + "\n" +
+						" - Module Reversing, Research & Tiers" + "\n" +
+						" - Local Forces Awareness & Response" + "\n" +
+						" - Reworked Boarding & Module Looting" + "\n" +
+						" - Mod Added Features Info (<color=orange>F1</color> hotkey)" + "\n" +
+					"\n" + "Special thanks goes to <color=#4fd376>Interactive Fate</color> for creating this art piece and helping me with modding it, " +
+					"thus allowing me to make this unforgiving mod for it.";
 				if (txt.text.ToLower().Contains("we offer you an opportunity to unlock"))
-					txt.text = "<size=14>\nCongratulations! You found a secret cow level. Nah, I'm kidding, there is no cow level. If you found this page, it means you probably already know about mod's configuration file existence." + "\n\n" +
-					"Anyway, you can <color=#3366ff>reset all data and just unlock all ships</color> or <color=#ff3333>reset all data and unlock all ships with all perks</color> depending on mod's configuration. To do it just follow (no, not a white rabbit) IDKFA and take the pill.\n</size>";
+					txt.text = "<size=14>\nCongratulations! You found a secret cow level. Nah, I'm kidding, there is no cow level. If you found this " +
+						"page, it means you probably already know about mod's configuration file existence." + "\n\n" +
+						"Anyway, you can <color=#3366ff>reset all data and just unlock all ships</color> or <color=#ff3333>reset all data and unlock " +
+						"all ships with all perks</color> depending on mod's configuration. To do it just follow (no, not a white rabbit) IDKFA and " +
+						"take the pill.\n</size>";
 			}
 		}
 		public static float GetDifficultyModifier() {

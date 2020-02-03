@@ -328,6 +328,21 @@ namespace FFU_Bleeding_Edge {
 				default: return "<color=#" + "ffffff" + "ff>" + "Unknown" + "</color>";
 			}
 		}
+		public static string GetHostileFleetsLevel(int fltLevel) {
+			switch (fltLevel) {
+				case 0: return "<color=#" + "00ff00" + "ff>" + "Useless" + "</color>";
+				case 1: return "<color=#" + "55ff00" + "ff>" + "Unskilled" + "</color>";
+				case 2: return "<color=#" + "aaff00" + "ff>" + "Mediocre" + "</color>";
+				case 3: return "<color=#" + "ffff00" + "ff>" + "Trained" + "</color>";
+				case 4: return "<color=#" + "ffd200" + "ff>" + "Experienced" + "</color>";
+				case 5: return "<color=#" + "ffa800" + "ff>" + "Proficient" + "</color>";
+				case 6: return "<color=#" + "ff7e00" + "ff>" + "Veterans" + "</color>";
+				case 7: return "<color=#" + "ff5400" + "ff>" + "Professionals" + "</color>";
+				case 8: return "<color=#" + "ff2a00" + "ff>" + "Elites" + "</color>";
+				case 9: return "<color=#" + "ff0000" + "ff>" + "Special Ops" + "</color>";
+				default: return "<color=#" + "ffffff" + "ff>" + "Unknown" + "</color>";
+			}
+		}
 		public static string GetAwarnessLevelText() {
 			switch (FFU_BE_Defs.discoveryScanLevel) {
 				case 0: return "Unnoticed";
