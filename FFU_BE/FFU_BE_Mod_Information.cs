@@ -12,6 +12,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using FFU_Bleeding_Edge;
+using System.Text;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Information {
@@ -894,14 +895,99 @@ namespace RST.UI {
 	public class patch_ModuleDataSubpanel : ModuleDataSubpanel {
 		private extern void orig_Update();
 		[MonoModIgnore] private ShipModule m;
+		[MonoModIgnore] private float prevOrganics;
+		[MonoModIgnore] private float prevFuel;
+		[MonoModIgnore] private float prevMetals;
+		[MonoModIgnore] private float prevSynth;
+		[MonoModIgnore] private float prevExpl;
+		[MonoModIgnore] private float prevExotics;
+		[MonoModIgnore] private float prevWeaponDmgArea;
+		[MonoModIgnore] private float prevPowerCapacity;
 		[MonoModIgnore] private void SafeUpdateField(Text text, string value) { }
+		[MonoModIgnore] private void DoResourceConsPerDist(ResourceValueGroup rc, ShipModule m) { }
+		[MonoModIgnore] private static void DoRequirementColor(Text text, HoverableUI h, bool hasEnough) { }
+		[MonoModIgnore] private static void AppendDmgLine(StringBuilder sb, string localizedLine, int dmg, int cnt) { }
 		[MonoModIgnore] private void SafeUpdateField(Text text, float value, ref float prevValue, string format = "{0}") { }
+		[MonoModIgnore] private void UpdateGroupedDmg(bool showShieldIcon, bool showShipIcon, bool showModuleIcon, string value) { }
 		//Selected Module Full Information Window
 		private void Update() {
 			orig_Update();
 			exoticsProdText.transform.parent.parent.gameObject.SetActive(false);
 			if (m != null) health.horizontalOverflow = HorizontalWrapMode.Overflow;
 			if (m != null && m.Ownership.GetOwner() == Ownership.Owner.Me && iconHover.Hovered) iconHover.hoverText = FFU_BE_Mod_Information.GetSelectedModuleExactData(m);
+		}
+		//Updated Weapon Information
+		[MonoModReplace] private void DoWeapon() {
+			WeaponModule weapon = m.Weapon;
+			ShootAtDamageDealer.Damage damage = weapon.ProjectileOrBeamPrefab.GetDamage(weapon);
+			string text = Localization.TT("per");
+			GunnerySkillEffects gunnerySkillEffects = WorldRules.Instance.gunnerySkillEffects;
+			if (weapon.accuracy != 0) {
+				weaponAccuracy.SetActiveIfNeeded();
+				int num = gunnerySkillEffects.EffectiveAccuracy(weapon);
+				weaponAccuracy.effects.text = weapon.accuracy + ((weapon.accuracy != num) ? $" <color=lime>({num})</color>" : "");
+				weaponAccuracy.skillBonus.text = "+" + gunnerySkillEffects.skillPointAccuracyBonus.ToString("0.0") + " " + text;
+				weaponAccuracy.Hoverable.hoverText = string.Format(weaponAccuracy.HoverableTextTemplate, num, gunnerySkillEffects.EffectiveAngle(weapon), gunnerySkillEffects.skillPointAccuracyBonus.ToString("0.0"));
+			}
+			if (weapon.reloadInterval != 0f) {
+				weaponReloadTime.SetActiveIfNeeded();
+				float num2 = gunnerySkillEffects.EffectiveReloadTime(weapon);
+				weaponReloadTime.effects.text = string.Format("{0:0.0}{1}", weapon.reloadInterval, Localization.TT("s")) + ((weapon.reloadInterval != num2) ? string.Format(" <color=lime>({0:0.0}{1})</color>", num2, Localization.TT("s")) : "");
+				weaponReloadTime.skillBonus.text = $"-{((!weapon.reloadIntervalTakesNoBonuses) ? gunnerySkillEffects.skillPointBonusPercent : 0)}% {text}";
+				weaponReloadTime.Hoverable.hoverText = string.Format(weaponReloadTime.HoverableTextTemplate, gunnerySkillEffects.skillPointBonusPercent);
+			}
+			weaponTracksTargetGo.SetActive(false);
+			_ = weapon.tracksTarget;
+			weaponIgnoresShieldGo.SetActive(damage.ignoresShield);
+			weaponNeverDeflectsGo.SetActive(damage.neverDeflect);
+			if (damage.shieldDmg != 0 && damage.shieldDmg == damage.shipDmg && damage.shipDmg == damage.moduleDmg) {
+				if (!groupedDmg.activeSelf) groupedDmg.SetActive(true);
+				UpdateGroupedDmg(true, true, true, $"{weapon.magazineSize}x{damage.shieldDmg}");
+			} else if (damage.shieldDmg != 0 && damage.shieldDmg == damage.shipDmg) {
+				UpdateGroupedDmg(true, true, false, $"{weapon.magazineSize}x{damage.shieldDmg}");
+				if (damage.moduleDmg != 0) SafeUpdateField(dmgToModulesText, $"{weapon.magazineSize}x{damage.moduleDmg}");
+			} else if (damage.shieldDmg != 0 && damage.shieldDmg == damage.moduleDmg) {
+				UpdateGroupedDmg(true, false, true, $"{weapon.magazineSize}x{damage.shieldDmg}");
+				if (damage.shipDmg != 0) SafeUpdateField(dmgToShipsText, $"{weapon.magazineSize}x{damage.shipDmg}");
+			} else if (damage.shipDmg != 0 && damage.shipDmg == damage.moduleDmg) {
+				UpdateGroupedDmg(false, true, true, $"{weapon.magazineSize}x{damage.shipDmg}");
+				if (damage.shieldDmg != 0) SafeUpdateField(dmgToShieldsText, $"{weapon.magazineSize}x{damage.shieldDmg}");
+			} else {
+				if (damage.shipDmg != 0) SafeUpdateField(dmgToShipsText, $"{weapon.magazineSize}x{damage.shipDmg}");
+				if (damage.moduleDmg != 0) SafeUpdateField(dmgToModulesText, $"{weapon.magazineSize}x{damage.moduleDmg}");
+				if (damage.shieldDmg != 0) SafeUpdateField(dmgToShieldsText, $"{weapon.magazineSize}x{damage.shieldDmg}");
+			}
+			StringBuilder stringBuilder = RstShared.StringBuilder;
+			if (damage.shipDmg != 0) AppendDmgLine(stringBuilder, MonoBehaviourExtended.TT("Damage to armor"), damage.shipDmg, weapon.magazineSize);
+			if (damage.moduleDmg != 0) AppendDmgLine(stringBuilder, MonoBehaviourExtended.TT("Damage to modules"), damage.moduleDmg, weapon.magazineSize);
+			if (damage.shieldDmg != 0) AppendDmgLine(stringBuilder, MonoBehaviourExtended.TT("Damage to shields"), damage.shieldDmg, weapon.magazineSize);
+			groupedDmgTextHover.hoverText = ((stringBuilder.Length <= 0) ? "" : stringBuilder.ToString(0, stringBuilder.Length - 1));
+			SafeUpdateField(empOverloadText, (damage.moduleOverloadSeconds != 0) ? string.Format(Localization.TT("EMP {0}s"), damage.moduleOverloadSeconds) : null);
+			Ship ship = m.Ship;
+			ResourceValueGroup resourcesPerShot = weapon.resourcesPerShot;
+			SafeUpdateField(fuelPerShotText, resourcesPerShot.fuel, ref prevFuel);
+			DoRequirementColor(fuelPerShotText, fuelPerShot, ship == null || ship.Fuel >= resourcesPerShot.fuel);
+			SafeUpdateField(organicsPerShotText, resourcesPerShot.organics, ref prevOrganics);
+			DoRequirementColor(organicsPerShotText, organicsPerShot, ship == null || ship.Organics >= resourcesPerShot.organics);
+			SafeUpdateField(explosivesPerShotText, resourcesPerShot.explosives, ref prevExpl);
+			DoRequirementColor(explosivesPerShotText, explosivesPerShot, ship == null || ship.Explosives >= resourcesPerShot.explosives);
+			SafeUpdateField(exoticsPerShotText, resourcesPerShot.exotics, ref prevExotics);
+			DoRequirementColor(exoticsPerShotText, exoticsPerShot, ship == null || ship.Exotics >= resourcesPerShot.exotics);
+			SafeUpdateField(syntheticsPerShotText, resourcesPerShot.synthetics, ref prevSynth);
+			DoRequirementColor(syntheticsPerShotText, syntheticsPerShot, ship == null || ship.Synthetics >= resourcesPerShot.synthetics);
+			SafeUpdateField(metalsPerShotText, resourcesPerShot.metals, ref prevMetals);
+			DoRequirementColor(metalsPerShotText, metalsPerShot, ship == null || ship.Metals >= resourcesPerShot.metals);
+			SafeUpdateField(dmgAreaText, damage.damageAreaRadius, ref prevWeaponDmgArea, "{0:0.00}");
+			DoWeaponCrewDmg(weapon, damage.crewDmgLevel);
+			DoWeaponFireChance(damage.fireChanceLevel);
+		}
+		//Updated Reactor Information
+		[MonoModReplace] private void DoReactor() {
+			ReactorModule reactor = m.Reactor;
+			fireChanceHover.hoverText = "Additional power from overcharge and effective reactor overcharge time";
+			SafeUpdateField(reactorPowerProdText, reactor.powerCapacity, ref prevPowerCapacity);
+			SafeUpdateField(fireChanceText, reactor.overchargePowerCapacityAdd.ToString() + " (" + string.Format("{0:0.0}s", m.overchargeSeconds) + ")");
+			DoResourceConsPerDist(reactor.ConsumedPerDistance, m);
 		}
 		//Greenhouse Interface Fix
 		[MonoModReplace] private void DoGarden() {

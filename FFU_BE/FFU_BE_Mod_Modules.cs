@@ -561,7 +561,13 @@ namespace RST {
 	public class patch_ShipModule : ShipModule {
 		private extern void orig_Unpack();
 		[MonoModIgnore] private int maxHealth;
+		[MonoModIgnore] private Ship cachedShip;
+		[MonoModIgnore] private Ship cachedShip2;
+		[MonoModIgnore] private void EndOverload() { }
 		[MonoModIgnore] private void UnpackShared() { }
+		[MonoModIgnore] private void UpdateAppearance() { }
+		[MonoModIgnore] private GameObject isJammedInstance;
+		[MonoModIgnore] private SelfCombustible SelfCombustible;
 		[MonoModIgnore] public float UnpackTime { get; private set; }
 		[MonoModIgnore] public bool IsUnpacking { get; private set; }
 		[MonoModIgnore] public int MaxHealthLostCount { get; private set; }
@@ -661,6 +667,64 @@ namespace RST {
 			overchargeTimer.Restart(overchargeSeconds);
 			if (type == Type.Engine) if (Ship != null) UnityEngine.Object.Instantiate(VisualSettings.Instance.shipDodgeEffectPrefab, Ship.transform);
 			return true;
+		}
+		//Damaged Module Continues to Work
+		public bool IsWorking {
+			get {
+				if (!IsPacked && IsPowered && !IsOverloaded && !IsJammed && EnoughOps)
+					if (Health / (float)MaxHealth >= FFU_BE_Defs.moduleDamageThreshold)
+						return EnoughResources;
+				return false;
+			}
+		}
+		//Trigger Module Changes from Damage
+		[MonoModReplace] private void Update() {
+			UpdateRegistrationWithParent<Ship, ShipModule>(ref cachedShip);
+			UpdateRegistrationWithParent<Ship, IRepairable>(ref cachedShip2);
+			if (IsUnpacking) {
+				float speedMultiplier = PerFrameCache.IsGoodSituation ? WorldRules.Instance.moduleUnpackAndCraftTimeDividerIfGood : 1f;
+				if (unpackTimer.Update(speedMultiplier)) {
+					Unpack();
+					IsUnpacking = false;
+				}
+			}
+			if (OverchargePossible) {
+				if (IsOvercharged) {
+					if (!TurnedOnAndIsWorking) {
+						overchargeTimer.value = 0f;
+						overchargeCooldownTimer.Restart(WorldRules.Instance.moduleOverchargeCooldownSeconds);
+					}
+					if (overchargeTimer.Update(1f)) overchargeCooldownTimer.Restart(WorldRules.Instance.moduleOverchargeCooldownSeconds);
+				} else overchargeCooldownTimer.Update(1f);
+			}
+			if (!overloadTimer.ReachedZero && overloadTimer.Update(1f)) EndOverload();
+			if (IsPacked && IsOverloaded) EndOverload();
+			if (!RstTime.IsPaused && jammedPrefab != null) {
+				bool isJammed = IsJammed;
+				if (isJammed && isJammedInstance == null) isJammedInstance = UnityEngine.Object.Instantiate(jammedPrefab, base.transform.position, base.transform.rotation, base.transform.parent);
+				else if (!isJammed && isJammedInstance != null) UnityEngine.Object.Destroy(isJammedInstance);
+			}
+			SelfCombustible selfCombustible = SelfCombustible;
+			if (selfCombustible != null) {
+				bool isWorking = IsWorking;
+				if (selfCombustible.enabled != isWorking) selfCombustible.enabled = isWorking;
+			}
+			if (IsDead) {
+				GameObject gameObject = GameObjectPool.TakeRandomPrefab<GameObject>(Effects.explosionPool);
+				if (gameObject != null) Explosion.InstantiateExplosion(gameObject, base.transform, base.transform.parent);
+				StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, (Ownership.GetOwner() == Ownership.Owner.Enemy) ? 
+					string.Format(MonoBehaviourExtended.TT("Enemy module {0} destroyed"), DisplayNameLocalized) : 
+					string.Format(MonoBehaviourExtended.TT("{0} destroyed"), DisplayNameLocalized));
+				UnityEngine.Object.Destroy(base.gameObject);
+			}
+			Animator animator = Animator;
+			if (animator != null) animator.SetBool("operational", (type != Type.Warp) ? 
+				(TurnedOnAndIsWorking && (PrefabId != 1088715096 || !Weapon.inShootSequence || !Weapon.shotMade)) : 
+				((Health / (float)MaxHealth >= FFU_BE_Defs.moduleDamageThreshold) && EnoughOps && EnoughResources && !IsPacked));
+			UpdateAppearance();
+			bool flag = !PopupControls.PowerManagementMode;
+			if (OutlineHoverAndSelect.outlineDrawer.gameObject.activeSelf != flag)
+				OutlineHoverAndSelect.outlineDrawer.gameObject.SetActive(flag);
 		}
 	}
 }

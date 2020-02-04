@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "0.9.6.5";
+		public static string modVersion = "0.9.7.0 (WORK IN PROGRESS)";
 		//Internal Variables
 		public static bool firstRun = true;
 		public static bool firstInst = true;
@@ -33,6 +33,7 @@ namespace FFU_Bleeding_Edge {
 		public static float equipmentChangeDist = 2f;
 		public static float moduleRepairTime = 2f;
 		public static float shipHullRepairTime = 5f;
+		public static float moduleDamageThreshold = 0.25f;
 		public static float moduleRepairAcceleration = 25f;
 		public static float shipHullRepairAcceleration = 15f;
 		public static float permanentModuleDamageChance = 0.20f;
