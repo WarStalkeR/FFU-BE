@@ -726,5 +726,52 @@ namespace RST {
 			if (OutlineHoverAndSelect.outlineDrawer.gameObject.activeSelf != flag)
 				OutlineHoverAndSelect.outlineDrawer.gameObject.SetActive(flag);
 		}
+		//Updated Status Text for Damaged Module
+		public string GetStatusStringLocalized() {
+			StringBuilder stringBuilder = RstShared.StringBuilder2;
+			if (!(Ship == null)) {
+				if (IsOverloaded) stringBuilder.AppendFormat(MonoBehaviourExtended.TT("Overloaded for {0:0.0} seconds"), overloadTimer.value);
+				else if (IsJammed) stringBuilder.Append(MonoBehaviourExtended.TT("Jammed by enemy ship"));
+				else if (IsPacked) {
+					if (IsUnpacking) stringBuilder.AppendFormat(MonoBehaviourExtended.TT("Installed in {0:0.0} seconds"), unpackTimer.value);
+					else stringBuilder.Append(MonoBehaviourExtended.TT("In storage"));
+				} else if (!HasFullHealth) {
+					float repairTime = CalculateRepairTime();
+					if (repairTime >= 9999f) {
+						float healthPercent = Health / (float)MaxHealth;
+						if (healthPercent >= FFU_BE_Defs.moduleDamageThreshold) stringBuilder.Append("<color=red>").AppendFormat(MonoBehaviourExtended.TT("{0:0.0}% Damaged"), 1f - healthPercent).Append("</color>");
+						else stringBuilder.Append("<color=red>").Append(MonoBehaviourExtended.TT("Broken")).Append("</color>");
+					} else stringBuilder.Append("<color=red>").AppendFormat(MonoBehaviourExtended.TT("Repaired in {0:0.0} seconds"), repairTime).Append("</color>");
+				} else if (!turnedOn) stringBuilder.Append("<color=yellow>").Append(MonoBehaviourExtended.TT("Turned off")).Append("</color>");
+				else if (EnoughResources && EnoughPower && EnoughOps) {
+					float timerVal = Timer?.value ?? 0f;
+					float skillMult = SkillEffects.Get(GetRequiredCrewSkillType())?.EffectiveSkillMultiplier(this, true) ?? 1f;
+					if (type == Type.Weapon && Weapon.reloadIntervalTakesNoBonuses) skillMult = 1f;
+					float finalVal = timerVal * skillMult;
+					switch (type) {
+						case Type.ShieldGen: {
+							Shield shipShield = ShieldGen.ShipShield;
+							if (shipShield.ShieldPoints > 0 && shipShield.ShieldPoints >= shipShield.MaxShieldPoints) stringBuilder.Append("<color=lime>").Append(MonoBehaviourExtended.TT("Shield fully charged")).Append("</color>");
+							else if (shipShield.HasGenerators(true)) stringBuilder.Append("<color=yellow>").AppendFormat(MonoBehaviourExtended.TT("New shield point in {0:0.0} seconds"), finalVal).Append("</color>");
+							else stringBuilder.Append("<color=red>").Append(MonoBehaviourExtended.TT("Shield not functioning")).Append("</color>");
+							break;
+						}
+						default:
+						if (timerVal > 0f) stringBuilder.Append("<color=yellow>").AppendFormat(MonoBehaviourExtended.TT("Ready in {0:0.0} seconds"), finalVal).Append("</color>");
+						else stringBuilder.Append("<color=lime>").Append(MonoBehaviourExtended.TT("Ready/operational")).Append("</color>");
+						break;
+						case Type.Decoy:
+						break;
+					}
+				} else {
+					stringBuilder.Append("<color=red>").Append(MonoBehaviourExtended.TT("Lacks")).Append(": ");
+					if (!EnoughOps) stringBuilder.Append((type == Type.Medbay || type == Type.Dronebay) ? MonoBehaviourExtended.TT("patients") : MonoBehaviourExtended.TT("crew")).Append(' ');
+					if (!EnoughResources) stringBuilder.Append(MonoBehaviourExtended.TT("resources")).Append(' ');
+					if (!EnoughPower) stringBuilder.Append(MonoBehaviourExtended.TT("power"));
+					stringBuilder.Append("</color>");
+				}
+			}
+			return stringBuilder.ToString();
+		}
 	}
 }
