@@ -1029,9 +1029,9 @@ namespace RST {
 			float totalRadSecRng = 0f;
 			foreach (ShipModule item in modules) {
 				if (item != null && item.type == ShipModule.Type.Sensor && item.TurnedOnAndIsWorking) {
-					float radSecRng = item.Sensor.sectorRadarRange;
+					float radSecRng = item.Sensor.sectorRadarRange * FFU_BE_Defs.GetHealthPercent(item);
 					if (radSecRng != 0f) {
-						radSecRng += flagship.sectorRadarRangeAdd * FFU_BE_Defs.GetHealthPercent(item);
+						radSecRng += flagship.sectorRadarRangeAdd;
 						if (radSecRng > totalRadSecRng) totalRadSecRng = radSecRng;
 						perProviderCallback?.Invoke(item, radSecRng);
 					}

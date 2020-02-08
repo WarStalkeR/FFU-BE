@@ -992,19 +992,19 @@ namespace RST.UI {
 			PointDefenceModule pointDefence = m.PointDefence;
 			PointDefDamageDealer projectileOrBeamPrefab = pointDefence.projectileOrBeamPrefab;
 			ResourceValueGroup resourcesPerShot = pointDefence.resourcesPerShot;
-			string arg = Localization.TT("per");
+			string argPer = Localization.TT("per");
 			GunnerySkillEffects gunnerySkillEffects = WorldRules.Instance.gunnerySkillEffects;
 			pointDefReloadTime.SetActiveIfNeeded();
 			float pdEffReload = pointDefence.reloadInterval * gunnerySkillEffects.EffectiveSkillMultiplier(m, true);
 			if (m.HasFullHealth) pointDefReloadTime.effects.text = pointDefence.reloadInterval != pdEffReload ? $"<color=lime>{pdEffReload:0.00}{Localization.TT("s")}</color>": $"{pdEffReload:0.00}{Localization.TT("s")}";
 			else pointDefReloadTime.effects.text = $"<color=red>{pdEffReload / FFU_BE_Defs.GetHealthPercent(m):0.00}{Localization.TT("s")}</color>";
-			pointDefReloadTime.skillBonus.text = $"-{gunnerySkillEffects.skillPointBonusPercent}% {arg}";
+			pointDefReloadTime.skillBonus.text = $"-{gunnerySkillEffects.skillPointBonusPercent}% {argPer}";
 			pointDefReloadTime.Hoverable.hoverText = string.Format(pointDefReloadTime.HoverableTextTemplate, gunnerySkillEffects.skillPointBonusPercent);
 			pointDefCoverRadius.SetActiveIfNeeded();
 			float pdEffRadius = pointDefence.EffectiveCoverRadius;
 			if (m.HasFullHealth) pointDefCoverRadius.effects.text = pointDefence.coverRadius != pdEffRadius ? $"<color=lime>{pdEffRadius * 10f:0.0}{Localization.TT("m")}</color>" : $"{pdEffRadius * 10f:0.0}{Localization.TT("m")}";
 			else pointDefCoverRadius.effects.text = $"<color=red>{pdEffRadius * 10f * FFU_BE_Defs.GetHealthPercent(m):0.0}{Localization.TT("m")}</color>";
-			pointDefCoverRadius.skillBonus.text = $"+{gunnerySkillEffects.skillPointBonusPercent}% {arg}";
+			pointDefCoverRadius.skillBonus.text = $"+{gunnerySkillEffects.skillPointBonusPercent}% {argPer}";
 			pointDefCoverRadius.Hoverable.hoverText = string.Format(pointDefCoverRadius.HoverableTextTemplate, gunnerySkillEffects.skillPointBonusPercent);
 			SafeUpdateField(pointDefDmgToProjectilesText, projectileOrBeamPrefab.projectileDmg.ToString());
 			Ship ship = m.Ship;
@@ -1039,15 +1039,17 @@ namespace RST.UI {
 		//Updated Sensor Information
 		[MonoModReplace] private void DoSensor() {
 			SensorModule sensor = m.Sensor;
-			string arg = Localization.TT("ru");
-			string arg2 = Localization.TT("per");
-			SafeUpdateField(sensorSectorRadarRange, sensor.sectorRadarRange + arg);
+			string argRu = Localization.TT("ru");
+			string argPer = Localization.TT("per");
+			if (m.HasFullHealth) SafeUpdateField(sensorSectorRadarRange, sensor.sectorRadarRange + argRu);
+			else SafeUpdateField(sensorSectorRadarRange, $"<color=red>{sensor.sectorRadarRange * FFU_BE_Defs.GetHealthPercent(m):0}{argRu}</color>");
 			if (sensor.starmapRadarRange != 0) {
 				sensorStarmapRadarRange.SetActiveIfNeeded();
 				SensorSkillEffects sensorSkillEffects = WorldRules.Instance.sensorSkillEffects;
-				float num = sensor.starmapRadarRange * sensorSkillEffects.EffectiveSkillMultiplier(m, false);
-				sensorStarmapRadarRange.effects.text = sensor.starmapRadarRange + arg + ((sensor.starmapRadarRange != num) ? $" <color=lime>({num:0}{arg})</color>" : "");
-				sensorStarmapRadarRange.skillBonus.text = $"+{sensorSkillEffects.skillPointBonusPercent}% {arg2}";
+				float starRadRng = sensor.starmapRadarRange * sensorSkillEffects.EffectiveSkillMultiplier(m, false);
+				if (m.HasFullHealth) sensorStarmapRadarRange.effects.text = sensor.starmapRadarRange != starRadRng ? $" <color=lime>{starRadRng:0}{argRu}</color>" : $" {starRadRng:0}{argRu}";
+				else sensorStarmapRadarRange.effects.text = $" <color=red>{starRadRng * FFU_BE_Defs.GetHealthPercent(m):0}{argRu}</color>";
+				sensorStarmapRadarRange.skillBonus.text = $"+{sensorSkillEffects.skillPointBonusPercent}% {argPer}";
 				sensorStarmapRadarRange.Hoverable.hoverText = string.Format(sensorStarmapRadarRange.HoverableTextTemplate, sensorSkillEffects.skillPointBonusPercent);
 			}
 		}
