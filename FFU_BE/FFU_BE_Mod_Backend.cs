@@ -6,18 +6,14 @@
 #pragma warning disable CS0108
 #pragma warning disable CS0169
 #pragma warning disable CS0414
+#pragma warning disable CS0114
 
-using System;
-using System.Text.RegularExpressions;
 using UnityEngine;
+using System.Collections.Generic;
+using RST.PlaymakerAction;
+using FFU_Bleeding_Edge;
 using MonoMod;
 using RST.UI;
-using RST.PlaymakerAction;
-using HutongGames.PlayMaker;
-using System.Collections.Generic;
-using System.Linq;
-using FFU_Bleeding_Edge;
-using UnityEngine.UI;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Backend {
@@ -39,89 +35,18 @@ namespace FFU_Bleeding_Edge {
 }
 
 namespace RST {
-	public class patch_WeaponModule : WeaponModule {
-		[MonoModIgnore] private Ship ParentShip;
-		[MonoModIgnore] private float shotTimer;
-		[MonoModIgnore] private int shotsToMake;
-		[MonoModIgnore] private float preshootTimer;
-		[MonoModIgnore] public bool shotMade { get; private set; }
-		[MonoModIgnore] private bool DoLoadAndAim() { return false; }
-		[MonoModIgnore] public bool inShootSequence { get; private set; }
-		[MonoModIgnore] private int BarrelTipCount => Mathf.Max(barrelTips.Length, 1);
-		[MonoModIgnore] public float SecondsSinceLastTargetSwitch { get; private set; }
-		[MonoModIgnore] private ShootAtDamageDealer CreateDamageDealer(int barrelTipIndex, bool isFirstInVolley) { return null; }
-		//Min Aim Angle based on Weapon Type
-		[MonoModReplace] public float CalculateAimAngle(Vector2 targetPos) {
-			if (accuracy == 0) return 0f;
-			float num = 1f;
-			Collider2D[] colliders = RstShared.Colliders16;
-			int num2 = Physics2D.OverlapPointNonAlloc(targetPos, colliders, RstMask.Ship | RstMask.Module);
-			for (int i = 0; i < num2; i++) {
-				if (!(colliders[i] != null)) continue;
-				IHasEvasion hasEvasion = colliders[i].GetComponent(typeof(IHasEvasion)) as IHasEvasion;
-				if (hasEvasion as UnityEngine.Object != null) {
-					float num3 = 1f - 0.01f * hasEvasion.GetEvasion(null);
-					if (num3 < num) num = num3;
-				}
-			}
-			Ship ship = Module.Ship;
-			GunnerySkillEffects gunnerySkillEffects = WorldRules.Instance.gunnerySkillEffects;
-			float shipAccuracyBonus = ((ship != null) ? (1f + ship.GetAccuracy(null) * 0.01f) : 1f) * num;
-			if (Module.type == ShipModule.Type.Weapon_Nuke) return 0f;
-			else if (Module.displayName.ToLower().Contains("rail")) return Mathf.Clamp(gunnerySkillEffects.EffectiveAngle(this) * (1f / shipAccuracyBonus), 1f, 30f);
-			else return Mathf.Clamp(gunnerySkillEffects.EffectiveAngle(this) * (1f / shipAccuracyBonus), 4f, 90f);
-		}
-		//Use All Weapon Barrels Consequently
-		[MonoModReplace] private void Update() {
-			if (shotsToMake > 0) {
-				if (shotTimer <= 0f) {
-					int barrelTipIndex = (magazineSize - shotsToMake) % BarrelTipCount;
-					CreateDamageDealer(barrelTipIndex, shotsToMake == magazineSize);
-					shotsToMake--;
-					shotTimer = shotInterval;
-				}
-				shotTimer -= Time.deltaTime;
-			}
-			if (!tracksTarget && HasTarget && Physics2D.OverlapPointNonAlloc(TargetPos, RstShared.Colliders1, ShootAtDamageDealer.HitLayerMask) <= 0) UnsetTarget();
-			ShipModule module = Module;
-			if (module.autoOn && !HasTarget) {
-				Ship parentShip = ParentShip;
-				if (parentShip != null) {
-					GameObject gameObject = ChooseTarget(parentShip, ShipModule.Type.Weapon, false, true);
-					if (gameObject != null) SetTarget(gameObject.transform.position, gameObject);
-				}
-			}
-			if (!module.TurnedOnAndIsWorking) reloadTimer.Restart(reloadInterval);
-			else if (!inShootSequence) reloadTimer.Update(reloadIntervalTakesNoBonuses ? 1f : (1f / WorldRules.Instance.gunnerySkillEffects.EffectiveSkillMultiplier(module, true)));
-			AudioSource audioSource = module.AudioSource;
-			if (!inShootSequence) {
-				if (DoLoadAndAim()) {
-					inShootSequence = true;
-					shotMade = false;
-					preshootTimer = 0f;
-					reloadTimer.Restart(reloadInterval);
-					module.Animator?.SetTrigger("shoot");
-					if (preShootAudio != null) audioSource?.PlayOneShot(preShootAudio);
-				}
-			} else if (module.TurnedOnAndIsWorking) {
-				if (!shotMade) {
-					if (preshootTimer >= preShootDelay || (preShootAudio != null && audioSource != null && !audioSource.isPlaying)) {
-						ShootAt();
-						shotMade = true;
-					}
-					preshootTimer += Time.deltaTime;
-				} else if (!ShotInProgress) {
-					inShootSequence = false;
-					shotMade = false;
-				}
-			} else {
-				inShootSequence = false;
-				shotMade = false;
-			}
-			SecondsSinceLastTargetSwitch += Time.deltaTime;
-		}
-	}
 	public class patch_ShootAtDamageDealer : ShootAtDamageDealer {
+		//Force Misfire Damaged Weapon Module
+		[MonoModReplace] public virtual void SetInitialCondition(WeaponModule sourceWeapon, GameObject targetGo, Vector2 targetPos, float exactTargetDistance, Shield shieldToIgnore) {
+			if (exactTargetDistance <= 0f) exactTargetDistance = 100f;
+			effectDone = false;
+			this.sourceWeapon = sourceWeapon;
+			float num = (sourceWeapon != null) ? sourceWeapon.CalculateHitSectorDepth(exactTargetDistance) : 0f;
+			targetDistance = exactTargetDistance + RstRandom.Range(0f - num, num);
+			if (sourceWeapon != null && sourceWeapon.Module != null && !sourceWeapon.Module.HasFullHealth)
+				if (RstRandom.value <= FFU_BE_Defs.GetHealthEffect(sourceWeapon.Module, 0.5f)) targetDistance = 0f;
+			this.shieldToIgnore = shieldToIgnore;
+		}
 		//Overload Shield Gens/Caps from Damage
 		[MonoModReplace] protected void DoShieldHit(Shield shield) {
 			if (shield == null) return;
@@ -309,416 +234,258 @@ namespace RST {
 			if (RstShared.eventLockHolder == null) timer += Time.deltaTime;
 		}
 	}
-}
-
-namespace RST.UI {
-	public class patch_ResourceActionsPanel : ResourceActionsPanel {
-		[MonoModIgnore] private ShipModule resPackPrefab;
-		[MonoModIgnore] private PlayerResource GetPlayerResource(PlayerData pd) { return null; }
-		//Consume Full Cost on Resource Pack From Action Panel
-		[MonoModReplace] private bool ResPackCraftCheck(out int resToPack, out ResourceValueGroup cost, out ResourceValueGroup packValue, out bool hasUsableStorage, out bool hasEnoughForPayingCraftingCost, out bool craftNotDisabled) {
-			PlayerData me = PlayerDatas.Me;
-			PlayerResource playerResource = GetPlayerResource(me);
-			resToPack = 0;
-			packValue = default;
-			cost = WorldRules.Instance.resourcePackCraftCost;
-			switch (type) {
-				case ResourceType.Fuel:
-				resToPack = Mathf.Min(playerResource.Total, (int)(resPackPrefab.scrapGet.fuel - cost.fuel));
-				packValue.fuel = resToPack;
-				break;
-				case ResourceType.Organics:
-				resToPack = Mathf.Min(playerResource.Total, (int)(resPackPrefab.scrapGet.organics - cost.organics));
-				packValue.organics = resToPack;
-				break;
-				case ResourceType.Explosives:
-				resToPack = Mathf.Min(playerResource.Total, (int)(resPackPrefab.scrapGet.explosives - cost.explosives));
-				packValue.explosives = resToPack;
-				break;
-				case ResourceType.Exotics:
-				resToPack = Mathf.Min(playerResource.Total, (int)(resPackPrefab.scrapGet.exotics - cost.exotics));
-				packValue.exotics = resToPack;
-				break;
-				case ResourceType.Synthetics:
-				resToPack = Mathf.Min(playerResource.Total, (int)(resPackPrefab.scrapGet.synthetics - cost.synthetics));
-				packValue.synthetics = resToPack;
-				break;
-				case ResourceType.Metals:
-				resToPack = Mathf.Min(playerResource.Total, (int)(resPackPrefab.scrapGet.metals - cost.metals));
-				packValue.metals = resToPack;
-				break;
+	public class patch_CrewmemberAI : CrewmemberAI {
+		[MonoModIgnore] private Crewmember Crewmember => GetCachedComponent<Crewmember>(true);
+		[MonoModIgnore] private static bool RoleShouldRepair(Crewmember crew, out IRepairable rep) { rep = null; return false; }
+		[MonoModIgnore] private static ShipModule.Type GetModuleTypeToOperate(Crewmember.Role role) { return ShipModule.Type.None; }
+		//Makes Damaged Module Suitable for Operation
+		[MonoModReplace] private static bool ModuleIsSuitableForOp(ShipModule m, ShipModule.Type expectType, Ownership.Owner expectOwner, bool requireFullHealth) {
+			if (m != null && m.type == expectType) {
+				if ((requireFullHealth && m.HasFullHealth) || !requireFullHealth)
+					return !m.IsPacked && m.Ship != null && m.Ownership.GetOwner() == expectOwner && m.CurrentLocalOpsCount < m.operatorSpots.Length && m.EnoughResources;
+				else if (FFU_BE_Defs.DamagedButWorking(m))
+					return !m.IsPacked && m.Ship != null && m.Ownership.GetOwner() == expectOwner && m.CurrentLocalOpsCount < m.operatorSpots.Length && m.EnoughResources;
 			}
-			cost += packValue;
-			hasEnoughForPayingCraftingCost = cost.CheckHasEnough(me, 1f);
-			hasUsableStorage = !WorldRules.Impermanent.StorageDisabled && StoragePanel.HasRoom(Ownership.Owner.Me);
-			craftNotDisabled = !WorldRules.Impermanent.moduleCraftDisabled;
-			return hasUsableStorage & hasEnoughForPayingCraftingCost & craftNotDisabled;
+			return false;
 		}
-	}
-	public class patch_PlayerPanel : PlayerPanel {
-		private extern void orig_Update();
-		//Spam Reduction Timers & Modified Interface
-		private void Update() {
-			FFU_BE_Mod_Backend.timePassedOrganics += Time.unscaledDeltaTime;
-			FFU_BE_Mod_Backend.timePassedFuel += Time.unscaledDeltaTime;
-			FFU_BE_Mod_Backend.timePassedMetals += Time.unscaledDeltaTime;
-			FFU_BE_Mod_Backend.timePassedSynthetics += Time.unscaledDeltaTime;
-			FFU_BE_Mod_Backend.timePassedExplosives += Time.unscaledDeltaTime;
-			FFU_BE_Mod_Backend.timePassedExotics += Time.unscaledDeltaTime;
-			FFU_BE_Mod_Backend.timePassedCredits += Time.unscaledDeltaTime;
-			if (FFU_BE_Mod_Backend.timePassedOrganics > 10000f) FFU_BE_Mod_Backend.timePassedOrganics = 50f;
-			if (FFU_BE_Mod_Backend.timePassedFuel > 10000f) FFU_BE_Mod_Backend.timePassedFuel = 50f;
-			if (FFU_BE_Mod_Backend.timePassedMetals > 10000f) FFU_BE_Mod_Backend.timePassedMetals = 50f;
-			if (FFU_BE_Mod_Backend.timePassedSynthetics > 10000f) FFU_BE_Mod_Backend.timePassedSynthetics = 50f;
-			if (FFU_BE_Mod_Backend.timePassedExplosives > 10000f) FFU_BE_Mod_Backend.timePassedExplosives = 50f;
-			if (FFU_BE_Mod_Backend.timePassedExotics > 10000f) FFU_BE_Mod_Backend.timePassedExotics = 50f;
-			if (FFU_BE_Mod_Backend.timePassedCredits > 10000f) FFU_BE_Mod_Backend.timePassedCredits = 50f;
-			orig_Update();
-			researchCreditsBonus.text = FFU_BE_Mod_Technology.GetCraftChanceText().Replace("MK-", string.Empty).Replace(": ", string.Empty).Replace("I", string.Empty).Replace("V", string.Empty).Replace("X", string.Empty);
-			for (int i = 0; i < researchCreditsBonus.transform.childCount; i++) researchCreditsBonus.transform.GetChild(i).gameObject.SetActive(false);
-		}
-		//Update Research Pop-Up to Show Modified Data
-		[MonoModReplace] private static string BuildResearchCreditsBonusHover(int researchCreditsBonus) {
-			if (FFU_BE_Defs.unresearchedModuleIDs.ToList().Count > 2 && Input.GetKeyDown(KeyCode.PageUp) && !Input.GetKeyDown(KeyCode.PageDown)) FFU_BE_Mod_Technology.RotateResearchListForward();
-			if (FFU_BE_Defs.unresearchedModuleIDs.ToList().Count > 2 && !Input.GetKeyDown(KeyCode.PageUp) && Input.GetKeyDown(KeyCode.PageDown)) FFU_BE_Mod_Technology.RotateResearchListBackward();
-			string currentEnergyEmission = "<b>Flagship Energy Emission</b>: " + string.Format("{0:0.#}", FFU_BE_Defs.energyEmission) + "m³" + "\n";
-			string hostileAwarenessLevel = "<b>Local Forces Awareness Level</b>: " + FFU_BE_Mod_Discovery.GetHostileAwarnessLevel() + (FFU_BE_Defs.allStatProps ? " (" + string.Format("{0:0.##}", FFU_BE_Defs.distanceTraveledInPeace / FFU_BE_Mod_Discovery.GetCurrentScanFrequency() * 100f) + "%)" : "") + "\n";
-			string hostileEnforcersStrength = "<b>Local Forces Military Strength</b>: " + FFU_BE_Mod_Discovery.GetHostileFleetsLevel() + (FFU_BE_Defs.allStatProps ? " (" + string.Format("{0:0.##}", FFU_BE_Mod_Discovery.GetKilledFleetsCount() / FFU_BE_Mod_Discovery.GetTopFleetsTrigger() * 100f) + "%)" : "") + "\n";
-			string tierResearchProgress = "<b>Research Progress</b>: " + FFU_BE_Mod_Technology.GetCraftChanceText() + (FFU_BE_Defs.allStatProps ? " (" + Mathf.RoundToInt(FFU_BE_Defs.researchProgress) + ")" : "") + "\n";
-			string reverseEngineeringProgress = FFU_BE_Defs.unresearchedModuleIDs.ToList().Count == 0 ? "<b>Reverse Engineering</b>: (No Active Project)" : "<b>Reverse Engineering</b>: " +
-				FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == FFU_BE_Defs.unresearchedModuleIDs.ToList().First()).displayName + " " +
-				string.Format("{0:0}", FFU_BE_Defs.moduleResearchProgress / FFU_BE_Defs.moduleResearchGoal * 100f) + "%" + (FFU_BE_Defs.allStatProps ? " (" +
-				string.Format("{0:0}", FFU_BE_Defs.moduleResearchProgress) + "/" + string.Format("{0:0}", FFU_BE_Defs.moduleResearchGoal) + ")" : "");
-			string reverseEngineeringQueue = "";
-			bool postfixShown = false;
-			int totalQueueEntries = 0;
-			int totalQueueEntriesMax = (int)((Screen.height - 500) / 35f);
-			if (FFU_BE_Defs.unresearchedModuleIDs.ToList().Count > 1) {
-				reverseEngineeringQueue = "\n" + "<b>Reverse Engineering Queue</b>:";
-				foreach (int unresearchedModuleID in FFU_BE_Defs.unresearchedModuleIDs.ToList()) {
-					if (unresearchedModuleID != FFU_BE_Defs.unresearchedModuleIDs.ToList().First() && totalQueueEntries < totalQueueEntriesMax)
-						reverseEngineeringQueue += "\n" + " > " + FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == unresearchedModuleID).displayName;
-					else if (!postfixShown && totalQueueEntries > (totalQueueEntriesMax - 1)) {
-						reverseEngineeringQueue += "\n" + "<b>...and " + (FFU_BE_Defs.unresearchedModuleIDs.ToList().Count - totalQueueEntriesMax) +
-							" module" + (FFU_BE_Defs.unresearchedModuleIDs.ToList().Count - totalQueueEntriesMax > 1 ? "s" : "") + " more in research queue...</b>";
-						postfixShown = true;
+		//Crew is Allowed to Operate Damaged Module
+		[MonoModReplace] private bool CheckOperate() {
+			Crewmember crewmember = Crewmember;
+			ShipModule.Type moduleTypeToOperate = GetModuleTypeToOperate(crewmember.role);
+			if (moduleTypeToOperate != 0) {
+				ShipModule cModule = crewmember.TargetModule;
+				if ((crewmember.CurrentCmd != Crewmember.Command.Operate && crewmember.CurrentCmd != Crewmember.Command.Repair) || cModule == null || cModule.type != moduleTypeToOperate) {
+					ShipModule shipModule = null;
+					Ownership.Owner crewOwner = crewmember.Ownership.GetOwner();
+					if (crewmember.previousTargetGo != null && crewmember.previousTargetGo.CompareTag("Module")) {
+						ShipModule component = crewmember.previousTargetGo.GetComponent<ShipModule>();
+						if (ModuleIsSuitableForOp(component, moduleTypeToOperate, crewOwner, true)) shipModule = component;
 					}
-					totalQueueEntries++;
+					if (shipModule == null) {
+						List<ShipModule> suitableModuleList = new List<ShipModule>();
+						foreach (ShipModule sModule in PerFrameCache.CachedModules) if (ModuleIsSuitableForOp(sModule, moduleTypeToOperate, crewOwner, false)) suitableModuleList.Add(sModule);
+						shipModule = suitableModuleList.RandomElement();
+					}
+					if (shipModule != null) {
+						if (shipModule.HasFullHealth) crewmember.Operate(shipModule, false, false);
+						else if (crewmember.role == Crewmember.Role.RepairOfficer && shipModule.IsCrewRepairable && shipModule.IsRepairableNow) crewmember.Repair(shipModule, false, false);
+						else if (FFU_BE_Defs.DamagedButWorking(shipModule)) crewmember.Operate(shipModule, false, false);
+						else if (shipModule.IsCrewRepairable && shipModule.IsRepairableNow) crewmember.Repair(shipModule, false, false);
+						else crewmember.Operate(shipModule, false, false);
+					}
 				}
 			}
-			return "<color=lime>" + currentEnergyEmission + hostileAwarenessLevel + hostileEnforcersStrength + tierResearchProgress + reverseEngineeringProgress + reverseEngineeringQueue + "</color>";
+			ShipModule tModule = crewmember.TargetModule;
+			if (tModule != null && tModule.type == moduleTypeToOperate) {
+				if (crewmember.CurrentCmd != Crewmember.Command.Operate || !FFU_BE_Defs.DamagedButWorking(tModule)) {
+					if (crewmember.CurrentCmd == Crewmember.Command.Repair) return tModule.NeedsRepairs;
+					return false;
+				}
+				return true;
+			}
+			return false;
 		}
-		//Limit Interface Size and Reduce Text Spam
-		private class ResourceBlock {
-			[MonoModIgnore] public int resouceChangeSize;
-			[MonoModIgnore] public float animDuration;
-			[MonoModIgnore] public Color textChangingColor;
-			[MonoModIgnore] public AnimationCurve changingAnim;
-			[MonoModIgnore] public float risingTextSpeed;
-			[MonoModIgnore] public Color barColor;
-			[MonoModIgnore] private int lastValue;
-			[MonoModIgnore] private int lastMaxValue;
-			[MonoModIgnore] private float timer;
-			[MonoModIgnore] public int LastValue;
-			[MonoModIgnore] public int LastMaxValue;
-			[MonoModIgnore] public ResourceBlock(PlayerPanel ui, Color? barColor = null) { }
-			[MonoModIgnore] public bool Show(PlayerResource r, Text text, GameObject changeShowPos) { return false; }
-			[MonoModIgnore] public bool Show(PlayerResource r, Text text, GameObject changeShowPos, int ifCurValueLowerThanThisThenMakeItRed) { return false; }
-			[MonoModIgnore] public bool Show(int curValue, Text text, GameObject changeShowPos, List<string> changeReasons, string name) { return false; }
-			[MonoModIgnore] public bool Show(int curValue, int maxValue, Text text, GameObject changeShowPos, Image bar, LayoutElement maxBar, Texture2D specter, string name) { return false; }
-			[MonoModIgnore] public bool Show(int curValue, int maxValue, Text text, GameObject changeShowPos, string name) { return false; }
-			[MonoModReplace] private bool PrivateShow(int curValue, int maxValue, int ifCurValueLowerThanThisThenMakeItRed, Text text, GameObject changeShowPos, List<string> reasons, Image bar, LayoutElement maxBar, Texture2D specter, string name) {
-				bool result = false;
-				if (text != null) {
-					if (lastValue != curValue || lastMaxValue != maxValue) {
-						FireRaisingText(changeShowPos, curValue, lastValue, reasons, (!string.IsNullOrEmpty(name)) ? MonoBehaviourExtended.TT(name).ToLowerInvariant() : null);
-						string valueText = (curValue < ifCurValueLowerThanThisThenMakeItRed) ? ("<color=red>" + curValue + "</color>") : curValue.ToString();
-						text.text = (maxValue != int.MaxValue) ? (valueText + " / " + maxValue) : valueText;
-						if (bar != null) {
-							int shortCurValue = curValue / FFU_BE_Defs.pointsPerBarItem;
-							float barWidthLimit = Screen.width - 750 - (Screen.width - 750) % bar.sprite.rect.width;
-							bar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, shortCurValue * bar.sprite.rect.width > barWidthLimit ? barWidthLimit : (shortCurValue * bar.sprite.rect.width));
+		//Operators will Repair Broken, Full Repair to Repairers
+		[MonoModReplace] private bool CheckRepair(bool seeAllShip) {
+			Crewmember crewmember = Crewmember;
+			if (crewmember.CurrentCmd != Crewmember.Command.Repair) {
+				IRepairable targetModule;
+				if (!seeAllShip) {
+					if (crewmember.CurrentCmd == Crewmember.Command.Operate) {
+						targetModule = crewmember.TargetModule;
+						if (targetModule as Object != null && targetModule.NeedsRepairs && targetModule.IsCrewRepairable && targetModule.IsRepairableNow) {
+							if (targetModule as ShipModule != null)
+								if (FFU_BE_Defs.DamagedButWorking(targetModule as ShipModule)) return true;
+							if (crewmember.CanAcceptCommand(Crewmember.Command.Repair, targetModule.gameObject))
+								crewmember.Repair(targetModule, false, false);
+							else crewmember.Idle(true);
 						}
-						if (maxBar != null) {
-							int shortMaxValue = maxValue / FFU_BE_Defs.pointsPerBarItem;
-							float maxBarWidthLimit = Screen.width - 750 - (Screen.width - 750) % bar.sprite.rect.width;
-							maxBar.preferredWidth = shortMaxValue * bar.sprite.rect.width > maxBarWidthLimit ? maxBarWidthLimit : (shortMaxValue * bar.sprite.rect.width);
-						}
-						timer = 0f;
-						lastValue = curValue;
-						lastMaxValue = maxValue;
-						result = true;
 					}
-					Color uiColor = VisualSettings.Instance.uiColor;
-					text.color = Color.Lerp(uiColor, textChangingColor, changingAnim.Evaluate(timer / animDuration));
-					if (bar != null && specter != null) {
-						Color pixelBilinear = specter.GetPixelBilinear(curValue / (float)maxValue, 0.5f);
-						bar.color = Color.Lerp(pixelBilinear, barColor, changingAnim.Evaluate(timer / animDuration));
-					}
-					timer += Time.unscaledDeltaTime;
+				} else if (RoleShouldRepair(crewmember, out targetModule) && crewmember.CanAcceptCommand(Crewmember.Command.Repair, targetModule.gameObject)) crewmember.Repair(targetModule, false, true);
+			}
+			return crewmember.CurrentCmd == Crewmember.Command.Repair;
+		}
+	}
+	public class patch_ModuleStatusVisualizer : ModuleStatusVisualizer {
+		[MonoModIgnore] private ShipModule Module => GetCachedComponentInParent<ShipModule>(true);
+		//Status Visualizer of Damaged Modules
+		[MonoModReplace] private void UpdateData() {
+			ShipModule module = Module;
+			if (module == null) return;
+			if (rootToRotate != null) rootToRotate.rotation = Quaternion.identity;
+			bool flag = false;
+			switch (visualizeIf) {
+				case VisualizeIf.AllConditionsTrue:
+				flag = (!broken || (broken && !FFU_BE_Defs.DamagedButWorking(module))) && 
+					(!notEnoughPower || (notEnoughPower && !module.EnoughPower)) && 
+					(!notEnoughAmmo || (notEnoughAmmo && !module.EnoughResources)) && 
+					(!notEnoughOperators || (notEnoughOperators && !module.EnoughOps)) && 
+					(!notAllOperatorsPresent || (notAllOperatorsPresent && !module.AllOpsPresent)) && 
+					(!notEnoughRepairers || (notEnoughRepairers && !module.EnoughRepairers)) && 
+					(!notPowered || (notPowered && !module.IsPowered));
+				break;
+				case VisualizeIf.AllConditionsFalse:
+				flag = (!broken || (broken && FFU_BE_Defs.DamagedButWorking(module))) && 
+					(!notEnoughPower || (notEnoughPower && module.EnoughPower)) && 
+					(!notEnoughAmmo || (notEnoughAmmo && module.EnoughResources)) && 
+					(!notEnoughOperators || (notEnoughOperators && module.EnoughOps)) && 
+					(!notAllOperatorsPresent || (notAllOperatorsPresent && module.AllOpsPresent)) && 
+					(!notEnoughRepairers || (notEnoughRepairers && module.EnoughRepairers)) && 
+					(!notPowered || (notPowered && module.IsPowered));
+				break;
+				case VisualizeIf.AnyConditionTrue:
+				flag = false;
+				if (broken && FFU_BE_Defs.DamagedButWorking(module)) flag = true;
+				if (notEnoughPower && module.EnoughPower) flag = true;
+				if (notEnoughAmmo && module.EnoughResources) flag = true;
+				if (notEnoughOperators && module.EnoughOps) flag = true;
+				if (notAllOperatorsPresent && module.AllOpsPresent) flag = true;
+				if (notEnoughRepairers && module.EnoughRepairers) flag = true;
+				if (notPowered && module.IsPowered) flag = true;
+				break;
+				case VisualizeIf.AnyConditionFalse:
+				flag = false;
+				if (broken && !FFU_BE_Defs.DamagedButWorking(module)) flag = true;
+				if (notEnoughPower && !module.EnoughPower) flag = true;
+				if (notEnoughAmmo && !module.EnoughResources) flag = true;
+				if (notEnoughOperators && !module.EnoughOps) flag = true;
+				if (notAllOperatorsPresent && !module.AllOpsPresent) flag = true;
+				if (notEnoughRepairers && !module.EnoughRepairers) flag = true;
+				if (notPowered && !module.IsPowered) flag = true;
+				break;
+				default:
+				throw new System.NotImplementedException(string.Concat("VisualizeIf=", visualizeIf, " not implemented"));
+			}
+			if (visulizingGO != null && visulizingGO.activeSelf != flag) visulizingGO.SetActive(flag);
+			if (visualizingBeh != null && visualizingBeh.enabled != flag) visualizingBeh.enabled = flag;
+		}
+	}
+	public class patch_ModuleStatusVisualizers : ModuleStatusVisualizers {
+		[MonoModIgnore] private Color loadingBarDefaultColor;
+		[MonoModIgnore] private ShipModule Module => GetCachedComponentInParent<ShipModule>(true);
+		//Status Visualizers of Damaged Modules
+		[MonoModReplace] private void UpdateData() {
+			ShipModule module = Module;
+			bool isAlive = module != null && !module.IsDead;
+			if (mainGroup.activeSelf != isAlive) {
+				mainGroup.SetActive(isAlive);
+			}
+			if (!isAlive) return;
+			base.transform.rotation = Quaternion.identity;
+			Collider2D collider2D = module.Collider2D;
+			BoxCollider2D boxCollider2D = collider2D as BoxCollider2D;
+			CircleCollider2D circleCollider2D = collider2D as CircleCollider2D;
+			Vector2 healthBarSize = (boxCollider2D != null) ? boxCollider2D.size : ((circleCollider2D != null) ? new Vector2(circleCollider2D.radius * 2f, circleCollider2D.radius * 2f) : new Vector2(2f, 2f));
+			bool isUnpacked = !module.IsPacked;
+			if (healthBar.gameObject.activeSelf != isUnpacked) healthBar.gameObject.SetActive(isUnpacked);
+			float healthPercent = 0f;
+			if (isUnpacked) {
+				Transform transform = healthBar.transform;
+				transform.localPosition = new Vector3(0f, (0f - healthBarSize.y) * 0.5f, 0f);
+				transform.localScale = healthBarSize;
+				healthPercent = Mathf.Clamp01(1f - (module.Health + module.OnePointRepairProgress) / module.MaxHealth);
+			}
+			if (healthBar.size.y != healthPercent) healthBar.size = new Vector2(1f, healthPercent);
+			Ownership.Owner owner = module.Ownership.GetOwner();
+			bool isJammed = module.IsJammed;
+			bool hasTimer = module.IsUnpacking || (!module.IsPacked && FFU_BE_Defs.DamagedButWorking(module) && (module.Timer != null || module.IsOverloaded));
+			GameObject gameObject = loadingBarRenderer.transform.parent.gameObject;
+			if (gameObject.activeSelf != hasTimer) gameObject.SetActive(hasTimer);
+			float barPercent = 0f;
+			if (hasTimer) {
+				barPercent = module.IsOverloaded ? (module.overloadTimer.value / module.overloadTimeWhenCaused) : 
+					(module.IsUnpacking ? (1f - module.UnpackTimeLeft / module.UnpackTime) : 
+					((module.Timer != null) ? (1f - module.Timer.value / module.TimerInterval) : 0f));
+				if (float.IsNaN(barPercent)) barPercent = 0f;
+				VisualSettings vsInstance = VisualSettings.Instance;
+				Color barColor = module.IsOverloaded ? vsInstance.overloadedBarColor : 
+					(module.IsUnpacking ? vsInstance.unpackBarColor : 
+					((barPercent >= 1f) ? vsInstance.loadingBarCompleteColor : 
+					((module.type == ShipModule.Type.ShieldGen) ? vsInstance.shieldLoadingBarColor : 
+					((module.type == ShipModule.Type.Weapon || module.type == ShipModule.Type.Weapon_Nuke || 
+					module.type == ShipModule.Type.PointDefence) ? vsInstance.weaponLoadingBarColor : loadingBarDefaultColor))));
+				if (loadingBarRenderer.color != barColor) loadingBarRenderer.color = barColor;
+				CountdownTimer timer = module.Timer;
+				float skillTimer = SkillEffects.Get(module.GetRequiredCrewSkillType())?.EffectiveSkillMultiplier(module, true) ?? 1f;
+				if (module.type == ShipModule.Type.Weapon && module.Weapon.reloadIntervalTakesNoBonuses) skillTimer = 1f;
+				loadingBarText.color = loadingBarRenderer.color;
+				loadingBarText.text = module.IsOverloaded ? ((int)module.overloadTimer.value).ToString() : (module.IsUnpacking ? ((int)module.UnpackTimeLeft).ToString() : ((timer == null || timer.value <= 0f || timer.value >= module.TimerInterval) ? "" : ((int)(module.Timer.value * skillTimer)).ToString()));
+				bool barHasText = !string.IsNullOrEmpty(loadingBarText.text);
+				if (loadingBarText.transform.parent.gameObject.activeSelf != barHasText) loadingBarText.transform.parent.gameObject.SetActive(barHasText);
+			} else loadingBarText.text = "";
+			if (loadingBarRenderer.size.x != barPercent) loadingBarRenderer.size = new Vector2(barPercent, loadingBarRenderer.size.y);
+			VisualizeByActivating(overloaded, !module.IsPacked && module.IsOverloaded);
+			VisualizeByActivating(disabledByEnemy, !module.IsPacked && isJammed);
+			VisualizeByActivating(unpacking, module.IsUnpacking);
+			VisualizeByActivating(darken, !module.IsPacked && (!module.HasFullHealth || !module.IsPowered), healthBarSize * 1.1f);
+			bool show = !module.IsPacked && !module.HasFullHealth;
+			VisualizeByActivating(broken, show, healthBarSize);
+			VisualizeByActivating(brokenUnscaled, show);
+			float repairTime = 0f;
+			bool isNotFullHealth = !module.IsPacked && !module.HasFullHealth;
+			if (isNotFullHealth) {
+				repairTime = module.CalculateRepairTime();
+				isNotFullHealth = !float.IsInfinity(repairTime);
+				beingRepaired.transform.localPosition = new Vector3(0.5f * healthBarSize.x, -0.5f * healthBarSize.y, 0f);
+			}
+			if (beingRepaired.activeSelf != isNotFullHealth) beingRepaired.SetActive(isNotFullHealth);
+			repairedInText.text = ((int)repairTime).ToString();
+			EnoughResourcesCheckResult enoughResources = module.EnoughResources;
+			VisualizeByActivating(noFuel, !module.IsPacked && !enoughResources.fuel);
+			VisualizeByActivating(noOrganics, !module.IsPacked && !enoughResources.organics);
+			VisualizeByActivating(noExplosives, !module.IsPacked && !enoughResources.explosives);
+			VisualizeByActivating(noExotics, !module.IsPacked && !enoughResources.exotics);
+			VisualizeByActivating(noSynthetics, !module.IsPacked && !enoughResources.synthetics);
+			VisualizeByActivating(noMetals, !module.IsPacked && !enoughResources.metals);
+			VisualizeByActivating(noCredits, !module.IsPacked && !enoughResources.credits);
+			VisualizeByActivating(noOperators, !module.IsPacked && module.turnedOn && module.HasFullHealth && !module.EnoughOps);
+			VisualizeByActivating(remoteOperators, !module.IsPacked && module.IsRemotelyOperated);
+			VisualizeByActivating(localOperators, !module.IsPacked && module.IsLocallyOperated);
+			VisualizeByActivating(autoOperator, !module.IsPacked && module.type != ShipModule.Type.Container && module.type != ShipModule.Type.Storage && module.IsAutoOperated);
+			VisualizeByActivating(noPower, !module.IsPacked && !module.EnoughPower);
+			VisualizeByActivating(turnedOff.gameObject, !module.IsPacked && module.UsesTurnedOn && !module.turnedOn);
+			VisualizeByActivating(powerOn, !module.IsPacked && module.EnoughPower && module.IsPowered);
+			ICanLeakResource getCanLeakResource = module.GetCanLeakResource;
+			VisualizeByActivating(leaking, !module.IsPacked && getCanLeakResource != null && getCanLeakResource.SomethingIsLeaking);
+			bool wasCriticallyHit = !module.IsPacked && module.MaxHealthLostCount > 0;
+			VisualizeByActivating(maxHealthLostCountGroup, wasCriticallyHit);
+			if (wasCriticallyHit) {
+				maxHealthLostCountWorld.size = new Vector2(module.MaxHealthLostCount * maxHealthLostCountWorld.size.y, maxHealthLostCountWorld.size.y);
+				maxHealthLostCountQs.size = new Vector2(module.MaxHealthLostCount * maxHealthLostCountQs.size.y, maxHealthLostCountQs.size.y);
+			}
+			if (module.type == ShipModule.Type.PointDefence) {
+				coverArea.radius = module.PointDefence.EffectiveCoverRadius;
+				bool isInSelection = SelectionManager.Selection.Contains(module.gameObject);
+				bool showPointDefRange = !module.IsPacked && isInSelection && module.IsWorking && owner == Ownership.Owner.Me;
+				if (coverArea.gameObject.activeSelf != showPointDefRange) coverArea.gameObject.SetActive(showPointDefRange);
+			}
+			if (module.type == ShipModule.Type.Weapon || module.type == ShipModule.Type.Weapon_Nuke) {
+				WeaponModule weapon = module.Weapon;
+				bool isTargeted = !module.IsPacked && weapon.HasTarget;
+				if (isTargeted && owner == Ownership.Owner.Me) {
+					Vector2 basePos = base.transform.position;
+					Vector2 targetPos = weapon.TargetPos;
+					Vector2 relRange = targetPos - basePos;
+					aimSector.directionDeg = Mathf.Atan2(relRange.y, relRange.x) * 57.29578f;
+					aimSector.angleDeg = weapon.CalculateAimAngle(targetPos);
+					float magnitude = relRange.magnitude;
+					float hitDepth = weapon.CalculateHitSectorDepth(magnitude);
+					aimSector.closerRadius = magnitude - hitDepth;
+					aimSector.fartherRadius = magnitude + hitDepth;
+					aimSector.hasFocus = SelectionManager.Selection.Contains(module.gameObject);
 				}
-				return result;
+				if (aimSector.gameObject.activeSelf != isTargeted) aimSector.gameObject.SetActive(isTargeted);
 			}
-			[MonoModReplace] private void FireRaisingText(GameObject posGO, int value, int lastValue, List<string> reasons, string name) {
-				ResourceValueGroup pData = PlayerDatas.Me != null ? PlayerDatas.Me.Resources : ResourceValueGroup.Empty;
-				switch (name) {
-					case "organics":
-					if (FFU_BE_Mod_Backend.timePassedOrganics >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_Mod_Backend.timePassedOrganics = 0f;
-						lastValue = FFU_BE_Mod_Backend.lastValueOrganics;
-						FFU_BE_Mod_Backend.lastValueOrganics = (int)pData.organics;
-					} else return;
-					break;
-					case "fuel":
-					if (FFU_BE_Mod_Backend.timePassedFuel >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_Mod_Backend.timePassedFuel = 0f;
-						lastValue = FFU_BE_Mod_Backend.lastValueFuel;
-						FFU_BE_Mod_Backend.lastValueFuel = (int)pData.fuel;
-					} else return;
-					break;
-					case "metals":
-					if (FFU_BE_Mod_Backend.timePassedMetals >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_Mod_Backend.timePassedMetals = 0f;
-						lastValue = FFU_BE_Mod_Backend.lastValueMetals;
-						FFU_BE_Mod_Backend.lastValueMetals = (int)pData.metals;
-					} else return;
-					break;
-					case "synthetics":
-					if (FFU_BE_Mod_Backend.timePassedSynthetics >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_Mod_Backend.timePassedSynthetics = 0f;
-						lastValue = FFU_BE_Mod_Backend.lastValueSynthetics;
-						FFU_BE_Mod_Backend.lastValueSynthetics = (int)pData.synthetics;
-					} else return;
-					break;
-					case "explosives":
-					if (FFU_BE_Mod_Backend.timePassedExplosives >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_Mod_Backend.timePassedExplosives = 0f;
-						lastValue = FFU_BE_Mod_Backend.lastValueExplosives;
-						FFU_BE_Mod_Backend.lastValueExplosives = (int)pData.explosives;
-					} else return;
-					break;
-					case "exotics":
-					if (FFU_BE_Mod_Backend.timePassedExotics >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_Mod_Backend.timePassedExotics = 0f;
-						lastValue = FFU_BE_Mod_Backend.lastValueExotics;
-						FFU_BE_Mod_Backend.lastValueExotics = (int)pData.exotics;
-					} else return;
-					break;
-					case "credits":
-					if (FFU_BE_Mod_Backend.timePassedCredits >= FFU_BE_Defs.timePassedCycle) {
-						FFU_BE_Mod_Backend.timePassedCredits = 0f;
-						lastValue = FFU_BE_Mod_Backend.lastValueCredits;
-						FFU_BE_Mod_Backend.lastValueCredits = (int)pData.credits;
-					} else return;
-					break;
-				}
-				if (lastValue >= 0) {
-					string text = "";
-					if (reasons != null) {
-						List<string> list = new List<string>();
-						foreach (string reason in reasons) {
-							string item = MonoBehaviourExtended.TT(reason);
-							if (!list.Contains(item)) list.Add(item);
-						}
-						text = string.Join(", ", list.ToArray());
-						reasons.Clear();
-					}
-					int num = value - lastValue;
-					if (num != 0 && !string.IsNullOrEmpty(text)) {
-						Vector2 dir = new Vector2(0f, 1f);
-						string text2 = " <size=" + resouceChangeSize + ">" + num.ToString("+0;-0") + ((!string.IsNullOrEmpty(name)) ? (" " + name) : "") + " (" + text + ")</size>";
-						RisingText risingText = RisingText.FireAndForget(posGO, Vector2.zero, text2, (num >= 0) ? Color.green : Color.red, RisingText.Space.UI, dir, true);
-						risingText.lifetime = animDuration;
-						risingText.speed = risingTextSpeed;
-					}
-				}
+			CrewPanel cpInstance = CrewPanel.Instance;
+			if (!(cpInstance != null)) return;
+			bool shouldShowPowerPreview = cpInstance.GetShouldShowPowerPreview(out bool on, module);
+			if (powerPresetPreview.activeSelf == shouldShowPowerPreview) return;
+			if (shouldShowPowerPreview) {
+				Color color2 = on ? new Color(0f, 1f, 0f) : new Color(1f, 0f, 0f);
+				SpriteRenderer[] componentsInChildren = powerPresetPreview.GetComponentsInChildren<SpriteRenderer>();
+				for (int i = 0; i < componentsInChildren.Length; i++) componentsInChildren[i].color = color2;
 			}
-		}
-	}
-	public class patch_ModuleActionsPanel : ModuleActionsPanel {
-		private extern void orig_StoreModule();
-		private extern void orig_ModuleOvercharge();
-		private extern void orig_PowerToggleChanged(bool newValue);
-		//Recalculate Ship's Signature on Storing Module
-		private void StoreModule() {
-			orig_StoreModule();
-			FFU_BE_Defs.RecalculateEnergyEmission();
-		}
-		//Recalculate Ship's Signature on Overcharging Module
-		private void ModuleOvercharge() {
-			orig_ModuleOvercharge();
-			FFU_BE_Defs.RecalculateEnergyEmission();
-		}
-		//Recalculate Ship's Signature on Powering Module
-		private void PowerToggleChanged(bool newValue) {
-			orig_PowerToggleChanged(newValue);
-			FFU_BE_Defs.RecalculateEnergyEmission();
-		}
-	}
-	public class patch_StoragePanel : StoragePanel {
-		[MonoModIgnore] private HoverableUI upgradeButtonHover;
-		//Modified Max Storage Capacity Upgrade
-		[MonoModReplace] public void UpdateUpgradeButton(Ownership.Owner resourcesGoTo) {
-			PlayerData playerData = PlayerDatas.Get(resourcesGoTo);
-			ResourceValueGroup r = (playerData != null) ? playerData.Resources : ResourceValueGroup.Empty;
-			WorldRules instance = WorldRules.Instance;
-			StorageModule storageModule = GetStorageModule(resourcesGoTo, false);
-			bool canIncrease = storageModule != null && storageModule.slotCount < FFU_BE_Defs.maxStorageCapacity;
-			bool hasResources = instance.storageUpgradeCost.CheckHasEnough(r);
-			if (!canIncrease) upgradeButtonHover.hoverText = MonoBehaviourExtended.TT("Maximum slot count reached");
-			else if (!hasResources) upgradeButtonHover.hoverText = MonoBehaviourExtended.TT("Not enough resources for upgrading");
-			else upgradeButtonHover.hoverText = "";
-			upgradeButton.interactable = storageModule != null && canIncrease && hasResources;
-		}
-		//Modified Max Storage Capacity Upgrade
-		[MonoModReplace] public static void Upgrade() {
-			PlayerData me = PlayerDatas.Me;
-			StorageModule storageModule = GetStorageModule(Ownership.Owner.Me, false);
-			if (me == null || storageModule == null) return;
-			WorldRules instance = WorldRules.Instance;
-			if (storageModule.slotCount < FFU_BE_Defs.maxStorageCapacity) {
-				ResourceValueGroup storageUpgradeCost = WorldRules.Instance.storageUpgradeCost;
-				if (storageUpgradeCost.ConsumeFrom(me, 1f, Localization.tt("storage upgrade"))) {
-					FFU_BE_Defs.shipCurrentStorageCap = storageModule.slotCount + 1;
-					storageModule.slotCount++;
-				}
-			}
-		}
-	}
-}
-
-namespace RST.PlaymakerAction {
-	public class patch_ChoicePanel : ChoicePanel {
-		private extern void orig_Start();
-		//Increased Resource Numbers for Choices
-		private void Start() {
-			if (!FFU_BE_Defs.updatedChoices.Contains(GetHashCode())) {
-				foreach (var choiceEntry in choiceText)
-					if (Regex.Match(choiceEntry.Value, @"\d+").Success)
-						foreach (string anchorWord in FFU_BE_Defs.choiceAnchorWords)
-							if (Regex.Match(choiceEntry.Value, @"\d+ " + anchorWord).Success)
-								foreach (var matchEntry in Regex.Matches(choiceEntry.Value, @"\d+ " + anchorWord))
-									choiceEntry.Value = choiceEntry.Value.Replace(matchEntry.ToString(), (int.Parse(Regex.Match(matchEntry.ToString(), @"\d+").Value) * FFU_BE_Defs.resultNumbersMult).ToString() + " " + anchorWord);
-				if (FFU_BE_Defs.debugMode) Debug.LogWarning("Choice Instance with Hash [" + GetHashCode() + "] was successfully modified.");
-				FFU_BE_Defs.updatedChoices.Add(GetHashCode());
-			}
-			orig_Start();
-		}
-	}
-	public class patch_ResultsPanel : ResultsPanel {
-		[MonoModIgnore] private bool started;
-		[MonoModIgnore] private PlayMakerFSM fsm;
-		[MonoModIgnore] private AudioPlayWithFade.Ctx audioCtx;
-		//Increased Resource Numbers for Results
-		[MonoModReplace] private void Start() {
-			started = true;
-			fsm = CreateIfNeeded.Do(UISkin.Instance.resultsPrefab);
-			FsmVariables fsmVariables = fsm.FsmVariables;
-			POI current = POI.Current;
-			fsmVariables.GetFsmString("title").Value = ChoicePanel.GetTitle(base.Fsm, title);
-			fsmVariables.GetFsmObject("picture").Value = Pool<Sprite>.TakeRandomItem(picturePool.Value as SpritePool, picture.Value as Sprite, current);
-			string text = Localization.TT(Pool<string>.TakeRandomItem(textPool.Value as StringPool, text2, current));
-			fsmVariables.GetFsmString("text").Value = ChoicePanel.MakeReplacements(text, replacements);
-			fsmVariables.GetFsmBool("resources given").Value = resourcesGiven;
-			PlayerData pd = PlayerDatas.Me;
-			Ship flagship = pd.Flagship;
-			if (flagship != null) {
-				int psMaxHealth = flagship.MaxHealth;
-				int psHealth = flagship.HealthFast(psMaxHealth);
-				int psHealthNum = WorldRules.Impermanent.PlayerShipsTakeMaxHpDamage ? (psHealth + psMaxHealth) : psHealth;
-				int psMaxHealthNum = WorldRules.Impermanent.PlayerShipsTakeMaxHpDamage ? (psMaxHealth * 2) : psMaxHealth;
-				int psHealthChange = ParseIntExpr(Health.Value, () => psMaxHealth - psHealth);
-				psHealthChange = (healthNoKill.Value && -psHealthChange >= psHealthNum) ? (-psHealthNum + 1) : (Mathf.Clamp(psHealthNum + psHealthChange, 0, psMaxHealthNum) - psHealthNum);
-				bool value = -psHealthChange >= psHealthNum;
-				fsmVariables.GetFsmInt("health").Value = psHealthChange;
-				fsmVariables.GetFsmBool("dead by ship").Value = value;
-			}
-			ResourceValueGroup battleLoot = pd.battleLoot;
-			int fTotal = pd.Fuel.Total;
-			int oTotal = pd.Organics.Total;
-			int eTotal = pd.Explosives.Total;
-			int xTotal = pd.Exotics.Total;
-			int sTotal = pd.Synthetics.Total;
-			int mTotal = pd.Metals.Total;
-			int fAmount = ParseIntExpr(Fuel.Value, () => pd.Fuel.SoftMax - fTotal) * FFU_BE_Defs.resultNumbersMult + (int)battleLoot.fuel;
-			int oAmount = ParseIntExpr(Organics.Value, () => pd.Organics.SoftMax - oTotal) * FFU_BE_Defs.resultNumbersMult + (int)battleLoot.organics;
-			int eAmount = ParseIntExpr(Explosives.Value, () => pd.Explosives.SoftMax - eTotal) * FFU_BE_Defs.resultNumbersMult + (int)battleLoot.explosives;
-			int xAmount = ParseIntExpr(Exotics.Value, () => pd.Exotics.SoftMax - xTotal) * FFU_BE_Defs.resultNumbersMult + (int)battleLoot.exotics;
-			int sAmount = ParseIntExpr(Synthetics.Value, () => pd.Synthetics.SoftMax - sTotal) + (int)battleLoot.synthetics;
-			int mAmount = ParseIntExpr(Metals.Value, () => pd.Metals.SoftMax - mTotal) * FFU_BE_Defs.resultNumbersMult + (int)battleLoot.metals;
-			int cAmount = ParseIntExpr(Credits.Value, null) * FFU_BE_Defs.resultNumbersMult + (int)battleLoot.credits;
-			if (cAmount >= 0 && addResearchCreditsBonus.Value) cAmount += WorldRules.Instance.scienceSkillEffects.EffectiveCreditsBonus(Ownership.Owner.Me);
-			fsmVariables.GetFsmInt("fuel").Value = Mathf.Clamp(fTotal + fAmount, 0, int.MaxValue) - fTotal;
-			fsmVariables.GetFsmInt("organics").Value = Mathf.Clamp(oTotal + oAmount, 0, int.MaxValue) - oTotal;
-			fsmVariables.GetFsmInt("explosives").Value = Mathf.Clamp(eTotal + eAmount, 0, int.MaxValue) - eTotal;
-			fsmVariables.GetFsmInt("exotics").Value = Mathf.Clamp(xTotal + xAmount, 0, int.MaxValue) - xTotal;
-			fsmVariables.GetFsmInt("synthetics").Value = Mathf.Clamp(sTotal + sAmount, 0, int.MaxValue) - sTotal;
-			fsmVariables.GetFsmInt("metals").Value = Mathf.Clamp(mTotal + mAmount, 0, int.MaxValue) - mTotal;
-			fsmVariables.GetFsmInt("credits").Value = Mathf.Max(pd.Credits + cAmount, 0) - pd.Credits;
-			int repAmount = ParseIntExpr(RepPoints.Value, null);
-			fsmVariables.GetFsmInt("repPoints").Value = Mathf.Max(pd.RepPoints + repAmount, 0) - pd.RepPoints;
-			bool deadByCrew = false;
-			int crewHealth = ParseIntExpr(CrewHealth.Value, null);
-			int crewHealthMax = ParseIntExpr(CrewMaxHealth.Value, null);
-			if (crewHealth != 0 && crewHealthNoKill.Value) crewHealth *= FFU_BE_Defs.resultNumbersMult;
-			int crewHealthCount = (crewHealth != 0 || crewHealthMax != 0) ? (string.IsNullOrEmpty(divideBetweenHowManyCrew.Value) ? 1000 : ParseIntExpr(divideBetweenHowManyCrew.Value, () => 1000)) : 0;
-			if (crewHealth < 0 && !crewHealthNoKill.Value) {
-				int crewHealthDist = 0;
-				foreach (Crewmember cachedCrewmember in PerFrameCache.CachedCrewmembers)
-					if (cachedCrewmember != null && UpdatePlayerData.CrewIsDeletable(cachedCrewmember) && cachedCrewmember.Ownership.GetOwner() == Ownership.Owner.Me)
-						crewHealthDist += cachedCrewmember.Health;
-				if (-crewHealth >= crewHealthDist) deadByCrew = true;
-				if (crewHealthMax < 0) Debug.LogError("deadByCrew check can't be done if both crewMaxHealth<0 and crewHealth<0");
-			}
-			fsmVariables.GetFsmInt("crewHealth").Value = crewHealth;
-			fsmVariables.GetFsmInt("crewHealthCrewCount").Value = crewHealthCount;
-			fsmVariables.GetFsmBool("crewHealthNoKill").Value = crewHealthNoKill.Value;
-			fsmVariables.GetFsmString("crewDeathMessage").Value = crewDeathMessage.IsNone ? "<default>" : crewDeathMessage.Value;
-			fsmVariables.GetFsmInt("crewMaxHealth").Value = crewHealthMax;
-			int crewCountNum = ParseIntExpr(CrewCount.Value, null);
-			if (-crewCountNum >= pd.ControllableCrewCount) deadByCrew = true;
-			fsmVariables.GetFsmBool("dead by crew").Value = deadByCrew;
-			fsmVariables.GetFsmInt("crew").Value = crewCountNum;
-			fsmVariables.GetFsmArray("crewmemberPool").CopyValues(crewmemberPool);
-			fsmVariables.GetFsmString("crewNameOverride").Value = crewNameOverride.Value;
-			fsmVariables.GetFsmString("crewDescriptionOverride").Value = crewDescriptionOverride.Value;
-			int count = ParseIntExpr(ModuleCount.Value, null);
-			foreach (ShipModule item in InstantiateFromPool.DoIt<ShipModule>(Array.ConvertAll(modulePool.Values, (object p) => (GameObject)p), modulePoolAllowDuplicates.Value, PlayerDatas.Instance?.transform, count)) {
-				item.transform.position = new Vector3(10000f, 0f, 0f);
-				item.Ownership.SetOwner(Ownership.Owner.Inherit);
-			}
-			if (InstantiateFromPool.DoIt<ShipModule>(Array.ConvertAll(modulePool.Values, (object p) => (GameObject)p), modulePoolAllowDuplicates.Value, PlayerDatas.Instance?.transform, count).Count > 0) PerFrameCache.InvalidateModuleCache();
-			fsmVariables.GetFsmFloat("module dmg percent min").Value = moduleDmgPercentMin.Value;
-			fsmVariables.GetFsmFloat("module dmg percent max").Value = moduleDmgPercentMax.Value;
-			fsmVariables.GetFsmBool("dontDoLargeBg").Value = dontDoLargeBg.Value;
-			fsmVariables.GetFsmBool("crewDidntDie").Value = crewDidntDie.Value;
-			object[] array = fsmVariables.GetFsmArray("choiceTexts").Values = choiceTexts.stringValues;
-			fsmVariables.GetFsmBool("tutorial mode").Value = noPopup.Value;
-			fsmVariables.GetFsmString("reason to display").Value = reasonToDisplay.Value;
-			audioCtx = AudioPlayWithFade.Enter(base.Fsm.GameObject, audioClip.Value as AudioClip, audioNoFade.Value);
-		}
-	}
-	public class patch_PerksSelection : PerksSelection {
-		public extern void orig_OnEnter();
-		//Configurable Starting Fate
-		public override void OnEnter() {
-			firstRunFate.Value = FFU_BE_Defs.newStartingFateBonus;
-			orig_OnEnter();
-		}
-	}
-	public class patch_CrewOperatesModule : CrewOperatesModule {
-		public extern void orig_OnEnter();
-		public extern void orig_OnExit();
-		[MonoModIgnore] private Crewmember crew;
-		//Recalculate Ship's Signature on Crew's Entry
-		public override void OnEnter() {
-			orig_OnEnter();
-			if (crew != null) if (crew.Ownership.GetOwner() == Ownership.Owner.Me) FFU_BE_Defs.RecalculateEnergyEmission();
-		}
-		//Recalculate Ship's Signature on Crew's Exit
-		public override void OnExit() {
-			orig_OnExit();
-			if (crew != null) if (crew.Ownership.GetOwner() == Ownership.Owner.Me) FFU_BE_Defs.RecalculateEnergyEmission();
+			powerPresetPreview.SetActive(shouldShowPowerPreview);
 		}
 	}
 }

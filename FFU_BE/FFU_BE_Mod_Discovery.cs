@@ -479,13 +479,24 @@ namespace RST {
 				if (!(playerData == null)) {
 					string reason = null;
 					bool notConsuming = false;
-					ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref fuelDist, delta, consumedPerDistance.fuel, playerData.Fuel, reason);
-					ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref organicsDist, delta, consumedPerDistance.organics, playerData.Organics, reason);
-					ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref explosivesDist, delta, consumedPerDistance.explosives, playerData.Explosives, reason);
-					ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref exoticsDist, delta, consumedPerDistance.exotics, playerData.Exotics, reason);
-					ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref syntheticsDist, delta, consumedPerDistance.synthetics, playerData.Synthetics, reason);
-					ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref metalsDist, delta, consumedPerDistance.metals, playerData.Metals, reason);
-					ResourceValueGroup.ProcessOneCreditCons(ref notConsuming, ref creditsDist, delta, consumedPerDistance.credits, playerData, reason);
+					if (Module.HasFullHealth) {
+						ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref organicsDist, delta, consumedPerDistance.organics, playerData.Organics, reason);
+						ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref fuelDist, delta, consumedPerDistance.fuel, playerData.Fuel, reason);
+						ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref metalsDist, delta, consumedPerDistance.metals, playerData.Metals, reason);
+						ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref syntheticsDist, delta, consumedPerDistance.synthetics, playerData.Synthetics, reason);
+						ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref explosivesDist, delta, consumedPerDistance.explosives, playerData.Explosives, reason);
+						ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref exoticsDist, delta, consumedPerDistance.exotics, playerData.Exotics, reason);
+						ResourceValueGroup.ProcessOneCreditCons(ref notConsuming, ref creditsDist, delta, consumedPerDistance.credits, playerData, reason);
+					} else {
+						float consMult = FFU_BE_Defs.GetHealthPercent(Module);
+						ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref organicsDist, delta, consumedPerDistance.organics * consMult, playerData.Organics, reason);
+						ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref fuelDist, delta, consumedPerDistance.fuel * consMult, playerData.Fuel, reason);
+						ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref metalsDist, delta, consumedPerDistance.metals * consMult, playerData.Metals, reason);
+						ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref syntheticsDist, delta, consumedPerDistance.synthetics * consMult, playerData.Synthetics, reason);
+						ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref explosivesDist, delta, consumedPerDistance.explosives * consMult, playerData.Explosives, reason);
+						ResourceValueGroup.ProcessOneResourceCons(ref notConsuming, ref exoticsDist, delta, consumedPerDistance.exotics * consMult, playerData.Exotics, reason);
+						ResourceValueGroup.ProcessOneCreditCons(ref notConsuming, ref creditsDist, delta, consumedPerDistance.credits * consMult, playerData, reason);
+					}
 					if (!WarningsVisualizer.PlayerFleetJammedWarning) FFU_BE_Defs.distanceTraveledInPeace += delta;
 					FFU_BE_Mod_Discovery.HostileAttentionCheck();
 				}

@@ -234,6 +234,9 @@ namespace FFU_Bleeding_Edge {
 		public static void InitGameInterfaceUpdate() {
 			foreach (GridLayoutGroup gridLayoutGroup in Resources.FindObjectsOfTypeAll<GridLayoutGroup>()) {
 				if (gridLayoutGroup.name == "Grid" && gridLayoutGroup.constraintCount == 6) gridLayoutGroup.constraintCount = 12;
+				if (dumpObjectLists) Debug.LogWarning("[GridLayoutGroup] " + gridLayoutGroup.name + ": " + 
+				gridLayoutGroup.constraintCount + ", " + gridLayoutGroup.constraint + ", " +
+				gridLayoutGroup.cellSize.x + ", " + gridLayoutGroup.cellSize.y);
 			}
 		}
 		public static void InitDamageTokensPrefabList() {
@@ -670,6 +673,7 @@ namespace FFU_Bleeding_Edge {
 						"Anyway, you can <color=#3366ff>reset all data and just unlock all ships</color> or <color=#ff3333>reset all data and unlock " +
 						"all ships with all perks</color> depending on mod's configuration. To do it just follow (no, not a white rabbit) IDKFA and " +
 						"take the pill.\n</size>";
+				if (dumpObjectLists) Debug.LogWarning("[Welcome Text] " + txt.name + ": " + txt.text);
 			}
 		}
 		public static float GetDifficultyModifier() {
@@ -681,6 +685,15 @@ namespace FFU_Bleeding_Edge {
 			if (WorldRules.Impermanent.beginnerStartingBonus) return 1;
 			else if (WorldRules.Impermanent.ironman) return 3;
 			else return 2;
+		}
+		public static float GetHealthPercent(ShipModule shipModule) {
+			return shipModule.Health / (float)shipModule.MaxHealth;
+		}
+		public static float GetHealthEffect(ShipModule shipModule, float hMult = 1f) {
+			return (1f - (shipModule.Health / (float)shipModule.MaxHealth)) * hMult;
+		}
+		public static bool DamagedButWorking(ShipModule shipModule) {
+			return GetHealthPercent(shipModule) >= moduleDamageThreshold;
 		}
 		public static int SortAllModules(ShipModule shipModule) {
 			switch (shipModule.type) {

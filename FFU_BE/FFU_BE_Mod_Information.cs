@@ -26,7 +26,7 @@ namespace FFU_Bleeding_Edge {
 			weaponData += handWeapon.farthestAttackDistance > 0 ? "Effective Range: " + handWeapon.farthestAttackDistance + "m" + "\n" : "";
 			weaponData += handWeapon.reloadInterval > 0 ? "Reload Time: " + handWeapon.reloadInterval + "s" + "\n" : "";
 			weaponData += handWeapon.shotInterval > 0 ? "Salvo Delay: " + handWeapon.shotInterval + "s" + "\n" : "";
-			weaponData += handWeapon.accuracy > 0 ? "Accuracy: " + handWeapon.accuracy + "\n" : "";
+			weaponData += handWeapon.accuracy > 0 ? "Accuracy: " + handWeapon.accuracy + " Δm" + "\n" : "";
 			if (!string.IsNullOrEmpty(weaponData)) weaponData = "<color=lime>" + weaponData + "</color>" + handWeapon.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit);
 			else weaponData = handWeapon.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit);
 			return weaponData;
@@ -53,8 +53,8 @@ namespace FFU_Bleeding_Edge {
 				moduleData += shipModule.Weapon.reloadInterval > 0 ? "Reload Time: " + shipModule.Weapon.reloadInterval + "s" + "\n" : "";
 				moduleData += shipModule.Weapon.preShootDelay > 0 ? "Ignition Time: " + shipModule.Weapon.preShootDelay + "s" + "\n" : "";
 				moduleData += shipModule.Weapon.shotInterval > 0 ? "Salvo Delay: " + shipModule.Weapon.shotInterval + "s" + "\n" : "";
-				moduleData += shipModule.Weapon.accuracy > 0 ? "Accuracy: " + shipModule.Weapon.accuracy + "\n" : "";
-				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius > 0 ? "Damage Radius: " + string.Format("{0:0.###}", shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius) + "\n" : "";
+				moduleData += shipModule.Weapon.accuracy > 0 ? "Accuracy: " + shipModule.Weapon.accuracy + " Δm" + "\n" : "";
+				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius > 0 ? "Damage Radius: " + string.Format("{0:0.###}m", shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius * 10f) + "\n" : "";
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield ? "Ignores Shields: Yes" + "\n" : "";
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect ? "Never Deflects: Yes" + "\n" : "";
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg > 0 ? "Shield Damage: " + (shipModule.Weapon.magazineSize > 1 ? shipModule.Weapon.magazineSize + "x" : "") + shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg + "\n" : "";
@@ -87,7 +87,7 @@ namespace FFU_Bleeding_Edge {
 				case ShipModule.Type.Weapon_Nuke:
 				moduleData += "Type: " + FFU_BE_Mod_Technology.GetModuleGenText(shipModule) + " Gen. Capital Missile" + "\n";
 				moduleData += "Modifier: " + FFU_BE_Mod_Technology.GetModuleModText(shipModule) + "\n";
-				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius > 0 ? "Damage Radius: " + string.Format("{0:0.###}", shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius) + "\n" : "";
+				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius > 0 ? "Damage Radius: " + string.Format("{0:0.###}m", shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius * 10f) + "\n" : "";
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield ? "Ignores Shields: Yes" + "\n" : "";
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect ? "Never Deflects: Yes" + "\n" : "";
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg > 0 ? "Shield Damage: " + (shipModule.Weapon.magazineSize > 1 ? shipModule.Weapon.magazineSize + "x" : "") + shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg + "\n" : "";
@@ -107,7 +107,7 @@ namespace FFU_Bleeding_Edge {
 				moduleData += "Type: " + FFU_BE_Mod_Technology.GetModuleGenText(shipModule) + " Gen. Close-In Weapon System" + "\n";
 				moduleData += "Modifier: " + FFU_BE_Mod_Technology.GetModuleModText(shipModule) + "\n";
 				moduleData += shipModule.PointDefence.reloadInterval > 0 ? "Reload Time: " + shipModule.PointDefence.reloadInterval + "s" + "\n" : "";
-				moduleData += shipModule.PointDefence.coverRadius > 0 ? "Cover Radius: " + shipModule.PointDefence.coverRadius + "\n" : "";
+				moduleData += shipModule.PointDefence.coverRadius > 0 ? "Cover Radius: " + shipModule.PointDefence.coverRadius * 10f + "m" + "\n" : "";
 				moduleData += shipModule.PointDefence.projectileOrBeamPrefab.projectileDmg > 0 ? "Interception Damage: " + shipModule.PointDefence.projectileOrBeamPrefab.projectileDmg + "\n" : "";
 				moduleData += shipModule.PointDefence.projectileOrBeamPrefab.lifetime > 0 ? "Interception Delay: " + shipModule.PointDefence.projectileOrBeamPrefab.lifetime + "s" + "\n" : "";
 				moduleData += (shipModule.PointDefence.resourcesPerShot.organics > 0 ||
@@ -153,7 +153,7 @@ namespace FFU_Bleeding_Edge {
 				case ShipModule.Type.Reactor:
 				moduleData += "Type: " + FFU_BE_Mod_Technology.GetModuleGenText(shipModule) + " Gen. Energy Reactor" + "\n";
 				moduleData += "Modifier: " + FFU_BE_Mod_Technology.GetModuleModText(shipModule) + "\n";
-				moduleData += shipModule.Reactor.powerCapacity > 0 ? "Power Production: " + shipModule.Reactor.powerCapacity + "\n" : "";
+				moduleData += shipModule.Reactor.powerCapacity > 0 ? "Power Production: " + shipModule.Reactor.powerCapacity + " GW/h" + "\n" : "";
 				moduleData += shipModule.Reactor.overchargePowerCapacityAdd > 0 ? "Overcharge Production: " + string.Format("{0:0}", (shipModule.Reactor.overchargePowerCapacityAdd / (float)shipModule.Reactor.powerCapacity + 1f) * 100f) + "%" + "\n" : "";
 				moduleData += shipModule.overchargeSeconds > 0 ? "Overcharge Time: " + shipModule.overchargeSeconds + "s" + "\n" : "";
 				moduleData += (shipModule.Reactor.ConsumedPerDistance.organics > 0 ||
@@ -380,7 +380,7 @@ namespace FFU_Bleeding_Edge {
 			moduleData += shipModule.starmapSpeedAdd != 0 ? "Interstellar Speed: " + (shipModule.starmapSpeedAdd > 0 ? "+" : "") + string.Format("{0:0.0}", shipModule.starmapSpeedAdd) + "\n" : "";
 			moduleData += shipModule.maxHealthAdd != 0 ? "Ship Armor Modifier: " + (shipModule.maxHealthAdd > 0 ? "+" : "") + shipModule.maxHealthAdd + "\n" : "";
 			moduleData += shipModule.maxShieldAdd != 0 ? "Ship Shields Modifier: " + (shipModule.maxShieldAdd > 0 ? "+" : "") + shipModule.maxShieldAdd + "\n" : "";
-			moduleData += shipModule.PowerConsumed > 0 ? "Power Consumption: " + shipModule.PowerConsumed + "\n" : "";
+			moduleData += shipModule.PowerConsumed > 0 ? "Power Consumption: " + shipModule.PowerConsumed + " GW/h" + "\n" : "";
 			if (shipModule.type != ShipModule.Type.Reactor) moduleData += shipModule.overchargePowerNeed > 0 ? "Overcharge Consumption: " + string.Format("{0:0}", (shipModule.overchargePowerNeed / (float)shipModule.PowerConsumed + 1f) * 100f) + "%" + "\n" : "";
 			if (shipModule.type != ShipModule.Type.Reactor) moduleData += shipModule.overchargeSeconds > 0 ? "Overcharge Time: " + shipModule.overchargeSeconds + "s" + "\n" : "";
 			moduleData += (shipModule.turnedOn || !shipModule.UsesTurnedOn) && FFU_BE_Defs.GetModuleEnergyEmission(shipModule) != 0f ? "Energy Emission: " + string.Format("{0:0.#}", FFU_BE_Defs.GetModuleEnergyEmission(shipModule)) + "m³\n" : "";
@@ -411,8 +411,8 @@ namespace FFU_Bleeding_Edge {
 				newDescription += shipModule.Weapon.reloadInterval > 0 ? "Reload Time: " + shipModule.Weapon.reloadInterval + "s" + "\n" : "";
 				newDescription += shipModule.Weapon.preShootDelay > 0 ? "Ignition Time: " + shipModule.Weapon.preShootDelay + "s" + "\n" : "";
 				newDescription += shipModule.Weapon.shotInterval > 0 ? "Salvo Delay: " + shipModule.Weapon.shotInterval + "s" + "\n" : "";
-				newDescription += shipModule.Weapon.accuracy > 0 ? "Accuracy: " + shipModule.Weapon.accuracy + "\n" : "";
-				newDescription += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius > 0 ? "Damage Radius: " + string.Format("{0:0.###}", shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius) + "\n" : "";
+				newDescription += shipModule.Weapon.accuracy > 0 ? "Accuracy: " + shipModule.Weapon.accuracy + " Δm" + "\n" : "";
+				newDescription += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius > 0 ? "Damage Radius: " + string.Format("{0:0.###}m", shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius * 10f) + "\n" : "";
 				newDescription += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield ? "Ignores Shields: Yes" + "\n" : "";
 				newDescription += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect ? "Never Deflects: Yes" + "\n" : "";
 				newDescription += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg > 0 ? "Shield Damage: " + (shipModule.Weapon.magazineSize > 1 ? shipModule.Weapon.magazineSize + "x" : "") + shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg + "\n" : "";
@@ -481,7 +481,7 @@ namespace FFU_Bleeding_Edge {
 				if (FFU_BE_Defs.allModuleProps) newDescription += "Module Identifier: " + shipModule.name + "\n";
 				if (FFU_BE_Defs.allModuleProps) newDescription += "Module Prefab ID: " + shipModule.PrefabId + "\n";
 				newDescription += shipModule.PointDefence.reloadInterval > 0 ? "Reload Time: " + shipModule.PointDefence.reloadInterval + "s" + "\n" : "";
-				newDescription += shipModule.PointDefence.coverRadius > 0 ? "Cover Radius: " + shipModule.PointDefence.coverRadius + "\n" : "";
+				newDescription += shipModule.PointDefence.coverRadius > 0 ? "Cover Radius: " + shipModule.PointDefence.coverRadius * 10f + "m" + "\n" : "";
 				if (FFU_BE_Defs.allModuleProps) newDescription += "Interceptor Identifier: " + shipModule.PointDefence.projectileOrBeamPrefab.name + "\n";
 				newDescription += shipModule.PointDefence.projectileOrBeamPrefab.projectileDmg > 0 ? "Interception Damage: " + shipModule.PointDefence.projectileOrBeamPrefab.projectileDmg + "\n" : "";
 				newDescription += shipModule.PointDefence.projectileOrBeamPrefab.lifetime > 0 ? "Interception Delay: " + shipModule.PointDefence.projectileOrBeamPrefab.lifetime + "s" + "\n" : "";
@@ -532,7 +532,7 @@ namespace FFU_Bleeding_Edge {
 				newDescription += "Type: Energy Reactor" + "\n";
 				if (FFU_BE_Defs.allModuleProps) newDescription += "Module Identifier: " + shipModule.name + "\n";
 				if (FFU_BE_Defs.allModuleProps) newDescription += "Module Prefab ID: " + shipModule.PrefabId + "\n";
-				newDescription += shipModule.Reactor.powerCapacity > 0 ? "Power Production: " + shipModule.Reactor.powerCapacity + "\n" : "";
+				newDescription += shipModule.Reactor.powerCapacity > 0 ? "Power Production: " + shipModule.Reactor.powerCapacity + " GW/h" + "\n" : "";
 				newDescription += shipModule.Reactor.overchargePowerCapacityAdd > 0 ? "Overcharge Production: " + string.Format("{0:0}", (shipModule.Reactor.overchargePowerCapacityAdd / (float)shipModule.Reactor.powerCapacity + 1f) * 100f) + "%" + "\n" : "";
 				newDescription += shipModule.overchargeSeconds > 0 ? "Overcharge Time: " + shipModule.overchargeSeconds + "s" + "\n" : "";
 				newDescription += (shipModule.Reactor.ConsumedPerDistance.organics > 0 ||
@@ -776,7 +776,7 @@ namespace FFU_Bleeding_Edge {
 			newDescription += shipModule.starmapSpeedAdd != 0 ? "Interstellar Speed: " + (shipModule.starmapSpeedAdd > 0 ? "+" : "") + string.Format("{0:0.0}", shipModule.starmapSpeedAdd) + "\n" : "";
 			newDescription += shipModule.maxHealthAdd != 0 ? "Ship Armor Modifier: " + (shipModule.maxHealthAdd > 0 ? "+" : "") + shipModule.maxHealthAdd + "\n" : "";
 			newDescription += shipModule.maxShieldAdd != 0 ? "Ship Shields Modifier: " + (shipModule.maxShieldAdd > 0 ? "+" : "") + shipModule.maxShieldAdd + "\n" : "";
-			newDescription += shipModule.PowerConsumed > 0 ? "Power Consumption: " + shipModule.PowerConsumed + "\n" : "";
+			newDescription += shipModule.PowerConsumed > 0 ? "Power Consumption: " + shipModule.PowerConsumed + " GW/h" + "\n" : "";
 			if (shipModule.type != ShipModule.Type.Reactor) newDescription += shipModule.overchargePowerNeed > 0 ? "Overcharge Consumption: " + string.Format("{0:0}", (shipModule.overchargePowerNeed / (float)shipModule.PowerConsumed + 1f) * 100f) + "%" + "\n" : "";
 			if (shipModule.type != ShipModule.Type.Reactor) newDescription += shipModule.overchargeSeconds > 0 ? "Overcharge Time: " + shipModule.overchargeSeconds + "s" + "\n" : "";
 			newDescription += !string.IsNullOrEmpty(FFU_BE_Defs.GetModuleEnergyEmissionText(shipModule)) ? "Energy Emission: " + FFU_BE_Defs.GetModuleEnergyEmissionText(shipModule) + "\n" : "";
@@ -804,21 +804,6 @@ namespace FFU_Bleeding_Edge {
 				case ShootAtDamageDealer.FireChanceLevel.None: return (int)Core.FireIgniteChance.None + "%";
 				default: return "0%";
 			}
-		}
-	}
-}
-
-namespace RST {
-	public class patch_ScienceSkillEffects : ScienceSkillEffects {
-		//Allow Laboratory Modules to Produce All Types
-		[MonoModReplace] public int EffectiveCreditsProduction(ShipModule m) {
-			return EffectiveSkillPoints(m) * skillPointBonusProduction;
-		}
-	}
-	public class patch_GardenSkillEffects : GardenSkillEffects {
-		//Allow Greenhouse Modules to Produce All Types
-		[MonoModReplace] public int EffectiveOrganicsProduction(ShipModule m) {
-			return EffectiveSkillPoints(m) * skillPointBonusProduction;
 		}
 	}
 }
@@ -895,6 +880,7 @@ namespace RST.UI {
 	public class patch_ModuleDataSubpanel : ModuleDataSubpanel {
 		private extern void orig_Update();
 		[MonoModIgnore] private ShipModule m;
+		[MonoModIgnore] private float prevOpSpots;
 		[MonoModIgnore] private float prevOrganics;
 		[MonoModIgnore] private float prevFuel;
 		[MonoModIgnore] private float prevMetals;
@@ -903,15 +889,33 @@ namespace RST.UI {
 		[MonoModIgnore] private float prevExotics;
 		[MonoModIgnore] private float prevWeaponDmgArea;
 		[MonoModIgnore] private float prevPowerCapacity;
+		[MonoModIgnore] private float prevShieldAdd;
+		[MonoModIgnore] private float prevActivationFuel;
+		[MonoModIgnore] private float prevHealingSpots;
+		[MonoModIgnore] private float prevHealingInvSpeed;
+		[MonoModIgnore] private float prevOrganicsPerHp;
+		[MonoModIgnore] private float prevSyntheticsPerHp;
+		[MonoModIgnore] private float prevStarmapSpeedAdd;
+		[MonoModIgnore] private float prevAsteroidDefl;
+		[MonoModIgnore] private float prevSAccuracyBonus;
+		[MonoModIgnore] private float prevShipEvasionPercentAdd;
 		[MonoModIgnore] private void SafeUpdateField(Text text, string value) { }
 		[MonoModIgnore] private void DoResourceConsPerDist(ResourceValueGroup rc, ShipModule m) { }
 		[MonoModIgnore] private static void DoRequirementColor(Text text, HoverableUI h, bool hasEnough) { }
+		[MonoModIgnore] private void DoResourceProdPerSecond(ResourceValueGroup rp, float secondsPerConversion) { }
+		[MonoModIgnore] private void DoResourceConsPerSecond(ResourceValueGroup rc, float secondsPerConversion) { }
 		[MonoModIgnore] private static void AppendDmgLine(StringBuilder sb, string localizedLine, int dmg, int cnt) { }
 		[MonoModIgnore] private void SafeUpdateField(Text text, float value, ref float prevValue, string format = "{0}") { }
 		[MonoModIgnore] private void UpdateGroupedDmg(bool showShieldIcon, bool showShipIcon, bool showModuleIcon, string value) { }
 		//Selected Module Full Information Window
 		private void Update() {
 			orig_Update();
+			if (m != null) if (!m.HasFullHealth) {
+				SafeUpdateField(sSpeedBonusText, m.starmapSpeedAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevStarmapSpeedAdd, "<color=red>{0:0.0}</color>");
+				SafeUpdateField(sAsteroidDeflBonusText, m.asteroidDeflectionPercentAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevAsteroidDefl, "<color=red>{0:0}%</color>");
+				SafeUpdateField(sAccuracyBonusText, m.shipAccuracyPercentAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevSAccuracyBonus, "<color=red>{0:0}%</color>");
+				if (m.type != ShipModule.Type.Bridge) SafeUpdateField(sEvasionBonusText, m.shipEvasionPercentAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevShipEvasionPercentAdd, "<color=red>{0:0}</color>");
+			}
 			exoticsProdText.transform.parent.parent.gameObject.SetActive(false);
 			if (m != null) health.horizontalOverflow = HorizontalWrapMode.Overflow;
 			if (m != null && m.Ownership.GetOwner() == Ownership.Owner.Me && iconHover.Hovered) iconHover.hoverText = FFU_BE_Mod_Information.GetSelectedModuleExactData(m);
@@ -924,15 +928,17 @@ namespace RST.UI {
 			GunnerySkillEffects gunnerySkillEffects = WorldRules.Instance.gunnerySkillEffects;
 			if (weapon.accuracy != 0) {
 				weaponAccuracy.SetActiveIfNeeded();
-				int num = gunnerySkillEffects.EffectiveAccuracy(weapon);
-				weaponAccuracy.effects.text = weapon.accuracy + ((weapon.accuracy != num) ? $" <color=lime>({num})</color>" : "");
+				int effAccuracy = gunnerySkillEffects.EffectiveAccuracy(weapon);
+				if (m.HasFullHealth) weaponAccuracy.effects.text = weapon.accuracy != effAccuracy ? $"<color=lime>{effAccuracy:0} {Localization.TT("Δm")}</color>" : $"{effAccuracy:0} {Localization.TT("Δm")}";
+				else weaponAccuracy.effects.text = $"<color=red>{effAccuracy:0} {Localization.TT("Δm")}</color>";
 				weaponAccuracy.skillBonus.text = "+" + gunnerySkillEffects.skillPointAccuracyBonus.ToString("0.0") + " " + text;
-				weaponAccuracy.Hoverable.hoverText = string.Format(weaponAccuracy.HoverableTextTemplate, num, gunnerySkillEffects.EffectiveAngle(weapon), gunnerySkillEffects.skillPointAccuracyBonus.ToString("0.0"));
+				weaponAccuracy.Hoverable.hoverText = string.Format(weaponAccuracy.HoverableTextTemplate, effAccuracy, gunnerySkillEffects.EffectiveAngle(weapon), gunnerySkillEffects.skillPointAccuracyBonus.ToString("0.0"));
 			}
 			if (weapon.reloadInterval != 0f) {
 				weaponReloadTime.SetActiveIfNeeded();
-				float num2 = gunnerySkillEffects.EffectiveReloadTime(weapon);
-				weaponReloadTime.effects.text = string.Format("{0:0.0}{1}", weapon.reloadInterval, Localization.TT("s")) + ((weapon.reloadInterval != num2) ? string.Format(" <color=lime>({0:0.0}{1})</color>", num2, Localization.TT("s")) : "");
+				float effReload = gunnerySkillEffects.EffectiveReloadTime(weapon);
+				if (m.HasFullHealth) weaponReloadTime.effects.text = weapon.reloadInterval != effReload ? $"<color=lime>{effReload:0.0}{Localization.TT("s")}</color>" : $"{effReload:0.0}{Localization.TT("s")}";
+				else weaponReloadTime.effects.text = $"<color=red>{effReload:0.0}{Localization.TT("s")}</color>";
 				weaponReloadTime.skillBonus.text = $"-{((!weapon.reloadIntervalTakesNoBonuses) ? gunnerySkillEffects.skillPointBonusPercent : 0)}% {text}";
 				weaponReloadTime.Hoverable.hoverText = string.Format(weaponReloadTime.HoverableTextTemplate, gunnerySkillEffects.skillPointBonusPercent);
 			}
@@ -965,31 +971,158 @@ namespace RST.UI {
 			SafeUpdateField(empOverloadText, (damage.moduleOverloadSeconds != 0) ? string.Format(Localization.TT("EMP {0}s"), damage.moduleOverloadSeconds) : null);
 			Ship ship = m.Ship;
 			ResourceValueGroup resourcesPerShot = weapon.resourcesPerShot;
-			SafeUpdateField(fuelPerShotText, resourcesPerShot.fuel, ref prevFuel);
-			DoRequirementColor(fuelPerShotText, fuelPerShot, ship == null || ship.Fuel >= resourcesPerShot.fuel);
-			SafeUpdateField(organicsPerShotText, resourcesPerShot.organics, ref prevOrganics);
+			SafeUpdateField(organicsPerShotText, resourcesPerShot.organics, ref prevOrganics, "{0:0}");
+			SafeUpdateField(fuelPerShotText, resourcesPerShot.fuel, ref prevFuel, "{0:0}");
+			SafeUpdateField(metalsPerShotText, resourcesPerShot.metals, ref prevMetals, "{0:0}");
+			SafeUpdateField(explosivesPerShotText, resourcesPerShot.explosives, ref prevExpl, "{0:0}");
+			SafeUpdateField(syntheticsPerShotText, resourcesPerShot.synthetics, ref prevSynth, "{0:0}");
+			SafeUpdateField(exoticsPerShotText, resourcesPerShot.exotics, ref prevExotics, "{0:0}");
 			DoRequirementColor(organicsPerShotText, organicsPerShot, ship == null || ship.Organics >= resourcesPerShot.organics);
-			SafeUpdateField(explosivesPerShotText, resourcesPerShot.explosives, ref prevExpl);
-			DoRequirementColor(explosivesPerShotText, explosivesPerShot, ship == null || ship.Explosives >= resourcesPerShot.explosives);
-			SafeUpdateField(exoticsPerShotText, resourcesPerShot.exotics, ref prevExotics);
-			DoRequirementColor(exoticsPerShotText, exoticsPerShot, ship == null || ship.Exotics >= resourcesPerShot.exotics);
-			SafeUpdateField(syntheticsPerShotText, resourcesPerShot.synthetics, ref prevSynth);
-			DoRequirementColor(syntheticsPerShotText, syntheticsPerShot, ship == null || ship.Synthetics >= resourcesPerShot.synthetics);
-			SafeUpdateField(metalsPerShotText, resourcesPerShot.metals, ref prevMetals);
+			DoRequirementColor(fuelPerShotText, fuelPerShot, ship == null || ship.Fuel >= resourcesPerShot.fuel);
 			DoRequirementColor(metalsPerShotText, metalsPerShot, ship == null || ship.Metals >= resourcesPerShot.metals);
-			SafeUpdateField(dmgAreaText, damage.damageAreaRadius, ref prevWeaponDmgArea, "{0:0.00}");
+			DoRequirementColor(syntheticsPerShotText, syntheticsPerShot, ship == null || ship.Synthetics >= resourcesPerShot.synthetics);
+			DoRequirementColor(explosivesPerShotText, explosivesPerShot, ship == null || ship.Explosives >= resourcesPerShot.explosives);
+			DoRequirementColor(exoticsPerShotText, exoticsPerShot, ship == null || ship.Exotics >= resourcesPerShot.exotics);
+			SafeUpdateField(dmgAreaText, damage.damageAreaRadius * 10f, ref prevWeaponDmgArea, "{0:0.###}m");
 			DoWeaponCrewDmg(weapon, damage.crewDmgLevel);
 			DoWeaponFireChance(damage.fireChanceLevel);
+		}
+		//Updated Point Defense Information
+		[MonoModReplace] private void DoPointDefence() {
+			PointDefenceModule pointDefence = m.PointDefence;
+			PointDefDamageDealer projectileOrBeamPrefab = pointDefence.projectileOrBeamPrefab;
+			ResourceValueGroup resourcesPerShot = pointDefence.resourcesPerShot;
+			string arg = Localization.TT("per");
+			GunnerySkillEffects gunnerySkillEffects = WorldRules.Instance.gunnerySkillEffects;
+			pointDefReloadTime.SetActiveIfNeeded();
+			float pdEffReload = pointDefence.reloadInterval * gunnerySkillEffects.EffectiveSkillMultiplier(m, true);
+			if (m.HasFullHealth) pointDefReloadTime.effects.text = pointDefence.reloadInterval != pdEffReload ? $"<color=lime>{pdEffReload:0.00}{Localization.TT("s")}</color>": $"{pdEffReload:0.00}{Localization.TT("s")}";
+			else pointDefReloadTime.effects.text = $"<color=red>{pdEffReload / FFU_BE_Defs.GetHealthPercent(m):0.00}{Localization.TT("s")}</color>";
+			pointDefReloadTime.skillBonus.text = $"-{gunnerySkillEffects.skillPointBonusPercent}% {arg}";
+			pointDefReloadTime.Hoverable.hoverText = string.Format(pointDefReloadTime.HoverableTextTemplate, gunnerySkillEffects.skillPointBonusPercent);
+			pointDefCoverRadius.SetActiveIfNeeded();
+			float pdEffRadius = pointDefence.EffectiveCoverRadius;
+			if (m.HasFullHealth) pointDefCoverRadius.effects.text = pointDefence.coverRadius != pdEffRadius ? $"<color=lime>{pdEffRadius * 10f:0.0}{Localization.TT("m")}</color>" : $"{pdEffRadius * 10f:0.0}{Localization.TT("m")}";
+			else pointDefCoverRadius.effects.text = $"<color=red>{pdEffRadius * 10f * FFU_BE_Defs.GetHealthPercent(m):0.0}{Localization.TT("m")}</color>";
+			pointDefCoverRadius.skillBonus.text = $"+{gunnerySkillEffects.skillPointBonusPercent}% {arg}";
+			pointDefCoverRadius.Hoverable.hoverText = string.Format(pointDefCoverRadius.HoverableTextTemplate, gunnerySkillEffects.skillPointBonusPercent);
+			SafeUpdateField(pointDefDmgToProjectilesText, projectileOrBeamPrefab.projectileDmg.ToString());
+			Ship ship = m.Ship;
+			SafeUpdateField(organicsPerShotText, resourcesPerShot.organics, ref prevOrganics, "{0:0}");
+			SafeUpdateField(fuelPerShotText, resourcesPerShot.fuel, ref prevFuel, "{0:0}");
+			SafeUpdateField(metalsPerShotText, resourcesPerShot.metals, ref prevMetals, "{0:0}");
+			SafeUpdateField(syntheticsPerShotText, resourcesPerShot.synthetics, ref prevSynth, "{0:0}");
+			SafeUpdateField(explosivesPerShotText, resourcesPerShot.explosives, ref prevExpl, "{0:0}");
+			SafeUpdateField(exoticsPerShotText, resourcesPerShot.exotics, ref prevExotics, "{0:0}");
+			DoRequirementColor(organicsPerShotText, organicsPerShot, ship == null || ship.Organics >= resourcesPerShot.organics);
+			DoRequirementColor(fuelPerShotText, fuelPerShot, ship == null || ship.Fuel >= resourcesPerShot.fuel);
+			DoRequirementColor(metalsPerShotText, metalsPerShot, ship == null || ship.Metals >= resourcesPerShot.metals);
+			DoRequirementColor(syntheticsPerShotText, syntheticsPerShot, ship == null || ship.Synthetics >= resourcesPerShot.synthetics);
+			DoRequirementColor(explosivesPerShotText, explosivesPerShot, ship == null || ship.Explosives >= resourcesPerShot.explosives);
+			DoRequirementColor(exoticsPerShotText, exoticsPerShot, ship == null || ship.Exotics >= resourcesPerShot.exotics);
+		}
+		//Updated Engine Information
+		[MonoModReplace] private void DoEngine() {
+			EngineModule engine = m.Engine;
+			if (m.HasFullHealth) DoResourceConsPerDist(engine.ConsumedPerDistance, m);
+			else {
+				DoResourceConsPerDist(engine.ConsumedPerDistance * (1f / FFU_BE_Defs.GetHealthPercent(m)), m);
+				DoRequirementColor(organicsPerDistText, null, false);
+				DoRequirementColor(fuelPerDistText, null, false);
+				DoRequirementColor(metalsPerDistText, null, false);
+				DoRequirementColor(syntheticsPerDistText, null, false);
+				DoRequirementColor(explosivesPerDistText, null, false);
+				DoRequirementColor(exoticsPerDistText, null, false);
+				DoRequirementColor(creditsPerDistText, null, false);
+			}
+		}
+		//Updated Sensor Information
+		[MonoModReplace] private void DoSensor() {
+			SensorModule sensor = m.Sensor;
+			string arg = Localization.TT("ru");
+			string arg2 = Localization.TT("per");
+			SafeUpdateField(sensorSectorRadarRange, sensor.sectorRadarRange + arg);
+			if (sensor.starmapRadarRange != 0) {
+				sensorStarmapRadarRange.SetActiveIfNeeded();
+				SensorSkillEffects sensorSkillEffects = WorldRules.Instance.sensorSkillEffects;
+				float num = sensor.starmapRadarRange * sensorSkillEffects.EffectiveSkillMultiplier(m, false);
+				sensorStarmapRadarRange.effects.text = sensor.starmapRadarRange + arg + ((sensor.starmapRadarRange != num) ? $" <color=lime>({num:0}{arg})</color>" : "");
+				sensorStarmapRadarRange.skillBonus.text = $"+{sensorSkillEffects.skillPointBonusPercent}% {arg2}";
+				sensorStarmapRadarRange.Hoverable.hoverText = string.Format(sensorStarmapRadarRange.HoverableTextTemplate, sensorSkillEffects.skillPointBonusPercent);
+			}
+		}
+		//Updated Bridge Information
+		[MonoModReplace] private void DoBridge() {
+			bridgeRemoteOpsGo.SetActive(true);
+			BridgeSkillEffects bridgeSkillEffects = WorldRules.Instance.bridgeSkillEffects;
+			bridgeEvasion.SetActiveIfNeeded();
+			int num = bridgeSkillEffects.EffectiveSkillBonusPercent(m);
+			bridgeEvasion.effects.text = m.shipEvasionPercentAdd + ((m.shipEvasionPercentAdd != num) ? $" <color=lime>({num})</color>" : "");
+			bridgeEvasion.skillBonus.text = string.Format("+{0} {1}", bridgeSkillEffects.skillPointBonusPercent, Localization.TT("per"));
+			bridgeEvasion.Hoverable.hoverText = string.Format(bridgeEvasion.HoverableTextTemplate, bridgeSkillEffects.skillPointBonusPercent);
+			SafeUpdateField(crewText, m.CurrentLocalOpsCount + "/" + m.operatorSpots.Length);
+		}
+		//Updated Shields Information
+		[MonoModReplace] private void DoShieldGen() {
+			ShieldModule shieldGen = m.ShieldGen;
+			int maxShieldAdd = shieldGen.maxShieldAdd;
+			SafeUpdateField(sMaxShieldBonusText, maxShieldAdd, ref prevShieldAdd);
+			ShieldSkillEffects shieldSkillEffects = WorldRules.Instance.shieldSkillEffects;
+			if (shieldGen.reloadInterval != 0f) {
+				shieldReloadTime.SetActiveIfNeeded();
+				float num = shieldGen.reloadInterval * shieldSkillEffects.EffectiveSkillMultiplier(m, true);
+				shieldReloadTime.effects.text = shieldGen.reloadInterval + Localization.TT("s") + ((shieldGen.reloadInterval != num) ? string.Format(" <color=lime>({0:0.0}{1})</color>", num, Localization.TT("s")) : "");
+				shieldReloadTime.skillBonus.text = string.Format("-{0}% {1}", shieldSkillEffects.skillPointBonusPercent, Localization.TT("per"));
+				shieldReloadTime.Hoverable.hoverText = string.Format(shieldReloadTime.HoverableTextTemplate, shieldSkillEffects.skillPointBonusPercent);
+			}
+		}
+		//Updated Warp Drive Information
+		[MonoModReplace] private void DoWarp() {
+			WarpModule warp = m.Warp;
+			SafeUpdateField(warpActivationFuelText, warp.activationFuel, ref prevActivationFuel);
+			Ship ship = m.Ship;
+			DoRequirementColor(warpActivationFuelText, warpActivationFuel, ship == null || ship.Fuel >= warp.activationFuel);
+			WarpSkillEffects warpSkillEffects = WorldRules.Instance.warpSkillEffects;
+			warpReloadTime.SetActiveIfNeeded();
+			float num = warp.reloadInterval * warpSkillEffects.EffectiveSkillMultiplier(m, true);
+			warpReloadTime.effects.text = warp.reloadInterval + Localization.TT("s") + ((warp.reloadInterval != num) ? string.Format(" <color=lime>({0:0.0}{1})</color>", num, Localization.TT("s")) : "");
+			warpReloadTime.skillBonus.text = string.Format("-{0}% {1}", warpSkillEffects.skillPointBonusPercent, Localization.TT("per"));
+			warpReloadTime.Hoverable.hoverText = string.Format(warpReloadTime.HoverableTextTemplate, warpSkillEffects.skillPointBonusPercent);
 		}
 		//Updated Reactor Information
 		[MonoModReplace] private void DoReactor() {
 			ReactorModule reactor = m.Reactor;
-			fireChanceHover.hoverText = "Additional power from overcharge and effective reactor overcharge time";
-			SafeUpdateField(reactorPowerProdText, reactor.powerCapacity, ref prevPowerCapacity);
-			SafeUpdateField(fireChanceText, reactor.overchargePowerCapacityAdd.ToString() + " (" + string.Format("{0:0.0}s", m.overchargeSeconds) + ")");
+			fireChanceHover.hoverText = "Overcharge power bonus and effective time";
+			fireChanceText.alignment = TextAnchor.UpperLeft;
+			if (m.HasFullHealth) SafeUpdateField(reactorPowerProdText, reactor.powerCapacity, ref prevPowerCapacity, "{0:0} GW/h");
+			else SafeUpdateField(reactorPowerProdText, string.Format("<color=red>{0:0}</color> GW/h", reactor.powerCapacity * FFU_BE_Defs.GetHealthPercent(m)));
+			if (m.HasFullHealth) SafeUpdateField(fireChanceText, string.Format("+{0:0} GW/h\n{1:0.0}s", reactor.overchargePowerCapacityAdd, m.overchargeSeconds));
+			else SafeUpdateField(fireChanceText, string.Format("<color=red>+{0:0}</color> GW/h\n{1:0.0}s", reactor.overchargePowerCapacityAdd * FFU_BE_Defs.GetHealthPercent(m), m.overchargeSeconds));
 			DoResourceConsPerDist(reactor.ConsumedPerDistance, m);
 		}
-		//Greenhouse Interface Fix
+		//Updated Drone/Medbay Information
+		[MonoModReplace] private void DoMedbay() {
+			MedbayModule medbay = m.Medbay;
+			int num = m.operatorSpots.Length;
+			float secondsPerHp = medbay.secondsPerHp;
+			int num2 = (int)medbay.resourcesPerHp.organics;
+			int num3 = (int)medbay.resourcesPerHp.synthetics;
+			SafeUpdateField(medbayHealSpotsText, num, ref prevHealingSpots);
+			SafeUpdateField(medbayHealSpeedText, secondsPerHp, ref prevHealingInvSpeed, "{0:0.0}");
+			PlayerData playerData = PlayerDatas.Get(m.Ownership.GetOwner());
+			Ship ship = m.Ship;
+			SafeUpdateField(medbayOrganicsPerHpText, num2, ref prevOrganicsPerHp);
+			DoRequirementColor(medbayOrganicsPerHpText, medbayOrganicsPerHp, ship == null || playerData == null || playerData.Organics.Total >= num2);
+			SafeUpdateField(medbaySyntheticsPerHpText, num3, ref prevSyntheticsPerHp);
+			DoRequirementColor(medbaySyntheticsPerHpText, medbaySyntheticsPerHp, ship == null || playerData == null || playerData.Synthetics.Total >= num3);
+		}
+		//Updated Converter Information
+		[MonoModReplace] private void DoMaterialsConverter() {
+			MaterialsConverterModule materialsConverter = m.MaterialsConverter;
+			DoResourceConsPerSecond(materialsConverter.consume, materialsConverter.secondsPerConversion);
+			DoResourceProdPerSecond(materialsConverter.produce, materialsConverter.secondsPerConversion);
+		}
+		//Updated Greenhouse Information
 		[MonoModReplace] private void DoGarden() {
 			SafeUpdateField(crewText, m.CurrentLocalOpsCount + "/" + m.operatorSpots.Length);
 			GardenSkillEffects gardenSkillEffects = WorldRules.Instance.gardenSkillEffects;
@@ -1000,7 +1133,7 @@ namespace RST.UI {
 			SafeUpdateField(gardenOrganicsProdBonusText, totalGardenProduction + "/100" + Localization.TT("ru") + " " + Localization.TT("per"));
 			removesOpResCons.SetActive(true);
 		}
-		//Laboratory Interface Fix
+		//Updated Laboratory Information
 		[MonoModReplace] private void DoResearch() {
 			SafeUpdateField(crewText, m.CurrentLocalOpsCount + "/" + m.operatorSpots.Length);
 			ScienceSkillEffects scienceSkillEffects = WorldRules.Instance.scienceSkillEffects;
@@ -1010,10 +1143,19 @@ namespace RST.UI {
 			int totalLabProduction = scienceSkillEffects.skillPointBonusProduction * (int)m.Research.producedPerSkillPoint.credits;
 			SafeUpdateField(researchCreditsProdBonusText, totalLabProduction + "/100" + Localization.TT("ru") + " " + Localization.TT("per"));
 		}
+		//Updated Cryosleep Information
+		[MonoModReplace] private void DoCryosleep() {
+			int num = m.operatorSpots.Length;
+			removesOpResCons.SetActive(true);
+			SafeUpdateField(cryoSleepSpotsText, num, ref prevOpSpots);
+			cryoSleepChanceToHeal.SetActive(m.Cryosleep.healOneCrewHp);
+			cryoGenDreamCredits.SetActive(m.Cryosleep.genDreamCredits);
+		}
 		//Show Updated Crew Damage in Weapon Panel
 		[MonoModReplace] private void DoWeaponCrewDmg(WeaponModule w, ShootAtDamageDealer.CrewDmgLevel crewDmgLevel) {
 			dmgToCrewTextHover.hoverText = "Chance to damage all crewmembers within area of effect by shown amount.";
 			string crewDmgText = w.magazineSize + "x" + w.ProjectileOrBeamPrefab.GetDamage(w).doorDmg;
+			dmgToCrewText.alignment = TextAnchor.MiddleLeft;
 			switch (crewDmgLevel) {
 				case ShootAtDamageDealer.CrewDmgLevel.None: SafeUpdateField(dmgToCrewText, Localization.TT("None (" + (int)Core.CrewHitChance.None + "%)")); break;
 				case ShootAtDamageDealer.CrewDmgLevel.Low: SafeUpdateField(dmgToCrewText, Localization.TT(crewDmgText + " (" + (int)Core.CrewHitChance.Low + "%)")); break;
@@ -1024,6 +1166,7 @@ namespace RST.UI {
 		//Show Update Fire Ignition Chance in Weapon Panel
 		[MonoModReplace] private void DoWeaponFireChance(ShootAtDamageDealer.FireChanceLevel fireChanceLevel) {
 			fireChanceHover.hoverText = "Chance to ignite fire in every tile within area of effect.";
+			fireChanceText.alignment = TextAnchor.MiddleLeft;
 			switch (fireChanceLevel) {
 				case ShootAtDamageDealer.FireChanceLevel.None: SafeUpdateField(fireChanceText, Localization.TT("None (" + (int)Core.FireIgniteChance.None + "%)")); break;
 				case ShootAtDamageDealer.FireChanceLevel.Low: SafeUpdateField(fireChanceText, Localization.TT("Low (" + (int)Core.FireIgniteChance.Low + "%)")); break;

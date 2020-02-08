@@ -126,17 +126,11 @@ namespace FFU_Bleeding_Edge {
 
 namespace RST {
 	public class patch_Ship : Ship {
-		//[MonoModIgnore] private bool flyTo;
-		//[MonoModIgnore] private bool exploding;
-		//[MonoModIgnore] private Vector2 flyToPos;
-		//[MonoModIgnore] private float explosionTimer;
-		//[MonoModIgnore] private bool doAfterSpawnDone;
-		//[MonoModIgnore] private int doAfterSpawnCounter;
 		[MonoModIgnore] private bool prevIsSelfDestructing;
 		[MonoModIgnore] private void CompleteFlyTo() { }
 		[MonoModIgnore] private void UpdateExplosion() { }
 		[MonoModIgnore] private void AiSendSomeoneToExtinguishFire() { }
-		//Ship Evasion Limit from Configuration
+		//Ship Evasion Limit from Configuration & Reduced Evasion Bonus from Damaged Modules
 		public int GetEvasion(Action<IHasDisplayNameLocalized, int> perProviderCallback) {
 			int finalEvasion = evasionPercentAdd;
 			if (evasionPercentAdd != 0) perProviderCallback?.Invoke(this, evasionPercentAdd);
@@ -145,6 +139,7 @@ namespace RST {
 			foreach (ShipModule shipModule in shipModules) {
 				if (shipModule != null) {
 					int evasionFromModule = (perProviderCallback != null) ? (-(int)(shipModule.SortIndex >> 32)) : shipModule.ShipEvasionPercentBonus;
+					if (!shipModule.HasFullHealth) evasionFromModule = Mathf.CeilToInt(evasionFromModule * FFU_BE_Defs.GetHealthPercent(shipModule));
 					if (evasionFromModule != 0) {
 						finalEvasion += evasionFromModule;
 						perProviderCallback?.Invoke(shipModule, evasionFromModule);
@@ -152,6 +147,22 @@ namespace RST {
 				}
 			}
 			return Mathf.Clamp(finalEvasion, 0, FFU_BE_Defs.shipMaxEvasionLimit);
+		}
+		//Reduced Accuracy Bonus from Damaged Modules
+		[MonoModReplace] public int GetAccuracy(Action<IHasDisplayNameLocalized, int> perProviderCallback) {
+			int finalAccuracy = accuracyPercentAdd;
+			if (accuracyPercentAdd != 0) perProviderCallback?.Invoke(this, accuracyPercentAdd);
+			foreach (ShipModule shipModule in Modules) {
+				if (shipModule != null) {
+					int shipAccuracyPercentBonus = shipModule.ShipAccuracyPercentBonus;
+					if (!shipModule.HasFullHealth) shipAccuracyPercentBonus = Mathf.CeilToInt(shipAccuracyPercentBonus * FFU_BE_Defs.GetHealthPercent(shipModule));
+					if (shipAccuracyPercentBonus != 0) {
+						finalAccuracy += shipAccuracyPercentBonus;
+						perProviderCallback?.Invoke(shipModule, shipAccuracyPercentBonus);
+					}
+				}
+			}
+			return finalAccuracy;
 		}
 		//Enforce Ship Self-Destruct Timer
 		[MonoModReplace] private void DoSelfDestruct() {
@@ -163,72 +174,6 @@ namespace RST {
 			if (!isSelfDestructing && prevIsSelfDestructing) selfDestructTimer.Restart(WorldRules.Instance.shipSelfDestructTime);
 			if (isSelfDestructing && selfDestructTimer.Update(1f)) TakeDamage(int.MaxValue);
 		}
-		//Collections ToList() Fix
-		/*[MonoModReplace] private void Update() {
-			if (flyTo) {
-				if (!(Vector2.Distance(base.transform.position, flyToPos) < 0.1f)) {
-					if (!RstTime.IsPaused) base.transform.position = Vector2.Lerp(base.transform.position, flyToPos, 0.55f);
-				} else {
-					flyTo = false;
-					CompleteFlyTo();
-				}
-			}
-			if (doAfterSpawnCounter >= 0) {
-				if (doAfterSpawnCounter == 0 && !doAfterSpawnDone) {
-					List<IDoAfterShipSpawn> registeredChildren = GetRegisteredChildren<IDoAfterShipSpawn>();
-					foreach (IDoAfterShipSpawn item in registeredChildren) item.DoAfterShipSpawn(this);
-					DestroyAll(registeredChildren);
-					Ownership.Owner owner = Ownership.GetOwner();
-					if (owner == Ownership.Owner.Enemy) ShipAction.Do(this, ShipAction.Action.TurnAllModulesOn);
-					AI?.ThinkAndCommand(WorldRules.Instance.shipAiDoOnceActionsToConsider, true);
-					PowerDistributor.Update();
-					PlayerData me = PlayerDatas.Me;
-					switch (owner) {
-						case Ownership.Owner.Enemy:
-						ShipAction.Do(this, ShipAction.Action.ReloadShield);
-						ShipAction.Do(this, ShipAction.Action.TurnWeaponsToShipDirection);
-						break;
-						case Ownership.Owner.Me:
-						if (me != null && me.quickSelectSlotCount <= 0) me.AutoAssignQuickSelectSlots();
-						break;
-					}
-					if (owner == Ownership.Owner.Me && me != null && WorldRules.Impermanent.beginnerStartingBonus) {
-						WorldRules.StartingBonus beginnerStartingBonus = WorldRules.Instance.beginnerStartingBonus;
-						accuracyPercentAdd += beginnerStartingBonus.accuracyBonusPercent;
-						evasionPercentAdd += beginnerStartingBonus.evasionBonusPercent;
-						deflectChance += beginnerStartingBonus.deflectionBonusPercent * 0.01f;
-						string text = null;
-						me.Fuel.Add((int)beginnerStartingBonus.resources.fuel, text);
-						me.Organics.Add((int)beginnerStartingBonus.resources.organics, text);
-						me.Explosives.Add((int)beginnerStartingBonus.resources.explosives, text);
-						me.Exotics.Add((int)beginnerStartingBonus.resources.exotics, text);
-						me.Synthetics.Add((int)beginnerStartingBonus.resources.synthetics, text);
-						me.Metals.Add((int)beginnerStartingBonus.resources.metals, text);
-						if ((int)beginnerStartingBonus.resources.credits != 0) {
-							me.Credits += (int)beginnerStartingBonus.resources.credits;
-							me.creditsChangeReasons.Add(text);
-						}
-					}
-					doAfterSpawnDone = true;
-				}
-				doAfterSpawnCounter--;
-			}
-			bool flag = shield.ShieldPoints > 0;
-			if (shield.gameObject.activeSelf != flag) shield.gameObject.SetActive(flag);
-			DoSelfDestruct();
-			if (IsDead) {
-				if (!exploding) {
-					if (Ownership.GetOwner() == Ownership.Owner.Me) GameSummaryPanel.PlayerDeathRelatedAchievementsCheck(this);
-					PlayerData me2 = PlayerDatas.Me;
-					if (me2 != null) me2.shipsDestroyed++;
-					UsableWarpModule?.CancelWarp();
-					SelectionManager.RemoveFromSelection(base.gameObject);
-					explosionTimer = 0f;
-					exploding = true;
-				}
-			} else AiSendSomeoneToExtinguishFire();
-			if (exploding) UpdateExplosion();
-		}*/
 		//All Modules Lootable (Depends on their Integrity)
 		[MonoModReplace] private void LeaveLootModules() {
 			int[] leaveLootModuleCounts = WorldRules.Instance.shipExplosionParams.leaveLootModuleCounts;
@@ -238,8 +183,8 @@ namespace RST {
 				if (me != null) me.battleLoot += lootGet;
 				foreach (ShipModule droppedModule in droppedModulesList) {
 					if (FFU_BE_Defs.debugMode) Debug.Log("Dropped Module: [" + droppedModule.name + "] Health: " + droppedModule.Health + "/" + droppedModule.MaxHealth);
-					bool wasDropped = (FFU_BE_Defs.intactModuleDropChance * (droppedModule.Health / (float)droppedModule.MaxHealth)) >= UnityEngine.Random.Range(0f, 1f);
-					if (droppedModule.type == ShipModule.Type.Weapon_Nuke) wasDropped = (droppedModule.Health / (float)droppedModule.MaxHealth) >= UnityEngine.Random.Range(0f, 1f);
+					bool wasDropped = (FFU_BE_Defs.intactModuleDropChance * FFU_BE_Defs.GetHealthPercent(droppedModule)) >= UnityEngine.Random.Range(0f, 1f);
+					if (droppedModule.type == ShipModule.Type.Weapon_Nuke) wasDropped = FFU_BE_Defs.GetHealthPercent(droppedModule) >= UnityEngine.Random.Range(0f, 1f);
 					if (droppedModule.displayName.Contains("Cache")) wasDropped = true;
 					if (wasDropped) DetatchModule(droppedModule);
 				}
