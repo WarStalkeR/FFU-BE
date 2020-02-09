@@ -68,6 +68,7 @@ namespace FFU_Bleeding_Edge {
 			shipModule.powerConsumed = 0;
 			switch (Core.GetOriginalName(shipModule.name)) {
 				case "artifactmodule tec 33 biostasis nice worm":
+				if (!FFU_BE_Defs.cacheTypeIDs["Upgrades"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Upgrades"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Mechanical <color=#" + colorCache + "ff>Upgrades</color> Cache";
 				shipModule.description = "Upgrades cache that contains upgrades sets that increase health of drones and robots by certain amount. To apply: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 500f, exotics = 10f };
@@ -75,6 +76,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 11 biostasis":
+				if (!FFU_BE_Defs.cacheTypeIDs["Implants"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Implants"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Biological <color=#" + colorCache + "ff>Implants</color> Cache";
 				shipModule.description = "Implants cache that contains implant sets that increase health of biological crewmembers by certain amount. To apply: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, organics = 500f, exotics = 10f };
@@ -82,6 +84,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 50;
 				break;
 				case "artifactmodule tec 17 broken screen gizmo, data":
+				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "CQC Class <color=#" + colorCache + "ff>Weapons</color> Cache";
 				shipModule.description = "Weapon cache that contains full sets of Power Fists, Dual Welders, Napalm Guns and Toxic Guns. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 500f, synthetics = 500f, explosives = 500f, exotics = 15f };
@@ -89,6 +92,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 25 broken screen gizmo":
+				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Kinetic Type <color=#" + colorCache + "ff>Weapons</color> Cache";
 				shipModule.description = "Weapon cache that contains full sets of Revolvers, Pistols, SMGs, Shotguns, Rifles, Autocannon, Breacher Cannons and Railguns. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 1250f, synthetics = 250f, explosives = 500f, exotics = 10f };
@@ -96,6 +100,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 32 broken container gizmo":
+				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Laser Type <color=#" + colorCache + "ff>Weapons</color> Cache";
 				shipModule.description = "Weapon cache that contains full sets of Laser Pistols, Laser Rifles and Laser Cannons. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 750f, synthetics = 1250f, exotics = 15f };
@@ -104,6 +109,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 37 ripped quarter of a dome":
+				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Energy Type <color=#" + colorCache + "ff>Weapons</color> Cache";
 				shipModule.description = "Weapon cache that contains full sets of Blaster Pistols, Blaster Rifles, Warp Ray Guns and Particle Guns. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 750f, synthetics = 1250f, exotics = 20f };
@@ -112,6 +118,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 36 broken gizmo":
+				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Backup Class <color=#" + colorCache + "ff>Weapons</color> Cache";
 				shipModule.description = "Weapon cache that contains full sets Revolvers, Assault Pistols and Laser Pistols. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 750f, synthetics = 250f, explosives = 250f, exotics = 5f };
@@ -119,6 +126,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 34 data core grammofon":
+				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Tactical Class <color=#" + colorCache + "ff>Weapons</color> Cache";
 				shipModule.description = "Weapon cache that contains full sets Assault SMGs, Assault Rifles, Assault Shotguns and Laser Rifles. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 1250f, synthetics = 500f, explosives = 500f, exotics = 15f };
@@ -126,6 +134,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 35 data core makk":
+				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Assault Class <color=#" + colorCache + "ff>Weapons</color> Cache";
 				shipModule.description = "Weapon cache that contains full sets Autocannons, Breacher Cannons, Assault Railguns and Laser Cannons. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 2000f, synthetics = 1000f, explosives = 1000f, exotics = 25f };
@@ -374,6 +383,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 100;
 				break;
+				case "storage container 3x3":
 				case "storage container 3x4":
 				shipModule.displayName = "Modular Storage Compartment";
 				shipModule.description = "Universal storage unit that stores disassembled modules in highly compact form and requires quite some time to assemble them back. Also holds answer to the Ultimate Question of Life, the Universe, and Everything.";

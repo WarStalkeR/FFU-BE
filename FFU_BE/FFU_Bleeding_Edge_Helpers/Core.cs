@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace FFU_Bleeding_Edge {
 	public class Core {
+		public static string TT(string localeString) {
+			return Localization.TT(localeString);
+		}
 		public static int ParseIntExprMult(string inputValue, int multVar = 10) {
 			if (string.IsNullOrEmpty(inputValue)) return 0;
 			string[] array = inputValue.Split(new char[] { ',' });

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using System.Text;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
@@ -55,6 +56,21 @@ namespace FFU_Bleeding_Edge {
 		public static IDictionary<int, int> shipPrefabsDoorHealth = new Dictionary<int, int>();
 		public static IDictionary<int, string> shipPrefabsDoorName = new Dictionary<int, string>();
 		public static IDictionary<int, int> shipPrefabsStorageSize = new Dictionary<int, int>();
+		public static IDictionary<string, List<int>> weaponTypeIDs = new Dictionary<string, List<int>>() {
+			{"Launchers", new List<int>()},
+			{"Autocannons", new List<int>()},
+			{"Howitzers", new List<int>()},
+			{"Railguns", new List<int>()},
+			{"Railcannons", new List<int>()},
+			{"Lasers", new List<int>()},
+			{"Beams", new List<int>()},
+			{"Heat Rays", new List<int>()},
+			{"Disruptors", new List<int>()},
+			{"Exotic Rays", new List<int>()}};
+		public static IDictionary<string, List<int>> cacheTypeIDs = new Dictionary<string, List<int>>() {
+			{"Weapons", new List<int>()},
+			{"Implants", new List<int>()},
+			{"Upgrades", new List<int>()}};
 		public static int[] techLevel = new int[] { 0, 1500, 3500, 6000, 10000, 16000, 24000, 34000, 46000, 60000 };
 		public static List<int> discoveredModuleIDs = new List<int>(new int[] { 760167696, 453797399, 1581569285,
 			345284781, 813048445, 124199597, 92356131, 430038657, 2146165248, 533676501, 858424257, 821254137,
@@ -114,6 +130,9 @@ namespace FFU_Bleeding_Edge {
 		public static int[] killedFleetsTrigger = new int[] { 3, 6, 10, 15, 21, 27, 34, 42, 50 };
 		public static int[] timesInterceptedByEnforcers = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		public static float empowerLocalForcesChance = 0.45f;
+		public static float researchRareDivisor = 20f;
+		public static float researchCommonDivisor = 1000f;
+		public static float reverseResearchDivisor = 3f;
 		public static ResourceValueGroup doorRepairCost = new ResourceValueGroup { metals = 2f, synthetics = 4f };
 		//Configuration Variables
 		public static bool advancedWelcomePopup = false;
@@ -695,6 +714,12 @@ namespace FFU_Bleeding_Edge {
 		public static bool DamagedButWorking(ShipModule shipModule) {
 			return GetHealthPercent(shipModule) >= moduleDamageThreshold;
 		}
+		public static float GetResearchFromRVG(ResourceValueGroup mOutput) {
+			return (mOutput.credits + mOutput.organics + mOutput.fuel + mOutput.metals + mOutput.synthetics + mOutput.explosives) / researchCommonDivisor + mOutput.exotics / researchRareDivisor;
+		}
+		public static float GetReverseFromRVG(ResourceValueGroup mOutput) {
+			return GetResearchFromRVG(mOutput) / reverseResearchDivisor;
+		}
 		public static int SortAllModules(ShipModule shipModule) {
 			switch (shipModule.type) {
 				case ShipModule.Type.ResourcePack:
@@ -921,198 +946,163 @@ namespace FFU_Bleeding_Edge {
 				default: return 1.0f;
 			}
 		}
-		public static float GetModuleEnergyEmission(ShipModule shipModule) {
+		public static float GetModuleEnergyEmission(ShipModule shipModule, bool isStatic = false) {
+			if (shipModule == null) return 0f;
 			Core.BonusMod moduleMofidier = FFU_BE_Mod_Technology.GetModuleModifier(shipModule);
 			switch (shipModule.type) {
 				case ShipModule.Type.Bridge:
-				if (shipModule.Bridge != null && shipModule.turnedOn) return (shipModule.PowerConsumed + shipModule.CurrentLocalOpsCount) * GetModuleEnergyEmissionMult(shipModule);
+				if (shipModule.Bridge != null && (shipModule.turnedOn || isStatic))
+					return (shipModule.PowerConsumed + shipModule.CurrentLocalOpsCount) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.PointDefence:
-				if (shipModule.PointDefence != null && shipModule.turnedOn) return (shipModule.PowerConsumed + shipModule.PointDefence.coverRadius) * GetModuleEnergyEmissionMult(shipModule);
+				if (shipModule.PointDefence != null && (shipModule.turnedOn || isStatic))
+					return (shipModule.PowerConsumed + shipModule.PointDefence.coverRadius) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.ShieldGen:
-				if (shipModule.ShieldGen != null && shipModule.turnedOn) return (shipModule.PowerConsumed + shipModule.ShieldGen.MaxShieldAdd / 5f) * GetModuleEnergyEmissionMult(shipModule);
+				if (shipModule.ShieldGen != null && (shipModule.turnedOn || isStatic))
+					return (shipModule.PowerConsumed + shipModule.ShieldGen.MaxShieldAdd / 5f) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.Dronebay:
 				case ShipModule.Type.Medbay:
-				if (shipModule.Medbay != null && shipModule.turnedOn) return (shipModule.PowerConsumed + (shipModule.Medbay.resourcesPerHp.organics +
-						shipModule.Medbay.resourcesPerHp.fuel + shipModule.Medbay.resourcesPerHp.metals + shipModule.Medbay.resourcesPerHp.synthetics +
-						shipModule.Medbay.resourcesPerHp.explosives + shipModule.Medbay.resourcesPerHp.exotics * 10f + shipModule.Medbay.resourcesPerHp.credits / 10f) *
-						shipModule.CurrentLocalOpsCount) * GetModuleEnergyEmissionMult(shipModule);
+				if (shipModule.Medbay != null && (shipModule.turnedOn || isStatic)) return (shipModule.PowerConsumed + (shipModule.Medbay.resourcesPerHp.organics +
+					shipModule.Medbay.resourcesPerHp.fuel + shipModule.Medbay.resourcesPerHp.metals + shipModule.Medbay.resourcesPerHp.synthetics +
+					shipModule.Medbay.resourcesPerHp.explosives + shipModule.Medbay.resourcesPerHp.exotics * 10f + shipModule.Medbay.resourcesPerHp.credits / 10f) *
+					shipModule.CurrentLocalOpsCount) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.Cryosleep:
-				if (shipModule.Cryosleep != null && shipModule.turnedOn)
+				if (shipModule.Cryosleep != null && (shipModule.turnedOn || isStatic))
 					return (shipModule.PowerConsumed + shipModule.PowerConsumed / 2f * shipModule.CurrentLocalOpsCount) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.ResearchLab:
-				if (shipModule.Research != null && shipModule.turnedOn)
+				if (shipModule.Research != null && (shipModule.turnedOn || isStatic))
 					return (shipModule.PowerConsumed + (shipModule.Research.producedPerSkillPoint.organics + shipModule.Research.producedPerSkillPoint.fuel +
-						shipModule.Research.producedPerSkillPoint.metals + shipModule.Research.producedPerSkillPoint.synthetics +
-						shipModule.Research.producedPerSkillPoint.explosives + shipModule.Research.producedPerSkillPoint.exotics * 10 +
-						shipModule.Research.producedPerSkillPoint.credits) * shipModule.CurrentLocalOpsCount) * GetModuleEnergyEmissionMult(shipModule);
+					shipModule.Research.producedPerSkillPoint.metals + shipModule.Research.producedPerSkillPoint.synthetics +
+					shipModule.Research.producedPerSkillPoint.explosives + shipModule.Research.producedPerSkillPoint.exotics * 10 +
+					shipModule.Research.producedPerSkillPoint.credits) * shipModule.CurrentLocalOpsCount) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.Garden:
-				if (shipModule.GardenModule != null && shipModule.turnedOn)
+				if (shipModule.GardenModule != null && (shipModule.turnedOn || isStatic))
 					return (shipModule.PowerConsumed + (shipModule.GardenModule.producedPerSkillPoint.organics + shipModule.GardenModule.producedPerSkillPoint.fuel +
-						shipModule.GardenModule.producedPerSkillPoint.metals + shipModule.GardenModule.producedPerSkillPoint.synthetics +
-						shipModule.GardenModule.producedPerSkillPoint.explosives + shipModule.GardenModule.producedPerSkillPoint.exotics * 10 +
-						shipModule.GardenModule.producedPerSkillPoint.credits) * shipModule.CurrentLocalOpsCount) * GetModuleEnergyEmissionMult(shipModule);
+					shipModule.GardenModule.producedPerSkillPoint.metals + shipModule.GardenModule.producedPerSkillPoint.synthetics +
+					shipModule.GardenModule.producedPerSkillPoint.explosives + shipModule.GardenModule.producedPerSkillPoint.exotics * 10 +
+					shipModule.GardenModule.producedPerSkillPoint.credits) * shipModule.CurrentLocalOpsCount) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.Sensor:
-				if (shipModule.Sensor != null && shipModule.turnedOn)
+				if (shipModule.Sensor != null && (shipModule.turnedOn || isStatic))
 					return (shipModule.PowerConsumed + shipModule.Sensor.sectorRadarRange / 10f + shipModule.Sensor.starmapRadarRange) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.MaterialsConverter:
-				if (shipModule.MaterialsConverter != null && shipModule.turnedOn) return (shipModule.PowerConsumed + shipModule.MaterialsConverter.consume.organics +
-						shipModule.MaterialsConverter.consume.fuel + shipModule.MaterialsConverter.consume.metals + shipModule.MaterialsConverter.consume.synthetics +
-						shipModule.MaterialsConverter.consume.explosives + shipModule.MaterialsConverter.consume.exotics * 10f + shipModule.MaterialsConverter.consume.credits / 10f +
-						shipModule.MaterialsConverter.produce.organics + shipModule.MaterialsConverter.produce.fuel + shipModule.MaterialsConverter.produce.metals +
-						shipModule.MaterialsConverter.produce.synthetics + shipModule.MaterialsConverter.produce.explosives + shipModule.MaterialsConverter.produce.exotics * 10f +
-						shipModule.MaterialsConverter.produce.credits / 10f) * GetModuleEnergyEmissionMult(shipModule);
+				if (shipModule.MaterialsConverter != null && (shipModule.turnedOn || isStatic))
+					return (shipModule.PowerConsumed + shipModule.MaterialsConverter.consume.organics +
+					shipModule.MaterialsConverter.consume.fuel + shipModule.MaterialsConverter.consume.metals + shipModule.MaterialsConverter.consume.synthetics +
+					shipModule.MaterialsConverter.consume.explosives + shipModule.MaterialsConverter.consume.exotics * 10f + shipModule.MaterialsConverter.consume.credits / 10f +
+					shipModule.MaterialsConverter.produce.organics + shipModule.MaterialsConverter.produce.fuel + shipModule.MaterialsConverter.produce.metals +
+					shipModule.MaterialsConverter.produce.synthetics + shipModule.MaterialsConverter.produce.explosives + shipModule.MaterialsConverter.produce.exotics * 10f +
+					shipModule.MaterialsConverter.produce.credits / 10f) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.Reactor:
-				if (shipModule.Reactor != null && shipModule.IsOvercharged && shipModule.turnedOn)
+				if (shipModule.Reactor != null && shipModule.IsOvercharged && (shipModule.turnedOn || isStatic))
 					return (shipModule.Reactor.powerCapacity + shipModule.Reactor.overchargePowerCapacityAdd) * GetModuleEnergyEmissionMult(shipModule);
-				else if (shipModule.Reactor != null && shipModule.turnedOn)
+				else if (shipModule.Reactor != null && (shipModule.turnedOn || isStatic))
 					return shipModule.Reactor.powerCapacity * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.PassiveECM:
-				if (shipModule.ECM != null && shipModule.turnedOn) return shipModule.PowerConsumed / (moduleMofidier == Core.BonusMod.Sustained ? 0.5f :
+				if (shipModule.ECM != null && (shipModule.turnedOn || isStatic))
+					return shipModule.PowerConsumed / (moduleMofidier == Core.BonusMod.Sustained ? 0.5f :
 					moduleMofidier == Core.BonusMod.Unstable ? 2f : 1f) * GetModuleEnergyEmissionMult(shipModule) *
 					FFU_BE_Mod_Technology.GetTierBonus(FFU_BE_Mod_Technology.GetModuleTier(shipModule), Core.BonusType.Default) *
 					(moduleMofidier == Core.BonusMod.Enhanced ? 1.2f : moduleMofidier == Core.BonusMod.Deficient ? 0.5f : 1f);
 				else return 0f;
 				case ShipModule.Type.StealthDecryptor:
-				if (shipModule.StealthDecryptor != null && shipModule.turnedOn) return shipModule.PowerConsumed / (moduleMofidier == Core.BonusMod.Sustained ? 0.5f :
+				if (shipModule.StealthDecryptor != null && (shipModule.turnedOn || isStatic))
+					return shipModule.PowerConsumed / (moduleMofidier == Core.BonusMod.Sustained ? 0.5f :
 					moduleMofidier == Core.BonusMod.Unstable ? 2f : 1f) * GetModuleEnergyEmissionMult(shipModule) *
 					FFU_BE_Mod_Technology.GetTierBonus(FFU_BE_Mod_Technology.GetModuleTier(shipModule), Core.BonusType.Default) *
 					(moduleMofidier == Core.BonusMod.Enhanced ? 2f : moduleMofidier == Core.BonusMod.Deficient ? 0.5f : 1f);
 				else return 0f;
 				case ShipModule.Type.Weapon:
-				if (shipModule.Weapon != null && shipModule.turnedOn)
+				if (shipModule.Weapon != null && (shipModule.turnedOn || isStatic))
 					return (shipModule.PowerConsumed + shipModule.Weapon.resourcesPerShot.fuel + shipModule.Weapon.resourcesPerShot.explosives * 2f +
-						shipModule.Weapon.resourcesPerShot.exotics * 10f) * GetModuleEnergyEmissionMult(shipModule);
+					shipModule.Weapon.resourcesPerShot.exotics * 10f) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.Weapon_Nuke:
-				if (shipModule.Weapon != null) return (shipModule.craftCost.fuel + shipModule.craftCost.explosives * 2f + shipModule.craftCost.exotics * 10f) * GetModuleEnergyEmissionMult(shipModule);
+				if (shipModule.Weapon != null)
+					return (shipModule.craftCost.fuel + shipModule.craftCost.explosives * 2f + shipModule.craftCost.exotics * 10f) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.Engine:
-				if (shipModule.Engine != null && shipModule.turnedOn) return (shipModule.PowerConsumed + shipModule.Engine.ConsumedPerDistance.fuel * 100f) * GetModuleEnergyEmissionMult(shipModule);
+				if (shipModule.Engine != null && shipModule.IsOvercharged && (shipModule.turnedOn || isStatic))
+					return (shipModule.PowerConsumed + shipModule.overchargePowerNeed + shipModule.Engine.ConsumedPerDistance.fuel * 100f) * GetModuleEnergyEmissionMult(shipModule);
+				else if (shipModule.Engine != null && (shipModule.turnedOn || isStatic))
+					return (shipModule.PowerConsumed + shipModule.Engine.ConsumedPerDistance.fuel * 100f) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.Warp:
-				if (shipModule.Warp != null) return (shipModule.PowerConsumed + shipModule.Warp.activationFuel) * GetModuleEnergyEmissionMult(shipModule);
+				if (shipModule.Warp != null)
+					return (shipModule.PowerConsumed + shipModule.Warp.activationFuel) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				default: return 0f;
 			}
 		}
-		public static string GetModuleEnergyEmissionText(ShipModule shipModule) {
+		public static string GetModuleEmissionValues(ShipModule shipModule) {
+			if (shipModule == null) return null;
 			float emissionMin = 0f;
 			float emissionMax = 0f;
-			bool isStaticShipModule = !shipModule.name.ToLower().Contains("(clone)");
 			Core.BonusMod moduleMofidier = FFU_BE_Mod_Technology.GetModuleModifier(shipModule);
 			switch (shipModule.type) {
-				case ShipModule.Type.Bridge:
-				if (shipModule.Bridge != null && isStaticShipModule) {
-					emissionMin = shipModule.PowerConsumed * GetModuleEnergyEmissionMult(shipModule);
-					emissionMax = (shipModule.PowerConsumed + shipModule.OperatorSpots.Length) * GetModuleEnergyEmissionMult(shipModule);
-				} else { emissionMin = 0f; emissionMax = 0f; }
-				break;
-				case ShipModule.Type.PointDefence:
-				if (shipModule.PointDefence != null && isStaticShipModule) emissionMin = (shipModule.PowerConsumed + shipModule.PointDefence.coverRadius) * GetModuleEnergyEmissionMult(shipModule);
-				else { emissionMin = 0f; emissionMax = 0f; }
-				break;
-				case ShipModule.Type.ShieldGen:
-				if (shipModule.ShieldGen != null && isStaticShipModule) emissionMin = (shipModule.PowerConsumed + shipModule.ShieldGen.MaxShieldAdd / 5f) * GetModuleEnergyEmissionMult(shipModule);
-				else { emissionMin = 0f; emissionMax = 0f; }
-				break;
 				case ShipModule.Type.Dronebay:
 				case ShipModule.Type.Medbay:
-				if (shipModule.Medbay != null && isStaticShipModule) {
-					emissionMin = shipModule.PowerConsumed * GetModuleEnergyEmissionMult(shipModule);
-					emissionMax = (shipModule.PowerConsumed + (shipModule.Medbay.resourcesPerHp.organics +
-						 shipModule.Medbay.resourcesPerHp.fuel + shipModule.Medbay.resourcesPerHp.metals + shipModule.Medbay.resourcesPerHp.synthetics +
-						 shipModule.Medbay.resourcesPerHp.explosives + shipModule.Medbay.resourcesPerHp.exotics * 10f + shipModule.Medbay.resourcesPerHp.credits / 10f) *
-						 shipModule.OperatorSpots.Length) * GetModuleEnergyEmissionMult(shipModule);
-				} else { emissionMin = 0f; emissionMax = 0f; }
+				var mBayResPerHP = shipModule.Medbay != null ? shipModule.Medbay.resourcesPerHp : new ResourceValueGroup();
+				emissionMin = shipModule.PowerConsumed * GetModuleEnergyEmissionMult(shipModule);
+				emissionMax = (shipModule.PowerConsumed + (mBayResPerHP.organics + mBayResPerHP.fuel +
+				mBayResPerHP.metals + mBayResPerHP.synthetics + mBayResPerHP.explosives + mBayResPerHP.exotics * 10f +
+				mBayResPerHP.credits / 10f) * shipModule.OperatorSpots.Length) * GetModuleEnergyEmissionMult(shipModule);
+				break;
+				case ShipModule.Type.Bridge:
+				emissionMin = shipModule.PowerConsumed * GetModuleEnergyEmissionMult(shipModule);
+				emissionMax = (shipModule.PowerConsumed + shipModule.OperatorSpots.Length) * GetModuleEnergyEmissionMult(shipModule);
 				break;
 				case ShipModule.Type.Cryosleep:
-				if (shipModule.Cryosleep != null && isStaticShipModule) {
-					emissionMin = shipModule.PowerConsumed * GetModuleEnergyEmissionMult(shipModule);
-					emissionMax = (shipModule.PowerConsumed + shipModule.PowerConsumed / 2f * shipModule.OperatorSpots.Length) * GetModuleEnergyEmissionMult(shipModule);
-				} else { emissionMin = 0f; emissionMax = 0f; }
+				emissionMin = shipModule.PowerConsumed * GetModuleEnergyEmissionMult(shipModule);
+				emissionMax = (shipModule.PowerConsumed + shipModule.PowerConsumed / 2f * shipModule.OperatorSpots.Length) * GetModuleEnergyEmissionMult(shipModule);
 				break;
 				case ShipModule.Type.ResearchLab:
-				if (shipModule.Research != null && isStaticShipModule) {
-					emissionMin = shipModule.PowerConsumed * GetModuleEnergyEmissionMult(shipModule);
-					emissionMax = (shipModule.PowerConsumed + (shipModule.Research.producedPerSkillPoint.organics + shipModule.Research.producedPerSkillPoint.fuel +
-						shipModule.Research.producedPerSkillPoint.metals + shipModule.Research.producedPerSkillPoint.synthetics +
-						shipModule.Research.producedPerSkillPoint.explosives + shipModule.Research.producedPerSkillPoint.exotics * 10 +
-						shipModule.Research.producedPerSkillPoint.credits) * shipModule.OperatorSpots.Length) * GetModuleEnergyEmissionMult(shipModule);
-				} else { emissionMin = 0f; emissionMax = 0f; }
+				var rLabResPerSP = shipModule.Research != null ? shipModule.Research.producedPerSkillPoint : new ResourceValueGroup();
+				emissionMin = shipModule.PowerConsumed * GetModuleEnergyEmissionMult(shipModule);
+				emissionMax = (shipModule.PowerConsumed + (rLabResPerSP.organics + rLabResPerSP.fuel +
+				rLabResPerSP.metals + rLabResPerSP.synthetics + rLabResPerSP.explosives + rLabResPerSP.exotics * 10 +
+				rLabResPerSP.credits) * shipModule.OperatorSpots.Length) * GetModuleEnergyEmissionMult(shipModule);
 				break;
 				case ShipModule.Type.Garden:
-				if (shipModule.GardenModule != null && isStaticShipModule) {
-					emissionMin = shipModule.PowerConsumed * GetModuleEnergyEmissionMult(shipModule);
-					emissionMax = (shipModule.PowerConsumed + (shipModule.GardenModule.producedPerSkillPoint.organics + shipModule.GardenModule.producedPerSkillPoint.fuel +
-						shipModule.GardenModule.producedPerSkillPoint.metals + shipModule.GardenModule.producedPerSkillPoint.synthetics +
-						shipModule.GardenModule.producedPerSkillPoint.explosives + shipModule.GardenModule.producedPerSkillPoint.exotics * 10 +
-						shipModule.GardenModule.producedPerSkillPoint.credits) * shipModule.OperatorSpots.Length) * GetModuleEnergyEmissionMult(shipModule);
-				} else { emissionMin = 0f; emissionMax = 0f; }
-				break;
-				case ShipModule.Type.Sensor:
-				if (shipModule.Sensor != null && isStaticShipModule)
-					emissionMin = (shipModule.PowerConsumed + shipModule.Sensor.sectorRadarRange / 10f + shipModule.Sensor.starmapRadarRange) * GetModuleEnergyEmissionMult(shipModule);
-				else { emissionMin = 0f; emissionMax = 0f; }
-				break;
-				case ShipModule.Type.MaterialsConverter:
-				if (shipModule.MaterialsConverter != null && isStaticShipModule) emissionMin = (shipModule.PowerConsumed + shipModule.MaterialsConverter.consume.organics +
-						shipModule.MaterialsConverter.consume.fuel + shipModule.MaterialsConverter.consume.metals + shipModule.MaterialsConverter.consume.synthetics +
-						shipModule.MaterialsConverter.consume.explosives + shipModule.MaterialsConverter.consume.exotics * 10f + shipModule.MaterialsConverter.consume.credits / 10f +
-						shipModule.MaterialsConverter.produce.organics + shipModule.MaterialsConverter.produce.fuel + shipModule.MaterialsConverter.produce.metals +
-						shipModule.MaterialsConverter.produce.synthetics + shipModule.MaterialsConverter.produce.explosives + shipModule.MaterialsConverter.produce.exotics * 10f +
-						shipModule.MaterialsConverter.produce.credits / 10f) * GetModuleEnergyEmissionMult(shipModule);
-				else { emissionMin = 0f; emissionMax = 0f; }
+				var gFarmResPerSP = shipModule.GardenModule != null ? shipModule.GardenModule.producedPerSkillPoint : new ResourceValueGroup();
+				emissionMin = shipModule.PowerConsumed * GetModuleEnergyEmissionMult(shipModule);
+				emissionMax = (shipModule.PowerConsumed + (gFarmResPerSP.organics + gFarmResPerSP.fuel +
+				gFarmResPerSP.metals + gFarmResPerSP.synthetics + gFarmResPerSP.explosives + gFarmResPerSP.exotics * 10 +
+				gFarmResPerSP.credits) * shipModule.OperatorSpots.Length) * GetModuleEnergyEmissionMult(shipModule);
 				break;
 				case ShipModule.Type.Reactor:
-				if (shipModule.Reactor != null && isStaticShipModule) {
-					emissionMin = shipModule.Reactor.powerCapacity * GetModuleEnergyEmissionMult(shipModule);
-					emissionMax = (shipModule.Reactor.powerCapacity + shipModule.Reactor.overchargePowerCapacityAdd) * GetModuleEnergyEmissionMult(shipModule);
-				} else { emissionMin = 0f; emissionMax = 0f; }
-				break;
-				case ShipModule.Type.PassiveECM:
-				if (shipModule.ECM != null && isStaticShipModule) emissionMin = shipModule.PowerConsumed * GetModuleEnergyEmissionMult(shipModule) *
-					FFU_BE_Mod_Technology.GetTierBonus(FFU_BE_Mod_Technology.GetModuleTier(shipModule), Core.BonusType.Default) * (moduleMofidier == Core.BonusMod.Enhanced ? 1.2f :
-					moduleMofidier == Core.BonusMod.Deficient ? (1f / 1.2f) : 1f);
-				else { emissionMin = 0f; emissionMax = 0f; }
-				break;
-				case ShipModule.Type.StealthDecryptor:
-				if (shipModule.StealthDecryptor != null && isStaticShipModule) emissionMin = shipModule.PowerConsumed * GetModuleEnergyEmissionMult(shipModule) *
-					FFU_BE_Mod_Technology.GetTierBonus(FFU_BE_Mod_Technology.GetModuleTier(shipModule), Core.BonusType.Default) * (moduleMofidier == Core.BonusMod.Enhanced ? 2f :
-					moduleMofidier == Core.BonusMod.Deficient ? (1f / 2f) : 1f);
-				else { emissionMin = 0f; emissionMax = 0f; }
-				break;
-				case ShipModule.Type.Weapon:
-				if (shipModule.Weapon != null && isStaticShipModule) emissionMin = (shipModule.PowerConsumed + shipModule.Weapon.resourcesPerShot.fuel +
-						shipModule.Weapon.resourcesPerShot.explosives * 2f + shipModule.Weapon.resourcesPerShot.exotics * 10f) * GetModuleEnergyEmissionMult(shipModule);
-				else { emissionMin = 0f; emissionMax = 0f; }
-				break;
-				case ShipModule.Type.Weapon_Nuke:
-				if (shipModule.Weapon != null && isStaticShipModule) emissionMin = (shipModule.craftCost.fuel + shipModule.craftCost.explosives * 2f + shipModule.craftCost.exotics * 10f) * GetModuleEnergyEmissionMult(shipModule);
-				else { emissionMin = 0f; emissionMax = 0f; }
+				emissionMin = shipModule.Reactor.powerCapacity * GetModuleEnergyEmissionMult(shipModule);
+				emissionMax = (shipModule.Reactor.powerCapacity + shipModule.Reactor.overchargePowerCapacityAdd) * GetModuleEnergyEmissionMult(shipModule);
 				break;
 				case ShipModule.Type.Engine:
-				if (shipModule.Engine != null && isStaticShipModule) emissionMin = (shipModule.PowerConsumed + shipModule.Engine.ConsumedPerDistance.fuel * 100f) * GetModuleEnergyEmissionMult(shipModule);
-				else { emissionMin = 0f; emissionMax = 0f; }
+				emissionMin = (shipModule.PowerConsumed + shipModule.Engine.ConsumedPerDistance.fuel * 100f) * GetModuleEnergyEmissionMult(shipModule);
+				emissionMax = (shipModule.PowerConsumed + shipModule.overchargePowerNeed + shipModule.Engine.ConsumedPerDistance.fuel * 100f) * GetModuleEnergyEmissionMult(shipModule);
 				break;
+				case ShipModule.Type.PointDefence:
+				case ShipModule.Type.ShieldGen:
+				case ShipModule.Type.Sensor:
+				case ShipModule.Type.MaterialsConverter:
+				case ShipModule.Type.PassiveECM:
+				case ShipModule.Type.StealthDecryptor:
+				case ShipModule.Type.Weapon:
+				case ShipModule.Type.Weapon_Nuke:
 				case ShipModule.Type.Warp:
-				if (shipModule.Warp != null && isStaticShipModule) emissionMin = (shipModule.PowerConsumed + shipModule.Warp.activationFuel) * GetModuleEnergyEmissionMult(shipModule);
-				else { emissionMin = 0f; emissionMax = 0f; }
+				emissionMin = GetModuleEnergyEmission(shipModule, true);
 				break;
 				default: emissionMin = 0f; emissionMax = 0f; break;
 			}
-			if (emissionMin != 0f && emissionMax != 0f) return string.Format("{0:0.#}", emissionMin) + "m³ ~ " + string.Format("{0:0.#}", emissionMax) + "m³";
-			else if (emissionMin != 0f && emissionMax == 0f) return string.Format("{0:0.#}", emissionMin) + "m³";
-			else return null;
+			StringBuilder emissionText = new StringBuilder();
+			if (emissionMin != 0f) emissionText.Append($"{emissionMin:0.#}").Append($"{Core.TT("m")}³");
+			if (emissionMax != 0f) emissionText.Append(" ~ ").Append($"{emissionMax:0.#}").Append($"{Core.TT("m")}³");
+			return emissionText.ToString();
 		}
 		public static void RecalculateEnergyEmission() {
 			try {

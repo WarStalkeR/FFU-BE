@@ -521,7 +521,7 @@ namespace FFU_Bleeding_Edge {
 						shipModulesListFile.Write((shipModule.Weapon.reloadInterval > 0 ? shipModule.Weapon.reloadInterval.ToString() : "") + ",");
 						shipModulesListFile.Write((shipModule.Weapon.preShootDelay > 0 ? shipModule.Weapon.preShootDelay.ToString() : "") + ",");
 						shipModulesListFile.Write((shipModule.Weapon.accuracy > 0 ? shipModule.Weapon.accuracy.ToString() : "") + ",");
-						shipModulesListFile.Write((shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius > 0 ? String.Format("{0:0.###}", shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius) : "") + ",");
+						shipModulesListFile.Write((shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius > 0 ? string.Format("{0:0.###}", shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius) : "") + ",");
 						shipModulesListFile.Write((shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield ? "Yes" : "No") + ",");
 						shipModulesListFile.Write((shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect ? "Yes" : "No") + ",");
 						shipModulesListFile.Write((shipModule.Weapon.magazineSize > 0 ? shipModule.Weapon.magazineSize.ToString() : "") + ",");
@@ -705,6 +705,24 @@ namespace RST {
 				else if (FFU_BE_Defs.DamagedButWorking(this))
 					return turnedOn && !IsPacked && operatorSpots.Length != 0 && CurrentLocalOpsWithSkillCount <= 0 && RemoteBridge != null;
 				return false;
+			}
+		}
+		//Reduced Evasion Bonuses from Damaged Modules
+		public int ShipEvasionPercentBonus {
+			get {
+				if (type == Type.Bridge) {
+					if (!TurnedOnAndIsWorking) return 0;
+					if (HasFullHealth) return shipEvasionPercentAdd + WorldRules.Instance.bridgeSkillEffects.EffectiveSkillBonusPercent(this);
+					else return Mathf.CeilToInt((shipEvasionPercentAdd + WorldRules.Instance.bridgeSkillEffects.EffectiveSkillBonusPercent(this)) * FFU_BE_Defs.GetHealthPercent(this));
+				}
+				if (type == Type.Engine) {
+					if (!TurnedOnAndIsWorking) return 0;
+					if (HasFullHealth) return shipEvasionPercentAdd + (IsOvercharged ? Engine.overchargeEvasionAdd : 0);
+					else return Mathf.CeilToInt((shipEvasionPercentAdd + (IsOvercharged ? Engine.overchargeEvasionAdd : 0)) * FFU_BE_Defs.GetHealthPercent(this));
+				}
+				if (shipEvasionPercentAdd == 0 || !TurnedOnAndIsWorking) return 0;
+				if (HasFullHealth) return shipEvasionPercentAdd;
+				else return Mathf.CeilToInt(shipEvasionPercentAdd * FFU_BE_Defs.GetHealthPercent(this));
 			}
 		}
 		//Crew Can Operate Damaged Module

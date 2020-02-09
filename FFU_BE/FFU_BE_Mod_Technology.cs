@@ -329,42 +329,6 @@ namespace FFU_Bleeding_Edge {
 			else if (shipModule.name.Contains("MK-I")) return "MK-I";
 			else return "";
 		}
-		public static string GetModuleGenText(ShipModule shipModule) {
-			if (shipModule.name.Contains("MK-X")) return "10th";
-			else if (shipModule.name.Contains("MK-IX")) return "9th";
-			else if (shipModule.name.Contains("MK-VIII")) return "8th";
-			else if (shipModule.name.Contains("MK-VII")) return "7th";
-			else if (shipModule.name.Contains("MK-VI")) return "6th";
-			else if (shipModule.name.Contains("MK-V")) return "5th";
-			else if (shipModule.name.Contains("MK-IV")) return "4th";
-			else if (shipModule.name.Contains("MK-III")) return "3rd";
-			else if (shipModule.name.Contains("MK-II")) return "2nd";
-			else if (shipModule.name.Contains("MK-I")) return "1st";
-			else return "1st";
-		}
-		public static string GetModuleModText(ShipModule shipModule) {
-			Core.BonusMod moduleMod = GetModuleModifier(shipModule);
-			switch (moduleMod) {
-				case Core.BonusMod.None: return "None";
-				case Core.BonusMod.Sustained: return "Sustained";
-				case Core.BonusMod.Unstable: return "Unstable";
-				case Core.BonusMod.Reinforced: return "Reinforced";
-				case Core.BonusMod.Fragile: return "Fragile";
-				case Core.BonusMod.Efficient: return "Efficient";
-				case Core.BonusMod.Inefficient: return "Inefficient";
-				case Core.BonusMod.Precise: return "Precise";
-				case Core.BonusMod.Inhibited: return "Inhibited";
-				case Core.BonusMod.Rapid: return "Rapid";
-				case Core.BonusMod.Disrupted: return "Disrupted";
-				case Core.BonusMod.Enhanced: return "Enhanced";
-				case Core.BonusMod.Deficient: return "Deficient";
-				case Core.BonusMod.Durable: return "Durable";
-				case Core.BonusMod.Brittle: return "Brittle";
-				case Core.BonusMod.Persistent: return "Persistent";
-				case Core.BonusMod.Volatile: return "Volatile";
-				default: return "None";
-			}
-		}
 		public static string GetModuleModColoredText(ShipModule shipModule) {
 			Core.BonusMod moduleMod = GetModuleModifier(shipModule);
 			switch (moduleMod) {

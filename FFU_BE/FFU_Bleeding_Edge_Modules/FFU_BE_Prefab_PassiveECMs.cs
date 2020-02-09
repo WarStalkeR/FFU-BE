@@ -156,7 +156,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 10;
 				shipModule_maxHealth = 40;
 				break;
-				case "ECM 02 ancient artifact, slicer dicer":
+				case "ECM 02.2 ancient artifact, slicer dicer":
 				shipModule.displayName = "ECM Array Artifact";
 				shipModule_maxHealth = 50;
 				break;

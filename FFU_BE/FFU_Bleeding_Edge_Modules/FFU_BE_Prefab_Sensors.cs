@@ -252,7 +252,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 30;
 				break;
-				case "long range sensor 2 old (tutorial, not saveable)":
+				case "long range sensor 2 old tutorial":
 				shipModule.displayName = "Damaged <color=#" + colorSensor + "ff>Sensor Array</color>";
 				shipModule.description = "This sensor array has been though a lot. Amount of impacts and damage it received isn't any less then hull of any long serving border patrol battleship.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 500f, synthetics = 250f };
