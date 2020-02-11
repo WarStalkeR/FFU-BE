@@ -251,6 +251,9 @@ namespace FFU_Bleeding_Edge {
 			}
 		}
 		public static void InitGameInterfaceUpdate() {
+			foreach (HoverableUI hoverableUI in Resources.FindObjectsOfTypeAll<HoverableUI>()) {
+				if (dumpObjectLists) Debug.LogWarning("[HoverableUI] " + hoverableUI.name + ": " + hoverableUI.hoverText);
+			}
 			foreach (GridLayoutGroup gridLayoutGroup in Resources.FindObjectsOfTypeAll<GridLayoutGroup>()) {
 				if (gridLayoutGroup.name == "Grid" && gridLayoutGroup.constraintCount == 6) gridLayoutGroup.constraintCount = 12;
 				if (dumpObjectLists) Debug.LogWarning("[GridLayoutGroup] " + gridLayoutGroup.name + ": " + 
@@ -300,6 +303,10 @@ namespace FFU_Bleeding_Edge {
 			foreach (Text txt in Resources.FindObjectsOfTypeAll<Text>()) {
 				if (txt.name.Contains("WeaponIgnoresShieldValue")) txt.text = "Shield Bypass";
 				if (txt.name.Contains("WeaponNeverDeflectsValue")) txt.text = "Deflect Ignore";
+				if (txt.name.Contains("WeaponTracksTargetValue")) txt.text = "<color=lime>Tracks Target</color>";
+				if (txt.name.Contains("BridgeRemoteOpsValue")) txt.text = "<color=lime>Remote Control</color>";
+				if (txt.name.Contains("RemovesCrewResConsValue")) txt.text = "<color=lime>No Consumption</color>";
+				if (txt.name.Contains("CryosleepGeneratesCreditsValue")) txt.text = "<color=lime>Generates Credits</color>";
 				if (txt.name == "Text" && txt.text == "Quick start") txt.text = "Basic Controls";
 				if (txt.name == "quick start" && txt.text == "Quick Start") txt.text = "Basic Controls";
 				if (txt.name == "quick start 2" && txt.text == "Quick Start 2") txt.text = "Basic Information";
@@ -720,6 +727,31 @@ namespace FFU_Bleeding_Edge {
 		public static float GetReverseFromRVG(ResourceValueGroup mOutput) {
 			return GetResearchFromRVG(mOutput) / reverseResearchDivisor;
 		}
+		public static void GetComponentsListTree(Text tObject) {
+			if (tObject == null) return;
+			GetComponentsListTree(tObject.transform.parent.parent);
+		}
+		public static void GetComponentsListTree(GameObject tObject) {
+			if (tObject == null) return;
+			GetComponentsListTree(tObject.transform);
+		}
+		public static void GetComponentsListTree(RST.UI.ModuleEffectItem tObject) {
+			if (tObject == null) return;
+			GetComponentsListTree(tObject.transform);
+		}
+		public static void GetComponentsListTree(Transform tObject) {
+			if (tObject == null) return;
+			try { GetComponentsListTree(tObject, 0, 0); } catch (System.Exception ex) { Debug.LogWarning(ex.ToString()); }
+		}
+		private static void GetComponentsListTree(Transform tObject, int cOrder, int childNum) {
+			if (tObject == null) return;
+			StringBuilder itemSpacing = new StringBuilder();
+			for (int i = 0; i < cOrder; i++) itemSpacing.Append("  ");
+			if (cOrder == 0) Debug.LogWarning($"[ROOT] {tObject.ToString()}");
+			else Debug.LogWarning($"{itemSpacing.ToString()}[{childNum}] {tObject.ToString()}");
+			for (int i = 0; i < tObject.GetComponents<object>().Length; i++) Debug.LogWarning($"{itemSpacing.ToString()}  - {tObject.GetComponents<object>()[i]?.ToString()}");
+			for (int i = 0; i < tObject.childCount; i++) GetComponentsListTree(tObject.GetChild(i), cOrder + 1, i);
+		}
 		public static int SortAllModules(ShipModule shipModule) {
 			switch (shipModule.type) {
 				case ShipModule.Type.ResourcePack:
@@ -946,6 +978,28 @@ namespace FFU_Bleeding_Edge {
 				default: return 1.0f;
 			}
 		}
+		public static bool ModuleEmitsEnergy(ShipModule shipModule) {
+			if (shipModule == null) return false;
+			switch (shipModule.type) {
+				case ShipModule.Type.Bridge: return shipModule.Bridge != null && shipModule.turnedOn;
+				case ShipModule.Type.PointDefence: return shipModule.PointDefence != null && shipModule.turnedOn;
+				case ShipModule.Type.ShieldGen: return shipModule.ShieldGen != null && shipModule.turnedOn;
+				case ShipModule.Type.Dronebay: case ShipModule.Type.Medbay: return shipModule.Medbay != null && shipModule.turnedOn;
+				case ShipModule.Type.Cryosleep: return shipModule.Cryosleep != null && shipModule.turnedOn;
+				case ShipModule.Type.ResearchLab: return shipModule.Research != null && shipModule.turnedOn;
+				case ShipModule.Type.Garden: return shipModule.GardenModule != null && shipModule.turnedOn;
+				case ShipModule.Type.Sensor: return shipModule.Sensor != null && shipModule.turnedOn;
+				case ShipModule.Type.MaterialsConverter: return shipModule.MaterialsConverter != null && shipModule.turnedOn;
+				case ShipModule.Type.Reactor: return shipModule.Reactor != null && shipModule.turnedOn;
+				case ShipModule.Type.PassiveECM: return shipModule.ECM != null && shipModule.turnedOn;
+				case ShipModule.Type.StealthDecryptor: return shipModule.StealthDecryptor != null && shipModule.turnedOn;
+				case ShipModule.Type.Weapon: return shipModule.Weapon != null && shipModule.turnedOn;
+				case ShipModule.Type.Weapon_Nuke: return shipModule.Weapon != null;
+				case ShipModule.Type.Engine: return shipModule.Engine != null && shipModule.turnedOn;
+				case ShipModule.Type.Warp: return shipModule.Warp != null;
+				default: return false;
+			}
+		}
 		public static float GetModuleEnergyEmission(ShipModule shipModule, bool isStatic = false) {
 			if (shipModule == null) return 0f;
 			Core.BonusMod moduleMofidier = FFU_BE_Mod_Technology.GetModuleModifier(shipModule);
@@ -1121,7 +1175,7 @@ namespace FFU_Bleeding_Edge {
 			} catch { }
 		}
 		public static float GetFlagshipEmissionModifier() {
-			if (PlayerDatas.Me != null && PlayerDatas.Me.Flagship != null) return 1f + (PlayerDatas.Me.Flagship.ModuleSlotRoots.Count * GetDifficultyModifier()) / 100f;
+			if (PlayerDatas.Me != null && PlayerDatas.Me.Flagship != null) return 1f + PlayerDatas.Me.Flagship.ModuleSlotRoots.Count * GetDifficultyModifier() / 100f;
 			else return 1f;
 		}
 		public static float GetIntruderCountFromName(ShootAtDamageDealer damageDealer) {
