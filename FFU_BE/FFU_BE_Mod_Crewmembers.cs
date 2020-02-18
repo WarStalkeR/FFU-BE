@@ -29,6 +29,7 @@ namespace FFU_Bleeding_Edge {
 			else if (ship.name.Contains("Roundship")) return 7;
 			else if (ship.name.Contains("Endurance")) return 8;
 			else if (ship.name.Contains("BattleTiger")) return 9;
+			else if (ship.name.Contains("Easy Tiger")) return 10;
 			else return 0;
 		}
 		public static string GetMoodTextFromWeapon(string weaponName) {
@@ -1170,7 +1171,9 @@ namespace FFU_Bleeding_Edge {
 					handWeapon.magazineSize = 8;
 					handWeapon.accuracy = 36;
 					break;
-					default: break;
+					default:
+					Debug.LogWarning($"[NEW HAND WEAPON] Identifier: {handWeapon.name}\nPrefab ID:{handWeapon.PrefabId}\n{FFU_BE_Mod_Information.GetSelectedWeaponExactData(handWeapon, false)}");
+					break;
 				}
 				FFU_BE_Defs.prefabModdedFirearmsList.Add(handWeapon);
 			}

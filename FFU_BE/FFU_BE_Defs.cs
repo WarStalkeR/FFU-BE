@@ -1,10 +1,13 @@
-﻿using RST;
+﻿#pragma warning disable CS0436
+
+using RST;
 using HarmonyLib;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using System.Text;
+using RST.UI;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
@@ -27,7 +30,7 @@ namespace FFU_Bleeding_Edge {
 		public static int wordWrapLimit = 50;
 		public static int moduleRepairCost = 2;
 		public static int blackMarketMult = 111;
-		public static int pointsPerBarItem = 20;
+		public static int pointsPerBarItem = 30;
 		public static float timePassedCycle = 4f;
 		public static float shieldBonusMult = 4f;
 		public static float researchProgress = 0f;
@@ -45,6 +48,7 @@ namespace FFU_Bleeding_Edge {
 		public static List<Beam> prefabBeamRaysList = new List<Beam>();
 		public static List<Projectile> prefabProjectilesList = new List<Projectile>();
 		public static List<PointDefDamageDealer> prefabDefDealersList = new List<PointDefDamageDealer>();
+		public static List<ShootAtDamageDealer> prefabDamageDealersList = new List<ShootAtDamageDealer>();
 		public static List<Crewmember> prefabModdedCrewList = new List<Crewmember>();
 		public static List<ModuleSlot> prefabModdedSlotsList = new List<ModuleSlot>();
 		public static List<ShipModule> prefabModdedModulesList = new List<ShipModule>();
@@ -71,14 +75,71 @@ namespace FFU_Bleeding_Edge {
 			{"Weapons", new List<int>()},
 			{"Implants", new List<int>()},
 			{"Upgrades", new List<int>()}};
+		public static IDictionary<int, List<int>> sectorViableModuleIDs = new Dictionary<int, List<int>>() {
+			{0, new List<int>()},
+			{1, new List<int>()},
+			{2, new List<int>()},
+			{3, new List<int>()},
+			{4, new List<int>()},
+			{5, new List<int>()},
+			{6, new List<int>()},
+			{7, new List<int>()},
+			{8, new List<int>()},
+			{9, new List<int>()},
+			{10, new List<int>()}};
 		public static int[] techLevel = new int[] { 0, 1500, 3500, 6000, 10000, 16000, 24000, 34000, 46000, 60000 };
-		public static List<int> discoveredModuleIDs = new List<int>(new int[] { 760167696, 453797399, 1581569285,
-			345284781, 813048445, 124199597, 92356131, 430038657, 2146165248, 533676501, 858424257, 821254137,
-			1780996798, 1521997681, 1751631045, 842299308, 55650103, 144623758, 981179656, 1386212334, 2075523594,
-			893617597, 983196801, 1284816050, 2136288774, 482395317, 1700526886, 482395319, 825891570, 1404265275,
-			1158881065, 1449641283, 1477762477, 340918825, 165493307, 271236703, 168523420, 429768775, 126798266,
-			741193982, 930742757, 1769741276, 236853983, 241738085, 1219429018, 1290558229, 1398713621, 665713195,
-			1902866107, 1819161633 });
+		public static List<int> discoveredModuleIDs = initialModuleIDs;
+		public static List<int> initialModuleIDs = new List<int>(new int[] {
+			760167696,  /* Organics Pack */
+			453797399,  /* Starfuel Pack */
+			1581569285, /* Metals Pack */
+			345284781,  /* Synthetics Pack */
+			813048445,  /* Explosives Pack */
+			124199597,  /* Exotics Pack */
+			1012765355, /* Iron Harvest Kinetic Nuke */
+			92356131,   /* Powerpack Energy Nuke */
+			2146165248, /* Firepack Thermal Nuke */
+			533676501,  /* Explopack Tactical Nuke */
+			1771248833, /* Synthpack Chemical Nuke */
+			858424257,  /* Exopack Strategic Nuke */
+			821254137,  /* Rust Jigsaw Rocket Launcher */
+			1780996798, /* Dead Weight Explosive Autocannon */
+			1521997681, /* F1-Bushwacker Explosive Howitzer */
+			1751631045, /* Dead Eye Kinetic Railgun */
+			842299308,  /* Ancient 1-Core Laser Emitter */
+			55650103,   /* Scrap Cutter Beam Emitter */
+			144623758,  /* Impulse Wave Beam Emitter */
+			981179656,  /* Thermal Wave Heat Ray Projector */
+			1386212334, /* Charged Wave Energy Disruptor */
+			2075523594, /* Chromatic Flare Exotic Ray Projector */
+			893617597,  /* Makeshift Standard CIWS */
+			983196801,  /* Makeshift Command Bridge */
+			1284816050, /* Makeshift Chemical Engine */
+			2136288774, /* Makeshift Warp Drive */
+			482395317,  /* Light Scrap Reactor */
+			1700526886, /* Medium Scrap Reactor */
+			482395319,  /* Heavy Scrap Reactor */
+			825891570,  /* Makeshift XE Multicontainer */
+			1404265275, /* Makeshift FO Multicontainer */
+			1158881065, /* Makeshift FE Multicontainer */
+			1449641283, /* Makeshift Organics Container */
+			1477762477, /* Makeshift Starfuel Container */
+			340918825,  /* Makeshift Metals Container */
+			165493307,  /* Makeshift Synthetics Container */
+			271236703,  /* Makeshift Explosives Container */
+			168523420,  /* Makeshift Exotics Container */
+			429768775,  /* Makeshift Integrity Armor */
+			126798266,  /* Makeshift Shield Generator */
+			741193982,  /* Makeshift Shield Capacitor */
+			930742757,  /* Makeshift Sensor Array */
+			1769741276, /* Makeshift Stealth Generator */
+			236853983,  /* Makeshift ECM Array */
+			241738085,  /* Makeshift Drone Bay */
+			1219429018, /* Makeshift Medical Bay */
+			1290558229, /* Makeshift Cryodream Bay */
+			1398713621, /* Makeshift Cryosleep Bay */
+			665713195,  /* Makeshift Laboratory */
+			1902866107, /* Makeshift Greenery */ });
 		public static List<int> essentialTopModuleIDs = new List<int>(new int[] {
 			1196638242, /* Nanometric Integrity Armor */
 			1148319565, /* Dreadnought Command Bridge */
@@ -105,7 +166,9 @@ namespace FFU_Bleeding_Edge {
 			957508477,  /* Biological Implants Cache */
 			760711671,  /* Laser Type Weapons Cache */
 			938711464,  /* Iron Dome Tactical CIWS */
-			1571322820  /* Annihilator Rocket Launcher */ });
+			1571322820, /* Annihilator Rocket Launcher */
+			876704941,  /* Shockwave Plasma Howitzer */
+			412909021,  /* Liberator Kinetic Railcannon */ });
 		public static List<int> unresearchedModuleIDs = new List<int>();
 		public static float unusedReverseProgress = 0f;
 		public static float moduleResearchProgress = 0f;
@@ -167,7 +230,8 @@ namespace FFU_Bleeding_Edge {
 		public static float warpProducedResearchMult = 0.8f;
 		public static float warpProducedResourcesMult = 0.8f;
 		public static float enemyCrewHealthSectorMult = 0.1f;
-		public static string[][] crewTypesOnStart = new string[10][] {
+		public static string[][] crewTypesOnStart = new string[11][] {
+			new string[10] {"","","","","","","","","",""},
 			new string[10] {"","","","","","","","","",""},
 			new string[10] {"","","","","","","","","",""},
 			new string[10] {"","","","","","","","","",""},
@@ -179,7 +243,8 @@ namespace FFU_Bleeding_Edge {
 			new string[10] {"","","","","","","","","",""},
 			new string[10] {"","","","","","","","","",""}
 		};
-		public static string[][] crewNumsOnStart = new string[10][] {
+		public static string[][] crewNumsOnStart = new string[11][] {
+			new string[10] {"","","","","","","","","",""},
 			new string[10] {"","","","","","","","","",""},
 			new string[10] {"","","","","","","","","",""},
 			new string[10] {"","","","","","","","","",""},
@@ -239,6 +304,7 @@ namespace FFU_Bleeding_Edge {
 				if (ES2.Exists("start.es2?tag=shipCurrentStorageCap")) shipCurrentStorageCap = ES2.Load<int>("start.es2?tag=shipCurrentStorageCap");
 				if (ES2.Exists("permanent.es2?tag=discoveredModuleIDs")) discoveredModuleIDs = ES2.LoadList<int>("permanent.es2?tag=discoveredModuleIDs");
 				else ES2.Save<int>(discoveredModuleIDs, "permanent.es2?tag=discoveredModuleIDs");
+				foreach (int initialID in initialModuleIDs) if (!discoveredModuleIDs.Contains(initialID)) discoveredModuleIDs.Add(initialID);
 				if (goFullASMD) {
 					foreach (int moduleID in essentialTopModuleIDs)
 						if (!discoveredModuleIDs.Contains(moduleID) &&
@@ -271,11 +337,13 @@ namespace FFU_Bleeding_Edge {
 			foreach (ShootAtDamageDealer damageDealer in Resources.FindObjectsOfTypeAll<ShootAtDamageDealer>()) {
 				if (damageDealer as Projectile != null) prefabProjectilesList.Add(damageDealer as Projectile);
 				else if (damageDealer as Beam != null) prefabBeamRaysList.Add(damageDealer as Beam);
+				prefabDamageDealersList.Add(damageDealer);
 			}
 			foreach (PointDefDamageDealer pointDefDamageDealer in Resources.FindObjectsOfTypeAll<PointDefDamageDealer>()) {
 				prefabDefDealersList.Add(pointDefDamageDealer);
 			}
 			if (dumpObjectLists) {
+				foreach (ShootAtDamageDealer damageDealer in prefabDamageDealersList) Debug.Log("Damage Dealer: " + damageDealer.name);
 				foreach (PointDefDamageDealer defender in prefabDefDealersList) Debug.Log("Defender: " + defender.name);
 				foreach (Projectile projectile in prefabProjectilesList) Debug.Log("Projectile: " + projectile.name);
 				foreach (Beam beam in prefabBeamRaysList) Debug.Log("Beam: " + beam.name);
@@ -1197,33 +1265,10 @@ namespace FFU_Bleeding_Edge {
 			return shipModule.Weapon.overrideProjectileHealth * intruderCountMult / 40f;
 		}
 		public static bool ModuleViableForSector(ShipModule shipModule, int sectorNum) {
-			ShipModule refModule = prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId);
-			if (refModule != null) {
-				if (shipModule.name.Contains("bossweapon")) return true;
-				if (shipModule.name.Contains("tutorial")) return true;
-				if (shipModule.name.Contains("artifact")) return true;
-				switch (shipModule.type) {
-					case ShipModule.Type.Weapon: return FFU_BE_Prefab_Weapons.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.Weapon_Nuke: return FFU_BE_Prefab_Nukes.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.PointDefence: return FFU_BE_Prefab_PointDefences.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.Bridge: return FFU_BE_Prefab_Bridges.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.Engine: return FFU_BE_Prefab_Engines.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.Warp: return FFU_BE_Prefab_Drives.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.Reactor: return FFU_BE_Prefab_Reactors.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.Integrity: return FFU_BE_Prefab_Armors.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.ShieldGen: return FFU_BE_Prefab_Shields.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.Sensor: return FFU_BE_Prefab_Sensors.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.StealthDecryptor: return FFU_BE_Prefab_Decryptors.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.PassiveECM: return FFU_BE_Prefab_PassiveECMs.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.Dronebay: return FFU_BE_Prefab_HealthBays.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.Medbay: return FFU_BE_Prefab_HealthBays.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.Cryosleep: return FFU_BE_Prefab_CryoBays.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.ResearchLab: return FFU_BE_Prefab_Laboratories.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.Garden: return FFU_BE_Prefab_Greenhouses.ViableForSector(sectorNum).Contains(refModule.name);
-					case ShipModule.Type.MaterialsConverter: return FFU_BE_Prefab_Converters.ViableForSector(sectorNum).Contains(refModule.name);
-					default: return true;
-				}
-			} else return false;
+			if (shipModule.name.Contains("bossweapon")) return true;
+			else if (shipModule.name.Contains("tutorial")) return true;
+			else if (shipModule.name.Contains("artifact")) return true;
+			else return sectorViableModuleIDs[sectorNum].Contains(shipModule.PrefabId);
 		}
 		public static int ModuleAvailableSector(ShipModule shipModule) {
 			if (ModuleViableForSector(shipModule, 1)) return 1;
@@ -1240,447 +1285,77 @@ namespace FFU_Bleeding_Edge {
 		}
 		public static ShipModule GetReplacementModule(ShipModule shipModule, int sectorNum) {
 			ShipModule refModule = prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId);
+			if (refModule == null || !prefabModdedModulesList.Any()) return null;
+			string lookupType = "";
+			string lookupSubType = "";
 			switch (shipModule.type) {
 				case ShipModule.Type.Weapon:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					string lookupType = "";
-					string lookupSubType = "";
-					if (refModule.displayName.Contains("Launcher")) lookupType = "Launcher";
-					else if (refModule.displayName.Contains("Autocannon")) lookupType = "Autocannon";
-					else if (refModule.displayName.Contains("Howitzer")) lookupType = "Howitzer";
-					else if (refModule.displayName.Contains("Railgun")) lookupType = "Railgun";
-					else if (refModule.displayName.Contains("Railcannon")) lookupType = "Railcannon";
-					else if (refModule.displayName.Contains("Laser")) lookupType = "Laser";
-					else if (refModule.displayName.Contains("Beam")) lookupType = "Beam";
-					else if (refModule.displayName.Contains("Heat Ray")) lookupType = "Heat Ray";
-					else if (refModule.displayName.Contains("Disruptor")) lookupType = "Disruptor";
-					else if (refModule.displayName.Contains("Exotic Ray")) lookupType = "Exotic Ray";
-					if (refModule.displayName.Contains("Explosive")) lookupSubType = "Explosive";
-					else if (refModule.displayName.Contains("Kinetic")) lookupSubType = "Kinetic";
-					else if (refModule.displayName.Contains("Plasma")) lookupSubType = "Plasma";
-					else if (refModule.displayName.Contains("Chemical")) lookupSubType = "Chemical";
-					else if (refModule.displayName.Contains("Incendiary")) lookupSubType = "Incendiary";
-					else if (refModule.displayName.Contains("Exotic")) lookupSubType = "Exotic";
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Weapons.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(lookupType) && x.displayName.Contains(lookupSubType)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Weapons.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(lookupType)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else {
-							refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Weapons.ViableForSector(sectorNum).Contains(x.name)).ToList();
-							if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-							else {
-								refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Weapons.ViableForSector(0).Contains(x.name)).ToList();
-								if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-								else return null;
-							}
-						}
-					}
-				} else return null;
+				if (refModule.displayName.Contains("Launcher")) lookupType = "Launcher";
+				else if (refModule.displayName.Contains("Autocannon")) lookupType = "Autocannon";
+				else if (refModule.displayName.Contains("Howitzer")) lookupType = "Howitzer";
+				else if (refModule.displayName.Contains("Railgun")) lookupType = "Railgun";
+				else if (refModule.displayName.Contains("Railcannon")) lookupType = "Railcannon";
+				else if (refModule.displayName.Contains("Laser")) lookupType = "Laser";
+				else if (refModule.displayName.Contains("Beam")) lookupType = "Beam";
+				else if (refModule.displayName.Contains("Heat Ray")) lookupType = "Heat Ray";
+				else if (refModule.displayName.Contains("Disruptor")) lookupType = "Disruptor";
+				else if (refModule.displayName.Contains("Exotic Ray")) lookupType = "Exotic Ray";
+				if (refModule.displayName.Contains("Explosive")) lookupSubType = "Explosive";
+				else if (refModule.displayName.Contains("Kinetic")) lookupSubType = "Kinetic";
+				else if (refModule.displayName.Contains("Plasma")) lookupSubType = "Plasma";
+				else if (refModule.displayName.Contains("Chemical")) lookupSubType = "Chemical";
+				else if (refModule.displayName.Contains("Incendiary")) lookupSubType = "Incendiary";
+				else if (refModule.displayName.Contains("Exotic")) lookupSubType = "Exotic";
+				return GetRandomModuleType(refModule.type, sectorNum, lookupType, lookupSubType);
 				case ShipModule.Type.Weapon_Nuke:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					string lookupType = "";
-					if (refModule.displayName.Contains("Kinetic")) lookupType = "Kinetic";
-					else if (refModule.displayName.Contains("Energy")) lookupType = "Energy";
-					else if (refModule.displayName.Contains("Thermal")) lookupType = "Thermal";
-					else if (refModule.displayName.Contains("Tactical")) lookupType = "Tactical";
-					else if (refModule.displayName.Contains("Chemical")) lookupType = "Chemical";
-					else if (refModule.displayName.Contains("Boarding")) lookupType = "Boarding";
-					else if (refModule.displayName.Contains("Strategic")) lookupType = "Strategic";
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Nukes.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(lookupType)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Nukes.ViableForSector(sectorNum).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else {
-							refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Nukes.ViableForSector(0).Contains(x.name)).ToList();
-							if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-							else return null;
-						}
-					}
-				} else return null;
+				if (refModule.displayName.Contains("Kinetic")) lookupType = "Kinetic";
+				else if (refModule.displayName.Contains("Energy")) lookupType = "Energy";
+				else if (refModule.displayName.Contains("Thermal")) lookupType = "Thermal";
+				else if (refModule.displayName.Contains("Tactical")) lookupType = "Tactical";
+				else if (refModule.displayName.Contains("Chemical")) lookupType = "Chemical";
+				else if (refModule.displayName.Contains("Boarding")) lookupType = "Boarding";
+				else if (refModule.displayName.Contains("Strategic")) lookupType = "Strategic";
+				return GetRandomModuleType(refModule.type, sectorNum, lookupType);
 				case ShipModule.Type.PointDefence:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_PointDefences.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_PointDefences.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Bridge:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Bridges.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Bridges.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Engine:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Engines.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Engines.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Warp:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Drives.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Drives.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Reactor:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Reactors.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Reactors.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Integrity:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Armors.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Armors.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.ShieldGen:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					string lookupType = "";
-					if (refModule.displayName.Contains("Capacitor")) lookupType = "Capacitor";
-					else if (refModule.displayName.Contains("Generator")) lookupType = "Generator";
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Shields.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(lookupType)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Shields.ViableForSector(sectorNum).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else {
-							refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Shields.ViableForSector(0).Contains(x.name)).ToList();
-							if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-							else return null;
-						}
-					}
-				} else return null;
-				case ShipModule.Type.Sensor:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Sensors.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Sensors.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.StealthDecryptor:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Decryptors.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Decryptors.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.PassiveECM:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_PassiveECMs.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_PassiveECMs.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Dronebay:
+				if (refModule.displayName.Contains("Capacitor")) lookupType = "Capacitor";
+				else if (refModule.displayName.Contains("Generator")) lookupType = "Generator";
+				return GetRandomModuleType(refModule.type, sectorNum, lookupType);
 				case ShipModule.Type.Medbay:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					string lookupType = "";
-					if (refModule.displayName.Contains("Drone")) lookupType = "Drone";
-					else if (refModule.displayName.Contains("Medical")) lookupType = "Medical";
-					else if (refModule.displayName.Contains("Restoration")) lookupType = "Restoration";
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_HealthBays.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(lookupType)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_HealthBays.ViableForSector(sectorNum).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else {
-							refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_HealthBays.ViableForSector(0).Contains(x.name)).ToList();
-							if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-							else return null;
-						}
-					}
-				} else return null;
+				case ShipModule.Type.Dronebay:
+				if (refModule.displayName.Contains("Drone")) lookupType = "Drone";
+				else if (refModule.displayName.Contains("Medical")) lookupType = "Medical";
+				else if (refModule.displayName.Contains("Restoration")) lookupType = "Restoration";
+				return GetRandomModuleType(refModule.type, sectorNum, lookupType);
 				case ShipModule.Type.Cryosleep:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					string lookupType = "";
-					if (refModule.displayName.Contains("Cryodream")) lookupType = "Cryodream";
-					else if (refModule.displayName.Contains("Cryosleep")) lookupType = "Cryosleep";
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_CryoBays.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(lookupType)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_CryoBays.ViableForSector(sectorNum).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else {
-							refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_CryoBays.ViableForSector(0).Contains(x.name)).ToList();
-							if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-							else return null;
-						}
-					}
-				} else return null;
-				case ShipModule.Type.ResearchLab:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Laboratories.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Laboratories.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Garden:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Greenhouses.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Greenhouses.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.MaterialsConverter:
-				if (refModule != null && prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Converters.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Converters.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				default: return null;
+				if (refModule.displayName.Contains("Cryodream")) lookupType = "Cryodream";
+				else if (refModule.displayName.Contains("Cryosleep")) lookupType = "Cryosleep";
+				return GetRandomModuleType(refModule.type, sectorNum, lookupType);
+				default: return GetRandomModuleType(refModule.type, sectorNum);
 			}
 		}
-		public static ShipModule GetRandomModuleType(ShipModule.Type moduleType, int sectorNum, string mType = "", string mSubType = "") {
-			switch (moduleType) {
-				case ShipModule.Type.Weapon:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Weapons.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(mType) && x.displayName.Contains(mSubType)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Weapons.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(mType)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else {
-							refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Weapons.ViableForSector(sectorNum).Contains(x.name)).ToList();
-							if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-							else {
-								refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Weapons.ViableForSector(0).Contains(x.name)).ToList();
-								if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-								else return null;
-							}
-						}
-					}
-				} else return null;
-				case ShipModule.Type.Weapon_Nuke:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Nukes.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(mType)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Nukes.ViableForSector(sectorNum).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else {
-							refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Nukes.ViableForSector(0).Contains(x.name)).ToList();
-							if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-							else return null;
-						}
-					}
-				} else return null;
-				case ShipModule.Type.PointDefence:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_PointDefences.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_PointDefences.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Bridge:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Bridges.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Bridges.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Engine:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Engines.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Engines.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Warp:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Drives.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Drives.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Reactor:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Reactors.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Reactors.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Integrity:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Armors.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Armors.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.ShieldGen:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Shields.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(mType)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Shields.ViableForSector(sectorNum).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else {
-							refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Shields.ViableForSector(0).Contains(x.name)).ToList();
-							if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-							else return null;
-						}
-					}
-				} else return null;
-				case ShipModule.Type.Sensor:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Sensors.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Sensors.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.StealthDecryptor:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Decryptors.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Decryptors.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.PassiveECM:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_PassiveECMs.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_PassiveECMs.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Dronebay:
-				case ShipModule.Type.Medbay:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_HealthBays.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(mType)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_HealthBays.ViableForSector(sectorNum).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else {
-							refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_HealthBays.ViableForSector(0).Contains(x.name)).ToList();
-							if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-							else return null;
-						}
-					}
-				} else return null;
-				case ShipModule.Type.Cryosleep:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_CryoBays.ViableForSector(sectorNum).Contains(x.name) && x.displayName.Contains(mType)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_CryoBays.ViableForSector(sectorNum).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else {
-							refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_CryoBays.ViableForSector(0).Contains(x.name)).ToList();
-							if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-							else return null;
-						}
-					}
-				} else return null;
-				case ShipModule.Type.ResearchLab:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Laboratories.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Laboratories.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.Garden:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Greenhouses.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Greenhouses.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				case ShipModule.Type.MaterialsConverter:
-				if (prefabModdedModulesList.Count > 0) {
-					var refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Converters.ViableForSector(sectorNum).Contains(x.name)).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else {
-						refList = prefabModdedModulesList.Where(x => FFU_BE_Prefab_Converters.ViableForSector(0).Contains(x.name)).ToList();
-						if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-						else return null;
-					}
-				} else return null;
-				default:
-				if (prefabModdedModulesList.Count > 0) {
-					List<ShipModule> refList = new List<ShipModule>();
-					if (RstRandom.Range(0f, 1f) < 0.75f) refList = prefabModdedModulesList.Where(x => x.displayName.Contains("Cache")).ToList();
-					else refList = prefabModdedModulesList.Where(x => x.name.Contains("artifactmodule") && !x.displayName.Contains("Cache")).ToList();
-					if (refList.Count > 0) return Core.RandomItemFromList(refList, null);
-					else return null;
-				} else return null;
-			}
+		public static ShipModule GetRandomModuleType(ShipModule.Type moduleType, int sectorNum, string mType, string mSubType) {
+			List<ShipModule> refList = prefabModdedModulesList.Where(x => x.type == moduleType && sectorViableModuleIDs[sectorNum].Contains(x.PrefabId) && x.displayName.Contains(mType) && x.displayName.Contains(mSubType)).ToList();
+			if (!refList.Any()) refList = prefabModdedModulesList.Where(x => x.type == moduleType && sectorViableModuleIDs[sectorNum].Contains(x.PrefabId) && x.displayName.Contains(mType)).ToList();
+			if (!refList.Any()) refList = prefabModdedModulesList.Where(x => x.type == moduleType && sectorViableModuleIDs[sectorNum].Contains(x.PrefabId)).ToList();
+			if (!refList.Any()) refList = prefabModdedModulesList.Where(x => x.type == moduleType && sectorViableModuleIDs[0].Contains(x.PrefabId)).ToList();
+			return Core.RandomItemFromList(refList, null);
+		}
+		public static ShipModule GetRandomModuleType(ShipModule.Type moduleType, int sectorNum, string mType) {
+			List<ShipModule> refList = prefabModdedModulesList.Where(x => x.type == moduleType && sectorViableModuleIDs[sectorNum].Contains(x.PrefabId) && x.displayName.Contains(mType)).ToList();
+			if (!refList.Any()) refList = prefabModdedModulesList.Where(x => x.type == moduleType && sectorViableModuleIDs[sectorNum].Contains(x.PrefabId)).ToList();
+			if (!refList.Any()) refList = prefabModdedModulesList.Where(x => x.type == moduleType && sectorViableModuleIDs[0].Contains(x.PrefabId)).ToList();
+			return Core.RandomItemFromList(refList, null);
+		}
+		public static ShipModule GetRandomModuleType(ShipModule.Type moduleType, int sectorNum) {
+			List<ShipModule> refList = prefabModdedModulesList.Where(x => x.type == moduleType && sectorViableModuleIDs[sectorNum].Contains(x.PrefabId)).ToList();
+			if (!refList.Any()) refList = prefabModdedModulesList.Where(x => x.type == moduleType && sectorViableModuleIDs[0].Contains(x.PrefabId)).ToList();
+			return Core.RandomItemFromList(refList, null);
+		}
+		public static ShipModule GetRandomModuleType(ShipModule.Type moduleType) {
+			return Core.RandomItemFromList(prefabModdedModulesList.Where(x => x.type == moduleType).ToList(), null);
+		}
+		public static void SetViableForSectors(int modulePrefabID, params int[] sectorNumbers) {
+			foreach (int sectorNumber in sectorNumbers) sectorViableModuleIDs[sectorNumber].Add(modulePrefabID);
 		}
 	}
 }

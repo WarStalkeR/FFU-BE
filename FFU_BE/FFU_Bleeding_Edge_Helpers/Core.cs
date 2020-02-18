@@ -61,11 +61,13 @@ namespace FFU_Bleeding_Edge {
 			.Replace("MK-X", string.Empty);
 		}
 		public static T RandomItemFromList<T>(List<T> genericList, T fallbackVar) {
+			if (!genericList.Any()) return fallbackVar;
 			int index = UnityEngine.Random.Range(0, genericList.Count);
 			if (genericList.Count > 0) return genericList[index];
 			else return fallbackVar;
 		}
 		public static T RandomItemFromList<T>(List<T> genericList) {
+			if (!genericList.Any()) return default;
 			if (genericList.Count > 1) return genericList[UnityEngine.Random.Range(0, genericList.Count)];
 			else if (genericList.Count == 1) return genericList.First();
 			else return default;

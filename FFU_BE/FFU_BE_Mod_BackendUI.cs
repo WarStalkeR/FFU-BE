@@ -16,6 +16,32 @@ using System.Linq;
 using MonoMod;
 
 namespace RST.UI {
+	[ExecuteInEditMode]
+	[RequireComponent(typeof(LayoutElement))]
+	[MonoModReplace] public class UISetPreferredHeight : MonoBehaviour {
+		[Tooltip("Height of heightSource is copied over to LayoutElement.preferredHeight on this GO")]
+		public RectTransform heightSource;
+		[Tooltip("Adds or substracts from calculated LayoutElement.preferredHeight")]
+		public float heightOffset;
+		[Tooltip("If set then LayoutElement.preferredHeight is kept below or equal to maxHeight")]
+		public float maxHeight;
+		public float minHeight;
+		private LayoutElement le;
+		private void OnEnable() {
+			LateUpdate();
+		}
+		private void LateUpdate() {
+			if (le == null) {
+				le = GetComponent<LayoutElement>();
+			}
+			if (!(le == null) && !(heightSource == null)) {
+				float num = heightSource.sizeDelta.y + heightOffset;
+				if (minHeight > 0f && num < minHeight) num = minHeight;
+				if (maxHeight > 0f && num > maxHeight) num = maxHeight;
+				le.preferredHeight = num;
+			}
+		}
+	}
 	public class patch_ResourceActionsPanel : ResourceActionsPanel {
 		[MonoModIgnore] private ShipModule resPackPrefab;
 		[MonoModIgnore] private PlayerResource GetPlayerResource(PlayerData pd) { return null; }

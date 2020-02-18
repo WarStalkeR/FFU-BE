@@ -1,6 +1,6 @@
 ﻿using RST;
 using HarmonyLib;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Converters {
@@ -17,99 +17,15 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "biotech explosives recycler") return idx; idx++;
 			return 999;
 		}
-		public static List<string> ViableForSector(int sectorNum) {
-			List<string> moduleList = new List<string>();
-			switch (sectorNum) {
-				case 1:
-				moduleList.Add("synthetics cooker 1");
-				return moduleList;
-				case 2:
-				moduleList.Add("synthetics cooker 1");
-				moduleList.Add("oilcake converter");
-				return moduleList;
-				case 3:
-				moduleList.Add("synthetics cooker 1");
-				moduleList.Add("fuel processor 1B");
-				moduleList.Add("oilcake converter");
-				moduleList.Add("fuel combinator 1A old");
-				return moduleList;
-				case 4:
-				moduleList.Add("synthetics cooker 1");
-				moduleList.Add("fuel processor 1B");
-				moduleList.Add("oilcake converter");
-				moduleList.Add("fuel combinator 1A old");
-				return moduleList;
-				case 5:
-				moduleList.Add("synthetics cooker 1");
-				moduleList.Add("fuel processor 1B");
-				moduleList.Add("explosives combinator 1");
-				moduleList.Add("explosives combinator diy");
-				moduleList.Add("oilcake converter");
-				moduleList.Add("fuel combinator 1A old");
-				return moduleList;
-				case 6:
-				moduleList.Add("synthetics cooker 1");
-				moduleList.Add("fuel processor 1B");
-				moduleList.Add("explosives combinator 1");
-				moduleList.Add("fuel processor 2");
-				moduleList.Add("explosives combinator diy");
-				moduleList.Add("oilcake converter");
-				moduleList.Add("fuel combinator 1A old");
-				return moduleList;
-				case 7:
-				moduleList.Add("synthetics cooker 1");
-				moduleList.Add("fuel processor 1B");
-				moduleList.Add("explosives combinator 1");
-				moduleList.Add("fuel processor 2");
-				moduleList.Add("explosives combinator diy");
-				moduleList.Add("oilcake converter");
-				moduleList.Add("biotech explosives recycler");
-				return moduleList;
-				case 8:
-				moduleList.Add("synthetics cooker 1");
-				moduleList.Add("fuel processor 1B");
-				moduleList.Add("explosives combinator 1");
-				moduleList.Add("fuel processor 2");
-				moduleList.Add("explosives combinator tiger");
-				moduleList.Add("explosives combinator diy");
-				moduleList.Add("biotech explosives recycler");
-				return moduleList;
-				case 9:
-				moduleList.Add("synthetics cooker 1");
-				moduleList.Add("fuel processor 1B");
-				moduleList.Add("explosives combinator 1");
-				moduleList.Add("fuel processor 2");
-				moduleList.Add("explosives combinator tiger");
-				moduleList.Add("explosives combinator diy");
-				moduleList.Add("biotech explosives recycler");
-				return moduleList;
-				case 10:
-				moduleList.Add("synthetics cooker 1");
-				moduleList.Add("fuel processor 1B");
-				moduleList.Add("explosives combinator 1");
-				moduleList.Add("fuel processor 2");
-				moduleList.Add("explosives combinator tiger");
-				moduleList.Add("explosives combinator diy");
-				moduleList.Add("biotech explosives recycler");
-				return moduleList;
-				default:
-				moduleList.Add("synthetics cooker 1");
-				moduleList.Add("fuel processor 1B");
-				moduleList.Add("explosives combinator 1");
-				moduleList.Add("fuel processor 2");
-				moduleList.Add("explosives combinator tiger");
-				moduleList.Add("explosives combinator diy");
-				moduleList.Add("oilcake converter");
-				moduleList.Add("fuel combinator 1A old");
-				moduleList.Add("biotech explosives recycler");
-				return moduleList;
-			}
-		}
-		public static void UpdateConverterModule(ShipModule shipModule) {
+		public static void UpdateConverterModule(ShipModule shipModule, bool initItemData) {
 			string colorFactory = "dbc470";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			switch (Core.GetOriginalName(shipModule.name)) {
+			var refModuleName = string.Empty;
+			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
+			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
+			switch (refModuleName) {
 				case "synthetics cooker 1":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Synthetics Printer</color>";
 				shipModule.description = "Converts organics into synthetics through ultrahigh temperature processing. Has built-in recipes library for tens of thousands of different substances.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -119,6 +35,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "fuel processor 1B":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Fuel Refinery</color>";
 				shipModule.description = "Combines organics and synthetics into starfuel through ultrahigh pressure processing. Has built-in data library that allows to create 100% compatible fuel."; ;
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -128,6 +45,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "explosives combinator 1":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Ordnance Factory</color>";
 				shipModule.description = "Uses starfuel and synthetics to manufacture various ordnances automatically. Has built-in blueprint library for all existing of ordnance types, including exotic ones.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -137,6 +55,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "fuel processor 2":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Blast Furnace</color>";
 				shipModule.description = "Utilizes small amount of exotics with explosives as catalyst to process synthetics into various alloys. Has built-in data library that allows to create any possible metal.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -146,6 +65,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "explosives combinator tiger":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Exotics XMT-Purifier</color>";
 				shipModule.description = "Processes and purifies essence of all received materials into pure and stable exotic matter. Compared to other industrial facilities, has very slow production speed.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -155,6 +75,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "explosives combinator diy":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Quantum Processor</color>";
 				shipModule.description = "Extremely advanced and powerful processing unit that uses quantum intangibility to analyze exotic matter and derive viable xenodata from it. Has poor production efficiency.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -164,6 +85,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "oilcake converter":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Oilcake Converter</color>";
 				shipModule.description = "Purifies starfuel from hazardous elements and converts it into organics. Comes with built-in cake printer. Certified and suitable for wedding and other happy occasions.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -173,6 +95,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "fuel combinator 1A old":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Ordnance Recycler</color>";
 				shipModule.description = "Recycles explosives into starfuel through fail-safe processing methods.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -182,6 +105,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "biotech explosives recycler":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Biotic <color=#" + colorFactory + "ff>Ordnance Recycler</color>";
 				shipModule.description = "Recycles explosives into organics by 'digesting' it.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, organics = 2500f, synthetics = 1500f, exotics = 15f };
@@ -190,8 +114,12 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 20;
 				break;
-				default: shipModule.displayName = "(CONVERTER) " + shipModule.displayName; break;
+				default:
+				Debug.LogWarning($"[NEW CONVERTER] {FFU_BE_Mod_Information.GetSelectedModuleExactData(shipModule, false, true, false, false, false)}");
+				shipModule.displayName = "(CONVERTER) " + shipModule.displayName;
+				break;
 			}
+			AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = shipModule_maxHealth;
 			FFU_BE_Mod_Modules.UpdateCommonStats(shipModule);
 		}
 	}

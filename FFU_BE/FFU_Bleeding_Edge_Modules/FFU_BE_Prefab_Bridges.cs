@@ -1,6 +1,6 @@
 ﻿using RST;
 using HarmonyLib;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Bridges {
@@ -18,75 +18,15 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "bridge 3crew metalarmor") return idx; idx++;
 			return 999;
 		}
-		public static List<string> ViableForSector(int sectorNum) {
-			List<string> moduleList = new List<string>();
-			switch (sectorNum) {
-				case 1:
-				moduleList.Add("bridge 1crew DIY");
-				moduleList.Add("bridge 1crew insectoid");
-				return moduleList;
-				case 2:
-				moduleList.Add("bridge 1crew DIY");
-				moduleList.Add("bridge 1crew insectoid");
-				moduleList.Add("bridge 1crew");
-				return moduleList;
-				case 3:
-				moduleList.Add("bridge 1crew insectoid");
-				moduleList.Add("bridge 1crew");
-				moduleList.Add("bridge 2crew");
-				return moduleList;
-				case 4:
-				moduleList.Add("bridge 1crew");
-				moduleList.Add("bridge 2crew");
-				moduleList.Add("bridge 2crew tiger");
-				return moduleList;
-				case 5:
-				moduleList.Add("bridge 2crew");
-				moduleList.Add("bridge 2crew tiger");
-				moduleList.Add("bridge 3crew");
-				return moduleList;
-				case 6:
-				moduleList.Add("bridge 2crew tiger");
-				moduleList.Add("bridge 3crew");
-				moduleList.Add("bridge 3crew floral");
-				return moduleList;
-				case 7:
-				moduleList.Add("bridge 3crew");
-				moduleList.Add("bridge 3crew floral");
-				moduleList.Add("bridge 3crew plastarmor");
-				return moduleList;
-				case 8:
-				moduleList.Add("bridge 3crew floral");
-				moduleList.Add("bridge 3crew plastarmor");
-				moduleList.Add("bridge blackspider");
-				return moduleList;
-				case 9:
-				moduleList.Add("bridge 3crew plastarmor");
-				moduleList.Add("bridge blackspider");
-				moduleList.Add("bridge 3crew metalarmor");
-				return moduleList;
-				case 10:
-				moduleList.Add("bridge blackspider");
-				moduleList.Add("bridge 3crew metalarmor");
-				return moduleList;
-				default:
-				moduleList.Add("bridge 1crew DIY");
-				moduleList.Add("bridge 1crew insectoid");
-				moduleList.Add("bridge 1crew");
-				moduleList.Add("bridge 2crew");
-				moduleList.Add("bridge 3crew");
-				moduleList.Add("bridge 3crew floral");
-				moduleList.Add("bridge 3crew plastarmor");
-				moduleList.Add("bridge blackspider");
-				moduleList.Add("bridge 3crew metalarmor");
-				return moduleList;
-			}
-		}
-		public static void UpdateBridgeModule(ShipModule shipModule) {
+		public static void UpdateBridgeModule(ShipModule shipModule, bool initItemData) {
 			string colorBridge = "ff794d";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			switch (Core.GetOriginalName(shipModule.name)) {
+			var refModuleName = string.Empty;
+			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
+			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
+			switch (refModuleName) {
 				case "bridge 1crew DIY":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Makeshift <color=#" + colorBridge + "ff>Command Bridge</color>";
 				shipModule.description = "Made from high-tech scrap and other salvage to work as at least basic command and operations center of the ship. Very limited capabilities, but still better then nothing.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 100f, metals = 300f, synthetics = 200f, exotics = 1f };
@@ -96,6 +36,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "bridge 1crew insectoid":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Ancient <color=#" + colorBridge + "ff>Command Bridge</color>";
 				shipModule.description = "One of the first command bridges. Manufactured centuries ago, when FTL technology was still in infancy. Due to wearied down state, its efficiency is mediocre at beast.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 500f, synthetics = 350f, exotics = 3f };
@@ -105,6 +46,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 40;
 				break;
 				case "bridge 1crew":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Frigate <color=#" + colorBridge + "ff>Command Bridge</color>";
 				shipModule.description = "Standard issue command bridge that commonly used in almost all ships. Has decent processing capabilities to properly operate most of small and medium sized vessels.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 300f, metals = 750f, synthetics = 500f, exotics = 5f };
@@ -114,6 +56,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 50;
 				break;
 				case "bridge 2crew":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Destroyer <color=#" + colorBridge + "ff>Command Bridge</color>";
 				shipModule.description = "Mostly manufactured for military organization per request. Often can be found installed on border patrol or interceptor ships due to good processing capabilities.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 400f, metals = 1250f, synthetics = 850f, exotics = 7f };
@@ -123,6 +66,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 60;
 				break;
 				case "bridge 2crew tiger":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Tactical <color=#" + colorBridge + "ff>Command Bridge</color>";
 				shipModule.description = "Developed and manufactured by Terran Alliance on per invoice basis. Mostly installed on command and control vessels that require very specific processing capabilities.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 1500f, synthetics = 100f, exotics = 8f };
@@ -132,6 +76,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 70;
 				break;
 				case "bridge 3crew":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Cruiser <color=#" + colorBridge + "ff>Command Bridge</color>";
 				shipModule.description = "Used at combat-oriented ships that actively participate in interstellar wars. Has proper targeting assisting modules and great warfare-oriented processing capabilities.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 600f, metals = 2000f, synthetics = 1250f, exotics = 10f };
@@ -141,6 +86,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 80;
 				break;
 				case "bridge 3crew floral":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Biouplink <color=#" + colorBridge + "ff>Command Bridge</color>";
 				shipModule.description = "Command bridge of organic origin. Grown in special environment, but has full range of ports and connections to perfectly interface with almost any existing ship class.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, organics = 3000f, synthetics = 2000f, exotics = 15f };
@@ -150,6 +96,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 90;
 				break;
 				case "bridge 3crew plastarmor":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Battleship <color=#" + colorBridge + "ff>Command Bridge</color>";
 				shipModule.description = "Mostly installed on heavy combat vessels, where excellent warfare-oriented capabilities is a necessity. Beside excellent capabilities it is also heavily armored.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1000f, metals = 4000f, synthetics = 2500f, exotics = 20f };
@@ -159,6 +106,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 100;
 				break;
 				case "bridge blackspider":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Hiveworld <color=#" + colorBridge + "ff>Command Bridge</color>";
 				shipModule.description = "Command bridge manufactured with a neural interfacing by design. Allows all operators almost unite their consciousness to exponentially increase their performance.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1500f, metals = 5750f, synthetics = 3250f, exotics = 30f };
@@ -168,6 +116,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 120;
 				break;
 				case "bridge 3crew metalarmor":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Dreadnought <color=#" + colorBridge + "ff>Command Bridge</color>";
 				shipModule.description = "Needed, when ship is a hulking monstrosity armed to the utmost limit. Shielded by heavy adamantite plates to ensure that ship will continue operate under any circumstances.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 2000f, metals = 7500f, synthetics = 5000f, exotics = 50f };
@@ -176,8 +125,12 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 25;
 				shipModule_maxHealth = 150;
 				break;
-				default: shipModule.displayName = "(BRIDGE) " + shipModule.displayName; break;
+				default:
+				Debug.LogWarning($"[NEW BRIDGE] {FFU_BE_Mod_Information.GetSelectedModuleExactData(shipModule, false, true, false, false, false)}");
+				shipModule.displayName = "(BRIDGE) " + shipModule.displayName;
+				break;
 			}
+			AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = shipModule_maxHealth;
 			FFU_BE_Mod_Modules.UpdateCommonStats(shipModule);
 		}
 	}

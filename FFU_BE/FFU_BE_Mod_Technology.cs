@@ -1197,6 +1197,7 @@ namespace RST {
 			ShipModule module = moduleSlotRoot.Module;
 			if (!FFU_BE_Defs.IsCraftedToStorage(module)) module.Pack();
 			if (!FFU_BE_Defs.IsCraftedToStorage(module)) module.StartUnpacking(true);
+			FFU_BE_Mod_Modules.ApplyModuleEffects(module);
 			FFU_BE_Mod_Technology.ApplyPlayerModuleTier(module);
 			FFU_BE_Mod_Modules.ApplyMaxNewHealth(module);
 			if (FFU_BE_Defs.IsCraftedToStorage(module)) {

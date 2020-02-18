@@ -1,6 +1,6 @@
 ﻿using RST;
 using HarmonyLib;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_HealthBays {
@@ -17,76 +17,17 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName.Contains("medbay4 stem celler")) return idx; idx++;
 			return 999;
 		}
-		public static List<string> ViableForSector(int sectorNum) {
-			List<string> moduleList = new List<string>();
-			switch (sectorNum) {
-				case 1:
-				moduleList.Add("dronebay 0 diy");
-				moduleList.Add("medbay0 diy");
-				return moduleList;
-				case 2:
-				moduleList.Add("dronebay 0 diy");
-				moduleList.Add("medbay0 diy");
-				moduleList.Add("medbay1 Rat");
-				return moduleList;
-				case 3:
-				moduleList.Add("dronebay 0 diy");
-				moduleList.Add("medbay1 Rat");
-				moduleList.Add("medbay2 startversion");
-				return moduleList;
-				case 4:
-				moduleList.Add("dronebay 0 diy");
-				moduleList.Add("medbay2 startversion");
-				moduleList.Add("medbay3 nanorepair");
-				return moduleList;
-				case 5:
-				moduleList.Add("dronebay 0 diy");
-				moduleList.Add("dronebay 1 basic");
-				moduleList.Add("medbay3 nanorepair");
-				return moduleList;
-				case 6:
-				moduleList.Add("dronebay 1 basic");
-				moduleList.Add("medbay3 nanorepair");
-				moduleList.Add("medbay5 biofluid bath");
-				return moduleList;
-				case 7:
-				moduleList.Add("dronebay 1 basic");
-				moduleList.Add("medbay5 biofluid bath");
-				moduleList.Add("medbay6 biological");
-				return moduleList;
-				case 8:
-				moduleList.Add("dronebay 1 basic");
-				moduleList.Add("medbay6 biological");
-				moduleList.Add("medbay4 stem celler");
-				return moduleList;
-				case 9:
-				moduleList.Add("dronebay 1 basic");
-				moduleList.Add("medbay4 stem celler");
-				return moduleList;
-				case 10:
-				moduleList.Add("dronebay 1 basic");
-				moduleList.Add("medbay4 stem celler");
-				return moduleList;
-				default:
-				moduleList.Add("dronebay 0 diy");
-				moduleList.Add("dronebay 1 basic");
-				moduleList.Add("medbay0 diy");
-				moduleList.Add("medbay1 Rat");
-				moduleList.Add("medbay2 startversion");
-				moduleList.Add("medbay3 nanorepair");
-				moduleList.Add("medbay5 biofluid bath");
-				moduleList.Add("medbay6 biological");
-				moduleList.Add("medbay4 stem celler");
-				return moduleList;
-			}
-		}
-		public static void UpdateHealthBayModule(ShipModule shipModule) {
+		public static void UpdateHealthBayModule(ShipModule shipModule, bool initItemData) {
 			string colorCrew = "ff668c";
 			string colorDrone = "ff668c";
 			string colorBoth = "ff668c";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			switch (Core.GetOriginalName(shipModule.name)) {
+			var refModuleName = string.Empty;
+			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
+			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
+			switch (refModuleName) {
 				case "dronebay 0 diy":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Makeshift <color=#" + colorDrone + "ff>Drone Bay</color>";
 				shipModule.Medbay.secondsPerHp = 5f;
 				shipModule.Medbay.resourcesPerHp.synthetics = 15f;
@@ -95,6 +36,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 10;
 				break;
 				case "dronebay 1 basic":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Industrial <color=#" + colorDrone + "ff>Drone Bay</color>";
 				shipModule.Medbay.secondsPerHp = 2f;
 				shipModule.Medbay.resourcesPerHp.synthetics = 5f;
@@ -103,6 +45,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 40;
 				break;
 				case "medbay0 diy":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Makeshift <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 10f;
 				shipModule.Medbay.resourcesPerHp.organics = 15f;
@@ -111,6 +54,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 10;
 				break;
 				case "medbay1 Rat":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Ancient <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 7f;
 				shipModule.Medbay.resourcesPerHp.organics = 15f;
@@ -119,6 +63,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 15;
 				break;
 				case "medbay2 startversion":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Nanite <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 5f;
 				shipModule.Medbay.resourcesPerHp.organics = 12f;
@@ -127,6 +72,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 20;
 				break;
 				case "medbay3 nanorepair":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Modern <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 3f;
 				shipModule.Medbay.resourcesPerHp.organics = 10f;
@@ -135,6 +81,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "medbay5 biofluid bath":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Aura <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 2f;
 				shipModule.Medbay.resourcesPerHp.organics = 7f;
@@ -143,6 +90,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 35;
 				break;
 				case "medbay6 biological":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Biotic <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 2f;
 				shipModule.Medbay.resourcesPerHp.organics = 5f;
@@ -151,6 +99,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 25;
 				break;
 				case "medbay4 stem celler":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Genesis <color=#" + colorBoth + "ff>Restoration Bay</color>";
 				shipModule.description = "Universal restoration bay that consumes synthetics and organics at the same time to replace damaged cells & mechanic components on subatomic levels.";
 				shipModule.Medbay.secondsPerHp = 1f;
@@ -161,8 +110,12 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 40;
 				break;
-				default: shipModule.displayName = "(HEALTH) " + shipModule.displayName; break;
+				default:
+				Debug.LogWarning($"[NEW HEALBAY] {FFU_BE_Mod_Information.GetSelectedModuleExactData(shipModule, false, true, false, false, false)}");
+				shipModule.displayName = "(HEALBAY) " + shipModule.displayName;
+				break;
 			}
+			AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = shipModule_maxHealth;
 			FFU_BE_Mod_Modules.UpdateCommonStats(shipModule);
 		}
 	}

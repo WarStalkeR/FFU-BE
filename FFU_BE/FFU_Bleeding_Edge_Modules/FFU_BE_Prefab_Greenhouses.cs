@@ -1,6 +1,6 @@
 ﻿using RST;
 using HarmonyLib;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Greenhouses {
@@ -14,67 +14,15 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "garden 6 synthethics") return idx; idx++;
 			return 999;
 		}
-		public static List<string> ViableForSector(int sectorNum) {
-			List<string> moduleList = new List<string>();
-			switch (sectorNum) {
-				case 1:
-				moduleList.Add("garden 1 DIY");
-				moduleList.Add("garden 2 minigrow");
-				return moduleList;
-				case 2:
-				moduleList.Add("garden 1 DIY");
-				moduleList.Add("garden 2 minigrow");
-				return moduleList;
-				case 3:
-				moduleList.Add("garden 2 minigrow");
-				moduleList.Add("garden 3 shroomery");
-				return moduleList;
-				case 4:
-				moduleList.Add("garden 2 minigrow");
-				moduleList.Add("garden 3 shroomery");
-				return moduleList;
-				case 5:
-				moduleList.Add("garden 2 minigrow");
-				moduleList.Add("garden 3 shroomery");
-				moduleList.Add("garden 4 greenhouse");
-				moduleList.Add("garden 5 greenhouse");
-				return moduleList;
-				case 6:
-				moduleList.Add("garden 3 shroomery");
-				moduleList.Add("garden 4 greenhouse");
-				moduleList.Add("garden 5 greenhouse");
-				return moduleList;
-				case 7:
-				moduleList.Add("garden 3 shroomery");
-				moduleList.Add("garden 4 greenhouse");
-				moduleList.Add("garden 5 greenhouse");
-				return moduleList;
-				case 8:
-				moduleList.Add("garden 4 greenhouse");
-				moduleList.Add("garden 5 greenhouse");
-				return moduleList;
-				case 9:
-				moduleList.Add("garden 4 greenhouse");
-				moduleList.Add("garden 5 greenhouse");
-				return moduleList;
-				case 10:
-				moduleList.Add("garden 4 greenhouse");
-				moduleList.Add("garden 5 greenhouse");
-				return moduleList;
-				default:
-				moduleList.Add("garden 1 DIY");
-				moduleList.Add("garden 2 minigrow");
-				moduleList.Add("garden 3 shroomery");
-				moduleList.Add("garden 4 greenhouse");
-				moduleList.Add("garden 5 greenhouse");
-				return moduleList;
-			}
-		}
-		public static void UpdateGreenhouseModule(ShipModule shipModule) {
+		public static void UpdateGreenhouseModule(ShipModule shipModule, bool initItemData) {
 			string colorGarden = "4dff4d";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			switch (Core.GetOriginalName(shipModule.name)) {
+			var refModuleName = string.Empty;
+			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
+			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
+			switch (refModuleName) {
 				case "garden 1 DIY":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Makeshift <color=#" + colorGarden + "ff>Greenery</color>";
 				shipModule.description = "A very fragile artificial environment for growing bio-engineered lichen. Uses excess heat generated during interstellar travel for production.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 100f, fuel = 50f, metals = 50f, synthetics = 75f };
@@ -83,6 +31,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 5;
 				break;
 				case "garden 2 minigrow":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Standard <color=#" + colorGarden + "ff>Greenery</color>";
 				shipModule.description = "Artificial environment for growing bio-engineered plants. Uses excess heat generated during interstellar travel for production.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 200f, fuel = 100f, metals = 150f, synthetics = 250f, exotics = 1f };
@@ -91,6 +40,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 10;
 				break;
 				case "garden 3 shroomery":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Mushroom <color=#" + colorGarden + "ff>Hothouse</color>";
 				shipModule.description = "Artificial environment for growing bio-engineered mushrooms. Uses excess heat generated during interstellar travel for production.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 300f, fuel = 200f, metals = 300f, synthetics = 500f, exotics = 2f };
@@ -99,6 +49,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 15;
 				break;
 				case "garden 4 greenhouse":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Accelerated <color=#" + colorGarden + "ff>Greenhouse</color>";
 				shipModule.description = "Artificial environment for growing bio-engineered plants with best growth rate. Uses excess heat generated during interstellar travel for production.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 500f, fuel = 350f, metals = 750f, synthetics = 1250f, exotics = 5f };
@@ -107,6 +58,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 20;
 				break;
 				case "garden 5 greenhouse":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Luxurious <color=#" + colorGarden + "ff>Greenhouse</color>";
 				shipModule.description = "Artificial environment for growing bio-engineered plants with best operator capacity. Uses excess heat generated during interstellar travel for production.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 500f, fuel = 350f, metals = 750f, synthetics = 1250f, exotics = 5f };
@@ -115,6 +67,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 20;
 				break;
 				case "garden 6 synthethics":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
 				shipModule.displayName = "Exogenetic <color=#" + colorGarden + "ff>Greenhouse</color>";
 				shipModule.description = "Artificial environment for growing highly nutritious bio-engineered exotic plants. Uses excess heat generated during interstellar travel for production.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 1000f, fuel = 500f, metals = 1000f, synthetics = 1500f, exotics = 10f };
@@ -122,8 +75,12 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 25;
 				break;
-				default: shipModule.displayName = "(GREENHOUSE) " + shipModule.displayName; break;
+				default:
+				Debug.LogWarning($"[NEW GARDEN] {FFU_BE_Mod_Information.GetSelectedModuleExactData(shipModule, false, true, false, false, false)}");
+				shipModule.displayName = "(GARDEN) " + shipModule.displayName;
+				break;
 			}
+			AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = shipModule_maxHealth;
 			FFU_BE_Mod_Modules.UpdateCommonStats(shipModule);
 		}
 	}

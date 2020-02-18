@@ -5,6 +5,7 @@
 #pragma warning disable CS0649
 #pragma warning disable CS0108
 #pragma warning disable CS0414
+#pragma warning disable CS0436
 
 using HarmonyLib;
 using MonoMod;
@@ -18,7 +19,7 @@ using System.Linq;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Information {
-		public static string GetSelectedWeaponExactData(HandWeapon handWeapon) {
+		public static string GetSelectedWeaponExactData(HandWeapon handWeapon, bool showColors = true) {
 			string weaponData = "";
 			weaponData += handWeapon.damageDealerPrefab.GetDamage(handWeapon).crewDmg > 0 ? $"{Core.TT("Crew Damage")}: {(handWeapon.magazineSize > 1 ? handWeapon.magazineSize + "x" : "")}{handWeapon.damageDealerPrefab.GetDamage(handWeapon).crewDmg}\n" : "";
 			weaponData += handWeapon.damageDealerPrefab.GetDamage(handWeapon).doorDmg > 0 ? $"{Core.TT("Door Damage")}: {(handWeapon.magazineSize > 1 ? handWeapon.magazineSize + "x" : "")}{handWeapon.damageDealerPrefab.GetDamage(handWeapon).doorDmg}\n" : "";
@@ -29,15 +30,17 @@ namespace FFU_Bleeding_Edge {
 			weaponData += handWeapon.reloadInterval > 0 ? $"{Core.TT("Reload Time")}: {handWeapon.reloadInterval}{Core.TT("s")}\n" : "";
 			weaponData += handWeapon.shotInterval > 0 ? $"{Core.TT("Salvo Delay")}: {handWeapon.shotInterval}{Core.TT("s")}\n" : "";
 			weaponData += handWeapon.accuracy > 0 ? $"{Core.TT("Accuracy")}: {handWeapon.accuracy} Δ{Core.TT("m")}\n" : "";
-			if (!string.IsNullOrEmpty(weaponData)) weaponData = $"<color=lime>{weaponData}</color>{handWeapon.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit)}";
+			if (!string.IsNullOrEmpty(weaponData)) weaponData = $"{(showColors ? "<color=lime>" : "")}{weaponData}{(showColors ? "</color>" : "")}{handWeapon.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit)}";
 			else weaponData = handWeapon.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit);
 			return weaponData;
 		}
-		public static string GetSelectedModuleExactData(ShipModule shipModule, bool isInst = true) {
+		public static string GetSelectedModuleExactData(ShipModule shipModule, bool isInst = true, bool debugInfo = false, bool showDesc = true, bool hideUnique = true, bool showColors = true) {
 			string moduleData = "";
 			string instanceText = "";
-			if (shipModule.name.Contains("bossweapon")) return $"<color=lime>{Core.TT("Type")}: {Core.TT("Unidentified")}</color>\n{shipModule.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit)}";
-			if (shipModule.name.Contains("tutorial")) return $"<color=lime>{Core.TT("Type")}: {Core.TT("Unidentified")}</color>\n{shipModule.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit)}";
+			if (shipModule.name.Contains("bossweapon") && hideUnique) return $"<color=lime>{Core.TT("Type")}: {Core.TT("Unidentified")}</color>\n{shipModule.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit)}";
+			if (shipModule.name.Contains("tutorial") && hideUnique) return $"<color=lime>{Core.TT("Type")}: {Core.TT("Unidentified")}</color>\n{shipModule.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit)}";
+			if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += $"{Core.TT("Module Identifier")}: {shipModule.name}\n";
+			if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += $"{Core.TT("Module Prefab ID")}: {shipModule.PrefabId}\n";
 			switch (shipModule.type) {
 				case ShipModule.Type.Weapon:
 				instanceText = isInst ? $"{Core.TT(GetModuleGenText(shipModule))} {Core.TT("Gen.")} " : "";
@@ -66,12 +69,20 @@ namespace FFU_Bleeding_Edge {
 				moduleData += shipModule.Weapon.resourcesPerShot.explosives > 0 ? $" > {Core.TT("Explosives")}: {shipModule.Weapon.resourcesPerShot.explosives:0}\n" : "";
 				moduleData += shipModule.Weapon.resourcesPerShot.exotics > 0 ? $" > {Core.TT("Exotics")}: {shipModule.Weapon.resourcesPerShot.exotics:0}\n" : "";
 				moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $"{Core.TT("Damage Dealer")}: {Core.TT("Projectile")}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $" > {Core.TT("Projectile Identifier")}: {shipModule.Weapon.ProjectileOrBeamPrefab.name}\n" : "";
 				moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $" > {Core.TT("Projectile Health")}: {(shipModule.Weapon.overrideProjectileHealth > 0 ? shipModule.Weapon.overrideProjectileHealth : AccessTools.FieldRefAccess<ShootAtDamageDealer, int>(shipModule.Weapon.ProjectileOrBeamPrefab, "maxHealth"))} {Core.TT("HP")}\n" : "";
 				moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $" > {Core.TT("Projectile Velocity")}: {(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).speed}00{Core.TT("m")}/{Core.TT("s")}\n" : "";
 				moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $" > {Core.TT("Point Defense Detection")}: {(shipModule.Weapon.overridePointDefCanSeeThis ? shipModule.Weapon.overridePointDefCanSeeThis : AccessTools.FieldRefAccess<Projectile, bool>(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile, "pointDefCanSeeThis"))}\n" : "";
 				moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $" > {Core.TT("Point Defense Priority")}: {AccessTools.FieldRefAccess<Projectile, int>(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile, "pointDefPriority")}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $" > {Core.TT("Deflection Angle")}: {(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).deflectAngleRandom}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $" > {Core.TT("Deflection Distance (Min)")}: {(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).deflectDistanceMin}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $" > {Core.TT("Deflection Distance (Max)")}: {(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).deflectDistanceMax}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $" > {Core.TT("Expiration Time")}: {(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).selfDestructTime}\n" : "";
 				moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Beam) != null ? $"{Core.TT("Damage Dealer")}: {Core.TT("Beam")}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Beam) != null ? $" > {Core.TT("Beam Identifier")}: {shipModule.Weapon.ProjectileOrBeamPrefab.name}\n" : "";
 				moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Beam) != null ? $" > {Core.TT("Beam Duration")}: {(shipModule.Weapon.ProjectileOrBeamPrefab as Beam).duration}{Core.TT("s")}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Beam) != null ? $" > {Core.TT("Beam Health")}: {AccessTools.FieldRefAccess<ShootAtDamageDealer, int>(shipModule.Weapon.ProjectileOrBeamPrefab, "maxHealth")}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Beam) != null ? $" > {Core.TT("Beam Deflection")}: {AccessTools.FieldRefAccess<Beam, bool>(shipModule.Weapon.ProjectileOrBeamPrefab as Beam, "doDeflect")}\n" : "";
 				break;
 				case ShipModule.Type.Weapon_Nuke:
 				instanceText = isInst ? $"{Core.TT(GetModuleGenText(shipModule))} {Core.TT("Gen.")} " : "";
@@ -88,10 +99,16 @@ namespace FFU_Bleeding_Edge {
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel != ShootAtDamageDealer.FireChanceLevel.None ? $"{Core.TT("Fire Ignite Chance")}: {GetFireIgniteChance(shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel)}\n" : "";
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds > 0 ? $"{Core.TT("EMP Effect")}: {shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds}{Core.TT("s")}\n" : "";
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.spawnIntruderCount > 0 ? $"{Core.TT("Boarding Payload")}: {FFU_BE_Defs.GetIntruderCountFromName(shipModule) * 2f:0} ~ {FFU_BE_Defs.GetIntruderCountFromName(shipModule) * 5f:0} {Core.TT("Units")}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $"{Core.TT("Capital Missile Identifier")}: {shipModule.Weapon.ProjectileOrBeamPrefab.name}\n" : "";
 				moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $"{Core.TT("Capital Missile Health")}: {(shipModule.Weapon.overrideProjectileHealth > 0 ? shipModule.Weapon.overrideProjectileHealth : AccessTools.FieldRefAccess<ShootAtDamageDealer, int>(shipModule.Weapon.ProjectileOrBeamPrefab, "maxHealth"))} {Core.TT("HP")}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += shipModule.Weapon.accuracy > 0 ? $"{Core.TT("Capital Missile Accuracy")}: {shipModule.Weapon.accuracy}\n" : "";
 				try { moduleData += $"{Core.TT("Missile Acceleration")}: {((HomingMovement)AccessTools.PropertyGetter(typeof(Projectile), "HomingMovement").Invoke(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile, null)).force * 10f} {Core.TT("m")}/{Core.TT("s")}²\n"; } catch { }
 				moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $"{Core.TT("Point Defense Detection")}: {(shipModule.Weapon.overridePointDefCanSeeThis ? shipModule.Weapon.overridePointDefCanSeeThis : AccessTools.FieldRefAccess<Projectile, bool>(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile, "pointDefCanSeeThis"))}\n" : "";
 				moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $"{Core.TT("Point Defense Priority")}: {AccessTools.FieldRefAccess<Projectile, int>(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile, "pointDefPriority")}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $"{Core.TT("Deflection Angle")}: {(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).deflectAngleRandom}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $"{Core.TT("Deflection Distance (Min)")}: {(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).deflectDistanceMin}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $"{Core.TT("Deflection Distance (Max)")}: {(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).deflectDistanceMax}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += (shipModule.Weapon.ProjectileOrBeamPrefab as Projectile) != null ? $"{Core.TT("Expiration Time")}: {(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).selfDestructTime}\n" : "";
 				break;
 				case ShipModule.Type.PointDefence:
 				instanceText = isInst ? $"{Core.TT(GetModuleGenText(shipModule))} {Core.TT("Gen.")} " : "";
@@ -99,6 +116,7 @@ namespace FFU_Bleeding_Edge {
 				if (isInst) moduleData += $"{Core.TT("Modifier")}: {Core.TT(GetModuleModText(shipModule))}\n";
 				moduleData += shipModule.PointDefence.reloadInterval > 0 ? $"{Core.TT("Reload Time")}: {shipModule.PointDefence.reloadInterval:0.##}{Core.TT("s")}\n" : "";
 				moduleData += shipModule.PointDefence.coverRadius > 0 ? $"{Core.TT("Cover Radius")}: {shipModule.PointDefence.coverRadius * 10f:0.##}{Core.TT("m")}\n" : "";
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += $"{Core.TT("Interceptor Identifier")}: {shipModule.PointDefence.projectileOrBeamPrefab.name}\n";
 				moduleData += shipModule.PointDefence.projectileOrBeamPrefab.projectileDmg > 0 ? $"{Core.TT("Interception Damage")}: {shipModule.PointDefence.projectileOrBeamPrefab.projectileDmg}\n" : "";
 				moduleData += shipModule.PointDefence.projectileOrBeamPrefab.lifetime > 0 ? $"{Core.TT("Interception Delay")}: {shipModule.PointDefence.projectileOrBeamPrefab.lifetime:0.##}{Core.TT("s")}\n" : "";
 				moduleData += !shipModule.PointDefence.resourcesPerShot.IsEmpty ? $"{Core.TT("Resources Per Shot")}:\n" : "";
@@ -399,12 +417,12 @@ namespace FFU_Bleeding_Edge {
 			moduleData += shipModule.PowerConsumed > 0 ? $"{Core.TT("Power Consumption")}: {shipModule.PowerConsumed} {Core.TT("GW/h")}\n" : "";
 			if (shipModule.type != ShipModule.Type.Reactor) moduleData += shipModule.overchargePowerNeed > 0 ? $"{Core.TT("Overcharge Power Draw")}: {(shipModule.overchargePowerNeed / (float)shipModule.PowerConsumed + 1f) * 100f:0}%\n" : "";
 			if (shipModule.type != ShipModule.Type.Reactor) moduleData += shipModule.overchargeSeconds > 0 ? $"{Core.TT("Overcharge Time")}: {shipModule.overchargeSeconds}{Core.TT("s")}\n" : "";
-			if (isInst && (shipModule.turnedOn || !shipModule.UsesTurnedOn)) moduleData += $"{Core.TT("Energy Emission")}: {FFU_BE_Defs.GetModuleEnergyEmission(shipModule):0.#}{Core.TT("m")}³\n";
-			else if (!isInst) moduleData += $"{Core.TT("Energy Emission")}: {FFU_BE_Defs.GetModuleEmissionValues(shipModule)}\n";
+			if (isInst && (shipModule.turnedOn || !shipModule.UsesTurnedOn) && FFU_BE_Defs.ModuleEmitsEnergy(shipModule)) moduleData += $"{Core.TT("Energy Emission")}: {FFU_BE_Defs.GetModuleEnergyEmission(shipModule):0.#}{Core.TT("m")}³\n";
+			else if (!isInst && FFU_BE_Defs.ModuleEmitsEnergy(shipModule)) moduleData += $"{Core.TT("Energy Emission")}: {FFU_BE_Defs.GetModuleEmissionValues(shipModule)}\n";
 			moduleData += shipModule.MaxHealth > 0 ? $"{Core.TT("Module Durability")}: {shipModule.MaxHealth} {Core.TT("HP")}\n" : "";
 			moduleData += shipModule.costCreditsInShop > 0 ? $"{Core.TT("Market Price")}: ${shipModule.costCreditsInShop}" : $"{Core.TT("Market Price")}: {Core.TT("N/A")}";
-			if (!isInst) return $"<color=lime>{moduleData}</color>\n{shipModule.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit)}";
-			else return $"<color=lime>{moduleData}</color>";
+			if (!isInst && showDesc) return $"{(showColors ? "<color=lime>" : "")}{moduleData}{(showColors ? "</color>" : "")}\n{shipModule.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit)}";
+			else return $"{(showColors ? "<color=lime>" : "")}{moduleData}{(showColors ? "</color>" : "")}";
 		}
 		public static string GetCraftableModuleDescription(ShipModule shipModule) {
 			return GetSelectedModuleExactData(shipModule, false);
@@ -629,9 +647,35 @@ namespace RST.UI {
 		[MonoModIgnore] private void SafeUpdateField(Text text, float value, ref float prevValue, string format = "{0}") { }
 		[MonoModIgnore] private void UpdateGroupedDmg(bool showShieldIcon, bool showShipIcon, bool showModuleIcon, string value) { }
 		[MonoModIgnore] private static void DoSkillIcon(HoverableUI skillIcon, bool shouldShow, ShipModule m) { }
+		private bool doModuleHovers = false;
+		private bool doWeaponHovers = false;
+		private bool doNukeHovers = false;
+		private bool doPointDefHovers = false;
+		private bool doEngineHovers = false;
+		private bool doSensorHovers = false;
+		private bool doBridgeHovers = false;
+		private bool doShieldHovers = false;
+		private bool doWarpHovers = false;
+		private bool doReactorHovers = false;
+		private bool doHealthBayHovers = false;
+		private bool doConverterHovers = false;
+		private bool doCryosleepHovers = false;
+		private bool doGardenHovers = false;
+		private bool doResearchHovers = false;
+		private bool doStealthHovers = false;
+		private bool doIntegrityHovers = false;
+		private bool sizeWasChanged = false;
+		private float prevEnergyEmission;
+		private string preColor;
+		private string aftColor;
 		//Selected Module Full Information Window
 		[MonoModReplace] private void Update() {
 			if (m == null) return;
+			if (!sizeWasChanged) {
+				ModuleDataSubpanelUI.minHeight = 240;
+				ModuleDataSubpanelUI.maxHeight = 360;
+				sizeWasChanged = true;
+			}
 			if (lastModule != m) {
 				GameObject[] array = itemGroups;
 				for (int i = 0; i < array.Length; i++)
@@ -668,6 +712,7 @@ namespace RST.UI {
 				prevSynthCons = 0f;
 				prevSyntheticsPerHp = 0f;
 				prevWeaponDmgArea = 0f;
+				prevEnergyEmission = 0f;
 				lastModule = m;
 			}
 			displayName.text = m.DisplayNameLocalized;
@@ -686,50 +731,75 @@ namespace RST.UI {
 			ModuleSlotRoot moduleSlotRoot = m.ModuleSlotRoot;
 			float chance = (moduleSlotRoot == null || moduleSlotRoot.Slot == null) ? 0f : moduleSlotRoot.Slot.deflectChance;
 			deflection.text = RstUtil.FormatChanceValue(chance);
-			exoticsProdText.transform.parent.parent.gameObject.SetActive(false);
 			switch (m.type) {
-				case ShipModule.Type.Weapon: case ShipModule.Type.Weapon_Nuke: DoWeapon(); break;
-				case ShipModule.Type.PointDefence: DoPointDefence(); break;
-				case ShipModule.Type.Engine: DoEngine(); break;
-				case ShipModule.Type.ResourcePack: DoResourcePack(); break;
-				case ShipModule.Type.Sensor: DoSensor(); break;
-				case ShipModule.Type.Bridge: DoBridge(); break;
-				case ShipModule.Type.ShieldGen: DoShieldGen(); break;
-				case ShipModule.Type.Warp: DoWarp(); break;
-				case ShipModule.Type.Reactor: DoReactor(); break;
-				case ShipModule.Type.Medbay: case ShipModule.Type.Dronebay: DoMedbay(); break;
-				case ShipModule.Type.MaterialsConverter: DoMaterialsConverter(); break;
-				case ShipModule.Type.Fighter: DoFighter(); break;
-				case ShipModule.Type.Container: DoContainer(); break;
-				case ShipModule.Type.Storage: DoStorageContainer(); break;
-				case ShipModule.Type.Cryosleep: DoCryosleep(); break;
-				case ShipModule.Type.Garden: DoGarden(); break;
+				case ShipModule.Type.Weapon:
+				case ShipModule.Type.Weapon_Nuke:
+				DoWeapon(); break;
+				case ShipModule.Type.PointDefence:
+				DoPointDefence(); break;
+				case ShipModule.Type.Engine:
+				DoEngine(); break;
+				case ShipModule.Type.ResourcePack:
+				DoResourcePack(); break;
+				case ShipModule.Type.Sensor:
+				DoSensor(); break;
+				case ShipModule.Type.Bridge:
+				DoBridge(); break;
+				case ShipModule.Type.ShieldGen:
+				DoShieldGen(); break;
+				case ShipModule.Type.Warp:
+				DoWarp(); break;
+				case ShipModule.Type.Reactor:
+				DoReactor(); break;
+				case ShipModule.Type.Medbay:
+				case ShipModule.Type.Dronebay:
+				DoMedbay(); break;
+				case ShipModule.Type.MaterialsConverter:
+				DoMaterialsConverter(); break;
+				case ShipModule.Type.Fighter:
+				DoFighter(); break;
+				case ShipModule.Type.Container:
+				DoContainer(); break;
+				case ShipModule.Type.Storage:
+				DoStorageContainer(); break;
+				case ShipModule.Type.Cryosleep:
+				DoCryosleep(); break;
+				case ShipModule.Type.Garden:
+				DoGarden(); break;
 				case ShipModule.Type.ResearchLab: DoResearch(); break;
-				case ShipModule.Type.StealthDecryptor: DoStealthDecryptorSensor(); break;
-				case ShipModule.Type.PassiveECM: DoPassiveECM(); break;
-				case ShipModule.Type.Integrity: DoIntegrity(); break;
-				case ShipModule.Type.Decoy: DoDecoy(); break;
-				case ShipModule.Type.Other: DoOther(); break;
+				case ShipModule.Type.StealthDecryptor:
+				DoStealthDecryptorSensor(); break;
+				case ShipModule.Type.PassiveECM:
+				DoPassiveECM(); break;
+				case ShipModule.Type.Integrity:
+				DoIntegrity(); break;
+				case ShipModule.Type.Decoy:
+				DoDecoy(); break;
+				case ShipModule.Type.Other:
+				DoOther(); break;
 			}
-			SafeUpdateField(sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			if (m.HasFullHealth) SafeUpdateField(sSpeedBonusText, m.starmapSpeedAdd, ref prevStarmapSpeedAdd, "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s"));
-			else SafeUpdateField(sSpeedBonusText, m.starmapSpeedAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevStarmapSpeedAdd, "<color=red>{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + "</color>");
-			if (m.HasFullHealth) SafeUpdateField(sAsteroidDeflBonusText, m.asteroidDeflectionPercentAdd, ref prevAsteroidDefl, "{0:0}%");
-			else SafeUpdateField(sAsteroidDeflBonusText, m.asteroidDeflectionPercentAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevAsteroidDefl, "<color=red>{0:0}%</color>");
-			if (m.type != ShipModule.Type.Bridge) {
-				if (m.HasFullHealth) SafeUpdateField(sEvasionBonusText, m.shipEvasionPercentAdd, ref prevShipEvasionPercentAdd, "{0:0} °/" + Localization.TT("min."));
-				else SafeUpdateField(sEvasionBonusText, m.shipEvasionPercentAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevShipEvasionPercentAdd, "<color=red>{0:0} °/" + Localization.TT("min.") + "</color>");
+			if (m.HasFullHealth) { preColor = ""; aftColor = ""; }
+			else { preColor = "<color=red>"; aftColor = "</color>"; }
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
+			if (m.type != ShipModule.Type.ShieldGen) SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			if (!doModuleHovers) {
+				doModuleHovers = true;
+				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship")}.";
+				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations")}.";
+				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship")}.";
+				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship")}.";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship")}.";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship")}.";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by much it inflates ship's signature")}.";
+				doIntegrityHovers = false;
+				doStealthHovers = false;
+				doShieldHovers = false;
 			}
-			if (m.HasFullHealth) SafeUpdateField(sAccuracyBonusText, m.shipAccuracyPercentAdd, ref prevSAccuracyBonus, "{0:0}% Δ" + Localization.TT("m"));
-			else SafeUpdateField(sAccuracyBonusText, m.shipAccuracyPercentAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevSAccuracyBonus, "<color=red>{0:0}% Δ" + Localization.TT("m") + "</color>");
-			if (m.type != ShipModule.Type.ShieldGen) {
-				if (m.HasFullHealth) SafeUpdateField(sMaxShieldBonusText, m.maxShieldAdd, ref prevMaxShieldAdd, "{0:0} " + Localization.TT("SP"));
-				else SafeUpdateField(sMaxShieldBonusText, m.maxShieldAdd * FFU_BE_Defs.GetHealthPercent(m), ref prevMaxShieldAdd, "<color=red>{0:0} " + Localization.TT("SP") + "</color>");
-			}
-			if (FFU_BE_Defs.ModuleEmitsEnergy(m)) {
-				SafeUpdateField(starmapStealthDetMaxText, $"{FFU_BE_Defs.GetModuleEnergyEmission(m):0.#}{Localization.TT("m")}³");
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy noise module currently emits and inflates ship's signature.")}";
-			} else if (starmapStealthDetMaxText.isActiveAndEnabled) starmapStealthDetMaxText.transform.parent.parent.gameObject.SetActive(false);
 			Crewmember.Skill requiredCrewSkillType = m.GetRequiredCrewSkillType();
 			DoSkillIcon(bridgeSkill, requiredCrewSkillType == Crewmember.Skill.Bridge, m);
 			DoSkillIcon(sensorSkill, requiredCrewSkillType == Crewmember.Skill.Sensor, m);
@@ -739,61 +809,35 @@ namespace RST.UI {
 			DoSkillIcon(warpSkill, requiredCrewSkillType == Crewmember.Skill.Warp, m);
 			DoSkillIcon(gardeningSkill, requiredCrewSkillType == Crewmember.Skill.Garden, m);
 			Ship ship = m.Ship;
-			if (requiredCrewSkillType == Crewmember.Skill.Presence) {
-				int moduleOperators = m.operatorSpots.Length;
-				SafeUpdateField(operatorSpotsText, (moduleOperators == 1) ? "1" : ("1-" + moduleOperators));
-				DoRequirementColor(operatorSpotsText, operatorSpots, ship == null || m.IsPacked || m.EnoughOps);
-			}
 			SafeUpdateField(powerConsText, m.powerConsumed, ref prevPowerConsumed, "{0:0}");
 			DoRequirementColor(powerConsText, powerCons, ship == null || m.type == ShipModule.Type.Warp || (m.turnedOn && m.EnoughPower));
-			(transform.GetChild(1).GetChild(1) as RectTransform).sizeDelta = new Vector2((transform.GetChild(1).GetChild(1) as RectTransform).sizeDelta.x, 300);
-			//(transform.GetChild(1) as RectTransform).sizeDelta = new Vector2((transform.GetChild(1) as RectTransform).sizeDelta.x, 300);
-			//(transform as RectTransform).sizeDelta = new Vector2((transform as RectTransform).sizeDelta.x, 300);
-			//var minInterfaceSize = AccessTools.FieldRefAccess<LayoutGroup, Vector2>(transform.GetComponent<VerticalLayoutGroup>(), "m_TotalMinSize");
-			//var prefInterfaceSize = AccessTools.FieldRefAccess<LayoutGroup, Vector2>(transform.GetComponent<VerticalLayoutGroup>(), "m_TotalPreferredSize");
-			//AccessTools.FieldRefAccess<LayoutGroup, Vector2>(transform.GetComponent<VerticalLayoutGroup>(), "m_TotalMinSize") = new Vector2(minInterfaceSize.x, 300);
-			//AccessTools.FieldRefAccess<LayoutGroup, Vector2>(transform.GetComponent<VerticalLayoutGroup>(), "m_TotalPreferredSize") = new Vector2(prefInterfaceSize.x, 300);
-			//Debug.LogWarning($"{transform.GetComponent<VerticalLayoutGroup>().minHeight}");
-			//Debug.LogWarning($"{transform.GetComponent<VerticalLayoutGroup>().flexibleHeight}");
-			//Debug.LogWarning($"{transform.GetComponent<VerticalLayoutGroup>().preferredHeight}");
-			//if (Time.frameCount % 150 == 0) FFU_BE_Defs.GetComponentsListTree(transform);
-			//ListAllElementsChildren();
-			//ListAllElementsIndexes();
 		}
 		//Updated Weapon Information
 		[MonoModReplace] private void DoWeapon() {
 			WeaponModule weapon = m.Weapon;
 			ShootAtDamageDealer.Damage damage = weapon.ProjectileOrBeamPrefab.GetDamage(weapon);
-			string text = Localization.TT("per");
+			string perArg = Localization.TT("per");
 			GunnerySkillEffects gunnerySkillEffects = WorldRules.Instance.gunnerySkillEffects;
 			if (weapon.accuracy != 0) {
 				weaponAccuracy.SetActiveIfNeeded();
-				weaponAccuracy.effects.gameObject.SetActive(true);
-				weaponAccuracy.skillBonus.gameObject.SetActive(true);
-				weaponAccuracy.Hoverable.gameObject.SetActive(true);
-				weaponAccuracy.effects.alignment = TextAnchor.MiddleLeft;
 				int effAccuracy = gunnerySkillEffects.EffectiveAccuracy(weapon);
 				if (m.HasFullHealth) weaponAccuracy.effects.text = weapon.accuracy != effAccuracy ? $"<color=lime>{effAccuracy:0} Δ{Localization.TT("m")}</color>" : $"{effAccuracy:0} Δ{Localization.TT("m")}";
 				else weaponAccuracy.effects.text = $"<color=red>{effAccuracy:0} Δ{Localization.TT("m")}</color>";
-				weaponAccuracy.skillBonus.text = "+" + gunnerySkillEffects.skillPointAccuracyBonus.ToString("0.0") + " " + text;
+				weaponAccuracy.skillBonus.text = "+" + gunnerySkillEffects.skillPointAccuracyBonus.ToString("0.0") + " " + perArg;
 				weaponAccuracy.Hoverable.hoverText = string.Format(weaponAccuracy.HoverableTextTemplate, effAccuracy, gunnerySkillEffects.EffectiveAngle(weapon), gunnerySkillEffects.skillPointAccuracyBonus.ToString("0.0"));
 			}
 			if (weapon.reloadInterval != 0f) {
 				weaponReloadTime.SetActiveIfNeeded();
-				weaponReloadTime.effects.gameObject.SetActive(true);
-				weaponReloadTime.skillBonus.gameObject.SetActive(true);
-				weaponReloadTime.Hoverable.gameObject.SetActive(true);
-				weaponReloadTime.effects.alignment = TextAnchor.MiddleLeft;
 				float effReload = gunnerySkillEffects.EffectiveReloadTime(weapon);
 				if (m.HasFullHealth) weaponReloadTime.effects.text = weapon.reloadInterval != effReload ? $"<color=lime>{effReload:0.0}{Localization.TT("s")}</color>" : $"{effReload:0.0}{Localization.TT("s")}";
 				else weaponReloadTime.effects.text = $"<color=red>{effReload:0.0}{Localization.TT("s")}</color>";
-				weaponReloadTime.skillBonus.text = $"-{((!weapon.reloadIntervalTakesNoBonuses) ? gunnerySkillEffects.skillPointBonusPercent : 0)}% {text}";
+				weaponReloadTime.skillBonus.text = $"-{((!weapon.reloadIntervalTakesNoBonuses) ? gunnerySkillEffects.skillPointBonusPercent : 0)}% {perArg}";
 				weaponReloadTime.Hoverable.hoverText = string.Format(weaponReloadTime.HoverableTextTemplate, gunnerySkillEffects.skillPointBonusPercent);
 			}
-			weaponTracksTargetGo.SetActive(false);
 			_ = weapon.tracksTarget;
 			weaponIgnoresShieldGo.SetActive(damage.ignoresShield);
 			weaponNeverDeflectsGo.SetActive(damage.neverDeflect);
+			weaponTracksTargetGo.SetActive(m.type == ShipModule.Type.Weapon_Nuke);
 			if (damage.shieldDmg != 0 && damage.shieldDmg == damage.shipDmg && damage.shipDmg == damage.moduleDmg) {
 				if (!groupedDmg.activeSelf) groupedDmg.SetActive(true);
 				UpdateGroupedDmg(true, true, true, $"{weapon.magazineSize}x{damage.shieldDmg}");
@@ -843,20 +887,12 @@ namespace RST.UI {
 			string argPer = Localization.TT("per");
 			GunnerySkillEffects gunnerySkillEffects = WorldRules.Instance.gunnerySkillEffects;
 			pointDefReloadTime.SetActiveIfNeeded();
-			pointDefReloadTime.effects.gameObject.SetActive(true);
-			pointDefReloadTime.skillBonus.gameObject.SetActive(true);
-			pointDefReloadTime.Hoverable.gameObject.SetActive(true);
-			pointDefReloadTime.effects.alignment = TextAnchor.MiddleLeft;
 			float pdEffReload = pointDefence.reloadInterval * gunnerySkillEffects.EffectiveSkillMultiplier(m, true);
-			if (m.HasFullHealth) pointDefReloadTime.effects.text = pointDefence.reloadInterval != pdEffReload ? $"<color=lime>{pdEffReload:0.00}{Localization.TT("s")}</color>": $"{pdEffReload:0.00}{Localization.TT("s")}";
+			if (m.HasFullHealth) pointDefReloadTime.effects.text = pointDefence.reloadInterval != pdEffReload ? $"<color=lime>{pdEffReload:0.00}{Localization.TT("s")}</color>" : $"{pdEffReload:0.00}{Localization.TT("s")}";
 			else pointDefReloadTime.effects.text = $"<color=red>{pdEffReload / FFU_BE_Defs.GetHealthPercent(m):0.00}{Localization.TT("s")}</color>";
 			pointDefReloadTime.skillBonus.text = $"-{gunnerySkillEffects.skillPointBonusPercent}% {argPer}";
 			pointDefReloadTime.Hoverable.hoverText = string.Format(pointDefReloadTime.HoverableTextTemplate, gunnerySkillEffects.skillPointBonusPercent);
 			pointDefCoverRadius.SetActiveIfNeeded();
-			pointDefCoverRadius.effects.gameObject.SetActive(true);
-			pointDefCoverRadius.skillBonus.gameObject.SetActive(true);
-			pointDefCoverRadius.Hoverable.gameObject.SetActive(true);
-			pointDefCoverRadius.effects.alignment = TextAnchor.MiddleLeft;
 			float pdEffRadius = pointDefence.EffectiveCoverRadius;
 			if (m.HasFullHealth) pointDefCoverRadius.effects.text = pointDefence.coverRadius != pdEffRadius ? $"<color=lime>{pdEffRadius * 10f:0.0}{Localization.TT("m")}</color>" : $"{pdEffRadius * 10f:0.0}{Localization.TT("m")}";
 			else pointDefCoverRadius.effects.text = $"<color=red>{pdEffRadius * 10f * FFU_BE_Defs.GetHealthPercent(m):0.0}{Localization.TT("m")}</color>";
@@ -891,16 +927,12 @@ namespace RST.UI {
 				DoRequirementColor(exoticsPerDistText, null, false);
 				DoRequirementColor(creditsPerDistText, null, false);
 			}
-			weaponAccuracy.SetActiveIfNeeded();
-			weaponAccuracy.effects.gameObject.SetActive(false);
-			weaponAccuracy.skillBonus.gameObject.SetActive(false);
-			weaponAccuracy.Hoverable.gameObject.SetActive(false);
-			weaponReloadTime.SetActiveIfNeeded();
-			weaponReloadTime.skillBonus.gameObject.SetActive(false);
-			weaponReloadTime.Hoverable.hoverText = $"{Localization.TT("Overcharge evasion bonus, power draw and effective time")}.";
-			if (m.HasFullHealth) weaponReloadTime.effects.text = $"+{m.Engine.overchargeEvasionAdd} °/{Core.TT("min.")}\n-{m.overchargePowerNeed} {Core.TT("GW/h")}\n{m.overchargeSeconds}{Core.TT("s")}";
-			else weaponReloadTime.effects.text = $"<color=red>+{m.Engine.overchargeEvasionAdd * FFU_BE_Defs.GetHealthPercent(m):0} °/{Core.TT("min.")}</color>\n-{m.overchargePowerNeed} {Core.TT("GW/h")}\n{m.overchargeSeconds}{Core.TT("s")}";
-			weaponReloadTime.effects.alignment = TextAnchor.UpperLeft;
+			//weaponAccuracy.SetActiveIfNeeded();
+			//weaponReloadTime.SetActiveIfNeeded();
+			//weaponReloadTime.Hoverable.hoverText = $"{Localization.TT("Overcharge evasion bonus, power draw and effective time")}.";
+			//if (m.HasFullHealth) weaponReloadTime.effects.text = $"+{m.Engine.overchargeEvasionAdd} °/{Core.TT("min.")}\n-{m.overchargePowerNeed} {Core.TT("GW/h")}\n{m.overchargeSeconds}{Core.TT("s")}";
+			//else weaponReloadTime.effects.text = $"<color=red>+{m.Engine.overchargeEvasionAdd * FFU_BE_Defs.GetHealthPercent(m):0} °/{Core.TT("min.")}</color>\n-{m.overchargePowerNeed} {Core.TT("GW/h")}\n{m.overchargeSeconds}{Core.TT("s")}";
+			//weaponReloadTime.effects.alignment = TextAnchor.UpperLeft;
 		}
 		//Updated Sensor Information
 		[MonoModReplace] private void DoSensor() {
@@ -911,10 +943,6 @@ namespace RST.UI {
 			else SafeUpdateField(sensorSectorRadarRange, $"<color=red>{sensor.sectorRadarRange * FFU_BE_Defs.GetHealthPercent(m):0}{argRu}</color>");
 			if (sensor.starmapRadarRange != 0) {
 				sensorStarmapRadarRange.SetActiveIfNeeded();
-				sensorStarmapRadarRange.effects.gameObject.SetActive(true);
-				sensorStarmapRadarRange.skillBonus.gameObject.SetActive(true);
-				sensorStarmapRadarRange.Hoverable.gameObject.SetActive(true);
-				sensorStarmapRadarRange.effects.alignment = TextAnchor.MiddleLeft;
 				SensorSkillEffects sensorSkillEffects = WorldRules.Instance.sensorSkillEffects;
 				float starRadRng = sensor.starmapRadarRange * sensorSkillEffects.EffectiveSkillMultiplier(m, false);
 				if (m.HasFullHealth) sensorStarmapRadarRange.effects.text = sensor.starmapRadarRange != starRadRng ? $" <color=lime>{starRadRng:0}{argRu}</color>" : $" {starRadRng:0}{argRu}";
@@ -928,10 +956,6 @@ namespace RST.UI {
 			bridgeRemoteOpsGo.SetActive(true);
 			BridgeSkillEffects bridgeSkillEffects = WorldRules.Instance.bridgeSkillEffects;
 			bridgeEvasion.SetActiveIfNeeded();
-			bridgeEvasion.effects.gameObject.SetActive(true);
-			bridgeEvasion.skillBonus.gameObject.SetActive(true);
-			bridgeEvasion.Hoverable.gameObject.SetActive(true);
-			bridgeEvasion.effects.alignment = TextAnchor.MiddleLeft;
 			int bridgeEva = bridgeSkillEffects.EffectiveSkillBonusPercent(m);
 			if (m.HasFullHealth) bridgeEvasion.effects.text = (m.shipEvasionPercentAdd != bridgeEva) ? $"<color=lime>{m.shipEvasionPercentAdd + bridgeEva:0}</color>" : $"{m.shipEvasionPercentAdd + bridgeEva:0}";
 			else bridgeEvasion.effects.text = $"<color=red>{m.shipEvasionPercentAdd + bridgeEva * FFU_BE_Defs.GetHealthPercent(m):0}</color>";
@@ -947,10 +971,6 @@ namespace RST.UI {
 			ShieldSkillEffects shieldSkillEffects = WorldRules.Instance.shieldSkillEffects;
 			if (shieldGen.reloadInterval != 0f) {
 				shieldReloadTime.SetActiveIfNeeded();
-				shieldReloadTime.effects.gameObject.SetActive(true);
-				shieldReloadTime.skillBonus.gameObject.SetActive(true);
-				shieldReloadTime.Hoverable.gameObject.SetActive(true);
-				shieldReloadTime.effects.alignment = TextAnchor.MiddleLeft;
 				float num = shieldGen.reloadInterval * shieldSkillEffects.EffectiveSkillMultiplier(m, true);
 				shieldReloadTime.effects.text = shieldGen.reloadInterval + Localization.TT("s") + ((shieldGen.reloadInterval != num) ? string.Format(" <color=lime>({0:0.0}{1})</color>", num, Localization.TT("s")) : "");
 				shieldReloadTime.skillBonus.text = string.Format("-{0}% {1}", shieldSkillEffects.skillPointBonusPercent, Localization.TT("per"));
@@ -965,10 +985,6 @@ namespace RST.UI {
 			DoRequirementColor(warpActivationFuelText, warpActivationFuel, ship == null || ship.Fuel >= warp.activationFuel);
 			WarpSkillEffects warpSkillEffects = WorldRules.Instance.warpSkillEffects;
 			warpReloadTime.SetActiveIfNeeded();
-			warpReloadTime.effects.gameObject.SetActive(true);
-			warpReloadTime.skillBonus.gameObject.SetActive(true);
-			warpReloadTime.Hoverable.gameObject.SetActive(true);
-			warpReloadTime.effects.alignment = TextAnchor.MiddleLeft;
 			float num = warp.reloadInterval * warpSkillEffects.EffectiveSkillMultiplier(m, true);
 			warpReloadTime.effects.text = warp.reloadInterval + Localization.TT("s") + ((warp.reloadInterval != num) ? string.Format(" <color=lime>({0:0.0}{1})</color>", num, Localization.TT("s")) : "");
 			warpReloadTime.skillBonus.text = string.Format("-{0}% {1}", warpSkillEffects.skillPointBonusPercent, Localization.TT("per"));
@@ -1009,6 +1025,7 @@ namespace RST.UI {
 		//Updated Converter Information
 		[MonoModReplace] private void DoMaterialsConverter() {
 			MaterialsConverterModule materialsConverter = m.MaterialsConverter;
+			exoticsProdText.transform.parent.parent.gameObject.SetActive(false);
 			DoResourceConsPerSecond(materialsConverter.consume, materialsConverter.secondsPerConversion);
 			DoResourceProdPerSecond(materialsConverter.produce, materialsConverter.secondsPerConversion);
 		}
@@ -1070,7 +1087,61 @@ namespace RST.UI {
 				case ShootAtDamageDealer.FireChanceLevel.High: SafeUpdateField(fireChanceText, Localization.TT("High (" + (int)Core.FireIgniteChance.High + "%)")); break;
 			}
 		}
-		//New Function: HoverableUI and Text Access
+		//New Function: Components Direct Data & Properties Access
+		private void SafeUpdateField(int sortOrder, Text text, float value, ref float prevValue, string format = "{0}") {
+			bool flag = value != 0f;
+			if (text.isActiveAndEnabled != flag) {
+				text.transform.parent.parent.gameObject.SetActive(flag);
+			}
+			if (flag && sortOrder > 0) {
+				SortOrder(text, sortOrder);
+			}
+			if (prevValue == 0f || !value.Equals(prevValue)) {
+				text.text = string.Format(format, value);
+				prevValue = value;
+			}
+		}
+		private void SafeUpdateField(Text text, GameObject refObj, float value, ref float prevValue, string format = "{0}") {
+			bool flag = value != 0f;
+			if (refObj.activeSelf != flag) {
+				refObj.SetActive(flag);
+			}
+			if (prevValue == 0f || !value.Equals(prevValue)) {
+				text.text = string.Format(format, value);
+				prevValue = value;
+			}
+		}
+		private void SafeUpdateField(int sortOrder, Text text, GameObject refObj, float value, ref float prevValue, string format = "{0}") {
+			bool flag = value != 0f;
+			if (refObj.activeSelf != flag) {
+				refObj.SetActive(flag);
+			}
+			if (flag && sortOrder > 0) {
+				SortOrder(refObj, sortOrder);
+			}
+			if (prevValue == 0f || !value.Equals(prevValue)) {
+				text.text = string.Format(format, value);
+				prevValue = value;
+			}
+		}
+		public float ModuleDataSubpanelHeightMax {
+			set {
+				UISetPreferredHeight refUISetPreferredHeight = transform.GetChild(1).GetChild(1).GetComponent<UISetPreferredHeight>() ?? null;
+				if (refUISetPreferredHeight != null) refUISetPreferredHeight.maxHeight = value;
+			}
+		}
+		public float ModuleDataSubpanelHeightMin {
+			set {
+				UISetPreferredHeight refUISetPreferredHeight = transform.GetChild(1).GetChild(1).GetComponent<UISetPreferredHeight>();
+				LayoutElement refLayoutElement = refUISetPreferredHeight.GetComponent<LayoutElement>() ?? null;
+				if (refLayoutElement != null) refLayoutElement.preferredHeight = value;
+			}
+		}
+		public UISetPreferredHeight ModuleDataSubpanelUI {
+			get {
+				return transform.GetChild(1).GetChild(1).GetComponent<UISetPreferredHeight>();
+			}
+		}
 		public HoverableUI cryoSleepSpotsHover {
 			get {
 				return cryoSleepSpotsText.transform.parent.parent.GetChild(0).GetComponent<HoverableUI>();
@@ -1304,11 +1375,6 @@ namespace RST.UI {
 		public HoverableUI moduleDeflectionHover {
 			get {
 				return moduleDeflectionText.transform.parent.parent.GetChild(0).GetComponent<HoverableUI>();
-			}
-		}
-		public HoverableUI operatorSpotsHover {
-			get {
-				return operatorSpotsText.transform.parent.parent.GetChild(0).GetComponent<HoverableUI>();
 			}
 		}
 		public HoverableUI storageSizeHover {

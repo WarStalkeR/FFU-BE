@@ -12,8 +12,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using FFU_Bleeding_Edge;
-using RST.PlaymakerAction;
-using System.Linq;
 using UnityEngine.EventSystems;
 using System.Text;
 
@@ -21,7 +19,7 @@ namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Spaceships {
 		public static void InitSpaceShipsPrefabList() {
 			foreach (Ship ship in Resources.FindObjectsOfTypeAll<Ship>()) {
-				if (FFU_BE_Defs.dumpObjectLists) Debug.Log("Ship: " + ship.name + " [" + ship.displayName + "]");
+				if (FFU_BE_Defs.dumpObjectLists) Debug.Log($"Ship: {ship.name} [{ship.PrefabId}] {ship.displayName}");
 				switch (ship.name) {
 					case "01 Tigerfish":
 					ship.MaxHealthAdd = 300;
@@ -93,6 +91,13 @@ namespace FFU_Bleeding_Edge {
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 48));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
+					case "00 Easy Tiger":
+					ship.MaxHealthAdd = 450;
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 250));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Tactical Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 36));
+					FFU_BE_Defs.prefabShipsList.Add(ship);
+					break;
 					default: break;
 				}
 			}
@@ -111,7 +116,7 @@ namespace FFU_Bleeding_Edge {
 			}
 		}
 		public static bool IsUpdatedTemplateShip(Ship bossShip) {
-			if (bossShip.name.Contains("Level 1 Rat boss")) return true;
+			//if (bossShip.name.Contains("Level 1 Rat boss")) return true;
 			//else if (bossShip.name.Contains("Level 2 Pirate boss")) return true;
 			//else if (bossShip.name.Contains("Level 3 boss squid bounty hunter")) return true;
 			//else if (bossShip.name.Contains("Level 4 Insectoid boss")) return true;
@@ -119,7 +124,7 @@ namespace FFU_Bleeding_Edge {
 			//else if (bossShip.name.Contains("Level 7 boss squid assasnik")) return true;
 			//else if (bossShip.name.Contains("Level 9 boss, Shogar")) return true;
 			//else if (bossShip.name.Contains("Level 10 boss insectoid Calm Destruction")) return true;
-			else return false;
+			return false;
 		}
 	}
 }
