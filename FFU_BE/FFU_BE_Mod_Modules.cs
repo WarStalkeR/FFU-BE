@@ -1053,6 +1053,32 @@ namespace RST {
 			}
 		}
 	}
+	public class patch_CrewIsHealed : CrewIsHealed {
+		[MonoModIgnore] private float timer;
+		[MonoModIgnore] private ShipModule Module => GetCachedComponentInParent<ShipModule>(true);
+		[MonoModIgnore] private CrewAssignmentSpot AssignmentSpot => GetCachedComponent<CrewAssignmentSpot>(true);
+		//Health Bay Healing Speed from Damage
+		[MonoModReplace] private void UpdateData() {
+			if (AssignmentSpot.assignedCrewmember == null) return;
+			ShipModule module = Module;
+			if (!(module != null) || !module.HasFullHealth || !module.IsPowered || 1 == 0) return;
+			Crewmember assignedCrewmember = AssignmentSpot.assignedCrewmember;
+			MedbayModule medbay = module.Medbay;
+			float healthPercent = FFU_BE_Defs.GetHealthPercent(module);
+			if (timer >= (medbay.secondsPerHp / healthPercent)) {
+				bool flag = !assignedCrewmember.HasFullHealth;
+				if (flag && !EnoughResources) flag = false;
+				if (flag) {
+					assignedCrewmember.Heal(1);
+					PlayerData playerData = PlayerDatas.Get(module.Ownership.GetOwner());
+					if (playerData != null) medbay.resourcesPerHp.ConsumeFrom(playerData, 1f, reasonToDisplay);
+					timer = 0f;
+				}
+			}
+			float num = PerFrameCache.IsGoodSituation ? WorldRules.Instance.medbayHealSpeedMultiplierIfGood : 1f;
+			timer += num * Time.deltaTime;
+		}
+	}
 	public class patch_GunnerySkillEffects : GunnerySkillEffects {
 		//Damage Based Module Accuracy Reductions
 		[MonoModReplace] public int EffectiveAccuracy(WeaponModule wm) {

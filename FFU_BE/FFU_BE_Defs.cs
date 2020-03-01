@@ -781,7 +781,7 @@ namespace FFU_Bleeding_Edge {
 			else return 2;
 		}
 		public static float GetHealthPercent(ShipModule shipModule) {
-			return Mathf.Clamp01(shipModule.Health / (float)shipModule.MaxHealth);
+			return Mathf.Clamp(shipModule.Health / (float)shipModule.MaxHealth, 0.0001f, 1f);
 		}
 		public static float GetHealthEffect(ShipModule shipModule, float hMult = 1f) {
 			return (1f - (shipModule.Health / (float)shipModule.MaxHealth)) * hMult;

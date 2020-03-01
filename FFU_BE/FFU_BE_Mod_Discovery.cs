@@ -444,7 +444,8 @@ namespace RST {
 		//Tier dependent Instant Warp Mode
 		[MonoModReplace] private bool UpdateCountdown() {
 			float speedMultiplier = Module.TurnedOnAndIsWorking ? (1f / WorldRules.Instance.warpSkillEffects.EffectiveSkillMultiplier(Module, true)) : 0f;
-			return reloadTimer.Update(Mathf.Max(speedMultiplier * (PerFrameCache.IsGoodSituation ? 10f : 1f), 1f));
+			if (Module.HasFullHealth) return reloadTimer.Update(Mathf.Max(speedMultiplier * (PerFrameCache.IsGoodSituation ? 10f : 1f), 1f));
+			else return reloadTimer.Update(Mathf.Max(speedMultiplier * (PerFrameCache.IsGoodSituation ? 10f : 1f) * FFU_BE_Defs.GetHealthPercent(Module), FFU_BE_Defs.GetHealthPercent(Module)));
 		}
 		//Hostile Attention Check after Warping
 		[MonoModReplace] private void EndWarping(bool success, bool destroyIntviewShipToo) {
