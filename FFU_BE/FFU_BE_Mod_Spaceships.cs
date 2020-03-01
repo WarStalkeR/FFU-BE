@@ -189,6 +189,23 @@ namespace RST {
 			}
 			return finalAccuracy;
 		}
+		//Reduced Shield Capacity from Damaged Modules
+		[MonoModReplace] public int GetMaxShieldPoints(Action<IHasDisplayNameLocalized, int> perProviderCallback) {
+			List<ShipModule> modules = Modules;
+			if (perProviderCallback != null) modules.Sort((ShipModule m) => -m.MaxShieldAdd);
+			int totalShield = 0;
+			foreach (ShipModule shipModule in modules) {
+				if (shipModule != null && !shipModule.IsPacked) {
+					int maxShieldAdd = shipModule.MaxShieldAdd;
+					if (!shipModule.HasFullHealth) maxShieldAdd = Mathf.CeilToInt(maxShieldAdd * FFU_BE_Defs.GetHealthPercent(shipModule));
+					if (maxShieldAdd != 0) {
+						totalShield += maxShieldAdd;
+						perProviderCallback?.Invoke(shipModule, maxShieldAdd);
+					}
+				}
+			}
+			return totalShield;
+		}
 		//Enforce Ship Self-Destruct Timer
 		[MonoModReplace] private void DoSelfDestruct() {
 			bool isSelfDestructing = IsSelfDestructing;

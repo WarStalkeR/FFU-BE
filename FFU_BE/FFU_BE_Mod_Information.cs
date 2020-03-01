@@ -1013,7 +1013,7 @@ namespace RST.UI {
 			SafeUpdateField(40, fireChanceText, $"+{preColor}{engine.overchargeEvasionAdd * healthPercent:0} °/{Localization.TT("min.")}{aftColor}");
 			SafeUpdateField(50, empOverloadText, $"-{m.overchargePowerNeed:0} {Localization.TT("GW/h")}");
 			SafeUpdateField(60, medbayHealSpeedText, $"{m.overchargeSeconds:0}{Localization.TT("s")}");
-			SafeUpdateField(280, sMaxShieldBonusText, m.maxShieldAdd, ref prevMaxShieldAdd, "{0:0} " + Localization.TT("SP"));
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
 			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
 			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
 			if (m.HasFullHealth) DoResourceConsPerDist(engine.ConsumedPerDistance, m);
@@ -1095,7 +1095,7 @@ namespace RST.UI {
 			SortOrder(bridgeRemoteOpsGo, 20);
 			SortOrder(bridgeEvasion, 30);
 			SafeUpdateField(40, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
-			SafeUpdateField(280, sMaxShieldBonusText, m.maxShieldAdd, ref prevMaxShieldAdd, "{0:0} " + Localization.TT("SP"));
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
 			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
 			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
 			if (!doBridgeHovers) {
@@ -1120,7 +1120,7 @@ namespace RST.UI {
 				shieldReloadTime.skillBonus.text = string.Format("-{0}% {1}", shieldSkillEffects.skillPointBonusPercent, Localization.TT("per"));
 				SortOrder(shieldReloadTime, 10);
 			}
-			SafeUpdateField(20, sMaxShieldBonusText, shieldGen.maxShieldAdd, ref prevShieldAdd, "{0:0} " + Localization.TT("SP"));
+			SafeUpdateField(20, sMaxShieldBonusText, m.HasFullHealth ? shieldGen.maxShieldAdd : shieldGen.maxShieldAdd * healthPercent, ref prevShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
 			SafeUpdateField(30, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
 			SafeUpdateField(40, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
 			SafeUpdateField(50, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
