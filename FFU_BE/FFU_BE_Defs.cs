@@ -781,7 +781,7 @@ namespace FFU_Bleeding_Edge {
 			else return 2;
 		}
 		public static float GetHealthPercent(ShipModule shipModule) {
-			return shipModule.Health / (float)shipModule.MaxHealth;
+			return Mathf.Clamp01(shipModule.Health / (float)shipModule.MaxHealth);
 		}
 		public static float GetHealthEffect(ShipModule shipModule, float hMult = 1f) {
 			return (1f - (shipModule.Health / (float)shipModule.MaxHealth)) * hMult;
@@ -803,7 +803,7 @@ namespace FFU_Bleeding_Edge {
 			if (tObject == null) return;
 			GetComponentsListTree(tObject.transform);
 		}
-		public static void GetComponentsListTree(RST.UI.ModuleEffectItem tObject) {
+		public static void GetComponentsListTree(ModuleEffectItem tObject) {
 			if (tObject == null) return;
 			GetComponentsListTree(tObject.transform);
 		}
@@ -1355,7 +1355,11 @@ namespace FFU_Bleeding_Edge {
 			return Core.RandomItemFromList(prefabModdedModulesList.Where(x => x.type == moduleType).ToList(), null);
 		}
 		public static void SetViableForSectors(int modulePrefabID, params int[] sectorNumbers) {
-			foreach (int sectorNumber in sectorNumbers) sectorViableModuleIDs[sectorNumber].Add(modulePrefabID);
+			if (!sectorViableModuleIDs[0].Contains(modulePrefabID)) sectorViableModuleIDs[0].Add(modulePrefabID);
+			foreach (int sectorNumber in sectorNumbers) if (!sectorViableModuleIDs[sectorNumber].Contains(modulePrefabID)) sectorViableModuleIDs[sectorNumber].Add(modulePrefabID);
+		}
+		public static void SetViableForSectors(int modulePrefabID) {
+			if (!sectorViableModuleIDs[0].Contains(modulePrefabID)) sectorViableModuleIDs[0].Add(modulePrefabID);
 		}
 	}
 }

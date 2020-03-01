@@ -25,7 +25,7 @@ namespace FFU_Bleeding_Edge {
 			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
 			switch (refModuleName) {
 				case "synthetics cooker 1":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3, 4, 5);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Synthetics Printer</color>";
 				shipModule.description = "Converts organics into synthetics through ultrahigh temperature processing. Has built-in recipes library for tens of thousands of different substances.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -35,7 +35,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "fuel processor 1B":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3, 4, 5);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Fuel Refinery</color>";
 				shipModule.description = "Combines organics and synthetics into starfuel through ultrahigh pressure processing. Has built-in data library that allows to create 100% compatible fuel."; ;
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -45,7 +45,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "explosives combinator 1":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4, 5, 6);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Ordnance Factory</color>";
 				shipModule.description = "Uses starfuel and synthetics to manufacture various ordnances automatically. Has built-in blueprint library for all existing of ordnance types, including exotic ones.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -55,7 +55,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "fuel processor 2":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6, 7);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Blast Furnace</color>";
 				shipModule.description = "Utilizes small amount of exotics with explosives as catalyst to process synthetics into various alloys. Has built-in data library that allows to create any possible metal.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -65,7 +65,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "explosives combinator tiger":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9, 10);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Exotics XMT-Purifier</color>";
 				shipModule.description = "Processes and purifies essence of all received materials into pure and stable exotic matter. Compared to other industrial facilities, has very slow production speed.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -75,7 +75,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "explosives combinator diy":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9, 10);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Quantum Processor</color>";
 				shipModule.description = "Extremely advanced and powerful processing unit that uses quantum intangibility to analyze exotic matter and derive viable xenodata from it. Has poor production efficiency.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -85,7 +85,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "oilcake converter":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6, 7);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Oilcake Converter</color>";
 				shipModule.description = "Purifies starfuel from hazardous elements and converts it into organics. Comes with built-in cake printer. Certified and suitable for wedding and other happy occasions.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -95,7 +95,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "fuel combinator 1A old":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4, 5, 6);
 				shipModule.displayName = "Industrial <color=#" + colorFactory + "ff>Ordnance Recycler</color>";
 				shipModule.description = "Recycles explosives into starfuel through fail-safe processing methods.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2500f, synthetics = 1500f, exotics = 15f };
@@ -105,7 +105,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "biotech explosives recycler":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4, 5, 6);
 				shipModule.displayName = "Biotic <color=#" + colorFactory + "ff>Ordnance Recycler</color>";
 				shipModule.description = "Recycles explosives into organics by 'digesting' it.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, organics = 2500f, synthetics = 1500f, exotics = 15f };

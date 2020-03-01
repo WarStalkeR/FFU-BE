@@ -26,7 +26,7 @@ namespace FFU_Bleeding_Edge {
 			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
 			switch (refModuleName) {
 				case "warp 0 DIY":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				shipModule.displayName = "Makeshift <color=#" + colorDrive + "ff>Warp Drive</color>";
 				shipModule.description = "Made from spare exotics, high-tech scraps and salvaged power cores. Has very long spin-up time and horrible fuel consumption. Used, when there are no other alternatives.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 75f, metals = 150f, synthetics = 150f, exotics = 1f };
@@ -37,7 +37,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 20;
 				break;
 				case "warp 01 greencrystal":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				shipModule.displayName = "Fission <color=#" + colorDrive + "ff>Warp Drive</color>";
 				shipModule.description = "Basic warp drive that uses fission energy to recharge warp coils in order to initiate jump. Spin-up time is still very long, but fuel consumption is a little bit better.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 150f, metals = 300f, synthetics = 300f, exotics = 2f };
@@ -48,7 +48,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 24;
 				break;
 				case "warp 05 spiralcrystal":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				shipModule.displayName = "Biochemical <color=#" + colorDrive + "ff>Warp Drive</color>";
 				shipModule.description = "Organic warp drive that uses unidentified biochemical reactions to recharge warp coils for further jump initiation. Long spin-up time and mediocre fuel consumption.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, organics = 500f, synthetics = 500f, exotics = 3f };
@@ -59,7 +59,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 26;
 				break;
 				case "warp 02 bluecrystal":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				shipModule.displayName = "Immaterium <color=#" + colorDrive + "ff>Warp Drive</color>";
 				shipModule.description = "Exotic warp drive that uses feeds on immaterium energy to recharge warp coils in order to initiate jump. Long spin-up time and better then average fuel consumption.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 400f, metals = 750f, synthetics = 750f, exotics = 4f };
@@ -70,7 +70,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 28;
 				break;
 				case "warp 03 neoncrystal":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				shipModule.displayName = "Prismatic <color=#" + colorDrive + "ff>Warp Drive</color>";
 				shipModule.description = "Warp drive that uses prismatic mirrors to concentrate energy in the warp coils to recharge them. Has decent spin-up time and decent fuel consumption efficiency.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 600f, metals = 1250f, synthetics = 1250f, exotics = 5f };
@@ -81,7 +81,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 30;
 				break;
 				case "warp 05 rotor metal":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				shipModule.displayName = "Fusion <color=#" + colorDrive + "ff>Warp Drive</color>";
 				shipModule.description = "Warp drive that uses pure and unprocessed fusion energy to recharge warp coils for further jump initiation. Has good spin-up time and optimized fuel consumption.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 800f, metals = 1750f, synthetics = 1750f, exotics = 7f };
@@ -92,7 +92,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 33;
 				break;
 				case "warp 04 emperorbanks":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				shipModule.displayName = "Commerical <color=#" + colorDrive + "ff>Warp Drive</color>";
 				shipModule.description = "Warp drive that was developed for sake of profit and is sold to anybody who can afford it. Private manufacturing will lead to breach of copyright agreement and lawsuit.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1000f, metals = 2250f, synthetics = 2250f, exotics = 10f };
@@ -103,7 +103,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 36;
 				break;
 				case "warp 06 rotor blue":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				shipModule.displayName = "Antimatter <color=#" + colorDrive + "ff>Warp Drive</color>";
 				shipModule.description = "Warp drive that uses unstable antimatter energy to recharge warp coils for further jump initiation. Has great spin-up time and very optimized fuel consumption.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1250f, metals = 3000f, synthetics = 3000f, exotics = 15f };
@@ -114,7 +114,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 39;
 				break;
 				case "warp 09 spideraa":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				shipModule.displayName = "Repulsor <color=#" + colorDrive + "ff>Warp Drive</color>";
 				shipModule.description = "Warp drive that uses kinetic energy and unknown principles to recharge warp coils for further jumping. Has amazing spin-up time and near perfect fuel consumption.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1500f, metals = 4000f, synthetics = 4000f, exotics = 20f };
@@ -125,7 +125,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 41;
 				break;
 				case "warp 07 rotor glass":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				shipModule.displayName = "Quantum <color=#" + colorDrive + "ff>Warp Drive</color>";
 				shipModule.description = "This warp drive is more a hyper-drive then just a warp drive. It uses quantum energy to fold space and move through it. Has near perfect spin-up time and excellent fuel consumption.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1750f, metals = 5000f, synthetics = 5000f, exotics = 25f };

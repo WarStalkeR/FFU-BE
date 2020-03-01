@@ -571,6 +571,7 @@ namespace RST {
 	public class patch_ShipModule : ShipModule {
 		private extern void orig_Unpack();
 		[MonoModIgnore] private int maxHealth;
+		[MonoModIgnore] private bool isPowered;
 		[MonoModIgnore] private Ship cachedShip;
 		[MonoModIgnore] private Ship cachedShip2;
 		[MonoModIgnore] private void EndOverload() { }
@@ -709,10 +710,44 @@ namespace RST {
 		public bool IsRemotelyOperated {
 			get {
 				if (HasFullHealth)
-					return turnedOn && !IsPacked && operatorSpots.Length != 0 && CurrentLocalOpsWithSkillCount <= 0 && RemoteBridge != null;
+					return turnedOn && !IsPacked && (operatorSpots.Length != 0 || type == Type.Weapon_Nuke) && CurrentLocalOpsWithSkillCount <= 0 && RemoteBridge != null;
 				else if (FFU_BE_Defs.DamagedButWorking(this))
-					return turnedOn && !IsPacked && operatorSpots.Length != 0 && CurrentLocalOpsWithSkillCount <= 0 && RemoteBridge != null;
+					return turnedOn && !IsPacked && (operatorSpots.Length != 0 || type == Type.Weapon_Nuke) && CurrentLocalOpsWithSkillCount <= 0 && RemoteBridge != null;
 				return false;
+			}
+		}
+		//Nukes Operated Remotely via Bridge
+		public bool IsAutoOperated {
+			get {
+				return turnedOn && !IsPacked && operatorSpots.Length == 0 && type != Type.Weapon_Nuke;
+			}
+		}
+		//Nukes Operated Remotely via Bridge
+		public bool EnoughOps {
+			get {
+				if (operatorSpots.Length != 0) return CurrentOpsWithSkillCount > 0;
+				return type != Type.Weapon_Nuke || (type == Type.Weapon_Nuke && RemoteBridge != null);
+			}
+		}
+		//Nukes Operated Remotely via Bridge
+		public bool TurnedOnAndIsWorking {
+			get {
+				if (turnedOn) {
+					if (type == Type.Weapon_Nuke) return RemoteBridge != null;
+					return IsWorking;
+				}
+				return false;
+			}
+		}
+		//Nukes Operated Remotely via Bridge
+		public bool IsPowered {
+			get {
+				if (powerConsumed > 0) return isPowered;
+				if (type == Type.Weapon_Nuke) return RemoteBridge != null;
+				return true;
+			}
+			set {
+				isPowered = value;
 			}
 		}
 		//Reduced Evasion Bonuses from Damaged Modules
@@ -993,6 +1028,28 @@ namespace RST {
 				ShipModule module = Module;
 				if (module != null && !module.HasFullHealth) return Mathf.CeilToInt((powerCapacity + ((module != null && module.IsOvercharged) ? overchargePowerCapacityAdd : 0)) * FFU_BE_Defs.GetHealthPercent(module));
 				else return powerCapacity + ((module != null && module.IsOvercharged) ? overchargePowerCapacityAdd : 0);
+			}
+		}
+	}
+	public class patch_ShieldModule : ShieldModule {
+		//Decrease Shield Regen Speed from Damage
+		[MonoModReplace] private void Update() {
+			if (reloadInterval <= 0f) return;
+			Shield shipShield = ShipShield;
+			if (!(shipShield == null)) {
+				ShipModule module = Module;
+				if (module.TurnedOnAndIsWorking && shipShield.ShieldPoints < shipShield.MaxShieldPoints) {
+					ShieldSkillEffects shieldSkillEffects = WorldRules.Instance.shieldSkillEffects;
+					float shieldReload = 1f / shieldSkillEffects.EffectiveSkillMultiplier(module, true);
+					if (module.HasFullHealth) reloadTimer.Update(shieldReload * (PerFrameCache.IsGoodSituation ? shieldSkillEffects.accelTimeReloadSpeedup : 1f));
+					else reloadTimer.Update(shieldReload * (PerFrameCache.IsGoodSituation ? shieldSkillEffects.accelTimeReloadSpeedup : 1f) * FFU_BE_Defs.GetHealthPercent(module));
+				} else {
+					reloadTimer.Restart(reloadInterval);
+				}
+				if (reloadTimer.ReachedZero) {
+					shipShield.ShieldPoints = Mathf.Min(shipShield.ShieldPoints + 1, shipShield.MaxShieldPoints);
+					reloadTimer.Restart(reloadInterval);
+				}
 			}
 		}
 	}

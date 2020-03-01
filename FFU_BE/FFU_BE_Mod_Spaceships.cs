@@ -135,6 +135,26 @@ namespace RST {
 		[MonoModIgnore] private void CompleteFlyTo() { }
 		[MonoModIgnore] private void UpdateExplosion() { }
 		[MonoModIgnore] private void AiSendSomeoneToExtinguishFire() { }
+		//Detailed Ship Hover Info
+		public string HoverText {
+			get {
+				StringBuilder stringBuilder = RstShared.StringBuilder;
+				Ownership.Owner owner = Ownership.GetOwner();
+				switch (owner) {
+					case Ownership.Owner.Me: stringBuilder.Append(MonoBehaviourExtended.TT("Your Ship")).Append(": ").Append(displayName); break;
+					case Ownership.Owner.Enemy: stringBuilder.Append(MonoBehaviourExtended.TT("Enemy Ship")).Append(": ").Append(displayName); break;
+					default: stringBuilder.Append(MonoBehaviourExtended.TT("Unknown Ship")).Append(": ").Append(displayName); break;
+				}
+				stringBuilder.Append('\n').Append(MonoBehaviourExtended.TT("Health Points")).Append(": ").AppendColoredHealth(this);
+				if (IsSelfDestructing) stringBuilder.Append("\n<color=red>").AppendFormat(MonoBehaviourExtended.TT("Self-Destructs in {0}s"), (int)selfDestructTimer.value).Append("</color>");
+				if (owner == Ownership.Owner.Me) {
+					stringBuilder.Append('\n').Append(MonoBehaviourExtended.TT("Energy Emission: ")).Append($"{FFU_BE_Defs.energyEmission:0.#}").Append(MonoBehaviourExtended.TT("m³"));
+					if (sectorRadarRangeAdd != 0) stringBuilder.Append('\n').AppendFormat(MonoBehaviourExtended.TT("Sector Radar Range Bonus: +{0}ru"), sectorRadarRangeAdd);
+					if (starmapRadarRangeAdd != 0) stringBuilder.Append('\n').AppendFormat(MonoBehaviourExtended.TT("Starmap Radar Range Bonus: +{0}ru"), starmapRadarRangeAdd);
+				}
+				return stringBuilder.ToString();
+			}
+		}
 		//Ship Evasion Limit from Configuration & Reduced Evasion Bonus from Damaged Modules
 		public int GetEvasion(Action<IHasDisplayNameLocalized, int> perProviderCallback) {
 			int finalEvasion = evasionPercentAdd;

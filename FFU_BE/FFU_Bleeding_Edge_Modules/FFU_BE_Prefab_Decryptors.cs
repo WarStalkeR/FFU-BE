@@ -24,7 +24,7 @@ namespace FFU_Bleeding_Edge {
 			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
 			switch (refModuleName) {
 				case "Stealth decryptor 1 diy":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				shipModule.displayName = "Makeshift <color=#" + colorTarget + "ff>Stealth Generator</color>";
 				shipModule.description = "Made from tech scraps and simple exotic-based processing unit. Works as if it will break down at any moment. Unstable and can be disrupted by simple impact.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 75f, metals = 100f, synthetics = 150f, exotics = 1f };
@@ -35,7 +35,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 5;
 				break;
 				case "Stealth decryptor 1 ventilator":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				shipModule.displayName = "Civilian <color=#" + colorTarget + "ff>Stealth Generator</color>";
 				shipModule.description = "Manufactured by civilian equipment suppliers. Has improved exotic-based processing unit that can be used for simple dissipation of emitted energy by ship modules.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 125f, metals = 150f, synthetics = 250f, exotics = 2f };
@@ -46,7 +46,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 7;
 				break;
 				case "Stealth decryptor 1 ivory old":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				shipModule.displayName = "Ancient <color=#" + colorTarget + "ff>Stealth Generator</color>";
 				shipModule.description = "Was manufactured and intensively used centuries ago. Houses very advanced, but heavily damaged exotic-based processing unit. Has low performance due to wearied down state.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 250f, synthetics = 500f, exotics = 3f };
@@ -57,7 +57,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 10;
 				break;
 				case "Stealth decryptor 1 rats":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				shipModule.displayName = "Imperial <color=#" + colorTarget + "ff>Stealth Generator</color>";
 				shipModule.description = "Manufactured in Rat Empire with older stealth generators as template. Uses decent exotic-based processing unit, but due to lack of proper programming has questionable performance.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 300f, metals = 400f, synthetics = 750f, exotics = 4f };
@@ -68,7 +68,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 13;
 				break;
 				case "Stealth decryptor 2 new human tec":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				shipModule.displayName = "Modern <color=#" + colorTarget + "ff>Stealth Generator</color>";
 				shipModule.description = "Modern and mass produced stealth generator that mostly used in active military units. Uses very advanced exotic-based processing unit and has good operational performance.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 450f, metals = 650f, synthetics = 1000f, exotics = 5f };
@@ -79,7 +79,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 15;
 				break;
 				case "Stealth decryptor 3 bio":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				shipModule.displayName = "Bionic <color=#" + colorTarget + "ff>Stealth Generator</color>";
 				shipModule.description = "Stealth generator of organic origin. Cloned in special environment and uses organic/exotic-based processing unit for emitted energy dissipation. Has excellent performance.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 600f, organics = 1000f, synthetics = 1500f, exotics = 7f };
@@ -90,7 +90,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 18;
 				break;
 				case "Stealth decryptor 2 biobrain":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				shipModule.displayName = "Hybrid <color=#" + colorTarget + "ff>Stealth Generator</color>";
 				shipModule.description = "Stealth generator that houses experimental organic/exotic-based processing unit within hard metallic/synthetic shell for emitted energy dissipation. Has great operational performance.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 1000f, synthetics = 2000f, organics = 500f, exotics = 10f };
@@ -101,7 +101,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 22;
 				break;
 				case "Stealth decryptor 3 newest human tec":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				shipModule.displayName = "Phased <color=#" + colorTarget + "ff>Stealth Generator</color>";
 				shipModule.description = "Simultaneously processes received data from multiple observation phases with its ultra-advanced exotic-based processing unit to perfectly dissipate energy emitted by the ship.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1000f, metals = 1500f, synthetics = 2750f, exotics = 15f };

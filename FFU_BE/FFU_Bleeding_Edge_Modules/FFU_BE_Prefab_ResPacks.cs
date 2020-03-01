@@ -23,57 +23,57 @@ namespace FFU_Bleeding_Edge {
 			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
 			switch (refModuleName) {
 				case "organics pack":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Organics Pack";
 				shipModule.craftCost = new ResourceValueGroup { organics = 5000f };
 				shipModule.scrapGet = new ResourceValueGroup { organics = 5000f };
 				break;
 				case "fuel pack":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Starfuel Pack";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 5000f };
 				shipModule.scrapGet = new ResourceValueGroup { fuel = 5000f };
 				break;
 				case "metal pack":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Metals Pack";
 				shipModule.craftCost = new ResourceValueGroup { metals = 5000f };
 				shipModule.scrapGet = new ResourceValueGroup { metals = 5000f };
 				break;
 				case "synth pack":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Synthetics Pack";
 				shipModule.craftCost = new ResourceValueGroup { synthetics = 5000f };
 				shipModule.scrapGet = new ResourceValueGroup { synthetics = 5000f };
 				break;
 				case "explosives pack":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Explosives Pack";
 				shipModule.craftCost = new ResourceValueGroup { explosives = 5000f };
 				shipModule.scrapGet = new ResourceValueGroup { explosives = 5000f };
 				break;
 				case "exotics pack":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Exotics Pack";
 				shipModule.craftCost = new ResourceValueGroup { exotics = 500f };
 				shipModule.scrapGet = new ResourceValueGroup { exotics = 500f };
 				break;
 				case "medical pack organics, synth":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Medical Supply Pack";
 				shipModule.description = "Selection of carbon-organic substances and synthetic materials for 3D-printers for various needs. Provides organics and synthetics when scrapped.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 3500f, synthetics = 3500f };
 				shipModule.scrapGet = new ResourceValueGroup { organics = 3500f, synthetics = 3500f };
 				break;
 				case "general pack organics, synth, metal":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Military Supply Pack";
 				shipModule.description = "Selection of carbon-organic substances, synthetic materials for 3D-printers and rare metals for various needs. Provides organics, synthetics and metals when scrapped.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 2500f, synthetics = 2500f, metals = 2500f };
 				shipModule.scrapGet = new ResourceValueGroup { organics = 2500f, synthetics = 2500f, metals = 2500f };
 				break;
 				case "compressed exotics pack":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 0);
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Artificer Supply Pack";
 				shipModule.description = "Package that contains all resource types, including extremely rare exotics substances. Use with caution. Provides large amount of every resource type when scrapped.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 2000f, fuel = 2000f, metals = 2000f, synthetics = 2000f, explosives = 2000f, exotics = 200f };
