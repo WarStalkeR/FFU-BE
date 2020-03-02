@@ -124,6 +124,22 @@ namespace RST {
 			}
 		}
 	}
+	public class patch_Projectile : Projectile {
+		[MonoModIgnore] private float timer;
+		[MonoModIgnore] private Vector2 sourcePosition;
+		[MonoModIgnore] private Rigidbody2D Rigidbody2D => GetCachedComponent<Rigidbody2D>(true);
+		[MonoModIgnore] private HomingMovement HomingMovement => GetCachedComponent<HomingMovement>(true);
+		[MonoModIgnore] private bool DoEffect(Vector2 hitPos, Shield shield) { return false; }
+		//Damaged Nukes Launched with Reduced HP and Detonated on Zero HP.
+		[MonoModReplace] public void ApplyWeaponOverrides(WeaponModule w) {
+			if (!(w == null)) {
+				if (w.overridePointDefCanSeeThis) PointDefCanSeeThis = true;
+				if (w.overrideProjectileHealth > 0) maxHealth = health = w.overrideProjectileHealth;
+				if (w.Module != null) if (w.Module.type == ShipModule.Type.Weapon_Nuke) if (!w.Module.HasFullHealth) health = Mathf.RoundToInt(maxHealth * FFU_BE_Defs.GetHealthPercent(w.Module));
+				if (health <= 0) DoEffect(gameObject.transform.position, null);
+			}
+		}
+	}
 	public class patch_RepairSkillEffects : RepairSkillEffects {
 		//Speed Up Hull Repair Time
 		[MonoModReplace] public float GetShipHpRepairTime(Crewmember c, bool considerAccelTime) {

@@ -833,7 +833,7 @@ namespace RST {
 				bool isWorking = IsWorking;
 				if (selfCombustible.enabled != isWorking) selfCombustible.enabled = isWorking;
 			}
-			if (IsDead) {
+			if (IsDead && type != Type.Weapon_Nuke) {
 				GameObject gameObject = GameObjectPool.TakeRandomPrefab<GameObject>(Effects.explosionPool);
 				if (gameObject != null) Explosion.InstantiateExplosion(gameObject, base.transform, base.transform.parent);
 				StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, (Ownership.GetOwner() == Ownership.Owner.Enemy) ? 
@@ -906,11 +906,14 @@ namespace RST {
 		[MonoModIgnore] private int shotsToMake;
 		[MonoModIgnore] private float preshootTimer;
 		[MonoModIgnore] public bool shotMade { get; private set; }
+		[MonoModIgnore] public bool HasTarget { get; private set; }
 		[MonoModIgnore] private bool DoLoadAndAim() { return false; }
 		[MonoModIgnore] public bool inShootSequence { get; private set; }
 		[MonoModIgnore] private int BarrelTipCount => Mathf.Max(barrelTips.Length, 1);
 		[MonoModIgnore] public float SecondsSinceLastTargetSwitch { get; private set; }
+		[MonoModIgnore] public Vector2 TargetPos { get { return TrackedTargetGo.transform.position; } private set { } }
 		[MonoModIgnore] private ShootAtDamageDealer CreateDamageDealer(int barrelTipIndex, bool isFirstInVolley) { return null; }
+		private bool hasDetonated = false;
 		//Min Aim Angle based on Weapon Type
 		[MonoModReplace] public float CalculateAimAngle(Vector2 targetPos) {
 			if (accuracy == 0) return 0f;
@@ -932,8 +935,30 @@ namespace RST {
 			else if (Module.displayName.ToLower().Contains("rail")) return Mathf.Clamp(gunnerySkillEffects.EffectiveAngle(this) * (1f / shipAccuracyBonus), 1f, 30f);
 			else return Mathf.Clamp(gunnerySkillEffects.EffectiveAngle(this) * (1f / shipAccuracyBonus), 4f, 90f);
 		}
+		//Use All Weapon Barrels Consequently
+		[MonoModReplace] public bool ShootAt() {
+			Ship cachedComponentInParent = GetCachedComponentInParent<Ship>();
+			PlayerData useSurplusFrom = PlayerDatas.Get(cachedComponentInParent.Ownership.GetOwner());
+			if (!resourcesPerShot.ConsumeFrom(cachedComponentInParent, 1f, MonoBehaviourExtended.tt("weapon"), useSurplusFrom)) return false;
+			if (shotInterval > 0f) {
+				shotsToMake = magazineSize;
+				shotTimer = 0f;
+			} else for (int i = 0; i < magazineSize; i++) CreateDamageDealer(i % BarrelTipCount, i == 0);
+			if (Module.type == ShipModule.Type.Weapon_Nuke) UnityEngine.Object.Destroy(base.gameObject);
+			return true;
+		}
 		//Use All Weapon Barrels Consequently & Damaged Reload Speed
 		[MonoModReplace] private void Update() {
+			if (Module.IsDead && Module.type == ShipModule.Type.Weapon_Nuke && !hasDetonated) {
+				HasTarget = false;
+				TargetPos = gameObject.transform.position;
+				TrackedTargetGo = gameObject;
+				StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, (Module.Ownership.GetOwner() == Ownership.Owner.Enemy) ?
+					string.Format(MonoBehaviourExtended.TT("Enemy {0} detonated from damage!"), Module.DisplayNameLocalized) :
+					string.Format(MonoBehaviourExtended.TT("Our {0} detonated from damage!"), Module.DisplayNameLocalized));
+				hasDetonated = true;
+				ShootAt();
+			}
 			if (shotsToMake > 0) {
 				if (shotTimer <= 0f) {
 					int barrelTipIndex = (magazineSize - shotsToMake) % BarrelTipCount;
@@ -1053,6 +1078,15 @@ namespace RST {
 			}
 		}
 	}
+	public class patch_MaterialsConverterModule : MaterialsConverterModule {
+		//Resource Production Amount from Damage
+		[MonoModReplace] private void CompleteConversion() {
+			ConversionInProgress = false;
+			PlayerData pd = PlayerDatas.Get(Module.Ownership.GetOwner());
+			ResourceValueGroup newProduce = Module.HasFullHealth ? produce : produce * FFU_BE_Defs.GetHealthPercent(Module);
+			newProduce.ProduceTo(pd, 1f, resourceProductionReason);
+		}
+	}
 	public class patch_CrewIsHealed : CrewIsHealed {
 		[MonoModIgnore] private float timer;
 		[MonoModIgnore] private ShipModule Module => GetCachedComponentInParent<ShipModule>(true);
@@ -1064,7 +1098,7 @@ namespace RST {
 			if (!(module != null) || !module.HasFullHealth || !module.IsPowered || 1 == 0) return;
 			Crewmember assignedCrewmember = AssignmentSpot.assignedCrewmember;
 			MedbayModule medbay = module.Medbay;
-			float healthPercent = FFU_BE_Defs.GetHealthPercent(module);
+			float healthPercent = Mathf.Pow(FFU_BE_Defs.GetHealthPercent(module), 2);
 			if (timer >= (medbay.secondsPerHp / healthPercent)) {
 				bool flag = !assignedCrewmember.HasFullHealth;
 				if (flag && !EnoughResources) flag = false;
@@ -1189,16 +1223,6 @@ namespace RST {
 			}
 			if (!hasEngine) return 0f;
 			return totalStarSpeed;
-		}
-	}
-	public class patch_Projectile : Projectile {
-		//Damaged Nukes Launched with Reduced HP
-		[MonoModReplace] public void ApplyWeaponOverrides(WeaponModule w) {
-			if (!(w == null)) {
-				if (w.overridePointDefCanSeeThis) PointDefCanSeeThis = true;
-				if (w.overrideProjectileHealth > 0) maxHealth = health = w.overrideProjectileHealth;
-				if (w.Module != null) if (w.Module.type == ShipModule.Type.Weapon_Nuke) if (!w.Module.HasFullHealth) health = Mathf.CeilToInt(maxHealth * FFU_BE_Defs.GetHealthPercent(w.Module));
-			}
 		}
 	}
 }

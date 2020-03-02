@@ -620,20 +620,26 @@ namespace FFU_Bleeding_Edge {
 					"Refinery</color> module. As for how to produce organics and synthetics, please read relevant entries in Help Section (F1). In " +
 					"addition, fuel can be acquired through harvesting it from Gas Giants, buying it from trade stations or fuel traders and looting " +
 					"it from hostile ships." + "</color>";
-				if (txt.name == "refuel" && txt.text == "Refueling") txt.text = "Refueling Options";
-				if (txt.name == "Text" && txt.text == "Options for gaining fuel") txt.text = "Refueling Options";
+				if (txt.name == "refuel" && txt.text == "Refueling") { txt.transform.SetSiblingIndex(14); txt.text = "Module Integrity (FFU:BE)"; }
+				if (txt.name == "Text" && txt.text == "Refueling") txt.text = "Module Integrity & Efficiency (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Options for gaining fuel") txt.text = "<color=lime>Module can be operated and used as long as it has more than <color=orange>25%</color> of HP!</color>";
 				if (txt.name == "Text" && txt.text.Contains("Use converter modules (if you have them) to convert"))
-					txt.text = "1. Use converter modules (if you have them) to convert organics or other resources into fuel.";
+					txt.text = "<color=lime>Even after receiving damage, modules still can be activated, operated and used by the crew. However, their " +
+						"<color=orange>performance</color> and <color=orange>efficiency</color> will be <color=orange>reduced</color> based on the damage they received.</color>";
 				if (txt.name == "Text" && txt.text.Contains("Harvest fuel from gas giants or explore"))
-					txt.text = "2. Harvest fuel from gas giants or explore star system objects (such as shipwrecks or planets).";
+					txt.text = "<color=lime>Consequences of using damaged modules depends on their types. Whilst reactors will only have reduced performance " +
+						"if damaged, <color=orange>weapons</color> can <color=orange>misfire</color> and cause damage to the ship and itself, if damaged.</color>";
 				if (txt.name == "Text" && txt.text.Contains("Use xenodata credits to buy fuel from"))
-					txt.text = "3. Use your credits to buy fuel from trade stations or resource traders.";
+					txt.text = "<color=lime>Using damaged modules in <color=orange>short-term</color> is fine, as during intense <color=orange>combat</color> " +
+						"you won't have luxury of time to repair them all. However, in the <color=orange>long run</color> they should be <color=orange>repaired</color> to avoid any economic issues.</color>";
 				if (txt.name == "Text" && txt.text.Contains("Scrap modules or nukes that give fuel"))
-					txt.text = "4. Scrap modules or nukes that give fuel as scrap value.";
+					txt.text = "<color=lime>Some modules are volatile by the nature and damaging them has consequences. On destruction nuke will <color=orange>explode</color>, " +
+						"and on hit damaged container modules will start <color=orange>fires</color> and secondary <color=orange>explosions</color>.</color>";
 				if (txt.name == "Text" && txt.text.Contains("Fight hostile fleets to gain fuel"))
-					txt.text = "5. Fight hostile fleets to gain fuel as loot.";
+					txt.text = "<color=lime>Nukes are the most volatile modules in the game. When <color=orange>HP</color> of the non-deployed nuke will reach " +
+						"<color=orange>zero</color> from external damage, it will <color=orange>detonate</color> along with all magnificent nuclear, chemical & biological consequences.</color>";
 				if (txt.name == "Text" && txt.text.Contains("Activate the SOS signal and hope"))
-					txt.text = "6. Activate the SOS signal and hope for a trade ship that sells fuel.";
+					txt.text = "<color=lime>[...DATABASE IS CORRUPTED...]</color>";
 				if (txt.name == "metals" && txt.text == "Metals") txt.text = "Metals & Composites";
 				if (txt.name == "Text" && txt.text == "Metals") txt.text = "Metals & Composites";
 				if (txt.name == "DescriptionText" && txt.text.Contains("Metals are the most common resource"))
@@ -994,7 +1000,7 @@ namespace FFU_Bleeding_Edge {
 			else return false;
 		}
 		public static Crewmember GetRandomIntruderFromName(ShootAtDamageDealer damageDealer) {
-			float rollValue = UnityEngine.Random.Range(0f, 100f);
+			float rollValue = Random.Range(0f, 100f);
 			Core.PayloadPool spawnPoolType = Core.PayloadPool.None;
 			if (damageDealer.name.Contains("DIY bio nuke") || damageDealer.name.Contains("Mini Bio nuke") || damageDealer.name.Contains("insectoid spawner nuke")) spawnPoolType = Core.PayloadPool.Squid;
 			else if (damageDealer.name.Contains("pirate spawner nuke")) spawnPoolType = Core.PayloadPool.Pirate;

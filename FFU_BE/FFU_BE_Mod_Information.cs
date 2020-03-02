@@ -634,8 +634,6 @@ namespace RST.UI {
 		[MonoModIgnore] private void SafeUpdateField(Text text, string value) { }
 		[MonoModIgnore] private void DoResourceConsPerDist(ResourceValueGroup rc, ShipModule m) { }
 		[MonoModIgnore] private static void DoRequirementColor(Text text, HoverableUI h, bool hasEnough) { }
-		[MonoModIgnore] private void DoResourceProdPerSecond(ResourceValueGroup rp, float secondsPerConversion) { }
-		[MonoModIgnore] private void DoResourceConsPerSecond(ResourceValueGroup rc, float secondsPerConversion) { }
 		[MonoModIgnore] private static void AppendDmgLine(StringBuilder sb, string localizedLine, int dmg, int cnt) { }
 		[MonoModIgnore] private void SafeUpdateField(Text text, float value, ref float prevValue, string format = "{0}") { }
 		[MonoModIgnore] private void UpdateGroupedDmg(bool showShieldIcon, bool showShipIcon, bool showModuleIcon, string value) { }
@@ -674,6 +672,8 @@ namespace RST.UI {
 		private float prevOverchargeTime;
 		private string preColor;
 		private string aftColor;
+		private string altPreClr;
+		private string altAftClr;
 		//Selected Module Full Information Window
 		[MonoModReplace] private void Update() {
 			if (m == null) return;
@@ -746,11 +746,15 @@ namespace RST.UI {
 			if (m.HasFullHealth) {
 				preColor = null;
 				aftColor = null;
+				altPreClr = "<color=lime>";
+				altAftClr = "</color>";
 				healthPercent = 1f;
 			} 
 			else {
 				preColor = "<color=red>";
 				aftColor = "</color>";
+				altPreClr = null;
+				altAftClr = null;
 				healthPercent = FFU_BE_Defs.GetHealthPercent(m);
 			}
 			switch (m.type) {
@@ -824,14 +828,14 @@ namespace RST.UI {
 			if (weapon.accuracy != 0) {
 				weaponAccuracy.SetActiveIfNeeded();
 				int effAccuracy = gunnerySkillEffects.EffectiveAccuracy(weapon);
-				weaponAccuracy.effects.text = weapon.accuracy != effAccuracy ? $"<color=lime>{preColor}{effAccuracy * healthPercent:0} Δ{Localization.TT("m")}{aftColor}</color>" : $"{preColor}{effAccuracy * healthPercent:0} Δ{Localization.TT("m")}{aftColor}";
+				weaponAccuracy.effects.text = weapon.accuracy != effAccuracy ? $"{altPreClr}{preColor}{effAccuracy * healthPercent:0} Δ{Localization.TT("m")}{aftColor}{altAftClr}" : $"{preColor}{effAccuracy * healthPercent:0} Δ{Localization.TT("m")}{aftColor}";
 				weaponAccuracy.skillBonus.text = "+" + gunnerySkillEffects.skillPointAccuracyBonus.ToString("0.0") + " " + perArg;
 				SortOrder(weaponAccuracy, 10);
 			}
 			if (weapon.reloadInterval != 0f) {
 				weaponReloadTime.SetActiveIfNeeded();
 				float effReload = gunnerySkillEffects.EffectiveReloadTime(weapon);
-				weaponReloadTime.effects.text = weapon.reloadInterval != effReload ? $"<color=lime>{preColor}{effReload / healthPercent:0.0}{Localization.TT("s")}{aftColor}</color>" : $"{preColor}{effReload / healthPercent:0.0}{Localization.TT("s")}{aftColor}";
+				weaponReloadTime.effects.text = weapon.reloadInterval != effReload ? $"{altPreClr}{preColor}{effReload / healthPercent:0.0}{Localization.TT("s")}{aftColor}{altAftClr}" : $"{preColor}{effReload / healthPercent:0.0}{Localization.TT("s")}{aftColor}";
 				weaponReloadTime.skillBonus.text = $"-{((!weapon.reloadIntervalTakesNoBonuses) ? gunnerySkillEffects.skillPointBonusPercent : 0)}% {perArg}";
 				SortOrder(weaponReloadTime, 20);
 			}
@@ -971,12 +975,12 @@ namespace RST.UI {
 			GunnerySkillEffects gunnerySkillEffects = WorldRules.Instance.gunnerySkillEffects;
 			pointDefReloadTime.SetActiveIfNeeded();
 			float pdEffReload = pointDefence.reloadInterval * gunnerySkillEffects.EffectiveSkillMultiplier(m, true);
-			pointDefReloadTime.effects.text = pointDefence.reloadInterval != pdEffReload ? $"<color=lime>{preColor}{pdEffReload / healthPercent:0.00}{Localization.TT("s")}{aftColor}</color>" : $"{preColor}{pdEffReload / healthPercent:0.00}{Localization.TT("s")}{aftColor}";
+			pointDefReloadTime.effects.text = pointDefence.reloadInterval != pdEffReload ? $"{altPreClr}{preColor}{pdEffReload / healthPercent:0.00}{Localization.TT("s")}{aftColor}{altAftClr}" : $"{preColor}{pdEffReload / healthPercent:0.00}{Localization.TT("s")}{aftColor}";
 			pointDefReloadTime.skillBonus.text = $"-{gunnerySkillEffects.skillPointBonusPercent}% {argPer}";
 			SortOrder(pointDefReloadTime, 10);
 			pointDefCoverRadius.SetActiveIfNeeded();
 			float pdEffRadius = pointDefence.EffectiveCoverRadius;
-			pointDefCoverRadius.effects.text = pointDefence.coverRadius != pdEffRadius ? $"<color=lime>{preColor}{pdEffRadius * 10f * healthPercent:0.0}{Localization.TT("m")}{aftColor}</color>" : $"{preColor}{pdEffRadius * 10f * healthPercent:0.0}{Localization.TT("m")}{aftColor}";
+			pointDefCoverRadius.effects.text = pointDefence.coverRadius != pdEffRadius ? $"{altPreClr}{preColor}{pdEffRadius * 10f * healthPercent:0.0}{Localization.TT("m")}{aftColor}{altAftClr}" : $"{preColor}{pdEffRadius * 10f * healthPercent:0.0}{Localization.TT("m")}{aftColor}";
 			pointDefCoverRadius.skillBonus.text = $"+{gunnerySkillEffects.skillPointBonusPercent}% {argPer}";
 			SortOrder(pointDefCoverRadius, 20);
 			SafeUpdateField(30, pointDefDmgToProjectilesText, $"{projectileOrBeamPrefab.projectileDmg:0} {Localization.TT("HP")}/{Localization.TT("Hit")}");
@@ -1066,7 +1070,7 @@ namespace RST.UI {
 				sensorStarmapRadarRange.SetActiveIfNeeded();
 				SensorSkillEffects sensorSkillEffects = WorldRules.Instance.sensorSkillEffects;
 				float starRadRng = sensor.starmapRadarRange * sensorSkillEffects.EffectiveSkillMultiplier(m, false);
-				sensorStarmapRadarRange.effects.text = sensor.starmapRadarRange != starRadRng ? $" <color=lime>{preColor}<size=18>{starRadRng * healthPercent:0}{Localization.TT("ru")}</size>{aftColor}</color>" : $" {preColor}<size=18>{starRadRng * healthPercent:0}{Localization.TT("ru")}</size>{aftColor}";
+				sensorStarmapRadarRange.effects.text = sensor.starmapRadarRange != starRadRng ? $" {altPreClr}{preColor}<size=18>{starRadRng * healthPercent:0}{Localization.TT("ru")}</size>{aftColor}{altAftClr}" : $" {preColor}<size=18>{starRadRng * healthPercent:0}{Localization.TT("ru")}</size>{aftColor}";
 				sensorStarmapRadarRange.skillBonus.text = $"+{sensorSkillEffects.skillPointBonusPercent}% {Localization.TT("per")}";
 				sensorStarmapRadarRange.Hoverable.hoverText = string.Format(sensorStarmapRadarRange.HoverableTextTemplate, sensorSkillEffects.skillPointBonusPercent);
 				SortOrder(sensorStarmapRadarRange, 20);
@@ -1089,7 +1093,7 @@ namespace RST.UI {
 			bridgeEvasion.SetActiveIfNeeded();
 			BridgeSkillEffects bridgeSkillEffects = WorldRules.Instance.bridgeSkillEffects;
 			int bridgeEva = bridgeSkillEffects.EffectiveSkillBonusPercent(m);
-			bridgeEvasion.effects.text = (m.shipEvasionPercentAdd != bridgeEva) ? $"<color=lime>{preColor}{m.shipEvasionPercentAdd + bridgeEva * healthPercent:0}{aftColor} °/{Localization.TT("min.")}</color>" : $"{preColor}{m.shipEvasionPercentAdd + bridgeEva * healthPercent:0} °/{Localization.TT("min.")}{aftColor}";
+			bridgeEvasion.effects.text = (m.shipEvasionPercentAdd != bridgeEva) ? $"{altPreClr}{preColor}{m.shipEvasionPercentAdd + bridgeEva * healthPercent:0}{aftColor} °/{Localization.TT("min.")}</color>" : $"{preColor}{m.shipEvasionPercentAdd + bridgeEva * healthPercent:0} °/{Localization.TT("min.")}{aftColor}";
 			bridgeEvasion.skillBonus.text = string.Format("+{0} {1}", bridgeSkillEffects.skillPointBonusPercent, Localization.TT("per"));
 			SafeUpdateField(10, crewText, $"{m.CurrentLocalOpsCount}/{m.operatorSpots.Length} <size=16>{Localization.TT("Officers")}</size>");
 			SortOrder(bridgeRemoteOpsGo, 20);
@@ -1116,7 +1120,7 @@ namespace RST.UI {
 			if (shieldGen.reloadInterval != 0f) {
 				shieldReloadTime.SetActiveIfNeeded();
 				float shieldNum = shieldGen.reloadInterval * shieldSkillEffects.EffectiveSkillMultiplier(m, true);
-				shieldReloadTime.effects.text = (shieldGen.reloadInterval != shieldNum) ? $"<color=lime>{preColor}{shieldNum / healthPercent:0.00}{aftColor} {Localization.TT("s")}/{Localization.TT("SP")}</color>" : $"{preColor}{shieldNum / healthPercent:0.00}{aftColor} {Localization.TT("s")}/{Localization.TT("SP")}";
+				shieldReloadTime.effects.text = (shieldGen.reloadInterval != shieldNum) ? $"{altPreClr}{preColor}{shieldNum / healthPercent:0.00} {Localization.TT("s")}/{Localization.TT("SP")}{aftColor}{altAftClr}" : $"{preColor}{shieldNum / healthPercent:0.00}{aftColor} {Localization.TT("s")}/{Localization.TT("SP")}";
 				shieldReloadTime.skillBonus.text = string.Format("-{0}% {1}", shieldSkillEffects.skillPointBonusPercent, Localization.TT("per"));
 				SortOrder(shieldReloadTime, 10);
 			}
@@ -1144,7 +1148,7 @@ namespace RST.UI {
 			WarpSkillEffects warpSkillEffects = WorldRules.Instance.warpSkillEffects;
 			warpReloadTime.SetActiveIfNeeded();
 			float warpNum = warp.reloadInterval * warpSkillEffects.EffectiveSkillMultiplier(m, true);
-			warpReloadTime.effects.text = warp.reloadInterval != warpNum ? $"<color=lime>{preColor}{warpNum / healthPercent:0.00}{aftColor}{Localization.TT("s")}{aftColor}</color>" : $"{preColor}{warpNum / healthPercent:0.00}{Localization.TT("s")}{aftColor}";
+			warpReloadTime.effects.text = warp.reloadInterval != warpNum ? $"{altPreClr}{preColor}{warpNum / Mathf.Pow(healthPercent, 2):0.00}{Localization.TT("s")}{aftColor}{altAftClr}" : $"{preColor}{warpNum / Mathf.Pow(healthPercent, 2):0.00}{Localization.TT("s")}{aftColor}";
 			warpReloadTime.skillBonus.text = string.Format("-{0}% {1}", warpSkillEffects.skillPointBonusPercent, Localization.TT("per"));
 			SortOrder(warpReloadTime, 10);
 			SafeUpdateField(220, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
@@ -1169,10 +1173,10 @@ namespace RST.UI {
 			ReactorModule reactor = m.Reactor;
 			bool isOvercharged = m.IsOvercharged;
 			int reactorNum = isOvercharged ? reactor.powerCapacity + reactor.overchargePowerCapacityAdd : reactor.powerCapacity;
-			string rPreClr = isOvercharged ? "<color=lime>" : "";
-			string rAftClr = isOvercharged ? "</color>" : "";
+			string rPreClr = isOvercharged ? "<color=lime>" : null;
+			string rAftClr = isOvercharged ? "</color>" : null;
 			SafeUpdateField(10, reactorPowerProdText, $"{rPreClr}{preColor}{reactorNum * healthPercent:0} {Localization.TT("GW/h")}{aftColor}{rAftClr}");
-			SafeUpdateField(20, empOverloadText, $"{preColor}+{reactor.overchargePowerCapacityAdd:0} {Localization.TT("GW/h")}{aftColor}");
+			SafeUpdateField(20, empOverloadText, $"+{reactor.overchargePowerCapacityAdd:0} {Localization.TT("GW/h")}");
 			SafeUpdateField(30, medbayHealSpeedText, $"{m.overchargeSeconds:0}{Localization.TT("s")}");
 			SafeUpdateField(260, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
 			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
@@ -1198,7 +1202,7 @@ namespace RST.UI {
 			int synPerHp = (int)medbay.resourcesPerHp.synthetics;
 			SafeUpdateField(10, medbayHealSpotsText, $"<size=16>{CrewmemberTypesText(medbay.acceptCrewTypes)}</size>");
 			SafeUpdateField(20, crewText, $"{m.CurrentLocalOpsCount}/{m.operatorSpots.Length} <size=16>{Localization.TT("Patients")}</size>");
-			SafeUpdateField(30, medbayHealSpeedText, m.HasFullHealth ? medbay.secondsPerHp : medbay.secondsPerHp / healthPercent, ref prevHealingInvSpeed, preColor + "{0:0.00}" + Localization.TT("s") + aftColor);
+			SafeUpdateField(30, medbayHealSpeedText, m.HasFullHealth ? medbay.secondsPerHp : medbay.secondsPerHp / Mathf.Pow(healthPercent, 2), ref prevHealingInvSpeed, preColor + "{0:0.00}" + Localization.TT("s") + aftColor);
 			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
 			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
 			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
@@ -1221,53 +1225,75 @@ namespace RST.UI {
 		[MonoModReplace] private void DoMaterialsConverter() {
 			MaterialsConverterModule materialsConverter = m.MaterialsConverter;
 			exoticsProdText.transform.parent.parent.gameObject.SetActive(false);
-			DoResourceConsPerSecond(materialsConverter.consume, materialsConverter.secondsPerConversion);
 			DoResourceProdPerSecond(materialsConverter.produce, materialsConverter.secondsPerConversion);
+			DoResourceConsPerSecond(materialsConverter.consume, materialsConverter.secondsPerConversion);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
 			if (!doConverterHovers) {
 				UpdateHoverFlags(doConverterHovers: true);
-				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations.")}";
-				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship.")}";
-				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship.")}";
-				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship.")}";
-				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship.")}";
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by how much it inflates ship's signature.")}";
+				organicsProdHover.hoverText = $"{Localization.TT("Shows how much organics material converter produces per minute, if active.")}";
+				fuelProdHover.hoverText = $"{Localization.TT("Shows how much starfuel material converter produces per minute, if active.")}";
+				metalsProdHover.hoverText = $"{Localization.TT("Shows how much metal material converter produces per minute, if active.")}";
+				syntheticsProdHover.hoverText = $"{Localization.TT("Shows how much synthetics material converter produces per minute, if active.")}";
+				explosivesProdHover.hoverText = $"{Localization.TT("Shows how much explosives material converter produces per minute, if active.")}";
+				exoticsProdHover.hoverText = $"{Localization.TT("Shows how much exotics material converter produces per minute, if active.")}";
+				creditsProdHover.hoverText = $"{Localization.TT("Shows how much credits material converter generates per minute, if active.")}";
+				organicsConsHover.hoverText = $"{Localization.TT("Shows how much organics material converter consumes per minute, if active.")}";
+				fuelConsHover.hoverText = $"{Localization.TT("Shows how much starfuel material converter consumes per minute, if active.")}";
+				metalsConsHover.hoverText = $"{Localization.TT("Shows how much metal material converter consumes per minute, if active.")}";
+				syntheticsConsHover.hoverText = $"{Localization.TT("Shows how much synthetics material converter consumes per minute, if active.")}";
+				explosivesConsHover.hoverText = $"{Localization.TT("Shows how much explosives material converter consumes per minute, if active.")}";
+				exoticsConsHover.hoverText = $"{Localization.TT("Shows how much exotics material converter consumes per minute, if active.")}";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the materials converter.")}";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase materials converter provides to the ship.")}";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy materials converter currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Fighter/Drone Bay Information
+		//Updated Fighter Bay Information
 		[MonoModReplace] private void DoFighter() {
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
 			if (!doFighterHovers) {
 				UpdateHoverFlags(doFighterHovers: true);
-				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations.")}";
-				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship.")}";
-				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship.")}";
-				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship.")}";
-				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship.")}";
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by how much it inflates ship's signature.")}";
+				sSpeedBonusHover.hoverText = $"{Localization.TT("Shows interstellar travel speed increase fighter bay provides to the ship.")}";
+				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Shows protection efficiency against asteroids that figher bay provides to the ship.")}";
+				sEvasionBonusHover.hoverText = $"{Localization.TT("Shows maneuverability and evasive capabilities increase fighter bay provides to the ship.")}";
+				sAccuracyBonusHover.hoverText = $"{Localization.TT("Shows efficiency of fighter bay targeting and lock-on systems that increase accuracy of all ship weapons.")}";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the fighter bay.")}";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase fighter bay provides to the ship.")}";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy fighter bay currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
 		//Updated Resource Storage Information
 		[MonoModReplace] private void DoContainer() {
 			ContainerModule container = m.Container;
-			int fuel = container.Fuel;
-			int maxFuel = container.MaxFuel;
 			int organics = container.Organics;
-			int maxOrganics = container.MaxOrganics;
-			int explosives = container.Explosives;
-			int maxExplosives = container.MaxExplosives;
-			int exotics = container.Exotics;
-			int maxExotics = container.MaxExotics;
-			int synthetics = container.Synthetics;
-			int maxSynthetics = container.MaxSynthetics;
+			int fuel = container.Fuel;
 			int metals = container.Metals;
+			int synthetics = container.Synthetics;
+			int explosives = container.Explosives;
+			int exotics = container.Exotics;
+			int maxOrganics = container.MaxOrganics;
+			int maxFuel = container.MaxFuel;
 			int maxMetals = container.MaxMetals;
-			SafeUpdateField(organicsContCurText, (maxOrganics == 0) ? null : (organics + " / " + maxOrganics));
-			SafeUpdateField(fuelContCurText, (maxFuel == 0) ? null : (fuel + " / " + maxFuel));
-			SafeUpdateField(metalsContCurText, (maxMetals == 0) ? null : (metals + " / " + maxMetals));
-			SafeUpdateField(syntheticsContCurText, (maxSynthetics == 0) ? null : (synthetics + " / " + maxSynthetics));
-			SafeUpdateField(explosivesContCurText, (maxExplosives == 0) ? null : (explosives + " / " + maxExplosives));
-			SafeUpdateField(exoticsContCurText, (maxExotics == 0) ? null : (exotics + " / " + maxExotics));
+			int maxSynthetics = container.MaxSynthetics;
+			int maxExplosives = container.MaxExplosives;
+			int maxExotics = container.MaxExotics;
+			SafeUpdateField(10, organicsContCurText, (maxOrganics == 0) ? null : (organics + " / " + maxOrganics));
+			SafeUpdateField(20, fuelContCurText, (maxFuel == 0) ? null : (fuel + " / " + maxFuel));
+			SafeUpdateField(30, metalsContCurText, (maxMetals == 0) ? null : (metals + " / " + maxMetals));
+			SafeUpdateField(40, syntheticsContCurText, (maxSynthetics == 0) ? null : (synthetics + " / " + maxSynthetics));
+			SafeUpdateField(50, explosivesContCurText, (maxExplosives == 0) ? null : (explosives + " / " + maxExplosives));
+			SafeUpdateField(60, exoticsContCurText, (maxExotics == 0) ? null : (exotics + " / " + maxExotics));
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
 			if (!doContainerHovers) {
 				UpdateHoverFlags(doContainerHovers: true);
 				organicsContCurHover.hoverText = $"{Localization.TT("Shows how much organic substances can be stored in a container.")}";
@@ -1276,18 +1302,14 @@ namespace RST.UI {
 				syntheticsContCurHover.hoverText = $"{Localization.TT("Shows how much synthetic compounds can be stored in a container.")}";
 				explosivesContCurHover.hoverText = $"{Localization.TT("Shows how much explosive materials can be stored in a container.")}";
 				exoticsContCurHover.hoverText = $"{Localization.TT("Shows how much rare & exotic matter can be stored in a container.")}";
-				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations.")}";
-				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship.")}";
-				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship.")}";
-				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship.")}";
-				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship.")}";
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by how much it inflates ship's signature.")}";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the container.")}";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase container provides to the ship.")}";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy container currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
 		//Updated Module Storage Information
 		[MonoModReplace] private void DoStorageContainer() {
-			SafeUpdateField(storageSizeText, m.Storage.slotCount.ToString());
+			SafeUpdateField(10, storageSizeText, m.Storage.slotCount.ToString());
 			if (!doStorageHovers) {
 				UpdateHoverFlags(doStorageHovers: true);
 				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
@@ -1454,6 +1476,38 @@ namespace RST.UI {
 			else if (crewTypes.Contains(Crewmember.Type.Regular)) return $"{Localization.TT("Biologic")}";
 			else if (crewTypes.Contains(Crewmember.Type.Drone)) return $"{Localization.TT("Mechanic")}";
 			else return $"{Localization.TT("Pets Only")}";
+		}
+		//Sorted Resource Production Per Second
+		[MonoModReplace] private void DoResourceProdPerSecond(ResourceValueGroup rp, float secondsPerConversion) {
+			float organicsProd = rp.organics * 60f / secondsPerConversion;
+			float fuelProd = rp.fuel * 60f / secondsPerConversion;
+			float metalsProd = rp.metals * 60f / secondsPerConversion;
+			float syntheticsProd = rp.synthetics * 60f / secondsPerConversion;
+			float explosivesProd = rp.explosives * 60f / secondsPerConversion;
+			float exoticsProd = rp.exotics * 60f / secondsPerConversion;
+			float creditsProd = rp.credits * 60f / secondsPerConversion;
+			SafeUpdateField(10, organicsProdText, m.HasFullHealth ? organicsProd : organicsProd * healthPercent, ref prevOrganics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(20, fuelProdText, m.HasFullHealth ? fuelProd : fuelProd * healthPercent, ref prevFuel, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(30, metalsProdText, m.HasFullHealth ? metalsProd : metalsProd * healthPercent, ref prevMetals, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(40, syntheticsProdText, m.HasFullHealth ? syntheticsProd : syntheticsProd * healthPercent, ref prevSynth, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(50, explosivesProdText, m.HasFullHealth ? explosivesProd : explosivesProd * healthPercent, ref prevExpl, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(60, exoticsProdText, m.HasFullHealth ? exoticsProd : exoticsProd * healthPercent, ref prevExotics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(70, creditsProdText, m.HasFullHealth ? creditsProd : creditsProd * healthPercent, ref prevCredits, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+		}
+		//Sorted Resource Consumption Per Second
+		[MonoModReplace] private void DoResourceConsPerSecond(ResourceValueGroup rc, float secondsPerConversion) {
+			float organicsCons = rc.organics * 60f / secondsPerConversion;
+			float fuelCons = rc.fuel * 60f / secondsPerConversion;
+			float metalsCons = rc.metals * 60f / secondsPerConversion;
+			float syntheticsCons = rc.synthetics * 60f / secondsPerConversion;
+			float explosivesCons = rc.explosives * 60f / secondsPerConversion;
+			float exoticsCons = rc.exotics * 60f / secondsPerConversion;
+			SafeUpdateField(110, organicsConsText, organicsCons, ref prevOrganicsCons, "{0:0}/" + Localization.TT("min."));
+			SafeUpdateField(120, fuelConsText, fuelCons, ref prevFuelCons, "{0:0}/" + Localization.TT("min."));
+			SafeUpdateField(130, metalsConsText, metalsCons, ref prevMetalsCons, "{0:0}/" + Localization.TT("min."));
+			SafeUpdateField(140, syntheticsConsText, syntheticsCons, ref prevSynthCons, "{0:0}/" + Localization.TT("min."));
+			SafeUpdateField(150, explosivesConsText, explosivesCons, ref prevExplCons, "{0:0}/" + Localization.TT("min."));
+			SafeUpdateField(160, exoticsConsText, exoticsCons, ref prevExoticsCons, "{0:0}/" + Localization.TT("min."));
 		}
 		//New Function: Components Direct Data & Properties Access
 		private void UpdateHoverFlags(bool doWeaponHovers = false, bool doNukeHovers = false, bool doPointDefHovers = false, bool doEngineHovers = false,

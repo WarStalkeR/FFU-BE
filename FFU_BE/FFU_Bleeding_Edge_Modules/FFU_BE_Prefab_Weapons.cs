@@ -2022,13 +2022,13 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).doorDmg = 3;
 				(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).speed = prjSpeedRailcannon;
 				shipModule_Weapon_ProjectileOrBeamPrefab_pointDefPriority = 2;
-				shipModule.Weapon.reloadInterval = reloadProjRailcannon;
+				shipModule.Weapon.reloadInterval = reloadProjRailcannon - 10;
 				shipModule.Weapon.overridePointDefCanSeeThis = true;
 				shipModule.Weapon.overrideProjectileHealth = 15;
 				shipModule.Weapon.shotInterval = 0.2f;
 				shipModule.Weapon.magazineSize = 6;
 				shipModule.Weapon.accuracy = 25;
-				shipModule.powerConsumed = 15;
+				shipModule.powerConsumed = 20;
 				shipModule_maxHealth = 80;
 				break;
 				case "weapon mininglaser 0 old":
