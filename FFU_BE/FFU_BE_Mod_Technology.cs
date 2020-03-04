@@ -1270,12 +1270,6 @@ namespace RST {
 				Debug.LogWarning("Enemy ship spawned: [" + ship.InstanceId + "] " + ship.displayName + "! Applying tier upgrades in " + 
 					FFU_BE_Mod_Technology.GetTierCodeText(Mathf.Clamp(enemyTechLevel - 1, 1, 10)) + " ~ " + 
 					FFU_BE_Mod_Technology.GetTierCodeText(Mathf.Clamp(enemyTechLevel + 1, 1, 10)) + " range...");
-				ship.Organics += Mathf.RoundToInt((ship.MaxOrganics - ship.Organics) * Random.Range(0.45f, 0.85f));
-				ship.Fuel += Mathf.RoundToInt((ship.MaxFuel - ship.Fuel) * Random.Range(0.45f, 0.85f));
-				ship.Synthetics += Mathf.RoundToInt((ship.MaxSynthetics - ship.Synthetics) * Random.Range(0.45f, 0.85f));
-				ship.Metals += Mathf.RoundToInt((ship.MaxMetals - ship.Metals) * Random.Range(0.45f, 0.85f));
-				ship.Explosives += Mathf.RoundToInt((ship.MaxExplosives - ship.Explosives) * Random.Range(0.45f, 0.85f));
-				ship.Exotics += Mathf.RoundToInt((ship.MaxExotics - ship.Exotics) * Random.Range(0.45f, 0.85f));
 				ship.MaxHealthAdd = Mathf.RoundToInt(ship.MaxHealthAdd * FFU_BE_Defs.enemyShipHullHealthMult * (Sector.Instance != null ? 0.5f + enemyTechLevel / 2f : 1f));
 				if (Sector.Instance != null) {
 					int currentSector = Sector.Instance.number;
@@ -1384,38 +1378,32 @@ namespace RST {
 						if (ship.Ownership.GetOwner() == Ownership.Owner.Enemy && shipModule.type == ShipModule.Type.Container && (shipLacksOrganics || shipLacksFuel || shipLacksSynthetics || shipLacksMetals || shipLacksExplosives || shipLacksExotics)) {
 							if (shipLacksOrganics) {
 								Debug.LogWarning("No organics on ship! Adding lacking storage...");
-								shipModule.Container.MaxOrganics = 7000;
-								ship.Organics += 3500 + Mathf.RoundToInt(3500 * Random.Range(0f, 1f));
+								shipModule.Container.MaxOrganics = 8500;
 								shipLacksOrganics = false;
 							}
 							if (shipLacksFuel) {
 								Debug.LogWarning("No starfuel on ship! Adding lacking storage...");
-								shipModule.Container.MaxFuel = 7000;
-								ship.Fuel += 3500 + Mathf.RoundToInt(3500 * Random.Range(0f, 1f));
+								shipModule.Container.MaxFuel = 8500;
 								shipLacksFuel = false;
 							}
 							if (shipLacksSynthetics) {
 								Debug.LogWarning("No synthetics on ship! Adding lacking storage...");
-								shipModule.Container.MaxSynthetics = 7000;
-								ship.Synthetics += 3500 + Mathf.RoundToInt(3500 * Random.Range(0f, 1f));
+								shipModule.Container.MaxSynthetics = 8500;
 								shipLacksSynthetics = false;
 							}
 							if (shipLacksMetals) {
 								Debug.LogWarning("No metals on ship! Adding lacking storage...");
-								shipModule.Container.MaxMetals = 7000;
-								ship.Metals += 3500 + Mathf.RoundToInt(3500 * Random.Range(0f, 1f));
+								shipModule.Container.MaxMetals = 8500;
 								shipLacksMetals = false;
 							}
 							if (shipLacksExplosives) {
 								Debug.LogWarning("No explosives on ship! Adding lacking storage...");
-								shipModule.Container.MaxExplosives = 7000;
-								ship.Explosives += 3500 + Mathf.RoundToInt(3500 * Random.Range(0f, 1f));
+								shipModule.Container.MaxExplosives = 8500;
 								shipLacksExplosives = false;
 							}
 							if (shipLacksExotics) {
 								Debug.LogWarning("No exotics on ship! Adding lacking storage...");
-								shipModule.Container.MaxExotics = 700;
-								ship.Exotics += 350 + Mathf.RoundToInt(350 * Random.Range(0f, 1f));
+								shipModule.Container.MaxExotics = 850;
 								shipLacksExotics = false;
 							}
 						}
@@ -1429,6 +1417,12 @@ namespace RST {
 						if (FFU_BE_Defs.visualDebug) shipModule.displayName = ship.ModuleSlotRoots.ToList().IndexOf(shipModule.ModuleSlotRoot) + ": " + shipModule.displayName;
 					}
 				}
+				ship.Organics += Mathf.RoundToInt((ship.MaxOrganics - ship.Organics) * Random.Range(0.45f, 0.85f));
+				ship.Fuel += Mathf.RoundToInt((ship.MaxFuel - ship.Fuel) * Random.Range(0.45f, 0.85f));
+				ship.Synthetics += Mathf.RoundToInt((ship.MaxSynthetics - ship.Synthetics) * Random.Range(0.45f, 0.85f));
+				ship.Metals += Mathf.RoundToInt((ship.MaxMetals - ship.Metals) * Random.Range(0.45f, 0.85f));
+				ship.Explosives += Mathf.RoundToInt((ship.MaxExplosives - ship.Explosives) * Random.Range(0.45f, 0.85f));
+				ship.Exotics += Mathf.RoundToInt((ship.MaxExotics - ship.Exotics) * Random.Range(0.45f, 0.85f));
 				if (ship.Organics < ship.MaxOrganics * 0.6f) ship.Organics = Mathf.RoundToInt(Random.Range(ship.MaxOrganics * 0.6f, ship.MaxOrganics * 0.9f));
 				if (ship.Fuel < ship.MaxFuel * 0.6f) ship.Fuel = Mathf.RoundToInt(Random.Range(ship.MaxFuel * 0.6f, ship.MaxFuel * 0.9f));
 				if (ship.Metals < ship.MaxMetals * 0.6f) ship.Metals = Mathf.RoundToInt(Random.Range(ship.MaxMetals * 0.6f, ship.MaxMetals * 0.9f));

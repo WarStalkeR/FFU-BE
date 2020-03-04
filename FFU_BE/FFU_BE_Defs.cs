@@ -11,7 +11,7 @@ using RST.UI;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "0.9.7.0 (WORK IN PROGRESS)";
+		public static string modVersion = "0.9.7.0";
 		//Internal Variables
 		public static bool firstRun = true;
 		public static bool firstInst = true;
@@ -640,7 +640,8 @@ namespace FFU_Bleeding_Edge {
 					txt.text = "<color=lime>Nukes are the most volatile modules in the game. When <color=orange>HP</color> of the non-deployed nuke will reach " +
 						"<color=orange>zero</color> from external damage, it will <color=orange>detonate</color> along with all magnificent atomic, biological & chemical consequences.</color>";
 				if (txt.name == "Text" && txt.text.Contains("Activate the SOS signal and hope"))
-					txt.text = "<color=lime>[...DATABASE IS CORRUPTED...]</color>";
+					txt.text = "<color=lime>In addition, <color=orange>integrity</color> of a module affects chance to <color=orange>salvage</color> it from enemy " +
+						"ship, when it is destroyed. The more <color=orange>damage</color> module received during the battle, the lesser your <color=orange>chances</color> to salvage it.</color>";
 				if (txt.name == "metals" && txt.text == "Metals") txt.text = "Metals & Composites";
 				if (txt.name == "Text" && txt.text == "Metals") txt.text = "Metals & Composites";
 				if (txt.name == "DescriptionText" && txt.text.Contains("Metals are the most common resource"))
