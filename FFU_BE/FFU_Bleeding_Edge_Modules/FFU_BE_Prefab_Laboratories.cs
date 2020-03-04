@@ -21,6 +21,7 @@ namespace FFU_Bleeding_Edge {
 			switch (refModuleName) {
 				case "lab module diy x2":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Makeshift <color=#" + colorLab + "ff>Laboratory</color>";
 				shipModule.description = "Laboratory for scientific research. Crew assigned to it will generate xenodata during interstellar travel, based on their science skill.";
 				shipModule.Research.producedPerSkillPoint = new ResourceValueGroup { credits = 1f };
@@ -30,6 +31,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "lab rats x3":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = "Imperial <color=#" + colorLab + "ff>Laboratory</color>";
 				shipModule.description = "Laboratory for scientific research. Crew assigned to it will generate xenodata during interstellar travel, based on their science skill.";
 				shipModule.Research.producedPerSkillPoint = new ResourceValueGroup { credits = 2f };
@@ -39,6 +41,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "lab module x3":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6, 7);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.8f);
 				shipModule.displayName = "Complex <color=#" + colorLab + "ff>Laboratory</color>";
 				shipModule.description = "Laboratory for scientific research. Crew assigned to it will generate xenodata during interstellar travel, based on their science skill.";
 				shipModule.Research.producedPerSkillPoint = new ResourceValueGroup { credits = 3f };
@@ -48,6 +51,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "lab 1xgood":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
 				shipModule.displayName = "Quantum <color=#" + colorLab + "ff>Laboratory</color>";
 				shipModule.description = "A very efficient and powerful laboratory for scientific research. Crew assigned to it will generate xenodata and exotics during interstellar travel, based on their science skill.";
 				shipModule.Research.producedPerSkillPoint = new ResourceValueGroup { credits = 5f, exotics = 0.1f };

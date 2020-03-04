@@ -72,6 +72,7 @@ namespace FFU_Bleeding_Edge {
 			switch (refModuleName) {
 				case "02 Decoy nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Iron Harvest <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
 				shipModule.description = "Everything aside from engine is solid tungsten carbide alloy. Perfect as decoy due to immense durability. Impact can leave dents at ship's hull.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 15f, metals = 150f };
@@ -91,6 +92,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "07 Greentail nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Biotic Thorn <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
 				shipModule.description = "Semisolid bionic capital missile that uses reactive chemical reagent on impact to breach ship's hull and everything else in its way. Environmentally friendly.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 10f, metals = 100f, synthetics = 50f, organics = 300f };
@@ -110,6 +112,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "02 Spideraa decoy nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Hunter Killer <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
 				shipModule.description = "Mass-produced capital missile that concentrates and releases all destructive energy at one point on impact, that destroys everything in its direction.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 20f, metals = 400f, synthetics = 75f };
@@ -129,6 +132,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "07 Greentail nuke launcher 2":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Biotic Spike <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
 				shipModule.description = "Exotic semisolid bionic capital missile that uses extremely corrosive exotic chemical reagent on impact to breach ship's hull and everything else in its way.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 35f, metals = 200f, synthetics = 100f, organics = 400f, exotics = 1f };
@@ -148,6 +152,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "Tiger Monolith nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Bright Fury <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
 				shipModule.description = "Specialized capital missile made from ultra-hard and ultra-heavy material that utilizes experimental antimatter thrusters to accelerate indefinitely toward the target.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 750f, synthetics = 150f, exotics = 2f };
@@ -167,6 +172,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "Monolith nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Blackhammer <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
 				shipModule.description = "An unconventional capital missile that on near-impact accelerates to the speed of light to generate destructive immense kinetic energy in tandem in a single direction.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 75f, metals = 1000f, synthetics = 200f, exotics = 3f };
@@ -186,6 +192,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "00 DIY decoy nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Powerpack <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
 				shipModule.description = "Made from printed steel boiler filled with volatile electronic scrap to the brim. Extremely cheap and extremely fragile, but provides at least some form of electronic warfare.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 5f, metals = 25f, synthetics = 15f };
@@ -205,6 +212,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "00 DIY EMP nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Discharge <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
 				shipModule.description = "Manually assembled energy capital missile. Overloads shields and modules in the hit area. Fragile and may benefit from synced shots or decoys to distract enemy CIWS.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 10f, metals = 50f, synthetics = 30f, exotics = 1f };
@@ -224,6 +232,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "00 DIY shieldbreaker nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Disruptor <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
 				shipModule.description = "This capital missile carries a strong energy emission payload that increases its shield overloading capability and effective EMP radius. May zap unprotected crew.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 20f, metals = 100f, synthetics = 60f, exotics = 2f };
@@ -243,6 +252,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "16 EMP rat nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Pulse Wave <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
 				shipModule.description = "An improved energy capital missile that releases a very strong disharmony pulse wave that overloads shields, disables modules and electrifies crew a little bit.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 35f, metals = 200f, synthetics = 150f, exotics = 3f };
@@ -262,6 +272,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "Tiger EMP dual nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Dual Shock <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
 				shipModule.description = "Specialized energy capital missile that uses resonance EMP generator to release pulse wave that overloads shields, disables modules and seriously electrifies crew.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 400f, synthetics = 300f, exotics = 4f };
@@ -281,6 +292,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "11 EMP nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Ion Storm <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
 				shipModule.description = "Advanced energy capital missile that releases extremely strong electromagnetic pulse wave that overloads shields, disables modules and painfully electrifies crew.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 75f, metals = 500f, synthetics = 450f, exotics = 5f };
@@ -300,6 +312,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "04 DIY fuel pack launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Firepack <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
 				shipModule.description = "Thermal capital missile that was manually assembled from solidified starfuel, engines and crude armor. On impact effectively sets ship's interiors on fire.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 100f, metals = 15f, synthetics = 15f, explosives = 5f };
@@ -319,6 +332,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "00 DIY Rat fireball nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Fireball <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
 				shipModule.description = "Improvised thermal capital missile that was made from various munitions and high pressure fuel tanks. Releases pressurized and self-igniting liquid on impact.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 20f, synthetics = 20f, explosives = 10f };
@@ -338,6 +352,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "03 Barrel nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Phosphate <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
 				shipModule.description = "Ancient external fuel tank modified into thermal capital missile by welding in engine. Contains a lot of self-igniting pressurized liquid that is released on impact.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 30f, synthetics = 30f, explosives = 20f };
@@ -357,6 +372,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "04 Fueltank nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Blazefire <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
 				shipModule.description = "Modern ultra-pressurized external fuel tank modified into thermal capital missile by attaching the engine. On impact releases all self-igniting liquid in all directions.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 375f, metals = 45f, synthetics = 45f, explosives = 30f, exotics = 1f };
@@ -376,6 +392,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "09 Rat nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Firestorm <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
 				shipModule.description = "Thermal capital missile that contains specialized solid payload that self-ignites when leaves vacuum environment and comes into contact with other material or gases.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 600f, metals = 60f, synthetics = 60f, explosives = 40f, exotics = 3f };
@@ -395,6 +412,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "13 Bullseye nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Hellfire <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
 				shipModule.description = "Advanced thermal capital missile that uses extremely volatile payload of exotic origin that almost incinerates vacuum itself when not contained in specialized environment.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 75f, synthetics = 75f, explosives = 50f, exotics = 5f };
@@ -414,6 +432,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "04 DIY explo pack launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Explopack <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
 				shipModule.description = "A manually assembled tactical capital missile that does some external and internal damage to ship. Made form combined explosive packs with engines and crude armor.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 10f, metals = 50f, synthetics = 50f, explosives = 150f };
@@ -433,6 +452,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "08e thin speeder nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Stingray <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
 				shipModule.description = "Cheap and effective tactical capital missile that was designed centuries. Originally was used by a certain organization that fought off alien invasions since 1994.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 15f, metals = 100f, synthetics = 100f, explosives = 200f };
@@ -452,6 +472,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "06 Tiger nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Sub-Seismic <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
 				shipModule.description = "Originally a mining charge that was used for shattering colossal asteroids. Was found out that it is just as useful as tactical capital missile for shattering ship hulls.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 25f, metals = 150f, synthetics = 150f, explosives = 300f };
@@ -471,6 +492,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "14 Red EB nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Commercial <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
 				shipModule.description = "Improved tactical capital missile that was developed for sake of profit and sold to anybody who can afford it. Self-assembly will result in breach of copyright agreements.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 35f, metals = 200f, synthetics = 200f, explosives = 400f, exotics = 1f };
@@ -490,6 +512,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "08d Spearhead nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Avalanche <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
 				shipModule.description = "Advanced well-armored tactical capital missile that deals decent damage to interior and exterior of the ship, and releases self-igniting shrapnel that damages crew.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 250f, synthetics = 250f, explosives = 500f, exotics = 2f };
@@ -509,6 +532,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "Tiger 8x nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Cataclysm <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
 				shipModule.description = "Experimental capital missile with cluster warhead filled with 8 sub-munition charges. While each sub-munition charge doesn't have much of an impact, sheer quantity easily makes up for it.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 75f, metals = 325f, synthetics = 325f, explosives = 750f, exotics = 3f };
@@ -528,6 +552,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "04 DIY plastics launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Synthpack <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
 				shipModule.description = "A manually assembled tactical capital missile that is used to poison and kill crewmembers of hostile ship. Made form combined synthetic packs with engines and crude armor.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 10f, metals = 25f, synthetics = 50f, explosives = 35f };
@@ -547,6 +572,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "07 DIY acid nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Corrosion <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
 				shipModule.description = "Chemical capital missiles that releases a splash of extremely corrosive and acidic liquid that melts any organics (such as crew) and light robotic alloy composites.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 20f, metals = 50f, synthetics = 100f, explosives = 75f, exotics = 1f };
@@ -566,6 +592,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "13 nanopellet nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Green Mist <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
 				shipModule.description = "This chemical capital missile releases a huge cloud of corrosive/acidic nanopellets on impact that causes severe damage to the crew and minor damage to everything else.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 20f, metals = 50f, synthetics = 300f, explosives = 75f, exotics = 1f };
@@ -585,6 +612,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "07 Weirdship Chem nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Deathmite <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
 				shipModule.description = "Chemical capital missile of organic origin. Releases a pressurized, environmentally friendly, extremely corrosive liquid on impact that severely damages all crew.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 35f, metals = 75f, synthetics = 500f, explosives = 100f, exotics = 3f };
@@ -604,6 +632,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "Tiger sharpnel nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Acid Rain <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
 				shipModule.description = "Specialized capital missile that utilizes synthetic, very corrosive and acidic reagent, which is contained under the high pressure and released on capital missile impact.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 100f, synthetics = 750f, explosives = 150f, exotics = 4f };
@@ -623,6 +652,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "08c Green nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Green Death <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
 				shipModule.description = "Advanced chemical capital missile that contains extremely corrosive, acidic and exotic reagent under the highest pressure possible that is released on impact.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 75f, metals = 125f, synthetics = 1000f, explosives = 175f, exotics = 5f };
@@ -642,6 +672,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "07 DIY bionuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Micromite <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
 				shipModule.description = "Experimental capital missile that uses instant-hatching cocoons as payload. Contains small amount of active organic payload: aggressive lifeforms with limited lifespan.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 20f, metals = 40f, synthetics = 40f, explosives = 20f, organics = 250f, exotics = 4f };
@@ -662,6 +693,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "07 Weirdship Minibio nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Deathspore <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
 				shipModule.description = "Semi-organic capital missile that has high capacity and suitable internal environment. Contains decent amount of active organic payload: aggressive lifeforms with limited lifespan.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 35f, metals = 70f, synthetics = 70f, explosives = 35f, organics = 500f, exotics = 5f };
@@ -682,6 +714,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "99 maggot spawner launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Infestator <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
 				shipModule.description = "Capital missile of unknown origin, but has huge capacity and perfect internal environment. Contains huge amount of active organic payload: aggressive lifeforms with limited lifespan.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 100f, synthetics = 100f, explosives = 50f, organics = 750f, exotics = 6f };
@@ -702,6 +735,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "99 pirate spawner launcher 1":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Ramshackle <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
 				shipModule.description = "Capital missile developed by pirate factions that especially fond of boarding enemy ships. Filled to brim with scrap-made berserk drones that are more then happy rip and tear everything.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 75f, metals = 450f, synthetics = 450f, explosives = 75f, organics = 150f, exotics = 8f };
@@ -722,6 +756,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "Tiger intruderbot nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Apocalypse <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
 				shipModule.description = "Capital missile developed by Terran Federation. Densely packed with sturdy, but expendable industrial drones that were reconfigured with military grade software for boarding operations.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 100f, metals = 750f, synthetics = 750f, explosives = 100f, organics = 200f, exotics = 10f };
@@ -742,6 +777,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "04 DIY exotics nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "Exopack <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
 				shipModule.description = "A makeshift strategic capital missiles that made from destabilized exotics combined with crude armor, engines and a small fuel tank. Damages hull and overloads modules on impact.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 20f, metals = 75f, synthetics = 75f, explosives = 200f, exotics = 3f };
@@ -761,6 +797,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "06 DIY probe nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "Satellite <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
 				shipModule.description = "Improvised strategical capital missile that made by arming an old soviet probe with unstable reactor and packing it to brim with destabilized exotics for better effect.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 35f, metals = 100f, synthetics = 100f, explosives = 350f, exotics = 5f };
@@ -780,6 +817,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "08a Happy nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "Happy World <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
 				shipModule.description = "A civilian use strategic capital missile with a reduced payload. On impact damages exterior and interior of the ships, ignites objects, damages crew and releases EMP blast wave.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 150f, synthetics = 150f, explosives = 500f, exotics = 7f };
@@ -799,6 +837,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "08b Old nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "SS-18 Satan <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
 				shipModule.description = "Ancient strategic capital missile that dates back to 1974, but still printed and used even to this day for its high area of effect, damage capacity and released EMP wave.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 75f, metals = 200f, synthetics = 200f, explosives = 750f, exotics = 10f };
@@ -818,6 +857,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "10 White nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "White Death <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
 				shipModule.description = "Modern military-grade strategic capital missile that was developed not so long ago. Ignites objects, damages modules, crew and hull, and releases strong EMP wave on impact.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 100f, metals = 250f, synthetics = 250f, explosives = 1000f, exotics = 20f };
@@ -837,6 +877,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "15 Black nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "Void Fire <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
 				shipModule.description = "Experimental strategic capital missile that contains huge exotic payload that turns into overwhelming antimatter energy on impact with severe consequences for the target.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 150f, metals = 375f, synthetics = 375f, explosives = 1500f, exotics = 50f };
@@ -855,7 +896,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 25;
 				break;
 				default:
-				Debug.LogWarning($"[NEW NUKE] {FFU_BE_Mod_Information.GetSelectedModuleExactData(shipModule, false, true, false, false, false)}");
+				if (initItemData) Debug.LogWarning($"[NEW NUKE] {FFU_BE_Mod_Information.GetSelectedModuleExactData(shipModule, false, true, false, false, false)}");
 				shipModule.displayName = "(NUKE) " + shipModule.displayName;
 				break;
 			}

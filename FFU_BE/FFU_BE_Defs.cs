@@ -1032,6 +1032,7 @@ namespace FFU_Bleeding_Edge {
 			else craftingProficiency.Add(new KeyValuePair<int, int>(shipModule.PrefabId, 1));
 		}
 		public static float GetModuleEnergyEmissionMult(ShipModule shipModule) {
+			if (moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) return moduleEmissionPrefabs[shipModule.PrefabId];
 			switch (shipModule.type) {
 				case ShipModule.Type.Weapon: return 1.8f;
 				case ShipModule.Type.Weapon_Nuke: return 0.05f;
@@ -1091,8 +1092,7 @@ namespace FFU_Bleeding_Edge {
 				if (shipModule.ShieldGen != null && (shipModule.turnedOn || isStatic))
 					return (shipModule.PowerConsumed + shipModule.ShieldGen.MaxShieldAdd / 5f) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
-				case ShipModule.Type.Dronebay:
-				case ShipModule.Type.Medbay:
+				case ShipModule.Type.Dronebay: case ShipModule.Type.Medbay:
 				if (shipModule.Medbay != null && (shipModule.turnedOn || isStatic)) return (shipModule.PowerConsumed + (shipModule.Medbay.resourcesPerHp.organics +
 					shipModule.Medbay.resourcesPerHp.fuel + shipModule.Medbay.resourcesPerHp.metals + shipModule.Medbay.resourcesPerHp.synthetics +
 					shipModule.Medbay.resourcesPerHp.explosives + shipModule.Medbay.resourcesPerHp.exotics * 10f + shipModule.Medbay.resourcesPerHp.credits / 10f) *
@@ -1144,7 +1144,7 @@ namespace FFU_Bleeding_Edge {
 				else return 0f;
 				case ShipModule.Type.StealthDecryptor:
 				if (shipModule.StealthDecryptor != null && (shipModule.turnedOn || isStatic))
-					return shipModule.PowerConsumed / (moduleMofidier == Core.BonusMod.Sustained ? 0.5f :
+					return shipModule.PowerConsumed / (moduleMofidier == Core.BonusMod.Sustained ? 0.5f : 
 					moduleMofidier == Core.BonusMod.Unstable ? 2f : 1f) * GetModuleEnergyEmissionMult(shipModule) *
 					FFU_BE_Mod_Technology.GetTierBonus(FFU_BE_Mod_Technology.GetModuleTier(shipModule), Core.BonusType.Default) *
 					(moduleMofidier == Core.BonusMod.Enhanced ? 2f : moduleMofidier == Core.BonusMod.Deficient ? 0.5f : 1f);

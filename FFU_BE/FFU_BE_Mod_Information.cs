@@ -10,13 +10,11 @@
 using HarmonyLib;
 using MonoMod;
 using RST;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using FFU_Bleeding_Edge;
 using System.Text;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Information {
@@ -365,7 +363,8 @@ namespace FFU_Bleeding_Edge {
 			if (isInst && (shipModule.turnedOn || !shipModule.UsesTurnedOn) && FFU_BE_Defs.ModuleEmitsEnergy(shipModule)) moduleData += $"{Core.TT("Energy Emission")}: {FFU_BE_Defs.GetModuleEnergyEmission(shipModule):0.#}{Core.TT("m")}³\n";
 			else if (!isInst && FFU_BE_Defs.ModuleEmitsEnergy(shipModule)) moduleData += $"{Core.TT("Energy Emission")}: {FFU_BE_Defs.GetModuleEmissionValues(shipModule)}\n";
 			moduleData += shipModule.MaxHealth > 0 ? $"{Core.TT("Module Durability")}: {shipModule.MaxHealth} {Core.TT("HP")}\n" : null;
-			moduleData += shipModule.costCreditsInShop > 0 ? $"{Core.TT("Market Price")}: ${shipModule.costCreditsInShop}" : $"{Core.TT("Market Price")}: {Core.TT("N/A")}";
+			if (!isInst) moduleData += FFU_BE_Defs.IsAllowedModuleCategory(shipModule) ? $"{Core.TT("Crafting Proficiency")}: {FFU_BE_Defs.GetModuleCraftingProficiency(shipModule) * 100f:0.#}%\n" : null;
+			moduleData += shipModule.costCreditsInShop > 0 ? $"{(isInst ? Core.TT("Market Price") : Core.TT("Base Price"))}: ${shipModule.costCreditsInShop}" : $"{(isInst ? Core.TT("Market Price") : Core.TT("Base Price"))}: {Core.TT("N/A")}";
 			if (!isInst && showDesc) return $"{(showColors ? "<color=lime>" : null)}{moduleData}{(showColors ? "</color>" : null)}\n{shipModule.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit)}";
 			else return $"{(showColors ? "<color=lime>" : null)}{moduleData}{(showColors ? "</color>" : null)}";
 		}

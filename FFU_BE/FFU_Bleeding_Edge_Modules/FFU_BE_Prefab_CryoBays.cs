@@ -29,6 +29,7 @@ namespace FFU_Bleeding_Edge {
 			switch (refModuleName) {
 				case "dream recorder 1 DIY":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Makeshift <color=#" + colorDream + "ff>Cryodream Bay</color>";
 				shipModule.description = "Crew sleeping in this makeshift cryodream recorder requires no organics. In addition, during interstellar travel crew might recover health and record their dreams as xenodata.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 75f, organics = 200f, metals = 150f, synthetics = 100f, exotics = 1f };
@@ -45,6 +46,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "dream recorder 1 rats":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Imperial <color=#" + colorDream + "ff>Cryodream Bay</color>";
 				shipModule.description = "Crew sleeping in this armored cryodream recorder bay requires no organics. In addition, during interstellar travel crew might recover health and record their dreams as xenodata.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 150f, organics = 350f, metals = 350f, synthetics = 250f, exotics = 2f };
@@ -61,6 +63,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "dream recorder 2":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Standard <color=#" + colorDream + "ff>Cryodream Bay</color>";
 				shipModule.description = "Crew sleeping in this low capacity cryodream recorder bay requires no organics. In addition, during interstellar travel crew might recover health and record their dreams as xenodata.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, organics = 750f, metals = 500f, synthetics = 350f, exotics = 3f };
@@ -77,6 +80,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "dream recorder 4x weird biotech":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Advanced <color=#" + colorDream + "ff>Cryodream Bay</color>";
 				shipModule.description = "Crew sleeping in this medium capacity cryodream recorder bay requires no organics. In addition, during interstellar travel crew might recover health and record their dreams as xenodata.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, organics = 1500f, metals = 1250f, synthetics = 750f, exotics = 5f };
@@ -93,6 +97,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "cryosleep 6x human standard":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Exploration <color=#" + colorDream + "ff>Cryodream Bay</color>";
 				shipModule.description = "Crew sleeping in this high capacity cryodream recorder bay requires no organics. In addition, during interstellar travel crew might recover health and record their dreams as xenodata.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, organics = 2500f, metals = 2000f, synthetics = 1500f, exotics = 10f };
@@ -109,6 +114,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "cryosleep 1 DIY":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Makeshift <color=#" + colorSleep + "ff>Cryosleep Bay</color>";
 				shipModule.description = "Crew sleeping in this makeshift cryosleep bay requires no organics. In addition, during interstellar travel crew might recover health.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, organics = 150f, metals = 125f, synthetics = 75f };
@@ -120,6 +126,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "cryosleep 2x human small":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Standard <color=#" + colorSleep + "ff>Cryosleep Bay</color>";
 				shipModule.description = "Crew sleeping in this low capacity cryosleep bay requires no organics. In addition, during interstellar travel crew might recover health.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 100f, organics = 300f, metals = 250f, synthetics = 150f };
@@ -131,6 +138,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "cryosleep 3x rats armor":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Imperial <color=#" + colorSleep + "ff>Cryosleep Bay</color>";
 				shipModule.description = "Crew sleeping in this armored medium capacity cryosleep bay requires no organics. In addition, during interstellar travel crew might recover health.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, organics = 500f, metals = 350f, synthetics = 250f };
@@ -142,6 +150,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "cryosleep 3x medical":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Medical <color=#" + colorSleep + "ff>Cryosleep Bay</color>";
 				shipModule.description = "Crew sleeping in this medical medium capacity cryosleep bay requires no organics. In addition, during interstellar travel crew might recover health.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 300f, organics = 1000f, metals = 350f, synthetics = 250f };
@@ -153,6 +162,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "cryosleep 4x alien family":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Luxurious <color=#" + colorSleep + "ff>Cryosleep Bay</color>";
 				shipModule.description = "Crew sleeping in this luxurious medium capacity cryosleep bay requires no organics. In addition, during interstellar travel crew might recover health.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 350f, organics = 750f, metals = 500f, synthetics = 350f };
@@ -164,6 +174,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "cryosleep 8x insect":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Military <color=#" + colorSleep + "ff>Cryosleep Bay</color>";
 				shipModule.description = "Crew sleeping in this military high capacity cryosleep bay requires no organics. In addition, during interstellar travel crew might recover health.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, organics = 1000f, metals = 750f, synthetics = 500f };

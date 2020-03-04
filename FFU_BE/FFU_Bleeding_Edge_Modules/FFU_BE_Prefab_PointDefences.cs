@@ -25,6 +25,7 @@ namespace FFU_Bleeding_Edge {
 			switch (refModuleName) {
 				case "0 DIY PD":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Makeshift <color=#" + colorPointDef + "ff>Standard CIWS</color>";
 				shipModule.description = "Improvised close-in weapon system that made from spare weapon. Can intercept missiles, projectiles, asteroids and boarding pods at low range. Has very long reload time.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 75f, metals = 250f, synthetics = 150f };
@@ -39,6 +40,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "1 Rat PD":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Ancient <color=#" + colorPointDef + "ff>Standard CIWS</color>";
 				shipModule.description = "Decommissioned close-in weapon system that was manufactured centuries ago. Can intercept missiles, projectiles, asteroids and boarding pods at low range with mediocre rate.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 125f, metals = 350f, synthetics = 250f };
@@ -53,6 +55,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "3 Rat PD 2":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Imperial <color=#" + colorPointDef + "ff>Standard CIWS</color>";
 				shipModule.description = "Close-in weapon system that was developed by Rat Empire. Can intercept missiles, projectiles, asteroids and boarding pods at mediocre, but still lacking as point defense.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 500f, synthetics = 350f };
@@ -67,6 +70,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "6 Squid PD":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Biochemical <color=#" + colorPointDef + "ff>Advanced CIWS</color>";
 				shipModule.description = "Organic close-in weapon system that was grown in special environment. Can intercept missiles, projectiles, asteroids and boarding pods at moderate range with decent rate.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 300f, organics = 750f, synthetics = 500f, exotics = 1f };
@@ -81,6 +85,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "4 Insectoid PD":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Marauder <color=#" + colorPointDef + "ff>Advanced CIWS</color>";
 				shipModule.description = "Close-in weapon system that is used by various unlawful organizations. Can intercept missiles, projectiles, asteroids and boarding pods at decent range with good rate.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 1000f, synthetics = 750f, exotics = 3f };
@@ -95,6 +100,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "5 Human PD":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Phalanx <color=#" + colorPointDef + "ff>Advanced CIWS</color>";
 				shipModule.description = "Military issued close-in weapon system for ships at intensive conflict zones. Can intercept missiles, projectiles, asteroids and boarding pods at good range with great rate.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 1500f, synthetics = 1000f, exotics = 5f };
@@ -109,6 +115,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "7 Red PD":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Commercial <color=#" + colorPointDef + "ff>Tactical CIWS</color>";
 				shipModule.description = "A close-in weapon system that was developed for sake of profit and is sold to anybody who can afford it. Can intercept incoming targets at great range with excellent rate.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1000f, metals = 2000f, synthetics = 1500f, exotics = 7f };
@@ -123,6 +130,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "2 Tiger PD":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Iron Dome <color=#" + colorPointDef + "ff>Tactical CIWS</color>";
 				shipModule.description = "Best close-in weapon system that used on ships participating in most dangerous expeditions. Can perfectly intercept missiles, projectiles, asteroids and boarding pods.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1500f, metals = 2750f, synthetics = 2250f, exotics = 10f };

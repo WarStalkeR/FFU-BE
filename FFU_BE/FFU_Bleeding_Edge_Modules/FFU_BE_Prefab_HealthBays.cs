@@ -28,6 +28,7 @@ namespace FFU_Bleeding_Edge {
 			switch (refModuleName) {
 				case "dronebay 0 diy":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Makeshift <color=#" + colorDrone + "ff>Drone Bay</color>";
 				shipModule.Medbay.secondsPerHp = 5f;
 				shipModule.Medbay.resourcesPerHp.synthetics = 15f;
@@ -38,6 +39,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "dronebay 1 basic":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6, 7);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.1f);
 				shipModule.displayName = "Industrial <color=#" + colorDrone + "ff>Drone Bay</color>";
 				shipModule.Medbay.secondsPerHp = 2f;
 				shipModule.Medbay.resourcesPerHp.synthetics = 5f;
@@ -48,6 +50,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "medbay0 diy":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Makeshift <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 10f;
 				shipModule.Medbay.resourcesPerHp.organics = 15f;
@@ -58,6 +61,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "medbay1 Rat":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.7f);
 				shipModule.displayName = "Ancient <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 7f;
 				shipModule.Medbay.resourcesPerHp.organics = 15f;
@@ -68,6 +72,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "medbay2 startversion":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Nanite <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 5f;
 				shipModule.Medbay.resourcesPerHp.organics = 12f;
@@ -78,6 +83,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "medbay3 nanorepair":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Modern <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 3f;
 				shipModule.Medbay.resourcesPerHp.organics = 10f;
@@ -88,6 +94,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "medbay5 biofluid bath":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Aura <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 2f;
 				shipModule.Medbay.resourcesPerHp.organics = 7f;
@@ -98,6 +105,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "medbay6 biological":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.1f);
 				shipModule.displayName = "Biotic <color=#" + colorCrew + "ff>Medical Bay</color>";
 				shipModule.Medbay.secondsPerHp = 2f;
 				shipModule.Medbay.resourcesPerHp.organics = 5f;
@@ -108,6 +116,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "medbay4 stem celler":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Genesis <color=#" + colorBoth + "ff>Restoration Bay</color>";
 				shipModule.description = "Universal restoration bay that consumes synthetics and organics at the same time to replace damaged cells & mechanic components on subatomic levels.";
 				shipModule.Medbay.secondsPerHp = 1f;

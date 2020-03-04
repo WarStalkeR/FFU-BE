@@ -34,6 +34,7 @@ namespace FFU_Bleeding_Edge {
 			switch (refModuleName) {
 				case "engine 0 diy":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
 				shipModule.displayName = "Makeshift <color=#" + colorEngine + "ff>Chemical Engine</color>";
 				shipModule.description = "Assembled from the metal plates, synthetic blocks and high-tech scrap. Good alternative solution in case if ship has no engine at all. Fragile and inefficient.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 100f, synthetics = 75f };
@@ -49,6 +50,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 01 brittle":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.8f);
 				shipModule.displayName = "Mass-Produced <color=#" + colorEngine + "ff>Chemical Engine</color>";
 				shipModule.description = "Based on open-source blueprints and mass-produced. Questionable quality, low durability and completely inefficient fuel consumption leave much to be desired.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 100f, metals = 200f, synthetics = 150f };
@@ -65,6 +67,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 01 primitive":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.7f);
 				shipModule.displayName = "Ancient <color=#" + colorEngine + "ff>Fission Engine</color>";
 				shipModule.description = "One of the first fission engines ever created. Constant usage of couple past centuries wearied it down considerably. Has somewhat mediocre performance.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 150f, metals = 300f, synthetics = 275f, exotics = 1f };
@@ -81,6 +84,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 2 rats":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.6f);
 				shipModule.displayName = "Imperial <color=#" + colorEngine + "ff>Fission Engine</color>";
 				shipModule.description = "The only engine ever developed by the Rat Empire. It was designed after failing attempts to reverse salvaged fission engines. Has average performance at best.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 500f, synthetics = 350f, exotics = 2f };
@@ -97,6 +101,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 2.5 classic":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.5f);
 				shipModule.displayName = "Modern <color=#" + colorEngine + "ff>Fission Engine</color>";
 				shipModule.description = "Most commonly manufactured fission engine. Installed on almost all decent ships. Has decent performance, decent fuel efficiency and decent durability.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 300f, metals = 750f, synthetics = 500f, exotics = 3f };
@@ -113,6 +118,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 2 floral":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = "Organic <color=#" + colorEngine + "ff>Biochemical Engine</color>";
 				shipModule.description = "Organic engine that uses unique biochemical reaction that rivals fission energy emission to generate thrust. Has very decent performance and fuel efficiency.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 400f, organics = 1000f, synthetics = 750f, exotics = 4f };
@@ -129,6 +135,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 01 tiger":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.3f);
 				shipModule.displayName = "Industrial <color=#" + colorEngine + "ff>Fusion Engine</color>";
 				shipModule.description = "Heavy fusion engine that mostly installed on big industrial ships that require a lot of thrust power to move. Has good performance and high durability.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 1250f, synthetics = 875f, exotics = 5f };
@@ -145,6 +152,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 2.5 weird":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Exotic <color=#" + colorEngine + "ff>Biochemical Engine</color>";
 				shipModule.description = "Organic engine with built-in exotic material matrix uses unique biochemical reaction that rivals fusion energy emission to generate thrust. Has good performance.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 600f, organics = 1500f, synthetics = 1000f, exotics = 7f };
@@ -161,6 +169,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 2.5 terran":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.1f);
 				shipModule.displayName = "Military Navy <color=#" + colorEngine + "ff>Fusion Engine</color>";
 				shipModule.description = "Very heavy and durable fusion engine that commonly utilized by serious military organizations, especially Terran Navy. Very good performance and great durability.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 800f, metals = 2000f, synthetics = 1375f, exotics = 9f };
@@ -177,6 +186,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 03 emperor banks":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Commercial <color=#" + colorEngine + "ff>Plasma Engine</color>";
 				shipModule.description = "Engine that was developed for sake of profit and is sold to anybody who can afford it. Private manufacturing will lead to breach of copyright agreement and lawsuit.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1000f, metals = 2500f, synthetics = 1750f, exotics = 11f };
@@ -193,6 +203,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 04 red":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Interceptor <color=#" + colorEngine + "ff>Plasma Engine</color>";
 				shipModule.description = "Can you imagine it? Somebody managed to properly reverse engineer commercial version and recreate even better engine that not within reach of these copyright agreements.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1250f, metals = 3000f, synthetics = 2250f, exotics = 13f };
@@ -209,6 +220,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 03 bioship":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Heavy Ion <color=#" + colorEngine + "ff>Prismatic Engine</color>";
 				shipModule.description = "Houses set of prismatic mirrors that accelerate speed of ion energy emission to the levels that surpass plasma energy, thus generating high thrust with great efficiency.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1500f, metals = 3750f, synthetics = 2750f, exotics = 15f };
@@ -225,6 +237,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 2 large robust":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.7f);
 				shipModule.displayName = "Prototype <color=#" + colorEngine + "ff>Antimatter Engine</color>";
 				shipModule.description = "Prototype engine with heavy armoring to ensure stability when using antimatter energy emission to generate thrust. Has great fuel efficiency and high durability.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1750f, metals = 4500f, synthetics = 3250f, exotics = 20f };
@@ -241,6 +254,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 4 spideraa":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Repulsor <color=#" + colorEngine + "ff>Meta-Kinetic Engine</color>";
 				shipModule.description = "Engine that uses kinetic energy and unknown principles that rival antimatter energy emission to generate thrust. Has great performance and amazing fuel efficiency.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 2000f, metals = 5750f, synthetics = 4000f, exotics = 25f };
@@ -257,6 +271,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 04 xblack":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Assault <color=#" + colorEngine + "ff>Antimatter Engine</color>";
 				shipModule.description = "Combat oriented engine that uses antimatter energy emission to generate thrust. Mostly installed on heavy ships that need to move fast. Has excellent performance.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 2500f, metals = 6500f, synthetics = 4500f, exotics = 35f };
@@ -273,6 +288,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "engine 2 F-gulper":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Particle-Folding <color=#" + colorEngine + "ff>Quantum Engine</color>";
 				shipModule.description = "Experimental exploration engine that uses particle-folding quantum technology to move through interstellar void. Has amazing performance and perfect fuel efficiency.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 3000f, metals = 7500f, synthetics = 5000f, exotics = 50f };

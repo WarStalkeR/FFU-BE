@@ -8,8 +8,8 @@ namespace FFU_Bleeding_Edge {
 			int idx = 0;
 			if (moduleName == "reactor 4 diy 1") return idx; idx++;
 			if (moduleName == "reactor 5 diy 2 backup") return idx; idx++;
-			if (moduleName == "reactor 6 smalltrapho") return idx; idx++;
 			if (moduleName == "reactor 7 diy 3") return idx; idx++;
+			if (moduleName == "reactor 6 smalltrapho") return idx; idx++;
 			if (moduleName == "reactor 8 smallmulty") return idx; idx++;
 			if (moduleName == "reactor 9 biotech DIY") return idx; idx++;
 			if (moduleName == "reactor 9 small old") return idx; idx++;
@@ -40,6 +40,7 @@ namespace FFU_Bleeding_Edge {
 			switch (refModuleName) {
 				case "reactor 4 diy 1":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
 				shipModule.displayName = "Light Scrap <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Reactor assembled from tech scraps. Not very stable and may breaks down often, but provides necessary power. Especially when there are no other alternatives.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 25f, metals = 50f, synthetics = 75f, exotics = 1f };
@@ -51,6 +52,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 5 diy 2 backup":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
 				shipModule.displayName = "Medium Scrap <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Reactor assembled from pre-printed parts. Just as unstable as previous one, but breaks down a little bit less and provides a little bit more power.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 75f, synthetics = 100f, exotics = 1f };
@@ -60,19 +62,9 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 8;
 				break;
-				case "reactor 6 smalltrapho":
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
-				shipModule.displayName = "Light Fission <color=#" + colorReactor + "ff>Reactor</color>";
-				shipModule.description = "Reactor that mainly used on small civilian vessels such as luxurious exploration yachts. Stable, but not durable. Reminds about it every time when overloaded.";
-				shipModule.craftCost = new ResourceValueGroup { fuel = 100f, metals = 150f, synthetics = 100f, exotics = 1f };
-				shipModule.Reactor.overchargePowerCapacityAdd = 5;
-				shipModule.Reactor.powerCapacity = 9;
-				shipModule.overchargeSeconds = 300;
-				shipModule.maxHealthAdd = 0;
-				shipModule_maxHealth = 12;
-				break;
 				case "reactor 7 diy 3":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
 				shipModule.displayName = "Heavy Scrap <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Reactor assembled from decent energy core and big pile of tech scraps. Still unstable and still breakdowns, but doesn't require many materials to assemble.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 75f, metals = 100f, synthetics = 125f, exotics = 1f };
@@ -82,8 +74,21 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 10;
 				break;
+				case "reactor 6 smalltrapho":
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.6f);
+				shipModule.displayName = "Light Fission <color=#" + colorReactor + "ff>Reactor</color>";
+				shipModule.description = "Reactor that mainly used on small civilian vessels such as luxurious exploration yachts. Stable, but not durable. Reminds about it every time when overloaded.";
+				shipModule.craftCost = new ResourceValueGroup { fuel = 100f, metals = 150f, synthetics = 100f, exotics = 1f };
+				shipModule.Reactor.overchargePowerCapacityAdd = 5;
+				shipModule.Reactor.powerCapacity = 9;
+				shipModule.overchargeSeconds = 300;
+				shipModule.maxHealthAdd = 0;
+				shipModule_maxHealth = 12;
+				break;
 				case "reactor 8 smallmulty":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.6f);
 				shipModule.displayName = "Heavy Fission <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Reactor that mainly used on medium civilian vessels such as luxurious cruise ships. Stable, but not durable. Reminds about it every time when overloaded.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 125f, metals = 200f, synthetics = 150f, exotics = 2f };
@@ -95,6 +100,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 9 biotech DIY":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Zapfruit <color=#" + colorReactor + "ff>Bio-Reactor</color>";
 				shipModule.description = "Reactor that mainly made from organic compound while using synthesized Zapfruit as its core. Its durability leaves much to be desired.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 300f, fuel = 75f, synthetics = 200f, exotics = 2f };
@@ -106,6 +112,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 9 small old":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.6f);
 				shipModule.displayName = "Ancient Fusion <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Was mainstream source of energy centuries ago. Although rather cheap in production and maintenance, quite unstable and randomly breaks down at most unsuitable times.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 300f, synthetics = 200f, exotics = 2f };
@@ -117,6 +124,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 10 small":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = "Modern Fusion <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Modern version of fusion reactor which was through multiple revisions and modifications. Although power output didn't increase much, it became very stable, albeit more expensive.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 400f, synthetics = 300f, exotics = 2f };
@@ -128,6 +136,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 11 single biofruit DIY":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Makeshift <color=#" + colorReactor + "ff>Bio-Reactor</color>";
 				shipModule.description = "Organic and environment friendly bio-reactor that made from organic spare parts. Stable, rather cheap to produce with proper knowledge, but with lacking durability.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 500f, fuel = 150f, synthetics = 300f, exotics = 3f };
@@ -139,6 +148,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 12 custom old":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Light Ion <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Reactor that utilizes ionized energy streams to generate proper energy output. Favored by civilians and healthcare fanatics. Fragile and lacks stability when overloaded.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 150f, metals = 350f, synthetics = 600f, exotics = 3f };
@@ -150,6 +160,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 13 single biofruit":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Light <color=#" + colorReactor + "ff>Bio-Reactor</color>";
 				shipModule.description = "Organic bio-reactor specially cultivated in cloning laboratories. Has average energy output, but very stable and environment friendly. Lack in durability department.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 750f, fuel = 250f, synthetics = 500f, exotics = 3f };
@@ -161,6 +172,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 13 rats":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Imperial <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Developed by scientists of the Rat Empire and based on probably stolen ionized energy streams technology. Fragile, but used anyway due to the lack of alternatives.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 300f, metals = 450f, synthetics = 750f, exotics = 4f };
@@ -172,6 +184,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 13 classic cooled":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Heavy Ion <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Reactor that utilizes massive ionized energy streams to generate proper energy output. Favored by civilians and healthcare fanatics. Less fragile than light version.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 400f, metals = 600f, synthetics = 850f, exotics = 4f };
@@ -183,6 +196,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 15 medium":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Cold Fusion <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Reactor that uses more stable and efficient fusion reaction to generate power. Loved by military and used in most military vessels for its endurance, durability and stability.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 1000f, synthetics = 750f, exotics = 4f };
@@ -194,6 +208,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 16 explosives eater":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = "Ordnance Blast <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Reactor that uses excessive amounts of explosives to generate power. Not very cost efficient. Mostly used by mad and eccentric people. Extremely durable, but just as dangerous.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 1500f, synthetics = 1000f, exotics = 4f };
@@ -205,6 +220,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 17 emperorbanks":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Commercial <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Developed for sake of profit and sold to anybody who can afford it. If you managed to create such as this one by yourself, you probably breached multiple copyright agreements.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 1250f, synthetics = 1250f, exotics = 6f };
@@ -216,6 +232,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 17 flower":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Photovatic <color=#" + colorReactor + "ff>Bio-Reactor</color>";
 				shipModule.description = "Reactor that converts solar radiation into proper and usable energy. Organic in nature, but not as environment friendly as you expect. Very stable, but very fragile as well.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 1500f, fuel = 500f, synthetics = 1500f, exotics = 6f };
@@ -227,6 +244,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 18 weird alien biotech":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Resonance <color=#" + colorReactor + "ff>Bio-Reactor</color>";
 				shipModule.description = "Weird reactor that uses unknown resonance principles to generate energy. Consequences of using this reactor are unknown. Has good output, but everything else is pretty much average.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 1700f, fuel = 500f, synthetics = 1500f, exotics = 15f };
@@ -238,6 +256,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 20 biofruit":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Heavy <color=#" + colorReactor + "ff>Bio-Reactor</color>";
 				shipModule.description = "Heavy version of organic bio-reactor. Just as light version, can only be cultivated in special environment. Durability is still it's weak point, but stability is superb.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 2000f, fuel = 1000f, synthetics = 1750f, exotics = 8f };
@@ -249,6 +268,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 22 spideraa small":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Light Repulsor <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Reactor that uses kinetic energy and unknown principles to generate stable and constant power current. If damaged, contained internal kinetic energy will turn ship's hull into sieve.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1000f, metals = 2500f, synthetics = 1500f, exotics = 10f };
@@ -260,6 +280,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 20 fusion":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Quantum <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Reactor that generates power from lowest possible energy fluctuations. Complex to produce and maintain, but just as durable and stable when used, with great overload endurance.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1250f, metals = 3500f, synthetics = 1750f, exotics = 15f };
@@ -271,6 +292,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 25 spideraa large":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Heavy Repulsor <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "Reactor that uses kinetic energy and unknown principles to generate stable and constant power current. Albeit more reinforced then light version, just as dangerous if exposed.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1500f, metals = 4500f, synthetics = 2500f, exotics = 20f };
@@ -282,6 +304,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "reactor 22 cube":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Antimatter <color=#" + colorReactor + "ff>Reactor</color>";
 				shipModule.description = "High-performance and high-output reactor that utilizes stabilized antimatter as source of energy. Extremely durable and extremely stable due to immense amounts of fail-safe mechanisms.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1750f, metals = 5500f, synthetics = 3500f, exotics = 25f };
