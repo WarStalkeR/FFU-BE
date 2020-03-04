@@ -187,6 +187,7 @@ namespace FFU_Bleeding_Edge {
 				case "weapon DIY Rockets x1":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Rust Jigsaw <color=#" + colorRocketLan + "ff>Rocket</color> Launcher";
 				shipModule.description = "Improvised makeshift rocket platform. Prints and launches rockets of exactly same awful quality as itself. Rockets have high impact effect, but lack guidance system completely.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 350f, synthetics = 250f, exotics = 1f };
@@ -1580,7 +1581,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.shotInterval = 0.50f;
 				shipModule.Weapon.magazineSize = 3;
 				shipModule.Weapon.accuracy = 17;
-				shipModule.powerConsumed = 10;
+				shipModule.powerConsumed = 15;
 				shipModule_maxHealth = 50;
 				break;
 				case "weapon Floral cannon":

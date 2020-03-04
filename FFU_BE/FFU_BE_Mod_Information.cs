@@ -16,6 +16,7 @@ using UnityEngine.UI;
 using FFU_Bleeding_Edge;
 using System.Text;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Information {
@@ -246,7 +247,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case ShipModule.Type.ResearchLab:
 				ResearchModule rLab = shipModule.Research;
-				ResourceValueGroup laboratoryOutput = isInst ? rLab.ProducedPerDistance : rLab.producedPerSkillPoint;
+				ResourceValueGroup laboratoryOutput = isInst ? rLab.ProducedPerDistance * 100 : rLab.producedPerSkillPoint;
 				float researchSpeed = FFU_BE_Defs.GetResearchFromRVG(laboratoryOutput) * FFU_BE_Defs.tierResearchSpeedMult;
 				float reversingSpeed = FFU_BE_Defs.GetReverseFromRVG(laboratoryOutput) * FFU_BE_Defs.moduleResearchSpeedMult;
 				instanceText = isInst ? $"{Core.TT(GetModuleGenText(shipModule))} {Core.TT("Gen.")} " : null;
@@ -257,31 +258,30 @@ namespace FFU_Bleeding_Edge {
 				moduleData += researchSpeed > 0 ? $" > {Core.TT("Research Progress")}: {researchSpeed * 100f:0.0}/100{Core.TT("ru")}\n" : null;
 				moduleData += reversingSpeed > 0 ? $" > {Core.TT("Reverse Engineering")}: {reversingSpeed * 100f:0.0}/100{Core.TT("ru")}\n" : null;
 				moduleData += !laboratoryOutput.IsEmpty ? $"{Core.TT("Effective Production")}:\n" : null;
-				moduleData += laboratoryOutput.credits > 0 ? $" > {Core.TT("Credits")}: {laboratoryOutput.credits}/100{Core.TT("ru")}\n" : null;
-				moduleData += laboratoryOutput.organics > 0 ? $" > {Core.TT("Organics")}: {laboratoryOutput.organics}/100{Core.TT("ru")}\n" : null;
-				moduleData += laboratoryOutput.fuel > 0 ? $" > {Core.TT("Starfuel")}: {laboratoryOutput.fuel}/100{Core.TT("ru")}\n" : null;
-				moduleData += laboratoryOutput.metals > 0 ? $" > {Core.TT("Metals")}: {laboratoryOutput.metals}/100{Core.TT("ru")}\n" : null;
-				moduleData += laboratoryOutput.synthetics > 0 ? $" > {Core.TT("Synthetics")}: {laboratoryOutput.synthetics}/100{Core.TT("ru")}\n" : null;
-				moduleData += laboratoryOutput.explosives > 0 ? $" > {Core.TT("Explosives")}: {laboratoryOutput.explosives}/100{Core.TT("ru")}\n" : null;
-				moduleData += laboratoryOutput.exotics > 0 ? $" > {Core.TT("Exotics")}: {laboratoryOutput.exotics}/100{Core.TT("ru")}\n" : null;
+				moduleData += laboratoryOutput.credits > 0 ? $" > {Core.TT("Credits")}: {laboratoryOutput.credits:0.0}/100{Core.TT("ru")}\n" : null;
+				moduleData += laboratoryOutput.organics > 0 ? $" > {Core.TT("Organics")}: {laboratoryOutput.organics:0.0}/100{Core.TT("ru")}\n" : null;
+				moduleData += laboratoryOutput.fuel > 0 ? $" > {Core.TT("Starfuel")}: {laboratoryOutput.fuel:0.0}/100{Core.TT("ru")}\n" : null;
+				moduleData += laboratoryOutput.metals > 0 ? $" > {Core.TT("Metals")}: {laboratoryOutput.metals:0.0}/100{Core.TT("ru")}\n" : null;
+				moduleData += laboratoryOutput.synthetics > 0 ? $" > {Core.TT("Synthetics")}: {laboratoryOutput.synthetics:0.0}/100{Core.TT("ru")}\n" : null;
+				moduleData += laboratoryOutput.explosives > 0 ? $" > {Core.TT("Explosives")}: {laboratoryOutput.explosives:0.0}/100{Core.TT("ru")}\n" : null;
+				moduleData += laboratoryOutput.exotics > 0 ? $" > {Core.TT("Exotics")}: {laboratoryOutput.exotics:0.0}/100{Core.TT("ru")}\n" : null;
 				break;
 				case ShipModule.Type.Garden:
 				GardenModule rGreen = shipModule.GardenModule;
-				ResourceValueGroup greenhouseOutput = isInst ? rGreen.ProducedPerDistance : rGreen.producedPerSkillPoint;
-				float effectiveAgriInput = isInst ? WorldRules.Instance.gardenSkillEffects.EffectiveOrganicsProduction(shipModule) / shipModule.GardenModule.producedPerSkillPoint.organics : 1f;
+				ResourceValueGroup greenhouseOutput = isInst ? rGreen.ProducedPerDistance * 100 : rGreen.producedPerSkillPoint;
 				instanceText = isInst ? $"{Core.TT(GetModuleGenText(shipModule))} {Core.TT("Gen.")} " : null;
 				moduleData += $"{Core.TT("Type")}: {instanceText}{Core.TT("Greenhouse Facility")}\n";
 				if (isInst) moduleData += $"{Core.TT("Modifier")}: {Core.TT(GetModuleModText(shipModule))}\n";
 				moduleData += shipModule.OperatorSpots.Length > 0 ? $"{Core.TT("Available Workplaces")}: {shipModule.OperatorSpots.Length}\n" : null;
 				moduleData += shipModule.OperatorSpots.Length > 0 ? $"{Core.TT("Crew Food Consumption")}: {Core.TT("Disabled")}\n" : null;
 				moduleData += !greenhouseOutput.IsEmpty ? $"{Core.TT("Effective Production")}:\n" : null;
-				moduleData += greenhouseOutput.credits > 0 ? $" > {Core.TT("Credits")}: {greenhouseOutput.credits}/100{Core.TT("ru")}\n" : null;
-				moduleData += greenhouseOutput.organics > 0 ? $" > {Core.TT("Organics")}: {greenhouseOutput.organics}/100{Core.TT("ru")}\n" : null;
-				moduleData += greenhouseOutput.fuel > 0 ? $" > {Core.TT("Starfuel")}: {greenhouseOutput.fuel}/100{Core.TT("ru")}\n" : null;
-				moduleData += greenhouseOutput.metals > 0 ? $" > {Core.TT("Metals")}: {greenhouseOutput.metals}/100{Core.TT("ru")}\n" : null;
-				moduleData += greenhouseOutput.synthetics > 0 ? $" > {Core.TT("Synthetics")}: {greenhouseOutput.synthetics}/100{Core.TT("ru")}\n" : null;
-				moduleData += greenhouseOutput.explosives > 0 ? $" > {Core.TT("Explosives")}: {greenhouseOutput.explosives}/100{Core.TT("ru")}\n" : null;
-				moduleData += greenhouseOutput.exotics > 0 ? $" > {Core.TT("Exotics")}: {greenhouseOutput.exotics}/100{Core.TT("ru")}\n" : null;
+				moduleData += greenhouseOutput.credits > 0 ? $" > {Core.TT("Credits")}: {greenhouseOutput.credits:0.0}/100{Core.TT("ru")}\n" : null;
+				moduleData += greenhouseOutput.organics > 0 ? $" > {Core.TT("Organics")}: {greenhouseOutput.organics:0.0}/100{Core.TT("ru")}\n" : null;
+				moduleData += greenhouseOutput.fuel > 0 ? $" > {Core.TT("Starfuel")}: {greenhouseOutput.fuel:0.0}/100{Core.TT("ru")}\n" : null;
+				moduleData += greenhouseOutput.metals > 0 ? $" > {Core.TT("Metals")}: {greenhouseOutput.metals:0.0}/100{Core.TT("ru")}\n" : null;
+				moduleData += greenhouseOutput.synthetics > 0 ? $" > {Core.TT("Synthetics")}: {greenhouseOutput.synthetics:0.0}/100{Core.TT("ru")}\n" : null;
+				moduleData += greenhouseOutput.explosives > 0 ? $" > {Core.TT("Explosives")}: {greenhouseOutput.explosives:0.0}/100{Core.TT("ru")}\n" : null;
+				moduleData += greenhouseOutput.exotics > 0 ? $" > {Core.TT("Exotics")}: {greenhouseOutput.exotics:0.0}/100{Core.TT("ru")}\n" : null;
 				break;
 				case ShipModule.Type.MaterialsConverter:
 				instanceText = isInst ? $"{Core.TT(GetModuleGenText(shipModule))} {Core.TT("Gen.")} " : null;
@@ -326,81 +326,26 @@ namespace FFU_Bleeding_Edge {
 				moduleData += $"{Core.TT("Type")}: {instanceText}{Core.TT(defCat)}\n";
 				if (isInst) moduleData += $"{Core.TT("Modifier")}: {Core.TT(GetModuleModText(shipModule))}\n";
 				if (defCat.Contains("Cache")) {
-					int maxSets = 3 + (int)Math.Round((float)FFU_BE_Mod_Technology.GetModuleTier(shipModule) / 2 - 0.001f);
-					int maxInc = (int)Math.Round((float)FFU_BE_Mod_Technology.GetModuleTier(shipModule) / 2 - 0.001f);
-					int maxLimit = 25 + (int)FFU_BE_Mod_Technology.GetModuleTier(shipModule) * 25;
 					switch (GetCacheType(shipModule)) {
 						case "Mechanical Upgrades":
-						moduleData += $"{Core.TT("Available Upgrade Sets")}: {maxSets}\n";
-						moduleData += $"{Core.TT("Health Increase Per Set")}: {maxInc}\n";
-						moduleData += $"{Core.TT("Health Increase Limit")}: {maxLimit}\n";
+						moduleData += $"{Core.TT("Available Upgrade Sets")}: {GetCacheSets(shipModule)}\n";
+						moduleData += $"{Core.TT("Health Increase Per Set")}: {GetCacheHPIncrease(shipModule)}\n";
+						moduleData += $"{Core.TT("Health Increase Limit")}: {GetCacheHPLimit(shipModule)}\n";
 						break;
 						case "Biological Implants":
-						moduleData += $"{Core.TT("Available Implant Sets")}: {maxSets}\n";
-						moduleData += $"{Core.TT("Health Increase Per Set")}: {maxInc}\n";
-						moduleData += $"{Core.TT("Health Increase Limit")}: {maxLimit}\n";
+						moduleData += $"{Core.TT("Available Implant Sets")}: {GetCacheSets(shipModule)}\n";
+						moduleData += $"{Core.TT("Health Increase Per Set")}: {GetCacheHPIncrease(shipModule)}\n";
+						moduleData += $"{Core.TT("Health Increase Limit")}: {GetCacheHPLimit(shipModule)}\n";
 						break;
 						case "CQC Class Weapons":
-						moduleData += $"{Core.TT("Available Weapon Sets")}: {maxSets}\n";
-						moduleData += $"{Core.TT("Available Weapons")}: \n";
-						moduleData += $" > {Core.TT("Power Fists")}\n";
-						moduleData += $" > {Core.TT("Dual Welder")}\n";
-						moduleData += $" > {Core.TT("Napalm Gun")}\n";
-						moduleData += $" > {Core.TT("Toxic Gun")}\n";
-						break;
 						case "Kinetic Type Weapons":
-						moduleData += $"{Core.TT("Available Weapon Sets")}: {maxSets}\n";
-						moduleData += $"{Core.TT("Available Weapons")}: \n";
-						moduleData += $" > {Core.TT("Assault Pistol")}\n";
-						moduleData += $" > {Core.TT("Light Revolver")}\n";
-						moduleData += $" > {Core.TT("Heavy Revolver")}\n";
-						moduleData += $" > {Core.TT("Assault Revolver")}\n";
-						moduleData += $" > {Core.TT("Assault SMG")}\n";
-						moduleData += $" > {Core.TT("Assault Shotgun")}\n";
-						moduleData += $" > {Core.TT("Assault Rifle")}\n";
-						moduleData += $" > {Core.TT("Assault Autocannon")}\n";
-						moduleData += $" > {Core.TT("Breacher Cannon")}\n";
-						moduleData += $" > {Core.TT("Assault Railgun")}\n";
-						break;
 						case "Laser Type Weapons":
-						moduleData += $"{Core.TT("Available Weapon Sets")}: {maxSets}\n";
-						moduleData += $"{Core.TT("Available Weapons")}: \n";
-						moduleData += $" > {Core.TT("Laser Pistol")}\n";
-						moduleData += $" > {Core.TT("Laser Rifle")}\n";
-						moduleData += $" > {Core.TT("Laser Cannon")}\n";
-						break;
 						case "Energy Type Weapons":
-						moduleData += $"{Core.TT("Available Weapon Sets")}: {maxSets}\n";
-						moduleData += $"{Core.TT("Available Weapons")}: \n";
-						moduleData += $" > {Core.TT("Blaster Pistol")}\n";
-						moduleData += $" > {Core.TT("Blaster Rifle")}\n";
-						moduleData += $" > {Core.TT("Warp Ray Gun")}\n";
-						moduleData += $" > {Core.TT("Particle Gun")}\n";
-						break;
 						case "Backup Class Weapons":
-						moduleData += $"{Core.TT("Available Weapon Sets")}: {maxSets}\n";
-						moduleData += $"{Core.TT("Available Weapons")}: \n";
-						moduleData += $" > {Core.TT("Assault Pistol")}\n";
-						moduleData += $" > {Core.TT("Light Revolver")}\n";
-						moduleData += $" > {Core.TT("Heavy Revolver")}\n";
-						moduleData += $" > {Core.TT("Assault Revolver")}\n";
-						moduleData += $" > {Core.TT("Laser Pistol")}\n";
-						break;
 						case "Tactical Class Weapons":
-						moduleData += $"{Core.TT("Available Weapon Sets")}: {maxSets}\n";
-						moduleData += $"{Core.TT("Available Weapons")}: \n";
-						moduleData += $" > {Core.TT("Assault SMG")}\n";
-						moduleData += $" > {Core.TT("Assault Shotgun")}\n";
-						moduleData += $" > {Core.TT("Assault Rifle")}\n";
-						moduleData += $" > {Core.TT("Laser Rifle")}\n";
-						break;
 						case "Assault Class Weapons":
-						moduleData += $"{Core.TT("Available Weapon Sets")}: {maxSets}\n";
-						moduleData += $"{Core.TT("Available Weapons")}: \n";
-						moduleData += $" > {Core.TT("Assault Autocannon")}\n";
-						moduleData += $" > {Core.TT("Breacher Cannon")}\n";
-						moduleData += $" > {Core.TT("Assault Railgun")}\n";
-						moduleData += $" > {Core.TT("Laser Cannon")}\n";
+						moduleData += $"{Core.TT("Available Weapon Sets")}: {GetCacheSets(shipModule)}\n";
+						moduleData += $"{Core.TT("Available Weapons")}: \n > {string.Join("\n > ", GetCacheWeapons(shipModule))}\n";
 						break;
 					}
 				}
@@ -483,7 +428,7 @@ namespace FFU_Bleeding_Edge {
 			else return "Artifact";
 		}
 		public static string GetCacheType(ShipModule shipModule) {
-			if (shipModule == null) return null;
+			if (!(shipModule != null)) return null;
 			switch (shipModule.PrefabId) {
 				case 685017033: return "Mechanical Upgrades";
 				case 957508477: return "Biological Implants";
@@ -497,6 +442,22 @@ namespace FFU_Bleeding_Edge {
 				default: return null;
 			}
 		}
+		public static bool IsCacheModule(ShipModule shipModule) {
+			if (!(shipModule != null)) return false;
+			switch (shipModule.PrefabId) {
+				case 685017033:
+				case 957508477:
+				case 1745395900:
+				case 179311957:
+				case 760711671:
+				case 656277331:
+				case 760711667:
+				case 1279608160:
+				case 1316302015:
+				return true;
+				default: return false;
+			}
+		}
 		public static string GetStealthDetectionText(int stealthLevel) {
 			switch (stealthLevel) {
 				case 1: return "Basic";
@@ -506,6 +467,24 @@ namespace FFU_Bleeding_Edge {
 				case 5: return "Ultimate";
 				default: return "Unknown";
 			}
+		}
+		public static int GetCacheSets(ShipModule shipModule) {
+			if (GetCacheType(shipModule) != null) return 3 + Mathf.RoundToInt((float)FFU_BE_Mod_Technology.GetModuleTier(shipModule) / 2 - 0.001f);
+			else return 0;
+		}
+		public static int GetCacheHPIncrease(ShipModule shipModule) {
+			if (!(shipModule != null)) return 0;
+			if (shipModule.PrefabId == 685017033 || shipModule.PrefabId == 957508477) return 1 + Mathf.RoundToInt((float)FFU_BE_Mod_Technology.GetModuleTier(shipModule) / 2.5f - 0.001f);
+			else return 0;
+		}
+		public static int GetCacheHPLimit(ShipModule shipModule) {
+			if (!(shipModule != null)) return 0;
+			if (shipModule.PrefabId == 685017033 || shipModule.PrefabId == 957508477) return 25 + (int)FFU_BE_Mod_Technology.GetModuleTier(shipModule) * 25;
+			else return 0;
+		}
+		public static string[] GetCacheWeapons(ShipModule shipModule, string itemSpacing = null) {
+			if (!(shipModule != null)) return null;
+			return FFU_BE_Mod_Crewmembers.GetWeaponLocalesFromCacheID(shipModule.PrefabId, itemSpacing).ToArray();
 		}
 		public static string GetCrewHitChance(ShootAtDamageDealer.CrewDmgLevel crewDmgLevel) {
 			switch (crewDmgLevel) {
@@ -1093,7 +1072,7 @@ namespace RST.UI {
 			bridgeEvasion.SetActiveIfNeeded();
 			BridgeSkillEffects bridgeSkillEffects = WorldRules.Instance.bridgeSkillEffects;
 			int bridgeEva = bridgeSkillEffects.EffectiveSkillBonusPercent(m);
-			bridgeEvasion.effects.text = (m.shipEvasionPercentAdd != bridgeEva) ? $"{altPreClr}{preColor}{m.shipEvasionPercentAdd + bridgeEva * healthPercent:0}{aftColor} °/{Localization.TT("min.")}</color>" : $"{preColor}{m.shipEvasionPercentAdd + bridgeEva * healthPercent:0} °/{Localization.TT("min.")}{aftColor}";
+			bridgeEvasion.effects.text = (m.shipEvasionPercentAdd != bridgeEva) ? $"{altPreClr}{preColor}{m.shipEvasionPercentAdd + bridgeEva * healthPercent:0} °/{Localization.TT("min.")}{aftColor}{altAftClr}" : $"{preColor}{m.shipEvasionPercentAdd + bridgeEva * healthPercent:0} °/{Localization.TT("min.")}{aftColor}";
 			bridgeEvasion.skillBonus.text = string.Format("+{0} {1}", bridgeSkillEffects.skillPointBonusPercent, Localization.TT("per"));
 			SafeUpdateField(10, crewText, $"{m.CurrentLocalOpsCount}/{m.operatorSpots.Length} <size=16>{Localization.TT("Officers")}</size>");
 			SortOrder(bridgeRemoteOpsGo, 20);
@@ -1262,7 +1241,7 @@ namespace RST.UI {
 			if (!doFighterHovers) {
 				UpdateHoverFlags(doFighterHovers: true);
 				sSpeedBonusHover.hoverText = $"{Localization.TT("Shows interstellar travel speed increase fighter bay provides to the ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Shows protection efficiency against asteroids that figher bay provides to the ship.")}";
+				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Shows protection efficiency against asteroids that fighter bay provides to the ship.")}";
 				sEvasionBonusHover.hoverText = $"{Localization.TT("Shows maneuverability and evasive capabilities increase fighter bay provides to the ship.")}";
 				sAccuracyBonusHover.hoverText = $"{Localization.TT("Shows efficiency of fighter bay targeting and lock-on systems that increase accuracy of all ship weapons.")}";
 				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the fighter bay.")}";
@@ -1309,140 +1288,224 @@ namespace RST.UI {
 		}
 		//Updated Module Storage Information
 		[MonoModReplace] private void DoStorageContainer() {
+			storageSizeText.alignment = TextAnchor.MiddleLeft;
 			SafeUpdateField(10, storageSizeText, m.Storage.slotCount.ToString());
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
 			if (!doStorageHovers) {
 				UpdateHoverFlags(doStorageHovers: true);
-				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations.")}";
-				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship.")}";
-				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship.")}";
-				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship.")}";
-				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship.")}";
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by how much it inflates ship's signature.")}";
+				storageSizeHover.hoverText = $"{Localization.TT("Shows how much modules can be stored in the module storage compartment.")}";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the module storage compartment.")}";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase module storage compartment provides to the ship.")}";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module storage compartment currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
 		//Updated Greenhouse Information
 		[MonoModReplace] private void DoGarden() {
-			SafeUpdateField(crewText, m.CurrentLocalOpsCount + "/" + m.operatorSpots.Length);
-			GardenSkillEffects gardenSkillEffects = WorldRules.Instance.gardenSkillEffects;
-			int gardenProduction = gardenSkillEffects.EffectiveOrganicsProduction(m);
-			bool gardenProduces = gardenProduction > 0;
-			SafeUpdateField(gardenOrganicsProdCurText, gardenProduces ? string.Format("<color=lime>{0}/100{1}</color>", gardenProduction, Localization.TT("ru")) : null);
-			int totalGardenProduction = gardenSkillEffects.skillPointBonusProduction * (int)m.GardenModule.producedPerSkillPoint.organics;
-			SafeUpdateField(gardenOrganicsProdBonusText, totalGardenProduction + "/100" + Localization.TT("ru") + " " + Localization.TT("per"));
+			GardenModule farm = m.GardenModule;
+			ResourceValueGroup farmSkillProd = farm.producedPerSkillPoint;
+			ResourceValueGroup farmProdPerDist = farm.ProducedPerDistance;
 			removesOpResCons.SetActive(true);
+			SafeUpdateField(10, crewText, $"{m.CurrentLocalOpsCount}/{m.operatorSpots.Length} <size=16>{Localization.TT("Farmers")}</size>");
+			SortOrder(removesOpResCons, 20);
+			SafeUpdateField(30, creditsProdText, farmSkillProd.credits > 0 ? $"{(farmProdPerDist.credits > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.credits * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.credits > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(40, organicsProdText, farmSkillProd.organics > 0 ? $"{(farmProdPerDist.organics > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.organics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.organics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(50, fuelProdText, farmSkillProd.fuel > 0 ? $"{(farmProdPerDist.fuel > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.fuel * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.fuel > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(60, metalsProdText, farmSkillProd.metals > 0 ? $"{(farmProdPerDist.metals > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.metals * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.metals > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(70, syntheticsProdText, farmSkillProd.synthetics > 0 ? $"{(farmProdPerDist.synthetics > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.synthetics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.synthetics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(80, explosivesProdText, farmSkillProd.explosives > 0 ? $"{(farmProdPerDist.explosives > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.explosives * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.explosives > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(90, exoticsContCurText, farmSkillProd.exotics > 0 ? $"{(farmProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.exotics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
+			//SafeUpdateField(90, exoticsProdText, gardenSkillProd.exotics > 0 ? $"{(gardenProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{gardenProdPerDist.exotics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(gardenProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(100, gardenOrganicsProdBonusText, $" {farm.producedPerSkillPoint.organics:0.0}/100{Localization.TT("ru")} /");
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
 			if (!doGardenHovers) {
 				UpdateHoverFlags(doGardenHovers: true);
-				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations.")}";
-				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship.")}";
-				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship.")}";
-				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship.")}";
-				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship.")}";
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by how much it inflates ship's signature.")}";
+				crewOpsHover.hoverText = $"{Localization.TT("Shows current occupancy and limit of how much farmers can work in the greenhouse at the same time.")}";
+				removesOpResConsHover.hoverText = $"{Localization.TT("Shows if working in a greenhouse resolves food consumption issues for farmers.")}";
+				organicsProdHover.hoverText = $"{Localization.TT("Shows how much organics greenhouse produces per 100ru of travel.")}";
+				fuelProdHover.hoverText = $"{Localization.TT("Shows how much starfuel greenhouse produces per 100ru of travel.")}";
+				metalsProdHover.hoverText = $"{Localization.TT("Shows how much metal greenhouse produces per 100ru of travel.")}";
+				syntheticsProdHover.hoverText = $"{Localization.TT("Shows how much synthetics greenhouse produces per 100ru of travel.")}";
+				explosivesProdHover.hoverText = $"{Localization.TT("Shows how much explosives greenhouse produces per 100ru of travel.")}";
+				exoticsProdHover.hoverText = $"{Localization.TT("Shows how much exotics greenhouse produces per 100ru of travel.")}";
+				creditsProdHover.hoverText = $"{Localization.TT("Shows how much credits greenhouse generates per 100ru of travel.")}";
+				gardenOrganicsProdBonusHover.hoverText = $"{Localization.TT("Shows by how much greenhouse increases organics output per each gardening skill point for 100ru of travel.")}";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the greenhouse.")}";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase greenhouse provides to the ship.")}";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy greenhouse currently emits and by how much it inflates ship's signature.")}";
+				exoticsContCurHover.hoverText = exoticsProdHover.hoverText;
 			}
 		}
 		//Updated Laboratory Information
 		[MonoModReplace] private void DoResearch() {
-			SafeUpdateField(crewText, m.CurrentLocalOpsCount + "/" + m.operatorSpots.Length);
-			ScienceSkillEffects scienceSkillEffects = WorldRules.Instance.scienceSkillEffects;
-			int labProduciton = scienceSkillEffects.EffectiveCreditsProduction(m);
-			bool labProduces = labProduciton > 0;
-			SafeUpdateField(researchCreditsProdCurText, labProduces ? string.Format("<color=lime>{0}/100{1}</color>", labProduciton, Localization.TT("ru")) : null);
-			int totalLabProduction = scienceSkillEffects.skillPointBonusProduction * (int)m.Research.producedPerSkillPoint.credits;
-			SafeUpdateField(researchCreditsProdBonusText, totalLabProduction + "/100" + Localization.TT("ru") + " " + Localization.TT("per"));
+			ResearchModule lab = m.Research;
+			ResourceValueGroup labSkillProd = lab.producedPerSkillPoint;
+			ResourceValueGroup labProdPerDist = lab.ProducedPerDistance;
+			SafeUpdateField(10, crewText, $"{m.CurrentLocalOpsCount}/{m.operatorSpots.Length} <size=16>{Localization.TT("Scientists")}</size>");
+			SafeUpdateField(20, creditsProdText, labSkillProd.credits > 0 ? $"{(labProdPerDist.credits > 0 ? altPreClr : null)}{preColor}{labProdPerDist.credits * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.credits > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(30, organicsProdText, labSkillProd.organics > 0 ? $"{(labProdPerDist.organics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.organics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.organics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(40, fuelProdText, labSkillProd.fuel > 0 ? $"{(labProdPerDist.fuel > 0 ? altPreClr : null)}{preColor}{labProdPerDist.fuel * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.fuel > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(50, metalsProdText, labSkillProd.metals > 0 ? $"{(labProdPerDist.metals > 0 ? altPreClr : null)}{preColor}{labProdPerDist.metals * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.metals > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(60, syntheticsProdText, labSkillProd.synthetics > 0 ? $"{(labProdPerDist.synthetics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.synthetics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.synthetics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(70, explosivesProdText, labSkillProd.explosives > 0 ? $"{(labProdPerDist.explosives > 0 ? altPreClr : null)}{preColor}{labProdPerDist.explosives * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.explosives > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(80, exoticsContCurText, labSkillProd.exotics > 0 ? $"{(labProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.exotics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
+			//SafeUpdateField(80, exoticsProdText, labSkillProd.exotics > 0 ? $"{(labProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.exotics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(90, researchCreditsProdBonusText, $" {lab.producedPerSkillPoint.credits:0.0}/100{Localization.TT("ru")} /");
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
 			if (!doResearchHovers) {
 				UpdateHoverFlags(doResearchHovers: true);
-				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations.")}";
-				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship.")}";
-				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship.")}";
-				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship.")}";
-				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship.")}";
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by how much it inflates ship's signature.")}";
+				crewOpsHover.hoverText = $"{Localization.TT("Shows current occupancy and limit of how much scientists can work in the laboratory at the same time.")}";
+				removesOpResConsHover.hoverText = $"{Localization.TT("Shows if working in a laboratory resolves food consumption issues for farmers.")}";
+				organicsProdHover.hoverText = $"{Localization.TT("Shows how much organics laboratory produces per 100ru of travel.")}";
+				fuelProdHover.hoverText = $"{Localization.TT("Shows how much starfuel laboratory produces per 100ru of travel.")}";
+				metalsProdHover.hoverText = $"{Localization.TT("Shows how much metal laboratory produces per 100ru of travel.")}";
+				syntheticsProdHover.hoverText = $"{Localization.TT("Shows how much synthetics laboratory produces per 100ru of travel.")}";
+				explosivesProdHover.hoverText = $"{Localization.TT("Shows how much explosives laboratory produces per 100ru of travel.")}";
+				exoticsProdHover.hoverText = $"{Localization.TT("Shows how much exotics laboratory produces per 100ru of travel.")}";
+				creditsProdHover.hoverText = $"{Localization.TT("Shows how much credits laboratory generates per 100ru of travel.")}";
+				researchCreditsProdBonusHover.hoverText = $"{Localization.TT("Shows by how much laboratory increases credits output per each science skill point for 100ru of travel.")}";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the laboratory.")}";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase laboratory provides to the ship.")}";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy laboratory currently emits and by how much it inflates ship's signature.")}";
+				exoticsContCurHover.hoverText = exoticsProdHover.hoverText;
 			}
 		}
 		//Updated Cryosleep Information
 		[MonoModReplace] private void DoCryosleep() {
-			int num = m.operatorSpots.Length;
+			CryosleepModule cryo = m.Cryosleep;
 			removesOpResCons.SetActive(true);
-			SafeUpdateField(cryoSleepSpotsText, num, ref prevOpSpots);
-			cryoSleepChanceToHeal.SetActive(m.Cryosleep.healOneCrewHp);
-			cryoGenDreamCredits.SetActive(m.Cryosleep.genDreamCredits);
+			SafeUpdateField(10, crewText, $"{m.CurrentLocalOpsCount}/{m.operatorSpots.Length} <size=16>{Localization.TT("Occupied")}</size>");
+			SortOrder(removesOpResCons, 20);
+			SafeUpdateField(30, medbayHealSpotsText, cryo.healOneCrewHp ? $"{preColor}{cryo.healOneCrewHpDistance.minValue / healthPercent:0}{Localization.TT("ru")} ~ {cryo.healOneCrewHpDistance.maxValue / healthPercent:0}{Localization.TT("ru")}{aftColor}" : null);
+			SafeUpdateField(40, sensorSectorRadarRange, cryo.genDreamCredits ? $"{preColor}{cryo.genDreamCreditsDistance.minValue / healthPercent:0}{Localization.TT("ru")} ~ {cryo.genDreamCreditsDistance.maxValue / healthPercent:0}{Localization.TT("ru")}{aftColor}" : null);
+			SafeUpdateField(50, creditsProdText, cryo.genDreamCredits ? $"{preColor}${cryo.creditsPerDream.minValue * healthPercent:0.#} ~ ${cryo.creditsPerDream.maxValue * healthPercent:0.#}{aftColor}" : null);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
 			if (!doCryosleepHovers) {
 				UpdateHoverFlags(doCryosleepHovers: true);
-				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations.")}";
-				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship.")}";
-				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship.")}";
-				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship.")}";
-				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship.")}";
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by how much it inflates ship's signature.")}";
+				crewOpsHover.hoverText = $"{Localization.TT("Shows current occupancy and limit of how much crewmembers can be put into cryosleep at the same time.")}";
+				removesOpResConsHover.hoverText = $"{Localization.TT("Shows if sleeping in cryopods prevents food consumption for crewmembers.")}";
+				medbayHealSpotsHover.hoverText = $"{Localization.TT("Shows approximate travel distance required to heal a single health point of crewmember in cryosleep.")}";
+				sensorSectorRadarRangeHover.hoverText = $"{Localization.TT("Shows approximate travel distance required to record a full cryo-dream of crewmember in cryosleep.")}";
+				creditsProdHover.hoverText = $"{Localization.TT("Shows approximate amount of generated credits, when cryo-dream of a crewmember in cryosleep is recorded and compiled.")}";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the cryosleep bay.")}";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase cryosleep bay provides to the ship.")}";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy cryosleep bay currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
 		//Updated Stealth Generator Information
 		[MonoModReplace] private void DoStealthDecryptorSensor() {
+			SafeUpdateField(10, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, altPreClr + preColor + "{0:0.#} " + Localization.TT("m") + "³" + aftColor + altAftClr);
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
 			if (!doStealthHovers) {
 				UpdateHoverFlags(doStealthHovers: true);
-				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations.")}";
-				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship.")}";
-				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship.")}";
-				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship.")}";
-				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship.")}";
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by how much it inflates ship's signature.")}";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("Shows by how much stealth generator reduces ship's signature.")}";
+				sSpeedBonusHover.hoverText = $"{Localization.TT("Shows interstellar travel speed increase stealth generator provides to the ship.")}";
+				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Shows protection efficiency against asteroids that stealth generator provides to the ship.")}";
+				sEvasionBonusHover.hoverText = $"{Localization.TT("Shows maneuverability and evasive capabilities increase stealth generator provides to the ship.")}";
+				sAccuracyBonusHover.hoverText = $"{Localization.TT("Shows efficiency of stealth generator targeting and lock-on systems that increase accuracy of all ship weapons.")}";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the stealth generator.")}";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase stealth generator provides to the ship.")}";
 			}
 		}
 		//Updated Countermeasure Arrays Information
 		[MonoModReplace] private void DoPassiveECM() {
+			SafeUpdateField(10, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, altPreClr + preColor + "{0:0.#} " + Localization.TT("m") + "³" + aftColor + altAftClr);
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
 			if (!doPassiveHovers) {
 				UpdateHoverFlags(doPassiveHovers: true);
-				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations.")}";
-				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship.")}";
-				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship.")}";
-				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship.")}";
-				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship.")}";
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by how much it inflates ship's signature.")}";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("Shows by how much countermeasure module reduces ship's signature.")}";
+				sSpeedBonusHover.hoverText = $"{Localization.TT("Shows interstellar travel speed increase countermeasure module provides to the ship.")}";
+				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Shows protection efficiency against asteroids that countermeasure module provides to the ship.")}";
+				sEvasionBonusHover.hoverText = $"{Localization.TT("Shows maneuverability and evasive capabilities increase countermeasure module provides to the ship.")}";
+				sAccuracyBonusHover.hoverText = $"{Localization.TT("Shows efficiency of countermeasure module targeting and lock-on systems that increase accuracy of all ship weapons.")}";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the countermeasure module.")}";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase countermeasure module provides to the ship.")}";
 			}
 		}
 		//Updated Starship Armor Information
 		[MonoModReplace] private void DoIntegrity() {
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
 			if (!doIntegrityHovers) {
 				UpdateHoverFlags(doIntegrityHovers: true);
-				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations.")}";
-				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship.")}";
-				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship.")}";
-				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship.")}";
-				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship.")}";
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by how much it inflates ship's signature.")}";
+				sSpeedBonusHover.hoverText = $"{Localization.TT("Shows interstellar travel speed increase armor provides to the ship.")}";
+				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Shows protection efficiency against asteroids that armor provides to the ship.")}";
+				sEvasionBonusHover.hoverText = $"{Localization.TT("Shows maneuverability and evasive capabilities increase armor provides to the ship.")}";
+				sAccuracyBonusHover.hoverText = $"{Localization.TT("Shows efficiency of armor targeting and lock-on systems that increase accuracy of all ship weapons.")}";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the armor module.")}";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase armor provides to the ship.")}";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy armor currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
 		//Updated Decoy Modules Information
 		[MonoModReplace] private void DoDecoy() {
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
 			if (!doDecoyHovers) {
 				UpdateHoverFlags(doDecoyHovers: true);
-				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations.")}";
-				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship.")}";
-				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship.")}";
-				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship.")}";
-				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship.")}";
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by how much it inflates ship's signature.")}";
+				sSpeedBonusHover.hoverText = $"{Localization.TT("Shows interstellar travel speed increase decoy module provides to the ship.")}";
+				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Shows protection efficiency against asteroids that decoy module provides to the ship.")}";
+				sEvasionBonusHover.hoverText = $"{Localization.TT("Shows maneuverability and evasive capabilities increase decoy module provides to the ship.")}";
+				sAccuracyBonusHover.hoverText = $"{Localization.TT("Shows efficiency of decoy module targeting and lock-on systems that increase accuracy of all ship weapons.")}";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the decoy module.")}";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase decoy module provides to the ship.")}";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy decoy module currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
 		//Updated Other Modules Information
 		[MonoModReplace] private void DoOther() {
+			storageSizeText.alignment = TextAnchor.UpperLeft;
+			SafeUpdateField(10, crewText, FFU_BE_Mod_Information.IsCacheModule(m) && FFU_BE_Mod_Information.GetCacheSets(m) > 0 ? $"{FFU_BE_Mod_Information.GetCacheSets(m)} <size=16>{Localization.TT("Sets")}</size>" : null);
+			SafeUpdateField(20, medbayHealSpotsText, FFU_BE_Mod_Information.IsCacheModule(m) && FFU_BE_Mod_Information.GetCacheHPIncrease(m) > 0 ? $"+{FFU_BE_Mod_Information.GetCacheHPIncrease(m)} <size=16>{Localization.TT("Increase")}</size>" : null);
+			SafeUpdateField(30, dmgToCrewText, FFU_BE_Mod_Information.IsCacheModule(m) && FFU_BE_Mod_Information.GetCacheHPLimit(m) > 0 ? $"{FFU_BE_Mod_Information.GetCacheHPLimit(m)} <size=16>{Localization.TT("Limit")}</size>" : null);
+			SafeUpdateField(40, storageSizeText, FFU_BE_Mod_Information.IsCacheModule(m) && !FFU_BE_Mod_Information.GetCacheWeapons(m).IsEmpty() ? $"<size=14>{string.Join("\n", FFU_BE_Mod_Information.GetCacheWeapons(m, " "))}</size>" : null);
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
 			if (!doOtherHovers) {
 				UpdateHoverFlags(doOtherHovers: true);
-				sSpeedBonusHover.hoverText = $"{Localization.TT("Defines interstellar travel speed of your ship.")}";
-				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Defines efficiency of your anti-asteroid defenses at hazardous and volatile locations.")}";
-				sEvasionBonusHover.hoverText = $"{Localization.TT("Defines maneuverability and evasive capabilities of your ship.")}";
-				sAccuracyBonusHover.hoverText = $"{Localization.TT("Defines efficiency and quality of on-board targetings systems on your ship.")}";
-				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Defines capacity of on-board shielding systems on your ship.")}";
-				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Defines durability of built-in armors and bulkheads on your ship.")}";
-				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module currently emits and by how much it inflates ship's signature.")}";
+				crewOpsHover.hoverText = $"{Localization.TT("Shows how much equipment or upgrade sets cache contains.")}";
+				medbayHealSpotsHover.hoverText = $"{Localization.TT("Shows health points increase amount cache will provide to crewmembers, when applied.")}";
+				dmgToCrewTextHover.hoverText = $"{Localization.TT("Shows health points increase limit after which upgrade cache will have no effect.")}";
+				storageSizeHover.hoverText = $"{Localization.TT("Shows list of potentials weapons that crewmembers can equip, when cache is opened.")}";
+				sSpeedBonusHover.hoverText = $"{Localization.TT("Shows interstellar travel speed increase artifact provides to the ship.")}";
+				sAsteroidDeflBonusHover.hoverText = $"{Localization.TT("Shows protection efficiency against asteroids that artifact provides to the ship.")}";
+				sEvasionBonusHover.hoverText = $"{Localization.TT("Shows maneuverability and evasive capabilities increase artifact provides to the ship.")}";
+				sAccuracyBonusHover.hoverText = $"{Localization.TT("Shows efficiency of artifact targeting and lock-on systems that increase accuracy of all ship weapons.")}";
+				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the artifact.")}";
+				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase artifact provides to the ship.")}";
+				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy artifact currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
 		//Show Updated Crew Damage in Module Panel
@@ -1486,13 +1549,13 @@ namespace RST.UI {
 			float explosivesProd = rp.explosives * 60f / secondsPerConversion;
 			float exoticsProd = rp.exotics * 60f / secondsPerConversion;
 			float creditsProd = rp.credits * 60f / secondsPerConversion;
-			SafeUpdateField(10, organicsProdText, m.HasFullHealth ? organicsProd : organicsProd * healthPercent, ref prevOrganics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(20, fuelProdText, m.HasFullHealth ? fuelProd : fuelProd * healthPercent, ref prevFuel, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(30, metalsProdText, m.HasFullHealth ? metalsProd : metalsProd * healthPercent, ref prevMetals, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(40, syntheticsProdText, m.HasFullHealth ? syntheticsProd : syntheticsProd * healthPercent, ref prevSynth, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(50, explosivesProdText, m.HasFullHealth ? explosivesProd : explosivesProd * healthPercent, ref prevExpl, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(60, exoticsProdText, m.HasFullHealth ? exoticsProd : exoticsProd * healthPercent, ref prevExotics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(70, creditsProdText, m.HasFullHealth ? creditsProd : creditsProd * healthPercent, ref prevCredits, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(10, creditsProdText, m.HasFullHealth ? creditsProd : creditsProd * healthPercent, ref prevCredits, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(20, organicsProdText, m.HasFullHealth ? organicsProd : organicsProd * healthPercent, ref prevOrganics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(30, fuelProdText, m.HasFullHealth ? fuelProd : fuelProd * healthPercent, ref prevFuel, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(40, metalsProdText, m.HasFullHealth ? metalsProd : metalsProd * healthPercent, ref prevMetals, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(50, syntheticsProdText, m.HasFullHealth ? syntheticsProd : syntheticsProd * healthPercent, ref prevSynth, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(60, explosivesProdText, m.HasFullHealth ? explosivesProd : explosivesProd * healthPercent, ref prevExpl, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(70, exoticsProdText, m.HasFullHealth ? exoticsProd : exoticsProd * healthPercent, ref prevExotics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
 		}
 		//Sorted Resource Consumption Per Second
 		[MonoModReplace] private void DoResourceConsPerSecond(ResourceValueGroup rc, float secondsPerConversion) {

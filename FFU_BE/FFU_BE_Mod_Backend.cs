@@ -66,11 +66,18 @@ namespace RST {
 		}
 		//Improved Boarding/Spawner Nukes Mechanic
 		[MonoModReplace] protected void DoHit(Collider2D[] hits, int hitCount, Vector2 hitPos) {
+			Ownership.Owner hitOwner = Ownership.Owner.None;
 			Collider2D collider2D = null;
 			for (int i = 0; i < hitCount; i++) {
 				Collider2D collider2D2 = hits[i];
 				if (!(collider2D2 != null)) continue;
 				(collider2D2.GetComponent(typeof(IHasHealth)) as IHasHealth)?.TakeDamage(damage, hitPos);
+				if (hitOwner == Ownership.Owner.None) {
+					Ship tempShip = collider2D2.GetComponent(typeof(IHasHealth)) as Ship;
+					hitOwner = tempShip != null ? tempShip.Ownership.GetOwner() : Ownership.Owner.None;
+					if (hitOwner == Ownership.Owner.Me) hitOwner = Ownership.Owner.Enemy;
+					else if (hitOwner == Ownership.Owner.Enemy) hitOwner = Ownership.Owner.Me;
+				}
 				if (!collider2D2.CompareTag("IntViewShip")) continue;
 				collider2D = collider2D2;
 				if (target != null) {
@@ -84,8 +91,8 @@ namespace RST {
 			if (gameObject != null) Explosion.InstantiateExplosion(gameObject, base.transform, target);
 			if (!(collider2D != null)) return;
 			float num = 0.2f;
-			Ownership.Owner owner = (Ownership != null) ? Ownership.GetOwner() : ((sourceWeapon != null) ? sourceWeapon.Module.Ownership.GetOwner() : Ownership.Owner.None);
-			if (owner == Ownership.Owner.None) return;
+			if (hitOwner == Ownership.Owner.None) hitOwner = (Ownership != null) ? Ownership.GetOwner() : ((sourceWeapon != null) ? sourceWeapon.Module.Ownership.GetOwner() : Ownership.Owner.None);
+			if (hitOwner == Ownership.Owner.None) return;
 			int moddedSpawnCount = spawnIntruderCount > 0 ? (int)FFU_BE_Defs.GetIntruderCountFromName(this) : 0;
 			int randomSpawnCount = spawnIntruderCount > 0 ? (int)UnityEngine.Random.Range(moddedSpawnCount / 3f * 2f, moddedSpawnCount / 3f * 5f) : 0;
 			for (int j = 0; j < randomSpawnCount; j++) {
@@ -97,7 +104,7 @@ namespace RST {
 					bioPayloadSpawn.transform.parent = collider2D.transform;
 					bioPayloadSpawn.transform.position = v;
 					bioPayloadSpawn.transform.localScale = Vector3.one;
-					bioPayloadSpawn.Ownership.SetOwner(owner);
+					bioPayloadSpawn.Ownership.SetOwner(hitOwner);
 					bioPayloadSpawn.role = Crewmember.Role.Intruder;
 					bioPayloadSpawn.gameObject.SetActive(true);
 					bioPayloadSpawn.Idle(false);

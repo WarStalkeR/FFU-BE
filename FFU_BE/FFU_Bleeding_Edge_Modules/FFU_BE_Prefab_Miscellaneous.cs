@@ -102,7 +102,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Kinetic Type <color=#" + colorCache + "ff>Weapons</color> Cache";
-				shipModule.description = "Weapon cache that contains full sets of Revolvers, Pistols, SMGs, Shotguns, Rifles, Autocannon, Breacher Cannons and Railguns. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
+				shipModule.description = "Weapon cache that contains full sets of Revolvers, SMGs, Shotguns, Rifles, Autocannon, Breacher Cannons and Railguns. To equip: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 1250f, synthetics = 250f, explosives = 500f, exotics = 10f };
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;

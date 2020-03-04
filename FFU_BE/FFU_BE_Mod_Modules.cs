@@ -1087,6 +1087,79 @@ namespace RST {
 			newProduce.ProduceTo(pd, 1f, resourceProductionReason);
 		}
 	}
+	public class patch_CryosleepModule : CryosleepModule {
+		[MonoModIgnore] private float nextHealDist;
+		[MonoModIgnore] private float healDist;
+		[MonoModIgnore] private float nextDreamDist;
+		[MonoModIgnore] private float dreamDist;
+		[MonoModIgnore] private void HealOneCrewHp() { }
+		//Cryosleep Effects Trigger from Damage
+		public void AddDistanceTravelled(float delta) {
+			bool fullHealth = Module.HasFullHealth;
+			float healthPercent = FFU_BE_Defs.GetHealthPercent(Module);
+			if (healOneCrewHp) {
+				if (healDist == 0f && nextHealDist == 0f) {
+					if (fullHealth) nextHealDist = healOneCrewHpDistance.GetRandomFloat();
+					else nextHealDist = healOneCrewHpDistance.GetRandomFloat() / healthPercent;
+				}
+				if (healDist >= nextHealDist) {
+					HealOneCrewHp();
+					healDist -= nextHealDist;
+					if (fullHealth) nextHealDist = healOneCrewHpDistance.GetRandomFloat();
+					else nextHealDist = healOneCrewHpDistance.GetRandomFloat() / healthPercent;
+				}
+				healDist += delta * Module.CurrentLocalOpsCount;
+			}
+			if (genDreamCredits) {
+				if (dreamDist == 0f && nextDreamDist == 0f) {
+					if (fullHealth) nextDreamDist = genDreamCreditsDistance.GetRandomFloat();
+					else nextDreamDist = genDreamCreditsDistance.GetRandomFloat() / healthPercent;
+				}
+				if (dreamDist >= nextDreamDist) {
+					GenDreamCredits();
+					dreamDist -= nextDreamDist;
+					if (fullHealth) nextDreamDist = genDreamCreditsDistance.GetRandomFloat();
+					else nextDreamDist = genDreamCreditsDistance.GetRandomFloat() / healthPercent;
+				}
+				dreamDist += delta * Module.CurrentLocalOpsCount;
+			}
+		}
+		[MonoModReplace] private void GenDreamCredits() {
+			ShipModule module = Module;
+			List<Crewmember> list = new List<Crewmember>();
+			CrewAssignmentSpot[] operatorSpots = module.operatorSpots;
+			foreach (CrewAssignmentSpot crewAssignmentSpot in operatorSpots) if (crewAssignmentSpot.assignedCrewmember != null) list.Add(crewAssignmentSpot.assignedCrewmember);
+			Crewmember crewmember = list.RandomElement();
+			if (crewmember != null) {
+				PlayerData playerData = PlayerDatas.Get(module.Ownership.GetOwner());
+				if (playerData != null) {
+					int randomInt = Mathf.RoundToInt(Module.HasFullHealth ? creditsPerDream.GetRandomInt() : creditsPerDream.GetRandomInt() * FFU_BE_Defs.GetHealthPercent(Module));
+					if (randomInt <= 0) return;
+					playerData.Credits += randomInt;
+					StarmapLogPanelUI.Open();
+					StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Good, string.Format(MonoBehaviourExtended.TT("{0} generated {1} credits while dreaming in {2}"), crewmember.displayName, randomInt, Module.DisplayNameLocalized));
+				}
+			}
+		}
+	}
+	public class patch_CrewIsInCryosleep : CrewIsInCryosleep {
+		[MonoModIgnore] private Crewmember lastAssignedCrewmember;
+		[MonoModIgnore] private ShipModule Module => GetCachedComponentInParent<ShipModule>(true);
+		[MonoModIgnore] private CrewAssignmentSpot AssignemntSpot => GetCachedComponent<CrewAssignmentSpot>(true);
+		//Crew in Cryosleep in Damaged Cryobay Modules.
+		[MonoModReplace] private void UpdateData() {
+			Crewmember crewmember = null;
+			if (AssignemntSpot.assignedCrewmember != null) {
+				ShipModule module = Module;
+				if (module != null && (module.HasFullHealth || FFU_BE_Defs.DamagedButWorking(module)) && module.IsPowered) crewmember = AssignemntSpot.assignedCrewmember;
+			}
+			if (lastAssignedCrewmember != crewmember) {
+				if (lastAssignedCrewmember != null) lastAssignedCrewmember.StartWakingUp();
+				if (crewmember != null) crewmember.Sleep();
+				lastAssignedCrewmember = crewmember;
+			}
+		}
+	}
 	public class patch_CrewIsHealed : CrewIsHealed {
 		[MonoModIgnore] private float timer;
 		[MonoModIgnore] private ShipModule Module => GetCachedComponentInParent<ShipModule>(true);

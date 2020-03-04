@@ -33,56 +33,157 @@ namespace FFU_Bleeding_Edge {
 			else return 0;
 		}
 		public static string GetMoodTextFromWeapon(string weaponName) {
-			if (weaponName == "Hand weapon tazerfists") return " and understood why screaming \"FOR THE EMPEROR!\" while trying to bash invisible heresy feels great.";
-			else if (weaponName == "Hand weapon welder double") return " and started thinking deeply how effective will it be on USG Ishimura at cutting necromorphs' limbs.";
-			else if (weaponName == "Hand weapon flamepistol") return ", because killing with fire is the best way to purify dirty souls of these unwelcome guests on your ship.";
-			else if (weaponName == "Hand weapon acidgun") return ", because killing with fire is not enough and turning somebody into toxic sludge is best way to show your compassion.";
-			else if (weaponName == "Hand weapon autopistol") return " and got the feeling that speaking with British accent sentences like \"For King and Country!\" seems absolutely legit.";
-			else if (weaponName == "Hand weapon revolver small") return " and suddenly remembered historical lesson that God created people different, but Colonel Colt made them equal.";
-			else if (weaponName == "Hand weapon revolver large") return " and feels like he got transfered to the ancient times of Wild West, where Clint Eastwood was serious business.";
-			else if (weaponName == "Hand weapon revolver large acc") return " and was weirded out how unbalanced it looks. Even attached tactical system itself questions sanity of the user.";
-			else if (weaponName == "Hand weapon uzi") return " and started looking for its silencer, but then remembered about wrong time, place and occurrence and embarrassingly hid it.";
-			else if (weaponName == "Hand weapon shotgun") return ", because when Zombie Apocalypse starts, shotgun with infinite ammo is your best friend, especially against Nazi Zombies.";
-			else if (weaponName == "Hand weapon assaultrifle") return " and regrets that this is just a standard issue modern Assault Rifle, and not Storm Bolter with proper Hellfire rounds.";
-			else if (weaponName == "Hand weapon precisiongatling") return " and feels that bringing democracy, enlightenment and compassion to disagreeing parties became so much easier.";
-			else if (weaponName == "Hand weapon handcannon") return " and agrees that caliber matters, especially when it comes to 90mm High-Explosive Anti-Armor Tungsten Carbide Perforating rounds.";
-			else if (weaponName == "Hand weapon diyrailgun") return ", noticed unknown \"Caldari Navy Issue\" label on it and already imagines 20-Mach projectile ripping apart everything in its way.";
-			else if (weaponName == "Hand weapon laser pistol") return " and understood that even at its finest times, it was only giving hope to its wielder at best, when facing army of reapers.";
-			else if (weaponName == "Hand weapon diylasergun") return " and started reminiscing about good old times, when it was efficiently used to burst sectoid brains like fresh watermelons.";
-			else if (weaponName == "Hand weapon laserrifle") return " and started playing around with it, but suddenly remembered that in its own time, it was only viable weapon against chryssalids.";
-			else if (weaponName == "Hand weapon insect pinkray pistol") return " and feels happy about getting ability to role-play hist favorite character, captain Kirk from very famous sci-fi series.";
-			else if (weaponName == "Hand weapon insect pinkray rifle") return ", was weirded out by its looks, but decided to keep it anyway, because going into battle barehanded is bad idea.";
-			else if (weaponName == "Hand weapon warpeffector") return " and started to feel presence of immaterium, but got bored quickly, because random dude named \"Khorne\" was especially annoying.";
-			else if (weaponName == "Hand weapon yellow raypistol") return " and remembered historical joke about Large Hadron Collider, where best scientists gather every 7 billion years and activate it.";
-			else return "";
+			if (weaponName == "Hand weapon tazerfists") return Localization.TT(" and understood why screaming \"FOR THE EMPEROR!\" while trying to bash invisible heresy feels great.");
+			else if (weaponName == "Hand weapon welder double") return Localization.TT(" and started thinking deeply how effective will it be on USG Ishimura at cutting necromorphs' limbs.");
+			else if (weaponName == "Hand weapon flamepistol") return Localization.TT(", because killing with fire is the best way to purify dirty souls of these unwelcome guests on your ship.");
+			else if (weaponName == "Hand weapon acidgun") return Localization.TT(", because killing with fire is not enough and turning somebody into toxic sludge is best way to show your compassion.");
+			else if (weaponName == "Hand weapon autopistol") return Localization.TT(" and got the feeling that speaking with British accent sentences like \"For King and Country!\" seems absolutely legit.");
+			else if (weaponName == "Hand weapon revolver small") return Localization.TT(" and suddenly remembered historical lesson that God created people different, but Colonel Colt made them equal.");
+			else if (weaponName == "Hand weapon revolver large") return Localization.TT(" and feels like he got transfered to the ancient times of Wild West, where Clint Eastwood was serious business.");
+			else if (weaponName == "Hand weapon revolver large acc") return Localization.TT(" and was weirded out how unbalanced it looks. Even attached tactical system itself questions sanity of the user.");
+			else if (weaponName == "Hand weapon uzi") return Localization.TT(" and started looking for its silencer, but then remembered about wrong time, place and occurrence and embarrassingly hid it.");
+			else if (weaponName == "Hand weapon shotgun") return Localization.TT(", because when Zombie Apocalypse starts, shotgun with infinite ammo is your best friend, especially against Nazi Zombies.");
+			else if (weaponName == "Hand weapon assaultrifle") return Localization.TT(" and regrets that this is just a standard issue modern Assault Rifle, and not Storm Bolter with proper Hellfire rounds.");
+			else if (weaponName == "Hand weapon precisiongatling") return Localization.TT(" and feels that bringing democracy, enlightenment and compassion to disagreeing parties became so much easier.");
+			else if (weaponName == "Hand weapon handcannon") return Localization.TT(" and agrees that caliber matters, especially when it comes to 90mm High-Explosive Anti-Armor Tungsten Carbide Perforating rounds.");
+			else if (weaponName == "Hand weapon diyrailgun") return Localization.TT(", noticed unknown \"Caldari Navy Issue\" label on it and already imagines 20-Mach projectile ripping apart everything in its way.");
+			else if (weaponName == "Hand weapon laser pistol") return Localization.TT(" and understood that even at its finest times, it was only giving hope to its wielder at best, when facing army of reapers.");
+			else if (weaponName == "Hand weapon diylasergun") return Localization.TT(" and started reminiscing about good old times, when it was efficiently used to burst sectoid brains like fresh watermelons.");
+			else if (weaponName == "Hand weapon laserrifle") return Localization.TT(" and started playing around with it, but suddenly remembered that in its own time, it was only viable weapon against chryssalids.");
+			else if (weaponName == "Hand weapon insect pinkray pistol") return Localization.TT(" and feels happy about getting ability to role-play hist favorite character, captain Kirk from very famous sci-fi series.");
+			else if (weaponName == "Hand weapon insect pinkray rifle") return Localization.TT(", was weirded out by its looks, but decided to keep it anyway, because going into battle barehanded is bad idea.");
+			else if (weaponName == "Hand weapon warpeffector") return Localization.TT(" and started to feel presence of immaterium, but got bored quickly, because random dude named \"Khorne\" was especially annoying.");
+			else if (weaponName == "Hand weapon yellow raypistol") return Localization.TT(" and remembered historical joke about Large Hadron Collider, where best scientists gather every 7 billion years and activate it.");
+			else return Localization.TT(" and started thinking deeply about meaning of life.");
 		}
 		public static string GetMoodTextFromWeapon(HandWeapon handWeapon) {
 			if (handWeapon != null) {
 				switch (handWeapon.PrefabId) {
-					case 678337536: return " and understood why screaming \"FOR THE EMPEROR!\" while trying to bash invisible heresy feels great.";
-					case 266021953: return " and started thinking deeply how effective will it be on USG Ishimura at cutting necromorphs' limbs.";
-					case 1990035535: return ", because killing with fire is the best way to purify dirty souls of these unwelcome guests on your ship.";
-					case 607231408: return ", because killing with fire is not enough and turning somebody into toxic sludge is best way to show your compassion.";
-					case 1878534267: return " and got the feeling that speaking with British accent sentences like \"For King and Country!\" seems absolutely legit.";
-					case 933952449: return " and suddenly remembered historical lesson that God created people different, but Colonel Colt made them equal.";
-					case 117866831: return " and feels like he got transfered to the ancient times of Wild West, where Clint Eastwood was serious business.";
-					case 270410422: return " and was weirded out how unbalanced it looks. Even attached tactical system itself questions sanity of the user.";
-					case 799894355: return " and started looking for its silencer, but then remembered about wrong time, place and occurrence and embarrassingly hid it.";
-					case 1702502749: return ", because when Zombie Apocalypse starts, shotgun with infinite ammo is your best friend, especially against Nazi Zombies.";
-					case 1906191868: return " and regrets that this is just a standard issue modern Assault Rifle, and not Storm Bolter with proper Hellfire rounds.";
-					case 82011213: return " and feels that bringing democracy, enlightenment and compassion to disagreeing parties became so much easier.";
-					case 658851245: return " and agrees that caliber matters, especially when it comes to 90mm High-Explosive Anti-Armor Tungsten Carbide Perforating rounds.";
-					case 82876487: return ", noticed unknown \"Caldari Navy Issue\" label on it and already imagines 20-Mach projectile ripping apart everything in its way.";
-					case 2126525717: return " and understood that even at its finest times, it was only giving hope to its wielder at best, when facing army of reapers.";
-					case 1310955184: return " and started reminiscing about good old times, when it was efficiently used to burst sectoid brains like fresh watermelons.";
-					case 1723915276: return " and started playing around with it, but suddenly remembered that in its own time, it was only viable weapon against chryssalids.";
-					case 928676718: return " and feels happy about getting ability to role-play hist favorite character, captain Kirk from very famous sci-fi series.";
-					case 154008401: return ", was weirded out by its looks, but decided to keep it anyway, because going into battle barehanded is bad idea.";
-					case 1558207795: return " and started to feel presence of immaterium, but got bored quickly, because random dude named \"Khorne\" was especially annoying.";
-					case 1688300750: return " and remembered historical joke about Large Hadron Collider, where best scientists gather every 7 billion years and activate it.";
-					default: return "";
+					case 678337536: return Localization.TT(" and understood why screaming \"FOR THE EMPEROR!\" while trying to bash invisible heresy feels great.");
+					case 266021953: return Localization.TT(" and started thinking deeply how effective will it be on USG Ishimura at cutting necromorphs' limbs.");
+					case 1990035535: return Localization.TT(", because killing with fire is the best way to purify dirty souls of these unwelcome guests on your ship.");
+					case 607231408: return Localization.TT(", because killing with fire is not enough and turning somebody into toxic sludge is best way to show your compassion.");
+					case 1878534267: return Localization.TT(" and got the feeling that speaking with British accent sentences like \"For King and Country!\" seems absolutely legit.");
+					case 933952449: return Localization.TT(" and suddenly remembered historical lesson that God created people different, but Colonel Colt made them equal.");
+					case 117866831: return Localization.TT(" and feels like he got transfered to the ancient times of Wild West, where Clint Eastwood was serious business.");
+					case 270410422: return Localization.TT(" and was weirded out how unbalanced it looks. Even attached tactical system itself questions sanity of the user.");
+					case 799894355: return Localization.TT(" and started looking for its silencer, but then remembered about wrong time, place and occurrence and embarrassingly hid it.");
+					case 1702502749: return Localization.TT(", because when Zombie Apocalypse starts, shotgun with infinite ammo is your best friend, especially against Nazi Zombies.");
+					case 1906191868: return Localization.TT(" and regrets that this is just a standard issue modern Assault Rifle, and not Storm Bolter with proper Hellfire rounds.");
+					case 82011213: return Localization.TT(" and feels that bringing democracy, enlightenment and compassion to disagreeing parties became so much easier.");
+					case 658851245: return Localization.TT(" and agrees that caliber matters, especially when it comes to 90mm High-Explosive Anti-Armor Tungsten Carbide Perforating rounds.");
+					case 82876487: return Localization.TT(", noticed unknown \"Caldari Navy Issue\" label on it and already imagines 20-Mach projectile ripping apart everything in its way.");
+					case 2126525717: return Localization.TT(" and understood that even at its finest times, it was only giving hope to its wielder at best, when facing army of reapers.");
+					case 1310955184: return Localization.TT(" and started reminiscing about good old times, when it was efficiently used to burst sectoid brains like fresh watermelons.");
+					case 1723915276: return Localization.TT(" and started playing around with it, but suddenly remembered that in its own time, it was only viable weapon against chryssalids.");
+					case 928676718: return Localization.TT(" and feels happy about getting ability to role-play hist favorite character, captain Kirk from very famous sci-fi series.");
+					case 154008401: return Localization.TT(", was weirded out by its looks, but decided to keep it anyway, because going into battle barehanded is bad idea.");
+					case 1558207795: return Localization.TT(" and started to feel presence of immaterium, but got bored quickly, because random dude named \"Khorne\" was especially annoying.");
+					case 1688300750: return Localization.TT(" and remembered historical joke about Large Hadron Collider, where best scientists gather every 7 billion years and activate it.");
+					default: return Localization.TT(" and started thinking deeply about meaning of life.");
 				}
-			} else return " and started thinking deeply about meaning of life.";
+			} else return Localization.TT(" and started thinking deeply about meaning of life.");
+		}
+		public static List<string> GetWeaponNameIDsFromCacheID(int cachePrefabID) {
+			switch (cachePrefabID) {
+				case 1745395900: return new List<string> {
+					"Hand weapon tazerfists",
+					"Hand weapon welder double",
+					"Hand weapon flamepistol",
+					"Hand weapon acidgun" }; ;
+				case 179311957: return new List<string> {
+					"Hand weapon revolver large acc",
+					"Hand weapon uzi",
+					"Hand weapon shotgun",
+					"Hand weapon assaultrifle",
+					"Hand weapon precisiongatling",
+					"Hand weapon handcannon",
+					"Hand weapon diyrailgun" };
+				case 760711671: return new List<string> {
+					"Hand weapon laser pistol",
+					"Hand weapon diylasergun",
+					"Hand weapon laserrifle" };
+				case 656277331: return new List<string> {
+					"Hand weapon insect pinkray pistol",
+					"Hand weapon insect pinkray rifle",
+					"Hand weapon warpeffector",
+					"Hand weapon yellow raypistol" };
+				case 760711667: return new List<string> {
+					"Hand weapon autopistol",
+					"Hand weapon revolver small",
+					"Hand weapon revolver large",
+					"Hand weapon revolver large acc",
+					"Hand weapon laser pistol" };
+				case 1279608160: return new List<string> {
+					"Hand weapon uzi",
+					"Hand weapon shotgun",
+					"Hand weapon assaultrifle",
+					"Hand weapon diylasergun" };
+				case 1316302015: return new List<string> {
+					"Hand weapon precisiongatling",
+					"Hand weapon handcannon",
+					"Hand weapon diyrailgun",
+					"Hand weapon laserrifle" };
+				default: return null;
+			}
+		}
+		public static List<string> GetWeaponLocalesFromCacheID(int cachePrefabID, string itemSpacing) {
+			List<string> listedItems = new List<string>();
+			switch (cachePrefabID) {
+				case 1745395900: listedItems = new List<string> {
+					Localization.TT("Power Fists"),
+					Localization.TT("Dual Welder"),
+					Localization.TT("Napalm Gun"),
+					Localization.TT("Toxic Gun")};
+				if (!string.IsNullOrEmpty(itemSpacing)) listedItems.Add(itemSpacing);
+				return listedItems;
+				case 179311957: listedItems = new List<string> {
+					Localization.TT("Assault Revolver"),
+					Localization.TT("Assault SMG"),
+					Localization.TT("Assault Shotgun"),
+					Localization.TT("Assault Rifle"),
+					Localization.TT("Tactical Railgun"),
+					Localization.TT("Assault Autocannon"),
+					Localization.TT("Breacher Cannon")};
+				if (!string.IsNullOrEmpty(itemSpacing)) listedItems.Add(itemSpacing);
+				return listedItems;
+				case 760711671: listedItems = new List<string> {
+					Localization.TT("Laser Pistol"),
+					Localization.TT("Laser Rifle"),
+					Localization.TT("Laser Cannon")};
+				if (!string.IsNullOrEmpty(itemSpacing)) listedItems.Add(itemSpacing);
+				return listedItems;
+				case 656277331: listedItems = new List<string> {
+					Localization.TT("Blaster Pistol"),
+					Localization.TT("Blaster Rifle"),
+					Localization.TT("Warp Ray Gun"),
+					Localization.TT("Particle Gun")};
+				if (!string.IsNullOrEmpty(itemSpacing)) listedItems.Add(itemSpacing);
+				return listedItems;
+				case 760711667: listedItems = new List<string> {
+					Localization.TT("Assault Pistol"),
+					Localization.TT("Light Revolver"),
+					Localization.TT("Heavy Revolver"),
+					Localization.TT("Assault Revolver"),
+					Localization.TT("Laser Pistol")};
+				if (!string.IsNullOrEmpty(itemSpacing)) listedItems.Add(itemSpacing);
+				return listedItems;
+				case 1279608160: listedItems = new List<string> {
+					Localization.TT("Assault SMG"),
+					Localization.TT("Assault Shotgun"),
+					Localization.TT("Assault Rifle"),
+					Localization.TT("Laser Rifle")};
+				if (!string.IsNullOrEmpty(itemSpacing)) listedItems.Add(itemSpacing);
+				return listedItems;
+				case 1316302015: listedItems = new List<string> {
+					Localization.TT("Tactical Railgun"),
+					Localization.TT("Assault Autocannon"),
+					Localization.TT("Laser Minicannon"),
+					Localization.TT("Breacher Cannon")};
+				if (!string.IsNullOrEmpty(itemSpacing)) listedItems.Add(itemSpacing);
+				return listedItems;
+				default: return null;
+			}
 		}
 		public static void AddSkillPointsWithinLimits(Crewmember crewmember) {
 			int maxSkillPoints = 0;
@@ -228,12 +329,7 @@ namespace FFU_Bleeding_Edge {
 						} break;
 						case "artifactmodule tec 17 broken screen gizmo, data":
 						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = new List<string> {
-								"Hand weapon tazerfists",
-								"Hand weapon welder double",
-								"Hand weapon flamepistol",
-								"Hand weapon acidgun"
-							};
+							availableWeapons = GetWeaponNameIDsFromCacheID(1745395900);
 							EQUIP_CQC:
 							cacheUsedMessage = RstShared.StringBuilder;
 							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
@@ -247,18 +343,7 @@ namespace FFU_Bleeding_Edge {
 						} break;
 						case "artifactmodule tec 25 broken screen gizmo":
 						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = new List<string> {
-								"Hand weapon autopistol",
-								"Hand weapon revolver small",
-								"Hand weapon revolver large",
-								"Hand weapon revolver large acc",
-								"Hand weapon uzi",
-								"Hand weapon shotgun",
-								"Hand weapon assaultrifle",
-								"Hand weapon precisiongatling",
-								"Hand weapon handcannon",
-								"Hand weapon diyrailgun"
-							};
+							availableWeapons = GetWeaponNameIDsFromCacheID(179311957);
 							EQUIP_KINETIC:
 							cacheUsedMessage = RstShared.StringBuilder;
 							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
@@ -272,11 +357,7 @@ namespace FFU_Bleeding_Edge {
 						} break;
 						case "artifactmodule tec 32 broken container gizmo":
 						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = new List<string> {
-								"Hand weapon laser pistol",
-								"Hand weapon diylasergun",
-								"Hand weapon laserrifle"
-							};
+							availableWeapons = GetWeaponNameIDsFromCacheID(760711671);
 							EQUIP_LASERS:
 							cacheUsedMessage = RstShared.StringBuilder;
 							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
@@ -290,12 +371,7 @@ namespace FFU_Bleeding_Edge {
 						} break;
 						case "artifactmodule tec 37 ripped quarter of a dome":
 						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-								availableWeapons = new List<string> {
-								"Hand weapon insect pinkray pistol",
-								"Hand weapon insect pinkray rifle",
-								"Hand weapon warpeffector",
-								"Hand weapon yellow raypistol"
-							};
+							availableWeapons = GetWeaponNameIDsFromCacheID(656277331);
 							EQUIP_ENERGY:
 							cacheUsedMessage = RstShared.StringBuilder;
 							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
@@ -309,13 +385,7 @@ namespace FFU_Bleeding_Edge {
 						} break;
 						case "artifactmodule tec 36 broken gizmo":
 						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = new List<string> {
-								"Hand weapon autopistol",
-								"Hand weapon revolver small",
-								"Hand weapon revolver large",
-								"Hand weapon revolver large acc",
-								"Hand weapon laser pistol"
-							};
+							availableWeapons = GetWeaponNameIDsFromCacheID(760711667);
 							EQUIP_BACKUP:
 							cacheUsedMessage = RstShared.StringBuilder;
 							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
@@ -329,12 +399,7 @@ namespace FFU_Bleeding_Edge {
 						} break;
 						case "artifactmodule tec 34 data core grammofon":
 						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = new List<string> {
-								"Hand weapon uzi",
-								"Hand weapon shotgun",
-								"Hand weapon assaultrifle",
-								"Hand weapon diylasergun"
-							};
+							availableWeapons = GetWeaponNameIDsFromCacheID(1279608160);
 							EQUIP_TACTICAL:
 							cacheUsedMessage = RstShared.StringBuilder;
 							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
@@ -348,12 +413,7 @@ namespace FFU_Bleeding_Edge {
 						} break;
 						case "artifactmodule tec 35 data core makk":
 						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = new List<string> {
-								"Hand weapon precisiongatling",
-								"Hand weapon handcannon",
-								"Hand weapon diyrailgun",
-								"Hand weapon laserrifle"
-							};
+							availableWeapons = GetWeaponNameIDsFromCacheID(1316302015);
 							EQUIP_ASSAULT:
 							cacheUsedMessage = RstShared.StringBuilder;
 							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
@@ -1102,7 +1162,7 @@ namespace FFU_Bleeding_Edge {
 					handWeapon.accuracy = 36;
 					break;
 					case "Hand weapon laserrifle":
-					handWeapon.displayName = "Laser Cannon";
+					handWeapon.displayName = "Laser Minicannon";
 					handWeapon.description = "Same as assault autocannon, but twice as good and trice as deadly. Still serves greater good by bringing peace and salvation to most civilizations even these days.";
 					handWeapon.damageDealerPrefab.GetDamage(handWeapon).crewDmg = 4;
 					handWeapon.damageDealerPrefab.GetDamage(handWeapon).doorDmg = 4;

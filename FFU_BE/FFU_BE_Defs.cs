@@ -58,8 +58,9 @@ namespace FFU_Bleeding_Edge {
 		public static IDictionary<int, int> equippedCrewFirearms = new Dictionary<int, int>();
 		public static IDictionary<int, int> craftingProficiency = new Dictionary<int, int>();
 		public static IDictionary<int, int> shipPrefabsDoorHealth = new Dictionary<int, int>();
-		public static IDictionary<int, string> shipPrefabsDoorName = new Dictionary<int, string>();
 		public static IDictionary<int, int> shipPrefabsStorageSize = new Dictionary<int, int>();
+		public static IDictionary<int, string> shipPrefabsDoorName = new Dictionary<int, string>();
+		public static IDictionary<int, float> moduleEmissionPrefabs = new Dictionary<int, float>();
 		public static IDictionary<string, List<int>> weaponTypeIDs = new Dictionary<string, List<int>>() {
 			{"Launchers", new List<int>()},
 			{"Autocannons", new List<int>()},
@@ -637,7 +638,7 @@ namespace FFU_Bleeding_Edge {
 						"and on hit damaged container modules will start <color=orange>fires</color> and secondary <color=orange>explosions</color>.</color>";
 				if (txt.name == "Text" && txt.text.Contains("Fight hostile fleets to gain fuel"))
 					txt.text = "<color=lime>Nukes are the most volatile modules in the game. When <color=orange>HP</color> of the non-deployed nuke will reach " +
-						"<color=orange>zero</color> from external damage, it will <color=orange>detonate</color> along with all magnificent nuclear, chemical & biological consequences.</color>";
+						"<color=orange>zero</color> from external damage, it will <color=orange>detonate</color> along with all magnificent atomic, biological & chemical consequences.</color>";
 				if (txt.name == "Text" && txt.text.Contains("Activate the SOS signal and hope"))
 					txt.text = "<color=lime>[...DATABASE IS CORRUPTED...]</color>";
 				if (txt.name == "metals" && txt.text == "Metals") txt.text = "Metals & Composites";
@@ -1053,7 +1054,7 @@ namespace FFU_Bleeding_Edge {
 			}
 		}
 		public static bool ModuleEmitsEnergy(ShipModule shipModule) {
-			if (shipModule == null) return false;
+			if (!(shipModule != null)) return false;
 			switch (shipModule.type) {
 				case ShipModule.Type.Bridge: return shipModule.Bridge != null && shipModule.turnedOn;
 				case ShipModule.Type.PointDefence: return shipModule.PointDefence != null && shipModule.turnedOn;
@@ -1075,12 +1076,12 @@ namespace FFU_Bleeding_Edge {
 			}
 		}
 		public static float GetModuleEnergyEmission(ShipModule shipModule, bool isStatic = false) {
-			if (shipModule == null) return 0f;
+			if (!(shipModule != null)) return 0f;
 			Core.BonusMod moduleMofidier = FFU_BE_Mod_Technology.GetModuleModifier(shipModule);
 			switch (shipModule.type) {
 				case ShipModule.Type.Bridge:
 				if (shipModule.Bridge != null && (shipModule.turnedOn || isStatic))
-					return (shipModule.PowerConsumed + shipModule.CurrentLocalOpsCount) * GetModuleEnergyEmissionMult(shipModule);
+					return (shipModule.PowerConsumed + shipModule.PowerConsumed / 2f * shipModule.CurrentLocalOpsCount) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.PointDefence:
 				if (shipModule.PointDefence != null && (shipModule.turnedOn || isStatic))

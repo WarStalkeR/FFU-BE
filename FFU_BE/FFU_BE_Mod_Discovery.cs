@@ -17,74 +17,48 @@ using FFU_Bleeding_Edge;
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Discovery {
 		public static void ProduceResourcesFromWarp(float distance) {
-			float producedOrganics = 0;
-			float producedStarfuel = 0;
-			float producedMetals = 0;
-			float producedSynthetics = 0;
-			float producedExplosives = 0;
-			float producedExotics = 0;
-			float producedCredits = 0;
+			ResourceValueGroup producedInWarp = ResourceValueGroup.Empty;
 			foreach (ShipModule shipModule in PerFrameCache.CachedModules) {
 				if ((shipModule.Research != null || shipModule.GardenModule != null) && shipModule.InstanceId > 0 && shipModule.Ownership.GetOwner() == Ownership.Owner.Me && shipModule.TurnedOnAndIsWorking) {
-					if (shipModule.Research != null) {
-						float effectiveSkillInput = WorldRules.Instance.scienceSkillEffects.EffectiveCreditsProduction(shipModule) / shipModule.Research.producedPerSkillPoint.credits;
-						if (shipModule.Research.producedPerSkillPoint.organics > 0) producedOrganics += shipModule.Research.producedPerSkillPoint.organics * effectiveSkillInput * distance / 100f;
-						if (shipModule.Research.producedPerSkillPoint.fuel > 0) producedStarfuel += shipModule.Research.producedPerSkillPoint.fuel * effectiveSkillInput * distance / 100f;
-						if (shipModule.Research.producedPerSkillPoint.metals > 0) producedMetals += shipModule.Research.producedPerSkillPoint.metals * effectiveSkillInput * distance / 100f;
-						if (shipModule.Research.producedPerSkillPoint.synthetics > 0) producedSynthetics += shipModule.Research.producedPerSkillPoint.synthetics * effectiveSkillInput * distance / 100f;
-						if (shipModule.Research.producedPerSkillPoint.explosives > 0) producedExplosives += shipModule.Research.producedPerSkillPoint.explosives * effectiveSkillInput * distance / 100f;
-						if (shipModule.Research.producedPerSkillPoint.exotics > 0) producedExotics += shipModule.Research.producedPerSkillPoint.exotics * effectiveSkillInput * distance / 100f;
-						if (shipModule.Research.producedPerSkillPoint.credits > 0) producedCredits += shipModule.Research.producedPerSkillPoint.credits * effectiveSkillInput * distance / 100f;
-					}
-					if (shipModule.GardenModule != null) {
-						float effectiveSkillInput = WorldRules.Instance.gardenSkillEffects.EffectiveOrganicsProduction(shipModule) / shipModule.GardenModule.producedPerSkillPoint.organics;
-						if (shipModule.GardenModule.producedPerSkillPoint.organics > 0) producedOrganics += shipModule.GardenModule.producedPerSkillPoint.organics * effectiveSkillInput * distance / 100f;
-						if (shipModule.GardenModule.producedPerSkillPoint.fuel > 0) producedStarfuel += shipModule.GardenModule.producedPerSkillPoint.fuel * effectiveSkillInput * distance / 100f;
-						if (shipModule.GardenModule.producedPerSkillPoint.metals > 0) producedMetals += shipModule.GardenModule.producedPerSkillPoint.metals * effectiveSkillInput * distance / 100f;
-						if (shipModule.GardenModule.producedPerSkillPoint.synthetics > 0) producedSynthetics += shipModule.GardenModule.producedPerSkillPoint.synthetics * effectiveSkillInput * distance / 100f;
-						if (shipModule.GardenModule.producedPerSkillPoint.explosives > 0) producedExplosives += shipModule.GardenModule.producedPerSkillPoint.explosives * effectiveSkillInput * distance / 100f;
-						if (shipModule.GardenModule.producedPerSkillPoint.exotics > 0) producedExotics += shipModule.GardenModule.producedPerSkillPoint.exotics * effectiveSkillInput * distance / 100f;
-						if (shipModule.GardenModule.producedPerSkillPoint.credits > 0) producedCredits += shipModule.GardenModule.producedPerSkillPoint.credits * effectiveSkillInput * distance / 100f;
-					}
+					if (shipModule.Research != null) producedInWarp += shipModule.Research.ProducedPerDistance * distance;
+					if (shipModule.GardenModule != null) producedInWarp += shipModule.GardenModule.ProducedPerDistance * distance;
 				}
 			}
 			PlayerData playerData = PlayerDatas.Me;
-			if (producedOrganics > 0 && playerData.Organics.SoftMax - playerData.Organics.Total > Mathf.RoundToInt(producedOrganics * FFU_BE_Defs.warpProducedResourcesMult)) {
-				playerData.Organics.Add(Mathf.RoundToInt(producedOrganics * FFU_BE_Defs.warpProducedResourcesMult), "produced during hyperjump"); producedOrganics = 0f;
-			} else if (producedOrganics > 0) { playerData.Organics.Add(playerData.Organics.SoftMax - playerData.Organics.Total, "produced during hyperjump"); producedOrganics = 0f; }
-			if (producedStarfuel > 0 && playerData.Fuel.SoftMax - playerData.Fuel.Total > Mathf.RoundToInt(producedStarfuel * FFU_BE_Defs.warpProducedResourcesMult)) {
-				playerData.Fuel.Add(Mathf.RoundToInt(producedStarfuel * FFU_BE_Defs.warpProducedResourcesMult), "produced during hyperjump"); producedStarfuel = 0f;
-			} else if (producedStarfuel > 0) { playerData.Fuel.Add(playerData.Fuel.SoftMax - playerData.Fuel.Total, "produced during hyperjump"); producedStarfuel = 0f; }
-			if (producedMetals > 0 && playerData.Metals.SoftMax - playerData.Metals.Total > Mathf.RoundToInt(producedMetals * FFU_BE_Defs.warpProducedResourcesMult)) {
-				playerData.Metals.Add(Mathf.RoundToInt(producedMetals * FFU_BE_Defs.warpProducedResourcesMult), "produced during hyperjump"); producedMetals = 0f;
-			} else if (producedMetals > 0) { playerData.Metals.Add(playerData.Metals.SoftMax - playerData.Metals.Total, "produced during hyperjump"); producedMetals = 0f; }
-			if (producedSynthetics > 0 && playerData.Synthetics.SoftMax - playerData.Synthetics.Total > Mathf.RoundToInt(producedSynthetics * FFU_BE_Defs.warpProducedResourcesMult)) {
-				playerData.Synthetics.Add(Mathf.RoundToInt(producedSynthetics * FFU_BE_Defs.warpProducedResourcesMult), "produced during hyperjump"); producedSynthetics = 0f;
-			} else if (producedSynthetics > 0) { playerData.Synthetics.Add(playerData.Synthetics.SoftMax - playerData.Synthetics.Total, "produced during hyperjump"); producedSynthetics = 0f; }
-			if (producedExplosives > 0 && playerData.Explosives.SoftMax - playerData.Explosives.Total > Mathf.RoundToInt(producedExplosives * FFU_BE_Defs.warpProducedResourcesMult)) {
-				playerData.Explosives.Add(Mathf.RoundToInt(producedExplosives * FFU_BE_Defs.warpProducedResourcesMult), "produced during hyperjump"); producedExplosives = 0f;
-			} else if (producedExplosives > 0) { playerData.Explosives.Add(playerData.Explosives.SoftMax - playerData.Explosives.Total, "produced during hyperjump"); producedExplosives = 0f; }
-			if (producedExotics > 0 && playerData.Exotics.SoftMax - playerData.Exotics.Total > Mathf.RoundToInt(producedExotics * FFU_BE_Defs.warpProducedResourcesMult)) {
-				playerData.Exotics.Add(Mathf.RoundToInt(producedExotics * FFU_BE_Defs.warpProducedResourcesMult), "produced during hyperjump"); producedExotics = 0f;
-			} else if (producedExotics > 0) { playerData.Exotics.Add(playerData.Exotics.SoftMax - playerData.Exotics.Total, "produced during hyperjump"); producedExotics = 0f; }
-			if (producedCredits > 0) { playerData.Credits += Mathf.RoundToInt(producedCredits * FFU_BE_Defs.warpProducedResourcesMult); producedCredits = 0f; }
+			if (producedInWarp.organics > 0 && playerData.Organics.SoftMax - playerData.Organics.Total > Mathf.RoundToInt(producedInWarp.organics * FFU_BE_Defs.warpProducedResourcesMult)) {
+				playerData.Organics.Add(Mathf.RoundToInt(producedInWarp.organics * FFU_BE_Defs.warpProducedResourcesMult), "produced during hyperjump"); producedInWarp.organics = 0f;
+			} else if (producedInWarp.organics > 0) { playerData.Organics.Add(playerData.Organics.SoftMax - playerData.Organics.Total, "produced during hyperjump"); producedInWarp.organics = 0f; }
+			if (producedInWarp.fuel > 0 && playerData.Fuel.SoftMax - playerData.Fuel.Total > Mathf.RoundToInt(producedInWarp.fuel * FFU_BE_Defs.warpProducedResourcesMult)) {
+				playerData.Fuel.Add(Mathf.RoundToInt(producedInWarp.fuel * FFU_BE_Defs.warpProducedResourcesMult), "produced during hyperjump"); producedInWarp.fuel = 0f;
+			} else if (producedInWarp.fuel > 0) { playerData.Fuel.Add(playerData.Fuel.SoftMax - playerData.Fuel.Total, "produced during hyperjump"); producedInWarp.fuel = 0f; }
+			if (producedInWarp.metals > 0 && playerData.Metals.SoftMax - playerData.Metals.Total > Mathf.RoundToInt(producedInWarp.metals * FFU_BE_Defs.warpProducedResourcesMult)) {
+				playerData.Metals.Add(Mathf.RoundToInt(producedInWarp.metals * FFU_BE_Defs.warpProducedResourcesMult), "produced during hyperjump"); producedInWarp.metals = 0f;
+			} else if (producedInWarp.metals > 0) { playerData.Metals.Add(playerData.Metals.SoftMax - playerData.Metals.Total, "produced during hyperjump"); producedInWarp.metals = 0f; }
+			if (producedInWarp.synthetics > 0 && playerData.Synthetics.SoftMax - playerData.Synthetics.Total > Mathf.RoundToInt(producedInWarp.synthetics * FFU_BE_Defs.warpProducedResourcesMult)) {
+				playerData.Synthetics.Add(Mathf.RoundToInt(producedInWarp.synthetics * FFU_BE_Defs.warpProducedResourcesMult), "produced during hyperjump"); producedInWarp.synthetics = 0f;
+			} else if (producedInWarp.synthetics > 0) { playerData.Synthetics.Add(playerData.Synthetics.SoftMax - playerData.Synthetics.Total, "produced during hyperjump"); producedInWarp.synthetics = 0f; }
+			if (producedInWarp.explosives > 0 && playerData.Explosives.SoftMax - playerData.Explosives.Total > Mathf.RoundToInt(producedInWarp.explosives * FFU_BE_Defs.warpProducedResourcesMult)) {
+				playerData.Explosives.Add(Mathf.RoundToInt(producedInWarp.explosives * FFU_BE_Defs.warpProducedResourcesMult), "produced during hyperjump"); producedInWarp.explosives = 0f;
+			} else if (producedInWarp.explosives > 0) { playerData.Explosives.Add(playerData.Explosives.SoftMax - playerData.Explosives.Total, "produced during hyperjump"); producedInWarp.explosives = 0f; }
+			if (producedInWarp.exotics > 0 && playerData.Exotics.SoftMax - playerData.Exotics.Total > Mathf.RoundToInt(producedInWarp.exotics * FFU_BE_Defs.warpProducedResourcesMult)) {
+				playerData.Exotics.Add(Mathf.RoundToInt(producedInWarp.exotics * FFU_BE_Defs.warpProducedResourcesMult), "produced during hyperjump"); producedInWarp.exotics = 0f;
+			} else if (producedInWarp.exotics > 0) { playerData.Exotics.Add(playerData.Exotics.SoftMax - playerData.Exotics.Total, "produced during hyperjump"); producedInWarp.exotics = 0f; }
+			if (producedInWarp.credits > 0) { playerData.Credits += Mathf.RoundToInt(producedInWarp.credits * FFU_BE_Defs.warpProducedResourcesMult); producedInWarp.credits = 0f; }
 		}
 		public static void CalculateProgressFromWarp(float distance) {
 			float addReverseProgress = 0;
 			float addResearchProgress = 0;
 			foreach (ShipModule shipModule in PerFrameCache.CachedModules) {
 				if (shipModule.Research != null && shipModule.InstanceId > 0 && shipModule.Ownership.GetOwner() == Ownership.Owner.Me && shipModule.TurnedOnAndIsWorking) {
-					float effectiveSkillInput = WorldRules.Instance.scienceSkillEffects.EffectiveCreditsProduction(shipModule) / shipModule.Research.producedPerSkillPoint.credits;
-					addResearchProgress += (shipModule.Research.producedPerSkillPoint.credits / 1000f + shipModule.Research.producedPerSkillPoint.exotics / 20f) * effectiveSkillInput * FFU_BE_Defs.tierResearchSpeedMult;
-					addReverseProgress += (shipModule.Research.producedPerSkillPoint.credits / 333.33f + shipModule.Research.producedPerSkillPoint.exotics / 6.66f) * effectiveSkillInput * FFU_BE_Defs.moduleResearchSpeedMult;
+					addResearchProgress += FFU_BE_Defs.GetResearchFromRVG(shipModule.Research.ProducedPerDistance) * FFU_BE_Defs.tierResearchSpeedMult * 100;
+					addReverseProgress += FFU_BE_Defs.GetReverseFromRVG(shipModule.Research.ProducedPerDistance) * FFU_BE_Defs.moduleResearchSpeedMult * 100;
 				}
 			}
 			FFU_BE_Defs.researchProgress += addResearchProgress * distance * FFU_BE_Defs.warpProducedResearchMult;
 			FFU_BE_Defs.unusedReverseProgress += addReverseProgress * distance * FFU_BE_Defs.warpProducedResearchMult;
 		}
 		public static void CalculateProgressFromSublight(ResearchModule instance, float delta) {
-			float effectiveSkillInput = WorldRules.Instance.scienceSkillEffects.EffectiveCreditsProduction(instance.Module) / instance.producedPerSkillPoint.credits;
-			FFU_BE_Defs.researchProgress += (instance.producedPerSkillPoint.credits / 1000f + instance.producedPerSkillPoint.exotics / 20f) * effectiveSkillInput * FFU_BE_Defs.tierResearchSpeedMult * delta;
+			FFU_BE_Defs.researchProgress += FFU_BE_Defs.GetResearchFromRVG(instance.ProducedPerDistance) * FFU_BE_Defs.tierResearchSpeedMult * delta * 100;
 			if (FFU_BE_Defs.moduleResearchGoal > 0) {
 				if (FFU_BE_Defs.unusedReverseProgress > 0 && FFU_BE_Defs.moduleResearchGoal - FFU_BE_Defs.moduleResearchProgress > FFU_BE_Defs.unusedReverseProgress) {
 					FFU_BE_Defs.moduleResearchProgress += FFU_BE_Defs.unusedReverseProgress;
@@ -93,7 +67,7 @@ namespace FFU_Bleeding_Edge {
 					FFU_BE_Defs.unusedReverseProgress -= FFU_BE_Defs.moduleResearchGoal - FFU_BE_Defs.moduleResearchProgress;
 					FFU_BE_Defs.moduleResearchProgress = FFU_BE_Defs.moduleResearchGoal;
 				}
-				FFU_BE_Defs.moduleResearchProgress += (instance.producedPerSkillPoint.credits / 333.33f + instance.producedPerSkillPoint.exotics / 6.66f) * effectiveSkillInput * FFU_BE_Defs.moduleResearchSpeedMult * delta;
+				FFU_BE_Defs.moduleResearchProgress += FFU_BE_Defs.GetReverseFromRVG(instance.ProducedPerDistance) * FFU_BE_Defs.moduleResearchSpeedMult * delta * 100;
 			} else FFU_BE_Defs.unusedReverseProgress = 0;
 			if (FFU_BE_Defs.moduleResearchProgress > FFU_BE_Defs.moduleResearchGoal) {
 				FFU_BE_Defs.moduleResearchGoal = 0;
@@ -521,7 +495,8 @@ namespace RST {
 		public ResourceValueGroup ProducedPerDistance {
 			get {
 				int effectiveResearchProduction = Module.TurnedOnAndIsWorking ? WorldRules.Instance.scienceSkillEffects.EffectiveCreditsProduction(Module) : 0;
-				return producedPerSkillPoint * (effectiveResearchProduction / 100f);
+				if (Module.HasFullHealth) return producedPerSkillPoint * (effectiveResearchProduction / 100f);
+				else return producedPerSkillPoint * (effectiveResearchProduction / 100f) * FFU_BE_Defs.GetHealthPercent(Module);
 			}
 		}
 	}
@@ -530,7 +505,8 @@ namespace RST {
 		public ResourceValueGroup ProducedPerDistance {
 			get {
 				int effectiveGreenhouseProduction = Module.TurnedOnAndIsWorking ? WorldRules.Instance.gardenSkillEffects.EffectiveOrganicsProduction(Module) : 0;
-				return producedPerSkillPoint * (effectiveGreenhouseProduction / 100f);
+				if (Module.HasFullHealth) return producedPerSkillPoint * (effectiveGreenhouseProduction / 100f);
+				else return producedPerSkillPoint * (effectiveGreenhouseProduction / 100f) * FFU_BE_Defs.GetHealthPercent(Module);
 			}
 		}
 	}

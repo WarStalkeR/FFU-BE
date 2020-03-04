@@ -197,7 +197,7 @@ namespace RST {
 			foreach (ShipModule shipModule in modules) {
 				if (shipModule != null && !shipModule.IsPacked) {
 					int maxShieldAdd = shipModule.MaxShieldAdd;
-					if (!shipModule.HasFullHealth) maxShieldAdd = Mathf.CeilToInt(maxShieldAdd * FFU_BE_Defs.GetHealthPercent(shipModule));
+					if (!shipModule.HasFullHealth) maxShieldAdd = Mathf.RoundToInt(maxShieldAdd * FFU_BE_Defs.GetHealthPercent(shipModule));
 					if (maxShieldAdd != 0) {
 						totalShield += maxShieldAdd;
 						perProviderCallback?.Invoke(shipModule, maxShieldAdd);
