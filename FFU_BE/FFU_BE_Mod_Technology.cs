@@ -1277,18 +1277,6 @@ namespace RST {
 				ship.Explosives += Mathf.RoundToInt((ship.MaxExplosives - ship.Explosives) * Random.Range(0.45f, 0.85f));
 				ship.Exotics += Mathf.RoundToInt((ship.MaxExotics - ship.Exotics) * Random.Range(0.45f, 0.85f));
 				ship.MaxHealthAdd = Mathf.RoundToInt(ship.MaxHealthAdd * FFU_BE_Defs.enemyShipHullHealthMult * (Sector.Instance != null ? 0.5f + enemyTechLevel / 2f : 1f));
-				bool shipLacksOrganics = false;
-				bool shipLacksFuel = false;
-				bool shipLacksSynthetics = false;
-				bool shipLacksMetals = false;
-				bool shipLacksExplosives = false;
-				bool shipLacksExotics = false;
-				if (ship.MaxOrganics == 0) shipLacksOrganics = true;
-				if (ship.MaxFuel == 0) shipLacksFuel = true;
-				if (ship.MaxSynthetics == 0) shipLacksSynthetics = true;
-				if (ship.MaxMetals == 0) shipLacksMetals = true;
-				if (ship.MaxExplosives == 0) shipLacksExplosives = true;
-				if (ship.MaxExotics == 0) shipLacksExotics = true;
 				if (Sector.Instance != null) {
 					int currentSector = Sector.Instance.number;
 					bool shipHasShieldGen = ship.Modules.Find(x => x.type == ShipModule.Type.ShieldGen && x.displayName.Contains("Generator")) != null ? true : false;
@@ -1369,6 +1357,18 @@ namespace RST {
 						}
 					}
 				}
+				bool shipLacksOrganics = false;
+				bool shipLacksFuel = false;
+				bool shipLacksSynthetics = false;
+				bool shipLacksMetals = false;
+				bool shipLacksExplosives = false;
+				bool shipLacksExotics = false;
+				if (ship.MaxOrganics == 0) shipLacksOrganics = true;
+				if (ship.MaxFuel == 0) shipLacksFuel = true;
+				if (ship.MaxSynthetics == 0) shipLacksSynthetics = true;
+				if (ship.MaxMetals == 0) shipLacksMetals = true;
+				if (ship.MaxExplosives == 0) shipLacksExplosives = true;
+				if (ship.MaxExotics == 0) shipLacksExotics = true;
 				foreach (ShipModule shipModule in ship.Modules.ToList()) {
 					if (shipModule.InstanceId > 0) {
 						float healthPercent = FFU_BE_Mod_Modules.GetRelativeHealth(shipModule);
@@ -1376,6 +1376,7 @@ namespace RST {
 						FFU_BE_Mod_Modules.ApplyModuleChanges(shipModule);
 						FFU_BE_Mod_Technology.ApplyEnemyModuleTier(shipModule);
 						FFU_BE_Mod_Modules.ApplyRelativeNewHealth(shipModule, healthPercent);
+						if (shipModule.Ownership.GetOwner() == Ownership.Owner.Enemy && shipModule.type == ShipModule.Type.Weapon) shipModule.Weapon.reloadTimer.Restart(shipModule.Weapon.reloadInterval);
 						if (shipModule.Ownership.GetOwner() == Ownership.Owner.Enemy && shipModule.type == ShipModule.Type.Reactor) {
 							shipModule.Reactor.powerCapacity += shipModule.Reactor.overchargePowerCapacityAdd;
 							shipModule.displayName += " (Overcharged)";
@@ -1428,7 +1429,13 @@ namespace RST {
 						if (FFU_BE_Defs.visualDebug) shipModule.displayName = ship.ModuleSlotRoots.ToList().IndexOf(shipModule.ModuleSlotRoot) + ": " + shipModule.displayName;
 					}
 				}
-				foreach (ModuleSlotRoot moduleSlotRoot in ship.ModuleSlotRoots.ToList()) { /* Something Will Happen Here. Eventually. */ }
+				if (ship.Organics < ship.MaxOrganics * 0.6f) ship.Organics = Mathf.RoundToInt(Random.Range(ship.MaxOrganics * 0.6f, ship.MaxOrganics * 0.9f));
+				if (ship.Fuel < ship.MaxFuel * 0.6f) ship.Fuel = Mathf.RoundToInt(Random.Range(ship.MaxFuel * 0.6f, ship.MaxFuel * 0.9f));
+				if (ship.Metals < ship.MaxMetals * 0.6f) ship.Metals = Mathf.RoundToInt(Random.Range(ship.MaxMetals * 0.6f, ship.MaxMetals * 0.9f));
+				if (ship.Synthetics < ship.MaxSynthetics * 0.6f) ship.Synthetics = Mathf.RoundToInt(Random.Range(ship.MaxSynthetics * 0.6f, ship.MaxSynthetics * 0.9f));
+				if (ship.Explosives < ship.MaxExplosives * 0.6f) ship.Explosives = Mathf.RoundToInt(Random.Range(ship.MaxExplosives * 0.6f, ship.MaxExplosives * 0.9f));
+				if (ship.Exotics < ship.MaxExotics * 0.6f) ship.Exotics = Mathf.RoundToInt(Random.Range(ship.MaxExotics * 0.6f, ship.MaxExotics * 0.9f));
+				//foreach (ModuleSlotRoot moduleSlotRoot in ship.ModuleSlotRoots.ToList()) { /* Something Will Happen Here. Eventually. */ }
 				if (ship.shield != null && ship.shield.MaxShieldPoints > 0) ship.shield.ShieldPoints = ship.shield.MaxShieldPoints;
 				FFU_BE_Defs.updatedShips.Add(ship.InstanceId);
 				return true;

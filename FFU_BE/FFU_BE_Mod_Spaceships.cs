@@ -14,6 +14,8 @@ using UnityEngine;
 using FFU_Bleeding_Edge;
 using UnityEngine.EventSystems;
 using System.Text;
+using RST.PlaymakerAction;
+using System.Linq;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Spaceships {
@@ -131,6 +133,12 @@ namespace FFU_Bleeding_Edge {
 
 namespace RST {
 	public class patch_Ship : Ship {
+		[MonoModIgnore] private bool flyTo;
+		[MonoModIgnore] private bool exploding;
+		[MonoModIgnore] private Vector2 flyToPos;
+		[MonoModIgnore] private float explosionTimer;
+		[MonoModIgnore] private bool doAfterSpawnDone;
+		[MonoModIgnore] private int doAfterSpawnCounter;
 		[MonoModIgnore] private bool prevIsSelfDestructing;
 		[MonoModIgnore] private void CompleteFlyTo() { }
 		[MonoModIgnore] private void UpdateExplosion() { }
@@ -215,6 +223,71 @@ namespace RST {
 			}
 			if (!isSelfDestructing && prevIsSelfDestructing) selfDestructTimer.Restart(WorldRules.Instance.shipSelfDestructTime);
 			if (isSelfDestructing && selfDestructTimer.Update(1f)) TakeDamage(int.MaxValue);
+		}//Collections to List Fix
+		[MonoModReplace] private void Update() {
+			if (flyTo) {
+				if (!(Vector2.Distance(base.transform.position, flyToPos) < 0.1f)) {
+					if (!RstTime.IsPaused) base.transform.position = Vector2.Lerp(base.transform.position, flyToPos, 0.55f);
+				} else {
+					flyTo = false;
+					CompleteFlyTo();
+				}
+			}
+			if (doAfterSpawnCounter >= 0) {
+				if (doAfterSpawnCounter == 0 && !doAfterSpawnDone) {
+					List<IDoAfterShipSpawn> registeredChildren = GetRegisteredChildren<IDoAfterShipSpawn>();
+					foreach (IDoAfterShipSpawn item in registeredChildren.ToList()) item.DoAfterShipSpawn(this);
+					DestroyAll(registeredChildren);
+					Ownership.Owner owner = Ownership.GetOwner();
+					if (owner == Ownership.Owner.Enemy) ShipAction.Do(this, ShipAction.Action.TurnAllModulesOn);
+					AI?.ThinkAndCommand(WorldRules.Instance.shipAiDoOnceActionsToConsider, true);
+					PowerDistributor.Update();
+					PlayerData me = PlayerDatas.Me;
+					switch (owner) {
+						case Ownership.Owner.Enemy:
+						ShipAction.Do(this, ShipAction.Action.ReloadShield);
+						ShipAction.Do(this, ShipAction.Action.TurnWeaponsToShipDirection);
+						break;
+						case Ownership.Owner.Me:
+						if (me != null && me.quickSelectSlotCount <= 0) me.AutoAssignQuickSelectSlots();
+						break;
+					}
+					if (owner == Ownership.Owner.Me && me != null && WorldRules.Impermanent.beginnerStartingBonus) {
+						WorldRules.StartingBonus beginnerStartingBonus = WorldRules.Instance.beginnerStartingBonus;
+						accuracyPercentAdd += beginnerStartingBonus.accuracyBonusPercent;
+						evasionPercentAdd += beginnerStartingBonus.evasionBonusPercent;
+						deflectChance += beginnerStartingBonus.deflectionBonusPercent * 0.01f;
+						string text = null;
+						me.Fuel.Add((int)beginnerStartingBonus.resources.fuel, text);
+						me.Organics.Add((int)beginnerStartingBonus.resources.organics, text);
+						me.Explosives.Add((int)beginnerStartingBonus.resources.explosives, text);
+						me.Exotics.Add((int)beginnerStartingBonus.resources.exotics, text);
+						me.Synthetics.Add((int)beginnerStartingBonus.resources.synthetics, text);
+						me.Metals.Add((int)beginnerStartingBonus.resources.metals, text);
+						if ((int)beginnerStartingBonus.resources.credits != 0) {
+							me.Credits += (int)beginnerStartingBonus.resources.credits;
+							me.creditsChangeReasons.Add(text);
+						}
+					}
+					doAfterSpawnDone = true;
+				}
+				doAfterSpawnCounter--;
+			}
+			bool flag = shield.ShieldPoints > 0;
+			if (shield.gameObject.activeSelf != flag) shield.gameObject.SetActive(flag);
+			DoSelfDestruct();
+			if (IsDead) {
+				if (!exploding) {
+					if (Ownership.GetOwner() == Ownership.Owner.Me) GameSummaryPanel.PlayerDeathRelatedAchievementsCheck(this);
+					PlayerData me2 = PlayerDatas.Me;
+					if (me2 != null) me2.shipsDestroyed++;
+					UsableWarpModule?.CancelWarp();
+					SelectionManager.RemoveFromSelection(base.gameObject);
+					explosionTimer = 0f;
+					exploding = true;
+				}
+			} else AiSendSomeoneToExtinguishFire();
+			if (exploding) UpdateExplosion();
 		}
 		//All Modules Lootable (Depends on their Integrity)
 		[MonoModReplace] private void LeaveLootModules() {
