@@ -11,7 +11,7 @@ using RST.UI;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "0.9.7.0";
+		public static string modVersion = "0.9.7.1";
 		//Internal Variables
 		public static bool firstRun = true;
 		public static bool firstInst = true;
@@ -89,7 +89,6 @@ namespace FFU_Bleeding_Edge {
 			{9, new List<int>()},
 			{10, new List<int>()}};
 		public static int[] techLevel = new int[] { 0, 1500, 3500, 6000, 10000, 16000, 24000, 34000, 46000, 60000 };
-		public static List<int> discoveredModuleIDs = initialModuleIDs;
 		public static List<int> initialModuleIDs = new List<int>(new int[] {
 			760167696,  /* Organics Pack */
 			453797399,  /* Starfuel Pack */
@@ -170,6 +169,7 @@ namespace FFU_Bleeding_Edge {
 			1571322820, /* Annihilator Rocket Launcher */
 			876704941,  /* Shockwave Plasma Howitzer */
 			412909021,  /* Liberator Kinetic Railcannon */ });
+		public static List<int> discoveredModuleIDs = initialModuleIDs;
 		public static List<int> unresearchedModuleIDs = new List<int>();
 		public static float unusedReverseProgress = 0f;
 		public static float moduleResearchProgress = 0f;
