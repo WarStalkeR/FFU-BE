@@ -15,6 +15,7 @@ using FFU_Bleeding_Edge;
 using UnityEngine;
 using MonoMod;
 using RST.UI;
+using System.Collections.Generic;
 
 namespace RST.PlaymakerAction {
 	public class patch_ChoicePanel : ChoicePanel {
@@ -112,11 +113,12 @@ namespace RST.PlaymakerAction {
 			fsmVariables.GetFsmString("crewNameOverride").Value = crewNameOverride.Value;
 			fsmVariables.GetFsmString("crewDescriptionOverride").Value = crewDescriptionOverride.Value;
 			int count = ParseIntExpr(ModuleCount.Value, null);
-			foreach (ShipModule item in InstantiateFromPool.DoIt<ShipModule>(Array.ConvertAll(modulePool.Values, (object p) => (GameObject)p), modulePoolAllowDuplicates.Value, PlayerDatas.Instance?.transform, count)) {
+			List<ShipModule> modulePoolList = InstantiateFromPool.DoIt<ShipModule>(Array.ConvertAll(modulePool.Values, (object p) => (GameObject)p), modulePoolAllowDuplicates.Value, PlayerDatas.Instance?.transform, count);
+			foreach (ShipModule item in modulePoolList) {
 				item.transform.position = new Vector3(10000f, 0f, 0f);
 				item.Ownership.SetOwner(Ownership.Owner.Inherit);
 			}
-			if (InstantiateFromPool.DoIt<ShipModule>(Array.ConvertAll(modulePool.Values, (object p) => (GameObject)p), modulePoolAllowDuplicates.Value, PlayerDatas.Instance?.transform, count).Count > 0) PerFrameCache.InvalidateModuleCache();
+			if (modulePoolList.Count > 0) PerFrameCache.InvalidateModuleCache();
 			fsmVariables.GetFsmFloat("module dmg percent min").Value = moduleDmgPercentMin.Value;
 			fsmVariables.GetFsmFloat("module dmg percent max").Value = moduleDmgPercentMax.Value;
 			fsmVariables.GetFsmBool("dontDoLargeBg").Value = dontDoLargeBg.Value;
@@ -125,6 +127,23 @@ namespace RST.PlaymakerAction {
 			fsmVariables.GetFsmBool("tutorial mode").Value = noPopup.Value;
 			fsmVariables.GetFsmString("reason to display").Value = reasonToDisplay.Value;
 			audioCtx = AudioPlayWithFade.Enter(base.Fsm.GameObject, audioClip.Value as AudioClip, audioNoFade.Value);
+		}
+	}
+	public class patch_GetOrphanedModules : GetOrphanedModules {
+		//Damage Salvaged Modules
+		[MonoModReplace] private void DoIt() {
+			List<GameObject> list = new List<GameObject>();
+			float droppedHealthMin = FFU_BE_Defs.GetDifficultyChanceMin();
+			float droppedHealthMax = FFU_BE_Defs.GetDifficultyChanceMax();
+			foreach (ShipModule cachedModule in PerFrameCache.CachedModules) {
+				if (cachedModule != null && !cachedModule.IsPacked && cachedModule.Ownership.GetIsOrphan()) {
+					if (cachedModule.Health == cachedModule.MaxHealth) cachedModule.TakeDamage(UnityEngine.Random.Range(Mathf.RoundToInt(cachedModule.MaxHealth * droppedHealthMin), Mathf.RoundToInt(cachedModule.MaxHealth * droppedHealthMax) + 1));
+					list.Add(cachedModule.gameObject);
+				}
+			}
+			list.Sort((GameObject a, GameObject b) => a.name.CompareTo(b.name));
+			object[] array2 = storeModuleGOs.Values = list.ToArray();
+			storeModuleCount.Value = list.Count;
 		}
 	}
 	public class patch_PerksSelection : PerksSelection {

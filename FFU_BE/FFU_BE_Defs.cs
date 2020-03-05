@@ -11,7 +11,7 @@ using RST.UI;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "0.9.7.1";
+		public static string modVersion = "0.9.7.2";
 		//Internal Variables
 		public static bool firstRun = true;
 		public static bool firstInst = true;
@@ -44,6 +44,7 @@ namespace FFU_Bleeding_Edge {
 		public static float permanentModuleDamagePercent = 0.15f;
 		public static List<int> updatedShips = new List<int>();
 		public static List<int> updatedCrews = new List<int>();
+		public static List<int> updatedSalvage = new List<int>();
 		public static List<Ship> prefabShipsList = new List<Ship>();
 		public static List<Beam> prefabBeamRaysList = new List<Beam>();
 		public static List<Projectile> prefabProjectilesList = new List<Projectile>();
@@ -777,6 +778,16 @@ namespace FFU_Bleeding_Edge {
 						"take the pill.\n</size>";
 				if (dumpObjectLists) Debug.LogWarning("[Welcome Text] " + txt.name + ": " + txt.text);
 			}
+		}
+		public static float GetDifficultyChanceMin() {
+			if (WorldRules.Impermanent.beginnerStartingBonus) return 0.1f;
+			else if (WorldRules.Impermanent.ironman) return 0.5f;
+			else return 0.3f;
+		}
+		public static float GetDifficultyChanceMax() {
+			if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
+			else if (WorldRules.Impermanent.ironman) return 0.9f;
+			else return 0.7f;
 		}
 		public static float GetDifficultyModifier() {
 			if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
