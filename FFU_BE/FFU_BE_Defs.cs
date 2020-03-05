@@ -304,7 +304,7 @@ namespace FFU_Bleeding_Edge {
 				if (ES2.Exists("start.es2?tag=summonAttempted")) summonAttempted = ES2.Load<bool>("start.es2?tag=summonAttempted");
 				if (ES2.Exists("start.es2?tag=shipCurrentStorageCap")) shipCurrentStorageCap = ES2.Load<int>("start.es2?tag=shipCurrentStorageCap");
 				if (ES2.Exists("permanent.es2?tag=discoveredModuleIDs")) discoveredModuleIDs = ES2.LoadList<int>("permanent.es2?tag=discoveredModuleIDs");
-				else ES2.Save<int>(discoveredModuleIDs, "permanent.es2?tag=discoveredModuleIDs");
+				else ES2.Save(discoveredModuleIDs, "permanent.es2?tag=discoveredModuleIDs");
 				foreach (int initialID in initialModuleIDs) if (!discoveredModuleIDs.Contains(initialID)) discoveredModuleIDs.Add(initialID);
 				if (goFullASMD) {
 					foreach (int moduleID in essentialTopModuleIDs)
