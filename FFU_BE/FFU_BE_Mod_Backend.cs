@@ -170,14 +170,16 @@ namespace RST {
 			if (!wasLoaded) {
 				moduleCommissionFeeSeed = RstRandom.positiveIntValue;
 				if (crewStation) {
-					int crewPoolSize = RstRandom.Range(crewPoolTakeMin, crewPoolTakeMax + 1);
+					int crewPoolSize = crewPoolTakeMax;
+					//int crewPoolSize = RstRandom.Range(crewPoolTakeMin, crewPoolTakeMax + 1);
 					foreach (Crewmember shopMember in InstantiateFromPool.DoIt<Crewmember>(crewPool, crewPoolAllowDuplicates, buyableCrewContainer, (crewPoolSize <= 0) ? crewPool.Length : crewPoolSize)) {
 						shopMember.Randomize();
 						shopMember.BuyableAssignToStore(this);
 					}
 				}
 				if (moduleStation) {
-					int modulePoolSize = RstRandom.Range(modulePoolTakeMin, modulePoolTakeMax + 1);
+					int modulePoolSize = modulePoolTakeMax;
+					//int modulePoolSize = RstRandom.Range(modulePoolTakeMin, modulePoolTakeMax + 1);
 					foreach (ShipModule shopModule in InstantiateFromPool.DoIt<ShipModule>(modulePool, modulePoolAllowDuplicates, buyableModulesContainer, (modulePoolSize <= 0) ? modulePool.Length : modulePoolSize)) {
 						shopModule.SetHealthToPercent(100f - RstRandom.Range(moduleDamagePercentMin, moduleDamagePercentMax));
 						shopModule.BuyableAssignToStore(this);
@@ -189,12 +191,12 @@ namespace RST {
 				synthetics.capacity *= FFU_BE_Defs.stationCapacityMult;
 				explosives.capacity *= FFU_BE_Defs.stationCapacityMult;
 				exotics.capacity *= FFU_BE_Defs.stationCapacityMult;
-				if (organics.available < organics.capacity / 4) organics.available += organics.capacity / 3;
-				if (fuel.available < fuel.capacity / 4) fuel.available += fuel.capacity / 3;
-				if (metals.available < metals.capacity / 4) metals.available += metals.capacity / 3;
-				if (synthetics.available < synthetics.capacity / 4) synthetics.available += synthetics.capacity / 3;
-				if (explosives.available < explosives.capacity / 4) explosives.available += explosives.capacity / 3;
-				if (exotics.available < exotics.capacity / 4) exotics.available += exotics.capacity / 3;
+				if (organics.available < organics.capacity / 3) organics.available += organics.capacity / 2;
+				if (fuel.available < fuel.capacity / 3) fuel.available += fuel.capacity / 2;
+				if (metals.available < metals.capacity / 3) metals.available += metals.capacity / 2;
+				if (synthetics.available < synthetics.capacity / 3) synthetics.available += synthetics.capacity / 2;
+				if (explosives.available < explosives.capacity / 3) explosives.available += explosives.capacity / 2;
+				if (exotics.available < exotics.capacity / 3) exotics.available += exotics.capacity / 2;
 			}
 		}
 	}

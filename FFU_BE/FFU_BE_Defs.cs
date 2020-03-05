@@ -215,7 +215,7 @@ namespace FFU_Bleeding_Edge {
 		public static int minEnemyCrewSkillsLimit = 1;
 		public static int enemyShipCrewSizeMult = 1;
 		public static int shipMaxEvasionLimit = 95;
-		public static int stationCapacityMult = 20;
+		public static int stationCapacityMult = 80;
 		public static int resultNumbersMult = 10;
 		public static int maxStorageCapacity = 120;
 		public static float shipModuleHealthMult = 3f;
