@@ -133,11 +133,11 @@ namespace RST.PlaymakerAction {
 		//Damage Salvaged Modules
 		[MonoModReplace] private void DoIt() {
 			List<GameObject> list = new List<GameObject>();
-			float droppedHealthMin = FFU_BE_Defs.GetDifficultyChanceMin();
-			float droppedHealthMax = FFU_BE_Defs.GetDifficultyChanceMax();
+			float salvageDamageMin = FFU_BE_Defs.GetDifficultyChanceMin();
+			float salvageDamageMax = FFU_BE_Defs.GetDifficultyChanceMax();
 			foreach (ShipModule cachedModule in PerFrameCache.CachedModules) {
 				if (cachedModule != null && !cachedModule.IsPacked && cachedModule.Ownership.GetIsOrphan()) {
-					if (cachedModule.Health == cachedModule.MaxHealth) cachedModule.TakeDamage(UnityEngine.Random.Range(Mathf.RoundToInt(cachedModule.MaxHealth * droppedHealthMin), Mathf.RoundToInt(cachedModule.MaxHealth * droppedHealthMax) + 1));
+					if (cachedModule.Health == cachedModule.MaxHealth) cachedModule.TakeDamage(UnityEngine.Random.Range(Mathf.RoundToInt(cachedModule.MaxHealth * salvageDamageMin), Mathf.RoundToInt(cachedModule.MaxHealth * salvageDamageMax) + 1));
 					list.Add(cachedModule.gameObject);
 				}
 			}
