@@ -24,9 +24,9 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "04 DIY fuel pack launcher") return idx; idx++;
 			if (moduleName == "00 DIY Rat fireball nuke launcher") return idx; idx++;
 			if (moduleName == "03 Barrel nuke launcher") return idx; idx++;
-			if (moduleName == "04 Fueltank nuke launcher") return idx; idx++;
 			if (moduleName == "09 Rat nuke launcher") return idx; idx++;
 			if (moduleName == "13 Bullseye nuke launcher") return idx; idx++;
+			if (moduleName == "04 Fueltank nuke launcher") return idx; idx++;
 			//Tactical
 			if (moduleName == "04 DIY explo pack launcher") return idx; idx++;
 			if (moduleName == "08e thin speeder nuke launcher") return idx; idx++;
@@ -354,7 +354,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Phosphate <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
-				shipModule.description = "Ancient external fuel tank modified into thermal capital missile by welding in engine. Contains a lot of self-igniting pressurized liquid that is released on impact.";
+				shipModule.description = "Old external fuel tank modified into thermal capital missile by welding in engine and additional armor. Contains a lot of self-igniting pressurized liquid that is released on impact.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 30f, synthetics = 30f, explosives = 20f };
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = true;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 2.5f;
@@ -370,11 +370,11 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 3;
 				shipModule_maxHealth = 15;
 				break;
-				case "04 Fueltank nuke launcher":
+				case "09 Rat nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Blazefire <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
-				shipModule.description = "Modern ultra-pressurized external fuel tank modified into thermal capital missile by attaching the engine. On impact releases all self-igniting liquid in all directions.";
+				shipModule.description = "Thermal capital missile that contains specialized solid payload that self-ignites when leaves vacuum environment and comes into contact with other material or gases.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 375f, metals = 45f, synthetics = 45f, explosives = 30f, exotics = 1f };
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = true;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 3.5f;
@@ -390,11 +390,11 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 4;
 				shipModule_maxHealth = 15;
 				break;
-				case "09 Rat nuke launcher":
+				case "13 Bullseye nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Firestorm <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
-				shipModule.description = "Thermal capital missile that contains specialized solid payload that self-ignites when leaves vacuum environment and comes into contact with other material or gases.";
+				shipModule.description = "Improved thermal capital missile that uses highly radioactive and volatile liquid mixed with exotic materials that rise overall temperature of fires to the extreme levels.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 600f, metals = 60f, synthetics = 60f, explosives = 40f, exotics = 3f };
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = true;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 4.5f;
@@ -410,11 +410,11 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 5;
 				shipModule_maxHealth = 15;
 				break;
-				case "13 Bullseye nuke launcher":
+				case "04 Fueltank nuke launcher":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Hellfire <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
-				shipModule.description = "Advanced thermal capital missile that uses extremely volatile payload of exotic origin that almost incinerates vacuum itself when not contained in specialized environment.";
+				shipModule.description = "Advanced thermal capital missile that uses extremely volatile payload of exotic origin that almost incinerates vacuum itself, when not contained in a specialized environment.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 75f, synthetics = 75f, explosives = 50f, exotics = 5f };
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = true;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 6.0f;

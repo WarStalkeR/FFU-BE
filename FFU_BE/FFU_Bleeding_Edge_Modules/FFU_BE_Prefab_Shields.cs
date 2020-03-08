@@ -149,7 +149,7 @@ namespace FFU_Bleeding_Edge {
 				case "shield 4 solitary":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.65f);
-				shipModule.displayName = "Void <color=#" + colorShieldGen + "ff>Shield Generator</color>";
+				shipModule.displayName = "Void-Wave <color=#" + colorShieldGen + "ff>Shield Generator</color>";
 				shipModule.description = "Shield generator that manipulates sub-dimensional energies to generate and maintain extremely strong protective barrier around ship. Not to be confused with Gellar field.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1500f, metals = 4000f, synthetics = 5000f, exotics = 25f };
 				shipModule.ShieldGen.reloadInterval = 1.5f;
@@ -272,7 +272,7 @@ namespace FFU_Bleeding_Edge {
 				case "shieldbat 3 generic alien":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.35f);
-				shipModule.displayName = "Void <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
+				shipModule.displayName = "Void-Wave <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
 				shipModule.description = "Shield capacitor that manipulates sub-dimensional energies to strengthen already existing extremely strong protective barrier around ship. Has nothing to do with immaterium.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 2000f, synthetics = 2500f, exotics = 15f };
 				shipModule.ShieldGen.maxShieldAdd = 120;

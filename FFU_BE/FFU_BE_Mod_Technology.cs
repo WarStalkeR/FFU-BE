@@ -1227,14 +1227,6 @@ namespace RST {
 			if (ship == null || !CheckIfConditionSatisfied(condition, ship)) return false;
 			if (ship != null && ship.Ownership.GetOwner() == Ownership.Owner.Me && !FFU_BE_Defs.updatedShips.Contains(ship.InstanceId)) {
 				Debug.LogWarning("Player ship spawned: [" + ship.InstanceId + "] " + ship.displayName + "! Applying initial tier upgrades...");
-				PlayerData playerData = PlayerDatas.Get(ship.Ownership.GetOwner());
-				if (playerData != null && playerData.Credits < 20000) playerData.Credits += Mathf.RoundToInt(Random.Range(20000f, 80000f));
-				if (ship.Organics < ship.MaxOrganics * 0.25) ship.Organics += Mathf.RoundToInt((ship.MaxOrganics - ship.Organics) * Random.Range(0.25f, 0.45f));
-				if (ship.Fuel < ship.MaxFuel * 0.25) ship.Fuel += Mathf.RoundToInt((ship.MaxFuel - ship.Fuel) * Random.Range(0.25f, 0.45f));
-				if (ship.Synthetics < ship.MaxSynthetics * 0.25) ship.Synthetics += Mathf.RoundToInt((ship.MaxSynthetics - ship.Synthetics) * Random.Range(0.25f, 0.45f));
-				if (ship.Metals < ship.MaxMetals * 0.25) ship.Metals += Mathf.RoundToInt((ship.MaxMetals - ship.Metals) * Random.Range(0.25f, 0.45f));
-				if (ship.Explosives < ship.MaxExplosives * 0.25) ship.Explosives += Mathf.RoundToInt((ship.MaxExplosives - ship.Explosives) * Random.Range(0.25f, 0.45f));
-				if (ship.Exotics < ship.MaxExotics * 0.25) ship.Exotics += Mathf.RoundToInt((ship.MaxExotics - ship.Exotics) * Random.Range(0.25f, 0.45f));
 				foreach (Door shipDoor in ship.Doors) {
 					if (FFU_BE_Defs.shipPrefabsDoorName.ContainsKey(ship.PrefabId))
 						shipDoor.displayName = FFU_BE_Defs.shipPrefabsDoorName[ship.PrefabId];
@@ -1250,12 +1242,31 @@ namespace RST {
 						FFU_BE_Mod_Modules.ApplyModuleChanges(shipModule);
 						FFU_BE_Mod_Technology.ApplyInitialModuleTier(shipModule);
 						FFU_BE_Mod_Modules.ApplyRelativeNewHealth(shipModule, healthPercent);
-						if (shipModule.Storage != null && FFU_BE_Defs.shipPrefabsStorageSize.ContainsKey(ship.PrefabId)) {
-							FFU_BE_Defs.shipCurrentStorageCap = FFU_BE_Defs.shipPrefabsStorageSize[ship.PrefabId];
-							shipModule.Storage.slotCount = FFU_BE_Defs.shipPrefabsStorageSize[ship.PrefabId];
+						if (shipModule.Storage != null) {
+							if (FFU_BE_Defs.shipPrefabsStorageSize.ContainsKey(ship.PrefabId)) {
+								FFU_BE_Defs.shipCurrentStorageCap = FFU_BE_Defs.shipPrefabsStorageSize[ship.PrefabId];
+								shipModule.Storage.slotCount = FFU_BE_Defs.shipPrefabsStorageSize[ship.PrefabId];
+							}
+							foreach (Transform item in shipModule.Storage.storage) {
+								if (FFU_BE_Defs.debugMode) Debug.LogWarning("Initial Stored Module: " + item.name);
+								if (item.GetComponent<ShipModule>() != null) {
+									float storedHealthPercent = FFU_BE_Mod_Modules.GetRelativeHealth(item.GetComponent<ShipModule>());
+									FFU_BE_Mod_Modules.ApplyModuleEffects(item.GetComponent<ShipModule>());
+									FFU_BE_Mod_Modules.ApplyModuleChanges(item.GetComponent<ShipModule>());
+									FFU_BE_Mod_Technology.ApplyInitialModuleTier(item.GetComponent<ShipModule>());
+									FFU_BE_Mod_Modules.ApplyRelativeNewHealth(item.GetComponent<ShipModule>(), storedHealthPercent);
+								}
+							}
 						}
 					}
 				}
+				ship.Fuel += Mathf.RoundToInt(FFU_BE_Defs.initialResources.fuel);
+				ship.Organics += Mathf.RoundToInt(FFU_BE_Defs.initialResources.organics);
+				ship.Explosives += Mathf.RoundToInt(FFU_BE_Defs.initialResources.explosives);
+				ship.Exotics += Mathf.RoundToInt(FFU_BE_Defs.initialResources.exotics);
+				ship.Synthetics += Mathf.RoundToInt(FFU_BE_Defs.initialResources.synthetics);
+				ship.Metals += Mathf.RoundToInt(FFU_BE_Defs.initialResources.metals);
+				PlayerDatas.Get(ship.Ownership.GetOwner()).Credits += Mathf.RoundToInt(FFU_BE_Defs.initialResources.credits);
 				FFU_BE_Defs.updatedShips.Add(ship.InstanceId);
 				return true;
 			}

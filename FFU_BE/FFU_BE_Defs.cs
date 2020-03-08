@@ -18,7 +18,7 @@ namespace FFU_Bleeding_Edge {
 		public static bool goFullASMD = false;
 		public static bool debugMode = false;
 		public static bool visualDebug = false;
-		public static bool canSpawnCrew = true;
+		public static bool canSpawnCrew = false;
 		public static bool dumpObjectLists = false;
 		public static bool dumpInstructions = false;
 		public static bool allStatProps = false;
@@ -45,9 +45,12 @@ namespace FFU_Bleeding_Edge {
 		public static List<int> updatedShips = new List<int>();
 		public static List<int> updatedCrews = new List<int>();
 		public static List<int> updatedSalvage = new List<int>();
+		public static List<Perk> prefabPerkList = new List<Perk>();
 		public static List<Ship> prefabShipsList = new List<Ship>();
 		public static List<Beam> prefabBeamRaysList = new List<Beam>();
+		public static List<AddCrewToShip> prefabCrewSets = new List<AddCrewToShip>();
 		public static List<Projectile> prefabProjectilesList = new List<Projectile>();
+		public static List<AddResourcesToShip> prefabResourceSets = new List<AddResourcesToShip>();
 		public static List<PointDefDamageDealer> prefabDefDealersList = new List<PointDefDamageDealer>();
 		public static List<ShootAtDamageDealer> prefabDamageDealersList = new List<ShootAtDamageDealer>();
 		public static List<Crewmember> prefabModdedCrewList = new List<Crewmember>();
@@ -199,6 +202,7 @@ namespace FFU_Bleeding_Edge {
 		public static float researchCommonDivisor = 1000f;
 		public static float reverseResearchDivisor = 3f;
 		public static ResourceValueGroup doorRepairCost = new ResourceValueGroup { metals = 2f, synthetics = 4f };
+		public static ResourceValueGroup initialResources = new ResourceValueGroup { };
 		//Configuration Variables
 		public static bool advancedWelcomePopup = false;
 		public static bool restartUnlocksEverything = false;
@@ -289,6 +293,8 @@ namespace FFU_Bleeding_Edge {
 				FFU_BE_Mod_Crewmembers.InitSpacePodsList();
 				FFU_BE_Mod_Modules.InitShipSlotsList();
 				FFU_BE_Mod_Modules.InitShipModulesList();
+				FFU_BE_Mod_Spaceships.InitSelectablePerks();
+				FFU_BE_Mod_Spaceships.InitShipResourcePrefabs();
 				FFU_BE_Mod_Spaceships.InitSpaceShipsPrefabList();
 				if (ES2.Exists("start.es2?tag=researchProgress")) researchProgress = ES2.Load<float>("start.es2?tag=researchProgress");
 				if (ES2.Exists("start.es2?tag=moduleResearchGoal")) moduleResearchGoal = ES2.Load<float>("start.es2?tag=moduleResearchGoal");
@@ -308,6 +314,7 @@ namespace FFU_Bleeding_Edge {
 				else ES2.Save(discoveredModuleIDs, "permanent.es2?tag=discoveredModuleIDs");
 				foreach (int initialID in initialModuleIDs) if (!discoveredModuleIDs.Contains(initialID)) discoveredModuleIDs.Add(initialID);
 				if (goFullASMD) {
+					if (restartUnlocksEverything) ES2.Save(FFU_BE_Base.allPerksList, "permanent.es2?tag=unlockedItemIds");
 					foreach (int moduleID in essentialTopModuleIDs)
 						if (!discoveredModuleIDs.Contains(moduleID) &&
 							!unresearchedModuleIDs.Contains(moduleID))
@@ -747,7 +754,7 @@ namespace FFU_Bleeding_Edge {
 					"pirates, their hideouts and legitimate loot filled with resources, credits, rare exotic substances and even unknown " +
 					"artifacts. As result, hunting down Pirates and Slavers earns not only respect and bounty, but also various " +
 					"resources salvaged from wrecks of their ships.";
-				if (dumpObjectLists) Debug.LogWarning("[Game Text] " + txt.name + ": " + txt.text);
+				if (dumpObjectLists) Debug.Log("[Game Text] " + txt.name + ": " + txt.text);
 			}
 		}
 		public static void LoadBleedingEdgeWelcome() {
@@ -776,15 +783,10 @@ namespace FFU_Bleeding_Edge {
 						"Anyway, you can <color=#3366ff>reset all data and just unlock all ships</color> or <color=#ff3333>reset all data and unlock " +
 						"all ships with all perks</color> depending on mod's configuration. To do it just follow (no, not a white rabbit) IDKFA and " +
 						"take the pill.\n</size>";
-				if (dumpObjectLists) Debug.LogWarning("[Welcome Text] " + txt.name + ": " + txt.text);
+				if (dumpObjectLists) Debug.Log("[Welcome Text] " + txt.name + ": " + txt.text);
 			}
 		}
-		public static float GetDifficultyChanceMin() {
-			if (WorldRules.Impermanent.beginnerStartingBonus) return 0.1f;
-			else if (WorldRules.Impermanent.ironman) return 0.5f;
-			else return 0.3f;
-		}
-		public static float GetDifficultyChanceMax() {
+		public static float GetDifficultyDamageMax() {
 			if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
 			else if (WorldRules.Impermanent.ironman) return 0.9f;
 			else return 0.7f;

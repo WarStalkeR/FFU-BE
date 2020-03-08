@@ -87,6 +87,7 @@ namespace RST.UI {
 	}
 	public class patch_PlayerPanel : PlayerPanel {
 		private extern void orig_Update();
+		[MonoModIgnore] private int prevEvasion;
 		//Spam Reduction Timers & Modified Interface
 		private void Update() {
 			FFU_BE_Mod_Backend.timePassedOrganics += Time.unscaledDeltaTime;
@@ -104,8 +105,10 @@ namespace RST.UI {
 			if (FFU_BE_Mod_Backend.timePassedExotics > 10000f) FFU_BE_Mod_Backend.timePassedExotics = 50f;
 			if (FFU_BE_Mod_Backend.timePassedCredits > 10000f) FFU_BE_Mod_Backend.timePassedCredits = 50f;
 			orig_Update();
-			researchCreditsBonus.text = FFU_BE_Mod_Technology.GetCraftChanceText().Replace("MK-", string.Empty).Replace(": ", string.Empty).Replace("I", string.Empty).Replace("V", string.Empty).Replace("X", string.Empty);
+			int newEvasion = prevEvasion + 1;
 			for (int i = 0; i < researchCreditsBonus.transform.childCount; i++) researchCreditsBonus.transform.GetChild(i).gameObject.SetActive(false);
+			researchCreditsBonus.text = FFU_BE_Mod_Technology.GetCraftChanceText().Replace("MK-", string.Empty).Replace(": ", string.Empty).Replace("I", string.Empty).Replace("V", string.Empty).Replace("X", string.Empty);
+			shipEvasion.SetText(prevEvasion, ref newEvasion, (int i) => i.ToString() + $"°/ₘ");
 		}
 		//Update Research Pop-Up to Show Modified Data
 		[MonoModReplace] private static string BuildResearchCreditsBonusHover(int researchCreditsBonus) {

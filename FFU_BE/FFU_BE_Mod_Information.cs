@@ -1226,6 +1226,7 @@ namespace RST.UI {
 				sMaxShieldBonusHover.hoverText = $"{Localization.TT("Shows built-in shields capacity of the materials converter.")}";
 				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase materials converter provides to the ship.")}";
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy materials converter currently emits and by how much it inflates ship's signature.")}";
+				exoticsContCurHover.hoverText = exoticsProdHover.hoverText;
 			}
 		}
 		//Updated Fighter Bay Information
@@ -1554,7 +1555,8 @@ namespace RST.UI {
 			SafeUpdateField(40, metalsProdText, m.HasFullHealth ? metalsProd : metalsProd * healthPercent, ref prevMetals, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
 			SafeUpdateField(50, syntheticsProdText, m.HasFullHealth ? syntheticsProd : syntheticsProd * healthPercent, ref prevSynth, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
 			SafeUpdateField(60, explosivesProdText, m.HasFullHealth ? explosivesProd : explosivesProd * healthPercent, ref prevExpl, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(70, exoticsProdText, m.HasFullHealth ? exoticsProd : exoticsProd * healthPercent, ref prevExotics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(70, exoticsContCurText, m.HasFullHealth ? exoticsProd : exoticsProd * healthPercent, ref prevExotics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			//SafeUpdateField(70, exoticsProdText, m.HasFullHealth ? exoticsProd : exoticsProd * healthPercent, ref prevExotics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
 		}
 		//Sorted Resource Consumption Per Second
 		[MonoModReplace] private void DoResourceConsPerSecond(ResourceValueGroup rc, float secondsPerConversion) {

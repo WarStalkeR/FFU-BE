@@ -16,6 +16,7 @@ using UnityEngine;
 using MonoMod;
 using RST.UI;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace RST.PlaymakerAction {
 	public class patch_ChoicePanel : ChoicePanel {
@@ -133,11 +134,10 @@ namespace RST.PlaymakerAction {
 		//Damage Salvaged Modules
 		[MonoModReplace] private void DoIt() {
 			List<GameObject> list = new List<GameObject>();
-			float salvageDamageMin = FFU_BE_Defs.GetDifficultyChanceMin();
-			float salvageDamageMax = FFU_BE_Defs.GetDifficultyChanceMax();
+			float salvageDamageMax = FFU_BE_Defs.GetDifficultyDamageMax();
 			foreach (ShipModule cachedModule in PerFrameCache.CachedModules) {
 				if (cachedModule != null && !cachedModule.IsPacked && cachedModule.Ownership.GetIsOrphan()) {
-					if (cachedModule.Health == cachedModule.MaxHealth) cachedModule.TakeDamage(UnityEngine.Random.Range(Mathf.RoundToInt(cachedModule.MaxHealth * salvageDamageMin), Mathf.RoundToInt(cachedModule.MaxHealth * salvageDamageMax) + 1));
+					if (cachedModule.Health == cachedModule.MaxHealth) cachedModule.TakeDamage(UnityEngine.Random.Range(Mathf.RoundToInt(cachedModule.MaxHealth * 0.1f), Mathf.RoundToInt(cachedModule.MaxHealth * salvageDamageMax) + 1));
 					list.Add(cachedModule.gameObject);
 				}
 			}
@@ -148,10 +148,187 @@ namespace RST.PlaymakerAction {
 	}
 	public class patch_PerksSelection : PerksSelection {
 		public extern void orig_OnEnter();
+		[MonoModIgnore] private void FinishThisAction() { }
+		[MonoModIgnore] private bool CanStartGame() { return false; }
+		[MonoModIgnore] private void ChangeCrewName(Crewmember crew, string newName) { }
+		[MonoModIgnore] private List<PerkUIGridElement> perkUiElements = new List<PerkUIGridElement>();
+		[MonoModIgnore] private static void SetResourceElementText(FsmObject textObj, FsmGameObject warningGO, FloatMinMax value, int startingBonus) { }
+		[MonoModIgnore] private static Crewmember InstantiateCrewWithSeed(Crewmember crewPrefab, int seed, string matchingComment, Perk perkPrefab = null) { return null; }
 		//Configurable Starting Fate
 		public override void OnEnter() {
 			firstRunFate.Value = FFU_BE_Defs.newStartingFateBonus;
 			orig_OnEnter();
+		}
+		//Allow Modded Crewmembers to Spawn
+		[MonoModReplace] private void ConfirmationYesClicked() {
+			confirmationGroup.Value.SetActive(false);
+			if (CanStartGame()) {
+				FFU_BE_Defs.canSpawnCrew = true;
+				FinishThisAction();
+			}
+		}
+		//Usage of Data from Modded Variables
+		[MonoModReplace] private void UpdateResourceAndBonusesDisplay() {
+			Ship ship = chosenMothership.Value?.GetComponent<Ship>();
+			if (ship == null) return;
+			AddResourcesToShip[] componentsInChildren = ship.GetComponentsInChildren<AddResourcesToShip>();
+			FloatMinMax floatMinMax = new FloatMinMax(ship.MaxHealthAdd);
+			FloatMinMax baseFuel = new FloatMinMax(0f);
+			FloatMinMax baseOrganics = new FloatMinMax(0f);
+			FloatMinMax baseExplosives = new FloatMinMax(0f);
+			FloatMinMax baseExotics = new FloatMinMax(0f);
+			FloatMinMax baseSynthetics = new FloatMinMax(0f);
+			FloatMinMax baseMetals = new FloatMinMax(0f);
+			FloatMinMax baseCredits = new FloatMinMax(0f);
+			FloatMinMax baseAccuracy = new FloatMinMax(ship.accuracyPercentAdd);
+			FloatMinMax baseDefelection = new FloatMinMax(ship.deflectChance * 100f);
+			FloatMinMax baseEvasion = new FloatMinMax(ship.evasionPercentAdd);
+			AddResourcesToShip[] array = componentsInChildren;
+			foreach (AddResourcesToShip addResourcesToShip in array) {
+				if (addResourcesToShip.condition == AddResourcesToShip.Condition.Always || addResourcesToShip.condition == AddResourcesToShip.Condition.IfPlayer_NotTutorial) {
+					baseFuel += addResourcesToShip.fuel;
+					baseOrganics += addResourcesToShip.organics;
+					baseExplosives += addResourcesToShip.explosives;
+					baseExotics += addResourcesToShip.exotics;
+					baseSynthetics += addResourcesToShip.synthetics;
+					baseMetals += addResourcesToShip.metals;
+					baseCredits += addResourcesToShip.credits;
+				}
+			}
+			int seed = StartGameCustomization.GetSeed();
+			RstRandom.InitState(seed);
+			AddCrewToShip[] initialShipCrew = ship.GetComponentsInChildren<AddCrewToShip>();
+			List<Crewmember> list = new List<Crewmember>();
+			for (int j = 0; j < initialShipCrew.Length; j++) {
+				AddCrewToShip addCrewToShip = initialShipCrew[j];
+				if (addCrewToShip.condition != AddResourcesToShip.Condition.Always && addCrewToShip.condition != AddResourcesToShip.Condition.IfPlayer_NotTutorial) continue;
+				addCrewToShip.seed = Mathf.Abs(seed + j);
+				StartGameCustomization.SaveAddCrewToShipSeed(addCrewToShip);
+				RstRandom.InitState(addCrewToShip.seed);
+				for (int k = 0; k < addCrewToShip.groups.Length; k++) {
+					AddCrewToShip.Group group = addCrewToShip.groups[k];
+					Color color = Color.white;
+					if (group.matchCrewColor) RandomizeCrewmember.PickMatchedColor(group.Pool, out color);
+					int randomInt = group.count.GetRandomInt();
+					for (int l = 0; l < randomInt; l++) {
+						Crewmember crewmember = GameObjectPool.TakeRandomPrefab<Crewmember>(group.Pool);
+						if (crewmember != null) {
+							int newSeed = Mathf.Abs(addCrewToShip.seed + k * 100 + l);
+							Crewmember newCrewmember = InstantiateCrewWithSeed(crewmember, newSeed, group.chooseWithMatchingComment);
+							if (group.matchCrewColor) newCrewmember.SetColor(color);
+							list.Add(newCrewmember);
+							UnityEngine.Object.Destroy(newCrewmember.gameObject);
+						}
+					}
+				}
+			}
+			if (FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length > 0 && FFU_BE_Defs.crewNumsOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length > 0 && 
+				FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length == FFU_BE_Defs.crewNumsOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length) {
+				int amountPerType = 0;
+				for (int t = 0; t < FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length; t++) {
+					int.TryParse(FFU_BE_Defs.crewNumsOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)][t], out amountPerType);
+					if (amountPerType > 0 && !string.IsNullOrEmpty(FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)][t])) {
+						Crewmember tempType = FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)][t]);
+						if (tempType != null) {
+							for (int n = 0; n < amountPerType; n++) {
+								int newSeed = Mathf.Abs(seed + t * 100 + n);
+								Crewmember newCrewmember = InstantiateCrewWithSeed(tempType, newSeed, null);
+								list.Add(newCrewmember);
+								UnityEngine.Object.Destroy(newCrewmember.gameObject);
+							}
+						}
+					}
+				}
+			}
+			int extraModules = 0;
+			for (int m = 0; m < perkUiElements.Count; m++) {
+				PerkUIGridElement perkUIGridElement = perkUiElements[m];
+				if (!perkUIGridElement.toggle.isOn) continue;
+				floatMinMax += perkUIGridElement.perkPrefab.addShipMaxHealth;
+				baseFuel += perkUIGridElement.perkPrefab.randomizerResources.fuel;
+				baseOrganics += perkUIGridElement.perkPrefab.randomizerResources.organics;
+				baseExplosives += perkUIGridElement.perkPrefab.randomizerResources.explosives;
+				baseExotics += perkUIGridElement.perkPrefab.randomizerResources.exotics;
+				baseSynthetics += perkUIGridElement.perkPrefab.randomizerResources.synthetics;
+				baseMetals += perkUIGridElement.perkPrefab.randomizerResources.metals;
+				baseCredits += perkUIGridElement.perkPrefab.randomizerResources.credits;
+				baseAccuracy += perkUIGridElement.perkPrefab.addShipAccuracyPercent;
+				baseDefelection += perkUIGridElement.perkPrefab.addShipDeflectPercent;
+				baseEvasion += perkUIGridElement.perkPrefab.addShipEvasionPercent;
+				RstRandom.InitState(Mathf.Abs(seed + 5555 + perkUIGridElement.perkPrefab.name.GetHashCode()));
+				for (int n = 0; n < perkUIGridElement.perkPrefab.extraCrew.Length; n++) {
+					Crewmember crewmember3 = GameObjectPool.TakeRandomPrefab<Crewmember>(perkUIGridElement.perkPrefab.extraCrew[n].Prefabs);
+					if (crewmember3 != null) {
+						int seed3 = Mathf.Abs(seed + perkUIGridElement.perkPrefab.name.GetHashCode() + n);
+						Crewmember crewmember4 = InstantiateCrewWithSeed(crewmember3, seed3, perkUIGridElement.perkPrefab.extraCrewChooseWithMatchingComment, perkUIGridElement.perkPrefab);
+						list.Add(crewmember4);
+						UnityEngine.Object.Destroy(crewmember4.gameObject);
+					}
+				}
+				extraModules += perkUIGridElement.perkPrefab.extraModules.Length;
+			}
+			(shipHealth.Value as Text).text = floatMinMax.ToString("0") + "/" + floatMinMax.ToString("0");
+			WorldRules.StartingBonus startingBonus = beginnerStartingBonus.Value ? WorldRules.Instance.beginnerStartingBonus : WorldRules.StartingBonus.None;
+			SetResourceElementText(fuel, fuelWarning, baseFuel, (int)startingBonus.resources.fuel);
+			SetResourceElementText(organics, organicsWarning, baseOrganics, (int)startingBonus.resources.organics);
+			SetResourceElementText(explosives, explosivesWarning, baseExplosives, (int)startingBonus.resources.explosives);
+			SetResourceElementText(exotics, exoticsWarning, baseExotics, (int)startingBonus.resources.exotics);
+			SetResourceElementText(synthetics, syntheticsWarning, baseSynthetics, (int)startingBonus.resources.synthetics);
+			SetResourceElementText(metals, metalsWarning, baseMetals, (int)startingBonus.resources.metals);
+			SetResourceElementText(credits, creditsWarning, baseCredits, (int)startingBonus.resources.credits);
+			FFU_BE_Defs.initialResources.fuel = baseFuel.min + startingBonus.resources.fuel;
+			FFU_BE_Defs.initialResources.organics = baseOrganics.min + startingBonus.resources.organics;
+			FFU_BE_Defs.initialResources.explosives = baseExplosives.min + startingBonus.resources.explosives;
+			FFU_BE_Defs.initialResources.exotics = baseExotics.min + startingBonus.resources.exotics;
+			FFU_BE_Defs.initialResources.synthetics = baseSynthetics.min + startingBonus.resources.synthetics;
+			FFU_BE_Defs.initialResources.metals = baseMetals.min + startingBonus.resources.metals;
+			FFU_BE_Defs.initialResources.credits = baseCredits.min + startingBonus.resources.credits;
+			(shipAccuracyBonus.Value as Text).text = "+" + baseAccuracy.ToString("0") + "%" + ((startingBonus.accuracyBonusPercent != 0) ? (" <color=#00FF00>+" + startingBonus.accuracyBonusPercent + "%</color>") : "");
+			(shipDeflectionBonus.Value as Text).text = "+" + baseDefelection.ToString("0") + "%" + ((startingBonus.deflectionBonusPercent != 0) ? (" <color=#00FF00>+" + startingBonus.deflectionBonusPercent + "%</color>") : "");
+			(shipEvasionBonus.Value as Text).text = "+" + baseEvasion.ToString("0") + "°" + ((startingBonus.evasionBonusPercent != 0) ? (" <color=#00FF00>+" + startingBonus.evasionBonusPercent + "°</color>") : "");
+			int crewRegular = 0;
+			int crewPets = 0;
+			int crewDrones = 0;
+			foreach (Crewmember item in list) {
+				if (item != null) {
+					switch (item.type) {
+						case Crewmember.Type.Regular: crewRegular++; break;
+						case Crewmember.Type.Pet: crewPets++; break;
+						case Crewmember.Type.Drone: crewDrones++; break;
+					}
+				}
+			}
+			(crewCount.Value as Text).text = crewRegular.ToString();
+			(petCount.Value as Text).text = crewPets.ToString();
+			(droneCount.Value as Text).text = crewDrones.ToString();
+			RstUtil.RebuildUiList(crewList.Value.transform, crewListItemProto.Value as CrewOnPerksSelectionListItem, list, delegate (CrewOnPerksSelectionListItem ui, Crewmember crew) {
+				patch_PerksSelection perksSelection = this;
+				ui.FillWithDataFrom(crew);
+				ui.displayName.onEndEdit.RemoveAllListeners();
+				ui.displayName.onEndEdit.AddListener(delegate (string newName) {
+					perksSelection.ChangeCrewName(crew, newName);
+				});
+			});
+			int storageSizeInShipPrefab = GetStorageSizeInShipPrefab(ship);
+			(extraModulesCount.Value as Text).text = extraModules + "/" + storageSizeInShipPrefab;
+			bool flag = extraModules > storageSizeInShipPrefab;
+			if (extraModulesWarning.Value.activeSelf != flag) extraModulesWarning.Value.SetActive(flag);
+		}
+		//Storage Capacity from Modded Dictionary
+		[MonoModReplace] private static int GetStorageSizeInShipPrefab(Ship shipPrefab) {
+			if (FFU_BE_Defs.shipPrefabsStorageSize.ContainsKey(shipPrefab.PrefabId)) return FFU_BE_Defs.shipPrefabsStorageSize[shipPrefab.PrefabId];
+			foreach (Transform item in shipPrefab.transform) {
+				if (item.CompareTag("Module slot root")) {
+					Instantiate moduleCreator = item.GetComponent<ModuleSlotRoot>().ModuleCreator;
+					if (moduleCreator != null && moduleCreator.Prefab != null) {
+						ShipModule component = moduleCreator.Prefab.GetComponent<ShipModule>();
+						if (component != null && component.type == ShipModule.Type.Storage) {
+							return component.GetComponent<StorageModule>().slotCount;
+						}
+					}
+				}
+			}
+			return 0;
 		}
 	}
 	public class patch_CrewOperatesModule : CrewOperatesModule {

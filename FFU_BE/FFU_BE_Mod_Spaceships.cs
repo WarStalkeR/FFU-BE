@@ -19,6 +19,216 @@ using System.Linq;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Spaceships {
+		public static void InitSelectablePerks() {
+			string perksData = $"\n";
+			foreach (Perk perk in Resources.FindObjectsOfTypeAll<Perk>()) {
+				switch (perk.name) {
+					case "Perk add fuel":
+					perk.displayName = "Additional Starfuel Stash";
+					perk.description = "Additional stash of starfuel provided by supporters of our endeavor. Supporters sent it anonymously.";
+					perk.randomizerResources.organics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.fuel = new ProbabilityDistribution { minValue = 500, maxValue = 500 };
+					perk.randomizerResources.metals = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.synthetics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.explosives = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.exotics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.credits = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.fuel.minValue} Starfuel" };
+					perk.repCost = 1;
+					break;
+					case "Perk add fuel 2, extra canisters":
+					perk.displayName = "Emergency Starfuel Backup";
+					perk.description = "Emergency starfuel backup that we've prepared a long time ago, but eventually forgot it. Good that now we've remembered about it.";
+					perk.randomizerResources.organics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.fuel = new ProbabilityDistribution { minValue = 1500, maxValue = 1500 };
+					perk.randomizerResources.metals = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.synthetics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.explosives = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.exotics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.credits = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.fuel.minValue} Starfuel" };
+					perk.repCost = 2;
+					break;
+					case "Perk add fuel 3, passing ship":
+					perk.displayName = "Alliance Starfuel Supply";
+					perk.description = "Starfuel supply provided by Earth Alliance and the allies through hidden channels to aid us in our fight against our eternal foe.";
+					perk.randomizerResources.organics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.fuel = new ProbabilityDistribution { minValue = 2500, maxValue = 2500 };
+					perk.randomizerResources.metals = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.synthetics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.explosives = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.exotics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.credits = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.fuel.minValue} Starfuel" };
+					perk.repCost = 3;
+					break;
+					default:
+					if (FFU_BE_Defs.dumpObjectLists) Debug.Log($"Perk: {perk.name} [{perk.PrefabId}] {perk.displayName}");
+					perksData += $"Prefab ID: {perk.PrefabId}\n";
+					perksData += $"Object Name: {perk.name}\n";
+					perksData += $"Display Name: {perk.displayName}\n";
+					perksData += $"Description: {perk.description}\n";
+					perksData += $"Is Permanent: {perk.isPermanent.ToString()}\n";
+					perksData += $"Is Default: {perk.isUnlockedByDefault.ToString()}\n";
+					perksData += $"Unlock Announcement: {perk.unlockAnnouncementText}\n";
+					perksData += $"Max Health Increase: {perk.addShipMaxHealth}\n";
+					perksData += $"Max Deflect Increase: {perk.addShipDeflectPercent}\n";
+					perksData += $"Max Evasion Increase: {perk.addShipEvasionPercent}\n";
+					perksData += $"Max Accuracy Increase: {perk.addShipAccuracyPercent}\n";
+					if (!perk.extraCrew.IsEmpty()) perksData += $"Extra Crewmember Pools:\n";
+					if (!perk.extraCrew.IsEmpty()) for (int i = 0; i < perk.extraCrew.Length; i++) if (!perk.extraCrew[i].Prefabs.IsEmpty()) for (int j = 0; j < perk.extraCrew[i].Prefabs.Length; j++) perksData += $" > Pool #{i}: {perk.extraCrew[i].Prefabs[j].name}\n";
+					perksData += $"Crew Matching Comment: {perk.extraCrewChooseWithMatchingComment}\n";
+					perksData += $"Crew Display Name Override: {perk.extraCrewDisplayNameOverride}\n";
+					perksData += $"Crew Description Override: {perk.extraCrewDescripionOverride}\n";
+					if (!perk.extraModules.IsEmpty()) perksData += $"Extra Ship Module Pools:\n";
+					if (!perk.extraModules.IsEmpty()) for (int i = 0; i < perk.extraModules.Length; i++) if (!perk.extraModules[i].Prefabs.IsEmpty()) for (int j = 0; j < perk.extraModules[i].Prefabs.Length; j++) perksData += $" > Pool #{i}: {perk.extraModules[i].Prefabs[j].name}\n";
+					if (!perk.moduleReplacements.IsEmpty()) perksData += $"Ship Module Replacement Sets:\n";
+					if (!perk.moduleReplacements.IsEmpty()) for (int i = 0; i < perk.moduleReplacements.Length; i++) perksData += $" > Set #{i}: {perk.moduleReplacements[i].oldModulePrefabRef.Prefab.name} => {perk.moduleReplacements[i].newModulePrefabRef.Prefab.name}\n";
+					if (perk.randomizerResources.organics.MinValue != 0 ||
+						perk.randomizerResources.fuel.MinValue != 0 ||
+						perk.randomizerResources.metals.MinValue != 0 ||
+						perk.randomizerResources.synthetics.MinValue != 0 ||
+						perk.randomizerResources.explosives.MinValue != 0 ||
+						perk.randomizerResources.exotics.MinValue != 0 ||
+						perk.randomizerResources.credits.MinValue != 0)
+						perksData += $"Additional Resources:\n";
+					if (perk.randomizerResources.organics.MinValue != 0) perksData += $" > Organics: {perk.randomizerResources.organics.MinValue} ~ {perk.randomizerResources.organics.MaxValue}\n";
+					if (perk.randomizerResources.fuel.MinValue != 0) perksData += $" > Starfuel: {perk.randomizerResources.fuel.MinValue} ~ {perk.randomizerResources.fuel.MaxValue}\n";
+					if (perk.randomizerResources.metals.MinValue != 0) perksData += $" > Metals: {perk.randomizerResources.metals.MinValue} ~ {perk.randomizerResources.metals.MaxValue}\n";
+					if (perk.randomizerResources.synthetics.MinValue != 0) perksData += $" > Synthetics: {perk.randomizerResources.synthetics.MinValue} ~ {perk.randomizerResources.synthetics.MaxValue}\n";
+					if (perk.randomizerResources.explosives.MinValue != 0) perksData += $" > Explosives: {perk.randomizerResources.explosives.MinValue} ~ {perk.randomizerResources.explosives.MaxValue}\n";
+					if (perk.randomizerResources.exotics.MinValue != 0) perksData += $" > Exotics: {perk.randomizerResources.exotics.MinValue} ~ {perk.randomizerResources.exotics.MaxValue}\n";
+					if (perk.randomizerResources.credits.MinValue != 0) perksData += $" > Credits: {perk.randomizerResources.credits.MinValue} ~ {perk.randomizerResources.credits.MaxValue}\n";
+					if (!perk.randomizerMenuStrings.IsEmpty()) perksData += $"Additional Descriptions:\n";
+					if (!perk.randomizerMenuStrings.IsEmpty()) for (int i = 0; i < perk.randomizerMenuStrings.Length; i++) perksData += $" > Entry #{i}: {perk.randomizerMenuStrings[i]}\n";
+					perksData += $"Fate Bonus: {perk.fateBonusInPerkSelection}\n";
+					perksData += $"Fate Cost: {perk.repCost}\n\n";
+					break;
+				}
+				FFU_BE_Defs.prefabPerkList.Add(perk);
+			}
+			if (FFU_BE_Defs.dumpObjectLists) Debug.LogWarning(perksData);
+		}
+		public static void InitShipResourcePrefabs() {
+			foreach (AddResourcesToShip resSet in Resources.FindObjectsOfTypeAll<AddResourcesToShip>()) {
+				if (FFU_BE_Defs.dumpObjectLists) Debug.Log($"Resource Set: {resSet.name}");
+				switch (resSet.name) {
+					case "01 Tigerfish":
+					resSet.organics = new ProbabilityDistribution { minValue = 3000, maxValue = 3000 };
+					resSet.fuel = new ProbabilityDistribution { minValue = 3000, maxValue = 3000 };
+					resSet.metals = new ProbabilityDistribution { minValue = 3000, maxValue = 3000 };
+					resSet.synthetics = new ProbabilityDistribution { minValue = 3000, maxValue = 3000 };
+					resSet.explosives = new ProbabilityDistribution { minValue = 3000, maxValue = 3000 };
+					resSet.exotics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					resSet.credits = new ProbabilityDistribution { minValue = 50000, maxValue = 50000 };
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+					case "02 Nuke Runner":
+					resSet.organics = new ProbabilityDistribution { minValue = 3500, maxValue = 3500 };
+					resSet.fuel = new ProbabilityDistribution { minValue = 4500, maxValue = 4500 };
+					resSet.metals = new ProbabilityDistribution { minValue = 4000, maxValue = 4000 };
+					resSet.synthetics = new ProbabilityDistribution { minValue = 4000, maxValue = 4000 };
+					resSet.explosives = new ProbabilityDistribution { minValue = 5000, maxValue = 5000 };
+					resSet.exotics = new ProbabilityDistribution { minValue = 50, maxValue = 50 };
+					resSet.credits = new ProbabilityDistribution { minValue = 35000, maxValue = 35000 };
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+					case "03 Weirdship":
+					resSet.organics = new ProbabilityDistribution { minValue = 6500, maxValue = 6500 };
+					resSet.fuel = new ProbabilityDistribution { minValue = 6000, maxValue = 6000 };
+					resSet.metals = new ProbabilityDistribution { minValue = 4000, maxValue = 4000 };
+					resSet.synthetics = new ProbabilityDistribution { minValue = 4000, maxValue = 4000 };
+					resSet.explosives = new ProbabilityDistribution { minValue = 4000, maxValue = 4000 };
+					resSet.exotics = new ProbabilityDistribution { minValue = 150, maxValue = 150 };
+					resSet.credits = new ProbabilityDistribution { minValue = 40000, maxValue = 40000 };
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+					case "04 Rogue Rat":
+					resSet.organics = new ProbabilityDistribution { minValue = 3500, maxValue = 3500 };
+					resSet.fuel = new ProbabilityDistribution { minValue = 8500, maxValue = 8500 };
+					resSet.metals = new ProbabilityDistribution { minValue = 6000, maxValue = 6000 };
+					resSet.synthetics = new ProbabilityDistribution { minValue = 6000, maxValue = 6000 };
+					resSet.explosives = new ProbabilityDistribution { minValue = 6000, maxValue = 6000 };
+					resSet.exotics = new ProbabilityDistribution { minValue = 350, maxValue = 350 };
+					resSet.credits = new ProbabilityDistribution { minValue = 15000, maxValue = 15000 };
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+					case "05 Gardenship":
+					resSet.organics = new ProbabilityDistribution { minValue = 10000, maxValue = 10000 };
+					resSet.fuel = new ProbabilityDistribution { minValue = 7000, maxValue = 7000 };
+					resSet.metals = new ProbabilityDistribution { minValue = 4500, maxValue = 4500 };
+					resSet.synthetics = new ProbabilityDistribution { minValue = 6500, maxValue = 6500 };
+					resSet.explosives = new ProbabilityDistribution { minValue = 4500, maxValue = 4500 };
+					resSet.exotics = new ProbabilityDistribution { minValue = 250, maxValue = 250 };
+					resSet.credits = new ProbabilityDistribution { minValue = 50000, maxValue = 50000 };
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+					case "06 Atlas":
+					resSet.organics = new ProbabilityDistribution { minValue = 6000, maxValue = 6000 };
+					resSet.fuel = new ProbabilityDistribution { minValue = 9000, maxValue = 9000 };
+					resSet.metals = new ProbabilityDistribution { minValue = 8000, maxValue = 8000 };
+					resSet.synthetics = new ProbabilityDistribution { minValue = 8000, maxValue = 8000 };
+					resSet.explosives = new ProbabilityDistribution { minValue = 8000, maxValue = 8000 };
+					resSet.exotics = new ProbabilityDistribution { minValue = 350, maxValue = 350 };
+					resSet.credits = new ProbabilityDistribution { minValue = 75000, maxValue = 75000 };
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+					case "07 Bluestar MK III scientific":
+					resSet.organics = new ProbabilityDistribution { minValue = 7500, maxValue = 7500 };
+					resSet.fuel = new ProbabilityDistribution { minValue = 9000, maxValue = 9000 };
+					resSet.metals = new ProbabilityDistribution { minValue = 7000, maxValue = 7000 };
+					resSet.synthetics = new ProbabilityDistribution { minValue = 7000, maxValue = 7000 };
+					resSet.explosives = new ProbabilityDistribution { minValue = 7000, maxValue = 7000 };
+					resSet.exotics = new ProbabilityDistribution { minValue = 500, maxValue = 500 };
+					resSet.credits = new ProbabilityDistribution { minValue = 75000, maxValue = 75000 };
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+					case "00 Easy Tiger":
+					resSet.organics = new ProbabilityDistribution { minValue = 10000, maxValue = 10000 };
+					resSet.fuel = new ProbabilityDistribution { minValue = 10000, maxValue = 10000 };
+					resSet.metals = new ProbabilityDistribution { minValue = 10000, maxValue = 10000 };
+					resSet.synthetics = new ProbabilityDistribution { minValue = 10000, maxValue = 10000 };
+					resSet.explosives = new ProbabilityDistribution { minValue = 10000, maxValue = 10000 };
+					resSet.exotics = new ProbabilityDistribution { minValue = 750, maxValue = 750 };
+					resSet.credits = new ProbabilityDistribution { minValue = 125000, maxValue = 125000 };
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+					case "08 Roundship":
+					resSet.organics = new ProbabilityDistribution { minValue = 15000, maxValue = 15000 };
+					resSet.fuel = new ProbabilityDistribution { minValue = 10000, maxValue = 10000 };
+					resSet.metals = new ProbabilityDistribution { minValue = 10000, maxValue = 10000 };
+					resSet.synthetics = new ProbabilityDistribution { minValue = 10000, maxValue = 10000 };
+					resSet.explosives = new ProbabilityDistribution { minValue = 10000, maxValue = 10000 };
+					resSet.exotics = new ProbabilityDistribution { minValue = 1500, maxValue = 1500 };
+					resSet.credits = new ProbabilityDistribution { minValue = 100000, maxValue = 100000 };
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+					case "BattleTiger":
+					resSet.organics = new ProbabilityDistribution { minValue = 10000, maxValue = 10000 };
+					resSet.fuel = new ProbabilityDistribution { minValue = 15000, maxValue = 15000 };
+					resSet.metals = new ProbabilityDistribution { minValue = 12500, maxValue = 12500 };
+					resSet.synthetics = new ProbabilityDistribution { minValue = 12500, maxValue = 12500 };
+					resSet.explosives = new ProbabilityDistribution { minValue = 15000, maxValue = 15000 };
+					resSet.exotics = new ProbabilityDistribution { minValue = 1250, maxValue = 1250 };
+					resSet.credits = new ProbabilityDistribution { minValue = 125000, maxValue = 125000 };
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+					case "10 Endurance":
+					resSet.organics = new ProbabilityDistribution { minValue = 13500, maxValue = 13500 };
+					resSet.fuel = new ProbabilityDistribution { minValue = 15000, maxValue = 15000 };
+					resSet.metals = new ProbabilityDistribution { minValue = 12000, maxValue = 12000 };
+					resSet.synthetics = new ProbabilityDistribution { minValue = 12000, maxValue = 12000 };
+					resSet.explosives = new ProbabilityDistribution { minValue = 17500, maxValue = 17500 };
+					resSet.exotics = new ProbabilityDistribution { minValue = 1500, maxValue = 1500 };
+					resSet.credits = new ProbabilityDistribution { minValue = 150000, maxValue = 150000 };
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+				}
+			}
+		}
 		public static void InitSpaceShipsPrefabList() {
 			foreach (Ship ship in Resources.FindObjectsOfTypeAll<Ship>()) {
 				if (FFU_BE_Defs.dumpObjectLists) Debug.Log($"Ship: {ship.name} [{ship.PrefabId}] {ship.displayName}");
@@ -72,10 +282,24 @@ namespace FFU_Bleeding_Edge {
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 42));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
+					case "00 Easy Tiger":
+					ship.MaxHealthAdd = 450;
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 250));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Tactical Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 36));
+					FFU_BE_Defs.prefabShipsList.Add(ship);
+					break;
 					case "08 Roundship":
 					ship.MaxHealthAdd = 420;
 					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 200));
 					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Carapace Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 48));
+					FFU_BE_Defs.prefabShipsList.Add(ship);
+					break;
+					case "BattleTiger":
+					ship.MaxHealthAdd = 700;
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 350));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Shielded Door"));
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 48));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
@@ -86,21 +310,6 @@ namespace FFU_Bleeding_Edge {
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 60));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
-					case "BattleTiger":
-					ship.MaxHealthAdd = 700;
-					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 350));
-					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Shielded Door"));
-					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 48));
-					FFU_BE_Defs.prefabShipsList.Add(ship);
-					break;
-					case "00 Easy Tiger":
-					ship.MaxHealthAdd = 450;
-					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 250));
-					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Tactical Door"));
-					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 36));
-					FFU_BE_Defs.prefabShipsList.Add(ship);
-					break;
-					default: break;
 				}
 			}
 		}

@@ -1486,7 +1486,7 @@ namespace RST {
 		//Advanced Starting/Initial Ships Crew Spawn
 		public bool DoAfterShipSpawn(Ship ship) {
 			if (ship == null || !AddResourcesToShip.CheckIfConditionSatisfied(condition, ship)) return false;
-			if (!FFU_BE_Defs.updatedShips.Contains(ship.InstanceId)) {
+			if (!FFU_BE_Defs.updatedCrews.Contains(ship.InstanceId)) {
 				StartGameCustomization.LoadOrInitAddCrewToShipSeed(this);
 				RstRandom.InitState(seed);
 				for (int i = 0; i < groups.Length; i++) {
@@ -1512,7 +1512,7 @@ namespace RST {
 							newCrewmember.BuyableAssignToShip(ship, group.spawnArea, Ship.TaskArea.None);
 						}
 					}
-					if (ship.Ownership.GetOwner() == Ownership.Owner.Me && FFU_BE_Defs.canSpawnCrew) {
+					if (FFU_BE_Defs.canSpawnCrew && ship.Ownership.GetOwner() == Ownership.Owner.Me) {
 						int amountPerType = 0;
 						FFU_BE_Defs.researchProgress = 0f;
 						FFU_BE_Defs.moduleResearchGoal = 0f;
