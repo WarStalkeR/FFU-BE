@@ -26,44 +26,408 @@ namespace FFU_Bleeding_Edge {
 					case "Perk add fuel":
 					perk.displayName = "Additional Starfuel Stash";
 					perk.description = "Additional stash of starfuel provided by supporters of our endeavor. Supporters sent it anonymously.";
-					perk.randomizerResources.organics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.fuel = new ProbabilityDistribution { minValue = 500, maxValue = 500 };
-					perk.randomizerResources.metals = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.synthetics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.explosives = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.exotics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.credits = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue(1000);
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.randomizerResources.fuel.minValue} Starfuel" };
 					perk.repCost = 1;
 					break;
 					case "Perk add fuel 2, extra canisters":
 					perk.displayName = "Emergency Starfuel Backup";
-					perk.description = "Emergency starfuel backup that we've prepared a long time ago, but eventually forgot it. Good that now we've remembered about it.";
-					perk.randomizerResources.organics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.fuel = new ProbabilityDistribution { minValue = 1500, maxValue = 1500 };
-					perk.randomizerResources.metals = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.synthetics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.explosives = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.exotics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.credits = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.description = "Emergency starfuel backup that we've prepared a long time ago, but eventually forgot about it. Good that now we've remembered about it.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue(2500);
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.randomizerResources.fuel.minValue} Starfuel" };
 					perk.repCost = 2;
 					break;
 					case "Perk add fuel 3, passing ship":
 					perk.displayName = "Alliance Starfuel Supply";
-					perk.description = "Starfuel supply provided by Earth Alliance and the allies through hidden channels to aid us in our fight against our eternal foe.";
-					perk.randomizerResources.organics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.fuel = new ProbabilityDistribution { minValue = 2500, maxValue = 2500 };
-					perk.randomizerResources.metals = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.synthetics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.explosives = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.exotics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
-					perk.randomizerResources.credits = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					perk.description = "Starfuel supply provided by Earth Alliance and the allies through hidden channels to aid us in our endeavor and fight against our eternal foe.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue(4500);
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.randomizerResources.fuel.minValue} Starfuel" };
 					perk.repCost = 3;
+					break;
+					case "Perk add organics 0":
+					perk.displayName = "Additional Organics Stash";
+					perk.description = "Additional stash of organics provided by supporters of our endeavor. Supporters sent it anonymously.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(1000);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.organics.minValue} Organics" };
+					perk.repCost = 1;
+					break;
+					case "Perk add organics 2, increased nutrition":
+					perk.displayName = "Sumptuous & Luxurious Feast";
+					perk.description = "Feast comparable to Manchu-Han Imperial Feast, made by locals to celebrate start of our great endeavor, whilst getting rid of our annoying presence.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(2500);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.organics.minValue} Organics" };
+					perk.repCost = 2;
+					break;
+					case "Perk add organics 3, braindead":
+					perk.displayName = "Bionic Technology Remnants";
+					perk.description = "Generously donated by unknown 3rd party to support our endeavor. They were probably trying to get rid of the evidence after their failed experiments.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(1500);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(1000);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.organics.minValue} Organics",
+						$"+{perk.randomizerResources.synthetics.minValue} Synthetics" };
+					perk.repCost = 2;
+					break;
+					case "Perk add organics 5, dead animals":
+					perk.displayName = "Herd of Exotic Animals";
+					perk.description = "We accidentally stumbled on a herd of wild animals and decided to turn them into space rations. During butchering we found out about their exotic nature.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(1500);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(100);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.organics.minValue} Organics",
+						$"+{perk.randomizerResources.exotics.minValue} Exotics" };
+					perk.repCost = 2;
+					break;
+					case "Perk add organics 1, houseplant":
+					perk.displayName = "Nitrocherry Tree Garden";
+					perk.description = "Somebody before their death left their will that designated us as inheritors of garden full of nitrocherry trees. We happily accepted and reprocessed them.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(1500);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue(1000);
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.organics.minValue} Organics",
+						$"+{perk.randomizerResources.explosives.minValue} Explosives" };
+					perk.repCost = 2;
+					break;
+					case "Perk add organics 4, dead insectoids":
+					perk.displayName = "Alliance Organics Supply";
+					perk.description = "Organics supply provided by Earth Alliance and the allies through hidden channels to aid us in our endeavor and fight against our eternal foe.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(4500);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.organics.minValue} Organics" };
+					perk.repCost = 3;
+					break;
+					case "Perk add metals":
+					perk.displayName = "Additional Metals Stash";
+					perk.description = "Additional stash of metals provided by supporters of our endeavor. Supporters sent it anonymously.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(1000);
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.metals.minValue} Metals" };
+					perk.repCost = 1;
+					break;
+					case "Perk add metals 2, scrap tank":
+					perk.displayName = "Ruined Battle Fortress";
+					perk.description = "Our scanning drones accidentally discovered Mobile Battle Fortress, but sadly we didn't have enough time to repair it before takeoff and had to melt it down into hefty stash of alloys.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(7000);
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.metals.minValue} Metals" };
+					perk.repCost = 4;
+					break;
+					case "Perk add synthetics":
+					perk.displayName = "Additional Synthetics Stash";
+					perk.description = "Additional stash of synthetics provided by supporters of our endeavor. Supporters sent it anonymously.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(1000);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.synthetics.minValue} Synthetics" };
+					perk.repCost = 1;
+					break;
+					case "Perk add synthetics 2, broken lamp":
+					perk.displayName = "Fragmented Solar Furnace";
+					perk.description = "Once these were a solar furnace used to supply entire planet with energy and heat, but now this only a fragments of the past glory. We've discovered them accidentally, when we were exploring some ancient ruins.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(1500);
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(3000);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.metals.minValue} Metals",
+						$"+{perk.randomizerResources.synthetics.minValue} Synthetics" };
+					perk.repCost = 3;
+					break;
+					case "Perk add synthetics and fuel":
+					perk.displayName = "Enriched Tritium Rods";
+					perk.description = "Found in one of the abandoned power plants that were used centuries ago. Unexpectedly, power plant was completely cleaned up with only these rods left untouched. They probably were too heavy to steal. Or too radioactive.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue(3000);
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(1500);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.fuel.minValue} Starfuel",
+						$"+{perk.randomizerResources.synthetics.minValue} Synthetics" };
+					perk.repCost = 3;
+					break;
+					case "Perk add synthetics 3, ex container":
+					perk.displayName = "Alliance Synthetics Supply";
+					perk.description = "Synthetics supply provided by Earth Alliance and the allies through hidden channels to aid us in our endeavor and fight against our eternal foe.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(4500);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.synthetics.minValue} Synthetics" };
+					perk.repCost = 3;
+					break;
+					case "Perk add explosives":
+					perk.displayName = "Additional Explosives Stash";
+					perk.description = "Additional stash of explosives provided by supporters of our endeavor. Supporters sent it anonymously.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue(1000);
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.explosives.minValue} Explosives" };
+					perk.repCost = 1;
+					break;
+					case "Perk add explosives 2, explo sculpture":
+					perk.displayName = "Alliance Explosives Supply";
+					perk.description = "Explosives supply provided by Earth Alliance and the allies through hidden channels to aid us in our endeavor and fight against our eternal foe.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue(4500);
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.explosives.minValue} Explosives" };
+					perk.repCost = 3;
+					break;
+					case "Perk add exotics":
+					perk.displayName = "Exotic Ur-Quanite Crystals";
+					perk.description = "Were discovered floating in lower layers of the atmosphere during atmospheric reentry by the crewmember that was nostalgically reminiscing about good old classic games that were released centuries ago.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(100);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.exotics.minValue} Exotics" };
+					perk.repCost = 1;
+					break;
+					case "Perk barter get exotics for credits":
+					perk.displayName = "Exotic Low Quality Ore";
+					perk.description = "A months before takeoff we've managed to discover in one the excavated tunnels vein of low quality exotic ore. Sadly, only part of it found buyers. Rest of it had to be reprocessed.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(150);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(10000);
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.exotics.minValue} Exotics",
+						$"+{perk.randomizerResources.credits.minValue} Credits" };
+					perk.repCost = 2;
+					break;
+					case "Perk add exotics 2, broken sex toy":
+					perk.displayName = "Rare Exotic Contraption";
+					perk.description = "Was accidentally discovered by one of the most curious crewmembers at some junkyard. Although we can only assume that this was some sort of a sex toy, we had no use for it and thus reprocessed it into marvelous amount of exotic matter.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(1000);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(350);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.synthetics.minValue} Synthetics",
+						$"+{perk.randomizerResources.exotics.minValue} Exotics" };
+					perk.repCost = 3;
+					break;
+					case "Perk barter get exotics for explosives":
+					perk.displayName = "Exotics-Infused Ammunition";
+					perk.description = "Was discovered at one of the abandoned munitions factories. It was probably way too volatile and too unstable to steal as is. We had to spend some time to setup facilities to reprocess it into sumptuous amount of exotic matter.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue(1000);
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(350);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.explosives.minValue} Explosives",
+						$"+{perk.randomizerResources.exotics.minValue} Exotics" };
+					perk.repCost = 3;
+					break;
+					case "Perk add credits":
+					perk.displayName = "Anonymous Xenodata Donation";
+					perk.description = "Additional amount of credits provided by supporters of our endeavor. Supporters sent it anonymously.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(10000);
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.credits.minValue} Credits" };
+					perk.repCost = 1;
+					break;
+					case "Perk barter get credits for explosives":
+					perk.displayName = "Hidden Rebel Supply Stash";
+					perk.description = "As it seems we've discovered a hidden supply stash that was intended for the rebels. I'm pretty sure, if we will take it, nobody will be angry. We even will be the good ones who saved the day.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue(2000);
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(25000);
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.explosives.minValue} Explosives",
+						$"+{perk.randomizerResources.credits.minValue} Credits" };
+					perk.repCost = 3;
+					break;
+					case "Perk add credits 2, personal savings":
+					perk.displayName = "Hacked Ancient Xenodata Vault";
+					perk.description = "At one of the ancient archaeological sites we've discovered an untouched xenodata vault with priceless data. We've managed to bypass its protection due to the usage of centuries old encrypting algorithms in it.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(100000);
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.credits.minValue} Credits" };
+					perk.repCost = 5;
+					break;
+					case "Perk pack, medical resources":
+					perk.displayName = "Abandoned Artificer Stash";
+					perk.description = "As it seems somebody was in a hurry (or didn't had enough free space in storage) and left these stashes to collect the dust. I think they will be more useful during our endeavor. And nobody needs them anyway.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }},
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }},
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }},
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }},
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
+					perk.repCost = 15;
+					break;
+					case "Perk pack, organics":
+					perk.displayName = "Helpful Military Requisition";
+					perk.description = "While we were stationed on this planet, we've made some connections with local representatives of different powers. When military representatives heard about our secret mission, they were more than happy to help us.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }},
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }},
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }},
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }},
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
+					perk.repCost = 10;
+					break;
+					case "Perk pack, 3xsolid starfuel from level7":
+					perk.displayName = "Supply Transport Wreckage";
+					perk.description = "During planetary surface scan with our printed satellites we've discovered a centuries old spaceship wreckage. Although it was left undiscovered, time is an unbeatable foe and majority of intact supplies ended up being spoiled.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "fuel pack").gameObject }},
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "fuel pack").gameObject }},
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "fuel pack").gameObject }},
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "explosives pack").gameObject }},
+						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "explosives pack").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+3x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+2x {perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName}" };
+					perk.repCost = 10;
 					break;
 					default:
 					if (FFU_BE_Defs.dumpObjectLists) Debug.Log($"Perk: {perk.name} [{perk.PrefabId}] {perk.displayName}");
@@ -122,7 +486,7 @@ namespace FFU_Bleeding_Edge {
 					resSet.metals = new ProbabilityDistribution { minValue = 3000, maxValue = 3000 };
 					resSet.synthetics = new ProbabilityDistribution { minValue = 3000, maxValue = 3000 };
 					resSet.explosives = new ProbabilityDistribution { minValue = 3000, maxValue = 3000 };
-					resSet.exotics = new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+					resSet.exotics = FFU_BE_Defs.NewExactValue();
 					resSet.credits = new ProbabilityDistribution { minValue = 50000, maxValue = 50000 };
 					FFU_BE_Defs.prefabResourceSets.Add(resSet);
 					break;
@@ -463,19 +827,19 @@ namespace RST {
 					}
 					if (owner == Ownership.Owner.Me && me != null && WorldRules.Impermanent.beginnerStartingBonus) {
 						WorldRules.StartingBonus beginnerStartingBonus = WorldRules.Instance.beginnerStartingBonus;
-						accuracyPercentAdd += beginnerStartingBonus.accuracyBonusPercent;
-						evasionPercentAdd += beginnerStartingBonus.evasionBonusPercent;
-						deflectChance += beginnerStartingBonus.deflectionBonusPercent * 0.01f;
-						string text = null;
-						me.Fuel.Add((int)beginnerStartingBonus.resources.fuel, text);
-						me.Organics.Add((int)beginnerStartingBonus.resources.organics, text);
-						me.Explosives.Add((int)beginnerStartingBonus.resources.explosives, text);
-						me.Exotics.Add((int)beginnerStartingBonus.resources.exotics, text);
-						me.Synthetics.Add((int)beginnerStartingBonus.resources.synthetics, text);
-						me.Metals.Add((int)beginnerStartingBonus.resources.metals, text);
-						if ((int)beginnerStartingBonus.resources.credits != 0) {
-							me.Credits += (int)beginnerStartingBonus.resources.credits;
-							me.creditsChangeReasons.Add(text);
+						float startingBonusMult = FFU_BE_Defs.GetStartingModDiffMult();
+						accuracyPercentAdd += Mathf.RoundToInt(beginnerStartingBonus.accuracyBonusPercent * startingBonusMult);
+						evasionPercentAdd += Mathf.RoundToInt(beginnerStartingBonus.evasionBonusPercent * startingBonusMult);
+						deflectChance += Mathf.RoundToInt(beginnerStartingBonus.deflectionBonusPercent * 0.01f * startingBonusMult);
+						me.Fuel.Add(Mathf.RoundToInt(beginnerStartingBonus.resources.fuel), null);
+						me.Organics.Add(Mathf.RoundToInt(beginnerStartingBonus.resources.organics), null);
+						me.Explosives.Add(Mathf.RoundToInt(beginnerStartingBonus.resources.explosives), null);
+						me.Exotics.Add(Mathf.RoundToInt(beginnerStartingBonus.resources.exotics), null);
+						me.Synthetics.Add(Mathf.RoundToInt(beginnerStartingBonus.resources.synthetics), null);
+						me.Metals.Add(Mathf.RoundToInt(beginnerStartingBonus.resources.metals), null);
+						if (Mathf.RoundToInt(beginnerStartingBonus.resources.credits) != 0) {
+							me.Credits += Mathf.RoundToInt(beginnerStartingBonus.resources.credits);
+							me.creditsChangeReasons.Add(null);
 						}
 					}
 					doAfterSpawnDone = true;

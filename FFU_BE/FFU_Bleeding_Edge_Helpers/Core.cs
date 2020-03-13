@@ -124,5 +124,14 @@ namespace FFU_Bleeding_Edge {
 			Pirate,
 			Terran
 		}
+		public enum Difficulty {
+			None,
+			Easy,
+			Medium,
+			Hard,
+			Brutal,
+			Insane,
+			IDDQD
+		}
 	}
 }

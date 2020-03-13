@@ -48,6 +48,7 @@ namespace FFU_Bleeding_Edge {
 		public static List<Perk> prefabPerkList = new List<Perk>();
 		public static List<Ship> prefabShipsList = new List<Ship>();
 		public static List<Beam> prefabBeamRaysList = new List<Beam>();
+		public static List<WorldRules> prefabWorldRules = new List<WorldRules>();
 		public static List<AddCrewToShip> prefabCrewSets = new List<AddCrewToShip>();
 		public static List<Projectile> prefabProjectilesList = new List<Projectile>();
 		public static List<AddResourcesToShip> prefabResourceSets = new List<AddResourcesToShip>();
@@ -92,6 +93,11 @@ namespace FFU_Bleeding_Edge {
 			{8, new List<int>()},
 			{9, new List<int>()},
 			{10, new List<int>()}};
+		public static IDictionary<string, int> startDiffBonuses = new Dictionary<string, int>() {
+			{"MaxHealth", 200},
+			{"Deflection", 10},
+			{"Accuracy", 10},
+			{"Evasion", 10}};
 		public static int[] techLevel = new int[] { 0, 1500, 3500, 6000, 10000, 16000, 24000, 34000, 46000, 60000 };
 		public static List<int> initialModuleIDs = new List<int>(new int[] {
 			760167696,  /* Organics Pack */
@@ -203,6 +209,7 @@ namespace FFU_Bleeding_Edge {
 		public static float reverseResearchDivisor = 3f;
 		public static ResourceValueGroup doorRepairCost = new ResourceValueGroup { metals = 2f, synthetics = 4f };
 		public static ResourceValueGroup initialResources = new ResourceValueGroup { };
+		public static Core.Difficulty startingDifficulty = Core.Difficulty.None;
 		//Configuration Variables
 		public static bool advancedWelcomePopup = false;
 		public static bool restartUnlocksEverything = false;
@@ -285,6 +292,7 @@ namespace FFU_Bleeding_Edge {
 			if (firstRun) {
 				Debug.LogWarning("Loading modded data and custom variables for the first time...");
 				InitGameTextUpdate();
+				InitWorldPermVariables();
 				InitGameInterfaceUpdate();
 				InitDamageTokensPrefabList();
 				InitDamageDealersPrefabList();
@@ -323,6 +331,12 @@ namespace FFU_Bleeding_Edge {
 				}
 				firstRun = false;
 				RecalculateEnergyEmission();
+			}
+		}
+		public static void InitWorldPermVariables() {
+			foreach (WorldRules worldRules in Resources.FindObjectsOfTypeAll<WorldRules>()) {
+				worldRules.beginnerStartingBonus = new WorldRules.StartingBonus { accuracyBonusPercent = 10, deflectionBonusPercent = 10, evasionBonusPercent = 10 };
+				prefabWorldRules.Add(worldRules);
 			}
 		}
 		public static void InitGameInterfaceUpdate() {
@@ -786,6 +800,12 @@ namespace FFU_Bleeding_Edge {
 				if (dumpObjectLists) Debug.Log("[Welcome Text] " + txt.name + ": " + txt.text);
 			}
 		}
+		public static ProbabilityDistribution NewExactValue() {
+			return new ProbabilityDistribution { minValue = 0, maxValue = 0 };
+		}
+		public static ProbabilityDistribution NewExactValue(float exactValue) {
+			return new ProbabilityDistribution { minValue = exactValue, maxValue = exactValue };
+		}
 		public static float GetDifficultyDamageMax() {
 			if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
 			else if (WorldRules.Impermanent.ironman) return 0.9f;
@@ -795,6 +815,34 @@ namespace FFU_Bleeding_Edge {
 			if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
 			else if (WorldRules.Impermanent.ironman) return 2f;
 			else return 1f;
+		}
+		public static float GetStartingModDiffMult() {
+			switch (startingDifficulty) {
+				case Core.Difficulty.Easy: return 1.0f;
+				case Core.Difficulty.Medium: return 0;
+				case Core.Difficulty.Hard: return -1.0f;
+				case Core.Difficulty.Brutal: return -1.5f;
+				case Core.Difficulty.Insane: return -2.0f;
+				case Core.Difficulty.IDDQD: return -2.5f;
+				default:
+				if (WorldRules.Impermanent.beginnerStartingBonus) return 1.0f;
+				else if (WorldRules.Impermanent.ironman) return -1.0f;
+				else return 0f;
+			}
+		}
+		public static float GetStartingResDiffMult() {
+			switch (startingDifficulty) {
+				case Core.Difficulty.Easy: return 0.5f;
+				case Core.Difficulty.Medium: return 0;
+				case Core.Difficulty.Hard: return -0.5f;
+				case Core.Difficulty.Brutal: return -0.75f;
+				case Core.Difficulty.Insane: return -0.90f;
+				case Core.Difficulty.IDDQD: return -0.95f;
+				default:
+				if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
+				else if (WorldRules.Impermanent.ironman) return -0.5f;
+				else return 0f;
+			}
 		}
 		public static int GetDifficultySetting() {
 			if (WorldRules.Impermanent.beginnerStartingBonus) return 1;

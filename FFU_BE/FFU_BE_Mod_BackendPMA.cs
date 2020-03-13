@@ -146,13 +146,106 @@ namespace RST.PlaymakerAction {
 			storeModuleCount.Value = list.Count;
 		}
 	}
+	public class patch_NewGamePanel : NewGamePanel {
+		public extern void orig_NewGameBeginnerClicked();
+		public extern void orig_NewGameChallengingClicked();
+		public extern void orig_NewGameHardcoreClicked();
+		private void NewGameBeginnerClicked() {
+			FFU_BE_Defs.startingDifficulty = Core.Difficulty.Easy;
+			orig_NewGameBeginnerClicked();
+		}
+		private void NewGameChallengingClicked() {
+			FFU_BE_Defs.startingDifficulty = Core.Difficulty.Medium;
+			orig_NewGameChallengingClicked();
+		}
+		private void NewGameHardcoreClicked() {
+			FFU_BE_Defs.startingDifficulty = Core.Difficulty.Hard;
+			orig_NewGameHardcoreClicked();
+		}
+	}
+	public class patch_MothershipSelection : MothershipSelection {
+		[MonoModIgnore] private int shipIndex;
+		[MonoModIgnore] private List<Ship> ships;
+		[MonoModIgnore] private string defaultShipName;
+		[MonoModIgnore] private List<int> unlockedItems;
+		[MonoModIgnore] private FloatMinMax CountStartingCrew(Ship s) { return default; }
+		[MonoModIgnore] private void CountModuleSlots(Ship s, out int weaponSlots, out int nukeSlots, out int otherSlots) { weaponSlots = 0; nukeSlots = 0; otherSlots = 0; }
+		//Modded Starting Bonuses
+		[MonoModReplace] private void UpdateShipSelection() {
+			if (ships.Count <= 0) {
+				targetImage.sprite = null;
+				targetDisplayNameInput.text = "";
+				targetDescription.text = Localization.TT("No playable ships available. Broken install?");
+				shipLockedIndicator.SetActive(false);
+				shipNotAvailableIndicator.SetActive(false);
+				shipStatsPanel.SetActive(false);
+				doneButton.interactable = false;
+				return;
+			}
+			shipIndex = Mathf.Clamp(shipIndex, 0, ships.Count - 1);
+			Ship ship = ships[shipIndex];
+			storeShip.Value = ship.gameObject;
+			targetImage.sprite = ship.menuSprite;
+			if (ship.menuSprite != null) {
+				targetImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, ship.menuSprite.texture.width);
+				targetImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, ship.menuSprite.texture.height);
+			}
+			targetDisplayNameInput.text = "";
+			targetDisplayNameInput.placeholder.GetComponent<Text>().text = Localization.TT("Default name:") + " " + ship.displayName;
+			defaultShipName = ship.displayName;
+			storeShipDisplayName.Value = defaultShipName;
+			targetDescription.text = Localization.TT(ship.description);
+			CountModuleSlots(ship, out int weaponSlots, out int nukeSlots, out int otherSlots);
+			WorldRules.StartingBonus startingBonus = WorldRules.Instance.beginnerStartingBonus;
+			float startingBonusMult = FFU_BE_Defs.GetStartingModDiffMult();
+			string valueSign = startingBonusMult > 0 ? "↑" : "↓";
+			targetWeaponSlots.text = weaponSlots.ToString();
+			targetNukeSlots.text = nukeSlots.ToString();
+			targetOtherSlots.text = otherSlots.ToString();
+			targetMaxHealthAdd.text = ship.MaxHealthAdd.ToString();
+			targetCrew.text = CountStartingCrew(ship).ToString("0");
+			targetAccuracyPercentAdd.text = ship.accuracyPercentAdd + "%";
+			targetAccuracyStartingBonus.text = $" {valueSign}{Mathf.Abs(startingBonus.accuracyBonusPercent * startingBonusMult):0}";
+			targetAccuracyStartingBonus.color = startingBonusMult > 0 ? Color.green : Color.red;
+			targetAccuracyStartingBonus.gameObject.SetActive(startingBonusMult != 0);
+			targetDeflection.text = RstUtil.FormatChanceValue(ship.deflectChance);
+			targetDeflectionStartingBonus.text = $" {valueSign}{Mathf.Abs(startingBonus.deflectionBonusPercent * startingBonusMult):0}";
+			targetDeflectionStartingBonus.color = startingBonusMult > 0 ? Color.green : Color.red;
+			targetDeflectionStartingBonus.gameObject.SetActive(startingBonusMult != 0);
+			targetEvasionPercentAdd.text = ship.evasionPercentAdd.ToString() + "°/ₘ";
+			targetEvasionStartingBonus.text = $" {valueSign}{Mathf.Abs(startingBonus.evasionBonusPercent * startingBonusMult):0}";
+			targetEvasionStartingBonus.color = startingBonusMult > 0 ? Color.green : Color.red;
+			targetEvasionStartingBonus.gameObject.SetActive(startingBonusMult != 0);
+			targetSurvivability.text = ship.survivabilityText;
+			if (!rollingSelection.Value) {
+				nextShipButton.interactable = shipIndex < ships.Count - 1;
+				prevShipButton.interactable = shipIndex > 0;
+			} else {
+				nextShipButton.interactable = true;
+				prevShipButton.interactable = true;
+			}
+			bool flag = !beginnerStartingBonus.Value || (beginnerStartingBonus.Value && !WorldRules.Instance.shipsNotAvailableInBeginner.Exists((PrefabRef p) => p.PrefabId == ship.PrefabId));
+			shipNotAvailableIndicator.SetActive(!flag);
+			shipNotAvailableText.text = Localization.TT("Available only in challenging/hardcore difficulties").ToUpperInvariant();
+			bool flag2 = ship.IsUnlockedByDefault || unlockedItems.Contains(ship.PrefabId);
+			if (flag) {
+				shipLockedIndicator.SetActive(!flag2);
+				shipLockedText.text = Localization.TT(ship.unlockText).ToUpperInvariant();
+			} else {
+				shipLockedIndicator.SetActive(false);
+			}
+			bool flag3 = flag2 && flag;
+			targetImage.color = flag3 ? Color.white : shipLockedColor.Value;
+			shipStatsPanel.SetActive(flag3);
+			doneButton.interactable = flag3;
+		}
+	}
 	public class patch_PerksSelection : PerksSelection {
 		public extern void orig_OnEnter();
 		[MonoModIgnore] private void FinishThisAction() { }
 		[MonoModIgnore] private bool CanStartGame() { return false; }
 		[MonoModIgnore] private void ChangeCrewName(Crewmember crew, string newName) { }
 		[MonoModIgnore] private List<PerkUIGridElement> perkUiElements = new List<PerkUIGridElement>();
-		[MonoModIgnore] private static void SetResourceElementText(FsmObject textObj, FsmGameObject warningGO, FloatMinMax value, int startingBonus) { }
 		[MonoModIgnore] private static Crewmember InstantiateCrewWithSeed(Crewmember crewPrefab, int seed, string matchingComment, Perk perkPrefab = null) { return null; }
 		//Configurable Starting Fate
 		public override void OnEnter() {
@@ -172,7 +265,7 @@ namespace RST.PlaymakerAction {
 			Ship ship = chosenMothership.Value?.GetComponent<Ship>();
 			if (ship == null) return;
 			AddResourcesToShip[] componentsInChildren = ship.GetComponentsInChildren<AddResourcesToShip>();
-			FloatMinMax floatMinMax = new FloatMinMax(ship.MaxHealthAdd);
+			FloatMinMax baseMaxHP = new FloatMinMax(ship.MaxHealthAdd);
 			FloatMinMax baseFuel = new FloatMinMax(0f);
 			FloatMinMax baseOrganics = new FloatMinMax(0f);
 			FloatMinMax baseExplosives = new FloatMinMax(0f);
@@ -180,6 +273,13 @@ namespace RST.PlaymakerAction {
 			FloatMinMax baseSynthetics = new FloatMinMax(0f);
 			FloatMinMax baseMetals = new FloatMinMax(0f);
 			FloatMinMax baseCredits = new FloatMinMax(0f);
+			FloatMinMax coreFuel = new FloatMinMax(0f);
+			FloatMinMax coreOrganics = new FloatMinMax(0f);
+			FloatMinMax coreExplosives = new FloatMinMax(0f);
+			FloatMinMax coreExotics = new FloatMinMax(0f);
+			FloatMinMax coreSynthetics = new FloatMinMax(0f);
+			FloatMinMax coreMetals = new FloatMinMax(0f);
+			FloatMinMax coreCredits = new FloatMinMax(0f);
 			FloatMinMax baseAccuracy = new FloatMinMax(ship.accuracyPercentAdd);
 			FloatMinMax baseDefelection = new FloatMinMax(ship.deflectChance * 100f);
 			FloatMinMax baseEvasion = new FloatMinMax(ship.evasionPercentAdd);
@@ -193,6 +293,13 @@ namespace RST.PlaymakerAction {
 					baseSynthetics += addResourcesToShip.synthetics;
 					baseMetals += addResourcesToShip.metals;
 					baseCredits += addResourcesToShip.credits;
+					coreFuel += addResourcesToShip.fuel;
+					coreOrganics += addResourcesToShip.organics;
+					coreExplosives += addResourcesToShip.explosives;
+					coreExotics += addResourcesToShip.exotics;
+					coreSynthetics += addResourcesToShip.synthetics;
+					coreMetals += addResourcesToShip.metals;
+					coreCredits += addResourcesToShip.credits;
 				}
 			}
 			int seed = StartGameCustomization.GetSeed();
@@ -244,7 +351,7 @@ namespace RST.PlaymakerAction {
 			for (int m = 0; m < perkUiElements.Count; m++) {
 				PerkUIGridElement perkUIGridElement = perkUiElements[m];
 				if (!perkUIGridElement.toggle.isOn) continue;
-				floatMinMax += perkUIGridElement.perkPrefab.addShipMaxHealth;
+				baseMaxHP += perkUIGridElement.perkPrefab.addShipMaxHealth;
 				baseFuel += perkUIGridElement.perkPrefab.randomizerResources.fuel;
 				baseOrganics += perkUIGridElement.perkPrefab.randomizerResources.organics;
 				baseExplosives += perkUIGridElement.perkPrefab.randomizerResources.explosives;
@@ -267,25 +374,28 @@ namespace RST.PlaymakerAction {
 				}
 				extraModules += perkUIGridElement.perkPrefab.extraModules.Length;
 			}
-			(shipHealth.Value as Text).text = floatMinMax.ToString("0") + "/" + floatMinMax.ToString("0");
-			WorldRules.StartingBonus startingBonus = beginnerStartingBonus.Value ? WorldRules.Instance.beginnerStartingBonus : WorldRules.StartingBonus.None;
-			SetResourceElementText(fuel, fuelWarning, baseFuel, (int)startingBonus.resources.fuel);
-			SetResourceElementText(organics, organicsWarning, baseOrganics, (int)startingBonus.resources.organics);
-			SetResourceElementText(explosives, explosivesWarning, baseExplosives, (int)startingBonus.resources.explosives);
-			SetResourceElementText(exotics, exoticsWarning, baseExotics, (int)startingBonus.resources.exotics);
-			SetResourceElementText(synthetics, syntheticsWarning, baseSynthetics, (int)startingBonus.resources.synthetics);
-			SetResourceElementText(metals, metalsWarning, baseMetals, (int)startingBonus.resources.metals);
-			SetResourceElementText(credits, creditsWarning, baseCredits, (int)startingBonus.resources.credits);
-			FFU_BE_Defs.initialResources.fuel = baseFuel.min + startingBonus.resources.fuel;
-			FFU_BE_Defs.initialResources.organics = baseOrganics.min + startingBonus.resources.organics;
-			FFU_BE_Defs.initialResources.explosives = baseExplosives.min + startingBonus.resources.explosives;
-			FFU_BE_Defs.initialResources.exotics = baseExotics.min + startingBonus.resources.exotics;
-			FFU_BE_Defs.initialResources.synthetics = baseSynthetics.min + startingBonus.resources.synthetics;
-			FFU_BE_Defs.initialResources.metals = baseMetals.min + startingBonus.resources.metals;
-			FFU_BE_Defs.initialResources.credits = baseCredits.min + startingBonus.resources.credits;
-			(shipAccuracyBonus.Value as Text).text = "+" + baseAccuracy.ToString("0") + "%" + ((startingBonus.accuracyBonusPercent != 0) ? (" <color=#00FF00>+" + startingBonus.accuracyBonusPercent + "%</color>") : "");
-			(shipDeflectionBonus.Value as Text).text = "+" + baseDefelection.ToString("0") + "%" + ((startingBonus.deflectionBonusPercent != 0) ? (" <color=#00FF00>+" + startingBonus.deflectionBonusPercent + "%</color>") : "");
-			(shipEvasionBonus.Value as Text).text = "+" + baseEvasion.ToString("0") + "°" + ((startingBonus.evasionBonusPercent != 0) ? (" <color=#00FF00>+" + startingBonus.evasionBonusPercent + "°</color>") : "");
+			(shipHealth.Value as Text).text = baseMaxHP.ToString("0") + "/" + baseMaxHP.ToString("0");
+			WorldRules.StartingBonus startingBonus = WorldRules.Instance.beginnerStartingBonus;
+			SetResourceElementText(fuel, fuelWarning, baseFuel, Mathf.RoundToInt(coreFuel.min * FFU_BE_Defs.GetStartingResDiffMult()));
+			SetResourceElementText(organics, organicsWarning, baseOrganics, Mathf.RoundToInt(coreOrganics.min * FFU_BE_Defs.GetStartingResDiffMult()));
+			SetResourceElementText(explosives, explosivesWarning, baseExplosives, Mathf.RoundToInt(coreExplosives.min * FFU_BE_Defs.GetStartingResDiffMult()));
+			SetResourceElementText(exotics, exoticsWarning, baseExotics, Mathf.RoundToInt(coreExotics.min * FFU_BE_Defs.GetStartingResDiffMult()));
+			SetResourceElementText(synthetics, syntheticsWarning, baseSynthetics, Mathf.RoundToInt(coreSynthetics.min * FFU_BE_Defs.GetStartingResDiffMult()));
+			SetResourceElementText(metals, metalsWarning, baseMetals, Mathf.RoundToInt(coreMetals.min * FFU_BE_Defs.GetStartingResDiffMult()));
+			SetResourceElementText(credits, creditsWarning, baseCredits, Mathf.RoundToInt(coreCredits.min * FFU_BE_Defs.GetStartingResDiffMult()));
+			FFU_BE_Defs.initialResources.fuel = baseFuel.min + coreFuel.min * FFU_BE_Defs.GetStartingResDiffMult();
+			FFU_BE_Defs.initialResources.organics = baseOrganics.min + coreOrganics.min * FFU_BE_Defs.GetStartingResDiffMult();
+			FFU_BE_Defs.initialResources.explosives = baseExplosives.min + coreExplosives.min * FFU_BE_Defs.GetStartingResDiffMult();
+			FFU_BE_Defs.initialResources.exotics = baseExotics.min + coreExotics.min * FFU_BE_Defs.GetStartingResDiffMult();
+			FFU_BE_Defs.initialResources.synthetics = baseSynthetics.min + coreSynthetics.min * FFU_BE_Defs.GetStartingResDiffMult();
+			FFU_BE_Defs.initialResources.metals = baseMetals.min + coreMetals.min * FFU_BE_Defs.GetStartingResDiffMult();
+			FFU_BE_Defs.initialResources.credits = baseCredits.min + coreCredits.min * FFU_BE_Defs.GetStartingResDiffMult();
+			float startingBonusMult = FFU_BE_Defs.GetStartingModDiffMult();
+			string bonusColor = startingBonusMult > 0 ? "lime" : "red";
+			string valueSign = startingBonusMult > 0 ? "↑" : "↓";
+			(shipAccuracyBonus.Value as Text).text = $"{baseAccuracy.ToString("0")}{(startingBonusMult != 0 ? $" <color={bonusColor}>{valueSign}{Mathf.Abs(startingBonus.accuracyBonusPercent * startingBonusMult):0}</color>" : null)}%";
+			(shipDeflectionBonus.Value as Text).text = $"{baseDefelection.ToString("0")}{(startingBonusMult != 0 ? $" <color={bonusColor}>{valueSign}{Mathf.Abs(startingBonus.deflectionBonusPercent * startingBonusMult):0}</color>" : null)}%";
+			(shipEvasionBonus.Value as Text).text = $"{baseEvasion.ToString("0")}{(startingBonusMult != 0 ? $" <color={bonusColor}>{valueSign}{Mathf.Abs(startingBonus.evasionBonusPercent * startingBonusMult):0}</color>" : null)}°/ₘ";
 			int crewRegular = 0;
 			int crewPets = 0;
 			int crewDrones = 0;
@@ -305,9 +415,7 @@ namespace RST.PlaymakerAction {
 				patch_PerksSelection perksSelection = this;
 				ui.FillWithDataFrom(crew);
 				ui.displayName.onEndEdit.RemoveAllListeners();
-				ui.displayName.onEndEdit.AddListener(delegate (string newName) {
-					perksSelection.ChangeCrewName(crew, newName);
-				});
+				ui.displayName.onEndEdit.AddListener(delegate (string newName) { perksSelection.ChangeCrewName(crew, newName); });
 			});
 			int storageSizeInShipPrefab = GetStorageSizeInShipPrefab(ship);
 			(extraModulesCount.Value as Text).text = extraModules + "/" + storageSizeInShipPrefab;
@@ -329,6 +437,13 @@ namespace RST.PlaymakerAction {
 				}
 			}
 			return 0;
+		}
+		//Color base on Starting Bonus Amount
+		private static void SetResourceElementText(FsmObject textObj, FsmGameObject warningGO, FloatMinMax value, int startingBonus) {
+			string valueSign = startingBonus > 0 ? "↑" : "↓";
+			bool notEnoughRes = value.min + startingBonus < 0f || value.max + startingBonus < 0f;
+			(textObj.Value as Text).text = notEnoughRes ? $"<color=red>{value.ToString("0")} {(startingBonus != 0 ? $"{valueSign}{Mathf.Abs(startingBonus)}" : null)}</color>" : $"{value.ToString("0")} <color={(startingBonus > 0 ? "lime" : "red")}>{(startingBonus != 0 ? $"{valueSign}{Mathf.Abs(startingBonus)}" : null)}</color>";
+			warningGO.Value.SetActive(notEnoughRes);
 		}
 	}
 	public class patch_CrewOperatesModule : CrewOperatesModule {

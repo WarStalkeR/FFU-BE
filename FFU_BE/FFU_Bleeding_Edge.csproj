@@ -104,6 +104,7 @@
     <Compile Include="FFU_BE_Defs.cs" />
     <Compile Include="FFU_BE_Base.cs" />
     <Compile Include="FFU_BE_Init.cs" />
+    <Compile Include="FFU_BE_Mod_BackendAI.cs" />
     <Compile Include="FFU_BE_Mod_BackendPMA.cs" />
     <Compile Include="FFU_BE_Mod_BackendUI.cs" />
     <Compile Include="FFU_BE_Mod_Discovery.cs" />
