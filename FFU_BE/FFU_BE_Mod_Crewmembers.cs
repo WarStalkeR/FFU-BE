@@ -279,15 +279,83 @@ namespace FFU_Bleeding_Edge {
 				case "Beedroid crew":
 				case "Combat Drone Humanoid":
 				return crewmember.MaxHealth < 35;
-				case "Drone DIY gunjunker":
-				case "Drone DIY gunjunker enemy":
 				case "Drone tigerspider pirates":
 				case "Drone tigerspider":
 				return crewmember.MaxHealth < 50;
 				case "Redripper crew":
 				case "Heavy security drone":
 				return crewmember.MaxHealth < 75;
+				case "Drone DIY gunjunker":
+				case "Drone DIY gunjunker enemy":
+				return crewmember.MaxHealth < 125;
 				default: return false;
+			}
+		}
+		public static int GetCrewBaseHealth(Crewmember crewmember) {
+			Crewmember crewPrefab = FFU_BE_Defs.prefabModdedCrewList.Find(x => x.PrefabId == crewmember.PrefabId);
+			switch (crewPrefab.name) {
+				case "Cat1":
+				case "Drone pet":
+				case "Slime pet":
+				case "Larva small":
+				case "Drone fire safety":
+				case "Drone DIY fire safety clawed":
+				return 10;
+				case "Rat crew":
+				case "Rat crew cook":
+				case "Human crew":
+				case "Human crew adventurer":
+				case "Pirates humanoid crew":
+				case "Larva big":
+				return 15;
+				case "GorMor crew":
+				case "Grippy crew":
+				case "Gitchanki crew":
+				case "Testcrew 1":
+				case "Testcrew 2":
+				case "Testcrew 3":
+				case "Testcrew 4":
+				case "Drone CT1 maintenance":
+				case "Drone CT2 gunnery clawed":
+				case "Drone CT2 gunnery":
+				case "Drone DIY firesafety pirates":
+				case "Drone DIY firesafety":
+				case "Drone DIY guard pirates":
+				case "Drone DIY guard":
+				case "Drone DIY gunnery":
+				case "Drone DIY repairer pirates":
+				case "Drone DIY repairer":
+				case "Drone DIY science":
+				case "Drone DIY sensor":
+				return 20;
+				case "Mantis crew":
+				case "Slavers crew":
+				case "Lizardman crew":
+				case "Insectoid crew":
+				case "Insectoidian crew":
+				case "Drone DIY mincer pirates":
+				case "Drone CT1 maintenance clawed":
+				case "Drone DIY gunnery pirates cannon":
+				return 25;
+				case "Moleculaati":
+				case "Squid crew":
+				case "Yu-Ee crew":
+				case "EmperorBanks crew":
+				return 30;
+				case "Spideraa crew":
+				case "Beedroid crew":
+				case "Combat Drone Humanoid":
+				return 35;
+				case "Drone tigerspider pirates":
+				case "Drone tigerspider":
+				return 50;
+				case "Redripper crew":
+				case "Heavy security drone":
+				return 75;
+				case "Drone DIY gunjunker":
+				case "Drone DIY gunjunker enemy":
+				return 125;
+				default: return 0;
 			}
 		}
 		public static void ApplyCrewChanges(Crewmember crewmember) {
@@ -310,7 +378,7 @@ namespace FFU_Bleeding_Edge {
 						case "artifactmodule tec 33 biostasis nice worm":
 						if (cachedCrewmember.type == Crewmember.Type.Drone) {
 							cacheUsedMessage = RstShared.StringBuilder;
-							if (cachedCrewmember.MaxHealth <= healthLimit) {
+							if (cachedCrewmember.MaxHealth <= healthLimit + GetCrewBaseHealth(cachedCrewmember)) {
 								cachedCrewmember.MaxHealth += healthBoost;
 								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} was upgraded with new mechanical upgrades and now has {1} health in total!"), cachedCrewmember.DisplayNameLocalized, cachedCrewmember.MaxHealth);
 								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
@@ -320,7 +388,7 @@ namespace FFU_Bleeding_Edge {
 						case "artifactmodule tec 11 biostasis":
 						if (cachedCrewmember.type == Crewmember.Type.Regular || cachedCrewmember.type == Crewmember.Type.Pet) {
 							cacheUsedMessage = RstShared.StringBuilder;
-							if (cachedCrewmember.MaxHealth <= healthLimit) {
+							if (cachedCrewmember.MaxHealth <= healthLimit + GetCrewBaseHealth(cachedCrewmember)) {
 								cachedCrewmember.MaxHealth += healthBoost;
 								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} was enhanced with new biological implants and now has {1} health in total!"), cachedCrewmember.DisplayNameLocalized, cachedCrewmember.MaxHealth);
 								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
@@ -579,14 +647,6 @@ namespace FFU_Bleeding_Edge {
 				targetCrew.fireResistance = 0.50f;
 				targetCrew.moveSpeed = 1.3f;
 				break;
-				case "Drone DIY gunjunker":
-				case "Drone DIY gunjunker enemy":
-				targetCrew.MaxHealth = 50 + UnityEngine.Random.Range(0, 16);
-				targetCrew.HomingMovement.turnSpeed = 2.5f;
-				targetCrew.HomingMovement.force = 3.0f;
-				targetCrew.fireResistance = 0.75f;
-				targetCrew.moveSpeed = 0.8f;
-				break;
 				case "Drone tigerdog":
 				case "Drone tigerspider":
 				case "Drone tigerspider pirates":
@@ -604,6 +664,14 @@ namespace FFU_Bleeding_Edge {
 				targetCrew.HomingMovement.force = 3.5f;
 				targetCrew.fireResistance = 1.00f;
 				targetCrew.moveSpeed = 2.2f;
+				break;
+				case "Drone DIY gunjunker":
+				case "Drone DIY gunjunker enemy":
+				targetCrew.MaxHealth = 125 + UnityEngine.Random.Range(0, 101);
+				targetCrew.HomingMovement.turnSpeed = 2.0f;
+				targetCrew.HomingMovement.force = 2.5f;
+				targetCrew.fireResistance = 1.00f;
+				targetCrew.moveSpeed = 0.8f;
 				break;
 				case "Combat Drone Humanoid":
 				targetCrew.description = "Light tactical droid. Very versatile and capable of performing same operations as any normal crewmember. Fire-resistant body.";
