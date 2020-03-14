@@ -379,7 +379,7 @@ namespace FFU_Bleeding_Edge {
 						if (cachedCrewmember.type == Crewmember.Type.Drone) {
 							cacheUsedMessage = RstShared.StringBuilder;
 							if (cachedCrewmember.MaxHealth <= healthLimit + GetCrewBaseHealth(cachedCrewmember)) {
-								cachedCrewmember.MaxHealth += healthBoost;
+								cachedCrewmember.MaxHealth += healthBoost + GetCrewBaseHealth(cachedCrewmember) / 10;
 								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} was upgraded with new mechanical upgrades and now has {1} health in total!"), cachedCrewmember.DisplayNameLocalized, cachedCrewmember.MaxHealth);
 								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
 								availableSets--;
@@ -389,7 +389,7 @@ namespace FFU_Bleeding_Edge {
 						if (cachedCrewmember.type == Crewmember.Type.Regular || cachedCrewmember.type == Crewmember.Type.Pet) {
 							cacheUsedMessage = RstShared.StringBuilder;
 							if (cachedCrewmember.MaxHealth <= healthLimit + GetCrewBaseHealth(cachedCrewmember)) {
-								cachedCrewmember.MaxHealth += healthBoost;
+								cachedCrewmember.MaxHealth += healthBoost + GetCrewBaseHealth(cachedCrewmember) / 10;
 								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} was enhanced with new biological implants and now has {1} health in total!"), cachedCrewmember.DisplayNameLocalized, cachedCrewmember.MaxHealth);
 								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
 								availableSets--;
@@ -1581,16 +1581,14 @@ namespace RST {
 						}
 					}
 					if (FFU_BE_Defs.canSpawnCrew && ship.Ownership.GetOwner() == Ownership.Owner.Me) {
-						int amountPerType = 0;
-						if (FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length > 0 && FFU_BE_Defs.crewNumsOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length > 0 && FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length == FFU_BE_Defs.crewNumsOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length) {
-							for (int t = 0; t < FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length; t++) {
-								int.TryParse(FFU_BE_Defs.crewNumsOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)][t], out amountPerType);
-								if (amountPerType > 0 && !string.IsNullOrEmpty(FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)][t])) {
-									Crewmember tempType = FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)][t]);
-									if (tempType != null) {
-										for (int n = 0; n < amountPerType; n++) {
-											Crewmember newCrewmember = UnityEngine.Object.Instantiate<Crewmember>(tempType, base.transform.position, Quaternion.identity, base.transform);
-											newCrewmember.seed = Mathf.Abs(seed + i * 100 + t * 10 + n);
+						if (FFU_BE_Defs.startingCrew.ContainsKey(ship.PrefabId)) {
+							if (FFU_BE_Defs.startingCrew[ship.PrefabId].Count() > 0) {
+								foreach (var crewSpawn in FFU_BE_Defs.startingCrew[ship.PrefabId]) {
+									Crewmember crewPrefab = FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == crewSpawn.Key);
+									if (crewPrefab != null & crewSpawn.Value > 0) {
+										for (int n = 0; n < crewSpawn.Value; n++) {
+											Crewmember newCrewmember = UnityEngine.Object.Instantiate<Crewmember>(crewPrefab, base.transform.position, Quaternion.identity, base.transform);
+											newCrewmember.seed = Mathf.Abs(seed + i * 100 + FFU_BE_Defs.startingCrew[ship.PrefabId].IndexOf(crewSpawn) * 10 + n);
 											RandomizeCrewmember randomizeCrewmember = newCrewmember.RandomizeCrewmember;
 											if (randomizeCrewmember != null) ((IRandomizer)randomizeCrewmember).Randomize(newCrewmember.seed);
 											StartGameCustomization.LoadCrewCustomization(newCrewmember);

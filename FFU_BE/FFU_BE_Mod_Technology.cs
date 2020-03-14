@@ -1274,13 +1274,14 @@ namespace RST {
 					ShipModule refModule = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == FFU_BE_Defs.unresearchedModuleIDs.ToList().First());
 					FFU_BE_Defs.moduleResearchGoal = refModule.costCreditsInShop / 10 * (refModule.type == ShipModule.Type.Weapon_Nuke || refModule.displayName.Contains("Cache") ? 10 : 1);
 				}
-				ship.Fuel += Mathf.RoundToInt(FFU_BE_Defs.initialResources.fuel);
-				ship.Organics += Mathf.RoundToInt(FFU_BE_Defs.initialResources.organics);
-				ship.Explosives += Mathf.RoundToInt(FFU_BE_Defs.initialResources.explosives);
-				ship.Exotics += Mathf.RoundToInt(FFU_BE_Defs.initialResources.exotics);
-				ship.Synthetics += Mathf.RoundToInt(FFU_BE_Defs.initialResources.synthetics);
-				ship.Metals += Mathf.RoundToInt(FFU_BE_Defs.initialResources.metals);
-				PlayerDatas.Get(ship.Ownership.GetOwner()).Credits += Mathf.RoundToInt(FFU_BE_Defs.initialResources.credits);
+				PlayerData pData = PlayerDatas.Get(ship.Ownership.GetOwner());
+				pData.Organics.Add(Mathf.RoundToInt(FFU_BE_Defs.initialResources.organics), null);
+				pData.Fuel.Add(Mathf.RoundToInt(FFU_BE_Defs.initialResources.fuel), null);
+				pData.Metals.Add(Mathf.RoundToInt(FFU_BE_Defs.initialResources.metals), null);
+				pData.Synthetics.Add(Mathf.RoundToInt(FFU_BE_Defs.initialResources.synthetics), null);
+				pData.Explosives.Add(Mathf.RoundToInt(FFU_BE_Defs.initialResources.explosives), null);
+				pData.Exotics.Add(Mathf.RoundToInt(FFU_BE_Defs.initialResources.exotics), null);
+				pData.Credits += Mathf.RoundToInt(FFU_BE_Defs.initialResources.credits);
 				FFU_BE_Defs.updatedShips.Add(ship.InstanceId);
 				return true;
 			}

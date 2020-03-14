@@ -246,32 +246,55 @@ namespace FFU_Bleeding_Edge {
 		public static float warpProducedResearchMult = 0.8f;
 		public static float warpProducedResourcesMult = 0.8f;
 		public static float enemyCrewHealthSectorMult = 0.1f;
-		public static string[][] crewTypesOnStart = new string[11][] {
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""}
-		};
-		public static string[][] crewNumsOnStart = new string[11][] {
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""},
-			new string[10] {"","","","","","","","","",""}
-		};
+		public static IDictionary<int, List<KeyValuePair<string, int>>> initialCrew = new Dictionary<int, List<KeyValuePair<string, int>>>() {
+			{ 516057105,  new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
+				new KeyValuePair<string, int>("Combat Drone Humanoid", 2),
+				new KeyValuePair<string, int>("Drone tigerspider", 2)})},
+			{ 487234563,  new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
+				new KeyValuePair<string, int>("Heavy security drone", 2),
+				new KeyValuePair<string, int>("Drone CT2 gunnery", 2)})},
+			{ 1809014558, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
+				new KeyValuePair<string, int>("Redripper crew", 2),
+				new KeyValuePair<string, int>("Beedroid crew", 2)})},
+			{ 578937222,  new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
+				new KeyValuePair<string, int>("Drone DIY gunjunker", 2),
+				new KeyValuePair<string, int>("Drone DIY gunnery pirates cannon", 2)})},
+			{ 1106792042, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
+				new KeyValuePair<string, int>("Combat Drone Humanoid", 4),
+				new KeyValuePair<string, int>("Drone tigerspider", 2)})},
+			{ 2103659466, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
+				new KeyValuePair<string, int>("Combat Drone Humanoid", 2),
+				new KeyValuePair<string, int>("Heavy security drone", 4)})},
+			{ 1772361532, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
+				new KeyValuePair<string, int>("Drone DIY science", 4),
+				new KeyValuePair<string, int>("Drone tigerspider", 4)})},
+			{ 1920692188, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
+				new KeyValuePair<string, int>("Combat Drone Humanoid", 6),
+				new KeyValuePair<string, int>("Heavy security drone", 2)})},
+			{ 1251918188, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
+				new KeyValuePair<string, int>("Combat Drone Humanoid", 2),
+				new KeyValuePair<string, int>("Redripper crew", 6)})},
+			{ 1452660923, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
+				new KeyValuePair<string, int>("Combat Drone Humanoid", 4),
+				new KeyValuePair<string, int>("Heavy security drone", 2),
+				new KeyValuePair<string, int>("Drone tigerspider assaulter", 2),
+				new KeyValuePair<string, int>("Drone tigerdog", 2)})},
+			{ 1939804939, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
+				new KeyValuePair<string, int>("Combat Drone Humanoid", 4),
+				new KeyValuePair<string, int>("Heavy security drone", 2),
+				new KeyValuePair<string, int>("Drone tigerspider pirates", 4)})}};
+		public static IDictionary<int, List<KeyValuePair<string, int>>> startingCrew = new Dictionary<int, List<KeyValuePair<string, int>>>() {
+			{ 516057105,  new List<KeyValuePair<string, int>>()},	//_Tigerfish
+			{ 487234563,  new List<KeyValuePair<string, int>>()},	//_NukeRunner
+			{ 1809014558, new List<KeyValuePair<string, int>>()},	//_Weirdship
+			{ 578937222,  new List<KeyValuePair<string, int>>()},	//_RogueRat
+			{ 1106792042, new List<KeyValuePair<string, int>>()},	//_Gardenship
+			{ 2103659466, new List<KeyValuePair<string, int>>()},	//_Atlas
+			{ 1772361532, new List<KeyValuePair<string, int>>()},	//_Bluestar
+			{ 1920692188, new List<KeyValuePair<string, int>>()},	//_EasyTiger
+			{ 1251918188, new List<KeyValuePair<string, int>>()},	//_Roundship
+			{ 1452660923, new List<KeyValuePair<string, int>>()},	//_BattleTiger
+			{ 1939804939, new List<KeyValuePair<string, int>>()}};	//_Endurance
 		public static void LoadModPropsAndFeatures() {
 			if (!firstRun) {
 				Debug.LogWarning("Updating and saving custom variables...");
