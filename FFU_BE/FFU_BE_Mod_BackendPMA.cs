@@ -286,13 +286,6 @@ namespace RST.PlaymakerAction {
 			AddResourcesToShip[] array = componentsInChildren;
 			foreach (AddResourcesToShip addResourcesToShip in array) {
 				if (addResourcesToShip.condition == AddResourcesToShip.Condition.Always || addResourcesToShip.condition == AddResourcesToShip.Condition.IfPlayer_NotTutorial) {
-					baseFuel += addResourcesToShip.fuel;
-					baseOrganics += addResourcesToShip.organics;
-					baseExplosives += addResourcesToShip.explosives;
-					baseExotics += addResourcesToShip.exotics;
-					baseSynthetics += addResourcesToShip.synthetics;
-					baseMetals += addResourcesToShip.metals;
-					baseCredits += addResourcesToShip.credits;
 					coreFuel += addResourcesToShip.fuel;
 					coreOrganics += addResourcesToShip.organics;
 					coreExplosives += addResourcesToShip.explosives;
@@ -300,6 +293,13 @@ namespace RST.PlaymakerAction {
 					coreSynthetics += addResourcesToShip.synthetics;
 					coreMetals += addResourcesToShip.metals;
 					coreCredits += addResourcesToShip.credits;
+					baseFuel += addResourcesToShip.fuel;
+					baseOrganics += addResourcesToShip.organics;
+					baseExplosives += addResourcesToShip.explosives;
+					baseExotics += addResourcesToShip.exotics;
+					baseSynthetics += addResourcesToShip.synthetics;
+					baseMetals += addResourcesToShip.metals;
+					baseCredits += addResourcesToShip.credits;
 				}
 			}
 			int seed = StartGameCustomization.GetSeed();
@@ -348,6 +348,7 @@ namespace RST.PlaymakerAction {
 				}
 			}
 			int extraModules = 0;
+			FFU_BE_Defs.perkModuleBlueprintIDs = new List<int>();
 			for (int m = 0; m < perkUiElements.Count; m++) {
 				PerkUIGridElement perkUIGridElement = perkUiElements[m];
 				if (!perkUIGridElement.toggle.isOn) continue;
@@ -372,6 +373,9 @@ namespace RST.PlaymakerAction {
 						UnityEngine.Object.Destroy(crewmember4.gameObject);
 					}
 				}
+				if (FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perkUIGridElement.perkPrefab.PrefabId))
+					foreach (int moduleID in FFU_BE_Defs.perkStoredBlueprintIDs[perkUIGridElement.perkPrefab.PrefabId])
+						FFU_BE_Defs.perkModuleBlueprintIDs.Add(moduleID);
 				extraModules += perkUIGridElement.perkPrefab.extraModules.Length;
 			}
 			(shipHealth.Value as Text).text = baseMaxHP.ToString("0") + "/" + baseMaxHP.ToString("0");

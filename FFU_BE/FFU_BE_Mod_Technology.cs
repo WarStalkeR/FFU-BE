@@ -1260,6 +1260,20 @@ namespace RST {
 						}
 					}
 				}
+				FFU_BE_Defs.researchProgress = 0f;
+				FFU_BE_Defs.discoveryScanLevel = 0;
+				FFU_BE_Defs.moduleResearchGoal = 0f;
+				FFU_BE_Defs.discoveryFleetsLevel = 0;
+				FFU_BE_Defs.moduleResearchProgress = 0f;
+				FFU_BE_Defs.unresearchedModuleIDs = new List<int>();
+				if (!FFU_BE_Defs.perkModuleBlueprintIDs.IsEmpty())
+					foreach (int moduleID in FFU_BE_Defs.perkModuleBlueprintIDs)
+						if (!FFU_BE_Defs.discoveredModuleIDs.Contains(moduleID))
+							FFU_BE_Defs.unresearchedModuleIDs.Add(moduleID);
+				if (FFU_BE_Defs.moduleResearchGoal == 0 && FFU_BE_Defs.unresearchedModuleIDs.Count > 0) {
+					ShipModule refModule = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == FFU_BE_Defs.unresearchedModuleIDs.ToList().First());
+					FFU_BE_Defs.moduleResearchGoal = refModule.costCreditsInShop / 10 * (refModule.type == ShipModule.Type.Weapon_Nuke || refModule.displayName.Contains("Cache") ? 10 : 1);
+				}
 				ship.Fuel += Mathf.RoundToInt(FFU_BE_Defs.initialResources.fuel);
 				ship.Organics += Mathf.RoundToInt(FFU_BE_Defs.initialResources.organics);
 				ship.Explosives += Mathf.RoundToInt(FFU_BE_Defs.initialResources.explosives);

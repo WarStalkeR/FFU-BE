@@ -115,13 +115,13 @@ namespace RST.UI {
 			if (FFU_BE_Defs.unresearchedModuleIDs.ToList().Count > 2 && Input.GetKeyDown(KeyCode.PageUp) && !Input.GetKeyDown(KeyCode.PageDown)) FFU_BE_Mod_Technology.RotateResearchListForward();
 			if (FFU_BE_Defs.unresearchedModuleIDs.ToList().Count > 2 && !Input.GetKeyDown(KeyCode.PageUp) && Input.GetKeyDown(KeyCode.PageDown)) FFU_BE_Mod_Technology.RotateResearchListBackward();
 			string currentEnergyEmission = "<b>Flagship Energy Emission</b>: " + string.Format("{0:0.#}", FFU_BE_Defs.energyEmission) + "m³" + "\n";
-			string hostileAwarenessLevel = "<b>Local Forces Awareness Level</b>: " + FFU_BE_Mod_Discovery.GetHostileAwarnessLevel() + (FFU_BE_Defs.allStatProps ? " (" + string.Format("{0:0.##}", FFU_BE_Defs.distanceTraveledInPeace / FFU_BE_Mod_Discovery.GetCurrentScanFrequency() * 100f) + "%)" : "") + "\n";
-			string hostileEnforcersStrength = "<b>Local Forces Military Strength</b>: " + FFU_BE_Mod_Discovery.GetHostileFleetsLevel() + (FFU_BE_Defs.allStatProps ? " (" + string.Format("{0:0.##}", FFU_BE_Mod_Discovery.GetKilledFleetsCount() / FFU_BE_Mod_Discovery.GetTopFleetsTrigger() * 100f) + "%)" : "") + "\n";
-			string tierResearchProgress = "<b>Research Progress</b>: " + FFU_BE_Mod_Technology.GetCraftChanceText() + (FFU_BE_Defs.allStatProps ? " (" + Mathf.RoundToInt(FFU_BE_Defs.researchProgress) + ")" : "") + "\n";
+			string hostileAwarenessLevel = "<b>Local Forces Awareness Level</b>: " + FFU_BE_Mod_Discovery.GetHostileAwarnessLevel() + (FFU_BE_Defs.allStatProps ? " (" + string.Format("{0:0.###}", FFU_BE_Defs.distanceTraveledInPeace / FFU_BE_Mod_Discovery.GetCurrentScanFrequency() * 100f) + "%)" : "") + "\n";
+			string hostileEnforcersStrength = "<b>Local Forces Military Strength</b>: " + FFU_BE_Mod_Discovery.GetHostileFleetsLevel() + (FFU_BE_Defs.allStatProps ? " (" + string.Format("{0:0.###}", FFU_BE_Mod_Discovery.GetKilledFleetsCount() / FFU_BE_Mod_Discovery.GetTopFleetsTrigger() * 100f) + "%)" : "") + "\n";
+			string tierResearchProgress = "<b>Research Progress</b>: " + FFU_BE_Mod_Technology.GetCraftChanceText() + (FFU_BE_Defs.allStatProps ? " (" + string.Format("{0:0.###}", FFU_BE_Defs.researchProgress) + ")" : "") + "\n";
 			string reverseEngineeringProgress = FFU_BE_Defs.unresearchedModuleIDs.ToList().Count == 0 ? "<b>Reverse Engineering</b>: (No Active Project)" : "<b>Reverse Engineering</b>: " +
 				FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == FFU_BE_Defs.unresearchedModuleIDs.ToList().First()).displayName + " " +
 				string.Format("{0:0}", FFU_BE_Defs.moduleResearchProgress / FFU_BE_Defs.moduleResearchGoal * 100f) + "%" + (FFU_BE_Defs.allStatProps ? " (" +
-				string.Format("{0:0}", FFU_BE_Defs.moduleResearchProgress) + "/" + string.Format("{0:0}", FFU_BE_Defs.moduleResearchGoal) + ")" : "");
+				string.Format("{0:0.###}", FFU_BE_Defs.moduleResearchProgress) + "/" + string.Format("{0:0}", FFU_BE_Defs.moduleResearchGoal) + ")" : "");
 			string reverseEngineeringQueue = "";
 			bool postfixShown = false;
 			int totalQueueEntries = 0;

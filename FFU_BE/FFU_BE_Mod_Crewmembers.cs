@@ -1514,10 +1514,6 @@ namespace RST {
 					}
 					if (FFU_BE_Defs.canSpawnCrew && ship.Ownership.GetOwner() == Ownership.Owner.Me) {
 						int amountPerType = 0;
-						FFU_BE_Defs.researchProgress = 0f;
-						FFU_BE_Defs.moduleResearchGoal = 0f;
-						FFU_BE_Defs.moduleResearchProgress = 0f;
-						FFU_BE_Defs.unresearchedModuleIDs = new List<int>();
 						if (FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length > 0 && FFU_BE_Defs.crewNumsOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length > 0 && FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length == FFU_BE_Defs.crewNumsOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length) {
 							for (int t = 0; t < FFU_BE_Defs.crewTypesOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)].Length; t++) {
 								int.TryParse(FFU_BE_Defs.crewNumsOnStart[FFU_BE_Mod_Crewmembers.GetShipID(ship)][t], out amountPerType);

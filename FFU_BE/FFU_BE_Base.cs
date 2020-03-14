@@ -49,6 +49,7 @@ namespace FFU_Bleeding_Edge {
 					IniFile modConfig = new IniFile();
 					modConfig.Load(appDataPath + modConfDir + modConfFile);
 					string modConfigLog = "Loading mod configuration from " + appDataPath + modConfDir + modConfFile;
+					if (string.IsNullOrEmpty(modConfig["InitConfig"]["modVersion"].Value) || modConfig["InitConfig"]["modVersion"].ToString() != FFU_BE_Defs.modVersion) { CreateModConfiguration(modConfDir, modConfFile); return; }
 					if (modConfig["Settings"]["advancedWelcomePopup"].TryConvertBool(out FFU_BE_Defs.advancedWelcomePopup)) modConfigLog += "\n > " + "Property \"advancedWelcomePopup\" loaded with value: " + FFU_BE_Defs.advancedWelcomePopup.ToString();
 					else { FFU_BE_Defs.advancedWelcomePopup = false; modConfigLog += "\n > " + "Property \"advancedWelcomePopup\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.advancedWelcomePopup.ToString(); }
 					if (modConfig["Settings"]["restartUnlocksEverything"].TryConvertBool(out FFU_BE_Defs.restartUnlocksEverything)) modConfigLog += "\n > " + "Property \"restartUnlocksEverything\" loaded with value: " + FFU_BE_Defs.restartUnlocksEverything.ToString();
@@ -123,63 +124,65 @@ namespace FFU_Bleeding_Edge {
 						}
 					}
 					Debug.LogWarning(modConfigLog);
-				} else {
-					Debug.LogWarning("Mod configuration file doesn't exists!");
-					Debug.LogWarning("Creating template mod configuration file at " + appDataPath + modConfDir + modConfFile);
-					IniFile modConfig = new IniFile();
-					modConfig["Settings"]["advancedWelcomePopup"] = false;
-					modConfig["Settings"]["restartUnlocksEverything"] = false;
-					modConfig["Settings"]["allModulesCraftable"] = false;
-					modConfig["Settings"]["allTypesCraftable"] = false;
-					modConfig["Settings"]["moduleCraftingForFree"] = false;
-					modConfig["Settings"]["fuelIsCraftingEnergy"] = true;
-					modConfig["Settings"]["fuelIsScrapRefunded"] = false;
-					modConfig["Settings"]["relativeEnemyCrewSkills"] = true;
-					modConfig["Multipliers"]["containerSizeMultiplier"] = 1.0f;
-					modConfig["Multipliers"]["resourcesScrapFraction"] = 0.2f;
-					modConfig["Multipliers"]["newStartingFateBonus"] = 0;
-					modConfig["Multipliers"]["addFreeCrewSkillPoints"] = 0;
-					modConfig["Multipliers"]["minPlayerCrewSkillsLimit"] = 1;
-					modConfig["Multipliers"]["minEnemyCrewSkillsLimit"] = 1;
-					modConfig["Multipliers"]["enemyShipCrewSizeMult"] = 1;
-					modConfig["Multipliers"]["shipMaxEvasionLimit"] = 95;
-					modConfig["Multipliers"]["shipModuleHealthMult"] = 3.0f;
-					modConfig["Multipliers"]["shipModuleUnpackTime"] = 60.0f;
-					modConfig["Multipliers"]["shipModuleCraftTime"] = 120.0f;
-					modConfig["Multipliers"]["coreSlotsHealthMult"] = 1.0f;
-					modConfig["Multipliers"]["enemyResourcesLootMinMult"] = 2.0f;
-					modConfig["Multipliers"]["enemyResourcesLootMaxMult"] = 5.0f;
-					modConfig["Multipliers"]["tierResearchSpeedMult"] = 1.0f;
-					modConfig["Multipliers"]["moduleResearchSpeedMult"] = 1.0f;
-					modConfig["Multipliers"]["intactModuleDropChance"] = 0.85f;
-					modConfig["Multipliers"]["warpProducedResearchMult"] = 0.8f;
-					modConfig["Multipliers"]["warpProducedResourcesMult"] = 0.8f;
-					modConfig["Multipliers"]["enemyCrewHealthSectorMult"] = 0.1f;
-					modConfig["CrewSpawn"]["shipTigerfishTypes"] = "Combat Drone Humanoid|Drone tigerspider";
-					modConfig["CrewSpawn"]["shipTigerfishNumbers"] = "3|2";
-					modConfig["CrewSpawn"]["shipNukeRunnerTypes"] = "Heavy security drone|Drone CT2 gunnery";
-					modConfig["CrewSpawn"]["shipNukeRunnerNumbers"] = "3|2";
-					modConfig["CrewSpawn"]["shipWeirdshipTypes"] = "Redripper crew|Beedroid crew";
-					modConfig["CrewSpawn"]["shipWeirdshipNumbers"] = "2|1";
-					modConfig["CrewSpawn"]["shipRogueRatTypes"] = "Drone DIY gunjunker|Drone DIY gunnery pirates cannon";
-					modConfig["CrewSpawn"]["shipRogueRatNumbers"] = "2|2";
-					modConfig["CrewSpawn"]["shipGardenshipTypes"] = "Combat Drone Humanoid|Drone tigerspider";
-					modConfig["CrewSpawn"]["shipGardenshipNumbers"] = "2|2";
-					modConfig["CrewSpawn"]["shipAtlasTypes"] = "Combat Drone Humanoid|Heavy security drone";
-					modConfig["CrewSpawn"]["shipAtlasNumbers"] = "2|2";
-					modConfig["CrewSpawn"]["shipBluestarTypes"] = "Drone DIY science|Drone tigerspider";
-					modConfig["CrewSpawn"]["shipBluestarNumbers"] = "4|2";
-					modConfig["CrewSpawn"]["shipRoundshipTypes"] = "Combat Drone Humanoid|Redripper crew";
-					modConfig["CrewSpawn"]["shipRoundshipNumbers"] = "2|4";
-					modConfig["CrewSpawn"]["shipEnduranceTypes"] = "Combat Drone Humanoid|Heavy security drone|Drone tigerspider pirates";
-					modConfig["CrewSpawn"]["shipEnduranceNumbers"] = "4|3|3";
-					modConfig["CrewSpawn"]["shipBattleTigerTypes"] = "Combat Drone Humanoid|Heavy security drone|Drone tigerspider assaulter|Drone tigerdog";
-					modConfig["CrewSpawn"]["shipBattleTigerNumbers"] = "4|2|2|2";
-					modConfig["CrewSpawn"]["shipEasyTigerTypes"] = "Combat Drone Humanoid|Drone tigerdog";
-					modConfig["CrewSpawn"]["shipEasyTigerNumbers"] = "4|2";
-					modConfig.Save(appDataPath + modConfDir + modConfFile);
-				}
+				} else CreateModConfiguration(modConfDir, modConfFile);
 			}
+		}
+		public static void CreateModConfiguration(string modConfDir, string modConfFile) {
+			Debug.LogWarning("Mod configuration file doesn't exists or obsolete!");
+			Debug.LogWarning("Creating template mod configuration file at " + appDataPath + modConfDir + modConfFile);
+			IniFile modConfig = new IniFile();
+			modConfig["InitConfig"]["modVersion"] = FFU_BE_Defs.modVersion;
+			modConfig["Settings"]["advancedWelcomePopup"] = false;
+			modConfig["Settings"]["restartUnlocksEverything"] = false;
+			modConfig["Settings"]["allModulesCraftable"] = false;
+			modConfig["Settings"]["allTypesCraftable"] = false;
+			modConfig["Settings"]["moduleCraftingForFree"] = false;
+			modConfig["Settings"]["fuelIsCraftingEnergy"] = true;
+			modConfig["Settings"]["fuelIsScrapRefunded"] = false;
+			modConfig["Settings"]["relativeEnemyCrewSkills"] = true;
+			modConfig["Multipliers"]["containerSizeMultiplier"] = 1.0f;
+			modConfig["Multipliers"]["resourcesScrapFraction"] = 0.2f;
+			modConfig["Multipliers"]["newStartingFateBonus"] = 0;
+			modConfig["Multipliers"]["addFreeCrewSkillPoints"] = 0;
+			modConfig["Multipliers"]["minPlayerCrewSkillsLimit"] = 1;
+			modConfig["Multipliers"]["minEnemyCrewSkillsLimit"] = 1;
+			modConfig["Multipliers"]["enemyShipCrewSizeMult"] = 1;
+			modConfig["Multipliers"]["shipMaxEvasionLimit"] = 95;
+			modConfig["Multipliers"]["shipModuleHealthMult"] = 3.0f;
+			modConfig["Multipliers"]["shipModuleUnpackTime"] = 60.0f;
+			modConfig["Multipliers"]["shipModuleCraftTime"] = 120.0f;
+			modConfig["Multipliers"]["coreSlotsHealthMult"] = 1.0f;
+			modConfig["Multipliers"]["enemyResourcesLootMinMult"] = 2.0f;
+			modConfig["Multipliers"]["enemyResourcesLootMaxMult"] = 5.0f;
+			modConfig["Multipliers"]["tierResearchSpeedMult"] = 1.0f;
+			modConfig["Multipliers"]["moduleResearchSpeedMult"] = 1.0f;
+			modConfig["Multipliers"]["intactModuleDropChance"] = 0.85f;
+			modConfig["Multipliers"]["warpProducedResearchMult"] = 0.8f;
+			modConfig["Multipliers"]["warpProducedResourcesMult"] = 0.8f;
+			modConfig["Multipliers"]["enemyCrewHealthSectorMult"] = 0.1f;
+			modConfig["CrewSpawn"]["shipTigerfishTypes"] = "Combat Drone Humanoid|Drone tigerspider";
+			modConfig["CrewSpawn"]["shipTigerfishNumbers"] = "2|2";
+			modConfig["CrewSpawn"]["shipNukeRunnerTypes"] = "Heavy security drone|Drone CT2 gunnery";
+			modConfig["CrewSpawn"]["shipNukeRunnerNumbers"] = "2|2";
+			modConfig["CrewSpawn"]["shipWeirdshipTypes"] = "Redripper crew|Beedroid crew";
+			modConfig["CrewSpawn"]["shipWeirdshipNumbers"] = "2|2";
+			modConfig["CrewSpawn"]["shipRogueRatTypes"] = "Drone DIY gunjunker|Drone DIY gunnery pirates cannon";
+			modConfig["CrewSpawn"]["shipRogueRatNumbers"] = "2|2";
+			modConfig["CrewSpawn"]["shipGardenshipTypes"] = "Combat Drone Humanoid|Drone tigerspider";
+			modConfig["CrewSpawn"]["shipGardenshipNumbers"] = "4|2";
+			modConfig["CrewSpawn"]["shipAtlasTypes"] = "Combat Drone Humanoid|Heavy security drone";
+			modConfig["CrewSpawn"]["shipAtlasNumbers"] = "2|4";
+			modConfig["CrewSpawn"]["shipBluestarTypes"] = "Drone DIY science|Drone tigerspider";
+			modConfig["CrewSpawn"]["shipBluestarNumbers"] = "4|4";
+			modConfig["CrewSpawn"]["shipRoundshipTypes"] = "Combat Drone Humanoid|Redripper crew";
+			modConfig["CrewSpawn"]["shipRoundshipNumbers"] = "2|6";
+			modConfig["CrewSpawn"]["shipEnduranceTypes"] = "Combat Drone Humanoid|Heavy security drone|Drone tigerspider pirates";
+			modConfig["CrewSpawn"]["shipEnduranceNumbers"] = "4|4|4";
+			modConfig["CrewSpawn"]["shipBattleTigerTypes"] = "Combat Drone Humanoid|Heavy security drone|Drone tigerspider assaulter|Drone tigerdog";
+			modConfig["CrewSpawn"]["shipBattleTigerNumbers"] = "4|2|2|2";
+			modConfig["CrewSpawn"]["shipEasyTigerTypes"] = "Combat Drone Humanoid|Drone tigerdog";
+			modConfig["CrewSpawn"]["shipEasyTigerNumbers"] = "6|2";
+			modConfig.Save(appDataPath + modConfDir + modConfFile);
 		}
 		public static List<int> allPerksList = new List<int>(new int[] {
 			487234563,

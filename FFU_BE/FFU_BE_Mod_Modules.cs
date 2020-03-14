@@ -655,7 +655,7 @@ namespace RST {
 				FFU_BE_Defs.unresearchedModuleIDs.Add(PrefabId);
 				if (FFU_BE_Defs.moduleResearchGoal == 0 && FFU_BE_Defs.unresearchedModuleIDs.Count > 0) {
 					ShipModule refModule = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == FFU_BE_Defs.unresearchedModuleIDs.ToList().First());
-					FFU_BE_Defs.moduleResearchGoal = refModule.costCreditsInShop / 10 * (refModule.type == ShipModule.Type.Weapon_Nuke || displayName.Contains("Cache") ? 10 : 1);
+					FFU_BE_Defs.moduleResearchGoal = refModule.costCreditsInShop / 10 * (refModule.type == ShipModule.Type.Weapon_Nuke || refModule.displayName.Contains("Cache") ? 10 : 1);
 				}
 				StringBuilder newItemInResearchQueueMessage = RstShared.StringBuilder;
 				newItemInResearchQueueMessage.AppendFormat(MonoBehaviourExtended.TT("{0} is not listed in crafting database! Adding to reverse engineering queue..."), FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == PrefabId).DisplayNameLocalized);

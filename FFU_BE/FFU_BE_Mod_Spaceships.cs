@@ -34,7 +34,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.fuel.minValue} Starfuel" };
+						$"+{perk.randomizerResources.fuel.minValue} {Core.TT("Starfuel")}" };
 					perk.repCost = 1;
 					break;
 					case "Perk add fuel 2, extra canisters":
@@ -48,7 +48,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.fuel.minValue} Starfuel" };
+						$"+{perk.randomizerResources.fuel.minValue} {Core.TT("Starfuel")}" };
 					perk.repCost = 2;
 					break;
 					case "Perk add fuel 3, passing ship":
@@ -62,7 +62,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.fuel.minValue} Starfuel" };
+						$"+{perk.randomizerResources.fuel.minValue} {Core.TT("Starfuel")}" };
 					perk.repCost = 3;
 					break;
 					case "Perk add organics 0":
@@ -76,7 +76,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.organics.minValue} Organics" };
+						$"+{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}" };
 					perk.repCost = 1;
 					break;
 					case "Perk add organics 2, increased nutrition":
@@ -90,7 +90,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.organics.minValue} Organics" };
+						$"+{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}" };
 					perk.repCost = 2;
 					break;
 					case "Perk add organics 3, braindead":
@@ -104,8 +104,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.organics.minValue} Organics",
-						$"+{perk.randomizerResources.synthetics.minValue} Synthetics" };
+						$"+{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}",
+						$"+{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}" };
 					perk.repCost = 2;
 					break;
 					case "Perk add organics 5, dead animals":
@@ -119,8 +119,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(100);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.organics.minValue} Organics",
-						$"+{perk.randomizerResources.exotics.minValue} Exotics" };
+						$"+{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}",
+						$"+{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
 					perk.repCost = 2;
 					break;
 					case "Perk add organics 1, houseplant":
@@ -134,8 +134,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.organics.minValue} Organics",
-						$"+{perk.randomizerResources.explosives.minValue} Explosives" };
+						$"+{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}",
+						$"+{perk.randomizerResources.explosives.minValue} {Core.TT("Explosives")}" };
 					perk.repCost = 2;
 					break;
 					case "Perk add organics 4, dead insectoids":
@@ -149,7 +149,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.organics.minValue} Organics" };
+						$"+{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}" };
 					perk.repCost = 3;
 					break;
 					case "Perk add metals":
@@ -163,7 +163,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.metals.minValue} Metals" };
+						$"+{perk.randomizerResources.metals.minValue} {Core.TT("Metals")}" };
 					perk.repCost = 1;
 					break;
 					case "Perk add metals 2, scrap tank":
@@ -177,7 +177,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.metals.minValue} Metals" };
+						$"+{perk.randomizerResources.metals.minValue} {Core.TT("Metals")}" };
 					perk.repCost = 4;
 					break;
 					case "Perk add synthetics":
@@ -191,7 +191,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.synthetics.minValue} Synthetics" };
+						$"+{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}" };
 					perk.repCost = 1;
 					break;
 					case "Perk add synthetics 2, broken lamp":
@@ -205,8 +205,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.metals.minValue} Metals",
-						$"+{perk.randomizerResources.synthetics.minValue} Synthetics" };
+						$"+{perk.randomizerResources.metals.minValue} {Core.TT("Metals")}",
+						$"+{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}" };
 					perk.repCost = 3;
 					break;
 					case "Perk add synthetics and fuel":
@@ -220,8 +220,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.fuel.minValue} Starfuel",
-						$"+{perk.randomizerResources.synthetics.minValue} Synthetics" };
+						$"+{perk.randomizerResources.fuel.minValue} {Core.TT("Starfuel")}",
+						$"+{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}" };
 					perk.repCost = 3;
 					break;
 					case "Perk add synthetics 3, ex container":
@@ -235,7 +235,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.synthetics.minValue} Synthetics" };
+						$"+{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}" };
 					perk.repCost = 3;
 					break;
 					case "Perk add explosives":
@@ -249,7 +249,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.explosives.minValue} Explosives" };
+						$"+{perk.randomizerResources.explosives.minValue} {Core.TT("Explosives")}" };
 					perk.repCost = 1;
 					break;
 					case "Perk add explosives 2, explo sculpture":
@@ -263,7 +263,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.explosives.minValue} Explosives" };
+						$"+{perk.randomizerResources.explosives.minValue} {Core.TT("Explosives")}" };
 					perk.repCost = 3;
 					break;
 					case "Perk add exotics":
@@ -277,7 +277,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(100);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.exotics.minValue} Exotics" };
+						$"+{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
 					perk.repCost = 1;
 					break;
 					case "Perk barter get exotics for credits":
@@ -291,8 +291,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(150);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(10000);
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.exotics.minValue} Exotics",
-						$"+{perk.randomizerResources.credits.minValue} Credits" };
+						$"+{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}",
+						$"+{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
 					perk.repCost = 2;
 					break;
 					case "Perk add exotics 2, broken sex toy":
@@ -306,8 +306,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(350);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.synthetics.minValue} Synthetics",
-						$"+{perk.randomizerResources.exotics.minValue} Exotics" };
+						$"+{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
+						$"+{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
 					perk.repCost = 3;
 					break;
 					case "Perk barter get exotics for explosives":
@@ -321,8 +321,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(350);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.explosives.minValue} Explosives",
-						$"+{perk.randomizerResources.exotics.minValue} Exotics" };
+						$"+{perk.randomizerResources.explosives.minValue} {Core.TT("Explosives")}",
+						$"+{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
 					perk.repCost = 3;
 					break;
 					case "Perk add credits":
@@ -336,7 +336,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(10000);
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.credits.minValue} Credits" };
+						$"+{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
 					perk.repCost = 1;
 					break;
 					case "Perk barter get credits for explosives":
@@ -350,8 +350,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(25000);
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.explosives.minValue} Explosives",
-						$"+{perk.randomizerResources.credits.minValue} Credits" };
+						$"+{perk.randomizerResources.explosives.minValue} {Core.TT("Explosives")}",
+						$"+{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
 					perk.repCost = 3;
 					break;
 					case "Perk add credits 2, personal savings":
@@ -365,7 +365,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(100000);
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.randomizerResources.credits.minValue} Credits" };
+						$"+{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
 					perk.repCost = 5;
 					break;
 					case "Perk pack, medical resources":
@@ -379,11 +379,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }},
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }},
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }},
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }},
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "compressed exotics pack").gameObject }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.repCost = 15;
@@ -399,11 +399,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }},
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }},
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }},
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }},
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "general pack organics, synth, metal").gameObject }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.repCost = 10;
@@ -419,15 +419,490 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "fuel pack").gameObject }},
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "fuel pack").gameObject }},
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "fuel pack").gameObject }},
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "explosives pack").gameObject }},
-						new Perk.Pool { Prefabs = new GameObject[] { FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "explosives pack").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "fuel pack").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "fuel pack").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "fuel pack").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "explosives pack").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "explosives pack").gameObject }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+3x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+2x {perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.repCost = 10;
+					break;
+					case "Perk module DIY medbay":
+					perk.displayName = "Advanced Medical Bay Cache";
+					perk.description = "Discovered at one of the abandoned and locked down medical facilities during exploration. Contains completely working and packed module, encrypted blueprint and some resources required to operate.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(2500);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "medbay6 biological").gameObject }}};
+					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
+						FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "medbay6 biological").PrefabId });
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
+						$"+{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}" };
+					perk.repCost = 15;
+					break;
+					case "Perk module medbay 202":
+					perk.displayName = "Universal Restoration Bay Cache";
+					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely anomalous location full of destructive ion storms. The only reason this cache was left intact is extremely protected bunker, where it was found.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(2500);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(2500);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "medbay4 stem celler").gameObject }}};
+					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
+						FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "medbay4 stem celler").PrefabId });
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
+						$"+{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}",
+						$"+{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}" };
+					perk.repCost = 25;
+					break;
+					case "Perk crew 1 human adventurer":
+					perk.displayName = "Experienced Adventurer";
+					perk.description = "A trustworthy adventurer offers credits for the opportunity to travel back to Earth with us. They wear an armored helmet and promise to bring along a cool handgun.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(5000);
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Human Crewmember")}",
+						$"+{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.repCost = 2;
+					break;
+					case "Perk crew best marine":
+					perk.displayName = "Tactical Marine Graduate";
+					perk.description = "A marine with top grades from University of Tactical Land Warfare joins our mission. For the experience. They also carry a full set of live ammunition with them. Just in case.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue(500);
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Human Crewmember")}",
+						$"+{perk.randomizerResources.explosives.minValue} {Core.TT("Explosives")}" };
+					perk.repCost = 2;
+					break;
+					case "Perk crew human scientist":
+					perk.displayName = "Seasoned Quantum Physicist";
+					perk.description = "A scientist joins the mission, to research an obscure topic of time travel, causality manipulation, how it affects the universe and related to the meaning of life. They bring along some exotic supplies.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(500);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(50);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Human Crewmember")}",
+						$"+{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}",
+						$"+{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.repCost = 2;
+					break;
+					case "Perk crew 2 beedroid engineer":
+					perk.displayName = "Beedroid Engineer Veteran";
+					perk.description = "An alien cyborg joins the mission to repay an old favor. The entire species of Beedroids have transcended their biological bodies. They also bring a full set of tools to perform repairs and modifications.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(500);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Beedroid Crewmember")}",
+						$"+{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}" };
+					perk.repCost = 2;
+					break;
+					case "Perk crew rat cook":
+					perk.displayName = "Proficient Rat Cook";
+					perk.description = "This excellent Rat cook is also skilled in growing food and extinguishing fires. Both mastered during his years in the Rat Cooking University. They also bring along a set of precooked supplies.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(500);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Rat Crewmember")}",
+						$"+{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}" };
+					perk.repCost = 2;
+					break;
+					case "Perk crew rat mercs -creds":
+					perk.displayName = "Ragtag Rat Mercenaries";
+					perk.description = "A band of ragtag mercenary rats join the mission for ability feed themselves. The poor fellas had mediocre skills and do not have any body augments. They also bring along a set of low quality metals to maintain their weapons.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(500);
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+3x {Core.TT("Rat Crewmember")}",
+						$"+{perk.randomizerResources.metals.minValue} {Core.TT("Metals")}" };
+					perk.repCost = 6;
+					break;
+					case "Perk crew gitchanki sensorist":
+					perk.displayName = "Inexperienced Gitchanki Astronomer";
+					perk.description = "His regular lovers were a gang of female space marines who taught him everything about wrestling, handguns and ship sensors. They gave him some credits and sent him to adventure to get more life experience.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(5000);
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Gitchanki Crewmember")}",
+						$"+{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.repCost = 2;
+					break;
+					case "Perk crew lizard firefighter":
+					perk.displayName = "Monk of Infinite Fire Temple";
+					perk.description = "This old lizardfolk monk has improved fire resistance and firefighting skills due to years spent in the Temple of Infinite Fire. Likes to stay in the shower for hours. Has hobby of collecting exotic and volatile matter.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(50);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Lizardfolk Crewmember")}",
+						$"+{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.repCost = 2;
+					break;
+					case "Perk crew grippy gunner":
+					perk.displayName = "Weaponry Ex-Specialist Grippy";
+					perk.description = "This snake-individual used to serve in a military warship as a gunnery officer. Experienced in using all kinds of ship weapons. Regularly consumes a cocktail of intoxicants, always has hidden stash of explosives. Just in case.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue(500);
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Grippy Crewmember")}",
+						$"+{perk.randomizerResources.explosives.minValue} {Core.TT("Explosives")}" };
+					perk.repCost = 2;
+					break;
+					case "Perk crew gormor gardener":
+					perk.displayName = "Tranquil Gor-Mod Gardener";
+					perk.description = "This Gor-Mor individual is a famous gardener-philosopher, praised highly by political leaders and spiritual acolytes who seek enlightenment. He wants to help us in exchange for allowing him to meditate in our greenhouses.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(5000);
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Gor-Mod Crewmember")}",
+						$"+{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.repCost = 2;
+					break;
+					case "Perk augment 00a full checkup":
+					perk.displayName = "Full Diagnostics & Maintenance";
+					perk.description = "Full testing of all ship components, modules and subroutines, and replacement of deprecated and faulty one ensures increased survivability of the ship and crew that uses it.";
+					perk.addShipMaxHealth = 50;
+					perk.addShipDeflectPercent = 0;
+					perk.addShipEvasionPercent = 0;
+					perk.addShipAccuracyPercent = 0;
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-500);
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(-500);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipMaxHealth} {Core.TT("Ship Max Hitpoints")}",
+						$"{perk.randomizerResources.metals.minValue} {Core.TT("Metals")}",
+						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}" };
+					perk.repCost = 5;
+					break;
+					case "Perk augment 00b evasive manuever dbase update":
+					perk.displayName = "Advanced Maneuvering Subroutines";
+					perk.description = "Refurbishment and upgrade of built-in maneuvering systems will increase ship's chances to successfully evade incoming hostile fire and break-off from enemy targeting systems.";
+					perk.addShipMaxHealth = 0;
+					perk.addShipDeflectPercent = 0;
+					perk.addShipEvasionPercent = 5;
+					perk.addShipAccuracyPercent = 0;
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipEvasionPercent}°/ₘ {Core.TT("Ship Evasion")}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.repCost = 10;
+					break;
+					case "Perk augment 00c impact dampeners":
+					perk.displayName = "Impact Dampening Armor Coating";
+					perk.description = "An experimental armor coating that eventually fuses into armor and becomes part of it, while increasing its deflective properties against incoming enemy fire.";
+					perk.addShipMaxHealth = 0;
+					perk.addShipDeflectPercent = 5;
+					perk.addShipEvasionPercent = 0;
+					perk.addShipAccuracyPercent = 0;
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipDeflectPercent}% {Core.TT("Ship Deflection")}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.repCost = 10;
+					break;
+					case "Perk augment 00d tactical predictor":
+					perk.displayName = "Tactical Prediction Software";
+					perk.description = "Almost universal software that requires no hardware upgrades. Increases accuracy of all on-board and built-in weapon system without any negative drawbacks and consequences.";
+					perk.addShipMaxHealth = 0;
+					perk.addShipDeflectPercent = 0;
+					perk.addShipEvasionPercent = 0;
+					perk.addShipAccuracyPercent = 5;
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipAccuracyPercent}% {Core.TT("Ship Accuracy")}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.repCost = 10;
+					break;
+					case "Perk augment 001a elastic augmentations":
+					perk.displayName = "Carbon Fiber Integrity Upgrade";
+					perk.description = "Increases ship hull integrity by reinforcing ship's hardpoints and exposed inter-connectors with extremely durable carbon fibers that allow the ship to \"bend\" a little.";
+					perk.addShipMaxHealth = 100;
+					perk.addShipDeflectPercent = 0;
+					perk.addShipEvasionPercent = 0;
+					perk.addShipAccuracyPercent = 0;
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(-1000);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(-1000);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipMaxHealth} {Core.TT("Ship Max Hitpoints")}",
+						$"{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}",
+						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}" };
+					perk.repCost = 10;
+					break;
+					case "Perk augment 001b exotic armor":
+					perk.displayName = "Composite Exotic-Infused Armor";
+					perk.description = "Adds additional layer of composite exotic-infused armor over ship's hull that provides additional durability and increases overall integrity, thus increasing survivability of the ship.";
+					perk.addShipMaxHealth = 200;
+					perk.addShipDeflectPercent = 0;
+					perk.addShipEvasionPercent = 0;
+					perk.addShipAccuracyPercent = 0;
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-2000);
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-200);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipMaxHealth} {Core.TT("Ship Max Hitpoints")}",
+						$"{perk.randomizerResources.metals.minValue} {Core.TT("Metals")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.repCost = 20;
+					break;
+					case "Perk augment 02 Fortified subsections":
+					perk.displayName = "Segmented Armored Subsections";
+					perk.description = "Complete rework of ship's interior. Replaces all standard subsection with heavily armored ones that follow strict segmentation standards to prevent uncontrolled decompression in cases of even extreme damage.";
+					perk.addShipMaxHealth = 150;
+					perk.addShipDeflectPercent = 0;
+					perk.addShipEvasionPercent = 0;
+					perk.addShipAccuracyPercent = 0;
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipMaxHealth} {Core.TT("Ship Max Hitpoints")}" };
+					perk.repCost = 25;
+					break;
+					case "Perk augment 03 targeting software":
+					perk.displayName = "Combat Forensics Processing Units";
+					perk.description = "An entire full set of new hardware that is integrated into the core systems of the ship and even partially replaces built-in targeting systems. Allows to analyze on the fly hostile ships behavior and perform necessary targeting corrections.";
+					perk.addShipMaxHealth = 0;
+					perk.addShipDeflectPercent = 0;
+					perk.addShipEvasionPercent = 0;
+					perk.addShipAccuracyPercent = 5;
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipAccuracyPercent}% {Core.TT("Ship Accuracy")}" };
+					perk.repCost = 25;
+					break;
+					case "Perk augment 04 maneuvering jets":
+					perk.displayName = "Reinforced Maneuvering Thrusters";
+					perk.description = "Replaces ship's original maneuvering thrusters and reaction control systems with more advanced and reinforced ones. Reinforced maneuvering thrusters and reaction control systems has much greater evasion capability due to enhanced durability.";
+					perk.addShipMaxHealth = 0;
+					perk.addShipDeflectPercent = 0;
+					perk.addShipEvasionPercent = 5;
+					perk.addShipAccuracyPercent = 0;
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipEvasionPercent}°/ₘ {Core.TT("Ship Evasion")}" };
+					perk.repCost = 25;
+					break;
+					case "Perk augment 05 deflection":
+					perk.displayName = "Experimental Reflective Composite Armor";
+					perk.description = "Completely replaces original ship armor with experimental reflective composite one. Due to its exotic nature, this armor has improved deflective properties that equally effective for deflection of projectiles and reflection of beams.";
+					perk.addShipMaxHealth = 0;
+					perk.addShipDeflectPercent = 5;
+					perk.addShipEvasionPercent = 0;
+					perk.addShipAccuracyPercent = 0;
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipDeflectPercent}% {Core.TT("Ship Deflection")}" };
+					perk.repCost = 25;
+					break;
+					case "Perk add permanent credits":
+					perk.displayName = "Detailed Spideraa Scientific Data";
+					perk.description = "Scientific data about the Spideraa species is worth a lot of credits once we've obtained it. This information is quite dangerous, so we had to invest a lot of time and money into comprehensive background checks before deciding on a buyer.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(125000);
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.repCost = 25;
+					break;
+					case "Perk fate permanent 01 fortunate coincidence":
+					perk.displayName = "A Fortunate Coincidence";
+					perk.description = "A fortunate coincidence helps you to prepare better for the upcoming journey.";
+					perk.fateBonusInPerkSelection = 1 * FFU_BE_Defs.permanentFateMult;
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
+					perk.repCost = 2;
+					break;
+					case "Perk fate permanent 02 good luck":
+					perk.displayName = "The Good Luck";
+					perk.description = "Somebody wished you good luck before the journey, and thanks to an unexpected series of events, their wish actually came true.";
+					perk.fateBonusInPerkSelection = 2 * FFU_BE_Defs.permanentFateMult;
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
+					perk.repCost = 4;
+					break;
+					case "Perk fate permanent 03 causal chain reaction":
+					perk.displayName = "The Causal Chain Reaction";
+					perk.description = "Years ago, you helped somebody, changing their lives forever. It started a chain-reaction of events that led to somebody helping you today.";
+					perk.fateBonusInPerkSelection = 3 * FFU_BE_Defs.permanentFateMult;
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
+					perk.repCost = 6;
+					break;
+					case "Perk fate permanent 04 generosity and abundance":
+					perk.displayName = "The Seeds of Generosity";
+					perk.description = "By sowing the seeds of generosity in the past, you have arrived to the harvest of abundance in the present.";
+					perk.fateBonusInPerkSelection = 4 * FFU_BE_Defs.permanentFateMult;
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
+					perk.repCost = 8;
+					break;
+					case "Perk fate permanent 05 friend of truth":
+					perk.displayName = "The Friend of Truth";
+					perk.description = "Awareness of your personal limitations has granted you an even deeper awareness of your freedom.";
+					perk.fateBonusInPerkSelection = 5 * FFU_BE_Defs.permanentFateMult;
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
+					perk.repCost = 10;
+					break;
+					case "Perk fate permanent 06 focused one":
+					perk.displayName = "The Focused One";
+					perk.description = "You understand something so deeply that it allows you to understand everything a bit better than individuals usually do.";
+					perk.fateBonusInPerkSelection = 6 * FFU_BE_Defs.permanentFateMult;
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
+					perk.repCost = 12;
+					break;
+					case "Perk fate permanent 07 masterful exister":
+					perk.displayName = "The Masterful Exister";
+					perk.description = "Random coincidences seem to support the fulfillment of your wishes more than what is usually considered normal.";
+					perk.fateBonusInPerkSelection = 7 * FFU_BE_Defs.permanentFateMult;
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
+					perk.repCost = 14;
+					break;
+					case "Perk fate permanent 08 the great peace":
+					perk.displayName = "The Great Peace";
+					perk.description = "You're starting to realize your intimate connection with the Great Peace, remaining calm even in situations of utter distress.";
+					perk.fateBonusInPerkSelection = 8 * FFU_BE_Defs.permanentFateMult;
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
+					perk.repCost = 16;
+					break;
+					case "Perk fate permanent 09 optimality":
+					perk.displayName = "The Optimality";
+					perk.description = "You are in the right place, at the right time and under the right circumstances.";
+					perk.fateBonusInPerkSelection = 9 * FFU_BE_Defs.permanentFateMult;
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
+					perk.repCost = 18;
+					break;
+					case "Perk fate permanent 10 victory":
+					perk.displayName = "The Taste of Victory";
+					perk.description = "Those who know what awaits at the end of the road can enjoy the road itself better. And you are such person.";
+					perk.fateBonusInPerkSelection = 10 * FFU_BE_Defs.permanentFateMult;
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
+					perk.repCost = 20;
 					break;
 					default:
 					if (FFU_BE_Defs.dumpObjectLists) Debug.Log($"Perk: {perk.name} [{perk.PrefabId}] {perk.displayName}");

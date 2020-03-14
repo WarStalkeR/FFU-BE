@@ -31,6 +31,7 @@ namespace FFU_Bleeding_Edge {
 		public static int moduleRepairCost = 2;
 		public static int blackMarketMult = 111;
 		public static int pointsPerBarItem = 30;
+		public static int permanentFateMult = 5;
 		public static float timePassedCycle = 4f;
 		public static float shieldBonusMult = 4f;
 		public static float researchProgress = 0f;
@@ -66,6 +67,7 @@ namespace FFU_Bleeding_Edge {
 		public static IDictionary<int, int> shipPrefabsStorageSize = new Dictionary<int, int>();
 		public static IDictionary<int, string> shipPrefabsDoorName = new Dictionary<int, string>();
 		public static IDictionary<int, float> moduleEmissionPrefabs = new Dictionary<int, float>();
+		public static IDictionary<int, int[]> perkStoredBlueprintIDs = new Dictionary<int, int[]>();
 		public static IDictionary<string, List<int>> weaponTypeIDs = new Dictionary<string, List<int>>() {
 			{"Launchers", new List<int>()},
 			{"Autocannons", new List<int>()},
@@ -181,6 +183,7 @@ namespace FFU_Bleeding_Edge {
 			412909021,  /* Liberator Kinetic Railcannon */ });
 		public static List<int> discoveredModuleIDs = initialModuleIDs;
 		public static List<int> unresearchedModuleIDs = new List<int>();
+		public static List<int> perkModuleBlueprintIDs = new List<int>();
 		public static float unusedReverseProgress = 0f;
 		public static float moduleResearchProgress = 0f;
 		public static float moduleResearchGoal = 0f;
