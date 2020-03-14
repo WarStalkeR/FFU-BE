@@ -7,20 +7,20 @@ using System.Linq;
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Base {
 		public static readonly string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\LocalLow\Interactive Fate\Shortest Trip To Earth\";
-		private static readonly string[] shipEntries = { "shipTigerfish", "shipNukeRunner", "shipWeirdship", "shipRogueRat", "shipGardenship", "shipAtlas", "shipBluestar", "shipEasyTiger", "shipRoundship", "shipBattleTiger", "shipEndurance" };
+		private static readonly string[] shipEntries = { "Tigerfish", "NukeRunner", "Weirdship", "RogueRat", "Gardenship", "Atlas", "Bluestar", "EasyTiger", "Roundship", "BattleTiger", "Endurance" };
 		private static int GetShipPrefabID(string shipType) {
 			switch (shipType) {
-				case "shipTigerfish": return 516057105;
-				case "shipNukeRunner": return 487234563;
-				case "shipWeirdship": return 1809014558;
-				case "shipRogueRat": return 578937222;
-				case "shipGardenship": return 1106792042;
-				case "shipAtlas": return 2103659466;
-				case "shipBluestar": return 1772361532;
-				case "shipEasyTiger": return 1920692188;
-				case "shipRoundship": return 1251918188;
-				case "shipBattleTiger": return 1452660923;
-				case "shipEndurance": return 1939804939;
+				case "Tigerfish": return 516057105;
+				case "NukeRunner": return 487234563;
+				case "Weirdship": return 1809014558;
+				case "RogueRat": return 578937222;
+				case "Gardenship": return 1106792042;
+				case "Atlas": return 2103659466;
+				case "Bluestar": return 1772361532;
+				case "EasyTiger": return 1920692188;
+				case "Roundship": return 1251918188;
+				case "BattleTiger": return 1452660923;
+				case "Endurance": return 1939804939;
 				default: return -1;
 			}
 		}
@@ -110,11 +110,9 @@ namespace FFU_Bleeding_Edge {
 					if (modConfig["Multipliers"]["enemyCrewHealthSectorMult"].TryConvertFloat(out FFU_BE_Defs.enemyCrewHealthSectorMult)) modConfigLog += "\n > " + "Property \"enemyCrewHealthSectorMult\" loaded with value: " + FFU_BE_Defs.enemyCrewHealthSectorMult.ToString();
 					else { FFU_BE_Defs.enemyCrewHealthSectorMult = 0.1f; modConfigLog += "\n > " + "Property \"enemyCrewHealthSectorMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.enemyCrewHealthSectorMult.ToString(); }
 					foreach (string shipEntry in shipEntries) {
-						if (!string.IsNullOrEmpty(modConfig["CrewSpawn"][shipEntry + "Types"].GetString()) && !string.IsNullOrEmpty(modConfig["CrewSpawn"][shipEntry + "Numbers"].GetString())) {
-							string[] tmpStrArrT = new string[] { };
-							string[] tmpStrArrN = new string[] { };
-							tmpStrArrT = modConfig["CrewSpawn"][shipEntry + "Types"].GetString().Split('|');
-							tmpStrArrN = modConfig["CrewSpawn"][shipEntry + "Numbers"].GetString().Split('|');
+						if (!string.IsNullOrEmpty(modConfig["CrewSpawn"]["ship" + shipEntry + "Types"].GetString()) && !string.IsNullOrEmpty(modConfig["CrewSpawn"]["ship" + shipEntry + "Numbers"].GetString())) {
+							string[] tmpStrArrT = modConfig["CrewSpawn"]["ship" + shipEntry + "Types"].GetString().Split('|');
+							string[] tmpStrArrN = modConfig["CrewSpawn"]["ship" + shipEntry + "Numbers"].GetString().Split('|');
 							if (!FFU_BE_Defs.startingCrew.ContainsKey(GetShipPrefabID(shipEntry))) FFU_BE_Defs.startingCrew.Add(new KeyValuePair<int, List<KeyValuePair<string, int>>>(GetShipPrefabID(shipEntry), new List<KeyValuePair<string, int>>()));
 							if (FFU_BE_Defs.startingCrew.ContainsKey(GetShipPrefabID(shipEntry))) {
 								for (int i = 0; i < tmpStrArrT.Length && i < tmpStrArrN.Length; i++) {
