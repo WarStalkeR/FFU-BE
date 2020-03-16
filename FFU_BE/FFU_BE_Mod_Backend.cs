@@ -38,8 +38,8 @@ namespace FFU_Bleeding_Edge {
 
 namespace RST {
 	public class patch_ShootAtDamageDealer : ShootAtDamageDealer {
-		//Force Misfire Damaged Weapon Module
 		[MonoModReplace] public virtual void SetInitialCondition(WeaponModule sourceWeapon, GameObject targetGo, Vector2 targetPos, float exactTargetDistance, Shield shieldToIgnore) {
+		/// Force Misfire Damaged Weapon Module
 			if (exactTargetDistance <= 0f) exactTargetDistance = 100f;
 			effectDone = false;
 			this.sourceWeapon = sourceWeapon;
@@ -49,8 +49,8 @@ namespace RST {
 				if (RstRandom.value <= FFU_BE_Defs.GetHealthEffect(sourceWeapon.Module, 0.5f)) targetDistance = 0f;
 			this.shieldToIgnore = shieldToIgnore;
 		}
-		//Overload Shield Gens/Caps from Damage
 		[MonoModReplace] protected void DoShieldHit(Shield shield) {
+		/// Overload Shield Gens/Caps from Damage
 			if (shield == null) return;
 			if (shield.ShieldPoints < damage.shieldDmg) {
 				Ship ship = shield.Ship;
@@ -66,8 +66,8 @@ namespace RST {
 				Explosion.InstantiateExplosion(gameObject, base.transform, target);
 			}
 		}
-		//Improved Boarding/Spawner Nukes Mechanic
 		[MonoModReplace] protected void DoHit(Collider2D[] hits, int hitCount, Vector2 hitPos) {
+		/// Improved Boarding/Spawner Nukes Mechanic
 			Ownership.Owner hitOwner = Ownership.Owner.None;
 			Collider2D collider2D = null;
 			for (int i = 0; i < hitCount; i++) {
@@ -139,8 +139,8 @@ namespace RST {
 		[MonoModIgnore] private Rigidbody2D Rigidbody2D => GetCachedComponent<Rigidbody2D>(true);
 		[MonoModIgnore] private HomingMovement HomingMovement => GetCachedComponent<HomingMovement>(true);
 		[MonoModIgnore] private bool DoEffect(Vector2 hitPos, Shield shield) { return false; }
-		//Damaged Nukes Launched with Reduced HP and Detonated on Zero HP.
 		[MonoModReplace] public void ApplyWeaponOverrides(WeaponModule w) {
+		/// Damaged Nukes Launched with Reduced HP and Detonated on Zero HP.
 			if (!(w == null)) {
 				if (w.overridePointDefCanSeeThis) PointDefCanSeeThis = true;
 				if (w.overrideProjectileHealth > 0) maxHealth = health = w.overrideProjectileHealth;
@@ -150,25 +150,25 @@ namespace RST {
 		}
 	}
 	public class patch_RepairSkillEffects : RepairSkillEffects {
-		//Speed Up Hull Repair Time
 		[MonoModReplace] public float GetShipHpRepairTime(Crewmember c, bool considerAccelTime) {
+		/// Speed Up Hull Repair Time
 			float timeMult = (considerAccelTime && PerFrameCache.IsGoodSituation) ? FFU_BE_Defs.shipHullRepairAcceleration : 1f;
 			return FFU_BE_Defs.shipHullRepairTime * TimeMultiplier(c) / timeMult;
 		}
-		//Speed Up Module Repair Time
 		[MonoModReplace] public float GetModuleHpRepairTime(Crewmember c, bool considerAccelTime) {
+		/// Speed Up Module Repair Time
 			float timeMult = (considerAccelTime && PerFrameCache.IsGoodSituation) ? FFU_BE_Defs.moduleRepairAcceleration : 1f;
 			return FFU_BE_Defs.moduleRepairTime * TimeMultiplier(c) / timeMult;
 		}
-		//Decrease Module Repair Cost
 		public ResourceValueGroup ModuleHpRepairCost {
+		/// Decrease Module Repair Cost
 			get { return new ResourceValueGroup { synthetics = FFU_BE_Defs.moduleRepairCost }; }
 		}
 	}
 	public class patch_Shop : Shop {
 		[MonoModIgnore] private bool wasLoaded;
-		//Increased Station Resource Capacity
 		[MonoModReplace] private void Start() {
+		/// Increased Station Resource Capacity
 			if (!wasLoaded) {
 				moduleCommissionFeeSeed = RstRandom.positiveIntValue;
 				if (crewStation) {
@@ -204,8 +204,8 @@ namespace RST {
 	}
 	public class patch_RandomizeShip : RandomizeShip {
 		public extern void orig_Randomize(int seed);
-		//Increased Resource Drop from Battles
 		public void Randomize(int seed) {
+		/// Increased Resource Drop from Battles
 			int sectorMult = Sector.Instance != null ? Sector.Instance.number : 1;
 			lootOrganics.minValue *= FFU_BE_Defs.enemyResourcesLootMinMult * sectorMult;
 			lootOrganics.maxValue *= FFU_BE_Defs.enemyResourcesLootMaxMult * sectorMult;
@@ -225,8 +225,8 @@ namespace RST {
 		}
 	}
 	public class patch_WorldRules : WorldRules {
-		//Alternative Fire Chance Levels
 		[MonoModReplace] public float GetFireChancePercent(ShootAtDamageDealer.FireChanceLevel level) {
+		/// Alternative Fire Chance Levels
 			switch (level) {
 				case ShootAtDamageDealer.FireChanceLevel.High: return (float)Core.FireIgniteChance.High;
 				case ShootAtDamageDealer.FireChanceLevel.Default: return (float)Core.FireIgniteChance.Medium;
@@ -238,8 +238,8 @@ namespace RST {
 	public class patch_SOSBeacon : SOSBeacon {
 		[MonoModIgnore] private float timer;
 		[MonoModIgnore] private float chosenWaitTime;
-		//Triggering SOS might empower Local Forces.
 		[MonoModReplace] private void Update() {
+		/// Triggering SOS might empower Local Forces.
 			if (timer > chosenWaitTime) {
 				PlayerFleet fleetInstance = PlayerFleet.Instance;
 				Sector sectorInstance = Sector.Instance;
@@ -265,8 +265,8 @@ namespace RST {
 		[MonoModIgnore] private Crewmember Crewmember => GetCachedComponent<Crewmember>(true);
 		[MonoModIgnore] private static bool RoleShouldRepair(Crewmember crew, out IRepairable rep) { rep = null; return false; }
 		[MonoModIgnore] private static ShipModule.Type GetModuleTypeToOperate(Crewmember.Role role) { return ShipModule.Type.None; }
-		//Makes Damaged Module Suitable for Operation
 		[MonoModReplace] private static bool ModuleIsSuitableForOp(ShipModule m, ShipModule.Type expectType, Ownership.Owner expectOwner, bool requireFullHealth) {
+		/// Makes Damaged Module Suitable for Operation
 			if (m != null && m.type == expectType) {
 				if ((requireFullHealth && m.HasFullHealth) || !requireFullHealth)
 					return !m.IsPacked && m.Ship != null && m.Ownership.GetOwner() == expectOwner && m.CurrentLocalOpsCount < m.operatorSpots.Length && m.EnoughResources;
@@ -275,8 +275,8 @@ namespace RST {
 			}
 			return false;
 		}
-		//Crew is Allowed to Operate Damaged Module
 		[MonoModReplace] private bool CheckOperate() {
+		/// Crew is Allowed to Operate Damaged Module
 			Crewmember crewmember = Crewmember;
 			ShipModule.Type moduleTypeToOperate = GetModuleTypeToOperate(crewmember.role);
 			if (moduleTypeToOperate != 0) {
@@ -312,8 +312,8 @@ namespace RST {
 			}
 			return false;
 		}
-		//Operators will Repair Broken, Full Repair to Repairers
 		[MonoModReplace] private bool CheckRepair(bool seeAllShip) {
+		/// Operators will Repair Broken, Full Repair to Repairers
 			Crewmember crewmember = Crewmember;
 			if (crewmember.CurrentCmd != Crewmember.Command.Repair) {
 				IRepairable targetModule;
@@ -335,8 +335,8 @@ namespace RST {
 	}
 	public class patch_ModuleStatusVisualizer : ModuleStatusVisualizer {
 		[MonoModIgnore] private ShipModule Module => GetCachedComponentInParent<ShipModule>(true);
-		//Status Visualizer of Damaged Modules
 		[MonoModReplace] private void UpdateData() {
+		/// Status Visualizer of Damaged Modules
 			ShipModule module = Module;
 			if (module == null) return;
 			if (rootToRotate != null) rootToRotate.rotation = Quaternion.identity;
@@ -390,8 +390,8 @@ namespace RST {
 	public class patch_ModuleStatusVisualizers : ModuleStatusVisualizers {
 		[MonoModIgnore] private Color loadingBarDefaultColor;
 		[MonoModIgnore] private ShipModule Module => GetCachedComponentInParent<ShipModule>(true);
-		//Status Visualizers of Damaged Modules
 		[MonoModReplace] private void UpdateData() {
+		/// Status Visualizers of Damaged Modules
 			ShipModule module = Module;
 			bool isAlive = module != null && !module.IsDead;
 			if (mainGroup.activeSelf != isAlive) {

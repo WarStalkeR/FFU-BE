@@ -344,8 +344,8 @@ namespace FFU_Bleeding_Edge {
 
 namespace RST {
 	public class patch_PlayerFleet : PlayerFleet {
-		//Increase Damage From Asteroids
 		[MonoModReplace] private void DoAsteroidHit(Ship playerShip) {
+		/// Increase Damage From Asteroids
 			if (hitAudio != null) AudioSource.PlayOneShot(hitAudio);
 			if (hitCausesFire && playerShip != null) {
 				if (playerShip.Fire != null) playerShip.Fire.SetFireAtRandomPos();
@@ -356,8 +356,8 @@ namespace RST {
 			StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, line);
 			ComchannelTip.Instance?.NotifyAboutAsteroidHit();
 		}
-		//Research & Peaceful Distance from Warp Gate
 		[MonoModReplace] public bool WarpUsingWarpGate(WarpGate wg) {
+		/// Research & Peaceful Distance from Warp Gate
 			if (wg == null) return false;
 			if (wg.Destination == null) return false;
 			Vector2 shipPos = transform.position;
@@ -375,8 +375,8 @@ namespace RST {
 			}
 			return true;
 		}
-		//Research & Peaceful Distance from Warp Drive
 		[MonoModReplace] public bool WarpToStar(Star targetStar) {
+		/// Research & Peaceful Distance from Warp Drive
 			if (targetStar == null) return false;
 			Vector2 shipPos = transform.position;
 			Vector2 starPos = targetStar.transform.position;
@@ -392,21 +392,21 @@ namespace RST {
 	}
 	public class patch_WarningsVisualizer : WarningsVisualizer {
 		private extern void orig_UpdateData();
-		//Remove Modules and Upgrades Notification Icon
 		private void UpdateData() {
+		/// Remove Modules and Upgrades Notification Icon
 			orig_UpdateData();
 			if (moduleSlotUpgradesAvailable != null) moduleSlotUpgradesAvailable = null;
 			if (moduleCraftsAvailable != null) moduleCraftsAvailable = null;
 		}
-		//Null Reference Exception Patch-Fix
 		public static bool PlayerFleetJammedWarning {
+		/// Null Reference Exception Patch-Fix
 			get {
 				try { return PlayerFleet.Instance != null && PlayerFleet.Instance.IsJammed; } 
 				catch { return true; }
 			}
 		}
-		//Advanced Warp Drive Jamming Feature
 		[MonoModReplace] public static bool WarpIsDisabledForOwner(Ownership.Owner forOwner) {
+		/// Advanced Warp Drive Jamming Feature
 			Ownership.Owner enemyOwner = Ownership.GetOpposite(forOwner);
 			try { return PerFrameCache.CachedShips.Exists((Ship s) => s != null && s.disablesEnemyWarp && s.Ownership.GetOwner() == enemyOwner) ||
 				(forOwner == Ownership.Owner.Me && WarningsVisualizer.PlayerFleetJammedWarning && FFU_BE_Defs.distanceTraveledInPeace < 5f);
@@ -417,15 +417,15 @@ namespace RST {
 		[MonoModIgnore] public Vector2 Destination { get; private set; }
 		[MonoModIgnore] public Transform DestinationNewParent { get; private set; }
 		[MonoModIgnore] private void SetAnimState(bool warpIsLoading, bool destroyIntviewShipToo, float warpLoadDuration) { }
-		//Tier dependent Instant Warp Mode
 		[MonoModReplace] private bool UpdateCountdown() {
+		/// Tier dependent Instant Warp Mode
 			float healthPercent = Mathf.Pow(FFU_BE_Defs.GetHealthPercent(Module), 2);
 			float speedMultiplier = Module.TurnedOnAndIsWorking ? (1f / WorldRules.Instance.warpSkillEffects.EffectiveSkillMultiplier(Module, true)) : 0f;
 			if (Module.HasFullHealth) return reloadTimer.Update(Mathf.Max(speedMultiplier * (PerFrameCache.IsGoodSituation ? 10f : 1f), 1f));
 			else return reloadTimer.Update(Mathf.Max(speedMultiplier * (PerFrameCache.IsGoodSituation ? 10f : 1f) * healthPercent, healthPercent));
 		}
-		//Hostile Attention Check after Warping
 		[MonoModReplace] private void EndWarping(bool success, bool destroyIntviewShipToo) {
+		/// Hostile Attention Check after Warping
 			ShipModule module = Module;
 			if (!success && activationFuel != 0) {
 				PlayerData playerData = PlayerDatas.Get(module.Ownership.GetOwner());
@@ -450,8 +450,8 @@ namespace RST {
 		[MonoModIgnore] private float exoticsDist;
 		[MonoModIgnore] private float creditsDist;
 		[MonoModIgnore] private ResourceValueGroup consumedPerDistance;
-		//Increase Peaceful Distance Counter if not Jammed
 		public void AddDistanceTravelled(float delta) {
+		/// Increase Peaceful Distance Counter if not Jammed
 			if (IsConsumingPerDistance) {
 				PlayerData playerData = PlayerDatas.Get(Module.Ownership.GetOwner());
 				if (!(playerData == null)) {
@@ -483,8 +483,8 @@ namespace RST {
 	}
 	public class patch_ResearchModule : ResearchModule {
 		[MonoModIgnore] private ResourceValueGroup gen;
-		//Generate research points if not Jammed
 		public void AddDistanceTravelled(float delta) {
+		/// Generate research points if not Jammed
 			if (IsProducingPerDistance) {
 				gen += ProducedPerDistance * delta;
 				if (!WarningsVisualizer.PlayerFleetJammedWarning) FFU_BE_Mod_Discovery.CalculateProgressFromSublight(this, delta);
@@ -493,8 +493,8 @@ namespace RST {
 				}
 			}
 		}
-		//Allow Laboratory Modules to Produce All Types
 		public ResourceValueGroup ProducedPerDistance {
+		/// Allow Laboratory Modules to Produce All Types
 			get {
 				int effectiveResearchProduction = Module.TurnedOnAndIsWorking ? WorldRules.Instance.scienceSkillEffects.EffectiveCreditsProduction(Module) : 0;
 				if (Module.HasFullHealth) return producedPerSkillPoint * (effectiveResearchProduction / 100f);
@@ -503,8 +503,8 @@ namespace RST {
 		}
 	}
 	public class patch_GardenModule : GardenModule {
-		//Allow Greenhouse Modules to Produce All Types
 		public ResourceValueGroup ProducedPerDistance {
+		/// Allow Greenhouse Modules to Produce All Types
 			get {
 				int effectiveGreenhouseProduction = Module.TurnedOnAndIsWorking ? WorldRules.Instance.gardenSkillEffects.EffectiveOrganicsProduction(Module) : 0;
 				if (Module.HasFullHealth) return producedPerSkillPoint * (effectiveGreenhouseProduction / 100f);

@@ -1224,8 +1224,8 @@ namespace RST {
 		}
 	}
 	public class patch_AddResourcesToShip : AddResourcesToShip {
-		//Apply Modified Ship Parameters on Spawn
 		public bool DoAfterShipSpawn(Ship ship) {
+		/// Apply Modified Ship Parameters on Spawn
 			if (ship == null || !CheckIfConditionSatisfied(condition, ship)) return false;
 			if (ship != null && ship.Ownership.GetOwner() == Ownership.Owner.Me && !FFU_BE_Defs.updatedShips.Contains(ship.InstanceId)) {
 				Debug.LogWarning("Player ship spawned: [" + ship.InstanceId + "] " + ship.displayName + "! Applying initial tier upgrades...");
@@ -1470,8 +1470,8 @@ namespace RST {
 namespace RST.PlaymakerAction {
 	public class patch_SavegameActions : SavegameActions {
 		private extern void orig_Load();
-		//Validate Modified Loaded Data & Parameters
 		private void Load() {
+		/// Validate Modified Loaded Data & Parameters
 			orig_Load();
 			if (FFU_BE_Defs.firstInst) {
 				if (!FFU_BE_Defs.allModulesCraftable) {
@@ -1551,8 +1551,8 @@ namespace RST.PlaymakerAction {
 	}
 	public class patch_PoiWaitForPlayer : PoiWaitForPlayer {
 		[MonoModIgnore] private POI poi;
-		//Recalculate Black Market Module Price
 		[MonoModReplace] private void TryToVisit() {
+		/// Recalculate Black Market Module Price
 			if (!RstMutexes.TryToLock(ref RstShared.eventLockHolder, poi)) return;
 			POI.LockFleet(poi);
 			poi.LongRangeScanned = true;

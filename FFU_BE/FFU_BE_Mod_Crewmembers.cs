@@ -284,9 +284,10 @@ namespace FFU_Bleeding_Edge {
 				case "Drone tigerspider pirates":
 				case "Drone tigerspider":
 				return crewmember.MaxHealth < 50;
-				case "Redripper crew":
 				case "Heavy security drone":
 				return crewmember.MaxHealth < 75;
+				case "Redripper crew":
+				return crewmember.MaxHealth < 100;
 				case "Drone DIY gunjunker":
 				case "Drone DIY gunjunker enemy":
 				return crewmember.MaxHealth < 125;
@@ -351,9 +352,10 @@ namespace FFU_Bleeding_Edge {
 				case "Drone tigerspider pirates":
 				case "Drone tigerspider":
 				return 50;
-				case "Redripper crew":
 				case "Heavy security drone":
 				return 75;
+				case "Redripper crew":
+				return 100;
 				case "Drone DIY gunjunker":
 				case "Drone DIY gunjunker enemy":
 				return 125;
@@ -659,13 +661,19 @@ namespace FFU_Bleeding_Edge {
 				targetCrew.fireResistance = 1.00f;
 				targetCrew.moveSpeed = 1.9f;
 				break;
-				case "Redripper crew":
 				case "Heavy security drone":
 				targetCrew.MaxHealth = 75 + UnityEngine.Random.Range(0, 36);
 				targetCrew.HomingMovement.turnSpeed = 2.5f;
 				targetCrew.HomingMovement.force = 3.5f;
 				targetCrew.fireResistance = 1.00f;
 				targetCrew.moveSpeed = 2.2f;
+				break;
+				case "Redripper crew":
+				targetCrew.MaxHealth = 100 + UnityEngine.Random.Range(0, 51);
+				targetCrew.HomingMovement.turnSpeed = 2.5f;
+				targetCrew.HomingMovement.force = 3.5f;
+				targetCrew.fireResistance = 0.80f;
+				targetCrew.moveSpeed = 2.4f;
 				break;
 				case "Drone DIY gunjunker":
 				case "Drone DIY gunjunker enemy":
@@ -1368,8 +1376,8 @@ namespace FFU_Bleeding_Edge {
 namespace RST {
 	public class patch_Crewmember : Crewmember {
 		[MonoModIgnore] public SpacePod SpacePodInstance { get; private set; }
-		//Skill Efficiency Limit
 		[MonoModReplace] public int GetEffectiveSkill(Skill skill) {
+		/// Skill Efficiency Limit
 			int effectiveSkill = GetSkill(skill);
 			if (effectiveSkill > 0) {
 				if (!Hungry) return Mathf.Clamp(effectiveSkill, 1, 10);
@@ -1377,8 +1385,8 @@ namespace RST {
 			}
 			return 0;
 		}
-		//Auto Level Up Skill Overflow Fix
 		[MonoModReplace] private static void AutoLevelUp(Crewmember c) {
+		/// Auto Level Up Skill Overflow Fix
 			if (c.unusedSkillPoints > 0) {
 				Skill prioritySkill = Skill.None;
 				switch (c.role) {
@@ -1480,8 +1488,8 @@ namespace RST {
 				}
 			}
 		}
-		//Take Crew Damage From Ship Weapons
 		public void TakeDamage(ShootAtDamageDealer.Damage dd, Vector2 hitPos) {
+		/// Take Crew Damage From Ship Weapons
 			float crewHitChance = 0;
 			switch (dd.crewDmgLevel) {
 				case ShootAtDamageDealer.CrewDmgLevel.High: crewHitChance = (float)Core.CrewHitChance.High; break;
@@ -1493,8 +1501,8 @@ namespace RST {
 				TriggerHitAnim();
 			}
 		}
-		//Kill Boarding Party when Leaving Ship
 		[MonoModReplace] public void EnterPod() {
+		/// Kill Boarding Party when Leaving Ship
 			if (name.Contains("ShortLifeSpan")) {
 				SpacePodInstance.gameObject.Destroy();
 				gameObject.Destroy();
@@ -1506,8 +1514,8 @@ namespace RST {
 			if (HomingMovement != null) HomingMovement.enabled = true;
 			base.transform.SetParent(PlayerDatas.Instance?.transform);
 		}
-		//Allow Drones Skill Points Allocation
 		[MonoModReplace] public bool CanLevelUpSkill(Skill skill, int inc) {
+		/// Allow Drones Skill Points Allocation
 			if (skill == Skill.Presence || skill == Skill.None || inc <= 0) {
 				return false;
 			}
@@ -1515,8 +1523,8 @@ namespace RST {
 			if (unusedSkillPoints >= inc) return skill2 + inc <= 10;
 			return false;
 		}
-		//Update Crew Parameters Assigned to Shops
 		public void BuyableAssignToStore(Shop shop) {
+		/// Update Crew Parameters Assigned to Shops
 			base.gameObject.SetActive(false);
 			Ownership.SetOwner(Ownership.Owner.None);
 			base.transform.parent = shop.buyableCrewContainer;
@@ -1531,8 +1539,8 @@ namespace RST {
 				skills.science * 500 + skills.warp * 500;
 			Fsm.SendEvent("assign to store");
 		}
-		//Update Crew Parameters Assigned to Ships
 		[MonoModReplace] public void BuyableAssignToShip(Ship ship, Ship.TaskArea spawnArea, Ship.TaskArea initialMoveToArea) {
+		/// Update Crew Parameters Assigned to Ships
 			base.gameObject.SetActive(true);
 			Ownership.SetOwner(ship.Ownership.GetOwner());
 			FFU_BE_Mod_Crewmembers.ApplyCrewChanges(this);
@@ -1553,8 +1561,8 @@ namespace RST {
 		}
 	}
 	public class patch_AddCrewToShip : AddCrewToShip {
-		//Advanced Starting/Initial Ships Crew Spawn
 		public bool DoAfterShipSpawn(Ship ship) {
+		/// Advanced Starting/Initial Ships Crew Spawn
 			if (ship == null || !AddResourcesToShip.CheckIfConditionSatisfied(condition, ship)) return false;
 			if (!FFU_BE_Defs.updatedCrews.Contains(ship.InstanceId)) {
 				StartGameCustomization.LoadOrInitAddCrewToShipSeed(this);
@@ -1615,8 +1623,8 @@ namespace RST.PlaymakerAction {
 	public class patch_StartSector : StartSector {
 		[MonoModIgnore] private bool done;
 		[MonoModIgnore] private GameObject loadingInstance;
-		//Drones Receive Skill Points & No Overflow
 		[MonoModReplace] public override void OnUpdate() {
+		/// Drones Receive Skill Points & No Overflow
 			if (done) return;
 			Sector sector = CreateIfNeeded.Do(levelPrefab.Value.GetComponent<Sector>());
 			sector.transform.SetParent(base.Fsm.GameObject.transform);

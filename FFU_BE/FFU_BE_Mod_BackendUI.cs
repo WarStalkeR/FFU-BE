@@ -47,8 +47,8 @@ namespace RST.UI {
 	public class patch_ResourceActionsPanel : ResourceActionsPanel {
 		[MonoModIgnore] private ShipModule resPackPrefab;
 		[MonoModIgnore] private PlayerResource GetPlayerResource(PlayerData pd) { return null; }
-		//Consume Full Cost on Resource Pack From Action Panel
 		[MonoModReplace] private bool ResPackCraftCheck(out int resToPack, out ResourceValueGroup cost, out ResourceValueGroup packValue, out bool hasUsableStorage, out bool hasEnoughForPayingCraftingCost, out bool craftNotDisabled) {
+		/// Consume Full Cost on Resource Pack From Action Panel
 			PlayerData me = PlayerDatas.Me;
 			PlayerResource playerResource = GetPlayerResource(me);
 			resToPack = 0;
@@ -90,8 +90,8 @@ namespace RST.UI {
 	public class patch_PlayerPanel : PlayerPanel {
 		private extern void orig_Update();
 		[MonoModIgnore] private int prevEvasion;
-		//Spam Reduction Timers & Modified Interface
 		private void Update() {
+		/// Spam Reduction Timers & Modified Interface
 			FFU_BE_Mod_Backend.timePassedOrganics += Time.unscaledDeltaTime;
 			FFU_BE_Mod_Backend.timePassedFuel += Time.unscaledDeltaTime;
 			FFU_BE_Mod_Backend.timePassedMetals += Time.unscaledDeltaTime;
@@ -112,8 +112,8 @@ namespace RST.UI {
 			researchCreditsBonus.text = FFU_BE_Mod_Technology.GetCraftChanceText().Replace("MK-", string.Empty).Replace(": ", string.Empty).Replace("I", string.Empty).Replace("V", string.Empty).Replace("X", string.Empty);
 			shipEvasion.SetText(prevEvasion, ref newEvasion, (int i) => i.ToString() + $"°/ₘ");
 		}
-		//Update Research Pop-Up to Show Modified Data
 		[MonoModReplace] private static string BuildResearchCreditsBonusHover(int researchCreditsBonus) {
+		/// Update Research Pop-Up to Show Modified Data
 			if (FFU_BE_Defs.unresearchedModuleIDs.ToList().Count > 2 && Input.GetKeyDown(KeyCode.PageUp) && !Input.GetKeyDown(KeyCode.PageDown)) FFU_BE_Mod_Technology.RotateResearchListForward();
 			if (FFU_BE_Defs.unresearchedModuleIDs.ToList().Count > 2 && !Input.GetKeyDown(KeyCode.PageUp) && Input.GetKeyDown(KeyCode.PageDown)) FFU_BE_Mod_Technology.RotateResearchListBackward();
 			string currentEnergyEmission = "<b>Flagship Energy Emission</b>: " + string.Format("{0:0.#}", FFU_BE_Defs.energyEmission) + "m³" + "\n";
@@ -143,8 +143,8 @@ namespace RST.UI {
 			}
 			return "<color=lime>" + currentEnergyEmission + hostileAwarenessLevel + hostileEnforcersStrength + tierResearchProgress + reverseEngineeringProgress + reverseEngineeringQueue + "</color>";
 		}
-		//Limit Interface Size and Reduce Text Spam
 		private class ResourceBlock {
+		/// Limit Interface Size and Reduce Text Spam
 			[MonoModIgnore] public int resouceChangeSize;
 			[MonoModIgnore] public float animDuration;
 			[MonoModIgnore] public Color textChangingColor;
@@ -274,26 +274,26 @@ namespace RST.UI {
 		private extern void orig_StoreModule();
 		private extern void orig_ModuleOvercharge();
 		private extern void orig_PowerToggleChanged(bool newValue);
-		//Recalculate Ship's Signature on Storing Module
 		private void StoreModule() {
+		/// Recalculate Ship's Signature on Storing Module
 			orig_StoreModule();
 			FFU_BE_Defs.RecalculateEnergyEmission();
 		}
-		//Recalculate Ship's Signature on Overcharging Module
 		private void ModuleOvercharge() {
+		/// Recalculate Ship's Signature on Overcharging Module
 			orig_ModuleOvercharge();
 			FFU_BE_Defs.RecalculateEnergyEmission();
 		}
-		//Recalculate Ship's Signature on Powering Module
 		private void PowerToggleChanged(bool newValue) {
+		/// Recalculate Ship's Signature on Powering Module
 			orig_PowerToggleChanged(newValue);
 			FFU_BE_Defs.RecalculateEnergyEmission();
 		}
 	}
 	public class patch_StoragePanel : StoragePanel {
 		[MonoModIgnore] private HoverableUI upgradeButtonHover;
-		//Modified Max Storage Capacity Upgrade
 		[MonoModReplace] public void UpdateUpgradeButton(Ownership.Owner resourcesGoTo) {
+		/// Modified Max Storage Capacity Upgrade
 			PlayerData playerData = PlayerDatas.Get(resourcesGoTo);
 			ResourceValueGroup r = (playerData != null) ? playerData.Resources : ResourceValueGroup.Empty;
 			WorldRules instance = WorldRules.Instance;
@@ -305,8 +305,8 @@ namespace RST.UI {
 			else upgradeButtonHover.hoverText = "";
 			upgradeButton.interactable = storageModule != null && canIncrease && hasResources;
 		}
-		//Modified Max Storage Capacity Upgrade
 		[MonoModReplace] public static void Upgrade() {
+		/// Modified Max Storage Capacity Upgrade
 			PlayerData me = PlayerDatas.Me;
 			StorageModule storageModule = GetStorageModule(Ownership.Owner.Me, false);
 			if (me == null || storageModule == null) return;

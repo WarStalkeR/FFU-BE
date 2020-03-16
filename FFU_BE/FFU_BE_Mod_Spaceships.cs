@@ -997,6 +997,16 @@ namespace FFU_Bleeding_Edge {
 					resSet.credits = FFU_BE_Defs.NewExactValue(35000);
 					FFU_BE_Defs.prefabResourceSets.Add(resSet);
 					break;
+					case "04 Rogue Rat":
+					resSet.organics = FFU_BE_Defs.NewExactValue(3500);
+					resSet.fuel = FFU_BE_Defs.NewExactValue(8500);
+					resSet.metals = FFU_BE_Defs.NewExactValue(6000);
+					resSet.synthetics = FFU_BE_Defs.NewExactValue(6000);
+					resSet.explosives = FFU_BE_Defs.NewExactValue(6000);
+					resSet.exotics = FFU_BE_Defs.NewExactValue(350);
+					resSet.credits = FFU_BE_Defs.NewExactValue(15000);
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
 					case "03 Weirdship":
 					resSet.organics = FFU_BE_Defs.NewExactValue(6500);
 					resSet.fuel = FFU_BE_Defs.NewExactValue(6000);
@@ -1007,14 +1017,14 @@ namespace FFU_Bleeding_Edge {
 					resSet.credits = FFU_BE_Defs.NewExactValue(40000);
 					FFU_BE_Defs.prefabResourceSets.Add(resSet);
 					break;
-					case "04 Rogue Rat":
-					resSet.organics = FFU_BE_Defs.NewExactValue(3500);
-					resSet.fuel = FFU_BE_Defs.NewExactValue(8500);
-					resSet.metals = FFU_BE_Defs.NewExactValue(6000);
-					resSet.synthetics = FFU_BE_Defs.NewExactValue(6000);
-					resSet.explosives = FFU_BE_Defs.NewExactValue(6000);
-					resSet.exotics = FFU_BE_Defs.NewExactValue(350);
-					resSet.credits = FFU_BE_Defs.NewExactValue(15000);
+					case "00 Easy Tiger":
+					resSet.organics = FFU_BE_Defs.NewExactValue(10000);
+					resSet.fuel = FFU_BE_Defs.NewExactValue(10000);
+					resSet.metals = FFU_BE_Defs.NewExactValue(10000);
+					resSet.synthetics = FFU_BE_Defs.NewExactValue(10000);
+					resSet.explosives = FFU_BE_Defs.NewExactValue(10000);
+					resSet.exotics = FFU_BE_Defs.NewExactValue(750);
+					resSet.credits = FFU_BE_Defs.NewExactValue(125000);
 					FFU_BE_Defs.prefabResourceSets.Add(resSet);
 					break;
 					case "05 Gardenship":
@@ -1045,16 +1055,6 @@ namespace FFU_Bleeding_Edge {
 					resSet.explosives = FFU_BE_Defs.NewExactValue(7000);
 					resSet.exotics = FFU_BE_Defs.NewExactValue(500);
 					resSet.credits = FFU_BE_Defs.NewExactValue(75000);
-					FFU_BE_Defs.prefabResourceSets.Add(resSet);
-					break;
-					case "00 Easy Tiger":
-					resSet.organics = FFU_BE_Defs.NewExactValue(10000);
-					resSet.fuel = FFU_BE_Defs.NewExactValue(10000);
-					resSet.metals = FFU_BE_Defs.NewExactValue(10000);
-					resSet.synthetics = FFU_BE_Defs.NewExactValue(10000);
-					resSet.explosives = FFU_BE_Defs.NewExactValue(10000);
-					resSet.exotics = FFU_BE_Defs.NewExactValue(750);
-					resSet.credits = FFU_BE_Defs.NewExactValue(125000);
 					FFU_BE_Defs.prefabResourceSets.Add(resSet);
 					break;
 					case "08 Roundship":
@@ -1224,8 +1224,8 @@ namespace RST {
 		[MonoModIgnore] private void CompleteFlyTo() { }
 		[MonoModIgnore] private void UpdateExplosion() { }
 		[MonoModIgnore] private void AiSendSomeoneToExtinguishFire() { }
-		//Detailed Ship Hover Info
 		public string HoverText {
+		/// Detailed Ship Hover Info
 			get {
 				StringBuilder stringBuilder = RstShared.StringBuilder;
 				Ownership.Owner owner = Ownership.GetOwner();
@@ -1244,8 +1244,8 @@ namespace RST {
 				return stringBuilder.ToString();
 			}
 		}
-		//Ship Evasion Limit from Configuration & Reduced Evasion Bonus from Damaged Modules
 		public int GetEvasion(Action<IHasDisplayNameLocalized, int> perProviderCallback) {
+		/// Ship Evasion Limit from Configuration & Reduced Evasion Bonus from Damaged Modules
 			int finalEvasion = evasionPercentAdd;
 			if (evasionPercentAdd != 0) perProviderCallback?.Invoke(this, evasionPercentAdd);
 			List<ShipModule> shipModules = Modules;
@@ -1262,8 +1262,8 @@ namespace RST {
 			}
 			return Mathf.Clamp(finalEvasion, 0, FFU_BE_Defs.shipMaxEvasionLimit);
 		}
-		//Reduced Accuracy Bonus from Damaged Modules
 		[MonoModReplace] public int GetAccuracy(Action<IHasDisplayNameLocalized, int> perProviderCallback) {
+		/// Reduced Accuracy Bonus from Damaged Modules
 			int finalAccuracy = accuracyPercentAdd;
 			if (accuracyPercentAdd != 0) perProviderCallback?.Invoke(this, accuracyPercentAdd);
 			foreach (ShipModule shipModule in Modules) {
@@ -1278,8 +1278,8 @@ namespace RST {
 			}
 			return finalAccuracy;
 		}
-		//Reduced Shield Capacity from Damaged Modules
 		[MonoModReplace] public int GetMaxShieldPoints(Action<IHasDisplayNameLocalized, int> perProviderCallback) {
+		/// Reduced Shield Capacity from Damaged Modules
 			List<ShipModule> modules = Modules;
 			if (perProviderCallback != null) modules.Sort((ShipModule m) => -m.MaxShieldAdd);
 			int totalShield = 0;
@@ -1295,8 +1295,8 @@ namespace RST {
 			}
 			return totalShield;
 		}
-		//Enforce Ship Self-Destruct Timer
 		[MonoModReplace] private void DoSelfDestruct() {
+		/// Enforce Ship Self-Destruct Timer
 			bool isSelfDestructing = IsSelfDestructing;
 			if (prevIsSelfDestructing != isSelfDestructing) {
 				if (isSelfDestructing) selfDestructTimer.Restart(WorldRules.Instance.shipSelfDestructTime);
@@ -1304,8 +1304,9 @@ namespace RST {
 			}
 			if (!isSelfDestructing && prevIsSelfDestructing) selfDestructTimer.Restart(WorldRules.Instance.shipSelfDestructTime);
 			if (isSelfDestructing && selfDestructTimer.Update(1f)) TakeDamage(int.MaxValue);
-		}//Collections to List Fix
+		}
 		[MonoModReplace] private void Update() {
+		/// Collections to List Fix
 			if (flyTo) {
 				if (!(Vector2.Distance(base.transform.position, flyToPos) < 0.1f)) {
 					if (!RstTime.IsPaused) base.transform.position = Vector2.Lerp(base.transform.position, flyToPos, 0.55f);
@@ -1370,8 +1371,8 @@ namespace RST {
 			} else AiSendSomeoneToExtinguishFire();
 			if (exploding) UpdateExplosion();
 		}
-		//All Modules Lootable (Depends on their Integrity)
 		[MonoModReplace] private void LeaveLootModules() {
+		/// All Modules Lootable (Depends on their Integrity)
 			int[] leaveLootModuleCounts = WorldRules.Instance.shipExplosionParams.leaveLootModuleCounts;
 			if (!WorldRules.Impermanent.shipModuleLootDisabled && leaveLootModuleCounts.Length != 0 && Ownership.GetOwner() != Ownership.Owner.Me) {
 				List<ShipModule> droppedModulesList = Modules.FindAll((ShipModule m) => m != null && !m.IsDead && m.type != ShipModule.Type.Storage && !FFU_BE_Defs.IsProhibitedModule(m));
@@ -1386,8 +1387,8 @@ namespace RST {
 				}
 			}
 		}
-		//Remove Temporary Modifiers & Make Boss Weapons Useless
 		[MonoModReplace] private static void DetatchModule(ShipModule module) {
+		/// Remove Temporary Modifiers & Make Boss Weapons Useless
 			if (module == null) return;
 			CrewAssignmentSpot[] operatorSpots = module.operatorSpots;
 			for (int i = 0; i < operatorSpots.Length; i++) operatorSpots[i].UnassignCrew();
@@ -1430,8 +1431,8 @@ namespace RST {
 	public class patch_Door : Door {
 		[MonoModIgnore] private PlayMakerFSM Fsm => GetCachedComponent<PlayMakerFSM>(true);
 		[MonoModIgnore] private static List<Crewmember> tmpCrewList = new List<Crewmember>();
-		//Repair Door when clicking Left Mouse Button
 		public void OnPointerClick(PointerEventData eventData) {
+		/// Repair Door when clicking Left Mouse Button
 			if (eventData.button == Settings.SelectButton) {
 				if (Ownership.GetOwner() == Ownership.Owner.Me && !HasFullHealth && PerFrameCache.IsGoodSituation) {
 					int repairAmount = (MaxHealth - Health) >= 10 ? 10 : MaxHealth - Health;

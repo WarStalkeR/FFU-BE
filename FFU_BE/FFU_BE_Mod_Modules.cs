@@ -587,16 +587,16 @@ namespace RST {
 		[MonoModIgnore] private CountdownTimer unpackTimer = new CountdownTimer();
 		[MonoModIgnore] private static void ScrapGetResources(PlayerResource resource, int amount, StringBuilder logLineSb) { }
 		[MonoModIgnore] private static void ScrapGetCredits(PlayerData pd, int amount, StringBuilder logLineSb) { }
-		//Tactical Unpack Times
 		[MonoModReplace] public void StartUnpacking(bool useCraftTime) {
+		/// Tactical Unpack Times
 			UnpackShared();
 			UnpackTime = useCraftTime ? FFU_BE_Defs.shipModuleCraftTime : FFU_BE_Defs.shipModuleUnpackTime;
 			if (UnpackTime == 0f) { Unpack(); return; }
 			IsUnpacking = true;
 			unpackTimer.Restart(UnpackTime);
 		}
-		//Update Module Parameters Assigned to Store
 		public void BuyableAssignToStore(Shop shop) {
+		/// Update Module Parameters Assigned to Store
 			Ownership.SetOwner(Ownership.Owner.None);
 			float healthPercent = FFU_BE_Mod_Modules.GetRelativeHealth(this);
 			FFU_BE_Mod_Technology.ApplySectorModuleTier(this);
@@ -606,13 +606,13 @@ namespace RST {
 			Pack();
 			base.transform.position = new Vector3(10000f, 0f, 0f);
 		}
-		//Recalculate Ship's Signature on Module Unpack
 		private void Unpack() {
+		/// Recalculate Ship's Signature on Module Unpack
 			orig_Unpack();
 			FFU_BE_Defs.RecalculateEnergyEmission();
 		}
-		//Do Permanent Damage to Module on Higher Difficulties
 		public void TakeDamage(ShootAtDamageDealer.Damage dd, Vector2 hitPos) {
+		/// Do Permanent Damage to Module on Higher Difficulties
 			if (type == Type.Storage) return;
 			TakeDamage(dd.moduleDmg);
 			if (dd.moduleOverloadSeconds > 0) TryCauseOverload(dd.moduleOverloadSeconds);
@@ -627,8 +627,8 @@ namespace RST {
 				}
 			}
 		}
-		//Multiple Features Implementations on Scrap Module
 		[MonoModReplace] public void Scrap(PlayerData resourcesGoTo, bool addLogLine) {
+		/// Multiple Features Implementations on Scrap Module
 			float moduleHealthPercent = FFU_BE_Mod_Modules.GetRelativeHealth(this);
 			if (resourcesGoTo != null) {
 				scrapGet *= moduleHealthPercent;
@@ -670,8 +670,8 @@ namespace RST {
 			GameObject gameObject = (!IsPacked) ? Effects.scrappedPrefab : ((!InStorage) ? Effects.scrappedPackedPrefab : null);
 			if (gameObject != null) UnityEngine.Object.Instantiate(gameObject, base.transform.position, base.transform.rotation);
 		}
-		//Extensive Damage from Overcharge
 		[MonoModReplace] public bool StartOvercharge() {
+		/// Extensive Damage from Overcharge
 			if (!OverchargeAvailable) return false;
 			WorldRules instance = WorldRules.Instance;
 			if (RstRandom.value <= instance.moduleOverchargeDamageChance) TakeDamage(UnityEngine.Random.Range(1, MaxHealth / 3 + 1));
@@ -681,15 +681,15 @@ namespace RST {
 			if (type == Type.Engine) if (Ship != null) UnityEngine.Object.Instantiate(VisualSettings.Instance.shipDodgeEffectPrefab, Ship.transform);
 			return true;
 		}
-		//Damaged Module Still is Operable
 		public bool IsOperatableNow {
+		/// Damaged Module Still is Operable
 			get {
 				if (!FFU_BE_Defs.DamagedButWorking(this) || IsPacked) return false;
 				return CurrentLocalOpsCount < operatorSpots.Length;
 			}
 		}
-		//Damaged Module Consumes Power
 		public bool RequestsPower {
+		/// Damaged Module Consumes Power
 			get {
 				if (HasFullHealth)
 					return turnedOn && !IsPacked && EnoughOps && EnoughResources && Ship != null;
@@ -698,8 +698,8 @@ namespace RST {
 				return false;
 			}
 		}
-		//Damaged Module Continues to Work
 		public bool IsWorking {
+		/// Damaged Module Continues to Work
 			get {
 				if (HasFullHealth)
 					return !IsPacked && IsPowered && !IsOverloaded && !IsJammed && EnoughOps && EnoughResources;
@@ -708,8 +708,8 @@ namespace RST {
 				return false;
 			}
 		}
-		//Damaged Module is Remotely Operated
 		public bool IsRemotelyOperated {
+		/// Damaged Module is Remotely Operated
 			get {
 				if (HasFullHealth)
 					return turnedOn && !IsPacked && (operatorSpots.Length != 0 || type == Type.Weapon_Nuke) && CurrentLocalOpsWithSkillCount <= 0 && RemoteBridge != null;
@@ -718,21 +718,21 @@ namespace RST {
 				return false;
 			}
 		}
-		//Nukes Operated Remotely via Bridge
 		public bool IsAutoOperated {
+		/// Nukes Operated Remotely via Bridge
 			get {
 				return turnedOn && !IsPacked && operatorSpots.Length == 0 && type != Type.Weapon_Nuke;
 			}
 		}
-		//Nukes Operated Remotely via Bridge
 		public bool EnoughOps {
+		/// Nukes Operated Remotely via Bridge
 			get {
 				if (operatorSpots.Length != 0) return CurrentOpsWithSkillCount > 0;
 				return type != Type.Weapon_Nuke || (type == Type.Weapon_Nuke && RemoteBridge != null);
 			}
 		}
-		//Nukes Operated Remotely via Bridge
 		public bool TurnedOnAndIsWorking {
+		/// Nukes Operated Remotely via Bridge
 			get {
 				if (turnedOn) {
 					if (type == Type.Weapon_Nuke) return RemoteBridge != null;
@@ -741,8 +741,8 @@ namespace RST {
 				return false;
 			}
 		}
-		//Nukes Operated Remotely via Bridge
 		public bool IsPowered {
+		/// Nukes Operated Remotely via Bridge
 			get {
 				if (powerConsumed > 0) return isPowered;
 				if (type == Type.Weapon_Nuke) return RemoteBridge != null;
@@ -752,8 +752,8 @@ namespace RST {
 				isPowered = value;
 			}
 		}
-		//Reduced Evasion Bonuses from Damaged Modules
 		public int ShipEvasionPercentBonus {
+		/// Reduced Evasion Bonuses from Damaged Modules
 			get {
 				if (type == Type.Bridge) {
 					if (!TurnedOnAndIsWorking) return 0;
@@ -770,8 +770,8 @@ namespace RST {
 				else return Mathf.CeilToInt(shipEvasionPercentAdd * FFU_BE_Defs.GetHealthPercent(this));
 			}
 		}
-		//Crew Can Operate Damaged Module
 		[MonoModReplace] public bool CanOperate(Crewmember crew, bool now) {
+		/// Crew Can Operate Damaged Module
 			if (now) {
 				if (!EnoughResources || IsPacked || IsOverloaded || IsJammed || CurrentLocalOpsCount >= operatorSpots.Length) return false;
 				if (!FFU_BE_Defs.DamagedButWorking(this)) return false;
@@ -787,8 +787,8 @@ namespace RST {
 			if (type == Type.Cryosleep) return CryosleepModule.CanAccept(crew.type);
 			return crew.HasSkill(GetRequiredCrewSkillType());
 		}
-		//Crew Can Operate THIS Damaged Module
 		[MonoModReplace] private bool GetSelectedPlayerCrewThatCanOperateThis(List<Crewmember> outList) {
+		/// Crew Can Operate THIS Damaged Module
 			outList?.Clear();
 			if (!FFU_BE_Defs.DamagedButWorking(this)) return false;
 			if ((HoverPanel.ChosenCrewCommand == Crewmember.Command.None && Ownership.GetOwner() == Ownership.Owner.Me) || HoverPanel.ChosenCrewCommand == Crewmember.Command.Operate) {
@@ -803,8 +803,8 @@ namespace RST {
 			if (outList != null) return outList.Count > 0;
 			return false;
 		}
-		//Trigger Module Changes from Damage
 		[MonoModReplace] private void Update() {
+		/// Trigger Module Changes from Damage
 			UpdateRegistrationWithParent<Ship, ShipModule>(ref cachedShip);
 			UpdateRegistrationWithParent<Ship, IRepairable>(ref cachedShip2);
 			if (IsUnpacking) {
@@ -852,8 +852,8 @@ namespace RST {
 			if (OutlineHoverAndSelect.outlineDrawer.gameObject.activeSelf != flag)
 				OutlineHoverAndSelect.outlineDrawer.gameObject.SetActive(flag);
 		}
-		//Updated Status Text for Damaged Module
 		public string GetStatusStringLocalized() {
+		/// Updated Status Text for Damaged Module
 			StringBuilder stringBuilder = RstShared.StringBuilder2;
 			if (!(Ship == null)) {
 				if (IsOverloaded) stringBuilder.AppendFormat(MonoBehaviourExtended.TT("Overloaded for {0:0.0} seconds"), overloadTimer.value);
@@ -916,8 +916,8 @@ namespace RST {
 		[MonoModIgnore] public Vector2 TargetPos { get { return TrackedTargetGo.transform.position; } private set { } }
 		[MonoModIgnore] private ShootAtDamageDealer CreateDamageDealer(int barrelTipIndex, bool isFirstInVolley) { return null; }
 		private bool hasDetonated = false;
-		//Min Aim Angle based on Weapon Type
 		[MonoModReplace] public float CalculateAimAngle(Vector2 targetPos) {
+		/// Min Aim Angle based on Weapon Type
 			if (accuracy == 0) return 0f;
 			float num = 1f;
 			Collider2D[] colliders = RstShared.Colliders16;
@@ -937,8 +937,8 @@ namespace RST {
 			else if (Module.displayName.ToLower().Contains("rail")) return Mathf.Clamp(gunnerySkillEffects.EffectiveAngle(this) * (1f / shipAccuracyBonus), 1f, 30f);
 			else return Mathf.Clamp(gunnerySkillEffects.EffectiveAngle(this) * (1f / shipAccuracyBonus), 4f, 90f);
 		}
-		//Use All Weapon Barrels Consequently
 		[MonoModReplace] public bool ShootAt() {
+		/// Use All Weapon Barrels Consequently
 			Ship cachedComponentInParent = GetCachedComponentInParent<Ship>();
 			PlayerData useSurplusFrom = PlayerDatas.Get(cachedComponentInParent.Ownership.GetOwner());
 			if (!resourcesPerShot.ConsumeFrom(cachedComponentInParent, 1f, MonoBehaviourExtended.tt("weapon"), useSurplusFrom)) return false;
@@ -949,8 +949,8 @@ namespace RST {
 			if (Module.type == ShipModule.Type.Weapon_Nuke) UnityEngine.Object.Destroy(base.gameObject);
 			return true;
 		}
-		//Use All Weapon Barrels Consequently & Damaged Reload Speed
 		[MonoModReplace] private void Update() {
+		/// Use All Weapon Barrels Consequently & Damaged Reload Speed
 			if (Module.IsDead && Module.type == ShipModule.Type.Weapon_Nuke && !hasDetonated) {
 				HasTarget = false;
 				TargetPos = gameObject.transform.position;
@@ -1016,8 +1016,8 @@ namespace RST {
 		[MonoModIgnore] private void TrackTarget(IPointDefTarget dd) { }
 		[MonoModIgnore] private bool ShootAt(IPointDefTarget targetDd, bool needAndTakeResources) { return false; }
 		[MonoModIgnore] private static IPointDefTarget GetHighestPriorityTarget(Vector2 fromPos, float radius, Ownership.Owner ddOwner) { return null; }
-		//Reduce Reload Speed for Damaged Point Defense
 		[MonoModReplace] private void Update() {
+		/// Reduce Reload Speed for Damaged Point Defense
 			ShipModule module = Module;
 			if (!RstTime.IsPaused && module.IsWorking) {
 				IPointDefTarget target = GetTarget();
@@ -1030,8 +1030,8 @@ namespace RST {
 				}
 			}
 		}
-		//Reduce Cover Radius for Damaged Point Defense
 		[MonoModReplace] private IPointDefTarget GetTarget() {
+		/// Reduce Cover Radius for Damaged Point Defense
 			Vector2 vector = base.transform.position;
 			float effectiveCoverRadius;
 			if (Module.HasFullHealth) effectiveCoverRadius = EffectiveCoverRadius;
@@ -1049,8 +1049,8 @@ namespace RST {
 		}
 	}
 	public class patch_ReactorModule : ReactorModule {
-		//Damage Affects Reactor Output 
 		public int PowerCapacity {
+		/// Damage Affects Reactor Output
 			get {
 				ShipModule module = Module;
 				if (module != null && !module.HasFullHealth) return Mathf.CeilToInt((powerCapacity + ((module != null && module.IsOvercharged) ? overchargePowerCapacityAdd : 0)) * FFU_BE_Defs.GetHealthPercent(module));
@@ -1059,8 +1059,8 @@ namespace RST {
 		}
 	}
 	public class patch_ShieldModule : ShieldModule {
-		//Decrease Shield Regen Speed from Damage
 		[MonoModReplace] private void Update() {
+		/// Decrease Shield Regen Speed from Damage
 			if (reloadInterval <= 0f) return;
 			Shield shipShield = ShipShield;
 			if (!(shipShield == null)) {
@@ -1081,8 +1081,8 @@ namespace RST {
 		}
 	}
 	public class patch_MaterialsConverterModule : MaterialsConverterModule {
-		//Resource Production Amount from Damage
 		[MonoModReplace] private void CompleteConversion() {
+		/// Resource Production Amount from Damage
 			ConversionInProgress = false;
 			PlayerData pd = PlayerDatas.Get(Module.Ownership.GetOwner());
 			ResourceValueGroup newProduce = Module.HasFullHealth ? produce : produce * FFU_BE_Defs.GetHealthPercent(Module);
@@ -1095,8 +1095,8 @@ namespace RST {
 		[MonoModIgnore] private float nextDreamDist;
 		[MonoModIgnore] private float dreamDist;
 		[MonoModIgnore] private void HealOneCrewHp() { }
-		//Cryosleep Effects Trigger from Damage
 		public void AddDistanceTravelled(float delta) {
+		/// Cryosleep Effects Trigger from Damage
 			bool fullHealth = Module.HasFullHealth;
 			float healthPercent = FFU_BE_Defs.GetHealthPercent(Module);
 			if (healOneCrewHp) {
@@ -1148,8 +1148,8 @@ namespace RST {
 		[MonoModIgnore] private Crewmember lastAssignedCrewmember;
 		[MonoModIgnore] private ShipModule Module => GetCachedComponentInParent<ShipModule>(true);
 		[MonoModIgnore] private CrewAssignmentSpot AssignemntSpot => GetCachedComponent<CrewAssignmentSpot>(true);
-		//Crew in Cryosleep in Damaged Cryobay Modules.
 		[MonoModReplace] private void UpdateData() {
+		/// Crew in Cryosleep in Damaged Cryobay Modules.
 			Crewmember crewmember = null;
 			if (AssignemntSpot.assignedCrewmember != null) {
 				ShipModule module = Module;
@@ -1166,8 +1166,8 @@ namespace RST {
 		[MonoModIgnore] private float timer;
 		[MonoModIgnore] private ShipModule Module => GetCachedComponentInParent<ShipModule>(true);
 		[MonoModIgnore] private CrewAssignmentSpot AssignmentSpot => GetCachedComponent<CrewAssignmentSpot>(true);
-		//Health Bay Healing Speed from Damage
 		[MonoModReplace] private void UpdateData() {
+		/// Health Bay Healing Speed from Damage
 			if (AssignmentSpot.assignedCrewmember == null) return;
 			ShipModule module = Module;
 			if (!(module != null) || !module.HasFullHealth || !module.IsPowered || 1 == 0) return;
@@ -1189,13 +1189,13 @@ namespace RST {
 		}
 	}
 	public class patch_GunnerySkillEffects : GunnerySkillEffects {
-		//Damage Based Module Accuracy Reductions
 		[MonoModReplace] public int EffectiveAccuracy(WeaponModule wm) {
+		/// Damage Based Module Accuracy Reductions
 			if (wm.Module.HasFullHealth) return Mathf.CeilToInt(EffectiveSkillPoints(wm.Module) * skillPointAccuracyBonus) + wm.accuracy;
 			else return Mathf.CeilToInt((EffectiveSkillPoints(wm.Module) * skillPointAccuracyBonus + wm.accuracy) * FFU_BE_Defs.GetHealthPercent(wm.Module));
 		}
-		//Damage Based Module Reload Reductions
 		[MonoModReplace] public float EffectiveReloadTime(WeaponModule wm) {
+		/// Damage Based Module Reload Reductions
 			if (wm.reloadIntervalTakesNoBonuses) {
 				if (wm.Module.HasFullHealth) return wm.reloadInterval;
 				else return wm.reloadInterval / FFU_BE_Defs.GetHealthPercent(wm.Module);
@@ -1203,27 +1203,27 @@ namespace RST {
 			if (wm.Module.HasFullHealth) return wm.reloadInterval * EffectiveSkillMultiplier(wm.Module, true);
 			else return wm.reloadInterval * EffectiveSkillMultiplier(wm.Module, true) / FFU_BE_Defs.GetHealthPercent(wm.Module);
 		}
-		//Damage Based Module Cover Radius Reductions
 		[MonoModReplace] public float EffectiveCoverRadius(PointDefenceModule pd) {
+		/// Damage Based Module Cover Radius Reductions
 			if (pd.Module.HasFullHealth) return pd.coverRadius * EffectiveSkillMultiplier(pd.Module, false);
 			else return pd.coverRadius * EffectiveSkillMultiplier(pd.Module, false) * FFU_BE_Defs.GetHealthPercent(pd.Module);
 		}
 	}
 	public class patch_ScienceSkillEffects : ScienceSkillEffects {
-		//Allow Laboratory Modules to Produce All Types
 		[MonoModReplace] public int EffectiveCreditsProduction(ShipModule m) {
+		/// Allow Laboratory Modules to Produce All Types
 			return EffectiveSkillPoints(m) * skillPointBonusProduction;
 		}
 	}
 	public class patch_GardenSkillEffects : GardenSkillEffects {
-		//Allow Greenhouse Modules to Produce All Types
 		[MonoModReplace] public int EffectiveOrganicsProduction(ShipModule m) {
+		/// Allow Greenhouse Modules to Produce All Types
 			return EffectiveSkillPoints(m) * skillPointBonusProduction;
 		}
 	}
 	public class patch_PlayerData : PlayerData {
-		//Damaged Module Affects Asteroid Deflection
 		[MonoModReplace] public int GetCurrentAsteroidDeflectionPercent(Action<IHasDisplayNameLocalized, int> perProviderCallback) {
+		/// Damaged Module Affects Asteroid Deflection
 			Ship flagship = Flagship;
 			if (flagship == null) return 0;
 			int totalAstDefl = flagship.asteroidDeflectionPercentAdd;
@@ -1238,8 +1238,8 @@ namespace RST {
 			}
 			return totalAstDefl;
 		}
-		//Damaged Module Affects Sector Radar Range
 		[MonoModReplace] public float GetCurrentSectorRadarRange(Action<IHasDisplayNameLocalized, float> perProviderCallback) {
+		/// Damaged Module Affects Sector Radar Range
 			Ship flagship = Flagship;
 			if (flagship == null) return 0f;
 			List<ShipModule> modules = flagship.Modules;
@@ -1257,8 +1257,8 @@ namespace RST {
 			}
 			return totalRadSecRng;
 		}
-		//Damaged Module Affects Starmap Radar Range
 		[MonoModReplace] public float GetCurrentStarmapRadarRange(Action<IHasDisplayNameLocalized, float> perProviderCallback) {
+		/// Damaged Module Affects Starmap Radar Range
 			Ship flagship = Flagship;
 			if (flagship == null) return 0f;
 			float totalRadStarRng = 0f;
@@ -1279,8 +1279,8 @@ namespace RST {
 			if (!(instance != null) || !(playerFleet != null) || !instance.CheckIfInsideClouds(playerFleet.transform.position)) return totalRadStarRng;
 			return totalRadStarRng * WorldRules.Instance.radarRangeMultiplierInCloud;
 		}
-		//Damaged Module Affects Starmap Speed
 		[MonoModReplace] public float GetCurrentStarmapSpeed(Action<IHasDisplayNameLocalized, float> perProviderCallback) {
+		/// Damaged Module Affects Starmap Speed
 			Ship flagship = Flagship;
 			PlayerFleet instance = PlayerFleet.Instance;
 			if (flagship == null || instance == null) return 0f;

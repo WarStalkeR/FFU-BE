@@ -17,8 +17,8 @@ using MonoMod;
 
 namespace RST {
 	public class patch_ShipAI : ShipAI {
-		//Broken Modules Identification Fix
 		public class ModuleCrewPair : AiStateItem, IAiStateItem, IHasAssociatedCrew, IHasAssociatedModule {
+		/// Broken Modules Identification Fix
 			public Crewmember Crew { get; private set; }
 			public Vector2 CrewPos { get; private set; }
 			public ShipModule Module { get; private set; }
@@ -68,8 +68,8 @@ namespace RST {
 				};
 			}
 		}
-		//Broken Modules Identification Fix
 		public class ModuleWithoutCrew : AiStateItem, IAiStateItem, IHasAssociatedModule {
+		/// Broken Modules Identification Fix
 			public ShipModule Module { get; private set; }
 			public Vector2 ModulePos { get; private set; }
 			public bool ModuleBrokenButFullyRepairable { get; private set; }
@@ -106,8 +106,8 @@ namespace RST {
 				};
 			}
 		}
-		//Broken Modules Identification Fix
 		public class WeaponWithoutOrTooOldTarget : AiStateItem, IAiStateItem, IHasAssociatedModule {
+		/// Broken Modules Identification Fix
 			public ShipModule Module { get; private set; }
 			public bool ModuleBrokenButFullyRepairable { get; private set; }
 			public Vector2 ModulePos { get; private set; }

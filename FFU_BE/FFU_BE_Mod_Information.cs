@@ -511,8 +511,8 @@ namespace FFU_Bleeding_Edge {
 namespace RST.UI {
 	public class patch_ModuleSlotActionsPanel : ModuleSlotActionsPanel {
 		private extern void orig_Update();
-		//Resize List of Modules based on Resolution
 		private void Update() {
+		/// Resize List of Modules based on Resolution
 			maxItemsToFit = (float)(Screen.height / 75) - 2;
 			orig_Update();
 		}
@@ -520,8 +520,8 @@ namespace RST.UI {
 	public class patch_ModuleSlotListItem : ModuleSlotListItem {
 		[MonoModIgnore] private bool confirmSlotDowngrade;
 		[MonoModIgnore] private ModuleSlotActionsPanel.Item Item;
-		//Prefab Module Full Information Window
 		[MonoModReplace] public void FillWithDataFrom(ModuleSlotActionsPanel.Item item, ResourceValueGroup pr) {
+		/// Prefab Module Full Information Window
 			Item = item;
 			base.gameObject.SetActive(true);
 			confirmSlotDowngrade = false;
@@ -553,8 +553,8 @@ namespace RST.UI {
 			hoverable.enabled = true;
 			Refresh(pr);
 		}
-		//Prefab Module Full Information Window
 		[MonoModReplace] public void Refresh(ResourceValueGroup pr) {
+		/// Prefab Module Full Information Window
 			ModuleSlotActionsPanel.Item item = Item;
 			if (item == null) return;
 			ModuleSlot.Upgrade slotUpgrade = item.slotUpgrade;
@@ -654,8 +654,8 @@ namespace RST.UI {
 		private string aftColor;
 		private string altPreClr;
 		private string altAftClr;
-		//Selected Module Full Information Window
 		[MonoModReplace] private void Update() {
+		/// Selected Module Full Information Window
 			if (m == null) return;
 			if (!sizeWasChanged) {
 				ModuleDataSubpanelUI.minHeight = 240;
@@ -798,8 +798,8 @@ namespace RST.UI {
 			SafeUpdateField(powerConsText, m.powerConsumed, ref prevPowerConsumed, "{0:0}");
 			DoRequirementColor(powerConsText, powerCons, ship == null || m.type == ShipModule.Type.Warp || (m.turnedOn && m.EnoughPower));
 		}
-		//Updated Weapon Information
 		[MonoModReplace] private void DoWeapon() {
+		/// Updated Weapon Information
 			WeaponModule weapon = m.Weapon;
 			ShootAtDamageDealer.Damage damage = weapon.ProjectileOrBeamPrefab.GetDamage(weapon);
 			Projectile projectile = weapon.ProjectileOrBeamPrefab as Projectile;
@@ -885,8 +885,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy weapon currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Capital Missile Information
 		private void DoNuke() {
+		/// Updated Capital Missile Information
 			WeaponModule weapon = m.Weapon;
 			ShootAtDamageDealer.Damage damage = weapon.ProjectileOrBeamPrefab.GetDamage(weapon);
 			Projectile projectile = weapon.ProjectileOrBeamPrefab as Projectile;
@@ -946,8 +946,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy capital missile currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Point Defense Information
 		[MonoModReplace] private void DoPointDefence() {
+		/// Updated Point Defense Information
 			PointDefenceModule pointDefence = m.PointDefence;
 			PointDefDamageDealer projectileOrBeamPrefab = pointDefence.projectileOrBeamPrefab;
 			ResourceValueGroup resourcesPerShot = pointDefence.resourcesPerShot;
@@ -988,8 +988,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy point defense currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Engine Information
 		[MonoModReplace] private void DoEngine() {
+		/// Updated Engine Information
 			EngineModule engine = m.Engine;
 			SafeUpdateField(10, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
 			SafeUpdateField(20, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
@@ -1024,8 +1024,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy engine currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Update Resource Pack Information
 		[MonoModReplace] private void DoResourcePack() {
+		/// Update Resource Pack Information
 			SafeUpdateField(organicsContCurText, (m.scrapGet.organics > 0) ? $"+{m.scrapGet.organics:0}" : null);
 			SafeUpdateField(fuelContCurText, (m.scrapGet.fuel > 0) ? $"+{m.scrapGet.fuel:0}" : null);
 			SafeUpdateField(metalsContCurText, (m.scrapGet.metals > 0) ? $"+{m.scrapGet.metals:0}" : null);
@@ -1042,8 +1042,8 @@ namespace RST.UI {
 				exoticsContCurHover.hoverText = $"{Localization.TT("Shows how much rare & exotic matter contained in a resource package.")}";
 			}
 		}
-		//Updated Sensor Information
 		[MonoModReplace] private void DoSensor() {
+		/// Updated Sensor Information
 			SensorModule sensor = m.Sensor;
 			SafeUpdateField(10, dmgAreaText, m.starmapStealthDetectionLevelMax > 0 ? $"<color=lime><size=16>{FFU_BE_Mod_Information.GetStealthDetectionText(m.starmapStealthDetectionLevelMax)}</size></color>" : null);
 			if (sensor.starmapRadarRange != 0) {
@@ -1067,8 +1067,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy sensor array currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Bridge Information
 		[MonoModReplace] private void DoBridge() {
+		/// Updated Bridge Information
 			bridgeRemoteOpsGo.SetActive(true);
 			bridgeEvasion.SetActiveIfNeeded();
 			BridgeSkillEffects bridgeSkillEffects = WorldRules.Instance.bridgeSkillEffects;
@@ -1093,8 +1093,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy bridge currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Shields Information
 		[MonoModReplace] private void DoShieldGen() {
+		/// Updated Shields Information
 			ShieldModule shieldGen = m.ShieldGen;
 			ShieldSkillEffects shieldSkillEffects = WorldRules.Instance.shieldSkillEffects;
 			if (shieldGen.reloadInterval != 0f) {
@@ -1119,8 +1119,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy shield module currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Warp Drive Information
 		[MonoModReplace] private void DoWarp() {
+		/// Updated Warp Drive Information
 			Ship ship = m.Ship;
 			WarpModule warp = m.Warp;
 			SafeUpdateField(warpActivationFuelText, warp.activationFuel, ref prevActivationFuel);
@@ -1148,8 +1148,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy warp drive currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Reactor Information
 		[MonoModReplace] private void DoReactor() {
+		/// Updated Reactor Information
 			ReactorModule reactor = m.Reactor;
 			bool isOvercharged = m.IsOvercharged;
 			int reactorNum = isOvercharged ? reactor.powerCapacity + reactor.overchargePowerCapacityAdd : reactor.powerCapacity;
@@ -1174,8 +1174,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy reactor currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Health Bay Information
 		[MonoModReplace] private void DoMedbay() {
+		/// Updated Health Bay Information
 			Ship ship = m.Ship;
 			MedbayModule medbay = m.Medbay;
 			int orgPerHp = (int)medbay.resourcesPerHp.organics;
@@ -1201,8 +1201,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy health bay currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Converter Information
 		[MonoModReplace] private void DoMaterialsConverter() {
+		/// Updated Converter Information
 			MaterialsConverterModule materialsConverter = m.MaterialsConverter;
 			exoticsProdText.transform.parent.parent.gameObject.SetActive(false);
 			DoResourceProdPerSecond(materialsConverter.produce, materialsConverter.secondsPerConversion);
@@ -1231,8 +1231,8 @@ namespace RST.UI {
 				exoticsContCurHover.hoverText = exoticsProdHover.hoverText;
 			}
 		}
-		//Updated Fighter Bay Information
 		[MonoModReplace] private void DoFighter() {
+		/// Updated Fighter Bay Information
 			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
 			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
@@ -1251,8 +1251,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy fighter bay currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Resource Storage Information
 		[MonoModReplace] private void DoContainer() {
+		/// Updated Resource Storage Information
 			ContainerModule container = m.Container;
 			int organics = container.Organics;
 			int fuel = container.Fuel;
@@ -1288,8 +1288,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy container currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Module Storage Information
 		[MonoModReplace] private void DoStorageContainer() {
+		/// Updated Module Storage Information
 			storageSizeText.alignment = TextAnchor.MiddleLeft;
 			SafeUpdateField(10, storageSizeText, m.Storage.slotCount.ToString());
 			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
@@ -1303,8 +1303,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy module storage compartment currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Greenhouse Information
 		[MonoModReplace] private void DoGarden() {
+		/// Updated Greenhouse Information
 			GardenModule farm = m.GardenModule;
 			ResourceValueGroup farmSkillProd = farm.producedPerSkillPoint;
 			ResourceValueGroup farmProdPerDist = farm.ProducedPerDistance;
@@ -1341,8 +1341,8 @@ namespace RST.UI {
 				exoticsContCurHover.hoverText = exoticsProdHover.hoverText;
 			}
 		}
-		//Updated Laboratory Information
 		[MonoModReplace] private void DoResearch() {
+		/// Updated Laboratory Information
 			ResearchModule lab = m.Research;
 			ResourceValueGroup labSkillProd = lab.producedPerSkillPoint;
 			ResourceValueGroup labProdPerDist = lab.ProducedPerDistance;
@@ -1383,8 +1383,8 @@ namespace RST.UI {
 				exoticsContCurHover.hoverText = exoticsProdHover.hoverText;
 			}
 		}
-		//Updated Cryosleep Information
 		[MonoModReplace] private void DoCryosleep() {
+		/// Updated Cryosleep Information
 			CryosleepModule cryo = m.Cryosleep;
 			removesOpResCons.SetActive(true);
 			SafeUpdateField(10, crewText, $"{m.CurrentLocalOpsCount}/{m.operatorSpots.Length} <size=16>{Localization.TT("Occupied")}</size>");
@@ -1407,8 +1407,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy cryosleep bay currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Stealth Generator Information
 		[MonoModReplace] private void DoStealthDecryptorSensor() {
+		/// Updated Stealth Generator Information
 			SafeUpdateField(10, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, altPreClr + preColor + "{0:0.#} " + Localization.TT("m") + "³" + aftColor + altAftClr);
 			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
@@ -1427,8 +1427,8 @@ namespace RST.UI {
 				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase stealth generator provides to the ship.")}";
 			}
 		}
-		//Updated Countermeasure Arrays Information
 		[MonoModReplace] private void DoPassiveECM() {
+		/// Updated Countermeasure Arrays Information
 			SafeUpdateField(10, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, altPreClr + preColor + "{0:0.#} " + Localization.TT("m") + "³" + aftColor + altAftClr);
 			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
@@ -1447,8 +1447,8 @@ namespace RST.UI {
 				sMaxHealthBonusHover.hoverText = $"{Localization.TT("Shows durability increase countermeasure module provides to the ship.")}";
 			}
 		}
-		//Updated Starship Armor Information
 		[MonoModReplace] private void DoIntegrity() {
+		/// Updated Starship Armor Information
 			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
 			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
@@ -1467,8 +1467,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy armor currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Decoy Modules Information
 		[MonoModReplace] private void DoDecoy() {
+		/// Updated Decoy Modules Information
 			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
 			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
@@ -1487,8 +1487,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy decoy module currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Updated Other Modules Information
 		[MonoModReplace] private void DoOther() {
+		/// Updated Other Modules Information
 			storageSizeText.alignment = TextAnchor.UpperLeft;
 			SafeUpdateField(10, crewText, FFU_BE_Mod_Information.IsCacheModule(m) && FFU_BE_Mod_Information.GetCacheSets(m) > 0 ? $"{FFU_BE_Mod_Information.GetCacheSets(m)} <size=16>{Localization.TT("Sets")}</size>" : null);
 			SafeUpdateField(20, medbayHealSpotsText, FFU_BE_Mod_Information.IsCacheModule(m) && FFU_BE_Mod_Information.GetCacheHPIncrease(m) > 0 ? $"+{FFU_BE_Mod_Information.GetCacheHPIncrease(m)} <size=16>{Localization.TT("Increase")}</size>" : null);
@@ -1516,8 +1516,8 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.hoverText = $"{Localization.TT("How much energy artifact currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		//Show Updated Crew Damage in Module Panel
 		[MonoModReplace] private void DoWeaponCrewDmg(WeaponModule w, ShootAtDamageDealer.CrewDmgLevel crewDmgLevel) {
+		/// Show Updated Crew Damage in Module Panel
 			dmgToCrewText.transform.parent.parent.gameObject.SetActive(crewDmgLevel != ShootAtDamageDealer.CrewDmgLevel.None);
 			dmgToCrewTextHover.hoverText = $"{Localization.TT("Chance to damage all crewmembers within area of effect by shown amount.")}";
 			string crewDmgText = w.magazineSize + "x" + w.ProjectileOrBeamPrefab.GetDamage(w).doorDmg;
@@ -1529,8 +1529,8 @@ namespace RST.UI {
 				case ShootAtDamageDealer.CrewDmgLevel.High: SafeUpdateField(dmgToCrewText, Localization.TT(crewDmgText + " (" + (int)Core.CrewHitChance.High + "%)")); break;
 			}
 		}
-		//Show Update Fire Ignition Chance in Module Panel
 		[MonoModReplace] private void DoWeaponFireChance(ShootAtDamageDealer.FireChanceLevel fireChanceLevel) {
+		/// Show Update Fire Ignition Chance in Module Panel
 			fireChanceText.transform.parent.parent.gameObject.SetActive(fireChanceLevel != ShootAtDamageDealer.FireChanceLevel.None);
 			fireChanceHover.hoverText = $"{Localization.TT("Chance to ignite fire in every tile within area of effect.")}";
 			fireChanceText.alignment = TextAnchor.MiddleLeft;
@@ -1541,15 +1541,15 @@ namespace RST.UI {
 				case ShootAtDamageDealer.FireChanceLevel.High: SafeUpdateField(fireChanceText, Localization.TT("High (" + (int)Core.FireIgniteChance.High + "%)")); break;
 			}
 		}
-		//Show Serviced Crewmember Types in Module Panel
 		private string CrewmemberTypesText(Crewmember.Type[] crewTypes) {
+		/// Show Serviced Crewmember Types in Module Panel
 			if (crewTypes.Contains(Crewmember.Type.Regular) && crewTypes.Contains(Crewmember.Type.Drone)) return $"{Localization.TT("Drones")}/{Localization.TT("Bio")}";
 			else if (crewTypes.Contains(Crewmember.Type.Regular)) return $"{Localization.TT("Biologic")}";
 			else if (crewTypes.Contains(Crewmember.Type.Drone)) return $"{Localization.TT("Mechanic")}";
 			else return $"{Localization.TT("Pets Only")}";
 		}
-		//Sorted Resource Production Per Second
 		[MonoModReplace] private void DoResourceProdPerSecond(ResourceValueGroup rp, float secondsPerConversion) {
+		/// Sorted Resource Production Per Second
 			float organicsProd = rp.organics * 60f / secondsPerConversion;
 			float fuelProd = rp.fuel * 60f / secondsPerConversion;
 			float metalsProd = rp.metals * 60f / secondsPerConversion;
@@ -1566,8 +1566,8 @@ namespace RST.UI {
 			SafeUpdateField(70, exoticsContCurText, m.HasFullHealth ? exoticsProd : exoticsProd * healthPercent, ref prevExotics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
 			//SafeUpdateField(70, exoticsProdText, m.HasFullHealth ? exoticsProd : exoticsProd * healthPercent, ref prevExotics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
 		}
-		//Sorted Resource Consumption Per Second
 		[MonoModReplace] private void DoResourceConsPerSecond(ResourceValueGroup rc, float secondsPerConversion) {
+		/// Sorted Resource Consumption Per Second
 			float organicsCons = rc.organics * 60f / secondsPerConversion;
 			float fuelCons = rc.fuel * 60f / secondsPerConversion;
 			float metalsCons = rc.metals * 60f / secondsPerConversion;
@@ -1581,8 +1581,8 @@ namespace RST.UI {
 			SafeUpdateField(150, explosivesConsText, explosivesCons, ref prevExplCons, "{0:0}/" + Localization.TT("min."));
 			SafeUpdateField(160, exoticsConsText, exoticsCons, ref prevExoticsCons, "{0:0}/" + Localization.TT("min."));
 		}
-		//New Function: Components Direct Data & Properties Access
 		private void UpdateHoverFlags(bool doWeaponHovers = false, bool doNukeHovers = false, bool doPointDefHovers = false, bool doEngineHovers = false,
+		/// New Function: Components Direct Data & Properties Access
 			bool doResPackHovers = false, bool doSensorHovers = false, bool doBridgeHovers = false, bool doShieldHovers = false,
 			bool doWarpHovers = false, bool doReactorHovers = false, bool doHealthBayHovers = false, bool doConverterHovers = false,
 			bool doFighterHovers = false, bool doContainerHovers = false, bool doStorageHovers = false, bool doCryosleepHovers = false,
@@ -1951,7 +1951,6 @@ namespace RST.UI {
 				return removesOpResCons.transform.GetChild(0).GetChild(1).GetComponent<Text>();
 			}
 		}
-		//New Function: Set Sort Order for Data Entries
 		private static void SortOrder(ModuleEffectItem tObject, int sortOrder) {
 			tObject.transform.SetSiblingIndex(sortOrder);
 		}
@@ -1970,8 +1969,8 @@ namespace RST.UI {
 		private static int SortIndex(Text tObject) {
 			return tObject.transform.parent.parent.GetSiblingIndex();
 		}
-		//New Function: List Index of Each Possible Element
 		private void ListAllElementsIndexes() {
+		/// New Function: List Index of Each Possible Element
 			if (Time.frameCount % 150 != 0) return;
 			Debug.LogWarning($"[cryoSleepSpotsText]: {SortIndex(cryoSleepSpotsText)}");
 			Debug.LogWarning($"[cryoSleepChanceToHeal]: {SortIndex(cryoSleepChanceToHeal)}");
@@ -2119,8 +2118,8 @@ namespace RST.UI {
 	public class patch_CrewDataSubpanel : CrewDataSubpanel {
 		private extern void orig_Update();
 		[MonoModIgnore] private Crewmember c;
-		//Crewmember Weapon Full Information Window
 		private void Update() {
+		/// Crewmember Weapon Full Information Window
 			orig_Update();
 			if (c != null) health.horizontalOverflow = HorizontalWrapMode.Overflow;
 			if (c != null && c.HandWeaponPrefab != null) handWeaponDescriptionHover.hoverText = FFU_BE_Mod_Information.GetSelectedWeaponExactData(c.HandWeaponPrefab);

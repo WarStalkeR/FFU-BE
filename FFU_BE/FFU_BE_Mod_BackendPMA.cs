@@ -1,6 +1,7 @@
 ﻿#pragma warning disable IDE1006
 #pragma warning disable IDE0044
 #pragma warning disable IDE0051
+#pragma warning disable IDE0052
 #pragma warning disable IDE0002
 #pragma warning disable CS0626
 #pragma warning disable CS0649
@@ -23,8 +24,8 @@ using System.Linq;
 namespace RST.PlaymakerAction {
 	public class patch_ChoicePanel : ChoicePanel {
 		private extern void orig_Start();
-		//Increased Resource Numbers for Choices
 		private void Start() {
+		/// Increased Resource Numbers for Choices
 			if (!FFU_BE_Defs.updatedChoices.Contains(GetHashCode())) {
 				foreach (var choiceEntry in choiceText)
 					if (Regex.Match(choiceEntry.Value, @"\d+").Success)
@@ -42,8 +43,8 @@ namespace RST.PlaymakerAction {
 		[MonoModIgnore] private bool started;
 		[MonoModIgnore] private PlayMakerFSM fsm;
 		[MonoModIgnore] private AudioPlayWithFade.Ctx audioCtx;
-		//Increased Resource Numbers for Results
 		[MonoModReplace] private void Start() {
+		/// Increased Resource Numbers for Results
 			started = true;
 			fsm = CreateIfNeeded.Do(UISkin.Instance.resultsPrefab);
 			FsmVariables fsmVariables = fsm.FsmVariables;
@@ -133,8 +134,8 @@ namespace RST.PlaymakerAction {
 		}
 	}
 	public class patch_GetOrphanedModules : GetOrphanedModules {
-		//Damage Salvaged Modules
 		[MonoModReplace] private void DoIt() {
+		/// Damage Salvaged Modules
 			List<GameObject> list = new List<GameObject>();
 			float salvageDamageMax = FFU_BE_Defs.GetDifficultyDamageMax();
 			foreach (ShipModule cachedModule in PerFrameCache.CachedModules) {
@@ -172,14 +173,14 @@ namespace RST.PlaymakerAction {
 		[MonoModIgnore] private List<int> unlockedItems;
 		[MonoModIgnore] private FloatMinMax CountStartingCrew(Ship s) { return default; }
 		[MonoModIgnore] private void CountModuleSlots(Ship s, out int weaponSlots, out int nukeSlots, out int otherSlots) { weaponSlots = 0; nukeSlots = 0; otherSlots = 0; }
-		//Class-based Ship Sorting
 		[MonoModReplace] public static List<Ship> GetAllPlayableShips() {
+		/// Class-based Ship Sorting
 			List<Ship> list = PrefabFinder.Instance.FindAll("IntViewShip", (Ship s) => s.isPlayableShip);
 			list.Sort((Ship a, Ship b) => FFU_BE_Defs.SortAllShips(a.PrefabId).CompareTo(FFU_BE_Defs.SortAllShips(b.PrefabId)));
 			return list;
 		}
-		//Modded Starting Bonuses
 		[MonoModReplace] private void UpdateShipSelection() {
+		/// Modded Starting Bonuses
 			if (ships.Count <= 0) {
 				targetImage.sprite = null;
 				targetDisplayNameInput.text = "";
@@ -255,21 +256,21 @@ namespace RST.PlaymakerAction {
 		[MonoModIgnore] private void ChangeCrewName(Crewmember crew, string newName) { }
 		[MonoModIgnore] private List<PerkUIGridElement> perkUiElements = new List<PerkUIGridElement>();
 		[MonoModIgnore] private static Crewmember InstantiateCrewWithSeed(Crewmember crewPrefab, int seed, string matchingComment, Perk perkPrefab = null) { return null; }
-		//Configurable Starting Fate
 		public override void OnEnter() {
+		/// Configurable Starting Fate
 			firstRunFate.Value = FFU_BE_Defs.newStartingFateBonus;
 			orig_OnEnter();
 		}
-		//Allow Modded Crewmembers to Spawn
 		[MonoModReplace] private void ConfirmationYesClicked() {
+		/// Allow Modded Crewmembers to Spawn
 			confirmationGroup.Value.SetActive(false);
 			if (CanStartGame()) {
 				FFU_BE_Defs.canSpawnCrew = true;
 				FinishThisAction();
 			}
 		}
-		//Usage of Data from Modded Variables
 		[MonoModReplace] private void UpdateResourceAndBonusesDisplay() {
+		/// Usage of Data from Modded Variables
 			Ship ship = chosenMothership.Value?.GetComponent<Ship>();
 			if (ship == null) return;
 			AddResourcesToShip[] componentsInChildren = ship.GetComponentsInChildren<AddResourcesToShip>();
@@ -432,8 +433,8 @@ namespace RST.PlaymakerAction {
 			bool flag = extraModules > storageSizeInShipPrefab;
 			if (extraModulesWarning.Value.activeSelf != flag) extraModulesWarning.Value.SetActive(flag);
 		}
-		//Storage Capacity from Modded Dictionary
 		[MonoModReplace] private static int GetStorageSizeInShipPrefab(Ship shipPrefab) {
+		/// Storage Capacity from Modded Dictionary
 			if (FFU_BE_Defs.shipPrefabsStorageSize.ContainsKey(shipPrefab.PrefabId)) return FFU_BE_Defs.shipPrefabsStorageSize[shipPrefab.PrefabId];
 			foreach (Transform item in shipPrefab.transform) {
 				if (item.CompareTag("Module slot root")) {
@@ -448,8 +449,8 @@ namespace RST.PlaymakerAction {
 			}
 			return 0;
 		}
-		//Color base on Starting Bonus Amount
 		private static void SetResourceElementText(FsmObject textObj, FsmGameObject warningGO, FloatMinMax value, int startingBonus) {
+		/// Color base on Starting Bonus Amount
 			string valueSign = startingBonus > 0 ? "↑" : "↓";
 			bool notEnoughRes = value.min + startingBonus < 0f || value.max + startingBonus < 0f;
 			(textObj.Value as Text).text = notEnoughRes ? $"<color=red>{value.ToString("0")} {(startingBonus != 0 ? $"{valueSign}{Mathf.Abs(startingBonus)}" : null)}</color>" : $"{value.ToString("0")} <color={(startingBonus > 0 ? "lime" : "red")}>{(startingBonus != 0 ? $"{valueSign}{Mathf.Abs(startingBonus)}" : null)}</color>";
@@ -460,21 +461,21 @@ namespace RST.PlaymakerAction {
 		public extern void orig_OnEnter();
 		public extern void orig_OnExit();
 		[MonoModIgnore] private Crewmember crew;
-		//Recalculate Ship's Signature on Crew's Entry
 		public override void OnEnter() {
+		/// Recalculate Ship's Signature on Crew's Entry
 			orig_OnEnter();
 			if (crew != null) if (crew.Ownership.GetOwner() == Ownership.Owner.Me) FFU_BE_Defs.RecalculateEnergyEmission();
 		}
-		//Recalculate Ship's Signature on Crew's Exit
 		public override void OnExit() {
+		/// Recalculate Ship's Signature on Crew's Exit
 			orig_OnExit();
 			if (crew != null) if (crew.Ownership.GetOwner() == Ownership.Owner.Me) FFU_BE_Defs.RecalculateEnergyEmission();
 		}
 	}
 	public class patch_CrewResumeCmd : CrewResumeCmd {
 		[MonoModIgnore] private Crewmember crew;
-		//Allows Crewmembers to Operate Damaged Modules
 		[MonoModReplace] public override void OnEnter() {
+		/// Allows Crewmembers to Operate Damaged Modules
 			Finish();
 			GameObject ownerDefaultTarget = base.Fsm.GetOwnerDefaultTarget(gameObject);
 			crew = ownerDefaultTarget?.GetComponent<Crewmember>();
