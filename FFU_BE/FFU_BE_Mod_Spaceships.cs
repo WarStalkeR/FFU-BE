@@ -1,6 +1,8 @@
 ﻿#pragma warning disable IDE1006
 #pragma warning disable IDE0044
 #pragma warning disable IDE0002
+#pragma warning disable IDE0051
+#pragma warning disable IDE0059
 #pragma warning disable CS0626
 #pragma warning disable CS0649
 #pragma warning disable CS0108
@@ -904,6 +906,26 @@ namespace FFU_Bleeding_Edge {
 						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
 					perk.repCost = 20;
 					break;
+					case "Perk module drone repair bay":
+					perk.displayName = "Advanced Drone Bay Cache";
+					perk.description = "Discovered at one of the abandoned and locked down maintanance facilities during exploration. Contains completely working and packed module, encrypted blueprint and some resources required to operate.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(2500);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "dronebay 1 basic").gameObject }}};
+					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
+						FFU_BE_Defs.prefabModdedModulesList.Find(m => m.name == "dronebay 1 basic").PrefabId });
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
+						$"+{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}" };
+					perk.repCost = 15;
+					break;
 					default:
 					if (FFU_BE_Defs.dumpObjectLists) Debug.Log($"Perk: {perk.name} [{perk.PrefabId}] {perk.displayName}");
 					perksData += $"Prefab ID: {perk.PrefabId}\n";
@@ -1074,6 +1096,7 @@ namespace FFU_Bleeding_Edge {
 				switch (ship.name) {
 					case "01 Tigerfish":
 					ship.MaxHealthAdd = 300;
+					ship.survivabilityText = "NO";
 					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 150));
 					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Industrial Door"));
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 24));
@@ -1081,27 +1104,39 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case "02 Nuke Runner":
 					ship.MaxHealthAdd = 250;
+					ship.survivabilityText = "NO?";
 					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 250));
 					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Security Door"));
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 30));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
-					case "03 Weirdship":
-					ship.MaxHealthAdd = 330;
-					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 75));
-					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Organic Door"));
-					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 18));
-					FFU_BE_Defs.prefabShipsList.Add(ship);
-					break;
 					case "04 Rogue Rat":
 					ship.MaxHealthAdd = 280;
+					ship.survivabilityText = "LOL?";
 					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 125));
 					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Metal Scrap Door"));
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 36));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
+					case "03 Weirdship":
+					ship.MaxHealthAdd = 330;
+					ship.survivabilityText = "MEH";
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 75));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Organic Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 18));
+					FFU_BE_Defs.prefabShipsList.Add(ship);
+					break;
+					case "00 Easy Tiger":
+					ship.MaxHealthAdd = 450;
+					ship.survivabilityText = "OK?";
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 250));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Tactical Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 36));
+					FFU_BE_Defs.prefabShipsList.Add(ship);
+					break;
 					case "05 Gardenship":
 					ship.MaxHealthAdd = 380;
+					ship.survivabilityText = "OK";
 					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 175));
 					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Pressure Door"));
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 24));
@@ -1109,6 +1144,7 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case "06 Atlas":
 					ship.MaxHealthAdd = 470;
+					ship.survivabilityText = "OK!";
 					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 225));
 					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Reinforced Door"));
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 36));
@@ -1116,20 +1152,15 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case "07 Bluestar MK III scientific":
 					ship.MaxHealthAdd = 520;
+					ship.survivabilityText = "YES";
 					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 275));
 					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "High-Tech Door"));
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 42));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
-					case "00 Easy Tiger":
-					ship.MaxHealthAdd = 450;
-					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 250));
-					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Tactical Door"));
-					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 36));
-					FFU_BE_Defs.prefabShipsList.Add(ship);
-					break;
 					case "08 Roundship":
 					ship.MaxHealthAdd = 420;
+					ship.survivabilityText = "GUD";
 					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 200));
 					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Carapace Door"));
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 48));
@@ -1137,6 +1168,7 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case "BattleTiger":
 					ship.MaxHealthAdd = 700;
+					ship.survivabilityText = "NICE";
 					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 350));
 					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Shielded Door"));
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 48));
@@ -1144,6 +1176,7 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case "10 Endurance":
 					ship.MaxHealthAdd = 600;
+					ship.survivabilityText = "EPIC";
 					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 475));
 					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Heavy Blast Door"));
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 60));

@@ -1,5 +1,6 @@
 ﻿#pragma warning disable IDE1006
 #pragma warning disable IDE0044
+#pragma warning disable IDE0051
 #pragma warning disable IDE0002
 #pragma warning disable CS0626
 #pragma warning disable CS0649
@@ -171,6 +172,12 @@ namespace RST.PlaymakerAction {
 		[MonoModIgnore] private List<int> unlockedItems;
 		[MonoModIgnore] private FloatMinMax CountStartingCrew(Ship s) { return default; }
 		[MonoModIgnore] private void CountModuleSlots(Ship s, out int weaponSlots, out int nukeSlots, out int otherSlots) { weaponSlots = 0; nukeSlots = 0; otherSlots = 0; }
+		//Class-based Ship Sorting
+		[MonoModReplace] public static List<Ship> GetAllPlayableShips() {
+			List<Ship> list = PrefabFinder.Instance.FindAll("IntViewShip", (Ship s) => s.isPlayableShip);
+			list.Sort((Ship a, Ship b) => FFU_BE_Defs.SortAllShips(a.PrefabId).CompareTo(FFU_BE_Defs.SortAllShips(b.PrefabId)));
+			return list;
+		}
 		//Modded Starting Bonuses
 		[MonoModReplace] private void UpdateShipSelection() {
 			if (ships.Count <= 0) {

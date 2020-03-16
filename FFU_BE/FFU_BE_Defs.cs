@@ -1,4 +1,6 @@
 ﻿#pragma warning disable CS0436
+#pragma warning disable IDE0051
+#pragma warning disable IDE0059
 
 using RST;
 using HarmonyLib;
@@ -424,6 +426,11 @@ namespace FFU_Bleeding_Edge {
 				if (txt.name.Contains("BridgeRemoteOpsValue")) txt.text = "<color=lime>Remote Control</color>";
 				if (txt.name.Contains("RemovesCrewResConsValue")) txt.text = "<color=lime>No Consumption</color>";
 				if (txt.name.Contains("CryosleepGeneratesCreditsValue")) txt.text = "<color=lime>Generates Credits</color>";
+				if (txt.name == "Text" && txt.text == "Starting bonuses:") {
+					try { txt.transform.parent.GetChild(3).gameObject.SetActive(false); } catch { }
+					txt.text = "You start with additional resources and bonuses, and modules are not affected by critical hits.";
+				}
+				if (txt.name == "Text" && txt.text == "The game ends when your ship HP reaches 0.") txt.text = "You start with reduced resources and bonuses, and game ends when your ship HP reaches 0.";
 				if (txt.name == "Text" && txt.text == "Quick start") txt.text = "Basic Controls";
 				if (txt.name == "quick start" && txt.text == "Quick Start") txt.text = "Basic Controls";
 				if (txt.name == "quick start 2" && txt.text == "Quick Start 2") txt.text = "Basic Information";
@@ -914,6 +921,22 @@ namespace FFU_Bleeding_Edge {
 			else Debug.LogWarning($"{itemSpacing.ToString()}[{childNum}] {tObject.ToString()}");
 			for (int i = 0; i < tObject.GetComponents<object>().Length; i++) Debug.LogWarning($"{itemSpacing.ToString()}  - {tObject.GetComponents<object>()[i]?.ToString()}");
 			for (int i = 0; i < tObject.childCount; i++) GetComponentsListTree(tObject.GetChild(i), cOrder + 1, i);
+		}
+		public static int SortAllShips(int shipPrefabID) {
+			switch (shipPrefabID) {
+				case 516057105: return 10;
+				case 487234563: return 20;
+				case 578937222: return 30;
+				case 1809014558: return 40;
+				case 1920692188: return 50;
+				case 1106792042: return 60;
+				case 2103659466: return 70;
+				case 1772361532: return 80;
+				case 1251918188: return 90;
+				case 1452660923: return 100;
+				case 1939804939: return 110;
+				default: return 1000;
+			}
 		}
 		public static int SortAllModules(ShipModule shipModule) {
 			switch (shipModule.type) {

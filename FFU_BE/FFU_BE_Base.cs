@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿#pragma warning disable IDE0051
+#pragma warning disable IDE0059
+
+using UnityEngine;
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -7,17 +10,17 @@ using System.Linq;
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Base {
 		public static readonly string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\LocalLow\Interactive Fate\Shortest Trip To Earth\";
-		private static readonly string[] shipEntries = { "Tigerfish", "NukeRunner", "Weirdship", "RogueRat", "Gardenship", "Atlas", "Bluestar", "EasyTiger", "Roundship", "BattleTiger", "Endurance" };
+		private static readonly string[] shipEntries = { "Tigerfish", "NukeRunner", "RogueRat", "Weirdship", "EasyTiger", "Gardenship", "Atlas", "Bluestar", "Roundship", "BattleTiger", "Endurance" };
 		private static int GetShipPrefabID(string shipType) {
 			switch (shipType) {
 				case "Tigerfish": return 516057105;
 				case "NukeRunner": return 487234563;
-				case "Weirdship": return 1809014558;
 				case "RogueRat": return 578937222;
+				case "Weirdship": return 1809014558;
+				case "EasyTiger": return 1920692188;
 				case "Gardenship": return 1106792042;
 				case "Atlas": return 2103659466;
 				case "Bluestar": return 1772361532;
-				case "EasyTiger": return 1920692188;
 				case "Roundship": return 1251918188;
 				case "BattleTiger": return 1452660923;
 				case "Endurance": return 1939804939;
@@ -28,12 +31,12 @@ namespace FFU_Bleeding_Edge {
 			switch (shipPrefabID) {
 				case 516057105: return "Tigerfish";
 				case 487234563: return "Nuke Runner";
-				case 1809014558: return "Fierce Sincerity";
 				case 578937222: return "Rogue Rat";
+				case 1809014558: return "Fierce Sincerity";
+				case 1920692188: return "Easy Tiger";
 				case 1106792042: return "Pumpkin Hammer";
 				case 2103659466: return "Atlas";
 				case 1772361532: return "Bluestar";
-				case 1920692188: return "Easy Tiger";
 				case 1251918188: return "Warpshell";
 				case 1452660923: return "Battle Tiger";
 				case 1939804939: return "Endurance";
@@ -170,18 +173,18 @@ namespace FFU_Bleeding_Edge {
 			modConfig["CrewSpawn"]["shipTigerfishNumbers"] = "2|2";
 			modConfig["CrewSpawn"]["shipNukeRunnerTypes"] = "Heavy security drone|Drone CT2 gunnery";
 			modConfig["CrewSpawn"]["shipNukeRunnerNumbers"] = "2|2";
-			modConfig["CrewSpawn"]["shipWeirdshipTypes"] = "Redripper crew|Beedroid crew";
-			modConfig["CrewSpawn"]["shipWeirdshipNumbers"] = "2|2";
 			modConfig["CrewSpawn"]["shipRogueRatTypes"] = "Drone DIY gunjunker|Drone DIY gunnery pirates cannon";
 			modConfig["CrewSpawn"]["shipRogueRatNumbers"] = "2|2";
+			modConfig["CrewSpawn"]["shipWeirdshipTypes"] = "Redripper crew|Beedroid crew";
+			modConfig["CrewSpawn"]["shipWeirdshipNumbers"] = "2|2";
+			modConfig["CrewSpawn"]["shipEasyTigerTypes"] = "Combat Drone Humanoid|Drone tigerdog";
+			modConfig["CrewSpawn"]["shipEasyTigerNumbers"] = "4|2";
 			modConfig["CrewSpawn"]["shipGardenshipTypes"] = "Combat Drone Humanoid|Drone tigerspider";
 			modConfig["CrewSpawn"]["shipGardenshipNumbers"] = "4|2";
 			modConfig["CrewSpawn"]["shipAtlasTypes"] = "Combat Drone Humanoid|Heavy security drone";
 			modConfig["CrewSpawn"]["shipAtlasNumbers"] = "2|4";
 			modConfig["CrewSpawn"]["shipBluestarTypes"] = "Drone DIY science|Drone tigerspider";
 			modConfig["CrewSpawn"]["shipBluestarNumbers"] = "4|4";
-			modConfig["CrewSpawn"]["shipEasyTigerTypes"] = "Combat Drone Humanoid|Drone tigerdog";
-			modConfig["CrewSpawn"]["shipEasyTigerNumbers"] = "6|2";
 			modConfig["CrewSpawn"]["shipRoundshipTypes"] = "Combat Drone Humanoid|Redripper crew";
 			modConfig["CrewSpawn"]["shipRoundshipNumbers"] = "2|6";
 			modConfig["CrewSpawn"]["shipBattleTigerTypes"] = "Combat Drone Humanoid|Heavy security drone|Drone tigerspider assaulter|Drone tigerdog";
