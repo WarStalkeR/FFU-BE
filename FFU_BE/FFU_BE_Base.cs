@@ -163,6 +163,7 @@ namespace FFU_Bleeding_Edge {
 			modConfig["Multipliers"]["coreSlotsHealthMult"] = 1.0f;
 			modConfig["Multipliers"]["enemyResourcesLootMinMult"] = 2.0f;
 			modConfig["Multipliers"]["enemyResourcesLootMaxMult"] = 5.0f;
+			modConfig["Multipliers"]["enemyShipHullHealthMult"] = 10.0f;
 			modConfig["Multipliers"]["tierResearchSpeedMult"] = 1.0f;
 			modConfig["Multipliers"]["moduleResearchSpeedMult"] = 1.0f;
 			modConfig["Multipliers"]["intactModuleDropChance"] = 0.85f;
@@ -187,7 +188,7 @@ namespace FFU_Bleeding_Edge {
 			modConfig["CrewSpawn"]["shipBluestarNumbers"] = "4|4";
 			modConfig["CrewSpawn"]["shipRoundshipTypes"] = "Combat Drone Humanoid|Redripper crew";
 			modConfig["CrewSpawn"]["shipRoundshipNumbers"] = "2|6";
-			modConfig["CrewSpawn"]["shipBattleTigerTypes"] = "Combat Drone Humanoid|Heavy security drone|Drone tigerspider assaulter|Drone tigerdog";
+			modConfig["CrewSpawn"]["shipBattleTigerTypes"] = "Combat Drone Humanoid|Heavy security drone|Drone tigerspider|Drone tigerdog";
 			modConfig["CrewSpawn"]["shipBattleTigerNumbers"] = "4|2|2|2";
 			modConfig["CrewSpawn"]["shipEnduranceTypes"] = "Combat Drone Humanoid|Heavy security drone|Drone tigerspider pirates";
 			modConfig["CrewSpawn"]["shipEnduranceNumbers"] = "4|4|4";

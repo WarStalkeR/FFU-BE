@@ -250,16 +250,89 @@ namespace RST.PlaymakerAction {
 		}
 	}
 	public class patch_PerksSelection : PerksSelection {
-		public extern void orig_OnEnter();
+		[MonoModIgnore] private void BackClicked() { }
+		[MonoModIgnore] private void DoneClicked() { }
+		[MonoModIgnore] private void ResetClicked() { }
+		[MonoModIgnore] private void UpdateDisplay() { }
 		[MonoModIgnore] private void FinishThisAction() { }
+		[MonoModIgnore] private void ConfirmationNoClicked() { }
+		[MonoModIgnore] private void ClearSelectedPerkInfo() { }
 		[MonoModIgnore] private bool CanStartGame() { return false; }
+		[MonoModIgnore] private string DefaultShipName { get { return null; } }
+		[MonoModIgnore] private void OnToggleChanged(PerkUIGridElement item, bool ticked) { }
 		[MonoModIgnore] private void ChangeCrewName(Crewmember crew, string newName) { }
 		[MonoModIgnore] private List<PerkUIGridElement> perkUiElements = new List<PerkUIGridElement>();
 		[MonoModIgnore] private static Crewmember InstantiateCrewWithSeed(Crewmember crewPrefab, int seed, string matchingComment, Perk perkPrefab = null) { return null; }
-		public override void OnEnter() {
+		[MonoModIgnore] private int prevTotalFate;
+		[MonoModIgnore] private int fateFromPermanentPerks;
+		[MonoModIgnore] private List<int> unlockedItemIds;
+		[MonoModIgnore] private List<int> shipSpecificPerkIds;
+		[MonoModIgnore] private List<int> purchasedPermPerkIds;
+		[MonoModIgnore] private int TotalFate => prevRunFate.Value + sectorFate.Value + firstRunFate.Value + fateFromPermanentPerks;
+		[MonoModReplace] public override void OnEnter() {
 		/// Configurable Starting Fate
-			firstRunFate.Value = FFU_BE_Defs.newStartingFateBonus;
-			orig_OnEnter();
+			if (FFU_BE_Defs.newStartingFateBonus > 0) firstRunFate.Value = FFU_BE_Defs.newStartingFateBonus;
+			backButton.onClick.AddListener(BackClicked);
+			doneButton.onClick.AddListener(DoneClicked);
+			resetButton.onClick.AddListener(ResetClicked);
+			(confirmationYesButton.Value as Button).onClick.AddListener(ConfirmationYesClicked);
+			(confirmationNoButton.Value as Button).onClick.AddListener(ConfirmationNoClicked);
+			confirmationGroup.Value.SetActive(false);
+			prevTotalFate = TotalFate;
+			List<Perk> list = new List<Perk>();
+			purchasedPermPerkIds = Perk.LoadPurchasedPermPerkIds();
+			unlockedItemIds = UnlockItem.LoadUnlockedItems();
+			shipSpecificPerkIds = new List<int>();
+			GameObjectPool gameObjectPool = WorldRules.Instance.perksPoolRef.Prefab?.GetComponent<GameObjectPool>();
+			if (gameObjectPool != null) {
+				foreach (GameObject item in gameObjectPool.items) {
+					if (item != null) {
+						Perk component = item.GetComponent<Perk>();
+						if (component != null) list.Add(component);
+					}
+				}
+			}
+			if (!FFU_BE_Defs.unusedPerkIDs.IsEmpty()) foreach (int perkId in FFU_BE_Defs.unusedPerkIDs) list.Add(FFU_BE_Defs.prefabPerkList.Find(p => p.PrefabId == perkId));
+			InputField obj = shipNameInput.Value as InputField;
+			string defaultShipName = DefaultShipName;
+			obj.text = ((storeShipName.Value != defaultShipName) ? storeShipName.Value : "");
+			obj.placeholder.GetComponent<Text>().text = Localization.TT("Default name:") + " " + DefaultShipName;
+			if (chosenMothership.Value != null) {
+				Ship component2 = chosenMothership.Value.GetComponent<Ship>();
+				if (component2 != null) {
+					ShipSpecificPerks cachedComponent = component2.GetCachedComponent<ShipSpecificPerks>(true);
+					if (cachedComponent != null) {
+						Perk[] perkPrefabs = cachedComponent.PerkPrefabs;
+						foreach (Perk perk2 in perkPrefabs) {
+							if (perk2 != null) {
+								shipSpecificPerkIds.Add(perk2.PrefabId);
+								list.Add(perk2);
+							}
+						}
+					}
+				}
+			}
+			fateFromPermanentPerks = 0;
+			perkUiElements = RstUtil.RebuildUiList((grid.Value as GridLayoutGroup).transform, gridItemProto.Value as PerkUIGridElement, list, delegate (PerkUIGridElement ui, Perk perk) {
+				patch_PerksSelection perksSelection = this;
+				ui.FillWithDataFrom(perk, unlockedItemIds, purchasedPermPerkIds, shipSpecificPerkIds);
+				bool flag = perk.isPermanent && purchasedPermPerkIds.Contains(perk.PrefabId);
+				if (flag) fateFromPermanentPerks += perk.fateBonusInPerkSelection;
+				if (ui.toggle.isOn != flag) {
+					Toggle.ToggleTransition toggleTransition = ui.toggle.toggleTransition;
+					ui.toggle.toggleTransition = Toggle.ToggleTransition.None;
+					ui.toggle.isOn = flag;
+					ui.toggle.toggleTransition = toggleTransition;
+				}
+				ui.toggle.onValueChanged.AddListener(delegate (bool ticked) {
+					perksSelection.OnToggleChanged(ui, ticked);
+				});
+			});
+			UpdateDisplay();
+			ClearSelectedPerkInfo();
+			if (perkInfoGroup.Value != null) {
+				perkInfoGroup.Value.SetActive(false);
+			}
 		}
 		[MonoModReplace] private void ConfirmationYesClicked() {
 		/// Allow Modded Crewmembers to Spawn

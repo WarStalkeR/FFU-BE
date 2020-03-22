@@ -673,7 +673,7 @@ namespace FFU_Bleeding_Edge {
 				targetCrew.HomingMovement.turnSpeed = 2.5f;
 				targetCrew.HomingMovement.force = 3.5f;
 				targetCrew.fireResistance = 0.80f;
-				targetCrew.moveSpeed = 2.4f;
+				targetCrew.moveSpeed = 2.8f;
 				break;
 				case "Drone DIY gunjunker":
 				case "Drone DIY gunjunker enemy":
@@ -1192,7 +1192,7 @@ namespace FFU_Bleeding_Edge {
 					handWeapon.damageDealerPrefab.GetDamage(handWeapon).moduleDmg = 4;
 					handWeapon.damageDealerPrefab.GetDamage(handWeapon).moduleDmgChance = 0.8f;
 					handWeapon.farthestAttackDistance = 36.0f;
-					handWeapon.reloadInterval = 8.2f;
+					handWeapon.reloadInterval = 6.2f;
 					handWeapon.shotInterval = 1.0f;
 					handWeapon.magazineSize = 3;
 					handWeapon.accuracy = 24;
@@ -1206,7 +1206,7 @@ namespace FFU_Bleeding_Edge {
 					handWeapon.damageDealerPrefab.GetDamage(handWeapon).moduleDmg = 3;
 					handWeapon.damageDealerPrefab.GetDamage(handWeapon).moduleDmgChance = 0.8f;
 					handWeapon.farthestAttackDistance = 48.0f;
-					handWeapon.reloadInterval = 8.4f;
+					handWeapon.reloadInterval = 5.4f;
 					handWeapon.shotInterval = 0.8f;
 					handWeapon.magazineSize = 5;
 					handWeapon.accuracy = 48;

@@ -51,6 +51,7 @@ namespace FFU_Bleeding_Edge {
 		public static List<Perk> prefabPerkList = new List<Perk>();
 		public static List<Ship> prefabShipsList = new List<Ship>();
 		public static List<Beam> prefabBeamRaysList = new List<Beam>();
+		public static List<Perk> unlockablePerkList = new List<Perk>();
 		public static List<WorldRules> prefabWorldRules = new List<WorldRules>();
 		public static List<AddCrewToShip> prefabCrewSets = new List<AddCrewToShip>();
 		public static List<Projectile> prefabProjectilesList = new List<Projectile>();
@@ -197,6 +198,7 @@ namespace FFU_Bleeding_Edge {
 		public static List<string> negativeMods = new List<string>(new string[] { "(Unstable)", "(Fragile)", "(Inefficient)", "(Inhibited)", "(Disrupted)", "(Deficient)", "(Brittle)", "(Volatile)" });
 		public static List<string> choiceAnchorWords = new List<string>(new string[] { "organic", "fuel", "starfuel", "metal", "synthetic", "explosive", "exotic", "xenodata", "credit" });
 		public static List<int> updatedChoices = new List<int>();
+		public static List<int> unusedPerkIDs = new List<int>();
 		public static bool summonAttempted = true;
 		public static bool summonEnforcerFleet = false;
 		public static int discoveryScanLevel = 0;
@@ -332,6 +334,7 @@ namespace FFU_Bleeding_Edge {
 				FFU_BE_Mod_Spaceships.InitSelectablePerks();
 				FFU_BE_Mod_Spaceships.InitShipResourcePrefabs();
 				FFU_BE_Mod_Spaceships.InitSpaceShipsPrefabList();
+				FFU_BE_Mod_Spaceships.InitLockedPerksAllocation();
 				if (ES2.Exists("start.es2?tag=researchProgress")) researchProgress = ES2.Load<float>("start.es2?tag=researchProgress");
 				if (ES2.Exists("start.es2?tag=moduleResearchGoal")) moduleResearchGoal = ES2.Load<float>("start.es2?tag=moduleResearchGoal");
 				if (ES2.Exists("start.es2?tag=unusedReverseProgress")) unusedReverseProgress = ES2.Load<float>("start.es2?tag=unusedReverseProgress");
@@ -428,9 +431,9 @@ namespace FFU_Bleeding_Edge {
 				if (txt.name.Contains("CryosleepGeneratesCreditsValue")) txt.text = "<color=lime>Generates Credits</color>";
 				if (txt.name == "Text" && txt.text == "Starting bonuses:") {
 					try { txt.transform.parent.GetChild(3).gameObject.SetActive(false); } catch { }
-					txt.text = "You start with additional resources and bonuses, and modules are not affected by critical hits.";
+					txt.text = "You start with additional resources and bonuses. Modules are not affected by critical hits.";
 				}
-				if (txt.name == "Text" && txt.text == "The game ends when your ship HP reaches 0.") txt.text = "You start with reduced resources and bonuses, and game ends when your ship HP reaches 0.";
+				if (txt.name == "Text" && txt.text == "The game ends when your ship HP reaches 0.") txt.text = "You start with reduced resources and bonuses. Game ends when your ship HP reaches 0.";
 				if (txt.name == "Text" && txt.text == "Quick start") txt.text = "Basic Controls";
 				if (txt.name == "quick start" && txt.text == "Quick Start") txt.text = "Basic Controls";
 				if (txt.name == "quick start 2" && txt.text == "Quick Start 2") txt.text = "Basic Information";

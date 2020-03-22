@@ -1026,12 +1026,12 @@ namespace RST.UI {
 		}
 		[MonoModReplace] private void DoResourcePack() {
 		/// Update Resource Pack Information
-			SafeUpdateField(organicsContCurText, (m.scrapGet.organics > 0) ? $"+{m.scrapGet.organics:0}" : null);
-			SafeUpdateField(fuelContCurText, (m.scrapGet.fuel > 0) ? $"+{m.scrapGet.fuel:0}" : null);
-			SafeUpdateField(metalsContCurText, (m.scrapGet.metals > 0) ? $"+{m.scrapGet.metals:0}" : null);
-			SafeUpdateField(syntheticsContCurText, (m.scrapGet.synthetics > 0) ? $"+{m.scrapGet.synthetics:0}" : null);
-			SafeUpdateField(explosivesContCurText, (m.scrapGet.explosives > 0) ? $"+{m.scrapGet.explosives:0}" : null);
-			SafeUpdateField(exoticsContCurText, (m.scrapGet.exotics > 0) ? $"+{m.scrapGet.exotics:0}" : null);
+			SafeUpdateField(10, organicsContCurText, (m.scrapGet.organics > 0) ? $"+{m.scrapGet.organics:0}" : null);
+			SafeUpdateField(20, fuelContCurText, (m.scrapGet.fuel > 0) ? $"+{m.scrapGet.fuel:0}" : null);
+			SafeUpdateField(30, metalsContCurText, (m.scrapGet.metals > 0) ? $"+{m.scrapGet.metals:0}" : null);
+			SafeUpdateField(40, syntheticsContCurText, (m.scrapGet.synthetics > 0) ? $"+{m.scrapGet.synthetics:0}" : null);
+			SafeUpdateField(50, explosivesContCurText, (m.scrapGet.explosives > 0) ? $"+{m.scrapGet.explosives:0}" : null);
+			SafeUpdateField(60, exoticsContCurText, (m.scrapGet.exotics > 0) ? $"+{m.scrapGet.exotics:0}" : null);
 			if (!doResPackHovers) {
 				UpdateHoverFlags(doResPackHovers: true);
 				organicsContCurHover.hoverText = $"{Localization.TT("Shows how much organic substances contained in a resource package.")}";
