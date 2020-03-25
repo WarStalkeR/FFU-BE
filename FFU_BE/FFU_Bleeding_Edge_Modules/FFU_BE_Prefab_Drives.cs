@@ -16,7 +16,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName.Contains("warp 06 rotor blue")) return idx; idx++;
 			if (moduleName.Contains("warp 09 spideraa")) return idx; idx++;
 			if (moduleName.Contains("warp 07 rotor glass")) return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateWarpDriveModule(ShipModule shipModule, bool initItemData) {
 			string colorDrive = "b366ff";

@@ -29,7 +29,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "reactor 20 fusion") return idx; idx++;
 			if (moduleName == "reactor 25 spideraa large") return idx; idx++;
 			if (moduleName == "reactor 22 cube") return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateReactorModule(ShipModule shipModule, bool initItemData) {
 			string colorReactor = "ff4d4d";

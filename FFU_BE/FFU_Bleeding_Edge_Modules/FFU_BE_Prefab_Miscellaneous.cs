@@ -56,7 +56,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "bossweapon insectoid ship") return idx; idx++;
 			if (moduleName == "bossweapon weirdaxer") return idx; idx++;
 			if (moduleName == "storage container 3x4") return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateMsicModule(ShipModule shipModule, bool initItemData) {
 			string colorCache = "add8e6";

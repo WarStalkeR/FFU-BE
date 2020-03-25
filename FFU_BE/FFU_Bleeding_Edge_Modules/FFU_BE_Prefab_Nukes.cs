@@ -54,7 +54,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "08b Old nuke launcher") return idx; idx++;
 			if (moduleName == "10 White nuke launcher") return idx; idx++;
 			if (moduleName == "15 Black nuke launcher") return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateNukeModule(ShipModule shipModule, bool initItemData) {
 			string colorNukeKin = "add8e6";

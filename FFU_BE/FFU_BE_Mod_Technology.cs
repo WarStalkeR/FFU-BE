@@ -334,22 +334,38 @@ namespace FFU_Bleeding_Edge {
 		public static string GetModuleModColoredText(ShipModule shipModule) {
 			Core.BonusMod moduleMod = GetModuleModifier(shipModule);
 			switch (moduleMod) {
-				case Core.BonusMod.Sustained: return "<color=lime>Sustained</color> ";
-				case Core.BonusMod.Unstable: return "<color=red>Unstable</color> ";
-				case Core.BonusMod.Reinforced: return "<color=lime>Reinforced</color> ";
-				case Core.BonusMod.Fragile: return "<color=red>Fragile</color> ";
-				case Core.BonusMod.Efficient: return "<color=lime>Efficient</color> ";
-				case Core.BonusMod.Inefficient: return "<color=red>Inefficient</color> ";
-				case Core.BonusMod.Precise: return "<color=lime>Precise</color> ";
-				case Core.BonusMod.Inhibited: return "<color=red>Inhibited</color> ";
-				case Core.BonusMod.Rapid: return "<color=lime>Rapid</color> ";
-				case Core.BonusMod.Disrupted: return "<color=red>Disrupted</color> ";
-				case Core.BonusMod.Enhanced: return "<color=lime>Enhanced</color> ";
-				case Core.BonusMod.Deficient: return "<color=red>Deficient</color> ";
-				case Core.BonusMod.Durable: return "<color=lime>Durable</color> ";
-				case Core.BonusMod.Brittle: return "<color=red>Brittle</color> ";
-				case Core.BonusMod.Persistent: return "<color=lime>Persistent</color> ";
-				case Core.BonusMod.Volatile: return "<color=red>Volatile</color> ";
+				//case Core.BonusMod.Sustained: return "<color=lime>Sustained</color> ";
+				//case Core.BonusMod.Unstable: return "<color=red>Unstable</color> ";
+				//case Core.BonusMod.Reinforced: return "<color=lime>Reinforced</color> ";
+				//case Core.BonusMod.Fragile: return "<color=red>Fragile</color> ";
+				//case Core.BonusMod.Efficient: return "<color=lime>Efficient</color> ";
+				//case Core.BonusMod.Inefficient: return "<color=red>Inefficient</color> ";
+				//case Core.BonusMod.Precise: return "<color=lime>Precise</color> ";
+				//case Core.BonusMod.Inhibited: return "<color=red>Inhibited</color> ";
+				//case Core.BonusMod.Rapid: return "<color=lime>Rapid</color> ";
+				//case Core.BonusMod.Disrupted: return "<color=red>Disrupted</color> ";
+				//case Core.BonusMod.Enhanced: return "<color=lime>Enhanced</color> ";
+				//case Core.BonusMod.Deficient: return "<color=red>Deficient</color> ";
+				//case Core.BonusMod.Durable: return "<color=lime>Durable</color> ";
+				//case Core.BonusMod.Brittle: return "<color=red>Brittle</color> ";
+				//case Core.BonusMod.Persistent: return "<color=lime>Persistent</color> ";
+				//case Core.BonusMod.Volatile: return "<color=red>Volatile</color> ";
+				case Core.BonusMod.Sustained: return "<color=lime>(P↑)</color> ";
+				case Core.BonusMod.Unstable: return "<color=red>(P↓)</color> ";
+				case Core.BonusMod.Reinforced: return "<color=lime>(D↑)</color> ";
+				case Core.BonusMod.Fragile: return "<color=red>(D↓)</color> ";
+				case Core.BonusMod.Efficient: return "<color=lime>(U↑)</color> ";
+				case Core.BonusMod.Inefficient: return "<color=red>(U↓)</color> ";
+				case Core.BonusMod.Precise: return "<color=lime>(A↑)</color> ";
+				case Core.BonusMod.Inhibited: return "<color=red>(A↓)</color> ";
+				case Core.BonusMod.Rapid: return "<color=lime>(R↑)</color> ";
+				case Core.BonusMod.Disrupted: return "<color=red>(R↓)</color> ";
+				case Core.BonusMod.Enhanced: return "<color=lime>(E↑)</color> ";
+				case Core.BonusMod.Deficient: return "<color=red>(E↓)</color> ";
+				case Core.BonusMod.Durable: return "<color=lime>(H↑)</color> ";
+				case Core.BonusMod.Brittle: return "<color=red>(H↓)</color> ";
+				case Core.BonusMod.Persistent: return "<color=lime>(S↑)</color> ";
+				case Core.BonusMod.Volatile: return "<color=red>(S↓)</color> ";
 				default: return "";
 			}
 		}

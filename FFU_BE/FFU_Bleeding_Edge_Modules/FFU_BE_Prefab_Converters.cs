@@ -15,7 +15,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "oilcake converter") return idx; idx++;
 			if (moduleName == "fuel combinator 1A old") return idx; idx++;
 			if (moduleName == "biotech explosives recycler") return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateConverterModule(ShipModule shipModule, bool initItemData) {
 			string colorFactory = "dbc470";
@@ -111,7 +111,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, organics = 2500f, synthetics = 1500f, exotics = 15f };
 				shipModule.MaterialsConverter.consume = new ResourceValueGroup { explosives = 24f };
 				shipModule.MaterialsConverter.produce = new ResourceValueGroup { organics = 48f };
-				shipModule.powerConsumed = 0;
+				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 20;
 				break;
 				default:

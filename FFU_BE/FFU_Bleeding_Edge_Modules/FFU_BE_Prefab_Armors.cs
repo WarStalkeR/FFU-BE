@@ -21,7 +21,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName.Contains("integrity 06 spideraa")) return idx; idx++;
 			if (moduleName.Contains("integrity 00 Ratty")) return idx; idx++;
 			if (moduleName.Contains("integrity tiger")) return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateArmorModule(ShipModule shipModule, bool initItemData) {
 			string colorArmor = "dbdb70";

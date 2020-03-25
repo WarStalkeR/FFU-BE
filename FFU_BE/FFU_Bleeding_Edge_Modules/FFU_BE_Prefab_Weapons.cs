@@ -162,7 +162,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "weapon BFGx9 for bluestar") return idx; idx++;
 			if (moduleName == "weapon rarelasergothic small") return idx; idx++;
 			if (moduleName == "weapon rarelasergothic") return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateWeaponModule(ShipModule shipModule, bool initItemData) {
 			string colorRocketLan = "ff0000";

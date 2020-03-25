@@ -16,7 +16,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "bridge 3crew plastarmor") return idx; idx++;
 			if (moduleName == "bridge blackspider") return idx; idx++;
 			if (moduleName == "bridge 3crew metalarmor") return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateBridgeModule(ShipModule shipModule, bool initItemData) {
 			string colorBridge = "ff794d";

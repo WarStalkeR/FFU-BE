@@ -14,7 +14,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "5 Human PD") return idx; idx++;
 			if (moduleName == "7 Red PD") return idx; idx++;
 			if (moduleName == "2 Tiger PD") return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdatePointDefModule(ShipModule shipModule, bool initItemData) {
 			string colorPointDef = "ffa64d";

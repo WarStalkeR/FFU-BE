@@ -14,7 +14,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName.Contains("Stealth decryptor 3 bio")) return idx; idx++;
 			if (moduleName.Contains("Stealth decryptor 2 biobrain")) return idx; idx++;
 			if (moduleName.Contains("Stealth decryptor 3 newest human tec")) return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateDecryptorModule(ShipModule shipModule, bool initItemData) {
 			string colorTarget = "4dffa6";

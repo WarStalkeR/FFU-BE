@@ -17,7 +17,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName.Contains("cryosleep 3x medical")) return idx; idx++;
 			if (moduleName.Contains("cryosleep 4x alien family")) return idx; idx++;
 			if (moduleName.Contains("cryosleep 8x insect")) return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateCryosleepModule(ShipModule shipModule, bool initItemData) {
 			string colorDream = "d966ff";

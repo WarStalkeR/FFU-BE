@@ -12,7 +12,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "garden 5 greenhouse") return idx; idx++;
 			if (moduleName == "garden 4 greenhouse") return idx; idx++;
 			if (moduleName == "garden 6 synthethics") return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateGreenhouseModule(ShipModule shipModule, bool initItemData) {
 			string colorGarden = "4dff4d";

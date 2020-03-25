@@ -8,7 +8,7 @@ namespace FFU_Bleeding_Edge {
 			int idx = 0;
 			if (moduleName == "shield decoy 1") return idx; idx++;
 			if (moduleName == "weapondecoy1") return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateDecoyModule(ShipModule shipModule, bool initItemData) {
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");

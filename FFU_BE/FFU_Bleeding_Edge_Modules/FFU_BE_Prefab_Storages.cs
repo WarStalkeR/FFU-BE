@@ -63,7 +63,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName.Contains("exotics container 1 small")) return idx; idx++;
 			if (moduleName.Contains("exotics container 2 medium")) return idx; idx++;
 			if (moduleName.Contains("exotics container 3 large")) return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateStorageModule(ShipModule shipModule, bool initItemData) {
 			string colorMulti = "cccccc";

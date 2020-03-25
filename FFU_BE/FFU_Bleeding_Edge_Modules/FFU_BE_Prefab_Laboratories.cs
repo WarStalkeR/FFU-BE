@@ -10,7 +10,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName.Contains("lab rats x3")) return idx; idx++;
 			if (moduleName.Contains("lab module x3")) return idx; idx++;
 			if (moduleName.Contains("lab 1xgood")) return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateLaboratoryModule(ShipModule shipModule, bool initItemData) {
 			string colorLab = "4dffff";

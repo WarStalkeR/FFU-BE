@@ -15,7 +15,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName.Contains("medbay5 biofluid bath")) return idx; idx++;
 			if (moduleName.Contains("medbay6 biological")) return idx; idx++;
 			if (moduleName.Contains("medbay4 stem celler")) return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateHealthBayModule(ShipModule shipModule, bool initItemData) {
 			string colorCrew = "ff668c";

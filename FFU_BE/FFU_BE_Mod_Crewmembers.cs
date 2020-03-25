@@ -519,10 +519,39 @@ namespace FFU_Bleeding_Edge {
 				targetCrew.moveSpeed = 0.7f;
 				break;
 				case "Dog":
+				if (targetCrew.skills.shield < 1) targetCrew.skills.shield = 1;
+				targetCrew.MaxHealth = 10 + UnityEngine.Random.Range(0, 6);
+				targetCrew.HomingMovement.turnSpeed = 2.5f;
+				targetCrew.HomingMovement.force = 2.5f;
+				targetCrew.fireResistance = 0.05f;
+				targetCrew.moveSpeed = 1.0f;
+				break;
 				case "Cat1":
+				if (targetCrew.skills.warp < 1) targetCrew.skills.warp = 1;
+				targetCrew.MaxHealth = 10 + UnityEngine.Random.Range(0, 6);
+				targetCrew.HomingMovement.turnSpeed = 2.5f;
+				targetCrew.HomingMovement.force = 2.5f;
+				targetCrew.fireResistance = 0.05f;
+				targetCrew.moveSpeed = 1.0f;
+				break;
 				case "Rabbit":
+				if (targetCrew.skills.gardening < 1) targetCrew.skills.gardening = 1;
+				targetCrew.MaxHealth = 10 + UnityEngine.Random.Range(0, 6);
+				targetCrew.HomingMovement.turnSpeed = 2.5f;
+				targetCrew.HomingMovement.force = 2.5f;
+				targetCrew.fireResistance = 0.05f;
+				targetCrew.moveSpeed = 1.0f;
+				break;
 				case "Drone pet":
+				if (targetCrew.skills.repair < 1) targetCrew.skills.repair = 1;
+				targetCrew.MaxHealth = 10 + UnityEngine.Random.Range(0, 6);
+				targetCrew.HomingMovement.turnSpeed = 2.5f;
+				targetCrew.HomingMovement.force = 2.5f;
+				targetCrew.fireResistance = 0.05f;
+				targetCrew.moveSpeed = 1.0f;
+				break;
 				case "Slime pet":
+				if (targetCrew.skills.science < 1) targetCrew.skills.science = 1;
 				targetCrew.MaxHealth = 10 + UnityEngine.Random.Range(0, 6);
 				targetCrew.HomingMovement.turnSpeed = 2.5f;
 				targetCrew.HomingMovement.force = 2.5f;
@@ -545,7 +574,15 @@ namespace FFU_Bleeding_Edge {
 				targetCrew.moveSpeed = 0.7f;
 				break;
 				case "Lizard":
+				if (targetCrew.skills.sensor < 1) targetCrew.skills.sensor = 1;
+				targetCrew.MaxHealth = 15 + UnityEngine.Random.Range(0, 11);
+				targetCrew.HomingMovement.turnSpeed = 2.5f;
+				targetCrew.HomingMovement.force = 2.5f;
+				targetCrew.fireResistance = 0.05f;
+				targetCrew.moveSpeed = 1.0f;
+				break;
 				case "Floater":
+				if (targetCrew.skills.gunnery < 1) targetCrew.skills.gunnery = 1;
 				targetCrew.MaxHealth = 15 + UnityEngine.Random.Range(0, 11);
 				targetCrew.HomingMovement.turnSpeed = 2.5f;
 				targetCrew.HomingMovement.force = 2.5f;
@@ -635,6 +672,7 @@ namespace FFU_Bleeding_Edge {
 				targetCrew.moveSpeed = 1.2f;
 				break;
 				case "Tortoise":
+				if (targetCrew.skills.bridge < 1) targetCrew.skills.bridge = 1;
 				targetCrew.MaxHealth = 35 + UnityEngine.Random.Range(0, 16);
 				targetCrew.HomingMovement.turnSpeed = 2.5f;
 				targetCrew.HomingMovement.force = 2.5f;
@@ -669,6 +707,8 @@ namespace FFU_Bleeding_Edge {
 				targetCrew.moveSpeed = 2.2f;
 				break;
 				case "Redripper crew":
+				targetCrew.description = "A genetically engineered combat animal. Eats as much as a squad of humans. Claws contain fire-extinguisher implants. Loves to care for flowers and other plants.";
+				if (targetCrew.skills.gardening < 1) targetCrew.skills.gardening = 1;
 				targetCrew.MaxHealth = 100 + UnityEngine.Random.Range(0, 51);
 				targetCrew.HomingMovement.turnSpeed = 2.5f;
 				targetCrew.HomingMovement.force = 3.5f;

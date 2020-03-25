@@ -28,7 +28,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName.Contains("shieldbat 5 floral")) return idx; idx++;
 			if (moduleName.Contains("shieldbat 3 generic alien")) return idx; idx++;
 			if (moduleName.Contains("shieldbat tiger")) return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateShieldModule(ShipModule shipModule, bool initItemData) {
 			string colorShieldGen = "4d79ff";

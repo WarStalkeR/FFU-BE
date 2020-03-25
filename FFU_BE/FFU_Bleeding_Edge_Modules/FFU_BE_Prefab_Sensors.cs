@@ -22,7 +22,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName.Contains("sensor 11 seashell s2")) return idx; idx++;
 			if (moduleName.Contains("sensor 10 tiger")) return idx; idx++;
 			if (moduleName.Contains("sensor 9 sunpanel new s2")) return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateSensorModule(ShipModule shipModule, bool initItemData) {
 			string colorSensor = "4dff79";

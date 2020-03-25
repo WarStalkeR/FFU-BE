@@ -22,7 +22,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName.Contains("engine 4 spideraa")) return idx; idx++;
 			if (moduleName.Contains("engine 04 xblack")) return idx; idx++;
 			if (moduleName.Contains("engine 2 F-gulper")) return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateEngineModule(ShipModule shipModule, bool initItemData) {
 			string colorEngine = "ffd24d";

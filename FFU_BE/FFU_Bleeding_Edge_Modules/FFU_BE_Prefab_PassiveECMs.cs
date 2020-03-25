@@ -15,7 +15,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName.Contains("ECM 02 terran")) return idx; idx++;
 			if (moduleName.Contains("ECM 04 spideraa")) return idx; idx++;
 			if (moduleName.Contains("ECM 03 terran")) return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateCountermeasureModule(ShipModule shipModule, bool initItemData) {
 			string colorCounter = "4dd2ff";

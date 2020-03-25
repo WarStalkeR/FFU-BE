@@ -15,7 +15,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleName == "medical pack organics, synth") return idx; idx++;
 			if (moduleName == "general pack organics, synth, metal") return idx; idx++;
 			if (moduleName == "compressed exotics pack") return idx; idx++;
-			return 999;
+			return idx + 100;
 		}
 		public static void UpdateResourcePackModule(ShipModule shipModule, bool initItemData) {
 			var refModuleName = string.Empty;
