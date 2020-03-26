@@ -184,7 +184,7 @@ namespace FFU_Bleeding_Edge {
 					Localization.TT("Breacher Cannon")};
 				if (!string.IsNullOrEmpty(itemSpacing)) listedItems.Add(itemSpacing);
 				return listedItems;
-				default: return null;
+				default: return new List<string>();
 			}
 		}
 		public static void AddSkillPointsWithinLimits(Crewmember crewmember) {

@@ -28,6 +28,9 @@ namespace FFU_Bleeding_Edge {
 		public static void ApplyInitialModuleTier(ShipModule shipModule) {
 			int rolledTier = Random.Range(2, 6);
 			Core.BonusMod rolledMod = GetInitialModuleModifier(shipModule);
+			if (shipModule != null) if (shipModule.type == ShipModule.Type.Container) rolledMod = Core.BonusMod.Durable;
+			if (shipModule != null) if (shipModule.type == ShipModule.Type.MaterialsConverter) rolledMod = Core.BonusMod.Enhanced;
+			if (shipModule != null) if (shipModule.type == ShipModule.Type.MaterialsConverter || shipModule.type == ShipModule.Type.Container) rolledTier = 5;
 			if (!shipModule.name.Contains("MK-") || !ModuleHasModifier(shipModule)) SetModuleModifier(shipModule, rolledTier, rolledMod);
 			if (shipModule.name.Contains("MK-") && ModuleHasModifier(shipModule)) ApplyModuleModifiedStatsAndParameters(shipModule);
 		}
@@ -334,38 +337,22 @@ namespace FFU_Bleeding_Edge {
 		public static string GetModuleModColoredText(ShipModule shipModule) {
 			Core.BonusMod moduleMod = GetModuleModifier(shipModule);
 			switch (moduleMod) {
-				//case Core.BonusMod.Sustained: return "<color=lime>Sustained</color> ";
-				//case Core.BonusMod.Unstable: return "<color=red>Unstable</color> ";
-				//case Core.BonusMod.Reinforced: return "<color=lime>Reinforced</color> ";
-				//case Core.BonusMod.Fragile: return "<color=red>Fragile</color> ";
-				//case Core.BonusMod.Efficient: return "<color=lime>Efficient</color> ";
-				//case Core.BonusMod.Inefficient: return "<color=red>Inefficient</color> ";
-				//case Core.BonusMod.Precise: return "<color=lime>Precise</color> ";
-				//case Core.BonusMod.Inhibited: return "<color=red>Inhibited</color> ";
-				//case Core.BonusMod.Rapid: return "<color=lime>Rapid</color> ";
-				//case Core.BonusMod.Disrupted: return "<color=red>Disrupted</color> ";
-				//case Core.BonusMod.Enhanced: return "<color=lime>Enhanced</color> ";
-				//case Core.BonusMod.Deficient: return "<color=red>Deficient</color> ";
-				//case Core.BonusMod.Durable: return "<color=lime>Durable</color> ";
-				//case Core.BonusMod.Brittle: return "<color=red>Brittle</color> ";
-				//case Core.BonusMod.Persistent: return "<color=lime>Persistent</color> ";
-				//case Core.BonusMod.Volatile: return "<color=red>Volatile</color> ";
-				case Core.BonusMod.Sustained: return "<color=lime>(P↑)</color> ";
-				case Core.BonusMod.Unstable: return "<color=red>(P↓)</color> ";
-				case Core.BonusMod.Reinforced: return "<color=lime>(D↑)</color> ";
-				case Core.BonusMod.Fragile: return "<color=red>(D↓)</color> ";
-				case Core.BonusMod.Efficient: return "<color=lime>(U↑)</color> ";
-				case Core.BonusMod.Inefficient: return "<color=red>(U↓)</color> ";
+				case Core.BonusMod.Sustained: return "<color=lime>(S↑)</color> ";
+				case Core.BonusMod.Unstable: return "<color=red>(S↓)</color> ";
+				case Core.BonusMod.Reinforced: return "<color=lime>(H↑)</color> ";
+				case Core.BonusMod.Fragile: return "<color=red>(H↓)</color> ";
+				case Core.BonusMod.Efficient: return "<color=lime>(R↑)</color> ";
+				case Core.BonusMod.Inefficient: return "<color=red>(R↓)</color> ";
 				case Core.BonusMod.Precise: return "<color=lime>(A↑)</color> ";
 				case Core.BonusMod.Inhibited: return "<color=red>(A↓)</color> ";
-				case Core.BonusMod.Rapid: return "<color=lime>(R↑)</color> ";
-				case Core.BonusMod.Disrupted: return "<color=red>(R↓)</color> ";
+				case Core.BonusMod.Rapid: return "<color=lime>(F↑)</color> ";
+				case Core.BonusMod.Disrupted: return "<color=red>(F↓)</color> ";
 				case Core.BonusMod.Enhanced: return "<color=lime>(E↑)</color> ";
 				case Core.BonusMod.Deficient: return "<color=red>(E↓)</color> ";
-				case Core.BonusMod.Durable: return "<color=lime>(H↑)</color> ";
-				case Core.BonusMod.Brittle: return "<color=red>(H↓)</color> ";
-				case Core.BonusMod.Persistent: return "<color=lime>(S↑)</color> ";
-				case Core.BonusMod.Volatile: return "<color=red>(S↓)</color> ";
+				case Core.BonusMod.Durable: return "<color=lime>(C↑)</color> ";
+				case Core.BonusMod.Brittle: return "<color=red>(C↓)</color> ";
+				case Core.BonusMod.Persistent: return "<color=lime>(P↑)</color> ";
+				case Core.BonusMod.Volatile: return "<color=red>(P↓)</color> ";
 				default: return "";
 			}
 		}
@@ -754,32 +741,31 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case ShipModule.Type.Engine:
 				var refEngineConsPerDist = AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(refModule.Engine, "consumedPerDistance");
-				var instEngineConsPerDist = AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance");
-				if (refEngineConsPerDist.organics > 0) instEngineConsPerDist.organics = Mathx.RoundToFloat(refEngineConsPerDist.organics / GetTierBonus(moduleTier, Core.BonusType.Default), 2);
-				if (refEngineConsPerDist.fuel > 0) instEngineConsPerDist.fuel = Mathx.RoundToFloat(refEngineConsPerDist.fuel / GetTierBonus(moduleTier, Core.BonusType.Default), 2);
-				if (refEngineConsPerDist.metals > 0) instEngineConsPerDist.metals = Mathx.RoundToFloat(refEngineConsPerDist.metals / GetTierBonus(moduleTier, Core.BonusType.Default), 2);
-				if (refEngineConsPerDist.synthetics > 0) instEngineConsPerDist.synthetics = Mathx.RoundToFloat(refEngineConsPerDist.synthetics / GetTierBonus(moduleTier, Core.BonusType.Default), 2);
-				if (refEngineConsPerDist.explosives > 0) instEngineConsPerDist.explosives = Mathx.RoundToFloat(refEngineConsPerDist.explosives / GetTierBonus(moduleTier, Core.BonusType.Default), 2);
-				if (refEngineConsPerDist.exotics > 0) instEngineConsPerDist.exotics = Mathx.RoundToFloat(refEngineConsPerDist.exotics / GetTierBonus(moduleTier, Core.BonusType.Default), 2);
+				if (refEngineConsPerDist.organics > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").organics = Mathx.RoundToFloat(refEngineConsPerDist.organics / GetTierBonus(moduleTier, Core.BonusType.Default), 2);
+				if (refEngineConsPerDist.fuel > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").fuel = Mathx.RoundToFloat(refEngineConsPerDist.fuel / GetTierBonus(moduleTier, Core.BonusType.Default), 2);
+				if (refEngineConsPerDist.metals > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").metals = Mathx.RoundToFloat(refEngineConsPerDist.metals / GetTierBonus(moduleTier, Core.BonusType.Default), 2);
+				if (refEngineConsPerDist.synthetics > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").synthetics = Mathx.RoundToFloat(refEngineConsPerDist.synthetics / GetTierBonus(moduleTier, Core.BonusType.Default), 2);
+				if (refEngineConsPerDist.explosives > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").explosives = Mathx.RoundToFloat(refEngineConsPerDist.explosives / GetTierBonus(moduleTier, Core.BonusType.Default), 2);
+				if (refEngineConsPerDist.exotics > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").exotics = Mathx.RoundToFloat(refEngineConsPerDist.exotics / GetTierBonus(moduleTier, Core.BonusType.Default), 2);
 				if (refModule.asteroidDeflectionPercentAdd > 0) shipModule.asteroidDeflectionPercentAdd = Mathf.RoundToInt(refModule.asteroidDeflectionPercentAdd * GetTierBonus(moduleTier, Core.BonusType.Minimal));
 				if (refModule.shipEvasionPercentAdd > 0) shipModule.shipEvasionPercentAdd = Mathf.RoundToInt(refModule.shipEvasionPercentAdd * GetTierBonus(moduleTier, Core.BonusType.Minimal));
 				if (refModule.starmapSpeedAdd > 0) shipModule.starmapSpeedAdd = Mathf.RoundToInt(refModule.starmapSpeedAdd * GetTierBonus(moduleTier, Core.BonusType.Reduced));
 				switch (moduleMofidier) {
 					case Core.BonusMod.Efficient:
-					if (refEngineConsPerDist.organics > 0) instEngineConsPerDist.organics = Mathx.RoundToFloat(refEngineConsPerDist.organics / GetTierBonus(moduleTier, Core.BonusType.Default) / 2f, 2);
-					if (refEngineConsPerDist.fuel > 0) instEngineConsPerDist.fuel = Mathx.RoundToFloat(refEngineConsPerDist.fuel / GetTierBonus(moduleTier, Core.BonusType.Default) / 2f, 2);
-					if (refEngineConsPerDist.metals > 0) instEngineConsPerDist.metals = Mathx.RoundToFloat(refEngineConsPerDist.metals / GetTierBonus(moduleTier, Core.BonusType.Default) / 2f, 2);
-					if (refEngineConsPerDist.synthetics > 0) instEngineConsPerDist.synthetics = Mathx.RoundToFloat(refEngineConsPerDist.synthetics / GetTierBonus(moduleTier, Core.BonusType.Default) / 2f, 2);
-					if (refEngineConsPerDist.explosives > 0) instEngineConsPerDist.explosives = Mathx.RoundToFloat(refEngineConsPerDist.explosives / GetTierBonus(moduleTier, Core.BonusType.Default) / 2f, 2);
-					if (refEngineConsPerDist.exotics > 0) instEngineConsPerDist.exotics = Mathx.RoundToFloat(refEngineConsPerDist.exotics / GetTierBonus(moduleTier, Core.BonusType.Default) / 2f, 2);
+					if (refEngineConsPerDist.organics > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").organics = Mathx.RoundToFloat(refEngineConsPerDist.organics / GetTierBonus(moduleTier, Core.BonusType.Default) / 2f, 2);
+					if (refEngineConsPerDist.fuel > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").fuel = Mathx.RoundToFloat(refEngineConsPerDist.fuel / GetTierBonus(moduleTier, Core.BonusType.Default) / 2f, 2);
+					if (refEngineConsPerDist.metals > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").metals = Mathx.RoundToFloat(refEngineConsPerDist.metals / GetTierBonus(moduleTier, Core.BonusType.Default) / 2f, 2);
+					if (refEngineConsPerDist.synthetics > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").synthetics = Mathx.RoundToFloat(refEngineConsPerDist.synthetics / GetTierBonus(moduleTier, Core.BonusType.Default) / 2f, 2);
+					if (refEngineConsPerDist.explosives > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").explosives = Mathx.RoundToFloat(refEngineConsPerDist.explosives / GetTierBonus(moduleTier, Core.BonusType.Default) / 2f, 2);
+					if (refEngineConsPerDist.exotics > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").exotics = Mathx.RoundToFloat(refEngineConsPerDist.exotics / GetTierBonus(moduleTier, Core.BonusType.Default) / 2f, 2);
 					break;
 					case Core.BonusMod.Inefficient:
-					if (refEngineConsPerDist.organics > 0) instEngineConsPerDist.organics = Mathx.RoundToFloat(refEngineConsPerDist.organics / GetTierBonus(moduleTier, Core.BonusType.Default) * 2f, 2);
-					if (refEngineConsPerDist.fuel > 0) instEngineConsPerDist.fuel = Mathx.RoundToFloat(refEngineConsPerDist.fuel / GetTierBonus(moduleTier, Core.BonusType.Default) * 2f, 2);
-					if (refEngineConsPerDist.metals > 0) instEngineConsPerDist.metals = Mathx.RoundToFloat(refEngineConsPerDist.metals / GetTierBonus(moduleTier, Core.BonusType.Default) * 2f, 2);
-					if (refEngineConsPerDist.synthetics > 0) instEngineConsPerDist.synthetics = Mathx.RoundToFloat(refEngineConsPerDist.synthetics / GetTierBonus(moduleTier, Core.BonusType.Default) * 2f, 2);
-					if (refEngineConsPerDist.explosives > 0) instEngineConsPerDist.explosives = Mathx.RoundToFloat(refEngineConsPerDist.explosives / GetTierBonus(moduleTier, Core.BonusType.Default) * 2f, 2);
-					if (refEngineConsPerDist.exotics > 0) instEngineConsPerDist.exotics = Mathx.RoundToFloat(refEngineConsPerDist.exotics / GetTierBonus(moduleTier, Core.BonusType.Default) * 2f, 2);
+					if (refEngineConsPerDist.organics > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").organics = Mathx.RoundToFloat(refEngineConsPerDist.organics / GetTierBonus(moduleTier, Core.BonusType.Default) * 2f, 2);
+					if (refEngineConsPerDist.fuel > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").fuel = Mathx.RoundToFloat(refEngineConsPerDist.fuel / GetTierBonus(moduleTier, Core.BonusType.Default) * 2f, 2);
+					if (refEngineConsPerDist.metals > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").metals = Mathx.RoundToFloat(refEngineConsPerDist.metals / GetTierBonus(moduleTier, Core.BonusType.Default) * 2f, 2);
+					if (refEngineConsPerDist.synthetics > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").synthetics = Mathx.RoundToFloat(refEngineConsPerDist.synthetics / GetTierBonus(moduleTier, Core.BonusType.Default) * 2f, 2);
+					if (refEngineConsPerDist.explosives > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").explosives = Mathx.RoundToFloat(refEngineConsPerDist.explosives / GetTierBonus(moduleTier, Core.BonusType.Default) * 2f, 2);
+					if (refEngineConsPerDist.exotics > 0) AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance").exotics = Mathx.RoundToFloat(refEngineConsPerDist.exotics / GetTierBonus(moduleTier, Core.BonusType.Default) * 2f, 2);
 					break;
 					case Core.BonusMod.Enhanced: if (refModule.starmapSpeedAdd > 0) shipModule.starmapSpeedAdd = Mathf.RoundToInt(refModule.starmapSpeedAdd * GetTierBonus(moduleTier, Core.BonusType.Reduced) * 1.2f); break;
 					case Core.BonusMod.Deficient: if (refModule.starmapSpeedAdd > 0) shipModule.starmapSpeedAdd = Mathf.RoundToInt(refModule.starmapSpeedAdd * GetTierBonus(moduleTier, Core.BonusType.Reduced) / 1.2f); break;
@@ -1069,15 +1055,14 @@ namespace FFU_Bleeding_Edge {
 				default: return;
 			}
 			var refModuleMaxHealth = AccessTools.FieldRefAccess<ShipModule, int>(refModule, "maxHealth");
-			var instModuleMaxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
 			var healthLossModifier =  Mathf.Max(Mathf.Pow(1 - FFU_BE_Defs.permanentModuleDamagePercent * FFU_BE_Defs.GetDifficultyModifier(), shipModule.MaxHealthLostCount), 0.05f);
 			if (shipModule.powerConsumed > 0) shipModule.powerConsumed = Mathf.RoundToInt(refModule.powerConsumed * GetTierBonus(moduleTier, Core.BonusType.Reduced));
-			if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) instModuleMaxHealth = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) * healthLossModifier);
+			if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) * healthLossModifier);
 			switch (moduleMofidier) {
 				case Core.BonusMod.Sustained: if (shipModule.powerConsumed > 0) shipModule.powerConsumed = Mathf.RoundToInt(refModule.powerConsumed * GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f); break;
 				case Core.BonusMod.Unstable: if (shipModule.powerConsumed > 0) shipModule.powerConsumed = Mathf.RoundToInt(refModule.powerConsumed * GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f); break;
-				case Core.BonusMod.Reinforced: if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) instModuleMaxHealth = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) * 2f * healthLossModifier); break;
-				case Core.BonusMod.Fragile: if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) instModuleMaxHealth = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) / 2f * healthLossModifier); break;
+				case Core.BonusMod.Reinforced: if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) * 2f * healthLossModifier); break;
+				case Core.BonusMod.Fragile: if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) / 2f * healthLossModifier); break;
 			}
 			shipModule.costCreditsInShop = Mathf.RoundToInt(refModule.costCreditsInShop * GetTierBonus(moduleTier, Core.BonusType.Extreme));
 		}
@@ -1221,7 +1206,7 @@ namespace RST {
 			if (FFU_BE_Defs.IsCraftedToStorage(module)) {
 				var shipStorage = PlayerDatas.Me.Flagship.Modules.Find(x => x.type == ShipModule.Type.Storage);
 				if (shipStorage != null && shipStorage.Storage != null && !shipStorage.Storage.IsFull) shipStorage.Storage.AddToStorage(module.gameObject);
-			} else FFU_BE_Defs.RecalculateEnergyEmission();
+			}
 			StringBuilder newlyCraftedItemDeployedMessage = RstShared.StringBuilder;
 			string craftingConsumedResources = ""
 				+ (module.craftCost.organics > 0 ? "-" + module.craftCost.organics + " organics " : "")

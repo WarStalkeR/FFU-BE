@@ -172,6 +172,27 @@ namespace FFU_Bleeding_Edge {
 				originalList = null;
 			} catch (Exception ex) { Debug.LogError(ex); }
 		}
+		public static void InitModuleMalfunctions() {
+			try {
+				foreach (SelfCombustible sMalfunction in Resources.FindObjectsOfTypeAll<SelfCombustible>()) {
+					switch(sMalfunction.name) {
+						case "reactor 12 custom old": sMalfunction.chance = 0; break;
+						case "fuel combinator 1A old": sMalfunction.chance = 0; break;
+						case "explosives combinator 1": sMalfunction.chance = 0; break;
+						case "explosives combinator diy": sMalfunction.chance = 0; break;
+						case "explosives combinator tiger": sMalfunction.chance = 0; break;
+						case "reactor 4 diy 1": sMalfunction.chance = 0.0005f; break;
+						case "reactor 5 diy 2 backup": sMalfunction.chance = 0.0005f; break;
+						case "reactor 7 diy 3": sMalfunction.chance = 0.0005f; break;
+						case "reactor 9 small old": sMalfunction.chance = 0.0003f; break;
+						case "reactor 13 rats": sMalfunction.chance = 0.0001f; break;
+						case "engine 01 primitive": sMalfunction.chance = 0.0001f; break;
+						default: Debug.LogWarning($"[MALFUNCTION] {sMalfunction.name} {sMalfunction.chance}"); break;
+					}
+					FFU_BE_Defs.prefabMalfunctionsList.Add(sMalfunction);
+				}
+			} catch (Exception ex) { Debug.LogError(ex); }
+		}
 		public static void ApplyModuleEffects(ShipModule shipModule, bool initItemData = false) {
 			var refModuleName = string.Empty;
 			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
@@ -571,11 +592,11 @@ namespace FFU_Bleeding_Edge {
 
 namespace RST {
 	public class patch_ShipModule : ShipModule {
-		private extern void orig_Unpack();
 		[MonoModIgnore] private int maxHealth;
 		[MonoModIgnore] private bool isPowered;
 		[MonoModIgnore] private Ship cachedShip;
 		[MonoModIgnore] private Ship cachedShip2;
+		[MonoModIgnore] private void Unpack() { }
 		[MonoModIgnore] private void EndOverload() { }
 		[MonoModIgnore] private void UnpackShared() { }
 		[MonoModIgnore] private void UpdateAppearance() { }
@@ -605,11 +626,6 @@ namespace RST {
 			base.transform.SetParent(shop.buyableModulesContainer.transform);
 			Pack();
 			base.transform.position = new Vector3(10000f, 0f, 0f);
-		}
-		private void Unpack() {
-		/// Recalculate Ship's Signature on Module Unpack
-			orig_Unpack();
-			FFU_BE_Defs.RecalculateEnergyEmission();
 		}
 		public void TakeDamage(ShootAtDamageDealer.Damage dd, Vector2 hitPos) {
 		/// Do Permanent Damage to Module on Higher Difficulties
@@ -652,7 +668,6 @@ namespace RST {
 			if (type != ShipModule.Type.ResourcePack && !name.Contains("artifact")) FFU_BE_Defs.researchProgress += costCreditsInShop * moduleHealthPercent / 1000f;
 			if (name.Contains("artifact") && displayName.Contains("Cache")) FFU_BE_Mod_Crewmembers.ApplyCacheToCrewInRange(this);
 			else if (name.Contains("artifact") && !displayName.Contains("Cache")) FFU_BE_Defs.researchProgress += (costCreditsInShop + scrapGet.credits) * moduleHealthPercent / 40f;
-			if (!IsPacked) FFU_BE_Defs.RecalculateEnergyEmission();
 			if (FFU_BE_Defs.IsAllowedModuleCategory(this) && !FFU_BE_Defs.discoveredModuleIDs.Contains(PrefabId) && !FFU_BE_Defs.unresearchedModuleIDs.ToList().Contains(PrefabId)) {
 				FFU_BE_Defs.unresearchedModuleIDs.Add(PrefabId);
 				if (FFU_BE_Defs.moduleResearchGoal == 0 && FFU_BE_Defs.unresearchedModuleIDs.Count > 0) {
@@ -823,7 +838,7 @@ namespace RST {
 					if (overchargeTimer.Update(1f)) overchargeCooldownTimer.Restart(WorldRules.Instance.moduleOverchargeCooldownSeconds);
 				} else overchargeCooldownTimer.Update(1f);
 			}
-			if (!overloadTimer.ReachedZero && overloadTimer.Update(PerFrameCache.IsGoodSituation ? 5f : 1f)) EndOverload();
+			if (!overloadTimer.ReachedZero && overloadTimer.Update(PerFrameCache.IsGoodSituation ? 10f : 1f)) EndOverload();
 			if (IsPacked && IsOverloaded) EndOverload();
 			if (!RstTime.IsPaused && jammedPrefab != null) {
 				bool isJammed = IsJammed;

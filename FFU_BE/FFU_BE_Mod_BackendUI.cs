@@ -108,6 +108,7 @@ namespace RST.UI {
 			if (FFU_BE_Mod_Backend.timePassedCredits > 10000f) FFU_BE_Mod_Backend.timePassedCredits = 50f;
 			orig_Update();
 			int newEvasion = prevEvasion + 1;
+			if (Time.frameCount % 30 == 0 && !WarningsVisualizer.EnemyShipsPresentWarning) FFU_BE_Defs.RecalculateEnergyEmission();
 			for (int i = 0; i < researchCreditsBonus.transform.childCount; i++) researchCreditsBonus.transform.GetChild(i).gameObject.SetActive(false);
 			researchCreditsBonus.text = FFU_BE_Mod_Technology.GetCraftChanceText().Replace("MK-", string.Empty).Replace(": ", string.Empty).Replace("I", string.Empty).Replace("V", string.Empty).Replace("X", string.Empty);
 			shipEvasion.SetText(prevEvasion, ref newEvasion, (int i) => i.ToString() + $"°/ₘ");
@@ -268,26 +269,6 @@ namespace RST.UI {
 					}
 				}
 			}
-		}
-	}
-	public class patch_ModuleActionsPanel : ModuleActionsPanel {
-		private extern void orig_StoreModule();
-		private extern void orig_ModuleOvercharge();
-		private extern void orig_PowerToggleChanged(bool newValue);
-		private void StoreModule() {
-		/// Recalculate Ship's Signature on Storing Module
-			orig_StoreModule();
-			FFU_BE_Defs.RecalculateEnergyEmission();
-		}
-		private void ModuleOvercharge() {
-		/// Recalculate Ship's Signature on Overcharging Module
-			orig_ModuleOvercharge();
-			FFU_BE_Defs.RecalculateEnergyEmission();
-		}
-		private void PowerToggleChanged(bool newValue) {
-		/// Recalculate Ship's Signature on Powering Module
-			orig_PowerToggleChanged(newValue);
-			FFU_BE_Defs.RecalculateEnergyEmission();
 		}
 	}
 	public class patch_StoragePanel : StoragePanel {

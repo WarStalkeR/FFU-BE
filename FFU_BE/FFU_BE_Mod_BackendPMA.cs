@@ -251,13 +251,13 @@ namespace RST.PlaymakerAction {
 	}
 	public class patch_PerksSelection : PerksSelection {
 		[MonoModIgnore] private void BackClicked() { }
-		[MonoModIgnore] private void DoneClicked() { }
 		[MonoModIgnore] private void ResetClicked() { }
 		[MonoModIgnore] private void UpdateDisplay() { }
 		[MonoModIgnore] private void FinishThisAction() { }
 		[MonoModIgnore] private void ConfirmationNoClicked() { }
 		[MonoModIgnore] private void ClearSelectedPerkInfo() { }
 		[MonoModIgnore] private bool CanStartGame() { return false; }
+		[MonoModIgnore] private int SumPerksTotalRepCost() { return 0; }
 		[MonoModIgnore] private string DefaultShipName { get { return null; } }
 		[MonoModIgnore] private void OnToggleChanged(PerkUIGridElement item, bool ticked) { }
 		[MonoModIgnore] private void ChangeCrewName(Crewmember crew, string newName) { }
@@ -332,6 +332,23 @@ namespace RST.PlaymakerAction {
 			ClearSelectedPerkInfo();
 			if (perkInfoGroup.Value != null) {
 				perkInfoGroup.Value.SetActive(false);
+			}
+		}
+		[MonoModReplace] private void DoneClicked() {
+		/// Allow Modded Crewmembers to Spawn
+			if (!CanStartGame()) {
+				return;
+			}
+			if (TotalFate - SumPerksTotalRepCost() > 0) {
+				confirmationGroup.Value.SetActive(true);
+				RstAudioManager instance = RstAudioManager.Instance;
+				AudioClip audioClip = confirmationOpenSound.Value as AudioClip;
+				if (instance != null && audioClip != null) {
+					instance.PlayUiSound(audioClip);
+				}
+			} else {
+				FFU_BE_Defs.canSpawnCrew = true;
+				FinishThisAction();
 			}
 		}
 		[MonoModReplace] private void ConfirmationYesClicked() {
@@ -528,21 +545,6 @@ namespace RST.PlaymakerAction {
 			bool notEnoughRes = value.min + startingBonus < 0f || value.max + startingBonus < 0f;
 			(textObj.Value as Text).text = notEnoughRes ? $"<color=red>{value.ToString("0")} {(startingBonus != 0 ? $"{valueSign}{Mathf.Abs(startingBonus)}" : null)}</color>" : $"{value.ToString("0")} <color={(startingBonus > 0 ? "lime" : "red")}>{(startingBonus != 0 ? $"{valueSign}{Mathf.Abs(startingBonus)}" : null)}</color>";
 			warningGO.Value.SetActive(notEnoughRes);
-		}
-	}
-	public class patch_CrewOperatesModule : CrewOperatesModule {
-		public extern void orig_OnEnter();
-		public extern void orig_OnExit();
-		[MonoModIgnore] private Crewmember crew;
-		public override void OnEnter() {
-		/// Recalculate Ship's Signature on Crew's Entry
-			orig_OnEnter();
-			if (crew != null) if (crew.Ownership.GetOwner() == Ownership.Owner.Me) FFU_BE_Defs.RecalculateEnergyEmission();
-		}
-		public override void OnExit() {
-		/// Recalculate Ship's Signature on Crew's Exit
-			orig_OnExit();
-			if (crew != null) if (crew.Ownership.GetOwner() == Ownership.Owner.Me) FFU_BE_Defs.RecalculateEnergyEmission();
 		}
 	}
 	public class patch_CrewResumeCmd : CrewResumeCmd {

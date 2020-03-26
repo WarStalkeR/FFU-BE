@@ -364,6 +364,8 @@ namespace FFU_Bleeding_Edge {
 			if (shipModule.type != ShipModule.Type.Reactor) moduleData += shipModule.overchargeSeconds > 0 ? $"{Core.TT("Overcharge Time")}: {shipModule.overchargeSeconds}{Core.TT("s")}\n" : null;
 			if (isInst && (shipModule.turnedOn || !shipModule.UsesTurnedOn) && FFU_BE_Defs.ModuleEmitsEnergy(shipModule)) moduleData += $"{Core.TT("Energy Emission")}: {FFU_BE_Defs.GetModuleEnergyEmission(shipModule):0.#}{Core.TT("m")}³\n";
 			else if (!isInst && FFU_BE_Defs.ModuleEmitsEnergy(shipModule)) moduleData += $"{Core.TT("Energy Emission")}: {FFU_BE_Defs.GetModuleEmissionValues(shipModule)}\n";
+			SelfCombustible shipModule_selfCombustion = shipModule.GetCachedComponent<SelfCombustible>(true);
+			if (shipModule_selfCombustion != null) moduleData += shipModule_selfCombustion.chance > 0 ? $"{Core.TT("Malfunction Chance")}: {shipModule_selfCombustion.chance * 100:0.###}%\n" : null;
 			moduleData += shipModule.MaxHealth > 0 ? $"{Core.TT("Module Durability")}: {shipModule.MaxHealth} {Core.TT("HP")}\n" : null;
 			if (!isInst) moduleData += FFU_BE_Defs.IsAllowedModuleCategory(shipModule) ? $"{Core.TT("Crafting Proficiency")}: {FFU_BE_Defs.GetModuleCraftingProficiency(shipModule) * 100f:0.#}%\n" : null;
 			moduleData += shipModule.costCreditsInShop > 0 ? $"{(isInst ? Core.TT("Market Price") : Core.TT("Base Price"))}: ${shipModule.costCreditsInShop}" : $"{(isInst ? Core.TT("Market Price") : Core.TT("Base Price"))}: {Core.TT("N/A")}";
@@ -484,7 +486,7 @@ namespace FFU_Bleeding_Edge {
 			else return 0;
 		}
 		public static string[] GetCacheWeapons(ShipModule shipModule, string itemSpacing = null) {
-			if (!(shipModule != null)) return null;
+			if (!(shipModule != null)) return new string[0];
 			return FFU_BE_Mod_Crewmembers.GetWeaponLocalesFromCacheID(shipModule.PrefabId, itemSpacing).ToArray();
 		}
 		public static string GetCrewHitChance(ShootAtDamageDealer.CrewDmgLevel crewDmgLevel) {

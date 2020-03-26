@@ -77,7 +77,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.displayName = "Exogenetic <color=#" + colorGarden + "ff>Greenhouse</color>";
 				shipModule.description = "Artificial environment for growing highly nutritious bio-engineered exotic plants. Uses excess heat generated during interstellar travel for production.";
 				shipModule.craftCost = new ResourceValueGroup { organics = 1000f, fuel = 500f, metals = 1000f, synthetics = 1500f, exotics = 10f };
-				shipModule.GardenModule.producedPerSkillPoint = new ResourceValueGroup { organics = 25f, exotics = 1f };
+				shipModule.GardenModule.producedPerSkillPoint = new ResourceValueGroup { organics = 25f, exotics = 0.3f };
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 25;
 				break;

@@ -23,6 +23,7 @@ namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Spaceships {
 		public static void InitSelectablePerks() {
 			string perksData = "\n";
+			IDictionary<string, Sprite> storedPerkSprites = new Dictionary<string, Sprite>();
 			foreach (Perk perk in Resources.FindObjectsOfTypeAll<Perk>()) {
 				Perk.Pool[] temp_ExtraCrew = perk.extraCrew;
 				Perk.Pool[] temp_ExtraModules = perk.extraModules;
@@ -1478,6 +1479,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
+					if (!storedPerkSprites.ContainsKey("Leftover_Module_Sprite")) storedPerkSprites.Add("Leftover_Module_Sprite", perk.menuSprite);
 					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 20;
@@ -1676,6 +1678,7 @@ namespace FFU_Bleeding_Edge {
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
 						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					if (!storedPerkSprites.ContainsKey("CIWS_DIY_Sprite")) storedPerkSprites.Add("CIWS_DIY_Sprite", perk.menuSprite);
 					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
 					perk.isUnlockedByDefault = false;
 					perk.repCost = 50;
@@ -1699,6 +1702,7 @@ namespace FFU_Bleeding_Edge {
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
 						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					if (!storedPerkSprites.ContainsKey("Random_Module_Sprite")) storedPerkSprites.Add("Random_Module_Sprite", perk.menuSprite);
 					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
 					perk.isUnlockedByDefault = false;
 					perk.repCost = 50;
@@ -1722,6 +1726,7 @@ namespace FFU_Bleeding_Edge {
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
 						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					if (!storedPerkSprites.ContainsKey("Imperial_Crate_Sprite")) storedPerkSprites.Add("Imperial_Crate_Sprite", perk.menuSprite);
 					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
 					perk.isUnlockedByDefault = false;
 					perk.repCost = 50;
@@ -2008,6 +2013,7 @@ namespace FFU_Bleeding_Edge {
 						$"+2x {Core.TT("Packed")} {perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+2x {Core.TT("Packed")} {perk.extraModules[4].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					if (!storedPerkSprites.ContainsKey("Random_Nuke_Sprite")) storedPerkSprites.Add("Random_Nuke_Sprite", perk.menuSprite);
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 10;
 					break;
@@ -2400,6 +2406,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Heavy Security")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					if (!storedPerkSprites.ContainsKey("Security_Drone_Sprite")) storedPerkSprites.Add("Security_Drone_Sprite", perk.menuSprite);
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 10;
 					break;
@@ -2605,6 +2612,7 @@ namespace FFU_Bleeding_Edge {
 						$"+{Core.TT("Shield Generators & Capacitors")} {Core.TT("Upgrade")}",
 						$"+2x {Core.TT("Packed")} {Core.TT("Emergency Industrial Modules")}",
 						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					if (!storedPerkSprites.ContainsKey("Deal_Handshake_Sprite")) storedPerkSprites.Add("Deal_Handshake_Sprite", perk.menuSprite);
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 20;
 					break;
@@ -2878,6 +2886,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Red Ripper")} {Core.TT("Combat Animals")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					if (!storedPerkSprites.ContainsKey("Red_Ripper_Crew_Sprite")) storedPerkSprites.Add("Red_Ripper_Crew_Sprite", perk.menuSprite);
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 10;
 					break;
@@ -3530,52 +3539,748 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Warpshell Perks
 					case "Perk nuke DIY shield breaker":
+					perk.displayName = "Absolute Chemical Extravaganza";
+					perk.description = "A complete arsenal of a military-grade chemical capital missiles that can be used to purify any single planet from any sings of life. It was acquired when we signed a very-ethical-use-only declaration and paid additional fees.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+12x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					case "Perk warpshell extra deflection":
+					perk.displayName = "External Tissue Enhancement";
+					perk.description = "The living part of the ship can be easily modified using a variety of biotechnological solutions. This one improves ship's internal and external kinetic bumpers, improving overall deflection efficiency.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(-2500);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(-2500);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-50);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.addShipDeflectPercent = 5;
+					perk.extraModules = new Perk.Pool[0];
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipDeflectPercent}% {Core.TT("Ship Deflection")}",
+						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
+						$"{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					case "Perk warpshell extra hitpoints":
+					perk.displayName = "Organic Integrity Enhancement";
+					perk.description = "The living part of the ship has a range of exotic nutrients it needs to consume couple of times a year. If correct biotechnological solutions added to the nutrients, the ship's living tissue will grow more resistant to damage.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(-2500);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(-2500);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-50);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.addShipMaxHealth = 300;
+					perk.extraModules = new Perk.Pool[0];
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipMaxHealth} {Core.TT("Ship Max Hitpoints")}",
+						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
+						$"{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					case "Perk Replace terran smallreactor oldx2":
-					break;
-					case "Perk Replace DIY FO with FOO":
+					perk.displayName = "Primary Modules Replacement";
+					perk.description = "Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older reactors, weapons and bridge modules of the ship with newer modules of same types available at the market.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-100);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "7 Red PD").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "7 Red PD").gameObject }}};
+					perk.moduleReplacements = new Perk.ModuleReplacement[] {
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "5 Human PD").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "7 Red PD").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon sniper cannon EMP").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Floral cannon").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon EMP energyball").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Floral cannon").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon dual EMP").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon exoticscannon1").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 5 diy 2 backup").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 20 biofruit").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 9 small old").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 20 biofruit").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 1crew DIY").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 3crew floral").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.moduleReplacements[5].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[6].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[3].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[2].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					case "Perk Replace ECM of warpshell":
+					perk.displayName = "Secondary Modules Replacement";
+					perk.description = "Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older shields, engines, sensors and warp drive modules of the ship with newer modules of same types available at the market.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-100);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 3 generic alien").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Stealth decryptor 2 biobrain").gameObject }}};
+					perk.moduleReplacements = new Perk.ModuleReplacement[] {
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 1 diy").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 4 solitary").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "ECM 01 terran").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "ECM 02 terran").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 0 diy").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 03 bioship").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 0 DIY").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 06 rotor blue").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 0-C diy").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 11 seashell s2").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.moduleReplacements[1].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[3].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[4].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[2].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
+					break;
+					case "Perk Replace DIY FO with FOO":
+					perk.displayName = "Auxiliary Modules Replacement";
+					perk.description = "Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older storage containers, greenhouses, laboratories and cryosleep bays of the ship with newer modules of same types available at the market.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-100);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "medbay4 stem celler").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 6 synthethics").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab 1xgood").gameObject }}};
+					perk.moduleReplacements = new Perk.ModuleReplacement[] {
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer DIY FO").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer MFO retro futu").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "exotics container 2 medium").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-1").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[2].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					//Battle Tiger Perks
 					case "Perk nuke Tiger sharpnel":
+					perk.displayName = "Acid Rain Chemical Nukes Deal";
+					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade chemical capital missiles with extremely corrosive payload.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger sharpnel nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger sharpnel nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger sharpnel nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger sharpnel nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger sharpnel nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger sharpnel nuke launcher").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 5;
 					break;
 					case "Perk nuke Battle Tiger monolith":
+					perk.displayName = "Bright Fury Kinetic Nukes Deal";
+					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade kinetic capital missiles with tandem-impactor kinetic warhead.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger Monolith nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger Monolith nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger Monolith nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger Monolith nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger Monolith nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger Monolith nuke launcher").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 5;
 					break;
 					case "Perk nuke Tiger dual EMP":
+					perk.displayName = "Dual Shock Energy Nukes Deal";
+					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade electromagnetic capital missiles with high-intensity pulse generators.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger EMP dual nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger EMP dual nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger EMP dual nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger EMP dual nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger EMP dual nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger EMP dual nuke launcher").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 5;
 					break;
 					case "Perk nuke Tiger battery 8":
+					perk.displayName = "Cataclysm Tactical Nukes Deal";
+					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade tactical capital missiles with octagonal cluster high-explosive high-yield warheads.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 5;
 					break;
 					case "Perk nuke Tiger intruderbot nuke":
+					perk.displayName = "Apocalypse Boarding Nukes Deal";
+					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade boarding capital missiles with perforation capabilities that release military boarding drones on impact.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 5;
 					break;
 					case "Perk pet Tiger dog drone":
+					perk.displayName = "Earth Alliance Drone Legion";
+					perk.description = "Additional set of all kinds of drones to delegate majority of routine work to autonomous machines. Was properly acquired through official Earth Alliance channels for fraction of a price due to the direct support of our endeavor by high command.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-20000);
+					perk.extraCrew = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerdog").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerdog").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+4x {Core.TT("Heavy Security")} {Core.TT("Drones")}",
+						$"+2x {Core.TT("Tactical Combat")} {Core.TT("Drones")}",
+						$"+2x {Core.TT("General Maintanance")} {Core.TT("Drones")}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					case "Perk pet DLC combat rabbit":
+					perk.displayName = "Primary Systems Upgrade & Combat Rabbit Pet";
+					perk.description = "We've acquired this ancient combat organism from a Earth Alliance support channel as present, when we used their ship upgrade services. It is genetically modified for superior speed and strength, and digitally trained to attack enemies in close combat.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
+					perk.extraModules = new Perk.Pool[0];
+					perk.moduleReplacements = new Perk.ModuleReplacement[] {
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon dual EMP").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon gatling Tiger").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigerlaser MK2").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon EMP energyball 3x Tiger").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigermissile x2").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon EMP energyball 3x Tiger").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 6 smalltrapho").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 10 small").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 20 fusion").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 2crew tiger").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 3crew plastarmor").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.moduleReplacements[4].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[3].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[5].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[2].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					case "Perk pet DLC shocker lizard":
+					perk.displayName = "Secondary Systems Upgrade & Shocker Lizard Pet";
+					perk.description = "We've acquired this ancient combat organism from a Earth Alliance support channel as present, when we used their ship upgrade services. The creature is quite intelligent and can shoot energy rays from its eyes.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield tigership").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat tiger").gameObject }}};
+					perk.moduleReplacements = new Perk.ModuleReplacement[] {
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 01 greencrystal").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 06 rotor blue").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 01 tiger").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 04 xblack").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 2 saucer old").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 10 tiger").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[2].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[1].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					case "Perk pet DLC fire tortoise":
+					perk.displayName = "Support Systems Upgrade & Fire Tortoise Pet";
+					perk.description = "We've acquired this ancient combat organism from a Earth Alliance support channel as present, when we used their ship upgrade services. The creature is very intelligent and can tend gardens. It can also naturally breathe fire at enemies.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "dronebay 1 basic").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "medbay5 biofluid bath").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator diy").gameObject }}};
+					perk.moduleReplacements = new Perk.ModuleReplacement[] {
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FE armor").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab 1xgood").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel container tiger").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 4 greenhouse").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer OME mechanical").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-1").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[1].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[2].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[3].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					case "Perk pet DLC warp floater":
+					perk.displayName = "Auxiliary Systems Upgrade & Warp Floater Pet";
+					perk.description = "We've acquired this ancient combat organism from a Earth Alliance support channel as present, when we used their ship upgrade services. This warp creature is an extreme rarity due to being able to effectively communicate with non-warp beings. It is quite intelligent and likes to stare into human eyes.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 1B").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").gameObject }}};
+					perk.moduleReplacements = new Perk.ModuleReplacement[] {
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "dream recorder 2").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+1x {Core.TT("Packed")} {perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+1x {Core.TT("Packed")} {perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					//Endurance Perks
 					case "Perk module old triple cannon":
+					perk.displayName = "Personnel Equipment Requisition";
+					perk.description = "A cache of freshly manufactured and neatly packed high-end personnel weapons, implants and upgrades supplied by an official Earth Alliance representative. We only had to pay transportation fee in credits and supply meager amount of exotic matter to power trans-dimensional gate.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-50);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+6x {Core.TT("Packed")} {perk.extraModules[6].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+6x {Core.TT("Packed")} {perk.extraModules[12].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 5;
 					break;
 					case "Perk Replace ATK old with ATK new for Endurance":
+					perk.displayName = "Experimental Weapons Requisition";
+					perk.description = "A cache of freshly manufactured and neatly packed multiple types of experimental weapons supplied by an official Earth Alliance representative. We only had to pay transportation fee in credits and supply meager amount of exotic matter to power trans-dimensional gate.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-50);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-25000);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigermissile large").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigermissile large").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon EMP energyball 3x Tiger").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon EMP energyball 3x Tiger").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon gatling Tiger").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon gatling Tiger").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+2x {Core.TT("Packed")} {perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+2x {Core.TT("Packed")} {perk.extraModules[4].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					case "Perk nuke for Endurance":
+					perk.displayName = "Ancient Capital Missiles Cache";
+					perk.description = "An ancient, but perfectly sealed cache with capital missiles of all types and classifications suitable for any objective. We had to pay a hefty price to one of the famous hackers to break the seal open without triggering self-destruction mechanism.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-50);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-20000);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Monolith nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Monolith nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08c Green nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08c Green nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "15 Black nuke launcher").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "15 Black nuke launcher").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+14x {Core.TT("Packed Nukes (2x Each)")}: " +
+							$"{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)}, " +
+							$"{perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)}, " +
+							$"{perk.extraModules[4].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)}, " +
+							$"{perk.extraModules[6].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)}, " +
+							$"{perk.extraModules[8].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)}, " +
+							$"{perk.extraModules[10].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)} {Core.TT("and")} " +
+							$"{perk.extraModules[12].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)} {Core.TT("Nukes")}.",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}, {perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					case "Perk Endurance extra hitpoints and deflection":
+					perk.displayName = "Bulkheads & Armor Refurbishment";
+					perk.description = "A full refurbishment of all armor plates and integrity bulkheads will greatly increase durability of this ancient space vessel, as well its deflective and evasion properties, thus greatly increasing chances to reach the conclusion of our journey safely.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-5000);
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(-5000);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.addShipMaxHealth = 500;
+					perk.addShipDeflectPercent = 15;
+					perk.addShipEvasionPercent = 5;
+					perk.extraModules = new Perk.Pool[0];
+					perk.randomizerMenuStrings = new string[]{
+						$"+{perk.addShipEvasionPercent}°/ₘ {Core.TT("Ship Evasion")}",
+						$"+{perk.addShipDeflectPercent}% {Core.TT("Ship Deflection")}",
+						$"+{perk.addShipMaxHealth} {Core.TT("Ship Max Hitpoints")}",
+						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
+						$"{perk.randomizerResources.metals.minValue} {Core.TT("Metals")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 20;
 					break;
 					case "Perk Replace containers with betters for Endurance":
+					perk.displayName = "Earth Alliance Council Backing";
+					perk.description = "Due to our immense achievements, Earth Alliance and the allies are ready to overhaul all of equipment with high-end modules on our ship for free, given we can provide enough exotic matter to power temporary trans-dimensional gate.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-50000);
+					perk.extraModules = new Perk.Pool[0];
+					perk.moduleReplacements = new Perk.ModuleReplacement[] {
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "metals container 2 medium").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Stealth decryptor 3 newest human tec").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer DIY EE").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "organics container 0 diy").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "medbay4 stem celler").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics container 0 diy").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel container 1").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 2x human small").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat tiger").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 1 round old").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield tigership").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 8 sunpanel old s1").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 9 sunpanel new s2").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "03 Barrel nuke launcher").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon DIY Minicannon ancient 2,3").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigermissile large").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon ATK-MK1").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigermissile large").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon DIY exoticslaser").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigermissile large").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "5 Human PD").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "2 Tiger PD").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 01 greencrystal").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 07 rotor glass").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 01 primitive").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2 F-gulper").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 1 DIY").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 4 greenhouse").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab module diy x2").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab 1xgood").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel combinator 1A old").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 22 cube").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 13 classic cooled").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 22 cube").gameObject }},
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 3crew").gameObject },
+							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 3crew metalarmor").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+{Core.TT("Bridge, Shields & CIWS")} {Core.TT("Upgrade")}",
+						$"+{Core.TT("Reactors, Engines & Drive")} {Core.TT("Upgrade")}",
+						$"+{Core.TT("Weapons, Nukes & Stealth")} {Core.TT("Upgrade")}",
+						$"+{Core.TT("Storages, Cryo & Health Bays")} {Core.TT("Upgrade")}",
+						$"+{Core.TT("Sensors, Greenhouses & Labs")} {Core.TT("Upgrade")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 40;
 					break;
 					case "Perk pack, solid starfuel for endurance":
+					perk.displayName = "Support Modules Requisition";
+					perk.description = "A cache of freshly manufactured and neatly packed full range of support modules supplied by an official Earth Alliance representative. We only had to pay transportation fee in credits and supply meager amount of exotic matter to power trans-dimensional gate.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-50);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-50000);
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat tiger").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Stealth decryptor 3 newest human tec").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 1B").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+{Core.TT("Packed Storages/Factories Set")}",
+						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+1x {Core.TT("Packed")} {perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
 					break;
 					case "Perk DIY drone army":
+					perk.displayName = "Private Tactical Drone Company";
+					perk.description = "A private company of sentient tactical drones with built-in perfect loyalty lock that ready to help us on our journey for serious credit investment. We can delegate majority of our work to them and increase overall efficiency of the ship.";
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-25000);
+					perk.extraCrew = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider pirates").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider pirates").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider pirates").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider pirates").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }}};
+					perk.randomizerMenuStrings = new string[]{
+						$"+8x {Core.TT("Tactical Combat")} {Core.TT("Drones")}",
+						$"+4x {Core.TT("Assault Maintanance")} {Core.TT("Drones")}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
+					if (!storedPerkSprites.ContainsKey("Drone_Army_Sprite")) storedPerkSprites.Add("Drone_Army_Sprite", perk.menuSprite);
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 20;
 					break;
 					//Perks Fallback
 					default:
@@ -3626,9 +4331,15 @@ namespace FFU_Bleeding_Edge {
 				if (!perk.isUnlockedByDefault) FFU_BE_Defs.unlockablePerkList.Add(perk);
 				FFU_BE_Defs.prefabPerkList.Add(perk);
 			}
-			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk Replace fuel containers with betters").menuSprite = FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk module old random").menuSprite;
-			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk drone 05 DIY science").menuSprite = FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk drone 09c Sentinel sec").menuSprite;
-			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk maggot pet").menuSprite = FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk war animal for weirdship").menuSprite;
+			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk Replace containers with betters for Endurance").menuSprite = storedPerkSprites["Deal_Handshake_Sprite"];
+			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk Replace ATK old with ATK new for Endurance").menuSprite = storedPerkSprites["Random_Module_Sprite"];
+			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk Replace fuel containers with betters").menuSprite = storedPerkSprites["Deal_Handshake_Sprite"];
+			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk pack, solid starfuel for endurance").menuSprite = storedPerkSprites["Leftover_Module_Sprite"];
+			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk module old triple cannon").menuSprite = storedPerkSprites["Imperial_Crate_Sprite"];
+			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk drone 05 DIY science").menuSprite = storedPerkSprites["Security_Drone_Sprite"];
+			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk pet Tiger dog drone").menuSprite = storedPerkSprites["Drone_Army_Sprite"];
+			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk nuke for Endurance").menuSprite = storedPerkSprites["Random_Nuke_Sprite"];
+			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk maggot pet").menuSprite = storedPerkSprites["Red_Ripper_Crew_Sprite"];
 			if (FFU_BE_Defs.dumpObjectLists) Debug.LogWarning(perksData);
 		}
 		public static void InitLockedPerksAllocation() {

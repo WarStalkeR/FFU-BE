@@ -13,7 +13,7 @@ using RST.UI;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "0.9.7.2";
+		public static string modVersion = "0.9.7.5";
 		//Internal Variables
 		public static bool firstRun = true;
 		public static bool firstInst = true;
@@ -55,6 +55,7 @@ namespace FFU_Bleeding_Edge {
 		public static List<WorldRules> prefabWorldRules = new List<WorldRules>();
 		public static List<AddCrewToShip> prefabCrewSets = new List<AddCrewToShip>();
 		public static List<Projectile> prefabProjectilesList = new List<Projectile>();
+		public static List<SelfCombustible> prefabMalfunctionsList = new List<SelfCombustible>();
 		public static List<AddResourcesToShip> prefabResourceSets = new List<AddResourcesToShip>();
 		public static List<PointDefDamageDealer> prefabDefDealersList = new List<PointDefDamageDealer>();
 		public static List<ShootAtDamageDealer> prefabDamageDealersList = new List<ShootAtDamageDealer>();
@@ -331,6 +332,7 @@ namespace FFU_Bleeding_Edge {
 				FFU_BE_Mod_Crewmembers.InitSpacePodsList();
 				FFU_BE_Mod_Modules.InitShipSlotsList();
 				FFU_BE_Mod_Modules.InitShipModulesList();
+				FFU_BE_Mod_Modules.InitModuleMalfunctions();
 				FFU_BE_Mod_Spaceships.InitSelectablePerks();
 				FFU_BE_Mod_Spaceships.InitShipResourcePrefabs();
 				FFU_BE_Mod_Spaceships.InitSpaceShipsPrefabList();
@@ -482,14 +484,14 @@ namespace FFU_Bleeding_Edge {
 					"<color=orange>module crafting proficiency</color>, crafted module might have different tiers and modifiers." + "</color>";
 				if (txt.name == "CraftreacText" && txt.text.Contains("You can use crafting to save yourself after losing an important"))
 					txt.text = "<color=lime>" + "Possible Module Tiers (MK): I, II, III, IV, V, VI, VII, VIII, IX, X." +
-					"\n" + "<color=orange>Sustained</color>/<color=red>Unstable</color> Mod: affects power consumption." +
-					"\n" + "<color=orange>Reinforced</color>/<color=red>Fragile</color> Mod: affects module's durability." +
-					"\n" + "<color=orange>Efficient</color>/<color=red>Inefficient</color> Mod: affects resources consumption." +
-					"\n" + "<color=orange>Precise</color>/<color=red>Inhibited</color> Mod: affects weapon's accuracy." +
-					"\n" + "<color=orange>Rapid</color>/<color=red>Disrupted</color> Mod: affects weapon's rate of fire." +
-					"\n" + "<color=orange>Enhanced</color>/<color=red>Deficient</color> Mod: affects core functionality." +
-					"\n" + "<color=orange>Durable</color>/<color=red>Brittle</color> Mod: affects armor or container capacity." +
-					"\n" + "<color=orange>Persistent</color>/<color=red>Volatile</color> Mod: affects shielding properties." + "</color>";
+					"\n" + "<color=orange>Sustained(S↑)</color>/<color=red>Unstable(S↓)</color> Mod: affects power consumption." +
+					"\n" + "<color=orange>Reinforced(H↑)</color>/<color=red>Fragile(H↓)</color> Mod: affects module's durability." +
+					"\n" + "<color=orange>Efficient(R↑)</color>/<color=red>Inefficient(R↓)</color> Mod: affects resources consumption." +
+					"\n" + "<color=orange>Precise(A↑)</color>/<color=red>Inhibited(A↓)</color> Mod: affects weapon's accuracy." +
+					"\n" + "<color=orange>Rapid(F↑)</color>/<color=red>Disrupted(F↓)</color> Mod: affects weapon's rate of fire." +
+					"\n" + "<color=orange>Enhanced(E↑)</color>/<color=red>Deficient(E↓)</color> Mod: affects core functionality." +
+					"\n" + "<color=orange>Durable(C↑)</color>/<color=red>Brittle(C↓)</color> Mod: affects armor or container capacity." +
+					"\n" + "<color=orange>Persistent(P↑)</color>/<color=red>Volatile(P↓)</color> Mod: affects shielding properties." + "</color>";
 				if (txt.name == "CraftpackText" && txt.text.Contains("For a small extra cost, you can craft resource packages"))
 					txt.text = "<color=lime>" + "In addition, excess resources can be packed into <color=orange>Resources Packs</color> that will be automatically sent to your storage." + "</color>";
 				if (txt.name == "turning off modules" && txt.text == "Turning off modules") txt.text = "Energy Emission (FFU:BE)";
