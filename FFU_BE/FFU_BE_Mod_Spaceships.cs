@@ -4352,6 +4352,41 @@ namespace FFU_Bleeding_Edge {
 			foreach (Perk perk in FFU_BE_Defs.unlockablePerkList) if (!existingPerks.Contains(perk.gameObject)) unusedPerks.Add(perk.gameObject);
 			foreach (Sector sector in Resources.FindObjectsOfTypeAll<Sector>()) if (sector.sectorEndUnlockablePerkPool != null) foreach (GameObject item in unusedPerks) sector.sectorEndUnlockablePerkPool.items.Add(item);
 		}
+		public static void InitShipCoreCrewmembers() {
+			foreach (AddCrewToShip crewSet in Resources.FindObjectsOfTypeAll<AddCrewToShip>()) {
+				int shipPrefabID = 0;
+				switch (crewSet.name) {
+					case "01 Tigerfish": shipPrefabID = 516057105; break;
+					case "02 Nuke Runner": shipPrefabID = 487234563; break;
+					case "04 Rogue Rat": shipPrefabID = 578937222; break;
+					case "03 Weirdship": shipPrefabID = 1809014558; break;
+					case "00 Easy Tiger": shipPrefabID = 1920692188; break;
+					case "05 Gardenship": shipPrefabID = 1106792042; break;
+					case "06 Atlas": shipPrefabID = 2103659466; break;
+					case "07 Bluestar MK III scientific": shipPrefabID = 1772361532; break;
+					case "08 Roundship": shipPrefabID = 1251918188; break;
+					case "BattleTiger": shipPrefabID = 1452660923; break;
+					case "10 Endurance": shipPrefabID = 1939804939; break;
+				}
+				if (shipPrefabID > 0) {
+					List<AddCrewToShip.Group> crewSetList = crewSet.groups.ToList();
+					foreach (KeyValuePair<string, int> storedCrewSet in FFU_BE_Defs.startingCrew[shipPrefabID]) {
+						AddCrewToShip.Group newCrewSet = new AddCrewToShip.Group();
+						Crewmember refCrew = FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == storedCrewSet.Key);
+						if (refCrew != null) {
+							newCrewSet.prefabRef.Prefab = refCrew.gameObject;
+							newCrewSet.spawnArea = Ship.TaskArea.DefaultCrewSpawn;
+							newCrewSet.count = FFU_BE_Defs.NewExactValue(storedCrewSet.Value);
+							newCrewSet.matchCrewColor = true;
+							crewSetList.Add(newCrewSet);
+						}
+					}
+					crewSet.groups = new AddCrewToShip.Group[crewSetList.Count];
+					crewSet.groups = crewSetList.ToArray();
+					FFU_BE_Defs.prefabCrewmemberSets.Add(crewSet);
+				}
+			}
+		}
 		public static void InitShipResourcePrefabs() {
 			foreach (AddResourcesToShip resSet in Resources.FindObjectsOfTypeAll<AddResourcesToShip>()) {
 				if (FFU_BE_Defs.dumpObjectLists) Debug.Log($"Resource Set: {resSet.name}");

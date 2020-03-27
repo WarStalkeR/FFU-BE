@@ -2119,12 +2119,46 @@ namespace RST.UI {
 	}
 	public class patch_CrewDataSubpanel : CrewDataSubpanel {
 		private extern void orig_Update();
+		public extern static void orig_DoSkill(SkillUi skillUi, Crewmember c, ISkillEffects se, bool crewIsMine);
 		[MonoModIgnore] private Crewmember c;
 		private void Update() {
 		/// Crewmember Weapon Full Information Window
 			orig_Update();
 			if (c != null) health.horizontalOverflow = HorizontalWrapMode.Overflow;
 			if (c != null && c.HandWeaponPrefab != null) handWeaponDescriptionHover.hoverText = FFU_BE_Mod_Information.GetSelectedWeaponExactData(c.HandWeaponPrefab);
+		}
+		public static void DoSkill(SkillUi skillUi, Crewmember c, ISkillEffects se, bool crewIsMine) {
+		/// Info About Full Skill Level Up
+			orig_DoSkill(skillUi, c, se, crewIsMine);
+			if (skillUi.levelUpHoverable != null) if (!skillUi.levelUpHoverable.hoverText.Contains("Hold Shift, while clicking for fast skill level up")) 
+			skillUi.levelUpHoverable.hoverText = skillUi.levelUpHoverable.hoverText.Replace("Click to level up this skill", "Click to level up this skill\nHold Shift, while clicking for fast skill level up");
+		}
+		public class patch_SkillUi : SkillUi {
+			[MonoModIgnore] private CrewDataSubpanel cds;
+			[MonoModIgnore] private CrewPanel.AssignmentItem ai;
+			[MonoModReplace] private void LevelUpClicked() {
+			/// Level Up Skill Fully with Pressed Shift Key
+				if (cds != null && ai != null && cds.Crewmember != null) {
+					if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) {
+						int currentSkill = 0;
+						switch (ai.skillUsed) {
+							case Crewmember.Skill.Bridge: currentSkill = cds.Crewmember.skills.bridge; break;
+							case Crewmember.Skill.Sensor: currentSkill = cds.Crewmember.skills.sensor; break;
+							case Crewmember.Skill.Gunnery: currentSkill = cds.Crewmember.skills.gunnery; break;
+							case Crewmember.Skill.Shield: currentSkill = cds.Crewmember.skills.shield; break;
+							case Crewmember.Skill.Repair: currentSkill = cds.Crewmember.skills.repair; break;
+							case Crewmember.Skill.FightFire: currentSkill = cds.Crewmember.skills.firefight; break;
+							case Crewmember.Skill.HandWeapon: currentSkill = cds.Crewmember.skills.handWeapon; break;
+							case Crewmember.Skill.Garden: currentSkill = cds.Crewmember.skills.gardening; break;
+							case Crewmember.Skill.Science: currentSkill = cds.Crewmember.skills.science; break;
+							case Crewmember.Skill.Warp: currentSkill = cds.Crewmember.skills.warp; break;
+						}
+						int allowedIncrease = 10 - currentSkill;
+						if (allowedIncrease > cds.Crewmember.unusedSkillPoints) cds.Crewmember.LevelUpSkill(ai.skillUsed, cds.Crewmember.unusedSkillPoints);
+						else cds.Crewmember.LevelUpSkill(ai.skillUsed, allowedIncrease);
+					} else cds.Crewmember.LevelUpSkill(ai.skillUsed, 1);
+				}
+			}
 		}
 	}
 }

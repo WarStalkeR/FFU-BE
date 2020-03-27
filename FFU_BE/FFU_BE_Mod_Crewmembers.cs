@@ -1629,25 +1629,26 @@ namespace RST {
 							if (group.matchCrewColor) newCrewmember.SetColor(color);
 							newCrewmember.BuyableAssignToShip(ship, group.spawnArea, Ship.TaskArea.None);
 						}
-					}
-					if (FFU_BE_Defs.canSpawnCrew && ship.Ownership.GetOwner() == Ownership.Owner.Me) {
-						if (FFU_BE_Defs.startingCrew.ContainsKey(ship.PrefabId)) {
-							if (FFU_BE_Defs.startingCrew[ship.PrefabId].Count() > 0) {
-								foreach (var crewSpawn in FFU_BE_Defs.startingCrew[ship.PrefabId]) {
-									Crewmember crewPrefab = FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == crewSpawn.Key);
-									if (crewPrefab != null & crewSpawn.Value > 0) {
-										for (int n = 0; n < crewSpawn.Value; n++) {
-											Crewmember newCrewmember = UnityEngine.Object.Instantiate<Crewmember>(crewPrefab, base.transform.position, Quaternion.identity, base.transform);
-											newCrewmember.seed = Mathf.Abs(seed + i * 100 + FFU_BE_Defs.startingCrew[ship.PrefabId].IndexOf(crewSpawn) * 10 + n);
-											RandomizeCrewmember randomizeCrewmember = newCrewmember.RandomizeCrewmember;
-											if (randomizeCrewmember != null) ((IRandomizer)randomizeCrewmember).Randomize(newCrewmember.seed);
-											StartGameCustomization.LoadCrewCustomization(newCrewmember);
-											newCrewmember.BuyableAssignToShip(ship, group.spawnArea, Ship.TaskArea.None);
+						if (FFU_BE_Defs.canSpawnCrew && ship.Ownership.GetOwner() == Ownership.Owner.Me) {
+							if (FFU_BE_Defs.startingCrew.ContainsKey(ship.PrefabId)) {
+								if (FFU_BE_Defs.startingCrew[ship.PrefabId].Count() > 0) {
+									foreach (var crewSpawn in FFU_BE_Defs.startingCrew[ship.PrefabId]) {
+										Crewmember crewPrefab = FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == crewSpawn.Key);
+										if (crewPrefab != null & crewSpawn.Value > 0) {
+											for (int n = 0; n < crewSpawn.Value; n++) {
+												Crewmember newCrewmember = UnityEngine.Object.Instantiate<Crewmember>(crewPrefab, base.transform.position, Quaternion.identity, base.transform);
+												newCrewmember.seed = Mathf.Abs(seed + i * 100 + FFU_BE_Defs.startingCrew[ship.PrefabId].IndexOf(crewSpawn) * 10 + n);
+												RandomizeCrewmember randomizeCrewmember = newCrewmember.RandomizeCrewmember;
+												if (randomizeCrewmember != null) ((IRandomizer)randomizeCrewmember).Randomize(newCrewmember.seed);
+												StartGameCustomization.LoadCrewCustomization(newCrewmember);
+												if (group.matchCrewColor) newCrewmember.SetColor(color);
+												newCrewmember.BuyableAssignToShip(ship, group.spawnArea, Ship.TaskArea.None);
+											}
 										}
 									}
 								}
+								FFU_BE_Defs.canSpawnCrew = false;
 							}
-							FFU_BE_Defs.canSpawnCrew = false;
 						}
 					}
 				}

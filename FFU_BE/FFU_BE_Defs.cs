@@ -55,6 +55,7 @@ namespace FFU_Bleeding_Edge {
 		public static List<WorldRules> prefabWorldRules = new List<WorldRules>();
 		public static List<AddCrewToShip> prefabCrewSets = new List<AddCrewToShip>();
 		public static List<Projectile> prefabProjectilesList = new List<Projectile>();
+		public static List<AddCrewToShip> prefabCrewmemberSets = new List<AddCrewToShip>();
 		public static List<SelfCombustible> prefabMalfunctionsList = new List<SelfCombustible>();
 		public static List<AddResourcesToShip> prefabResourceSets = new List<AddResourcesToShip>();
 		public static List<PointDefDamageDealer> prefabDefDealersList = new List<PointDefDamageDealer>();
@@ -291,12 +292,12 @@ namespace FFU_Bleeding_Edge {
 		public static IDictionary<int, List<KeyValuePair<string, int>>> startingCrew = new Dictionary<int, List<KeyValuePair<string, int>>>() {
 			{ 516057105,  new List<KeyValuePair<string, int>>()},	//_Tigerfish
 			{ 487234563,  new List<KeyValuePair<string, int>>()},	//_NukeRunner
-			{ 1809014558, new List<KeyValuePair<string, int>>()},	//_Weirdship
 			{ 578937222,  new List<KeyValuePair<string, int>>()},	//_RogueRat
+			{ 1809014558, new List<KeyValuePair<string, int>>()},	//_Weirdship
+			{ 1920692188, new List<KeyValuePair<string, int>>()},	//_EasyTiger
 			{ 1106792042, new List<KeyValuePair<string, int>>()},	//_Gardenship
 			{ 2103659466, new List<KeyValuePair<string, int>>()},	//_Atlas
 			{ 1772361532, new List<KeyValuePair<string, int>>()},	//_Bluestar
-			{ 1920692188, new List<KeyValuePair<string, int>>()},	//_EasyTiger
 			{ 1251918188, new List<KeyValuePair<string, int>>()},	//_Roundship
 			{ 1452660923, new List<KeyValuePair<string, int>>()},	//_BattleTiger
 			{ 1939804939, new List<KeyValuePair<string, int>>()}};	//_Endurance
@@ -334,6 +335,7 @@ namespace FFU_Bleeding_Edge {
 				FFU_BE_Mod_Modules.InitShipModulesList();
 				FFU_BE_Mod_Modules.InitModuleMalfunctions();
 				FFU_BE_Mod_Spaceships.InitSelectablePerks();
+				FFU_BE_Mod_Spaceships.InitShipCoreCrewmembers();
 				FFU_BE_Mod_Spaceships.InitShipResourcePrefabs();
 				FFU_BE_Mod_Spaceships.InitSpaceShipsPrefabList();
 				FFU_BE_Mod_Spaceships.InitLockedPerksAllocation();

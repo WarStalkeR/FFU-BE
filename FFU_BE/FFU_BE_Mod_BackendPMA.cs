@@ -428,22 +428,6 @@ namespace RST.PlaymakerAction {
 					}
 				}
 			}
-			if (FFU_BE_Defs.startingCrew.ContainsKey(ship.PrefabId)) {
-				if (FFU_BE_Defs.startingCrew[ship.PrefabId].Count() > 0) {
-					foreach (var crewSpawn in FFU_BE_Defs.startingCrew[ship.PrefabId]) {
-						Crewmember crewPrefab = FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == crewSpawn.Key);
-						if (crewPrefab != null & crewSpawn.Value > 0) {
-							for (int n = 0; n < crewSpawn.Value; n++) {
-								int newSeed = Mathf.Abs(seed + FFU_BE_Defs.startingCrew[ship.PrefabId].IndexOf(crewSpawn) * 100 + n);
-								Crewmember newCrewmember = InstantiateCrewWithSeed(crewPrefab, newSeed, null);
-								list.Add(newCrewmember);
-								UnityEngine.Object.Destroy(newCrewmember.gameObject);
-							}
-						}
-					}
-				}
-				FFU_BE_Defs.canSpawnCrew = false;
-			}
 			int extraModules = 0;
 			FFU_BE_Defs.perkModuleBlueprintIDs = new List<int>();
 			for (int m = 0; m < perkUiElements.Count; m++) {
