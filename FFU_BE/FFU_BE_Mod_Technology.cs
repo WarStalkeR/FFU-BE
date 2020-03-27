@@ -1064,6 +1064,7 @@ namespace FFU_Bleeding_Edge {
 				case Core.BonusMod.Reinforced: if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) * 2f * healthLossModifier); break;
 				case Core.BonusMod.Fragile: if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) / 2f * healthLossModifier); break;
 			}
+			if (FFU_BE_Defs.IsStaticModuleType(shipModule)) AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = refModuleMaxHealth;
 			shipModule.costCreditsInShop = Mathf.RoundToInt(refModule.costCreditsInShop * GetTierBonus(moduleTier, Core.BonusType.Extreme));
 		}
 		public static float GetTierBonus(Core.BonusTier bonusTier, Core.BonusType bonusType) {

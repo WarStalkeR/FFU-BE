@@ -502,6 +502,7 @@ namespace FFU_Bleeding_Edge {
 			int refModuleMaxHealth = AccessTools.FieldRefAccess<ShipModule, int>(refModule, "maxHealth");
 			float healthModifier = moduleModifier == Core.BonusMod.Reinforced ? 2f : moduleModifier == Core.BonusMod.Fragile ? 0.5f : 1f;
 			float maxHealth = Mathf.RoundToInt(refModuleMaxHealth * FFU_BE_Mod_Technology.GetTierBonus(moduleTier, Core.BonusType.Default) * healthModifier);
+			if (FFU_BE_Defs.IsStaticModuleType(shipModule)) maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(refModule, "maxHealth");
 			int currHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "health");
 			return Mathf.Min(1.0f, currHealth / maxHealth);
 		}

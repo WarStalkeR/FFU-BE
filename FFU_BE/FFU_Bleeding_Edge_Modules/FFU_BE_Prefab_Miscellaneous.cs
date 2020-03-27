@@ -87,7 +87,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.description = "Implants cache that contains implant sets that increase health of biological crewmembers by certain amount. To apply: pack it, bring crew close to Engine Module and scrap it. Amount of sets depends on cache's tier.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, organics = 500f, exotics = 10f };
 				shipModule.scrapGet = new ResourceValueGroup { };
-				shipModule_maxHealth = 50;
+				shipModule_maxHealth = 75;
 				break;
 				case "artifactmodule tec 17 broken screen gizmo, data":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);

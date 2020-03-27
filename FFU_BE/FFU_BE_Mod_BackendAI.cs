@@ -16,6 +16,28 @@ using FFU_Bleeding_Edge;
 using MonoMod;
 
 namespace RST {
+	public class patch_FleetAI : FleetAI {
+		[MonoModIgnore] private float intviewTimer;
+		[MonoModReplace] private void DoIntviewAi() {
+		/// Enemy Retreats Only if Damaged
+			foreach (Ship cachedShip in PerFrameCache.CachedShips) {
+				ShipAI aI = cachedShip.AI;
+				if (!aI.hasBossShipAi && cachedShip.Ownership.GetOwner() == Ownership.Owner.Enemy) {
+					WorldRules instance = WorldRules.Instance;
+					if (!aI.sendIntrudersIntent && intviewTimer >= instance.fleetAiTimeForIntruders) aI.sendIntrudersIntent = true;
+					if (!aI.sendNukesIntent && intviewTimer >= instance.fleetAiTimeForNukes) aI.sendNukesIntent = true;
+					if (!aI.escapeBattleIntent && cachedShip.HasInstalledWarpModule) {
+						int maxHealth = cachedShip.MaxHealth;
+						if (cachedShip.HealthFast(maxHealth) < maxHealth * instance.fleetAiHealthLimitForEscape) {
+							foreach (ShipModule module in cachedShip.Modules) if (module != null && module.type == ShipModule.Type.Warp && !module.turnedOn) module.turnedOn = true;
+							aI.escapeBattleIntent = true;
+						}
+					}
+				}
+			}
+			intviewTimer += Time.deltaTime;
+		}
+	}
 	public class patch_ShipAI : ShipAI {
 		public class ModuleCrewPair : AiStateItem, IAiStateItem, IHasAssociatedCrew, IHasAssociatedModule {
 		/// Broken Modules Identification Fix
