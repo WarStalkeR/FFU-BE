@@ -281,9 +281,9 @@ namespace RST.UI {
 			StorageModule storageModule = GetStorageModule(resourcesGoTo, false);
 			bool canIncrease = storageModule != null && storageModule.slotCount < FFU_BE_Defs.maxStorageCapacity;
 			bool hasResources = instance.storageUpgradeCost.CheckHasEnough(r);
-			if (!canIncrease) upgradeButtonHover.hoverText = MonoBehaviourExtended.TT("Maximum slot count reached");
-			else if (!hasResources) upgradeButtonHover.hoverText = MonoBehaviourExtended.TT("Not enough resources for upgrading");
-			else upgradeButtonHover.hoverText = "";
+			if (!canIncrease) upgradeButtonHover.HoverText = MonoBehaviourExtended.TT("Maximum slot count reached");
+			else if (!hasResources) upgradeButtonHover.HoverText = MonoBehaviourExtended.TT("Not enough resources for upgrading");
+			else upgradeButtonHover.HoverText = "";
 			upgradeButton.interactable = storageModule != null && canIncrease && hasResources;
 		}
 		[MonoModReplace] public static void Upgrade() {
@@ -299,6 +299,23 @@ namespace RST.UI {
 					storageModule.slotCount++;
 				}
 			}
+		}
+	}
+	public class patch_MenuNewGamePanel : MenuNewGamePanel {
+		public extern void orig_NewGameBeginnerClicked();
+		public extern void orig_NewGameChallengingClicked();
+		public extern void orig_NewGameHardcoreClicked();
+		private void NewGameBeginnerClicked() {
+			FFU_BE_Defs.startingDifficulty = Core.Difficulty.Easy;
+			orig_NewGameBeginnerClicked();
+		}
+		private void NewGameChallengingClicked() {
+			FFU_BE_Defs.startingDifficulty = Core.Difficulty.Medium;
+			orig_NewGameChallengingClicked();
+		}
+		private void NewGameHardcoreClicked() {
+			FFU_BE_Defs.startingDifficulty = Core.Difficulty.Hard;
+			orig_NewGameHardcoreClicked();
 		}
 	}
 }

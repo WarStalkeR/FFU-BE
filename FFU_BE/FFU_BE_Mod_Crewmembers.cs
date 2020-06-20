@@ -1556,9 +1556,7 @@ namespace RST {
 		}
 		[MonoModReplace] public bool CanLevelUpSkill(Skill skill, int inc) {
 		/// Allow Drones Skill Points Allocation
-			if (skill == Skill.Presence || skill == Skill.None || inc <= 0) {
-				return false;
-			}
+			if (skill == Skill.Presence || skill == Skill.None || inc <= 0) return false;
 			int skill2 = GetSkill(skill);
 			if (unusedSkillPoints >= inc) return skill2 + inc <= 10;
 			return false;
@@ -1690,26 +1688,26 @@ namespace RST.PlaymakerAction {
 			PlayerData me = PlayerDatas.Me;
 			if (me != null) me.questText = "";
 			SwitchView.Do(SwitchView.View.StarmapView);
-			AnalyticsEventSectorStarted.Send();
+			RstAnalytics.SendSectorStarted();
 			TimePanelControls.ControlsDisabled = false;
 			if (RstTime.timeScale <= 0f) RstTime.timeScale = 1f;
 			bool crewFlag = false;
 			MainQuest questInstance = MainQuest.Instance;
 			if (questInstance != null && questInstance.StartingSectorNumber != sector.number && sector.skillPointsPerCrewToGive > 0) {
 				foreach (Crewmember cachedCrewmember in PerFrameCache.CachedCrewmembers) {
-					if (cachedCrewmember != null && 
-						cachedCrewmember.Ownership.GetOwner() == Ownership.Owner.Me && 
-							(cachedCrewmember.skills.bridge > 0 || 
-							cachedCrewmember.skills.firefight > 0 || 
-							cachedCrewmember.skills.gardening > 0 || 
-							cachedCrewmember.skills.gunnery > 0 || 
-							cachedCrewmember.skills.handWeapon > 0 || 
-							cachedCrewmember.skills.repair > 0 || 
-							cachedCrewmember.skills.science > 0 || 
-							cachedCrewmember.skills.sensor > 0 || 
-							cachedCrewmember.skills.shield > 0 || 
+					if (cachedCrewmember != null &&
+						cachedCrewmember.Ownership.GetOwner() == Ownership.Owner.Me &&
+							(cachedCrewmember.skills.bridge > 0 ||
+							cachedCrewmember.skills.firefight > 0 ||
+							cachedCrewmember.skills.gardening > 0 ||
+							cachedCrewmember.skills.gunnery > 0 ||
+							cachedCrewmember.skills.handWeapon > 0 ||
+							cachedCrewmember.skills.repair > 0 ||
+							cachedCrewmember.skills.science > 0 ||
+							cachedCrewmember.skills.sensor > 0 ||
+							cachedCrewmember.skills.shield > 0 ||
 							cachedCrewmember.skills.warp > 0)) {
-						try { cachedCrewmember.unusedSkillPoints += sector.number; }
+						try { cachedCrewmember.unusedSkillPoints += sector.number; } 
 						catch { cachedCrewmember.unusedSkillPoints++; }
 						int maxSkillPoints = 0;
 						if (cachedCrewmember.skills.bridge > 0) maxSkillPoints += 10 - cachedCrewmember.skills.bridge;

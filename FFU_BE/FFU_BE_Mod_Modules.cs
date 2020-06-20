@@ -5,6 +5,7 @@
 #pragma warning disable IDE0059
 #pragma warning disable CS0626
 #pragma warning disable CS0649
+#pragma warning disable CS0414
 #pragma warning disable CS0108
 
 using System;
@@ -864,9 +865,13 @@ namespace RST {
 				(TurnedOnAndIsWorking && (PrefabId != 1088715096 || !Weapon.inShootSequence || !Weapon.shotMade)) : 
 				(FFU_BE_Defs.DamagedButWorking(this) && EnoughOps && EnoughResources && !IsPacked));
 			UpdateAppearance();
-			bool flag = !PopupControls.PowerManagementMode;
-			if (OutlineHoverAndSelect.outlineDrawer.gameObject.activeSelf != flag)
-				OutlineHoverAndSelect.outlineDrawer.gameObject.SetActive(flag);
+			OutlineHoverAndSelect outlineHoverAndSelect = OutlineHoverAndSelect;
+			if (outlineHoverAndSelect != null && outlineHoverAndSelect.outlineDrawer != null) {
+				bool flag = !PopupControls.PowerManagementMode;
+				if (outlineHoverAndSelect.outlineDrawer.gameObject.activeSelf != flag) {
+					outlineHoverAndSelect.outlineDrawer.gameObject.SetActive(flag);
+				}
+			}
 		}
 		public string GetStatusStringLocalized() {
 		/// Updated Status Text for Damaged Module
@@ -900,6 +905,13 @@ namespace RST {
 							else stringBuilder.Append("<color=red>").Append(MonoBehaviourExtended.TT("Shield not functioning")).Append("</color>");
 							break;
 						}
+						case Type.MaterialsConverter: {
+							MaterialsConverterModule mattConv = MaterialsConverter;
+							float convEff = 25;
+							if (convEff < 90) stringBuilder.Append("<color=yellow>").AppendFormat(MonoBehaviourExtended.TT("Converter Efficiency: {0:0.0}"), convEff).Append("</color>");
+							else stringBuilder.Append("<color=lime>").AppendFormat(MonoBehaviourExtended.TT("Converter Efficiency: {0:0.0}"), convEff).Append("</color>");
+							break;
+						}
 						default:
 						if (timerVal > 0f) stringBuilder.Append("<color=yellow>").AppendFormat(MonoBehaviourExtended.TT("Ready in {0:0.0} seconds"), finalVal).Append("</color>");
 						else stringBuilder.Append("<color=lime>").Append(MonoBehaviourExtended.TT("Ready/operational")).Append("</color>");
@@ -923,6 +935,7 @@ namespace RST {
 		[MonoModIgnore] private float shotTimer;
 		[MonoModIgnore] private int shotsToMake;
 		[MonoModIgnore] private float preshootTimer;
+		[MonoModIgnore] private float toTargetAngleOffset;
 		[MonoModIgnore] public bool shotMade { get; private set; }
 		[MonoModIgnore] public bool HasTarget { get; private set; }
 		[MonoModIgnore] private bool DoLoadAndAim() { return false; }
@@ -966,7 +979,7 @@ namespace RST {
 			return true;
 		}
 		[MonoModReplace] private void Update() {
-		/// Use All Weapon Barrels Consequently & Damaged Reload Speed
+		/// Use All Weapon Barrels Consequently, Damaged Reload Speed & Damaged Nuke Detonation
 			if (Module.IsDead && Module.type == ShipModule.Type.Weapon_Nuke && !hasDetonated) {
 				HasTarget = false;
 				TargetPos = gameObject.transform.position;
@@ -981,8 +994,9 @@ namespace RST {
 				if (shotTimer <= 0f) {
 					int barrelTipIndex = (magazineSize - shotsToMake) % BarrelTipCount;
 					CreateDamageDealer(barrelTipIndex, shotsToMake == magazineSize);
-					shotsToMake--;
 					shotTimer = shotInterval;
+					shotsToMake--;
+					if (shotsToMake <= 0) toTargetAngleOffset = 0f;
 				}
 				shotTimer -= Time.deltaTime;
 			}
@@ -1020,6 +1034,7 @@ namespace RST {
 				} else if (!ShotInProgress) {
 					inShootSequence = false;
 					shotMade = false;
+					if (shotInterval <= 0) toTargetAngleOffset = 0f;
 				}
 			} else {
 				inShootSequence = false;
@@ -1096,15 +1111,30 @@ namespace RST {
 			}
 		}
 	}
-	public class patch_MaterialsConverterModule : MaterialsConverterModule {
-		[MonoModReplace] private void CompleteConversion() {
+	/*[MonoModReplace] [RequireComponent(typeof(ShipModule))] public class MaterialsConverterModule : MonoBehaviourExtended, IHasModule, ILoadSave {
+		public ResourceValueGroup consume;
+		public ResourceValueGroup produce;
+		public IDictionary<ResourceValueGroup, ResourceValueGroup> conversionRecipes = new Dictionary<ResourceValueGroup, ResourceValueGroup>();
+		public float conversionEfficiency = 0.25f;
+		[Localized] public string resourceConsumptionReason = "started conversion";
+		[Localized] public string resourceProductionReason = "finished conversion";
+		public ShipModule Module => GetCachedComponent<ShipModule>(true);
+		public bool Convert(int convCount) {
 		/// Resource Production Amount from Damage
-			ConversionInProgress = false;
-			PlayerData pd = PlayerDatas.Get(Module.Ownership.GetOwner());
-			ResourceValueGroup newProduce = Module.HasFullHealth ? produce : produce * FFU_BE_Defs.GetHealthPercent(Module);
-			newProduce.ProduceTo(pd, 1f, resourceProductionReason);
+			PlayerData playerDatum = PlayerDatas.Get(this.Module.Ownership.GetOwner());
+			if (playerDatum == null) return false;
+			if (!this.consume.ConsumeFrom(playerDatum, (float)convCount, this.resourceConsumptionReason)) return false;
+			if (Module.HasFullHealth) this.produce.ProduceTo(playerDatum, (float)convCount, this.resourceProductionReason);
+			else this.produce.ProduceTo(playerDatum, (float)convCount * FFU_BE_Defs.GetHealthPercent(Module), this.resourceProductionReason);
+			return true;
 		}
-	}
+		public void Save(ES2Writer w) { 
+			w.Write(false, "MaterialsConverterModule.conversionInProgress");
+			w.Write(0f, "MaterialsConverterModule.timer");
+		}
+		public void Load(ES2Reader r) {}
+		public void Link() {}
+	}*/
 	public class patch_CryosleepModule : CryosleepModule {
 		[MonoModIgnore] private float nextHealDist;
 		[MonoModIgnore] private float healDist;
@@ -1155,7 +1185,7 @@ namespace RST {
 					if (randomInt <= 0) return;
 					playerData.Credits += randomInt;
 					StarmapLogPanelUI.Open();
-					StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Good, string.Format(MonoBehaviourExtended.TT("{0} generated {1} credits while dreaming in {2}"), crewmember.displayName, randomInt, Module.DisplayNameLocalized));
+					StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Good, string.Format(MonoBehaviourExtended.TT("{0} generated {1} while dreaming in {2}"), crewmember.displayName, MonoBehaviourExtended.TT(randomInt, "credit|credits"), Module.DisplayNameLocalized));
 				}
 			}
 		}

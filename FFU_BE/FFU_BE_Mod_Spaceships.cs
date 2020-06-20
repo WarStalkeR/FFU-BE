@@ -4630,6 +4630,7 @@ namespace FFU_Bleeding_Edge {
 
 namespace RST {
 	public class patch_Ship : Ship {
+		[MonoModIgnore] private int seed;
 		[MonoModIgnore] private bool flyTo;
 		[MonoModIgnore] private bool exploding;
 		[MonoModIgnore] private Vector2 flyToPos;
@@ -4767,6 +4768,13 @@ namespace RST {
 							me.creditsChangeReasons.Add(null);
 						}
 					}
+					if (owner == Ownership.Owner.Me && me != null) {
+						me.gameRunRecord.shipPrefabId = PrefabId;
+						me.gameRunRecord.shipSeed = seed;
+						me.gameRunRecord.shipSurvivabilityText = survivabilityText;
+						me.gameRunRecord.beginner = WorldRules.Impermanent.beginnerStartingBonus;
+						me.gameRunRecord.ironman = WorldRules.Impermanent.ironman;
+					}
 					doAfterSpawnDone = true;
 				}
 				doAfterSpawnCounter--;
@@ -4778,7 +4786,7 @@ namespace RST {
 				if (!exploding) {
 					if (Ownership.GetOwner() == Ownership.Owner.Me) GameSummaryPanel.PlayerDeathRelatedAchievementsCheck(this);
 					PlayerData me2 = PlayerDatas.Me;
-					if (me2 != null) me2.shipsDestroyed++;
+					if (me2 != null) me2.gameRunRecord.shipsDestroyed++;
 					UsableWarpModule?.CancelWarp();
 					SelectionManager.RemoveFromSelection(base.gameObject);
 					explosionTimer = 0f;
@@ -4845,45 +4853,53 @@ namespace RST {
 		}
 	}
 	public class patch_Door : Door {
-		[MonoModIgnore] private PlayMakerFSM Fsm => GetCachedComponent<PlayMakerFSM>(true);
-		[MonoModIgnore] private static List<Crewmember> tmpCrewList = new List<Crewmember>();
-		public void OnPointerClick(PointerEventData eventData) {
-		/// Repair Door when clicking Left Mouse Button
-			if (eventData.button == Settings.SelectButton) {
-				if (Ownership.GetOwner() == Ownership.Owner.Me && !HasFullHealth && PerFrameCache.IsGoodSituation) {
-					int repairAmount = (MaxHealth - Health) >= 10 ? 10 : MaxHealth - Health;
-					if (FFU_BE_Defs.doorRepairCost.CheckHasEnough(PlayerDatas.Me, repairAmount * FFU_BE_Defs.GetDifficultyModifier())) {
-						FFU_BE_Defs.doorRepairCost.ConsumeFrom(PlayerDatas.Me, repairAmount * FFU_BE_Defs.GetDifficultyModifier(), Localization.tt("door repair"));
-						Heal(repairAmount);
-					}
+		[MonoModIgnore] private int health;
+		[MonoModIgnore] private int maxHealth;
+		[MonoModIgnore] private GoLinker goLinker;
+		[MonoModIgnore] public int InstanceId { get; private set; }
+		public bool Save(string filePrefix) {
+		/// Save Custom Door Data
+			if (!IsSaveable) return false;
+			using (ES2Writer eS2Writer = SavegameManager.CreateWriter(filePrefix)) {
+				eS2Writer.Write(InstanceId, "id");
+				eS2Writer.Write(base.transform, "transform");
+				eS2Writer.Write(displayName, "displayName");
+				eS2Writer.Write(health, "health");
+				eS2Writer.Write(maxHealth, "maxHealth");
+				eS2Writer.Write(Locked, "locked");
+				eS2Writer.Write(Closed, "closed");
+				eS2Writer.Write(OnePointRepairProgress, "onePointRepairProgress");
+				List<GameObject> list = new List<GameObject>();
+				CrewAssignmentSpot[] array = repairSpots;
+				foreach (CrewAssignmentSpot crewAssignmentSpot in array) {
+					list.Add((crewAssignmentSpot.assignedCrewmember != null) ? crewAssignmentSpot.assignedCrewmember.gameObject : null);
 				}
-				SelectionManager.Select(base.gameObject);
-			} else if (eventData.button == Settings.ActionButton) {
-				if (PlayerCanLockThis()) Fsm.SendEvent("cmd action");
-				else if (Crewmember.GetSelectedPlayerCrewThatCanTarget(tmpCrewList, this)) {
-					UnityEngine.Object.Instantiate(VisualSettings.Instance.crewAttackFeedbackPrefab, base.transform.position, Quaternion.identity);
-					foreach (Crewmember tmpCrew in tmpCrewList) tmpCrew.Attack(base.gameObject, true);
-				} else MonoBehaviourExtended.ExecuteEventUpInHierarchy(base.gameObject, eventData, ExecuteEvents.pointerClickHandler);
+				GoLinker.SaveGoRefList(eS2Writer, list, "repairers");
+				SavegameManager.SaveBlankFsm(eS2Writer, "Smart closed");
+				SavegameManager.Save(filePrefix, eS2Writer, base.gameObject);
 			}
+			return true;
 		}
-		public string HoverText {
-			get {
-				StringBuilder stringBuilder = RstShared.StringBuilder;
-				stringBuilder.Append(MonoBehaviourExtended.TT(DisplayNameLocalized)).Append('\n').Append(MonoBehaviourExtended.TT("HP")).Append(": ").AppendColoredHealth(this);
-				if (IsLocked) stringBuilder.Append('\n').Append(MonoBehaviourExtended.TT("<color=lime>Locked</color>"));
-				if (!HasFullHealth) {
-					int lackingHealth = MaxHealth - Health;
-					stringBuilder.Append("\n\n").Append(MonoBehaviourExtended.TT("Full Repair Cost: "));
-					if (Ownership.GetOwner() == Ownership.Owner.Me) {
-						stringBuilder.Append('\n').Append(" > Metals: ").Append("<color=red>").Append(lackingHealth * FFU_BE_Defs.doorRepairCost.metals * FFU_BE_Defs.GetDifficultyModifier()).Append("</color>");
-						stringBuilder.Append('\n').Append(" > Synthetics: ").Append("<color=red>").Append(lackingHealth * FFU_BE_Defs.doorRepairCost.synthetics * FFU_BE_Defs.GetDifficultyModifier()).Append("</color>");
-					} else {
-						stringBuilder.Append('\n').Append(" > Metals: ").Append("<color=red>").Append(lackingHealth * FFU_BE_Defs.doorRepairCost.metals).Append("</color>");
-						stringBuilder.Append('\n').Append(" > Synthetics: ").Append("<color=red>").Append(lackingHealth * FFU_BE_Defs.doorRepairCost.synthetics).Append("</color>");
-					}
-					stringBuilder.Append("\n\n").Append("Click to repair.");
+		public void Load(string filePrefix) {
+		/// Load Custom Door Data if Exists
+			using (ES2Reader eS2Reader = SavegameManager.CreateReader(filePrefix)) {
+				if (eS2Reader.TagExists("id")) InstanceId = eS2Reader.Read<int>("id");
+				eS2Reader.ReadComponent("transform", base.gameObject);
+				health = eS2Reader.Read<int>("health");
+				if (eS2Reader.TagExists("maxHealth")) maxHealth = eS2Reader.Read<int>("maxHealth");
+				if (eS2Reader.TagExists("displayName")) displayName = eS2Reader.Read<string>("displayName");
+				if (eS2Reader.TagExists("locked")) {
+					Locked = eS2Reader.Read<bool>("locked");
+					Closed = eS2Reader.Read<bool>("closed");
+				} else {
+					string a = eS2Reader.TagExists("_a") ? eS2Reader.Read<string>("_a") : "";
+					Locked = (a == "Locked");
+					Closed = (Locked || a == "Smart closed");
 				}
-				return stringBuilder.ToString();
+				OnePointRepairProgress = (eS2Reader.TagExists("onePointRepairProgress") ? eS2Reader.Read<float>("onePointRepairProgress") : 0f);
+				goLinker = new GoLinker();
+				if (eS2Reader.TagExists("repairers")) goLinker.LoadGoRefList(eS2Reader, "repairers");
+				else goLinker.SetPathMapListItem("repairers", new List<string>());
 			}
 		}
 	}

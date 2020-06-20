@@ -54,17 +54,17 @@ namespace RST {
 			if (shield == null) return;
 			if (shield.ShieldPoints < damage.shieldDmg) {
 				Ship ship = shield.Ship;
-				if (ship != null)
-				foreach (ShipModule module in ship.Modules)
-				if (module != null && module.type == ShipModule.Type.ShieldGen && module.TurnedOnAndIsWorking)
-				module.TryCauseOverload(Mathf.Clamp(damage.shieldDmg - shield.ShieldPoints, 20f, 120f));
+				List<ShipModule> list = (ship != null) ? ship.Modules.FindAll((ShipModule m) => m != null && m.type == ShipModule.Type.ShieldGen && m.TurnedOnAndIsWorking) : null;
+				if (list != null && list.Count > 0) {
+					RstUtil.Shuffle(list);
+					list[0].TryCauseOverloadFromShield();
+					for (int i = 1; i < list.Count; i++) if (RstRandom.value < WorldRules.Instance.moduleOverloadFromShieldChance) list[i].TryCauseOverload(Mathf.Clamp(damage.shieldDmg - shield.ShieldPoints, 20f, 120f));
+				}
 			}
 			shield.PlayHitAnimation();
 			shield.ShieldPoints = Mathf.Max(0, shield.ShieldPoints - damage.shieldDmg);
 			GameObject gameObject = GameObjectPool.TakeRandomPrefab<GameObject>(Effects.explosionOnShieldPool);
-			if (gameObject != null) {
-				Explosion.InstantiateExplosion(gameObject, base.transform, target);
-			}
+			if (gameObject != null) Explosion.InstantiateExplosion(gameObject, base.transform, target);
 		}
 		[MonoModReplace] protected void DoHit(Collider2D[] hits, int hitCount, Vector2 hitPos) {
 		/// Improved Boarding/Spawner Nukes Mechanic
@@ -160,10 +160,20 @@ namespace RST {
 			float timeMult = (considerAccelTime && PerFrameCache.IsGoodSituation) ? FFU_BE_Defs.moduleRepairAcceleration : 1f;
 			return FFU_BE_Defs.moduleRepairTime * TimeMultiplier(c) / timeMult;
 		}
+		[MonoModReplace] public float GetDoorHpRepairTime(Crewmember c, bool considerAccelTime) {
+		/// Speed Up Door Repair Time
+			float timeMult = (considerAccelTime && PerFrameCache.IsGoodSituation) ? FFU_BE_Defs.doorRepairAcceleration : 1f;
+			return FFU_BE_Defs.doorRepairTime * TimeMultiplier(c) / timeMult;
+		}
 		public ResourceValueGroup ModuleHpRepairCost {
 		/// Decrease Module Repair Cost
 			get { return new ResourceValueGroup { synthetics = FFU_BE_Defs.moduleRepairCost }; }
 		}
+		public ResourceValueGroup DoorHpRepairCost {
+		/// Decrease Door Repair Cost
+			get { return new ResourceValueGroup { synthetics = FFU_BE_Defs.doorRepairCost }; }
+		}
+
 	}
 	public class patch_Shop : Shop {
 		[MonoModIgnore] private bool wasLoaded;
@@ -172,21 +182,32 @@ namespace RST {
 			if (!wasLoaded) {
 				moduleCommissionFeeSeed = RstRandom.positiveIntValue;
 				if (crewStation) {
-					int crewPoolSize = crewPoolTakeMax;
-					//int crewPoolSize = RstRandom.Range(crewPoolTakeMin, crewPoolTakeMax + 1);
+					int crewPoolSize = crewPoolTakeMax; //RstRandom.Range(crewPoolTakeMin, crewPoolTakeMax + 1);
 					foreach (Crewmember shopMember in InstantiateFromPool.DoIt<Crewmember>(crewPool, crewPoolAllowDuplicates, buyableCrewContainer, (crewPoolSize <= 0) ? crewPool.Length : crewPoolSize)) {
 						shopMember.Randomize();
 						shopMember.BuyableAssignToStore(this);
 					}
 				}
 				if (moduleStation) {
-					int modulePoolSize = modulePoolTakeMax;
-					//int modulePoolSize = RstRandom.Range(modulePoolTakeMin, modulePoolTakeMax + 1);
+					int modulePoolSize = modulePoolTakeMax; //RstRandom.Range(modulePoolTakeMin, modulePoolTakeMax + 1);
 					foreach (ShipModule shopModule in InstantiateFromPool.DoIt<ShipModule>(modulePool, modulePoolAllowDuplicates, buyableModulesContainer, (modulePoolSize <= 0) ? modulePool.Length : modulePoolSize)) {
 						shopModule.SetHealthToPercent(100f - RstRandom.Range(moduleDamagePercentMin, moduleDamagePercentMax));
 						shopModule.BuyableAssignToStore(this);
 					}
 				}
+				organics.capacity *= FFU_BE_Defs.stationCapacityMult;
+				fuel.capacity *= FFU_BE_Defs.stationCapacityMult;
+				metals.capacity *= FFU_BE_Defs.stationCapacityMult;
+				synthetics.capacity *= FFU_BE_Defs.stationCapacityMult;
+				explosives.capacity *= FFU_BE_Defs.stationCapacityMult;
+				exotics.capacity *= FFU_BE_Defs.stationCapacityMult;
+				if (organics.available < organics.capacity / 3) organics.available += organics.capacity / 2;
+				if (fuel.available < fuel.capacity / 3) fuel.available += fuel.capacity / 2;
+				if (metals.available < metals.capacity / 3) metals.available += metals.capacity / 2;
+				if (synthetics.available < synthetics.capacity / 3) synthetics.available += synthetics.capacity / 2;
+				if (explosives.available < explosives.capacity / 3) explosives.available += explosives.capacity / 2;
+				if (exotics.available < exotics.capacity / 3) exotics.available += exotics.capacity / 2;
+			} else {
 				organics.capacity *= FFU_BE_Defs.stationCapacityMult;
 				fuel.capacity *= FFU_BE_Defs.stationCapacityMult;
 				metals.capacity *= FFU_BE_Defs.stationCapacityMult;
@@ -394,23 +415,21 @@ namespace RST {
 		/// Status Visualizers of Damaged Modules
 			ShipModule module = Module;
 			bool isAlive = module != null && !module.IsDead;
-			if (mainGroup.activeSelf != isAlive) {
-				mainGroup.SetActive(isAlive);
-			}
+			if (mainGroup.activeSelf != isAlive) mainGroup.SetActive(isAlive);
 			if (!isAlive) return;
 			base.transform.rotation = Quaternion.identity;
 			Collider2D collider2D = module.Collider2D;
 			BoxCollider2D boxCollider2D = collider2D as BoxCollider2D;
 			CircleCollider2D circleCollider2D = collider2D as CircleCollider2D;
-			Vector2 healthBarSize = (boxCollider2D != null) ? boxCollider2D.size : ((circleCollider2D != null) ? new Vector2(circleCollider2D.radius * 2f, circleCollider2D.radius * 2f) : new Vector2(2f, 2f));
+			Vector2 vector = (boxCollider2D != null) ? boxCollider2D.size : ((circleCollider2D != null) ? new Vector2(circleCollider2D.radius * 2f, circleCollider2D.radius * 2f) : new Vector2(2f, 2f));
 			bool isUnpacked = !module.IsPacked;
 			if (healthBar.gameObject.activeSelf != isUnpacked) healthBar.gameObject.SetActive(isUnpacked);
 			float healthPercent = 0f;
 			if (isUnpacked) {
 				Transform transform = healthBar.transform;
-				transform.localPosition = new Vector3(0f, (0f - healthBarSize.y) * 0.5f, 0f);
-				transform.localScale = healthBarSize;
-				healthPercent = Mathf.Clamp01(1f - (module.Health + module.OnePointRepairProgress) / module.MaxHealth);
+				transform.localPosition = new Vector3(0f, (0f - vector.y) * 0.5f, 0f);
+				transform.localScale = vector;
+				healthPercent = Mathf.Clamp01(1f - ((float)module.Health + module.OnePointRepairProgress) / (float)module.MaxHealth);
 			}
 			if (healthBar.size.y != healthPercent) healthBar.size = new Vector2(1f, healthPercent);
 			Ownership.Owner owner = module.Ownership.GetOwner();
@@ -420,23 +439,16 @@ namespace RST {
 			if (gameObject.activeSelf != hasTimer) gameObject.SetActive(hasTimer);
 			float barPercent = 0f;
 			if (hasTimer) {
-				barPercent = module.IsOverloaded ? (module.overloadTimer.value / module.overloadTimeWhenCaused) : 
-					(module.IsUnpacking ? (1f - module.UnpackTimeLeft / module.UnpackTime) : 
-					((module.Timer != null) ? (1f - module.Timer.value / module.TimerInterval) : 0f));
+				barPercent = (module.IsOverloaded ? (module.overloadTimer.value / module.overloadTimeWhenCaused) : (module.IsUnpacking ? (1f - module.UnpackTimeLeft / module.UnpackTime) : ((module.Timer != null) ? (1f - module.Timer.value / module.TimerInterval) : 0f)));
 				if (float.IsNaN(barPercent)) barPercent = 0f;
-				VisualSettings vsInstance = VisualSettings.Instance;
-				Color barColor = module.IsOverloaded ? vsInstance.overloadedBarColor : 
-					(module.IsUnpacking ? vsInstance.unpackBarColor : 
-					((barPercent >= 1f) ? vsInstance.loadingBarCompleteColor : 
-					((module.type == ShipModule.Type.ShieldGen) ? vsInstance.shieldLoadingBarColor : 
-					((module.type == ShipModule.Type.Weapon || module.type == ShipModule.Type.Weapon_Nuke || 
-					module.type == ShipModule.Type.PointDefence) ? vsInstance.weaponLoadingBarColor : loadingBarDefaultColor))));
-				if (loadingBarRenderer.color != barColor) loadingBarRenderer.color = barColor;
+				VisualSettings instance = VisualSettings.Instance;
+				Color color = module.IsOverloaded ? instance.overloadedBarColor : (module.IsUnpacking ? instance.unpackBarColor : ((barPercent >= 1f) ? instance.loadingBarCompleteColor : ((module.type == ShipModule.Type.ShieldGen) ? instance.shieldLoadingBarColor : ((module.type == ShipModule.Type.Weapon || module.type == ShipModule.Type.Weapon_Nuke || module.type == ShipModule.Type.PointDefence) ? instance.weaponLoadingBarColor : loadingBarDefaultColor))));
+				if (loadingBarRenderer.color != color) loadingBarRenderer.color = color;
 				CountdownTimer timer = module.Timer;
 				float skillTimer = SkillEffects.Get(module.GetRequiredCrewSkillType())?.EffectiveSkillMultiplier(module, true) ?? 1f;
 				if (module.type == ShipModule.Type.Weapon && module.Weapon.reloadIntervalTakesNoBonuses) skillTimer = 1f;
 				loadingBarText.color = loadingBarRenderer.color;
-				loadingBarText.text = module.IsOverloaded ? ((int)module.overloadTimer.value).ToString() : (module.IsUnpacking ? ((int)module.UnpackTimeLeft).ToString() : ((timer == null || timer.value <= 0f || timer.value >= module.TimerInterval) ? "" : ((int)(module.Timer.value * skillTimer)).ToString()));
+				loadingBarText.text = (module.IsOverloaded ? ((int)module.overloadTimer.value).ToString() : (module.IsUnpacking ? ((int)module.UnpackTimeLeft).ToString() : ((timer == null || timer.value <= 0f || timer.value >= module.TimerInterval) ? "" : ((int)(module.Timer.value * skillTimer)).ToString())));
 				bool barHasText = !string.IsNullOrEmpty(loadingBarText.text);
 				if (loadingBarText.transform.parent.gameObject.activeSelf != barHasText) loadingBarText.transform.parent.gameObject.SetActive(barHasText);
 			} else loadingBarText.text = "";
@@ -444,16 +456,16 @@ namespace RST {
 			VisualizeByActivating(overloaded, !module.IsPacked && module.IsOverloaded);
 			VisualizeByActivating(disabledByEnemy, !module.IsPacked && isJammed);
 			VisualizeByActivating(unpacking, module.IsUnpacking);
-			VisualizeByActivating(darken, !module.IsPacked && (!module.HasFullHealth || !module.IsPowered), healthBarSize * 1.1f);
+			VisualizeByActivating(darken, !module.IsPacked && (!module.HasFullHealth || !module.IsPowered), vector * 1.1f);
 			bool show = !module.IsPacked && !module.HasFullHealth;
-			VisualizeByActivating(broken, show, healthBarSize);
+			VisualizeByActivating(broken, show, vector);
 			VisualizeByActivating(brokenUnscaled, show);
 			float repairTime = 0f;
 			bool isNotFullHealth = !module.IsPacked && !module.HasFullHealth;
 			if (isNotFullHealth) {
 				repairTime = module.CalculateRepairTime();
 				isNotFullHealth = !float.IsInfinity(repairTime);
-				beingRepaired.transform.localPosition = new Vector3(0.5f * healthBarSize.x, -0.5f * healthBarSize.y, 0f);
+				beingRepaired.transform.localPosition = new Vector3(0.5f * vector.x, -0.5f * vector.y, 0f);
 			}
 			if (beingRepaired.activeSelf != isNotFullHealth) beingRepaired.SetActive(isNotFullHealth);
 			repairedInText.text = ((int)repairTime).ToString();
@@ -473,12 +485,15 @@ namespace RST {
 			VisualizeByActivating(turnedOff.gameObject, !module.IsPacked && module.UsesTurnedOn && !module.turnedOn);
 			VisualizeByActivating(powerOn, !module.IsPacked && module.EnoughPower && module.IsPowered);
 			ICanLeakResource getCanLeakResource = module.GetCanLeakResource;
-			VisualizeByActivating(leaking, !module.IsPacked && getCanLeakResource != null && getCanLeakResource.SomethingIsLeaking);
+			bool isLeakingResources = !module.IsPacked && getCanLeakResource != null && getCanLeakResource.SomethingIsLeaking;
+			VisualizeByActivating(leaking, isLeakingResources);
+			HoverableUILeakWarning hoverableUILeakWarning = (!isLeakingResources) ? null : (HoverPanel.TopmostHoverable as HoverableUILeakWarning);
+			VisualizeByActivating(leakingWarningHovered, hoverableUILeakWarning != null && module.type == ShipModule.Type.Container && hoverableUILeakWarning.Matches(module.Container) && module.Ownership.GetOwner() == Ownership.Owner.Me);
 			bool wasCriticallyHit = !module.IsPacked && module.MaxHealthLostCount > 0;
 			VisualizeByActivating(maxHealthLostCountGroup, wasCriticallyHit);
 			if (wasCriticallyHit) {
-				maxHealthLostCountWorld.size = new Vector2(module.MaxHealthLostCount * maxHealthLostCountWorld.size.y, maxHealthLostCountWorld.size.y);
-				maxHealthLostCountQs.size = new Vector2(module.MaxHealthLostCount * maxHealthLostCountQs.size.y, maxHealthLostCountQs.size.y);
+				maxHealthLostCountWorld.size = new Vector2((float)module.MaxHealthLostCount * maxHealthLostCountWorld.size.y, maxHealthLostCountWorld.size.y);
+				maxHealthLostCountQs.size = new Vector2((float)module.MaxHealthLostCount * maxHealthLostCountQs.size.y, maxHealthLostCountQs.size.y);
 			}
 			if (module.type == ShipModule.Type.PointDefence) {
 				coverArea.radius = module.PointDefence.EffectiveCoverRadius;
@@ -490,22 +505,23 @@ namespace RST {
 				WeaponModule weapon = module.Weapon;
 				bool isTargeted = !module.IsPacked && weapon.HasTarget;
 				if (isTargeted && owner == Ownership.Owner.Me) {
-					Vector2 basePos = base.transform.position;
+					Vector2 b = base.transform.position;
 					Vector2 targetPos = weapon.TargetPos;
-					Vector2 relRange = targetPos - basePos;
-					aimSector.directionDeg = Mathf.Atan2(relRange.y, relRange.x) * 57.29578f;
+					Vector2 vector2 = targetPos - b;
+					aimSector.directionDeg = Mathf.Atan2(vector2.y, vector2.x) * 57.29578f;
 					aimSector.angleDeg = weapon.CalculateAimAngle(targetPos);
-					float magnitude = relRange.magnitude;
-					float hitDepth = weapon.CalculateHitSectorDepth(magnitude);
-					aimSector.closerRadius = magnitude - hitDepth;
-					aimSector.fartherRadius = magnitude + hitDepth;
+					float magnitude = vector2.magnitude;
+					float num5 = weapon.CalculateHitSectorDepth(magnitude);
+					aimSector.closerRadius = magnitude - num5;
+					aimSector.fartherRadius = magnitude + num5;
 					aimSector.hasFocus = SelectionManager.Selection.Contains(module.gameObject);
 				}
 				if (aimSector.gameObject.activeSelf != isTargeted) aimSector.gameObject.SetActive(isTargeted);
 			}
-			CrewPanel cpInstance = CrewPanel.Instance;
-			if (!(cpInstance != null)) return;
-			bool shouldShowPowerPreview = cpInstance.GetShouldShowPowerPreview(out bool on, module);
+			CrewPresetsPanel crewPresetsPanelInstance = CrewPresetsPanel.Instance;
+			if (!(crewPresetsPanelInstance != null)) return;
+			bool on;
+			bool shouldShowPowerPreview = crewPresetsPanelInstance.GetShouldShowPowerPreview(out on, module);
 			if (powerPresetPreview.activeSelf == shouldShowPowerPreview) return;
 			if (shouldShowPowerPreview) {
 				Color color2 = on ? new Color(0f, 1f, 0f) : new Color(1f, 0f, 0f);

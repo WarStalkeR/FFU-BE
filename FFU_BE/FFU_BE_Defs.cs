@@ -30,6 +30,7 @@ namespace FFU_Bleeding_Edge {
 		public static bool showDescription = false;
 		public static bool createModulesCSV = false;
 		public static int wordWrapLimit = 50;
+		public static int doorRepairCost = 1;
 		public static int moduleRepairCost = 2;
 		public static int blackMarketMult = 111;
 		public static int pointsPerBarItem = 30;
@@ -38,9 +39,11 @@ namespace FFU_Bleeding_Edge {
 		public static float shieldBonusMult = 4f;
 		public static float researchProgress = 0f;
 		public static float equipmentChangeDist = 2f;
+		public static float doorRepairTime = 3f;
 		public static float moduleRepairTime = 2f;
 		public static float shipHullRepairTime = 5f;
 		public static float moduleDamageThreshold = 0.25f;
+		public static float doorRepairAcceleration = 20f;
 		public static float moduleRepairAcceleration = 25f;
 		public static float shipHullRepairAcceleration = 15f;
 		public static float permanentModuleDamageChance = 0.20f;
@@ -175,10 +178,10 @@ namespace FFU_Bleeding_Edge {
 			1448350571, /* Quantum Laboratory */
 			1559705412, /* Quantum Warp Drive */
 			1119228548, /* Particle-Folding Quantum Engine */
-			373200662,  /* Industrial Synthetics Printer */
-			194638103,  /* Industrial Fuel Refinery */
-			1615170861, /* Industrial Ordnance Factory */
-			1482294420, /* Industrial Blast Furnace */
+			// 373200662,  /* Industrial Synthetics Printer */
+			// 194638103,  /* Industrial Fuel Refinery */
+			// 1615170861, /* Industrial Ordnance Factory */
+			// 1482294420, /* Industrial Blast Furnace */
 			685017033,  /* Mechanical Upgrades Cache */
 			957508477,  /* Biological Implants Cache */
 			760711671,  /* Laser Type Weapons Cache */
@@ -216,7 +219,6 @@ namespace FFU_Bleeding_Edge {
 		public static float researchRareDivisor = 20f;
 		public static float researchCommonDivisor = 1000f;
 		public static float reverseResearchDivisor = 3f;
-		public static ResourceValueGroup doorRepairCost = new ResourceValueGroup { metals = 2f, synthetics = 4f };
 		public static ResourceValueGroup initialResources = new ResourceValueGroup { };
 		public static Core.Difficulty startingDifficulty = Core.Difficulty.None;
 		//Configuration Variables

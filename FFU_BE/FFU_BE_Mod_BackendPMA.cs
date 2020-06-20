@@ -149,23 +149,6 @@ namespace RST.PlaymakerAction {
 			storeModuleCount.Value = list.Count;
 		}
 	}
-	public class patch_NewGamePanel : NewGamePanel {
-		public extern void orig_NewGameBeginnerClicked();
-		public extern void orig_NewGameChallengingClicked();
-		public extern void orig_NewGameHardcoreClicked();
-		private void NewGameBeginnerClicked() {
-			FFU_BE_Defs.startingDifficulty = Core.Difficulty.Easy;
-			orig_NewGameBeginnerClicked();
-		}
-		private void NewGameChallengingClicked() {
-			FFU_BE_Defs.startingDifficulty = Core.Difficulty.Medium;
-			orig_NewGameChallengingClicked();
-		}
-		private void NewGameHardcoreClicked() {
-			FFU_BE_Defs.startingDifficulty = Core.Difficulty.Hard;
-			orig_NewGameHardcoreClicked();
-		}
-	}
 	public class patch_MothershipSelection : MothershipSelection {
 		[MonoModIgnore] private int shipIndex;
 		[MonoModIgnore] private List<Ship> ships;
@@ -336,16 +319,12 @@ namespace RST.PlaymakerAction {
 		}
 		[MonoModReplace] private void DoneClicked() {
 		/// Allow Modded Crewmembers to Spawn
-			if (!CanStartGame()) {
-				return;
-			}
+			if (!CanStartGame()) return;
 			if (TotalFate - SumPerksTotalRepCost() > 0) {
 				confirmationGroup.Value.SetActive(true);
 				RstAudioManager instance = RstAudioManager.Instance;
 				AudioClip audioClip = confirmationOpenSound.Value as AudioClip;
-				if (instance != null && audioClip != null) {
-					instance.PlayUiSound(audioClip);
-				}
+				if (instance != null && audioClip != null) instance.PlayUiSound(audioClip);
 			} else {
 				FFU_BE_Defs.canSpawnCrew = true;
 				FinishThisAction();

@@ -349,7 +349,7 @@ namespace RST {
 			if (hitAudio != null) AudioSource.PlayOneShot(hitAudio);
 			if (hitCausesFire && playerShip != null) {
 				if (playerShip.Fire != null) playerShip.Fire.SetFireAtRandomPos();
-				hitDamageToShip = UnityEngine.Random.Range(5, 75 + 1);
+				hitDamageToShip = UnityEngine.Random.Range(5, Mathf.Max(50, playerShip.MaxHealth / 10) + 1);
 				playerShip.TakeDamage(hitDamageToShip);
 			}
 			string line = string.Format(Localization.TT("Ship was hit by an asteroid. HP -{0}"), hitDamageToShip);
