@@ -7,6 +7,7 @@
 #pragma warning disable CS0649
 #pragma warning disable CS0108
 #pragma warning disable CS0169
+#pragma warning disable CS0436
 #pragma warning disable CS0414
 #pragma warning disable CS0114
 
@@ -16,6 +17,8 @@ using FFU_Bleeding_Edge;
 using UnityEngine.UI;
 using System.Linq;
 using MonoMod;
+using System;
+using System.Text.RegularExpressions;
 
 namespace RST.UI {
 	[ExecuteInEditMode]

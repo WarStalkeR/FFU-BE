@@ -28,9 +28,9 @@ namespace FFU_Bleeding_Edge {
 		public static void ApplyInitialModuleTier(ShipModule shipModule) {
 			int rolledTier = Random.Range(2, 6);
 			Core.BonusMod rolledMod = GetInitialModuleModifier(shipModule);
+			if (shipModule != null) if (shipModule.type == ShipModule.Type.Container) rolledTier = 5;
 			if (shipModule != null) if (shipModule.type == ShipModule.Type.Container) rolledMod = Core.BonusMod.Durable;
-			if (shipModule != null) if (shipModule.type == ShipModule.Type.MaterialsConverter) rolledMod = Core.BonusMod.Enhanced;
-			if (shipModule != null) if (shipModule.type == ShipModule.Type.MaterialsConverter || shipModule.type == ShipModule.Type.Container) rolledTier = 5;
+			if (shipModule != null) if (shipModule.type == ShipModule.Type.MaterialsConverter) rolledMod = Core.BonusMod.Efficient;
 			if (!shipModule.name.Contains("MK-") || !ModuleHasModifier(shipModule)) SetModuleModifier(shipModule, rolledTier, rolledMod);
 			if (shipModule.name.Contains("MK-") && ModuleHasModifier(shipModule)) ApplyModuleModifiedStatsAndParameters(shipModule);
 		}
@@ -470,6 +470,7 @@ namespace FFU_Bleeding_Edge {
 				posModsList.Add(Core.BonusMod.Reinforced);
 				posModsList.Add(Core.BonusMod.Efficient);
 				posModsList.Add(Core.BonusMod.Enhanced);
+				posModsList.Add(Core.BonusMod.Persistent);
 				break;
 				default:
 				posModsList.Add(Core.BonusMod.Sustained);
@@ -584,6 +585,7 @@ namespace FFU_Bleeding_Edge {
 				negModsList.Add(Core.BonusMod.Fragile);
 				negModsList.Add(Core.BonusMod.Inefficient);
 				negModsList.Add(Core.BonusMod.Deficient);
+				negModsList.Add(Core.BonusMod.Volatile);
 				break;
 				default:
 				negModsList.Add(Core.BonusMod.Unstable);
@@ -603,7 +605,8 @@ namespace FFU_Bleeding_Edge {
 			if (!FFU_BE_Defs.IsAllowedModuleCategory(shipModule)) return;
 			Core.BonusTier moduleTier = GetModuleTier(shipModule);
 			Core.BonusMod moduleMofidier = GetModuleModifier(shipModule);
-			ShipModule refModule = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId);
+			patch_ShipModule currModule = shipModule as patch_ShipModule;
+			patch_ShipModule refModule = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId) as patch_ShipModule;
 			shipModule.displayName = GetModuleModColoredText(shipModule) + refModule.displayName + " " + GetModuleTierText(shipModule);
 			switch (shipModule.type) {
 				case ShipModule.Type.Weapon:
@@ -984,72 +987,54 @@ namespace FFU_Bleeding_Edge {
 				}
 				break;
 				case ShipModule.Type.MaterialsConverter:
-				//if (refModule.MaterialsConverter.consume.credits > 0) shipModule.MaterialsConverter.consume.credits = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.credits * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced));
-				//if (refModule.MaterialsConverter.consume.organics > 0) shipModule.MaterialsConverter.consume.organics = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.organics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced));
-				//if (refModule.MaterialsConverter.consume.fuel > 0) shipModule.MaterialsConverter.consume.fuel = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.fuel * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced));
-				//if (refModule.MaterialsConverter.consume.metals > 0) shipModule.MaterialsConverter.consume.metals = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.metals * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced));
-				//if (refModule.MaterialsConverter.consume.synthetics > 0) shipModule.MaterialsConverter.consume.synthetics = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.synthetics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced));
-				//if (refModule.MaterialsConverter.consume.explosives > 0) shipModule.MaterialsConverter.consume.explosives = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.explosives * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced));
-				//if (refModule.MaterialsConverter.consume.exotics > 0) shipModule.MaterialsConverter.consume.exotics = Mathf.Max(Mathx.RoundToFloat(refModule.MaterialsConverter.consume.exotics / GetTierBonus(moduleTier, Core.BonusType.Reduced)), 1f);
-				//if (refModule.MaterialsConverter.produce.credits > 0) shipModule.MaterialsConverter.produce.credits = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.credits * GetTierBonus(moduleTier, Core.BonusType.Maximal));
-				//if (refModule.MaterialsConverter.produce.organics > 0) shipModule.MaterialsConverter.produce.organics = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.organics * GetTierBonus(moduleTier, Core.BonusType.Maximal));
-				//if (refModule.MaterialsConverter.produce.fuel > 0) shipModule.MaterialsConverter.produce.fuel = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.fuel * GetTierBonus(moduleTier, Core.BonusType.Maximal));
-				//if (refModule.MaterialsConverter.produce.metals > 0) shipModule.MaterialsConverter.produce.metals = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.metals * GetTierBonus(moduleTier, Core.BonusType.Maximal));
-				//if (refModule.MaterialsConverter.produce.synthetics > 0) shipModule.MaterialsConverter.produce.synthetics = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.synthetics * GetTierBonus(moduleTier, Core.BonusType.Maximal));
-				//if (refModule.MaterialsConverter.produce.explosives > 0) shipModule.MaterialsConverter.produce.explosives = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.explosives * GetTierBonus(moduleTier, Core.BonusType.Maximal));
-				//if (refModule.MaterialsConverter.produce.exotics > 0) shipModule.MaterialsConverter.produce.exotics = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.exotics * GetTierBonus(moduleTier, Core.BonusType.Maximal));
-				//switch (moduleMofidier) {
-				//	case Core.BonusMod.Efficient:
-				//	if (refModule.MaterialsConverter.consume.credits > 0) shipModule.MaterialsConverter.consume.credits = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.credits * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
-				//	if (refModule.MaterialsConverter.consume.organics > 0) shipModule.MaterialsConverter.consume.organics = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.organics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
-				//	if (refModule.MaterialsConverter.consume.fuel > 0) shipModule.MaterialsConverter.consume.fuel = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.fuel * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
-				//	if (refModule.MaterialsConverter.consume.metals > 0) shipModule.MaterialsConverter.consume.metals = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.metals * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
-				//	if (refModule.MaterialsConverter.consume.synthetics > 0) shipModule.MaterialsConverter.consume.synthetics = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.synthetics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
-				//	if (refModule.MaterialsConverter.consume.explosives > 0) shipModule.MaterialsConverter.consume.explosives = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.explosives * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
-				//	if (refModule.MaterialsConverter.consume.exotics > 0) shipModule.MaterialsConverter.consume.exotics = Mathf.Max(Mathx.RoundToFloat(refModule.MaterialsConverter.consume.exotics / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f), 1f);
-				//	break;
-				//	case Core.BonusMod.Inefficient:
-				//	if (refModule.MaterialsConverter.consume.credits > 0) shipModule.MaterialsConverter.consume.credits = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.credits * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
-				//	if (refModule.MaterialsConverter.consume.organics > 0) shipModule.MaterialsConverter.consume.organics = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.organics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
-				//	if (refModule.MaterialsConverter.consume.fuel > 0) shipModule.MaterialsConverter.consume.fuel = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.fuel * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
-				//	if (refModule.MaterialsConverter.consume.metals > 0) shipModule.MaterialsConverter.consume.metals = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.metals * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
-				//	if (refModule.MaterialsConverter.consume.synthetics > 0) shipModule.MaterialsConverter.consume.synthetics = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.synthetics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
-				//	if (refModule.MaterialsConverter.consume.explosives > 0) shipModule.MaterialsConverter.consume.explosives = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.explosives * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
-				//	if (refModule.MaterialsConverter.consume.exotics > 0) shipModule.MaterialsConverter.consume.exotics = Mathf.Max(Mathx.RoundToFloat(refModule.MaterialsConverter.consume.exotics / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f), 1f);
-				//	break;
-				//	case Core.BonusMod.Enhanced:
-				//	if (refModule.MaterialsConverter.consume.credits > 0) shipModule.MaterialsConverter.consume.credits = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.credits * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
-				//	if (refModule.MaterialsConverter.consume.organics > 0) shipModule.MaterialsConverter.consume.organics = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.organics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
-				//	if (refModule.MaterialsConverter.consume.fuel > 0) shipModule.MaterialsConverter.consume.fuel = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.fuel * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
-				//	if (refModule.MaterialsConverter.consume.metals > 0) shipModule.MaterialsConverter.consume.metals = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.metals * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
-				//	if (refModule.MaterialsConverter.consume.synthetics > 0) shipModule.MaterialsConverter.consume.synthetics = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.synthetics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
-				//	if (refModule.MaterialsConverter.consume.explosives > 0) shipModule.MaterialsConverter.consume.explosives = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.explosives * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
-				//	if (refModule.MaterialsConverter.consume.exotics > 0) shipModule.MaterialsConverter.consume.exotics = Mathf.Max(Mathx.RoundToFloat(refModule.MaterialsConverter.consume.exotics / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f), 1f);
-				//	if (refModule.MaterialsConverter.produce.credits > 0) shipModule.MaterialsConverter.produce.credits = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.credits * GetTierBonus(moduleTier, Core.BonusType.Maximal) * 2f);
-				//	if (refModule.MaterialsConverter.produce.organics > 0) shipModule.MaterialsConverter.produce.organics = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.organics * GetTierBonus(moduleTier, Core.BonusType.Maximal) * 2f);
-				//	if (refModule.MaterialsConverter.produce.fuel > 0) shipModule.MaterialsConverter.produce.fuel = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.fuel * GetTierBonus(moduleTier, Core.BonusType.Maximal) * 2f);
-				//	if (refModule.MaterialsConverter.produce.metals > 0) shipModule.MaterialsConverter.produce.metals = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.metals * GetTierBonus(moduleTier, Core.BonusType.Maximal) * 2f);
-				//	if (refModule.MaterialsConverter.produce.synthetics > 0) shipModule.MaterialsConverter.produce.synthetics = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.synthetics * GetTierBonus(moduleTier, Core.BonusType.Maximal) * 2f);
-				//	if (refModule.MaterialsConverter.produce.explosives > 0) shipModule.MaterialsConverter.produce.explosives = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.explosives * GetTierBonus(moduleTier, Core.BonusType.Maximal) * 2f);
-				//	if (refModule.MaterialsConverter.produce.exotics > 0) shipModule.MaterialsConverter.produce.exotics = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.exotics * GetTierBonus(moduleTier, Core.BonusType.Maximal) * 2f);
-				//	break;
-				//	case Core.BonusMod.Deficient:
-				//	if (refModule.MaterialsConverter.consume.credits > 0) shipModule.MaterialsConverter.consume.credits = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.credits * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
-				//	if (refModule.MaterialsConverter.consume.organics > 0) shipModule.MaterialsConverter.consume.organics = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.organics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
-				//	if (refModule.MaterialsConverter.consume.fuel > 0) shipModule.MaterialsConverter.consume.fuel = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.fuel * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
-				//	if (refModule.MaterialsConverter.consume.metals > 0) shipModule.MaterialsConverter.consume.metals = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.metals * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
-				//	if (refModule.MaterialsConverter.consume.synthetics > 0) shipModule.MaterialsConverter.consume.synthetics = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.synthetics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
-				//	if (refModule.MaterialsConverter.consume.explosives > 0) shipModule.MaterialsConverter.consume.explosives = Mathx.RoundToFloat(refModule.MaterialsConverter.consume.explosives * GetTierBonus(moduleTier, Core.BonusType.Maximal) / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
-				//	if (refModule.MaterialsConverter.consume.exotics > 0) shipModule.MaterialsConverter.consume.exotics = Mathf.Max(Mathx.RoundToFloat(refModule.MaterialsConverter.consume.exotics / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f), 1f);
-				//	if (refModule.MaterialsConverter.produce.credits > 0) shipModule.MaterialsConverter.produce.credits = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.credits * GetTierBonus(moduleTier, Core.BonusType.Maximal) / 2f);
-				//	if (refModule.MaterialsConverter.produce.organics > 0) shipModule.MaterialsConverter.produce.organics = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.organics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / 2f);
-				//	if (refModule.MaterialsConverter.produce.fuel > 0) shipModule.MaterialsConverter.produce.fuel = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.fuel * GetTierBonus(moduleTier, Core.BonusType.Maximal) / 2f);
-				//	if (refModule.MaterialsConverter.produce.metals > 0) shipModule.MaterialsConverter.produce.metals = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.metals * GetTierBonus(moduleTier, Core.BonusType.Maximal) / 2f);
-				//	if (refModule.MaterialsConverter.produce.synthetics > 0) shipModule.MaterialsConverter.produce.synthetics = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.synthetics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / 2f);
-				//	if (refModule.MaterialsConverter.produce.explosives > 0) shipModule.MaterialsConverter.produce.explosives = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.explosives * GetTierBonus(moduleTier, Core.BonusType.Maximal) / 2f);
-				//	if (refModule.MaterialsConverter.produce.exotics > 0) shipModule.MaterialsConverter.produce.exotics = Mathx.RoundToFloat(refModule.MaterialsConverter.produce.exotics * GetTierBonus(moduleTier, Core.BonusType.Maximal) / 2f);
-				//	break;
-				//}
+				int availableRecipes = Mathf.Min(currModule.MaterialsConverter.produceRecipes.Length, currModule.MaterialsConverter.consumeRecipes.Length);
+				for (int recipeNum = 0; recipeNum < availableRecipes; recipeNum++) {
+					if (currModule.MaterialsConverter.consumeRecipes[recipeNum].credits > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].credits = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].credits / GetTierBonus(moduleTier, Core.BonusType.Reduced));
+					if (currModule.MaterialsConverter.consumeRecipes[recipeNum].organics > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].organics = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].organics / GetTierBonus(moduleTier, Core.BonusType.Reduced));
+					if (currModule.MaterialsConverter.consumeRecipes[recipeNum].fuel > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].fuel = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].fuel / GetTierBonus(moduleTier, Core.BonusType.Reduced));
+					if (currModule.MaterialsConverter.consumeRecipes[recipeNum].metals > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].metals = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].metals / GetTierBonus(moduleTier, Core.BonusType.Reduced));
+					if (currModule.MaterialsConverter.consumeRecipes[recipeNum].synthetics > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].synthetics = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].synthetics / GetTierBonus(moduleTier, Core.BonusType.Reduced));
+					if (currModule.MaterialsConverter.consumeRecipes[recipeNum].explosives > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].explosives = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].explosives / GetTierBonus(moduleTier, Core.BonusType.Reduced));
+					if (currModule.MaterialsConverter.consumeRecipes[recipeNum].exotics > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].exotics = Mathf.Max(Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].exotics / GetTierBonus(moduleTier, Core.BonusType.Reduced)), 1f);
+				}
+				if (currModule.MaterialsConverter.maxWarmUpPoints > 0) currModule.MaterialsConverter.maxWarmUpPoints = Mathx.RoundToFloat(refModule.MaterialsConverter.maxWarmUpPoints / GetTierBonus(moduleTier, Core.BonusType.Boosted));
+				if (currModule.MaterialsConverter.warmUpDissipation > 0) currModule.MaterialsConverter.warmUpDissipation = Mathx.RoundToFloat(refModule.MaterialsConverter.warmUpDissipation / GetTierBonus(moduleTier, Core.BonusType.Extreme), 10);
+				switch (moduleMofidier) {
+					case Core.BonusMod.Efficient:
+					for (int recipeNum = 0; recipeNum < availableRecipes; recipeNum++) {
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].credits > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].credits = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].credits / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].organics > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].organics = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].organics / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].fuel > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].fuel = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].fuel / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].metals > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].metals = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].metals / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].synthetics > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].synthetics = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].synthetics / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].explosives > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].explosives = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].explosives / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f);
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].exotics > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].exotics = Mathf.Max(Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].exotics / GetTierBonus(moduleTier, Core.BonusType.Reduced) / 2f), 1f);
+					} break;
+					case Core.BonusMod.Inefficient:
+					for (int recipeNum = 0; recipeNum < availableRecipes; recipeNum++) {
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].credits > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].credits = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].credits / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].organics > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].organics = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].organics / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].fuel > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].fuel = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].fuel / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].metals > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].metals = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].metals / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].synthetics > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].synthetics = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].synthetics / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].explosives > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].explosives = Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].explosives / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f);
+						if (currModule.MaterialsConverter.consumeRecipes[recipeNum].exotics > 0) currModule.MaterialsConverter.consumeRecipes[recipeNum].exotics = Mathf.Max(Mathx.RoundToFloat(refModule.MaterialsConverter.consumeRecipes[recipeNum].exotics / GetTierBonus(moduleTier, Core.BonusType.Reduced) * 2f), 1f);
+					} break;
+					case Core.BonusMod.Enhanced:
+					if (currModule.MaterialsConverter.maxWarmUpPoints > 0) currModule.MaterialsConverter.maxWarmUpPoints = Mathx.RoundToFloat(refModule.MaterialsConverter.maxWarmUpPoints / GetTierBonus(moduleTier, Core.BonusType.Boosted) / 2f);
+					if (currModule.MaterialsConverter.warmUpDissipation > 0) currModule.MaterialsConverter.warmUpDissipation = Mathx.RoundToFloat(refModule.MaterialsConverter.warmUpDissipation / GetTierBonus(moduleTier, Core.BonusType.Extreme) / 2f, 10);
+					break;
+					case Core.BonusMod.Deficient:
+					if (currModule.MaterialsConverter.maxWarmUpPoints > 0) currModule.MaterialsConverter.maxWarmUpPoints = Mathx.RoundToFloat(refModule.MaterialsConverter.maxWarmUpPoints / GetTierBonus(moduleTier, Core.BonusType.Boosted) * 2f);
+					if (currModule.MaterialsConverter.warmUpDissipation > 0) currModule.MaterialsConverter.warmUpDissipation = Mathx.RoundToFloat(refModule.MaterialsConverter.warmUpDissipation / GetTierBonus(moduleTier, Core.BonusType.Extreme) * 2f, 10);
+					break;
+					case Core.BonusMod.Persistent:
+					if (currModule.MaterialsConverter.warmUpDissipation > 0) currModule.MaterialsConverter.warmUpDissipation = Mathx.RoundToFloat(refModule.MaterialsConverter.warmUpDissipation / GetTierBonus(moduleTier, Core.BonusType.Extreme) / 2f, 10);
+					break;
+					case Core.BonusMod.Volatile:
+					if (currModule.MaterialsConverter.warmUpDissipation > 0) currModule.MaterialsConverter.warmUpDissipation = Mathx.RoundToFloat(refModule.MaterialsConverter.warmUpDissipation / GetTierBonus(moduleTier, Core.BonusType.Extreme) * 2f, 10);
+					break;
+				}
 				break;
 				case ShipModule.Type.Decoy: break;
 				default: return;

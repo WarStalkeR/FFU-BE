@@ -5,6 +5,7 @@
 #pragma warning disable IDE0059
 #pragma warning disable CS0626
 #pragma warning disable CS0649
+#pragma warning disable CS0436
 #pragma warning disable CS0414
 #pragma warning disable CS0108
 
@@ -610,6 +611,7 @@ namespace RST {
 		[MonoModIgnore] private CountdownTimer unpackTimer = new CountdownTimer();
 		[MonoModIgnore] private static void ScrapGetResources(PlayerResource resource, int amount, StringBuilder logLineSb) { }
 		[MonoModIgnore] private static void ScrapGetCredits(PlayerData pd, int amount, StringBuilder logLineSb) { }
+		[MonoModIgnore] public MaterialsConverterModule MaterialsConverter => GetCachedComponent<MaterialsConverterModule>(true);
 		[MonoModReplace] public void StartUnpacking(bool useCraftTime) {
 		/// Tactical Unpack Times
 			UnpackShared();
@@ -891,8 +893,17 @@ namespace RST {
 							if (type == Type.Weapon) stringBuilder.Append("<color=red>").Append($", {FFU_BE_Defs.GetHealthEffect(this, 0.5f) * 100f:0.0} Misfire Chance").Append("</color>");
 						} else stringBuilder.Append("<color=red>").Append(MonoBehaviourExtended.TT("Broken")).Append("</color>");
 					} else stringBuilder.Append("<color=red>").AppendFormat(MonoBehaviourExtended.TT("Repaired in {0:0.0} seconds"), repairTime).Append("</color>");
-				} else if (!turnedOn) stringBuilder.Append("<color=yellow>").Append(MonoBehaviourExtended.TT("Turned off")).Append("</color>");
-				else if (EnoughResources && EnoughPower && EnoughOps) {
+				} else if (!turnedOn) {
+					stringBuilder.Append("<color=yellow>").Append(MonoBehaviourExtended.TT("Turned off")).Append("</color>");
+					if (type == Type.MaterialsConverter) {
+						stringBuilder.Append("\n");
+						MaterialsConverterModule mattConv = MaterialsConverter;
+						float convEff = mattConv.currentWarmpUpPoints / mattConv.maxWarmUpPoints * 100f;
+						if (!HasFullHealth) convEff *= FFU_BE_Defs.GetHealthPercent(this);
+						float baseEff = HasFullHealth ? mattConv.baseEfficiency * 100f : mattConv.baseEfficiency * 100f * FFU_BE_Defs.GetHealthPercent(this);
+						stringBuilder.Append("<color=yellow>").Append(MonoBehaviourExtended.TT($"Converter Efficiency: {baseEff:0.0}% ({convEff:0.0}%)")).Append("</color>");
+					}
+				} else if (EnoughResources && EnoughPower && EnoughOps) {
 					float timerVal = Timer?.value ?? 0f;
 					float skillMult = SkillEffects.Get(GetRequiredCrewSkillType())?.EffectiveSkillMultiplier(this, true) ?? 1f;
 					if (type == Type.Weapon && Weapon.reloadIntervalTakesNoBonuses) skillMult = 1f;
@@ -907,9 +918,10 @@ namespace RST {
 						}
 						case Type.MaterialsConverter: {
 							MaterialsConverterModule mattConv = MaterialsConverter;
-							float convEff = 25;
-							if (convEff < 90) stringBuilder.Append("<color=yellow>").AppendFormat(MonoBehaviourExtended.TT("Converter Efficiency: {0:0.0}"), convEff).Append("</color>");
-							else stringBuilder.Append("<color=lime>").AppendFormat(MonoBehaviourExtended.TT("Converter Efficiency: {0:0.0}"), convEff).Append("</color>");
+							float convEff = mattConv.currentWarmpUpPoints / mattConv.maxWarmUpPoints * 100f;
+							if (!HasFullHealth) convEff *= FFU_BE_Defs.GetHealthPercent(this);
+							if (convEff < 90) stringBuilder.Append("<color=yellow>").AppendFormat(MonoBehaviourExtended.TT("Converter Efficiency: {0:0.0}%"), convEff).Append("</color>");
+							else stringBuilder.Append("<color=lime>").AppendFormat(MonoBehaviourExtended.TT("Converter Efficiency: {0:0.0}%"), convEff).Append("</color>");
 							break;
 						}
 						default:
@@ -1111,30 +1123,6 @@ namespace RST {
 			}
 		}
 	}
-	/*[MonoModReplace] [RequireComponent(typeof(ShipModule))] public class MaterialsConverterModule : MonoBehaviourExtended, IHasModule, ILoadSave {
-		public ResourceValueGroup consume;
-		public ResourceValueGroup produce;
-		public IDictionary<ResourceValueGroup, ResourceValueGroup> conversionRecipes = new Dictionary<ResourceValueGroup, ResourceValueGroup>();
-		public float conversionEfficiency = 0.25f;
-		[Localized] public string resourceConsumptionReason = "started conversion";
-		[Localized] public string resourceProductionReason = "finished conversion";
-		public ShipModule Module => GetCachedComponent<ShipModule>(true);
-		public bool Convert(int convCount) {
-		/// Resource Production Amount from Damage
-			PlayerData playerDatum = PlayerDatas.Get(this.Module.Ownership.GetOwner());
-			if (playerDatum == null) return false;
-			if (!this.consume.ConsumeFrom(playerDatum, (float)convCount, this.resourceConsumptionReason)) return false;
-			if (Module.HasFullHealth) this.produce.ProduceTo(playerDatum, (float)convCount, this.resourceProductionReason);
-			else this.produce.ProduceTo(playerDatum, (float)convCount * FFU_BE_Defs.GetHealthPercent(Module), this.resourceProductionReason);
-			return true;
-		}
-		public void Save(ES2Writer w) { 
-			w.Write(false, "MaterialsConverterModule.conversionInProgress");
-			w.Write(0f, "MaterialsConverterModule.timer");
-		}
-		public void Load(ES2Reader r) {}
-		public void Link() {}
-	}*/
 	public class patch_CryosleepModule : CryosleepModule {
 		[MonoModIgnore] private float nextHealDist;
 		[MonoModIgnore] private float healDist;

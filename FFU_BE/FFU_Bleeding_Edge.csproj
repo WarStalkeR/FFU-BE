@@ -107,6 +107,7 @@
     <Compile Include="FFU_BE_Mod_BackendAI.cs" />
     <Compile Include="FFU_BE_Mod_BackendPMA.cs" />
     <Compile Include="FFU_BE_Mod_BackendUI.cs" />
+    <Compile Include="FFU_BE_Mod_Conversion.cs" />
     <Compile Include="FFU_BE_Mod_Discovery.cs" />
     <Compile Include="FFU_BE_Mod_Spaceships.cs" />
     <Compile Include="FFU_BE_Mod_Backend.cs" />

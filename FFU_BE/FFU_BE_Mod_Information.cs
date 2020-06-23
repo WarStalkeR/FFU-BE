@@ -287,22 +287,34 @@ namespace FFU_Bleeding_Edge {
 				instanceText = isInst ? $"{Core.TT(GetModuleGenText(shipModule))} {Core.TT("Gen.")} " : null;
 				moduleData += $"{Core.TT("Type")}: {instanceText}{Core.TT("Industrial Facility")}\n";
 				if (isInst) moduleData += $"{Core.TT("Modifier")}: {Core.TT(GetModuleModText(shipModule))}\n";
-				//moduleData += !shipModule.MaterialsConverter.produce.IsEmpty ? $"{Core.TT("Industrial Production")}:\n" : null;
-				//moduleData += shipModule.MaterialsConverter.produce.credits > 0 ? $" > {Core.TT("Credits")}: {shipModule.MaterialsConverter.produce.credits * 60}/{Core.TT("min.")}\n" : null;
-				//moduleData += shipModule.MaterialsConverter.produce.organics > 0 ? $" > {Core.TT("Organics")}: {shipModule.MaterialsConverter.produce.organics * 60}/{Core.TT("min.")}\n" : null;
-				//moduleData += shipModule.MaterialsConverter.produce.fuel > 0 ? $" > {Core.TT("Starfuel")}: {shipModule.MaterialsConverter.produce.fuel * 60}{Core.TT("min.")}\n" : null;
-				//moduleData += shipModule.MaterialsConverter.produce.metals > 0 ? $" > {Core.TT("Metals")}: {shipModule.MaterialsConverter.produce.metals * 60}/{Core.TT("min.")}\n" : null;
-				//moduleData += shipModule.MaterialsConverter.produce.synthetics > 0 ? $" > {Core.TT("Synthetics")}: {shipModule.MaterialsConverter.produce.synthetics * 60}/{Core.TT("min.")}\n" : null;
-				//moduleData += shipModule.MaterialsConverter.produce.explosives > 0 ? $" > {Core.TT("Explosives")}: {shipModule.MaterialsConverter.produce.explosives * 60}/{Core.TT("min.")}\n" : null;
-				//moduleData += shipModule.MaterialsConverter.produce.exotics > 0 ? $" > {Core.TT("Exotics")}: {shipModule.MaterialsConverter.produce.exotics * 60}/{Core.TT("min.")}\n" : null;
-				//moduleData += !shipModule.MaterialsConverter.consume.IsEmpty ? $"{Core.TT("Industrial Consumption")}:\n" : null;
-				//moduleData += shipModule.MaterialsConverter.consume.credits > 0 ? $" > {Core.TT("Credits")}: {shipModule.MaterialsConverter.consume.credits * 60}/{Core.TT("min.")}\n" : null;
-				//moduleData += shipModule.MaterialsConverter.consume.organics > 0 ? $" > {Core.TT("Organics")}: {shipModule.MaterialsConverter.consume.organics * 60}/{Core.TT("min.")}\n" : null;
-				//moduleData += shipModule.MaterialsConverter.consume.fuel > 0 ? $" > {Core.TT("Starfuel")}: {shipModule.MaterialsConverter.consume.fuel * 60}{Core.TT("min.")}\n" : null;
-				//moduleData += shipModule.MaterialsConverter.consume.metals > 0 ? $" > {Core.TT("Metals")}: {shipModule.MaterialsConverter.consume.metals * 60}/{Core.TT("min.")}\n" : null;
-				//moduleData += shipModule.MaterialsConverter.consume.synthetics > 0 ? $" > {Core.TT("Synthetics")}: {shipModule.MaterialsConverter.consume.synthetics * 60}/{Core.TT("min.")}\n" : null;
-				//moduleData += shipModule.MaterialsConverter.consume.explosives > 0 ? $" > {Core.TT("Explosives")}: {shipModule.MaterialsConverter.consume.explosives * 60}/{Core.TT("min.")}\n" : null;
-				//moduleData += shipModule.MaterialsConverter.consume.exotics > 0 ? $" > {Core.TT("Exotics")}: {shipModule.MaterialsConverter.consume.exotics * 60}/{Core.TT("min.")}\n" : null;
+				MaterialsConverterModule refConv = (shipModule as patch_ShipModule).MaterialsConverter;
+				moduleData += $"Facility Full Warm-Up Time: {refConv.maxWarmUpPoints}s\n";
+				moduleData += $"Facility Initial Warm-Up Time: {refConv.maxWarmUpPoints - refConv.baseWarmUpPoints}s\n";
+				moduleData += $"Facility Base Efficiency: {refConv.baseEfficiency * 100: 0.0}%\n";
+				moduleData += $"Facility Efficiency Dissipation: {100f / (refConv.maxWarmUpPoints / refConv.warmUpDissipation):0.####}%/s\n";
+				int availableRecipes = Mathf.Min(refConv.produceRecipes.Length, refConv.consumeRecipes.Length);
+				if (availableRecipes > 0) {
+					float mVal = isInst ? refConv.currentEfficiency : 1f;
+					moduleData += availableRecipes > 0 ? $"{Core.TT("Available Recipes")}:\n" : null;
+					for (int recipeNum = 0; recipeNum < availableRecipes; recipeNum++) {
+						if (refConv.produceRecipes[recipeNum].organics > 0) moduleData += $" > {refConv.produceRecipes[recipeNum].organics * mVal:0.#}x {Core.TT("Organics")}: ";
+						else if (refConv.produceRecipes[recipeNum].fuel > 0) moduleData += $" > {refConv.produceRecipes[recipeNum].fuel * mVal:0.#}x {Core.TT("Starfuel")}: ";
+						else if (refConv.produceRecipes[recipeNum].metals > 0) moduleData += $" > {refConv.produceRecipes[recipeNum].metals * mVal:0.#}x {Core.TT("Metals")}: ";
+						else if (refConv.produceRecipes[recipeNum].synthetics > 0) moduleData += $" > {refConv.produceRecipes[recipeNum].synthetics * mVal:0.#}x {Core.TT("Synthetics")}: ";
+						else if (refConv.produceRecipes[recipeNum].explosives > 0) moduleData += $" > {refConv.produceRecipes[recipeNum].explosives * mVal:0.#}x {Core.TT("Explosives")}: ";
+						else if (refConv.produceRecipes[recipeNum].exotics > 0) moduleData += $" > {refConv.produceRecipes[recipeNum].exotics * mVal:0.#}x {Core.TT("Exotics")}: ";
+						else if (refConv.produceRecipes[recipeNum].credits > 0) moduleData += $" > {refConv.produceRecipes[recipeNum].credits * mVal:0.#}x {Core.TT("Credits")}: ";
+						string recipeCost = "";
+						if (refConv.consumeRecipes[recipeNum].organics > 0) recipeCost += $"{(!string.IsNullOrEmpty(recipeCost) ? ", " : null)}{refConv.consumeRecipes[recipeNum].organics}-O";
+						if (refConv.consumeRecipes[recipeNum].fuel > 0) recipeCost += $"{(!string.IsNullOrEmpty(recipeCost) ? ", " : null)}{refConv.consumeRecipes[recipeNum].fuel}-F";
+						if (refConv.consumeRecipes[recipeNum].metals > 0) recipeCost += $"{(!string.IsNullOrEmpty(recipeCost) ? ", " : null)}{refConv.consumeRecipes[recipeNum].metals}-M";
+						if (refConv.consumeRecipes[recipeNum].synthetics > 0) recipeCost += $"{(!string.IsNullOrEmpty(recipeCost) ? ", " : null)}{refConv.consumeRecipes[recipeNum].synthetics}-S";
+						if (refConv.consumeRecipes[recipeNum].explosives > 0) recipeCost += $"{(!string.IsNullOrEmpty(recipeCost) ? ", " : null)}{refConv.consumeRecipes[recipeNum].explosives}-X";
+						if (refConv.consumeRecipes[recipeNum].exotics > 0) recipeCost += $"{(!string.IsNullOrEmpty(recipeCost) ? ", " : null)}{refConv.consumeRecipes[recipeNum].exotics}-E";
+						if (refConv.consumeRecipes[recipeNum].credits > 0) recipeCost += $"{(!string.IsNullOrEmpty(recipeCost) ? ", " : null)}{refConv.consumeRecipes[recipeNum].credits}-C";
+						moduleData += $"{recipeCost}\n";
+					}
+				}
 				break;
 				case ShipModule.Type.Fighter:
 				instanceText = isInst ? $"{Core.TT(GetModuleGenText(shipModule))} {Core.TT("Gen.")} " : null;
@@ -580,8 +592,8 @@ namespace RST.UI {
 		}
 	}
 	public class patch_ModuleDataSubpanel : ModuleDataSubpanel {
-		[MonoModIgnore] private ShipModule m;
-		[MonoModIgnore] private ShipModule lastModule;
+		[MonoModIgnore] private patch_ShipModule m;
+		[MonoModIgnore] private patch_ShipModule lastModule;
 		[MonoModIgnore] private float prevMaxHealthAdd;
 		[MonoModIgnore] private float prevStarmapSpeedAdd;
 		[MonoModIgnore] private float prevAsteroidDefl;
@@ -799,6 +811,7 @@ namespace RST.UI {
 			Ship ship = m.Ship;
 			SafeUpdateField(powerConsText, m.powerConsumed, ref prevPowerConsumed, "{0:0}");
 			DoRequirementColor(powerConsText, powerCons, ship == null || m.type == ShipModule.Type.Warp || (m.turnedOn && m.EnoughPower));
+			//if (Time.frameCount % 300 == 0) FFU_BE_Defs.GetComponentsListTree(matConvEquationGroup);
 		}
 		[MonoModReplace] private void DoWeapon() {
 		/// Updated Weapon Information
@@ -1203,13 +1216,23 @@ namespace RST.UI {
 				starmapStealthDetMaxHover.HoverText = $"{Localization.TT("How much energy health bay currently emits and by how much it inflates ship's signature.")}";
 			}
 		}
-		[MonoModIgnore] private void DoMaterialsConverter() {
+		[MonoModReplace] private void DoMaterialsConverter() {
 		/// Updated Converter Information
 			MaterialsConverterModule materialsConverter = m.MaterialsConverter;
-			if (Time.frameCount % 300 == 0) FFU_BE_Defs.GetComponentsListTree(matConvEquationGroup);
-			//exoticsProdText.transform.parent.parent.gameObject.SetActive(false);
-			//DoResourceProdPerSecond(materialsConverter.produce, materialsConverter.secondsPerConversion);
-			//DoResourceConsPerSecond(materialsConverter.consume, materialsConverter.secondsPerConversion);
+			int availableRecipes = Mathf.Min(materialsConverter.produceRecipes.Length, materialsConverter.consumeRecipes.Length);
+			for (int recipeNum = 0; recipeNum < availableRecipes; recipeNum++) {
+				string recipeCost = $"{DoConverterRecipeCost(materialsConverter.consumeRecipes[recipeNum])}";
+				float prodAmt = 100f * materialsConverter.currentEfficiency * (m.HasFullHealth ? 1f : FFU_BE_Defs.GetHealthPercent(m));
+				if (materialsConverter.produceRecipes[recipeNum].organics > 0) SafeUpdateField(10, organicsProdText, $"<size=15>{preColor}{prodAmt:0.#}: {recipeCost}{aftColor}</size>");
+				if (materialsConverter.produceRecipes[recipeNum].fuel > 0) SafeUpdateField(20, fuelProdText, $"<size=15>{preColor}{prodAmt:0.#}: {recipeCost}{aftColor}</size>");
+				if (materialsConverter.produceRecipes[recipeNum].metals > 0) SafeUpdateField(30, metalsProdText, $"<size=15>{preColor}{prodAmt:0.#}: {recipeCost}{aftColor}</size>");
+				if (materialsConverter.produceRecipes[recipeNum].synthetics > 0) SafeUpdateField(40, syntheticsProdText, $"<size=15>{preColor}{prodAmt:0.#}: {recipeCost}{aftColor}</size>");
+				if (materialsConverter.produceRecipes[recipeNum].explosives > 0) SafeUpdateField(50, explosivesProdText, $"<size=15>{preColor}{prodAmt:0.#}: {recipeCost}{aftColor}</size>");
+				if (materialsConverter.produceRecipes[recipeNum].exotics > 0) SafeUpdateField(60, exoticsProdText, $"<size=15>{preColor}{prodAmt / 10:0.#}: {recipeCost}{aftColor}</size>");
+				if (materialsConverter.produceRecipes[recipeNum].credits > 0) SafeUpdateField(70, creditsProdText, $"<size=15>{preColor}{prodAmt * 10:0.#}: {recipeCost}{aftColor}</size>");
+			}
+			SafeUpdateField(100, medbayHealSpeedText, $"{materialsConverter.maxWarmUpPoints:0}{Localization.TT("s")}");
+			SafeUpdateField(110, dmgAreaText, $"{materialsConverter.maxWarmUpPoints / materialsConverter.warmUpDissipation:0}{Localization.TT("s")}");
 			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
 			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
 			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
@@ -1222,14 +1245,10 @@ namespace RST.UI {
 				explosivesProdHover.HoverText = $"{Localization.TT("Shows how much explosives material converter produces per minute, if active.")}";
 				exoticsProdHover.HoverText = $"{Localization.TT("Shows how much exotics material converter produces per minute, if active.")}";
 				creditsProdHover.HoverText = $"{Localization.TT("Shows how much credits material converter generates per minute, if active.")}";
-				organicsConsHover.HoverText = $"{Localization.TT("Shows how much organics material converter consumes per minute, if active.")}";
-				fuelConsHover.HoverText = $"{Localization.TT("Shows how much starfuel material converter consumes per minute, if active.")}";
-				metalsConsHover.HoverText = $"{Localization.TT("Shows how much metal material converter consumes per minute, if active.")}";
-				syntheticsConsHover.HoverText = $"{Localization.TT("Shows how much synthetics material converter consumes per minute, if active.")}";
-				explosivesConsHover.HoverText = $"{Localization.TT("Shows how much explosives material converter consumes per minute, if active.")}";
-				exoticsConsHover.HoverText = $"{Localization.TT("Shows how much exotics material converter consumes per minute, if active.")}";
 				sMaxShieldBonusHover.HoverText = $"{Localization.TT("Shows built-in shields capacity of the materials converter.")}";
 				sMaxHealthBonusHover.HoverText = $"{Localization.TT("Shows durability increase materials converter provides to the ship.")}";
+				medbayHealSpeedHover.HoverText = $"{Localization.TT("Shows how much time it takes for converter to warm-up from 0% to 100% efficiency.")}";
+				dmgAreaHover.HoverText = $"{Localization.TT("Shows how much time it takes for converter to dissipate efficiency from 100% to 0%, when powered off.")}";
 				starmapStealthDetMaxHover.HoverText = $"{Localization.TT("How much energy materials converter currently emits and by how much it inflates ship's signature.")}";
 				exoticsContCurHover.HoverText = exoticsProdHover.HoverText;
 			}
@@ -1320,8 +1339,7 @@ namespace RST.UI {
 			SafeUpdateField(60, metalsProdText, farmSkillProd.metals > 0 ? $"{(farmProdPerDist.metals > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.metals * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.metals > 0 ? altAftClr : null)}" : null);
 			SafeUpdateField(70, syntheticsProdText, farmSkillProd.synthetics > 0 ? $"{(farmProdPerDist.synthetics > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.synthetics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.synthetics > 0 ? altAftClr : null)}" : null);
 			SafeUpdateField(80, explosivesProdText, farmSkillProd.explosives > 0 ? $"{(farmProdPerDist.explosives > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.explosives * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.explosives > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(90, exoticsContCurText, farmSkillProd.exotics > 0 ? $"{(farmProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.exotics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
-			//SafeUpdateField(90, exoticsProdText, gardenSkillProd.exotics > 0 ? $"{(gardenProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{gardenProdPerDist.exotics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(gardenProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(90, exoticsProdText, farmSkillProd.exotics > 0 ? $"{(farmProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.exotics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
 			SafeUpdateField(100, gardenOrganicsProdBonusText, $" {farm.producedPerSkillPoint.organics:0.0}/100{Localization.TT("ru")} /");
 			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
 			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
@@ -1341,7 +1359,6 @@ namespace RST.UI {
 				sMaxShieldBonusHover.HoverText = $"{Localization.TT("Shows built-in shields capacity of the greenhouse.")}";
 				sMaxHealthBonusHover.HoverText = $"{Localization.TT("Shows durability increase greenhouse provides to the ship.")}";
 				starmapStealthDetMaxHover.HoverText = $"{Localization.TT("How much energy greenhouse currently emits and by how much it inflates ship's signature.")}";
-				exoticsContCurHover.HoverText = exoticsProdHover.HoverText;
 			}
 		}
 		[MonoModReplace] private void DoResearch() {
@@ -1361,8 +1378,7 @@ namespace RST.UI {
 			SafeUpdateField(70, metalsProdText, labSkillProd.metals > 0 ? $"{(labProdPerDist.metals > 0 ? altPreClr : null)}{preColor}{labProdPerDist.metals * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.metals > 0 ? altAftClr : null)}" : null);
 			SafeUpdateField(80, syntheticsProdText, labSkillProd.synthetics > 0 ? $"{(labProdPerDist.synthetics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.synthetics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.synthetics > 0 ? altAftClr : null)}" : null);
 			SafeUpdateField(90, explosivesProdText, labSkillProd.explosives > 0 ? $"{(labProdPerDist.explosives > 0 ? altPreClr : null)}{preColor}{labProdPerDist.explosives * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.explosives > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(100, exoticsContCurText, labSkillProd.exotics > 0 ? $"{(labProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.exotics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
-			//SafeUpdateField(100, exoticsProdText, labSkillProd.exotics > 0 ? $"{(labProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.exotics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(100, exoticsProdText, labSkillProd.exotics > 0 ? $"{(labProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.exotics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
 			SafeUpdateField(110, researchCreditsProdBonusText, $" {lab.producedPerSkillPoint.credits:0.0}/100{Localization.TT("ru")} /");
 			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
 			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
@@ -1383,7 +1399,6 @@ namespace RST.UI {
 				sMaxShieldBonusHover.HoverText = $"{Localization.TT("Shows built-in shields capacity of the laboratory.")}";
 				sMaxHealthBonusHover.HoverText = $"{Localization.TT("Shows durability increase laboratory provides to the ship.")}";
 				starmapStealthDetMaxHover.HoverText = $"{Localization.TT("How much energy laboratory currently emits and by how much it inflates ship's signature.")}";
-				exoticsContCurHover.HoverText = exoticsProdHover.HoverText;
 			}
 		}
 		[MonoModReplace] private void DoCryosleep() {
@@ -1583,6 +1598,17 @@ namespace RST.UI {
 			SafeUpdateField(140, syntheticsConsText, syntheticsCons, ref prevSynthCons, "{0:0}/" + Localization.TT("min."));
 			SafeUpdateField(150, explosivesConsText, explosivesCons, ref prevExplCons, "{0:0}/" + Localization.TT("min."));
 			SafeUpdateField(160, exoticsConsText, exoticsCons, ref prevExoticsCons, "{0:0}/" + Localization.TT("min."));
+		}
+		private string DoConverterRecipeCost(ResourceValueGroup recipe) {
+			string costText = "";
+			if (recipe.organics > 0) { if (!string.IsNullOrEmpty(costText)) costText += $"/"; costText += $"<color=#79e051ff>{recipe.organics:0}</color>"; }
+			if (recipe.fuel > 0) { if (!string.IsNullOrEmpty(costText)) costText += $"/"; costText += $"<color=#e76d08ff>{recipe.fuel:0}</color>"; }
+			if (recipe.metals > 0) { if (!string.IsNullOrEmpty(costText)) costText += $"/"; costText += $"<color=#9caec6ff>{recipe.metals:0}</color>"; }
+			if (recipe.synthetics > 0) { if (!string.IsNullOrEmpty(costText)) costText += $"/"; costText += $"<color=#ecbabaff>{recipe.synthetics:0}</color>"; }
+			if (recipe.explosives > 0) { if (!string.IsNullOrEmpty(costText)) costText += $"/"; costText += $"<color=#ffd600ff>{recipe.explosives:0}</color>"; }
+			if (recipe.exotics > 0) { if (!string.IsNullOrEmpty(costText)) costText += $"/"; costText += $"<color=#ce3761ff>{recipe.exotics:0}</color>"; }
+			if (recipe.credits > 0) { if (!string.IsNullOrEmpty(costText)) costText += $"/"; costText += $"<color=#c8c8c8ff>{recipe.credits:0}</color>"; }
+			return costText;
 		}
 		private void UpdateHoverFlags(bool doWeaponHovers = false, bool doNukeHovers = false, bool doPointDefHovers = false, bool doEngineHovers = false,
 		/// New Function: Components Direct Data & Properties Access

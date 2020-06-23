@@ -1248,29 +1248,25 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case "Perk module artifact, data core":
-					perk.displayName = "Industrial Modules Manufacturing Licenses";
-					perk.description = "We've found an official dealer that is ready to sell us a complete set of manufacturing licenses for industrial modules, along with their blueprints. However, we still need to research these blueprints, before we can manufacture them on our own.";
+					perk.displayName = "StarFurnace Singularity Core Cache";
+					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in ancient manufacturing complex full of active hostile defense systems. The only reason this cache was left intact is extremely protected compartment, where it was found.";
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-25000);
-					perk.extraModules = null;
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator tiger").gameObject }}};
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").PrefabId,
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 1B").PrefabId,
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").PrefabId,
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").PrefabId });
+						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator tiger").PrefabId });
 					perk.randomizerMenuStrings = new string[]{
-						$"+{FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").displayName} {Core.TT("Blueprint")}",
-						$"+{FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 1B").displayName} {Core.TT("Blueprint")}",
-						$"+{FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").displayName} {Core.TT("Blueprint")}",
-						$"+{FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").displayName} {Core.TT("Blueprint")}",
-						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
-					perk.isUnlockedByDefault = true;
-					perk.repCost = 10;
+						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
+					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
+					perk.isUnlockedByDefault = false;
+					perk.repCost = 25;
 					break;
 					case "Perk module DIY cryosleep":
 					perk.displayName = "Medical Cryosleep Bay Cache";
@@ -2019,7 +2015,7 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case "Perk module DIY explo combinator, to 3ships":
 					perk.displayName = "Advanced Industrial Modules Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed advanced industrial modules sold by official dealer for acceptable price. Contains modules for manufacturing explosives and metals.";
+					perk.description = "A cache with freshly manufactured and neatly packed improved industrial module sold by official dealer for acceptable price. Has decent features and moderate conversion efficiency.";
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2028,18 +2024,16 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").gameObject }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 5;
 					break;
 					case "Perk module synth cooker, to tigerfish":
 					perk.displayName = "Emergency Industrial Modules Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed advanced industrial modules sold by official dealer for acceptable price. Contains modules for manufacturing synthetics and starfuel.";
+					perk.description = "A cache with freshly manufactured and neatly packed basic industrial module sold by official dealer for acceptable price. Doesn't have much features and efficiency, but rather durable.";
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2048,11 +2042,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-2500);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 1B").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "oilcake converter").gameObject }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 5;
@@ -2308,7 +2300,7 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case "Perk module oilcake organics converter":
 					perk.displayName = "Complete Industrial Modules Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed advanced industrial modules sold by official dealer for acceptable price. Contains modules for manufacturing synthetics, starfuel, metals and explosives.";
+					perk.description = "A cache with freshly manufactured and neatly packed advanced industrial module sold by official dealer for acceptable price. Rather efficient and has many features, but most important - armored as nuclear bunker.";
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2317,15 +2309,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 1B").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").gameObject }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+1x {Core.TT("Packed")} {perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+1x {Core.TT("Packed")} {perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 10;
@@ -3325,8 +3311,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case "Perk module fuel combinator, to atlas":
-					perk.displayName = "Complete Industrial Modules Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed advanced industrial modules sold by official dealer for acceptable price. Contains modules for manufacturing synthetics, starfuel, metals and explosives.";
+					perk.displayName = "Experimental Industrial Modules Deal";
+					perk.description = "A cache with freshly manufactured/grown and neatly packed experimental industrial module sold by official dealer for acceptable price. Has great efficiency a lot of features, but very fragile.";
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3335,15 +3321,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 1B").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "biotech explosives recycler").gameObject }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+1x {Core.TT("Packed")} {perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+1x {Core.TT("Packed")} {perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 10;

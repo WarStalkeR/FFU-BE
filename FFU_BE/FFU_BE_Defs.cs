@@ -148,6 +148,7 @@ namespace FFU_Bleeding_Edge {
 			165493307,  /* Makeshift Synthetics Container */
 			271236703,  /* Makeshift Explosives Container */
 			168523420,  /* Makeshift Exotics Container */
+			1515661102, /* Makeshift Chemical Factory */
 			429768775,  /* Makeshift Integrity Armor */
 			126798266,  /* Makeshift Shield Generator */
 			741193982,  /* Makeshift Shield Capacitor */
@@ -171,6 +172,7 @@ namespace FFU_Bleeding_Edge {
 			1699316752, /* Antimatter Reactor */
 			426751082,  /* Capital XSM Multicontainer */
 			1165288718, /* Capital FEO Multicontainer */
+			1363987393, /* StarCORE Singularity Factory */
 			1427874574, /* Zero Point Shield Generator */
 			1424188745, /* Zero Point Shield Capacitor */
 			728608876,  /* Accelerated Greenhouse */
@@ -178,10 +180,6 @@ namespace FFU_Bleeding_Edge {
 			1448350571, /* Quantum Laboratory */
 			1559705412, /* Quantum Warp Drive */
 			1119228548, /* Particle-Folding Quantum Engine */
-			// 373200662,  /* Industrial Synthetics Printer */
-			// 194638103,  /* Industrial Fuel Refinery */
-			// 1615170861, /* Industrial Ordnance Factory */
-			// 1482294420, /* Industrial Blast Furnace */
 			685017033,  /* Mechanical Upgrades Cache */
 			957508477,  /* Biological Implants Cache */
 			760711671,  /* Laser Type Weapons Cache */
@@ -439,6 +437,8 @@ namespace FFU_Bleeding_Edge {
 					try { txt.transform.parent.GetChild(3).gameObject.SetActive(false); } catch { }
 					txt.text = "You start with additional resources and bonuses. Modules are not affected by critical hits.";
 				}
+				if (txt.name == "Text" && txt.text == "Convertor module damaged/overloaded!") txt.text = "Converter Module is Badly Damaged or Overloaded!";
+				if (txt.name == "Title" && txt.text == "Built in fuel converter") txt.text = "Built-In Starfuel Factory";
 				if (txt.name == "Text" && txt.text == "The game ends when your ship HP reaches 0.") txt.text = "You start with reduced resources and bonuses. Game ends when your ship HP reaches 0.";
 				if (txt.name == "Text" && txt.text == "Quick start") txt.text = "Basic Controls";
 				if (txt.name == "quick start" && txt.text == "Quick Start") txt.text = "Basic Controls";
@@ -610,15 +610,13 @@ namespace FFU_Bleeding_Edge {
 					"<color=lime>" + "However, some hostile fleets has ability to completely <color=orange>scramble</color> your warp drive, thus leaving you no " +
 					"choice, but to fight to the bitter end. This is especially true for <color=orange>Interdiction Fleets</color> sent by <color=orange>Local Forces" +
 					"</color> that aware of your presence in the sector." + "</color>";
-				if (txt.name == "doors" && txt.text == "Doors") txt.text = "Doors & Airlocks (FFU:BE)";
-				if (txt.name == "Text" && txt.text == "Doors") txt.text = "Doors & Airlocks (FFU:BE)";
+				if (txt.name == "doors" && txt.text == "Doors") txt.text = "Doors & Airlocks";
+				if (txt.name == "Text" && txt.text == "Doors") txt.text = "Doors & Airlocks";
 				if (txt.name == "DescriptionText" && txt.text.Contains("Many ships have doors which can be locked"))
 					txt.text = "Many ships are divided into multiple sections & segments. Doors & hatches between these sections & segments " +
 					"allow crewmembers access them. All doors can be locked/unlocked by clicking RMB (Right Mouse Button) on it, if you're owner. " +
-					"Locking door/hatch prevents enemies from entering into the section/segment. Also, locked door/hatch prevents fire from spreading." + "\n\n" +
-					"<color=lime>" + "If your flagship is not in battle and not pursued by enemy fleet, you can repair doors. Repair doors by clicking " +
-					"<color=orange>Left Mouse Button</color> on them. Each click can repair up to 10 hit points. Repairing each " +
-					"door hit point costs <color=orange>2 metals</color> and <color=orange>4 synthetics</color> by default." + "</color>";
+					"Locking door/hatch prevents enemies from entering into the section/segment. Also, locked door/hatch prevents fire from spreading. " +
+					"Doors can be repaired just like any other ship module: by selecting crewmembers and giving them order to repair damaged doors.";
 				if (txt.name == "log" && txt.text == "Log Messages") txt.text = "Ship Messages Log";
 				if (txt.name == "Text" && txt.text == "Log messages") txt.text = "Ship Messages Log";
 				if (txt.name == "DescriptionText" && txt.text.Contains("The log console shows what's going on in"))
@@ -656,16 +654,19 @@ namespace FFU_Bleeding_Edge {
 					"Also, please do remember that Hand Weapons can damage ship modules as well, thus beware of any skirmishes near reactors.";
 				if (txt.name == "multiplecrew" && txt.text == "Managing multiple crew") txt.text = "Managing Ship Personnel";
 				if (txt.name == "Text" && txt.text == "Managing multiple crew") txt.text = "Managing Ship Personnel";
-				if (txt.name == "resources" && txt.text == "Resources") txt.text = "Supplies & Resources";
-				if (txt.name == "Text" && txt.text == "Resources") txt.text = "Supplies & Resources";
+				if (txt.name == "resources" && txt.text == "Resources") txt.text = "Resources (FFU:BE)";
+				if (txt.name == "Text" && txt.text == "Resources") txt.text = "Resources (FFU:BE)";
 				if (txt.name == "DescriptionText" && txt.text.Contains("Basic resources are organics, fuel"))
 					txt.text = "Basic resources, such as Organics, Starfuel, Metals, Synthetics, Explosives and Exotics that required to " +
 					"sustain day-to-day ship's operations. Lacking any of them may result in very unexpected consequences and very expected " +
 					"end of your voyage. Be sure to alway keep your eye on their levels or at very least keep in store backup Resource Pack " +
 					"of each resource in your Storage." + "\n\n" +
-					"<color=lime>" + "When playing Fight For <color=orange>Universe: Bleeding Edge</color> modification for " +
-					"<color=orange>Shortest Trip to Earth</color>, you will need a lot of them, because you will use them often, " +
-					"especially when switching to next tier of ship modules or using resource hungry weapons." + "</color>";
+					"<color=lime>" + "One of the additional ways to acquire resources are <color=orange>Industrial Facility</color> modules " +
+					"that allow conversion of resources. They can be used form within, but with terrible efficiency. To truly take advantage " +
+					"of all its features, you need to install it on the ship and wait until it finishes <color=orange>warm-up procedure</color> " +
+					"and reaches <color=orange>100%</color> efficiency. Fully warmed-up industrial facility will have serious energy emission. " +
+					"Unlike other modules, when it will be turned off, it still will generate energy emission that will dissipate over time, along " +
+					"with efficiency. Packing or moving it will <color=orange>reset</color> efficiency to the base value." + "</color>";
 				if (txt.name == "organics" && txt.text == "Organics") txt.text = "Organic Substances";
 				if (txt.name == "Text" && txt.text == "Organics") txt.text = "Organic Substances";
 				if (txt.name == "DescriptionText" && txt.text.Contains("Most crewmembers consume organics as food"))
@@ -681,7 +682,7 @@ namespace FFU_Bleeding_Edge {
 					txt.text = "High Energy Starfuel, also known as Starfuel or just Fuel allows hungry Reactor Modules and Engine Modules " +
 					"to generate enough output and thrust power to move your ships in direction of your choice. Warp Drives also require fuel " +
 					"to initiate HyperJump to the location of your choice. Sometimes fuel also consumed for exploration and other EVA activities." + "\n\n" +
-					"<color=lime>" + "Most basic way to acquire steady supply of fuel is to convert organics and synthetics into fuel via <color=orange>Fuel " +
+					"<color=lime>" + "Most basic way to acquire steady supply of fuel is to convert organics and synthetics into fuel via any <color=orange>Basic " +
 					"Refinery</color> module. As for how to produce organics and synthetics, please read relevant entries in Help Section (F1). In " +
 					"addition, fuel can be acquired through harvesting it from Gas Giants, buying it from trade stations or fuel traders and looting " +
 					"it from hostile ships." + "</color>";
@@ -713,7 +714,7 @@ namespace FFU_Bleeding_Edge {
 					"organics and starfuel, they are still very important, especially when it comes to construction, crafting, hull repair and ammunition " +
 					"printing (especially for Electromagnetic Acceleration Weapons). Sometimes metals also consumed during expeditions, when assembly " +
 					"of specialized EVA equipment is needed." + "\n\n" +
-					"<color=lime>" + "Metals can be produced via <color=orange>Blast Furnace</color> module, by consuming synthetics, explosives and " +
+					"<color=lime>" + "Metals can be produced via <color=orange>Advanced Refinery</color> module, by consuming synthetics, explosives and " +
 					"minor amount of exotic matter. Information about acquisition of synthetics, explosives and exotics can be found in relevant entries " +
 					"of the Help Section (F1). In addition, metals can be acquired through processing of rich asteroids, buying it from trade stations or " +
 					"metal traders and looting it from hostile ships after battles." + "</color>";
@@ -724,7 +725,7 @@ namespace FFU_Bleeding_Edge {
 					"consumer goods. Just as metals, synthetics aren't critically important, but still very important when it comes to module repairs, " +
 					"drones maintenance, modules crafting and printing some types of ammunitions. Synthetics also can be used during some EVA events " +
 					"that require crewmembers to print some temporary equipment or single use ammunition." + "\n\n" +
-					"<color=lime>" + "Synthetics can be easily produced by <color=orange>Synthetics Printer</color> module, as long as you have constant " +
+					"<color=lime>" + "Synthetics can be easily produced by any <color=orange>Basic Refinery</color> module, as long as you have constant " +
 					"supply of organics for it. Please refer to \"Organic Substances\" entry in Help Section (F1) for this. In addition, you can acquire " +
 					"synthetics from some EVA events, trade stations, synthetics traders and even by looting it from hostile ships after battles." + "</color>";
 				if (txt.name == "explosives" && txt.text == "Explosives") txt.text = "Explosive Materials";
@@ -734,8 +735,8 @@ namespace FFU_Bleeding_Edge {
 					"democracy to all other sentient (and not so much) species that don't cherish or respect them. Mostly used to print all kinds of " +
 					"ammunition for non-energy weapons, especially resource hungry rocket launcher platforms. The Mothership AI also uses explosives " +
 					"automatically to print mines, cheap missiles and bombs during conflict events that happen off-screen." + "\n\n" +
-					"<color=lime>" + "As long as you got steady supply of synthetics and starfuel you can easily produce explosives via <color=orange>" +
-					"Ordnance Factory</color> module. Regarding synthetics and starfuel production you can read relevant entries in Help Section (F1). " +
+					"<color=lime>" + "As long as you got steady supply of synthetics and starfuel you can easily produce explosives via any <color=orange>" +
+					"Military Refinery</color> module. Regarding synthetics and starfuel production you can read relevant entries in Help Section (F1). " +
 					"You also can acquire explosives from some EVA events, buy from trade stations or explosive traders and even loot it from hostile " +
 					"ships." + "</color>";
 				if (txt.name == "exotics" && txt.text == "Exotic Substances") txt.text = "Rare & Exotic Matter";
@@ -746,7 +747,7 @@ namespace FFU_Bleeding_Edge {
 					"in production of high-tech components, crafting of exotic modules, printing of specialized ammunition and even as alternative " +
 					"currency to the xenodata credits. Also exotic matter is core component of any warp drive module." + "\n\n" +
 					"<color=lime>" + "Unlike other resources, exotic matter is very difficult to acquire. Beside inefficient production via <color=orange>" +
-					"Exotics XMT-Purifier</color> module, exotic matter can be acquired from specialized <color=orange>Laboratories</color>, exotic " +
+					"Specialized Refinery</color> module, exotic matter can be acquired from specialized <color=orange>Laboratories</color>, exotic " +
 					"<color=orange>Greenhouses</color>, warp animal remains and rarely by looting hostile ships after battles." + "</color>";
 				if (txt.name == "credits" && txt.text == "(Xeno)Data Credits") txt.text = "Xenodata Credits";
 				if (txt.name == "Text" && txt.text == "(Xeno)Data credits") txt.text = "Xenodata Credits";
@@ -755,9 +756,9 @@ namespace FFU_Bleeding_Edge {
 					"It uses a semi-intelligent digital algorithm to convert any data with knowledge value into a universally priced form, thus almost " +
 					"any exploration brings some sort of revenue in form of xenodata." + "\n\n" +
 					"<color=lime>" + "There are multiple way to earn credits, beside exploration. Actively working <color=orange>Laboratories</color> " +
-					"and <color=orange>Cryodream Bays</color> will generate xenodata during travel, <color=orange>Quantum Processor</color> module " +
-					"can convert exotic matter into xenodata after deep analysis, albeit inefficiently. You also can acquire credits by selling resources " +
-					"or by looting remains of hostile ships after battles." + "</color>";
+					"and <color=orange>Cryodream Bays</color> will generate xenodata during travel, <color=orange>Specialized Refinery</color> module " +
+					"can convert exotic matter into xenodata after deep analysis, albeit with low efficiency. You also can acquire credits by selling " +
+					"resources or by looting remains of hostile ships after battles." + "</color>";
 				if (txt.name == "fate points" && txt.text == "Fate Points") txt.text = "Fate Points & Destiny";
 				if (txt.name == "Text" && txt.text == "Fate points") txt.text = "Fate Points & Destiny";
 				if (txt.name == "saveresources" && txt.text == "Saving resources") txt.text = "Additional Mod Info (FFU:BE)";
@@ -1241,13 +1242,10 @@ namespace FFU_Bleeding_Edge {
 					return (shipModule.PowerConsumed + shipModule.Sensor.sectorRadarRange / 10f + shipModule.Sensor.starmapRadarRange) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.MaterialsConverter:
-				if (shipModule.MaterialsConverter != null && (shipModule.turnedOn || isStatic))
-					return (shipModule.PowerConsumed + shipModule.MaterialsConverter.consume.organics +
-					shipModule.MaterialsConverter.consume.fuel + shipModule.MaterialsConverter.consume.metals + shipModule.MaterialsConverter.consume.synthetics +
-					shipModule.MaterialsConverter.consume.explosives + shipModule.MaterialsConverter.consume.exotics * 10f + shipModule.MaterialsConverter.consume.credits / 10f +
-					shipModule.MaterialsConverter.produce.organics + shipModule.MaterialsConverter.produce.fuel + shipModule.MaterialsConverter.produce.metals +
-					shipModule.MaterialsConverter.produce.synthetics + shipModule.MaterialsConverter.produce.explosives + shipModule.MaterialsConverter.produce.exotics * 10f +
-					shipModule.MaterialsConverter.produce.credits / 10f) * GetModuleEnergyEmissionMult(shipModule);
+				if (shipModule.MaterialsConverter != null)
+					return (((shipModule.turnedOn || isStatic) ? shipModule.PowerConsumed: 0f) +
+					(isStatic ? (shipModule as patch_ShipModule).MaterialsConverter.maxWarmUpPoints * 0.5f :
+					(shipModule as patch_ShipModule).MaterialsConverter.currentWarmpUpPoints * 0.5f)) * GetModuleEnergyEmissionMult(shipModule);
 				else return 0f;
 				case ShipModule.Type.Reactor:
 				if (shipModule.Reactor != null && shipModule.IsOvercharged && (shipModule.turnedOn || isStatic))
