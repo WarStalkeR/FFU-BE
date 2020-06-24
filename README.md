@@ -15,12 +15,8 @@
 
 
 ## Installation
-1) To enjoy this mod you need to acquire BepInEx bleeding edge build from here: https://builds.bepis.io/projects/bepinex_be (I've used #186, i.e. 5.0.1.186, but I'm pretty sure any of them can be used).  
-2) Unpack (and configure it, if you want something specific).  
-3) Download Runtime MonoMod Loader from BepInEx from here: https://github.com/BepInEx/BepInEx.MonoMod.Loader  
-4) Download MonoMod (NET3.5) version based on what is permited in MonoMod Loader from here: https://github.com/MonoMod/MonoMod/releases  
-5) Add all missing references in BepInEx.MonoMod.Loader project from MonoMod and compile it.  
-6) Copy compiled "BepInEx.MonoMod.Loader.dll" into "BepInEx\patchers\" folder.  
-7) Rename "MonoMod.exe" into "MonoMod.dll" and copy it into "BepInEx\core\" folder.  
-8) Ensure that "BepInEx" folder and all relevant files such as "winhttp.dll" present in game's root directory.  
-9) Rename compiled DLL from this project into "Assembly-CSharp.FFU_BE.mm.dll" and copy it into "BepInEx\monomod\" folder.
+1) To enjoy this mod you need to acquire BepInEx v5.1 from here: https://github.com/BepInEx/BepInEx/releases/tag/v5.1
+2) Download already prepared MonoMod Loader v1.0.0.0 for BepInEx from here: https://github.com/BepInEx/BepInEx.MonoMod.Loader/releases/tag/v1.0.0.0
+3) Follow their installation instructions and run for the first time so BepInEx.cfg file will be generated in /BepInEx/config/ folder.
+4) Change BepInEx.cfg: EnableAssemblyCache = false, in [Logging.Console] Enabled = true, all LogLevels = Fatal, Error, Warning, Message, Info.
+5) Rename compiled DLL from this project into "Assembly-CSharp.FFU_BE.mm.dll" and copy it into "BepInEx\monomod\" folder.

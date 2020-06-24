@@ -158,7 +158,7 @@ namespace RST.PlaymakerAction {
 		[MonoModIgnore] private void CountModuleSlots(Ship s, out int weaponSlots, out int nukeSlots, out int otherSlots) { weaponSlots = 0; nukeSlots = 0; otherSlots = 0; }
 		[MonoModReplace] public static List<Ship> GetAllPlayableShips() {
 		/// Class-based Ship Sorting
-			List<Ship> list = PrefabFinder.Instance.FindAll("IntViewShip", (Ship s) => s.isPlayableShip);
+			List<Ship> list = PrefabFinder.Instance.FindAll("IntViewShip", (Ship s) => s.isPlayableShip || AllowedShip(s));
 			list.Sort((Ship a, Ship b) => FFU_BE_Defs.SortAllShips(a.PrefabId).CompareTo(FFU_BE_Defs.SortAllShips(b.PrefabId)));
 			return list;
 		}
@@ -230,6 +230,13 @@ namespace RST.PlaymakerAction {
 			targetImage.color = flag3 ? Color.white : shipLockedColor.Value;
 			shipStatsPanel.SetActive(flag3);
 			doneButton.interactable = flag3;
+		}
+		private static bool AllowedShip(Ship ship) {
+			switch (ship.PrefabId) {
+				case 1111111111:
+				return true;
+				default: return false;
+			}
 		}
 	}
 	public class patch_PerksSelection : PerksSelection {
