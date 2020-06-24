@@ -17,6 +17,6 @@
 ## Installation
 1) To enjoy this mod you need to acquire BepInEx v5.1 from here: https://github.com/BepInEx/BepInEx/releases/tag/v5.1
 2) Download already prepared MonoMod Loader v1.0.0.0 for BepInEx from here: https://github.com/BepInEx/BepInEx.MonoMod.Loader/releases/tag/v1.0.0.0
-3) Follow their installation instructions and run for the first time so BepInEx.cfg file will be generated in /BepInEx/config/ folder.
+3) Follow their installation instructions and run game for the first time so BepInEx.cfg file will be generated in /BepInEx/config/ folder.
 4) Change BepInEx.cfg: EnableAssemblyCache = false, in [Logging.Console] Enabled = true, all LogLevels = Fatal, Error, Warning, Message, Info.
 5) Rename compiled DLL from this project into "Assembly-CSharp.FFU_BE.mm.dll" and copy it into "BepInEx\monomod\" folder.
