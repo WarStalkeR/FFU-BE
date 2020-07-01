@@ -10,10 +10,18 @@ using System.Linq;
 using UnityEngine.UI;
 using System.Text;
 using RST.UI;
+using System;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
 		public static string modVersion = "0.9.8.0";
+		//Temporary Data
+		public static bool dataMenuSpritesLoaded = false;
+		public static List<Sprite> dataMenuSpritesSet = new List<Sprite>();
+		public static GameObject therExplosionPool = null;
+		public static GameObject chemExplosionPool = null;
+		public static GameObject boomExplosionPool = null;
+		public static GameObject specExplosionPool = null;
 		//Internal Variables
 		public static bool firstRun = true;
 		public static bool firstInst = true;
@@ -108,7 +116,6 @@ namespace FFU_Bleeding_Edge {
 			{"Deflection", 10},
 			{"Accuracy", 10},
 			{"Evasion", 10}};
-		public static int[] techLevel = new int[] { 0, 1500, 3500, 6000, 10000, 16000, 24000, 34000, 46000, 60000 };
 		public static List<int> initialModuleIDs = new List<int>(new int[] {
 			760167696,  /* Organics Pack */
 			453797399,  /* Starfuel Pack */
@@ -121,6 +128,7 @@ namespace FFU_Bleeding_Edge {
 			2146165248, /* Firepack Thermal Nuke */
 			533676501,  /* Explopack Tactical Nuke */
 			1771248833, /* Synthpack Chemical Nuke */
+			2053889862, /* Micromite Boarding Nuke */
 			858424257,  /* Exopack Strategic Nuke */
 			821254137,  /* Rust Jigsaw Rocket Launcher */
 			1780996798, /* Dead Weight Explosive Autocannon */
@@ -148,7 +156,7 @@ namespace FFU_Bleeding_Edge {
 			165493307,  /* Makeshift Synthetics Container */
 			271236703,  /* Makeshift Explosives Container */
 			168523420,  /* Makeshift Exotics Container */
-			1515661102, /* Makeshift Chemical Factory */
+			1515661102, /* Makeshift Chemical Reactor */
 			429768775,  /* Makeshift Integrity Armor */
 			126798266,  /* Makeshift Shield Generator */
 			741193982,  /* Makeshift Shield Capacitor */
@@ -172,7 +180,7 @@ namespace FFU_Bleeding_Edge {
 			1699316752, /* Antimatter Reactor */
 			426751082,  /* Capital XSM Multicontainer */
 			1165288718, /* Capital FEO Multicontainer */
-			1363987393, /* StarCORE Singularity Factory */
+			1363987393, /* StarFurnace Singularity Core */
 			1427874574, /* Zero Point Shield Generator */
 			1424188745, /* Zero Point Shield Capacitor */
 			728608876,  /* Accelerated Greenhouse */
@@ -186,7 +194,14 @@ namespace FFU_Bleeding_Edge {
 			938711464,  /* Iron Dome Tactical CIWS */
 			1571322820, /* Annihilator Rocket Launcher */
 			876704941,  /* Shockwave Plasma Howitzer */
-			412909021,  /* Liberator Kinetic Railcannon */ });
+			412909021,  /* Liberator Kinetic Railcannon */
+			1851270005, /* Blackhammer Kinetic Nuke */
+			2106923011, /* Ion Storm Energy Nuke */
+			780823633,  /* Hellfire Thermal Nuke */
+			120466776,  /* Cataclysm Tactical Nuke */
+			22001514,   /* Green Death Chemical Nuke */
+			381835966,  /* Apocalypse Boarding Nuke */
+			1558344950, /* Void Fire Strategic Nuke */ });
 		public static List<int> discoveredModuleIDs = initialModuleIDs;
 		public static List<int> unresearchedModuleIDs = new List<int>();
 		public static List<int> perkModuleBlueprintIDs = new List<int>();
@@ -218,7 +233,8 @@ namespace FFU_Bleeding_Edge {
 		public static float researchCommonDivisor = 1000f;
 		public static float reverseResearchDivisor = 3f;
 		public static ResourceValueGroup initialResources = new ResourceValueGroup { };
-		public static Core.Difficulty startingDifficulty = Core.Difficulty.None;
+		public static Core.Difficulty chosenDifficulty = Core.Difficulty.None;
+		public static Core.Difficulty gameDifficulty = Core.Difficulty.None;
 		//Configuration Variables
 		public static bool advancedWelcomePopup = false;
 		public static bool restartUnlocksEverything = false;
@@ -234,7 +250,6 @@ namespace FFU_Bleeding_Edge {
 		public static int addFreeCrewSkillPoints = 0;
 		public static int minPlayerCrewSkillsLimit = 1;
 		public static int minEnemyCrewSkillsLimit = 1;
-		public static int enemyShipCrewSizeMult = 1;
 		public static int shipMaxEvasionLimit = 95;
 		public static int stationCapacityMult = 80;
 		public static int resultNumbersMult = 10;
@@ -304,6 +319,7 @@ namespace FFU_Bleeding_Edge {
 		public static void LoadModPropsAndFeatures() {
 			if (!firstRun) {
 				Debug.LogWarning("Updating and saving custom variables...");
+				ES2.Save((int)gameDifficulty, "start.es2?tag=modDifficulty");
 				ES2.Save(discoveredModuleIDs, "permanent.es2?tag=discoveredModuleIDs");
 				ES2.Save(unresearchedModuleIDs, "start.es2?tag=unresearchedModuleIDs");
 				ES2.Save(researchProgress, "start.es2?tag=researchProgress");
@@ -355,6 +371,8 @@ namespace FFU_Bleeding_Edge {
 				if (ES2.Exists("start.es2?tag=shipCurrentStorageCap")) shipCurrentStorageCap = ES2.Load<int>("start.es2?tag=shipCurrentStorageCap");
 				if (ES2.Exists("permanent.es2?tag=discoveredModuleIDs")) discoveredModuleIDs = ES2.LoadList<int>("permanent.es2?tag=discoveredModuleIDs");
 				else ES2.Save(discoveredModuleIDs, "permanent.es2?tag=discoveredModuleIDs");
+				if (ES2.Exists("start.es2?tag=modDifficulty")) gameDifficulty = (Core.Difficulty)ES2.Load<int>("start.es2?tag=modDifficulty");
+				else ES2.Save(1, "start.es2?tag=modDifficulty");
 				foreach (int initialID in initialModuleIDs) if (!discoveredModuleIDs.Contains(initialID)) discoveredModuleIDs.Add(initialID);
 				if (goFullASMD) {
 					if (restartUnlocksEverything) ES2.Save(FFU_BE_Base.allPerksList, "permanent.es2?tag=unlockedItemIds");
@@ -433,10 +451,6 @@ namespace FFU_Bleeding_Edge {
 				if (txt.name.Contains("BridgeRemoteOpsValue")) txt.text = "<color=lime>Remote Control</color>";
 				if (txt.name.Contains("RemovesCrewResConsValue")) txt.text = "<color=lime>No Consumption</color>";
 				if (txt.name.Contains("CryosleepGeneratesCreditsValue")) txt.text = "<color=lime>Generates Credits</color>";
-				if (txt.name == "Text" && txt.text == "Starting bonuses:") {
-					try { txt.transform.parent.GetChild(3).gameObject.SetActive(false); } catch { }
-					txt.text = "You start with additional resources and bonuses. Modules are not affected by critical hits.";
-				}
 				if (txt.name == "Text" && txt.text == "Convertor module damaged/overloaded!") txt.text = "Converter Module is Badly Damaged or Overloaded!";
 				if (txt.name == "Title" && txt.text == "Built in fuel converter") txt.text = "Built-In Starfuel Factory";
 				if (txt.name == "Text" && txt.text == "The game ends when your ship HP reaches 0.") txt.text = "You start with reduced resources and bonuses. Game ends when your ship HP reaches 0.";
@@ -817,7 +831,7 @@ namespace FFU_Bleeding_Edge {
 		public static void LoadBleedingEdgeWelcome() {
 			foreach (Text txt in Resources.FindObjectsOfTypeAll<Text>()) {
 				if (txt.text.ToLower().Contains("cancel")) txt.text = "NOPE";
-				if (txt.text.ToLower().Contains("start game")) txt.text = "NIGHTMARE MODE ON";
+				if (txt.text.ToLower().Contains("start game")) txt.text = "ENTER WORLD OF PAIN";
 				if (txt.text.ToLower().Contains("discard this offer permanently")) txt.text = "I HAVE ASMD SHOCK RIFLE";
 				if (txt.text.ToLower().Contains("reset progress & unlock all ships")) txt.text = "HARD RESET + IDKFA";
 				if (txt.text.ToLower().Contains("yes, reset progress and unlock all ships")) txt.text = "TAKE THE " + (restartUnlocksEverything ? "RED" : "BLUE") + " PILL";
@@ -843,54 +857,167 @@ namespace FFU_Bleeding_Edge {
 				if (dumpObjectLists) Debug.Log("[Welcome Text] " + txt.name + ": " + txt.text);
 			}
 		}
+		public static void ProduceResources(PlayerData pData, ref ResourceValueGroup pStored, string pReason) {
+			if (pData.Organics.FreeSpace - pStored.organics >= 0 && pStored.organics >= 1f) {
+				int rAmount = (int)Math.Truncate(pStored.organics);
+				pData.Organics.Add(rAmount, pReason);
+				pStored.organics -= rAmount;
+			}
+			if (pData.Fuel.FreeSpace - pStored.fuel >= 0 && pStored.fuel >= 1f) {
+				int rAmount = (int)Math.Truncate(pStored.fuel);
+				pData.Fuel.Add(rAmount, pReason);
+				pStored.fuel -= rAmount;
+			}
+			if (pData.Metals.FreeSpace - pStored.metals >= 0 && pStored.metals >= 1f) {
+				int rAmount = (int)Math.Truncate(pStored.metals);
+				pData.Metals.Add(rAmount, pReason);
+				pStored.metals -= rAmount;
+			}
+			if (pData.Synthetics.FreeSpace - pStored.synthetics >= 0 && pStored.synthetics >= 1f) {
+				int rAmount = (int)Math.Truncate(pStored.synthetics);
+				pData.Synthetics.Add(rAmount, pReason);
+				pStored.synthetics -= rAmount;
+			}
+			if (pData.Explosives.FreeSpace - pStored.explosives >= 0 && pStored.explosives >= 1f) {
+				int rAmount = (int)Math.Truncate(pStored.explosives);
+				pData.Explosives.Add(rAmount, pReason);
+				pStored.explosives -= rAmount;
+			}
+			if (pData.Exotics.FreeSpace - pStored.exotics >= 0 && pStored.exotics >= 1f) {
+				int rAmount = (int)Math.Truncate(pStored.exotics);
+				pData.Exotics.Add(rAmount, pReason);
+				pStored.exotics -= rAmount;
+			}
+			if (pStored.credits >= 1f) {
+				int rAmount = (int)Math.Truncate(pStored.credits);
+				pData.Credits += rAmount;
+				if (!string.IsNullOrEmpty(pReason)) pData.creditsChangeReasons.Add(pReason);
+				pStored.credits -= rAmount;
+			}
+		}
 		public static ProbabilityDistribution NewExactValue() {
 			return new ProbabilityDistribution { minValue = 0, maxValue = 0 };
 		}
 		public static ProbabilityDistribution NewExactValue(float exactValue) {
 			return new ProbabilityDistribution { minValue = exactValue, maxValue = exactValue };
 		}
-		public static float GetDifficultyDamageMax() {
-			if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
-			else if (WorldRules.Impermanent.ironman) return 0.9f;
-			else return 0.7f;
+		public static float GetDifficultySalvDmg(bool preStart = false) {
+			var selectedDifficulty = preStart ? chosenDifficulty : gameDifficulty;
+			switch (selectedDifficulty) {
+				case Core.Difficulty.Easy: return 0.4f;
+				case Core.Difficulty.Medium: return 0.5f;
+				case Core.Difficulty.Hard: return 0.6f;
+				case Core.Difficulty.Brutal: return 0.7f;
+				case Core.Difficulty.Insane: return 0.8f;
+				case Core.Difficulty.Nightmare: return 0.9f;
+				default: if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
+				else if (WorldRules.Impermanent.ironman) return 0.9f;
+				else return 0.7f;
+			}
 		}
-		public static float GetDifficultyModifier() {
-			if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
-			else if (WorldRules.Impermanent.ironman) return 2f;
-			else return 1f;
+		public static float GetDifficultyFloatValue(bool preStart = false) {
+			var selectedDifficulty = preStart ? chosenDifficulty : gameDifficulty;
+			switch (selectedDifficulty) {
+				case Core.Difficulty.Easy: return 0.5f;
+				case Core.Difficulty.Medium: return 1f;
+				case Core.Difficulty.Hard: return 1.5f;
+				case Core.Difficulty.Brutal: return 2f;
+				case Core.Difficulty.Insane: return 2.5f;
+				case Core.Difficulty.Nightmare: return 3f;
+				default: if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
+				else if (WorldRules.Impermanent.ironman) return 2f;
+				else return 1f;
+			}
 		}
-		public static float GetStartingModDiffMult() {
-			switch (startingDifficulty) {
+		public static float GetDifficultyStartMod(bool preStart = false) {
+			var selectedDifficulty = preStart ? chosenDifficulty : gameDifficulty;
+			switch (selectedDifficulty) {
 				case Core.Difficulty.Easy: return 1.0f;
 				case Core.Difficulty.Medium: return 0;
 				case Core.Difficulty.Hard: return -1.0f;
 				case Core.Difficulty.Brutal: return -1.5f;
 				case Core.Difficulty.Insane: return -2.0f;
-				case Core.Difficulty.IDDQD: return -2.5f;
-				default:
-				if (WorldRules.Impermanent.beginnerStartingBonus) return 1.0f;
+				case Core.Difficulty.Nightmare: return -2.5f;
+				default: if (WorldRules.Impermanent.beginnerStartingBonus) return 1.0f;
 				else if (WorldRules.Impermanent.ironman) return -1.0f;
 				else return 0f;
 			}
 		}
-		public static float GetStartingResDiffMult() {
-			switch (startingDifficulty) {
+		public static float GetDifficultyStartRes(bool preStart = false) {
+			var selectedDifficulty = preStart ? chosenDifficulty : gameDifficulty;
+			switch (selectedDifficulty) {
 				case Core.Difficulty.Easy: return 0.5f;
 				case Core.Difficulty.Medium: return 0;
-				case Core.Difficulty.Hard: return -0.5f;
-				case Core.Difficulty.Brutal: return -0.75f;
-				case Core.Difficulty.Insane: return -0.90f;
-				case Core.Difficulty.IDDQD: return -0.95f;
-				default:
-				if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
+				case Core.Difficulty.Hard: return -0.25f;
+				case Core.Difficulty.Brutal: return -0.50f;
+				case Core.Difficulty.Insane: return -0.75f;
+				case Core.Difficulty.Nightmare: return -0.95f;
+				default: if (WorldRules.Impermanent.beginnerStartingBonus) return 0.5f;
 				else if (WorldRules.Impermanent.ironman) return -0.5f;
 				else return 0f;
 			}
 		}
-		public static int GetDifficultySetting() {
-			if (WorldRules.Impermanent.beginnerStartingBonus) return 1;
-			else if (WorldRules.Impermanent.ironman) return 3;
-			else return 2;
+		public static int GetDifficultyIntValue(bool preStart = false) {
+			var selectedDifficulty = preStart ? chosenDifficulty : gameDifficulty;
+			switch (selectedDifficulty) {
+				case Core.Difficulty.Easy: return 0;
+				case Core.Difficulty.Medium: return 1;
+				case Core.Difficulty.Hard: return 2;
+				case Core.Difficulty.Brutal: return 3;
+				case Core.Difficulty.Insane: return 4;
+				case Core.Difficulty.Nightmare: return 5;
+				default: if (WorldRules.Impermanent.beginnerStartingBonus) return 1;
+				else if (WorldRules.Impermanent.ironman) return 3;
+				else return 2;
+			}
+		}
+		public static int GetDifficultyCrewMult(bool preStart = false) {
+			var selectedDifficulty = preStart ? chosenDifficulty : gameDifficulty;
+			switch (selectedDifficulty) {
+				case Core.Difficulty.Easy:
+				case Core.Difficulty.Medium: return 1;
+				case Core.Difficulty.Hard:
+				case Core.Difficulty.Brutal: return 2;
+				case Core.Difficulty.Insane:
+				case Core.Difficulty.Nightmare: return 3;
+				default: return 1;
+			}
+		}
+		public static bool GetDifficultyAllowPause(bool preStart = false) {
+			var selectedDifficulty = preStart ? chosenDifficulty : gameDifficulty;
+			switch (selectedDifficulty) {
+				case Core.Difficulty.Easy:
+				case Core.Difficulty.Medium:
+				case Core.Difficulty.Hard: return true;
+				case Core.Difficulty.Brutal:
+				case Core.Difficulty.Insane:
+				case Core.Difficulty.Nightmare: return false;
+				default: return true;
+			}
+		}
+		public static bool GetDifficultyAllowCrits(bool preStart = false) {
+			var selectedDifficulty = preStart ? chosenDifficulty : gameDifficulty;
+			switch (selectedDifficulty) {
+				case Core.Difficulty.Easy: return false;
+				case Core.Difficulty.Medium:
+				case Core.Difficulty.Hard:
+				case Core.Difficulty.Brutal:
+				case Core.Difficulty.Insane:
+				case Core.Difficulty.Nightmare: return true;
+				default: return true;
+			}
+		}
+		public static bool GetDifficultyAllowSurvive(bool preStart = false) {
+			var selectedDifficulty = preStart ? chosenDifficulty : gameDifficulty;
+			switch (selectedDifficulty) {
+				case Core.Difficulty.Easy:
+				case Core.Difficulty.Medium: return true;
+				case Core.Difficulty.Hard:
+				case Core.Difficulty.Brutal:
+				case Core.Difficulty.Insane:
+				case Core.Difficulty.Nightmare: return false;
+				default: return true;
+			}
 		}
 		public static float GetHealthPercent(ShipModule shipModule) {
 			return Mathf.Clamp(shipModule.Health / (float)shipModule.MaxHealth, 0.0001f, 1f);
@@ -906,6 +1033,24 @@ namespace FFU_Bleeding_Edge {
 		}
 		public static float GetReverseFromRVG(ResourceValueGroup mOutput) {
 			return GetResearchFromRVG(mOutput) / reverseResearchDivisor;
+		}
+		public static bool CanMalfunction(ShipModule shipModule) {
+			switch (shipModule.type) {
+				case ShipModule.Type.Warp:
+				case ShipModule.Type.Engine:
+				case ShipModule.Type.Sensor:
+				case ShipModule.Type.Reactor:
+				case ShipModule.Type.Fighter:
+				case ShipModule.Type.Medbay:
+				case ShipModule.Type.Dronebay:
+				case ShipModule.Type.ShieldGen:
+				case ShipModule.Type.Training:
+				case ShipModule.Type.Cryosleep:
+				case ShipModule.Type.StealthDecryptor:
+				case ShipModule.Type.MaterialsConverter:
+				case ShipModule.Type.PassiveECM: return true;
+				default: return false;
+			}
 		}
 		public static void GetComponentsListTree(Text tObject) {
 			if (tObject == null) return;
@@ -1122,7 +1267,7 @@ namespace FFU_Bleeding_Edge {
 			else return false;
 		}
 		public static Crewmember GetRandomIntruderFromName(ShootAtDamageDealer damageDealer) {
-			float rollValue = Random.Range(0f, 100f);
+			float rollValue = UnityEngine.Random.Range(0f, 100f);
 			Core.PayloadPool spawnPoolType = Core.PayloadPool.None;
 			if (damageDealer.name.Contains("DIY bio nuke") || damageDealer.name.Contains("Mini Bio nuke") || damageDealer.name.Contains("insectoid spawner nuke")) spawnPoolType = Core.PayloadPool.Squid;
 			else if (damageDealer.name.Contains("pirate spawner nuke")) spawnPoolType = Core.PayloadPool.Pirate;
@@ -1368,7 +1513,7 @@ namespace FFU_Bleeding_Edge {
 			} catch { }
 		}
 		public static float GetFlagshipEmissionModifier() {
-			if (PlayerDatas.Me != null && PlayerDatas.Me.Flagship != null) return 1f + PlayerDatas.Me.Flagship.ModuleSlotRoots.Count * GetDifficultyModifier() / 100f;
+			if (PlayerDatas.Me != null && PlayerDatas.Me.Flagship != null) return 1f + PlayerDatas.Me.Flagship.ModuleSlotRoots.Count * (1f + GetDifficultyIntValue() / 10f) / 100f;
 			else return 1f;
 		}
 		public static float GetIntruderCountFromName(ShootAtDamageDealer damageDealer) {

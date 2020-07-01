@@ -290,7 +290,7 @@ namespace FFU_Bleeding_Edge {
 				MaterialsConverterModule refConv = (shipModule as patch_ShipModule).MaterialsConverter;
 				moduleData += $"Facility Full Warm-Up Time: {refConv.maxWarmUpPoints}s\n";
 				moduleData += $"Facility Initial Warm-Up Time: {refConv.maxWarmUpPoints - refConv.baseWarmUpPoints}s\n";
-				moduleData += $"Facility Base Efficiency: {refConv.baseEfficiency * 100: 0.0}%\n";
+				moduleData += $"Facility Base Efficiency: {refConv.baseEfficiency * 100:0.0}%\n";
 				moduleData += $"Facility Efficiency Dissipation: {100f / (refConv.maxWarmUpPoints / refConv.warmUpDissipation):0.####}%/s\n";
 				int availableRecipes = Mathf.Min(refConv.produceRecipes.Length, refConv.consumeRecipes.Length);
 				if (availableRecipes > 0) {

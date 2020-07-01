@@ -32,8 +32,8 @@ namespace RST {
 		public float currentWarmpUpPoints = 0;
 		public float baseWarmUpPoints => maxWarmUpPoints * baseEfficiency;
 		public float currentEfficiency => currentWarmpUpPoints / maxWarmUpPoints;
-		[Localized] public string resourceConsumptionReason = "started conversion";
-		[Localized] public string resourceProductionReason = "finished conversion";
+		[Localized] public string resourceConsumptionReason = "conversion";
+		[Localized] public string resourceProductionReason = "conversion";
 		public ShipModule Module => GetCachedComponent<ShipModule>(true);
 		private void Awake() {
 			currentWarmpUpPoints = baseWarmUpPoints;
@@ -43,9 +43,8 @@ namespace RST {
 				if (currentWarmpUpPoints < baseWarmUpPoints) currentWarmpUpPoints = baseWarmUpPoints;
 				if (currentWarmpUpPoints < maxWarmUpPoints) currentWarmpUpPoints += Time.deltaTime;
 				if (currentWarmpUpPoints > maxWarmUpPoints) currentWarmpUpPoints = maxWarmUpPoints;
-			} else if (!Module.IsPacked && !Module.TurnedOnAndIsWorking) {
-				if (currentWarmpUpPoints > baseWarmUpPoints) currentWarmpUpPoints -= Time.deltaTime * warmUpDissipation;
-			} else if (currentWarmpUpPoints > baseWarmUpPoints) currentWarmpUpPoints = baseWarmUpPoints;
+			} else if (Module.InStorage && currentWarmpUpPoints > baseWarmUpPoints) currentWarmpUpPoints = baseWarmUpPoints;
+			else if (currentWarmpUpPoints > baseWarmUpPoints) currentWarmpUpPoints -= Time.deltaTime * warmUpDissipation;
 		}
 		public bool Convert(int convCount, int recipeNum) {
 			/// Recipe-Based Resource Production

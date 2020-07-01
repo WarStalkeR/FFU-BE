@@ -116,7 +116,7 @@
     <Compile Include="FFU_BE_Mod_Modules.cs" />
     <Compile Include="FFU_BE_Mod_Technology.cs" />
     <Compile Include="FFU_Bleeding_Edge_Helpers\Core.cs" />
-    <Compile Include="FFU_Bleeding_Edge_Helpers\Delegates.cs" />
+    <Compile Include="FFU_Bleeding_Edge_Helpers\Datas.cs" />
     <Compile Include="FFU_Bleeding_Edge_Helpers\IniFile.cs" />
     <Compile Include="FFU_Bleeding_Edge_Helpers\Mathx.cs" />
     <Compile Include="FFU_Bleeding_Edge_Helpers\WordWrap.cs" />

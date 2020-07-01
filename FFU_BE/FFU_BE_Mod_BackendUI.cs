@@ -19,6 +19,7 @@ using System.Linq;
 using MonoMod;
 using System;
 using System.Text.RegularExpressions;
+using HarmonyLib;
 
 namespace RST.UI {
 	[ExecuteInEditMode]
@@ -305,20 +306,231 @@ namespace RST.UI {
 		}
 	}
 	public class patch_MenuNewGamePanel : MenuNewGamePanel {
+		public extern void orig_OnEnable();
 		public extern void orig_NewGameBeginnerClicked();
 		public extern void orig_NewGameChallengingClicked();
 		public extern void orig_NewGameHardcoreClicked();
+		public Text textTutorialButton => startTutorialButton.transform.GetChild(0).GetComponent<Text>();
+		public Text textBeginnerButton => startBeginnerButton.transform.GetChild(0).GetComponent<Text>();
+		public Text textChallengeButton => startChallengingButton.transform.GetChild(0).GetComponent<Text>();
+		public Text textHardcoreButton => startHardcoreButton.transform.GetChild(0).GetComponent<Text>();
+		public GameObject entryBeginnerItemsGO => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(2).GetChild(3).gameObject;
+		public Text entryButton1TextA => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(0).GetChild(0).GetComponent<Text>();
+		public Text entryButton1TextB => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(1).GetChild(0).GetComponent<Text>();
+		public Text entryButton1TextC => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(2).GetChild(0).GetComponent<Text>();
+		public Text entryButton2TextA => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(0).GetChild(0).GetComponent<Text>();
+		public Text entryButton2TextB => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>();
+		public Text entryButton2TextC => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(2).GetChild(0).GetComponent<Text>();
+		public Text entryButton3TextA => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(0).GetChild(0).GetComponent<Text>();
+		public Text entryButton3TextB => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(1).GetChild(0).GetComponent<Text>();
+		public Text entryButton3TextC => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(2).GetChild(0).GetComponent<Text>();
+		public Image entryButton1SignA => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(0).GetChild(2).GetComponent<Image>();
+		public Image entryButton1SignB => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(1).GetChild(2).GetComponent<Image>();
+		public Image entryButton1SignC => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(2).GetChild(2).GetComponent<Image>();
+		public Image entryButton2SignA => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(0).GetChild(2).GetComponent<Image>();
+		public Image entryButton2SignB => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(1).GetChild(2).GetComponent<Image>();
+		public Image entryButton2SignC => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(2).GetChild(2).GetComponent<Image>();
+		public Image entryButton3SignA => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(0).GetChild(2).GetComponent<Image>();
+		public Image entryButton3SignB => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(1).GetChild(2).GetComponent<Image>();
+		public Image entryButton3SignC => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(2).GetChild(2).GetComponent<Image>();
+		public Image entryButton1Background => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>();
+		public Image entryButton2Background => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(0).GetChild(0).GetComponent<Image>();
+		public Image entryButton3Background => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(0).GetComponent<Image>();
+		public UIColorOverride entryButton1ClrA => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(0).GetChild(2).GetComponent<UIColorOverride>();
+		public UIColorOverride entryButton1ClrB => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(1).GetChild(2).GetComponent<UIColorOverride>();
+		public UIColorOverride entryButton1ClrC => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(2).GetChild(2).GetComponent<UIColorOverride>();
+		public UIColorOverride entryButton2ClrA => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(0).GetChild(2).GetComponent<UIColorOverride>();
+		public UIColorOverride entryButton2ClrB => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(1).GetChild(2).GetComponent<UIColorOverride>();
+		public UIColorOverride entryButton2ClrC => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(2).GetChild(2).GetComponent<UIColorOverride>();
+		public UIColorOverride entryButton3ClrA => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(0).GetChild(2).GetComponent<UIColorOverride>();
+		public UIColorOverride entryButton3ClrB => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(1).GetChild(2).GetComponent<UIColorOverride>();
+		public UIColorOverride entryButton3ClrC => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(2).GetChild(2).GetComponent<UIColorOverride>();
+		private bool isIDDQDmode;
+		private void OnEnable() {
+			orig_OnEnable();
+			entryBeginnerItemsGO.SetActive(false);
+			if (!FFU_BE_Defs.dataMenuSpritesLoaded) {
+				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButton2SignA.sprite);
+				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButton2SignC.sprite);
+				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButton1Background.sprite);
+				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButton2Background.sprite);
+				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButton3Background.sprite);
+				FFU_BE_Defs.dataMenuSpritesLoaded = true;
+			}
+			textTutorialButton.text = Core.TT(Datas.diffTextTut);
+			if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) {
+				textBeginnerButton.text = Core.TT(Datas.diffTextBrut);
+				textChallengeButton.text = Core.TT(Datas.diffTextIns);
+				textHardcoreButton.text = Core.TT(Datas.diffTextNight);
+				UpdateDifficultySprites(true);
+				UpdateDifficultyHints(true);
+				isIDDQDmode = true;
+			} else {
+				textBeginnerButton.text = Core.TT(Datas.diffTextEasy);
+				textChallengeButton.text = Core.TT(Datas.diffTextMed);
+				textHardcoreButton.text = Core.TT(Datas.diffTextHard);
+				UpdateDifficultySprites(false);
+				UpdateDifficultyHints(false);
+				isIDDQDmode = false;
+			}
+		}
 		private void NewGameBeginnerClicked() {
-			FFU_BE_Defs.startingDifficulty = Core.Difficulty.Easy;
+			if (isIDDQDmode) FFU_BE_Defs.chosenDifficulty = Core.Difficulty.Brutal;
+			else FFU_BE_Defs.chosenDifficulty = Core.Difficulty.Easy;
 			orig_NewGameBeginnerClicked();
 		}
 		private void NewGameChallengingClicked() {
-			FFU_BE_Defs.startingDifficulty = Core.Difficulty.Medium;
+			if (isIDDQDmode) FFU_BE_Defs.chosenDifficulty = Core.Difficulty.Insane;
+			else FFU_BE_Defs.chosenDifficulty = Core.Difficulty.Medium;
 			orig_NewGameChallengingClicked();
 		}
 		private void NewGameHardcoreClicked() {
-			FFU_BE_Defs.startingDifficulty = Core.Difficulty.Hard;
+			if (isIDDQDmode) FFU_BE_Defs.chosenDifficulty = Core.Difficulty.Nightmare;
+			else FFU_BE_Defs.chosenDifficulty = Core.Difficulty.Hard;
 			orig_NewGameHardcoreClicked();
+		}
+		private void UpdateDifficultySprites(bool isDifficult) {
+			if (isDifficult) {
+				entryButton1Background.sprite = FFU_BE_Defs.dataMenuSpritesSet[3];
+				entryButton2Background.sprite = FFU_BE_Defs.dataMenuSpritesSet[4];
+				entryButton3Background.sprite = FFU_BE_Defs.dataMenuSpritesSet[4];
+				entryButton1SignA.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButton1SignB.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButton1SignC.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButton2SignA.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButton2SignB.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButton2SignC.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButton3SignA.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButton3SignB.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButton3SignC.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+			} else {
+				entryButton1Background.sprite = FFU_BE_Defs.dataMenuSpritesSet[2];
+				entryButton2Background.sprite = FFU_BE_Defs.dataMenuSpritesSet[2];
+				entryButton3Background.sprite = FFU_BE_Defs.dataMenuSpritesSet[3];
+				entryButton1SignA.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
+				entryButton1SignB.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
+				entryButton1SignC.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
+				entryButton2SignA.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
+				entryButton2SignB.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
+				entryButton2SignC.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButton3SignA.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
+				entryButton3SignB.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButton3SignC.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+			}
+		}
+		private void UpdateDifficultyHints(bool isDifficult) {
+			if (isDifficult) {
+				entryButton1TextA.text = Core.TT(Datas.diffPauseNo);
+				entryButton1TextB.text = Core.TT(Datas.diffTechMed);
+				entryButton1TextC.text = Core.TT(Datas.diffBonusBrut);
+				entryButton2TextA.text = Core.TT(Datas.diffPauseNo);
+				entryButton2TextB.text = Core.TT(Datas.diffTechHigh);
+				entryButton2TextC.text = Core.TT(Datas.diffBonusIns);
+				entryButton3TextA.text = Core.TT(Datas.diffPauseNo);
+				entryButton3TextB.text = Core.TT(Datas.diffTechUltra);
+				entryButton3TextC.text = Core.TT(Datas.diffBonusNight);
+			} else {
+				entryButton1TextA.text = Core.TT(Datas.diffPauseYes); 
+				entryButton1TextB.text = Core.TT(Datas.diffTechNone);
+				entryButton1TextC.text = Core.TT(Datas.diffBonusEasy);
+				entryButton2TextA.text = Core.TT(Datas.diffPauseYes); 
+				entryButton2TextB.text = Core.TT(Datas.diffTechNone);
+				entryButton2TextC.text = Core.TT(Datas.diffBonusMed);
+				entryButton3TextA.text = Core.TT(Datas.diffPauseYes);
+				entryButton3TextB.text = Core.TT(Datas.diffTechLow);
+				entryButton3TextC.text = Core.TT(Datas.diffBonusHard);
+			}
+		}
+	}
+	public class patch_TimePanelControls : TimePanelControls {
+		[MonoModIgnore] private float lastTimeScale;
+		[MonoModIgnore] private bool lastControlsDisabled;
+		[MonoModIgnore] private bool lastPauseDisabled;
+		[MonoModIgnore] private void DoFastForward() { }
+		[MonoModIgnore] private void DoSlowMotion() { }
+		[MonoModIgnore] private void DoPause() { }
+		[MonoModIgnore] private void DoPlay() { }
+		[MonoModReplace] private void Update() {
+		/// Custom Difficulty Time Control
+			if (lastTimeScale != RstTime.timeScale) {
+				if (RstTime.IsPaused) DoPause();
+				else if (RstTime.IsNormalSpeed) DoPlay();
+				else if (RstTime.IsSlowMotion) DoSlowMotion();
+				else if (RstTime.IsFastForward) DoFastForward();
+				lastTimeScale = RstTime.timeScale;
+			}
+			bool controlsDisabled = ControlsDisabled;
+			if (!controlsDisabled && KeyBindingManager.GetKeyUp(KeyAction.TimeToggle, KeyAction.TimeToggleAlt)) {
+				if (RstTime.IsNormalSpeed) {
+					if (!FFU_BE_Defs.GetDifficultyAllowPause()) slowMotionButton.onClick.Invoke();
+					else pauseButton.onClick.Invoke();
+				} else playButton.onClick.Invoke();
+			}
+			if (lastControlsDisabled != controlsDisabled) {
+				pauseButton.interactable = !controlsDisabled;
+				slowMotionButton.interactable = !controlsDisabled;
+				playButton.interactable = !controlsDisabled;
+				fastForwardButton.interactable = !controlsDisabled;
+				lastControlsDisabled = controlsDisabled;
+			}
+			bool pauseDisabled = !FFU_BE_Defs.GetDifficultyAllowPause();
+			if (lastPauseDisabled != pauseDisabled) {
+				pauseButton.gameObject.SetActive(!pauseDisabled);
+				pauseButton.GetComponent<HoverableUI>().HoverText = MonoBehaviourExtended.TT("Pause time") + ((!pauseDisabled) ? " [SPACE]" : "");
+				slowMotionButton.GetComponent<HoverableUI>().HoverText = MonoBehaviourExtended.TT("Slow time") + (pauseDisabled ? " [SPACE]" : "");
+				lastPauseDisabled = pauseDisabled;
+			}
+			bool flag = PerFrameCache.IsGoodSituation && IntviewCamera.Instance != null;
+			if (visualizeGoodTime.activeSelf != flag) visualizeGoodTime.SetActive(flag);
+		}
+		public void SetSlowMo() => DoSlowMotion();
+		public void SetPause() => DoPause();
+	}
+	public class patch_MenuProgressPanel : MenuProgressPanel {
+		public HoverableUI GreenDiffHover => modeBeginner.GetComponent<HoverableUI>();
+		public HoverableUI YellowDiffHover => modeChallenging.GetComponent<HoverableUI>();
+		public HoverableUI RedDiffHover => modeHardcore.GetComponent<HoverableUI>();
+		public Text GreenDiffText => modeBeginner.transform.GetChild(0).GetComponent<Text>();
+		public Text YellowDiffText => modeChallenging.transform.GetChild(0).GetComponent<Text>();
+		public Text RedDiffText => modeHardcore.transform.GetChild(0).GetComponent<Text>();
+		public Text TutorialText => modeTutorial.transform.GetChild(0).GetComponent<Text>();
+		private void Start() {
+		/// Custom Difficulty Information
+			PlayerData pData = PlayerDatas.Me;
+			if (pData != null) {
+				int number = Mathf.RoundToInt(pData.gameRunRecord.realTimePassed / 60f);
+				sectorName.text = ((Sector.Instance != null) ? Sector.Instance.DisplayNameLocalized : "");
+				playtime.text = Localization.TT(number, "minute|minutes");
+				battlesSurvived.text = pData.gameRunRecord.battlesSurvived.ToString();
+				shipsDestroyed.text = pData.gameRunRecord.shipsDestroyed.ToString();
+				modulesFound.text = pData.gameRunRecord.modulesFound.ToString();
+				planetsVisited.text = pData.gameRunRecord.planetsVisited.ToString();
+				fatePoints.text = pData.RepPoints.ToString();
+				UpdateInfo();
+			}
+		}
+		public void UpdateInfo() {
+			string nameText = ""; string descText = "";
+			bool isTutorial = MainQuest.Instance != null && MainQuest.Instance.isTutorial;
+			switch (FFU_BE_Defs.GetDifficultyIntValue()) {
+				case 0: nameText = Datas.diffTextEasy; descText = $"{Core.TT(Datas.diffPauseYes)}\n{Core.TT(Datas.diffTechNone)}\n{Core.TT(Datas.diffBonusEasy)}"; break;
+				case 1: nameText = Datas.diffTechMed; descText = $"{Core.TT(Datas.diffPauseYes)}\n{Core.TT(Datas.diffTechNone)}\n{Core.TT(Datas.diffBonusMed)}"; break;
+				case 2: nameText = Datas.diffTextHard; descText = $"{Core.TT(Datas.diffPauseYes)}\n{Core.TT(Datas.diffTechLow)}\n{Core.TT(Datas.diffBonusHard)}"; break;
+				case 3: nameText = Datas.diffTextBrut; descText = $"{Core.TT(Datas.diffPauseNo)}\n{Core.TT(Datas.diffTechMed)}\n{Core.TT(Datas.diffBonusBrut)}"; break;
+				case 4: nameText = Datas.diffTextIns; descText = $"{Core.TT(Datas.diffPauseNo)}\n{Core.TT(Datas.diffTechHigh)}\n{Core.TT(Datas.diffBonusIns)}"; break;
+				case 5: nameText = Datas.diffTextNight; descText = $"{Core.TT(Datas.diffPauseNo)}\n{Core.TT(Datas.diffTechUltra)}\n{Core.TT(Datas.diffBonusNight)}"; break;
+			}
+			GreenDiffHover.HoverText = descText;
+			YellowDiffHover.HoverText = descText;
+			RedDiffHover.HoverText = descText;
+			GreenDiffText.text = nameText;
+			YellowDiffText.text = nameText;
+			RedDiffText.text = nameText;
+			TutorialText.text = Core.TT(Datas.diffTextTut);
+			modeTutorial.SetActive(isTutorial);
+			if (FFU_BE_Defs.GetDifficultyIntValue() > 2) modeHardcore.SetActive(!isTutorial);
+			else if (FFU_BE_Defs.GetDifficultyIntValue() > 0) modeChallenging.SetActive(!isTutorial);
+			else modeBeginner.SetActive(!isTutorial);
 		}
 	}
 }

@@ -49,16 +49,16 @@ namespace FFU_Bleeding_Edge {
 			.Replace("(Deficient)", string.Empty)
 			.Replace("(Brittle)", string.Empty)
 			.Replace("(Volatile)", string.Empty)
-			.Replace("MK-I", string.Empty)
-			.Replace("MK-II", string.Empty)
-			.Replace("MK-III", string.Empty)
-			.Replace("MK-IV", string.Empty)
-			.Replace("MK-V", string.Empty)
-			.Replace("MK-VI", string.Empty)
-			.Replace("MK-VII", string.Empty)
-			.Replace("MK-VIII", string.Empty)
+			.Replace("MK-X", string.Empty)
 			.Replace("MK-IX", string.Empty)
-			.Replace("MK-X", string.Empty);
+			.Replace("MK-VIII", string.Empty)
+			.Replace("MK-VII", string.Empty)
+			.Replace("MK-VI", string.Empty)
+			.Replace("MK-V", string.Empty)
+			.Replace("MK-IV", string.Empty)
+			.Replace("MK-III", string.Empty)
+			.Replace("MK-II", string.Empty)
+			.Replace("MK-I", string.Empty);
 		}
 		public static T RandomItemFromList<T>(List<T> genericList, T fallbackVar) {
 			if (!genericList.Any()) return fallbackVar;
@@ -107,6 +107,18 @@ namespace FFU_Bleeding_Edge {
 			MK_IX,
 			MK_X
 		}
+		public enum TechLevel {
+			T1 = 0,
+			T2 = 1500,
+			T3 = 3500,
+			T4 = 6000,
+			T5 = 10000,
+			T6 = 16000,
+			T7 = 24000,
+			T8 = 34000,
+			T9 = 46000,
+			TX = 60000
+		}
 		public enum BonusMod {
 			None,
 			Sustained, Unstable,
@@ -131,7 +143,7 @@ namespace FFU_Bleeding_Edge {
 			Hard,
 			Brutal,
 			Insane,
-			IDDQD
+			Nightmare
 		}
 	}
 }

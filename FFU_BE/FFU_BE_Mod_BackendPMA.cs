@@ -89,7 +89,7 @@ namespace RST.PlaymakerAction {
 			fsmVariables.GetFsmInt("synthetics").Value = Mathf.Clamp(sTotal + sAmount, 0, int.MaxValue) - sTotal;
 			fsmVariables.GetFsmInt("metals").Value = Mathf.Clamp(mTotal + mAmount, 0, int.MaxValue) - mTotal;
 			fsmVariables.GetFsmInt("credits").Value = Mathf.Max(pd.Credits + cAmount, 0) - pd.Credits;
-			int repAmount = ParseIntExpr(RepPoints.Value, null);
+			int repAmount = ParseIntExpr(RepPoints.Value, null) * Mathf.Max(FFU_BE_Defs.GetDifficultyIntValue(), 1);
 			fsmVariables.GetFsmInt("repPoints").Value = Mathf.Max(pd.RepPoints + repAmount, 0) - pd.RepPoints;
 			bool deadByCrew = false;
 			int crewHealth = ParseIntExpr(CrewHealth.Value, null);
@@ -137,7 +137,7 @@ namespace RST.PlaymakerAction {
 		[MonoModReplace] private void DoIt() {
 		/// Damage Salvaged Modules
 			List<GameObject> list = new List<GameObject>();
-			float salvageDamageMax = FFU_BE_Defs.GetDifficultyDamageMax();
+			float salvageDamageMax = FFU_BE_Defs.GetDifficultySalvDmg();
 			foreach (ShipModule cachedModule in PerFrameCache.CachedModules) {
 				if (cachedModule != null && !cachedModule.IsPacked && cachedModule.Ownership.GetIsOrphan()) {
 					if (cachedModule.Health == cachedModule.MaxHealth) cachedModule.TakeDamage(UnityEngine.Random.Range(Mathf.RoundToInt(cachedModule.MaxHealth * 0.1f), Mathf.RoundToInt(cachedModule.MaxHealth * salvageDamageMax) + 1));
@@ -189,7 +189,7 @@ namespace RST.PlaymakerAction {
 			targetDescription.text = Localization.TT(ship.description);
 			CountModuleSlots(ship, out int weaponSlots, out int nukeSlots, out int otherSlots);
 			WorldRules.StartingBonus startingBonus = WorldRules.Instance.beginnerStartingBonus;
-			float startingBonusMult = FFU_BE_Defs.GetStartingModDiffMult();
+			float startingBonusMult = FFU_BE_Defs.GetDifficultyStartMod(true);
 			string valueSign = startingBonusMult > 0 ? "↑" : "↓";
 			targetWeaponSlots.text = weaponSlots.ToString();
 			targetNukeSlots.text = nukeSlots.ToString();
@@ -216,7 +216,7 @@ namespace RST.PlaymakerAction {
 				nextShipButton.interactable = true;
 				prevShipButton.interactable = true;
 			}
-			bool flag = !beginnerStartingBonus.Value || (beginnerStartingBonus.Value && !WorldRules.Instance.shipsNotAvailableInBeginner.Exists((PrefabRef p) => p.PrefabId == ship.PrefabId));
+			bool flag = FFU_BE_Defs.GetDifficultyIntValue(true) > 0 || !WorldRules.Instance.shipsNotAvailableInBeginner.Exists((PrefabRef p) => p.PrefabId == ship.PrefabId);
 			shipNotAvailableIndicator.SetActive(!flag);
 			shipNotAvailableText.text = Localization.TT("Available only in challenging/hardcore difficulties").ToUpperInvariant();
 			bool flag2 = ship.IsUnlockedByDefault || unlockedItems.Contains(ship.PrefabId);
@@ -233,8 +233,9 @@ namespace RST.PlaymakerAction {
 		}
 		private static bool AllowedShip(Ship ship) {
 			switch (ship.PrefabId) {
+				//case 853503871:
 				case 1111111111:
-				return true;
+					return true;
 				default: return false;
 			}
 		}
@@ -325,7 +326,7 @@ namespace RST.PlaymakerAction {
 			}
 		}
 		[MonoModReplace] private void DoneClicked() {
-		/// Allow Modded Crewmembers to Spawn
+		/// Set Difficulty & Allow Added Crew to Spawn
 			if (!CanStartGame()) return;
 			if (TotalFate - SumPerksTotalRepCost() > 0) {
 				confirmationGroup.Value.SetActive(true);
@@ -333,14 +334,16 @@ namespace RST.PlaymakerAction {
 				AudioClip audioClip = confirmationOpenSound.Value as AudioClip;
 				if (instance != null && audioClip != null) instance.PlayUiSound(audioClip);
 			} else {
+				FFU_BE_Defs.gameDifficulty = FFU_BE_Defs.chosenDifficulty;
 				FFU_BE_Defs.canSpawnCrew = true;
 				FinishThisAction();
 			}
 		}
 		[MonoModReplace] private void ConfirmationYesClicked() {
-		/// Allow Modded Crewmembers to Spawn
+			/// Set Difficulty & Allow Added Crew to Spawn
 			confirmationGroup.Value.SetActive(false);
 			if (CanStartGame()) {
+				FFU_BE_Defs.gameDifficulty = FFU_BE_Defs.chosenDifficulty;
 				FFU_BE_Defs.canSpawnCrew = true;
 				FinishThisAction();
 			}
@@ -447,21 +450,21 @@ namespace RST.PlaymakerAction {
 			}
 			(shipHealth.Value as Text).text = baseMaxHP.ToString("0") + "/" + baseMaxHP.ToString("0");
 			WorldRules.StartingBonus startingBonus = WorldRules.Instance.beginnerStartingBonus;
-			SetResourceElementText(fuel, fuelWarning, baseFuel, Mathf.RoundToInt(coreFuel.min * FFU_BE_Defs.GetStartingResDiffMult()));
-			SetResourceElementText(organics, organicsWarning, baseOrganics, Mathf.RoundToInt(coreOrganics.min * FFU_BE_Defs.GetStartingResDiffMult()));
-			SetResourceElementText(explosives, explosivesWarning, baseExplosives, Mathf.RoundToInt(coreExplosives.min * FFU_BE_Defs.GetStartingResDiffMult()));
-			SetResourceElementText(exotics, exoticsWarning, baseExotics, Mathf.RoundToInt(coreExotics.min * FFU_BE_Defs.GetStartingResDiffMult()));
-			SetResourceElementText(synthetics, syntheticsWarning, baseSynthetics, Mathf.RoundToInt(coreSynthetics.min * FFU_BE_Defs.GetStartingResDiffMult()));
-			SetResourceElementText(metals, metalsWarning, baseMetals, Mathf.RoundToInt(coreMetals.min * FFU_BE_Defs.GetStartingResDiffMult()));
-			SetResourceElementText(credits, creditsWarning, baseCredits, Mathf.RoundToInt(coreCredits.min * FFU_BE_Defs.GetStartingResDiffMult()));
-			FFU_BE_Defs.initialResources.fuel = baseFuel.min + coreFuel.min * FFU_BE_Defs.GetStartingResDiffMult();
-			FFU_BE_Defs.initialResources.organics = baseOrganics.min + coreOrganics.min * FFU_BE_Defs.GetStartingResDiffMult();
-			FFU_BE_Defs.initialResources.explosives = baseExplosives.min + coreExplosives.min * FFU_BE_Defs.GetStartingResDiffMult();
-			FFU_BE_Defs.initialResources.exotics = baseExotics.min + coreExotics.min * FFU_BE_Defs.GetStartingResDiffMult();
-			FFU_BE_Defs.initialResources.synthetics = baseSynthetics.min + coreSynthetics.min * FFU_BE_Defs.GetStartingResDiffMult();
-			FFU_BE_Defs.initialResources.metals = baseMetals.min + coreMetals.min * FFU_BE_Defs.GetStartingResDiffMult();
-			FFU_BE_Defs.initialResources.credits = baseCredits.min + coreCredits.min * FFU_BE_Defs.GetStartingResDiffMult();
-			float startingBonusMult = FFU_BE_Defs.GetStartingModDiffMult();
+			SetResourceElementText(fuel, fuelWarning, baseFuel, Mathf.RoundToInt(coreFuel.min * FFU_BE_Defs.GetDifficultyStartRes(true)));
+			SetResourceElementText(organics, organicsWarning, baseOrganics, Mathf.RoundToInt(coreOrganics.min * FFU_BE_Defs.GetDifficultyStartRes(true)));
+			SetResourceElementText(explosives, explosivesWarning, baseExplosives, Mathf.RoundToInt(coreExplosives.min * FFU_BE_Defs.GetDifficultyStartRes(true)));
+			SetResourceElementText(exotics, exoticsWarning, baseExotics, Mathf.RoundToInt(coreExotics.min * FFU_BE_Defs.GetDifficultyStartRes(true)));
+			SetResourceElementText(synthetics, syntheticsWarning, baseSynthetics, Mathf.RoundToInt(coreSynthetics.min * FFU_BE_Defs.GetDifficultyStartRes(true)));
+			SetResourceElementText(metals, metalsWarning, baseMetals, Mathf.RoundToInt(coreMetals.min * FFU_BE_Defs.GetDifficultyStartRes(true)));
+			SetResourceElementText(credits, creditsWarning, baseCredits, Mathf.RoundToInt(coreCredits.min * FFU_BE_Defs.GetDifficultyStartRes(true)));
+			FFU_BE_Defs.initialResources.fuel = baseFuel.min + coreFuel.min * FFU_BE_Defs.GetDifficultyStartRes(true);
+			FFU_BE_Defs.initialResources.organics = baseOrganics.min + coreOrganics.min * FFU_BE_Defs.GetDifficultyStartRes(true);
+			FFU_BE_Defs.initialResources.explosives = baseExplosives.min + coreExplosives.min * FFU_BE_Defs.GetDifficultyStartRes(true);
+			FFU_BE_Defs.initialResources.exotics = baseExotics.min + coreExotics.min * FFU_BE_Defs.GetDifficultyStartRes(true);
+			FFU_BE_Defs.initialResources.synthetics = baseSynthetics.min + coreSynthetics.min * FFU_BE_Defs.GetDifficultyStartRes(true);
+			FFU_BE_Defs.initialResources.metals = baseMetals.min + coreMetals.min * FFU_BE_Defs.GetDifficultyStartRes(true);
+			FFU_BE_Defs.initialResources.credits = baseCredits.min + coreCredits.min * FFU_BE_Defs.GetDifficultyStartRes(true);
+			float startingBonusMult = FFU_BE_Defs.GetDifficultyStartMod(true);
 			string bonusColor = startingBonusMult > 0 ? "lime" : "red";
 			string valueSign = startingBonusMult > 0 ? "↑" : "↓";
 			(shipAccuracyBonus.Value as Text).text = $"{baseAccuracy.ToString("0")}{(startingBonusMult != 0 ? $" <color={bonusColor}>{valueSign}{Mathf.Abs(startingBonus.accuracyBonusPercent * startingBonusMult):0}</color>" : null)}%";

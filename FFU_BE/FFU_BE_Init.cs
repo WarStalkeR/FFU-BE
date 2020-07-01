@@ -3,19 +3,28 @@
 #pragma warning disable IDE0059
 #pragma warning disable CS0626
 #pragma warning disable CS0414
+#pragma warning disable CS0108
 
 using MonoMod;
 using UnityEngine;
 using FFU_Bleeding_Edge;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections.Generic;
+using System.IO;
+using System;
 
 namespace RST.UI {
 	public class patch_MenuPanel : MenuPanel {
 		private extern void orig_OnEnable();
+		private Text textNewGameButton => transform.GetChild(2).GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>();
 		private void OnEnable() {
+		/// Load Features + Rename Button
 			FFU_BE_Defs.LoadModPropsAndFeatures();
 			orig_OnEnable();
+			if (textNewGameButton.text.Contains("New game")) textNewGameButton.text = Core.TT("New Game\n(Shift: IDDQD Mode)");
+			else textNewGameButton.text = Core.TT("Retire\n(Shift: IDDQD Mode)");
 		}
 	}
 }

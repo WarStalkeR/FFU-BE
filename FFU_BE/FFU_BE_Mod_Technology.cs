@@ -60,10 +60,13 @@ namespace FFU_Bleeding_Edge {
 		}
 		public static Core.BonusMod GetInitialModuleModifier(ShipModule shipModule) {
 			float initLimit = 0.50f;
-			switch (FFU_BE_Defs.GetDifficultySetting()) {
-				case 1: initLimit = 0.25f; break;
-				case 2: initLimit = 0.50f; break;
-				case 3: initLimit = 0.75f; break;
+			switch (FFU_BE_Defs.GetDifficultyIntValue()) {
+				case 0: initLimit = 0.15f; break;
+				case 1: initLimit = 0.30f; break;
+				case 2: initLimit = 0.45f; break;
+				case 3: initLimit = 0.60f; break;
+				case 4: initLimit = 0.75f; break;
+				case 5: initLimit = 0.90f; break;
 			}
 			float rolledValue = RstRandom.Range(0f, 1f);
 			if (rolledValue >= initLimit) return GetRandomPositiveBonus(shipModule);
@@ -72,10 +75,13 @@ namespace FFU_Bleeding_Edge {
 		public static Core.BonusMod GetPlayerModuleModifier(ShipModule shipModule) {
 			float negLimit = 0.25f;
 			float posLimit = 0.50f;
-			switch(FFU_BE_Defs.GetDifficultySetting()) {
-				case 1: negLimit = 0.10f; posLimit = 0.25f; break;
-				case 2: negLimit = 0.25f; posLimit = 0.50f; break;
-				case 3: negLimit = 0.50f; posLimit = 0.75f; break;
+			switch(FFU_BE_Defs.GetDifficultyIntValue()) {
+				case 0: negLimit = 0.10f; posLimit = 0.35f; break;
+				case 1: negLimit = 0.20f; posLimit = 0.45f; break;
+				case 2: negLimit = 0.30f; posLimit = 0.55f; break;
+				case 3: negLimit = 0.40f; posLimit = 0.65f; break;
+				case 4: negLimit = 0.50f; posLimit = 0.75f; break;
+				case 5: negLimit = 0.60f; posLimit = 0.85f; break;
 			}
 			float rolledValue = FFU_BE_Defs.GetModuleCraftingProficiency(shipModule) * 0.5f + RstRandom.Range(0f, 1f) * 0.5f;
 			if (rolledValue >= 0f && rolledValue <= negLimit) return GetRandomNegativeBonus(shipModule);
@@ -91,10 +97,13 @@ namespace FFU_Bleeding_Edge {
 		public static Core.BonusMod GetEnemyModuleModifier(ShipModule shipModule) {
 			float negLimit = 0.35f;
 			float posLimit = 0.75f;
-			switch (FFU_BE_Defs.GetDifficultySetting()) {
-				case 1: negLimit = 0.50f; posLimit = 0.90f; break;
-				case 2: negLimit = 0.35f; posLimit = 0.75f; break;
-				case 3: negLimit = 0.15f; posLimit = 0.15f; break;
+			switch (FFU_BE_Defs.GetDifficultyIntValue()) {
+				case 0: negLimit = 0.60f; posLimit = 0.85f; break;
+				case 1: negLimit = 0.50f; posLimit = 0.75f; break;
+				case 2: negLimit = 0.40f; posLimit = 0.65f; break;
+				case 3: negLimit = 0.30f; posLimit = 0.55f; break;
+				case 4: negLimit = 0.20f; posLimit = 0.45f; break;
+				case 5: negLimit = 0.10f; posLimit = 0.35f; break;
 			}
 			int enemyTechLevel = GetEnemyTechLevel();
 			int enemyForceLevel = FFU_BE_Defs.discoveryFleetsLevel + 1;
@@ -107,129 +116,129 @@ namespace FFU_Bleeding_Edge {
 		public static int GetPlayerTechLevel() {
 			int techLevel = 1;
 			float techPoints = FFU_BE_Defs.researchProgress;
-			if (techPoints > FFU_BE_Defs.techLevel[1]) techLevel++;
-			if (techPoints > FFU_BE_Defs.techLevel[2]) techLevel++;
-			if (techPoints > FFU_BE_Defs.techLevel[3]) techLevel++;
-			if (techPoints > FFU_BE_Defs.techLevel[4]) techLevel++;
-			if (techPoints > FFU_BE_Defs.techLevel[5]) techLevel++;
-			if (techPoints > FFU_BE_Defs.techLevel[6]) techLevel++;
-			if (techPoints > FFU_BE_Defs.techLevel[7]) techLevel++;
-			if (techPoints > FFU_BE_Defs.techLevel[8]) techLevel++;
-			if (techPoints > FFU_BE_Defs.techLevel[9]) techLevel++;
+			if (techPoints > (int)Core.TechLevel.T2) techLevel++;
+			if (techPoints > (int)Core.TechLevel.T3) techLevel++;
+			if (techPoints > (int)Core.TechLevel.T4) techLevel++;
+			if (techPoints > (int)Core.TechLevel.T5) techLevel++;
+			if (techPoints > (int)Core.TechLevel.T6) techLevel++;
+			if (techPoints > (int)Core.TechLevel.T7) techLevel++;
+			if (techPoints > (int)Core.TechLevel.T8) techLevel++;
+			if (techPoints > (int)Core.TechLevel.T9) techLevel++;
+			if (techPoints > (int)Core.TechLevel.TX) techLevel++;
 			return techLevel;
 		}
 		public static int GetSectorTechLevel() {
 			return Mathf.Clamp(Sector.Instance.number, 1, 10);
 		}
 		public static int GetEnemyTechLevel() {
-			return (int)Mathf.Clamp(Mathf.Max((GetPlayerTechLevel() + GetSectorTechLevel()) / 2f + 0.49999f, FFU_BE_Defs.discoveryFleetsLevel + 1), 1f, 10f);
+			return (int)Mathf.Clamp(Mathf.Max((GetPlayerTechLevel() + GetSectorTechLevel()) / 2f + 0.49999f + (FFU_BE_Defs.GetDifficultyIntValue() - 1), FFU_BE_Defs.discoveryFleetsLevel + 1), 1f, 10f);
 		}
 		public static string GetCraftChanceText() {
 			float researchValue = FFU_BE_Defs.researchProgress;
-			if (researchValue > FFU_BE_Defs.techLevel[0] && researchValue <= FFU_BE_Defs.techLevel[1]) {
+			if (researchValue > (int)Core.TechLevel.T1 && researchValue <= (int)Core.TechLevel.T2) {
 				return "MK-I: " + string.Format("{0:0}", GetPrevTierChance(researchValue) * 100f) + "% / " + "MK-II: " + string.Format("{0:0}", GetNextTierChance(researchValue) * 100f) + "%";
-			} else if (researchValue > FFU_BE_Defs.techLevel[1] && researchValue <= FFU_BE_Defs.techLevel[2]) {
+			} else if (researchValue > (int)Core.TechLevel.T2 && researchValue <= (int)Core.TechLevel.T3) {
 				return "MK-II: " + string.Format("{0:0}", GetPrevTierChance(researchValue) * 100f) + "% / " + "MK-III: " + string.Format("{0:0}", GetNextTierChance(researchValue) * 100f) + "%";
-			} else if (researchValue > FFU_BE_Defs.techLevel[2] && researchValue <= FFU_BE_Defs.techLevel[3]) {
+			} else if (researchValue > (int)Core.TechLevel.T3 && researchValue <= (int)Core.TechLevel.T4) {
 				return "MK-III: " + string.Format("{0:0}", GetPrevTierChance(researchValue) * 100f) + "% / " + "MK-IV: " + string.Format("{0:0}", GetNextTierChance(researchValue) * 100f) + "%";
-			} else if (researchValue > FFU_BE_Defs.techLevel[3] && researchValue <= FFU_BE_Defs.techLevel[4]) {
+			} else if (researchValue > (int)Core.TechLevel.T4 && researchValue <= (int)Core.TechLevel.T5) {
 				return "MK-IV: " + string.Format("{0:0}", GetPrevTierChance(researchValue) * 100f) + "% / " + "MK-V: " + string.Format("{0:0}", GetNextTierChance(researchValue) * 100f) + "%";
-			} else if (researchValue > FFU_BE_Defs.techLevel[4] && researchValue <= FFU_BE_Defs.techLevel[5]) {
+			} else if (researchValue > (int)Core.TechLevel.T5 && researchValue <= (int)Core.TechLevel.T6) {
 				return "MK-V: " + string.Format("{0:0}", GetPrevTierChance(researchValue) * 100f) + "% / " + "MK-VI: " + string.Format("{0:0}", GetNextTierChance(researchValue) * 100f) + "%";
-			} else if (researchValue > FFU_BE_Defs.techLevel[5] && researchValue <= FFU_BE_Defs.techLevel[6]) {
+			} else if (researchValue > (int)Core.TechLevel.T6 && researchValue <= (int)Core.TechLevel.T7) {
 				return "MK-VI: " + string.Format("{0:0}", GetPrevTierChance(researchValue) * 100f) + "% / " + "MK-VII: " + string.Format("{0:0}", GetNextTierChance(researchValue) * 100f) + "%";
-			} else if (researchValue > FFU_BE_Defs.techLevel[6] && researchValue <= FFU_BE_Defs.techLevel[7]) {
+			} else if (researchValue > (int)Core.TechLevel.T7 && researchValue <= (int)Core.TechLevel.T8) {
 				return "MK-VII: " + string.Format("{0:0}", GetPrevTierChance(researchValue) * 100f) + "% / " + "MK-VIII: " + string.Format("{0:0}", GetNextTierChance(researchValue) * 100f) + "%";
-			} else if (researchValue > FFU_BE_Defs.techLevel[7] && researchValue <= FFU_BE_Defs.techLevel[8]) {
+			} else if (researchValue > (int)Core.TechLevel.T8 && researchValue <= (int)Core.TechLevel.T9) {
 				return "MK-VIII: " + string.Format("{0:0}", GetPrevTierChance(researchValue) * 100f) + "% / " + "MK-IX: " + string.Format("{0:0}", GetNextTierChance(researchValue) * 100f) + "%";
-			} else if (researchValue > FFU_BE_Defs.techLevel[8] && researchValue <= FFU_BE_Defs.techLevel[9]) {
+			} else if (researchValue > (int)Core.TechLevel.T9 && researchValue <= (int)Core.TechLevel.TX) {
 				return "MK-IX: " + string.Format("{0:0}", GetPrevTierChance(researchValue) * 100f) + "% / " + "MK-X: " + string.Format("{0:0}", GetNextTierChance(researchValue) * 100f) + "%";
-			} else if (researchValue > FFU_BE_Defs.techLevel[9]) return "MK-IX: 0% / MK-X: 100%";
+			} else if (researchValue > (int)Core.TechLevel.TX) return "MK-IX: 0% / MK-X: 100%";
 			return "MK-I: 100% / MK-II: 0%";
 		}
 		public static float GetPrevTierChance(float researchValue) {
-			if (researchValue > FFU_BE_Defs.techLevel[0] && researchValue <= FFU_BE_Defs.techLevel[1]) {
-				return 1 - (researchValue - FFU_BE_Defs.techLevel[0]) / (FFU_BE_Defs.techLevel[1] - FFU_BE_Defs.techLevel[0]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[1] && researchValue <= FFU_BE_Defs.techLevel[2]) {
-				return 1 - (researchValue - FFU_BE_Defs.techLevel[1]) / (FFU_BE_Defs.techLevel[2] - FFU_BE_Defs.techLevel[1]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[2] && researchValue <= FFU_BE_Defs.techLevel[3]) {
-				return 1 - (researchValue - FFU_BE_Defs.techLevel[2]) / (FFU_BE_Defs.techLevel[3] - FFU_BE_Defs.techLevel[2]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[3] && researchValue <= FFU_BE_Defs.techLevel[4]) {
-				return 1 - (researchValue - FFU_BE_Defs.techLevel[3]) / (FFU_BE_Defs.techLevel[4] - FFU_BE_Defs.techLevel[3]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[4] && researchValue <= FFU_BE_Defs.techLevel[5]) {
-				return 1 - (researchValue - FFU_BE_Defs.techLevel[4]) / (FFU_BE_Defs.techLevel[5] - FFU_BE_Defs.techLevel[4]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[5] && researchValue <= FFU_BE_Defs.techLevel[6]) {
-				return 1 - (researchValue - FFU_BE_Defs.techLevel[5]) / (FFU_BE_Defs.techLevel[6] - FFU_BE_Defs.techLevel[5]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[6] && researchValue <= FFU_BE_Defs.techLevel[7]) {
-				return 1 - (researchValue - FFU_BE_Defs.techLevel[6]) / (FFU_BE_Defs.techLevel[7] - FFU_BE_Defs.techLevel[6]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[7] && researchValue <= FFU_BE_Defs.techLevel[8]) {
-				return 1 - (researchValue - FFU_BE_Defs.techLevel[7]) / (FFU_BE_Defs.techLevel[8] - FFU_BE_Defs.techLevel[7]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[8] && researchValue <= FFU_BE_Defs.techLevel[9]) {
-				return 1 - (researchValue - FFU_BE_Defs.techLevel[8]) / (FFU_BE_Defs.techLevel[9] - FFU_BE_Defs.techLevel[8]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[9]) return 0f;
+			if (researchValue > (int)Core.TechLevel.T1 && researchValue <= (int)Core.TechLevel.T2) {
+				return 1 - (researchValue - (int)Core.TechLevel.T1) / ((int)Core.TechLevel.T2 - (int)Core.TechLevel.T1);
+			} else if (researchValue > (int)Core.TechLevel.T2 && researchValue <= (int)Core.TechLevel.T3) {
+				return 1 - (researchValue - (int)Core.TechLevel.T2) / ((int)Core.TechLevel.T3 - (int)Core.TechLevel.T2);
+			} else if (researchValue > (int)Core.TechLevel.T3 && researchValue <= (int)Core.TechLevel.T4) {
+				return 1 - (researchValue - (int)Core.TechLevel.T3) / ((int)Core.TechLevel.T4 - (int)Core.TechLevel.T3);
+			} else if (researchValue > (int)Core.TechLevel.T4 && researchValue <= (int)Core.TechLevel.T5) {
+				return 1 - (researchValue - (int)Core.TechLevel.T4) / ((int)Core.TechLevel.T5 - (int)Core.TechLevel.T4);
+			} else if (researchValue > (int)Core.TechLevel.T5 && researchValue <= (int)Core.TechLevel.T6) {
+				return 1 - (researchValue - (int)Core.TechLevel.T5) / ((int)Core.TechLevel.T6 - (int)Core.TechLevel.T5);
+			} else if (researchValue > (int)Core.TechLevel.T6 && researchValue <= (int)Core.TechLevel.T7) {
+				return 1 - (researchValue - (int)Core.TechLevel.T6) / ((int)Core.TechLevel.T7 - (int)Core.TechLevel.T6);
+			} else if (researchValue > (int)Core.TechLevel.T7 && researchValue <= (int)Core.TechLevel.T8) {
+				return 1 - (researchValue - (int)Core.TechLevel.T7) / ((int)Core.TechLevel.T8 - (int)Core.TechLevel.T7);
+			} else if (researchValue > (int)Core.TechLevel.T8 && researchValue <= (int)Core.TechLevel.T9) {
+				return 1 - (researchValue - (int)Core.TechLevel.T8) / ((int)Core.TechLevel.T9 - (int)Core.TechLevel.T8);
+			} else if (researchValue > (int)Core.TechLevel.T9 && researchValue <= (int)Core.TechLevel.TX) {
+				return 1 - (researchValue - (int)Core.TechLevel.T9) / ((int)Core.TechLevel.TX - (int)Core.TechLevel.T9);
+			} else if (researchValue > (int)Core.TechLevel.TX) return 0f;
 			return 1f;
 		}
 		public static float GetNextTierChance(float researchValue) {
-			if (researchValue > FFU_BE_Defs.techLevel[0] && researchValue <= FFU_BE_Defs.techLevel[1]) {
-				return (researchValue - FFU_BE_Defs.techLevel[0]) / (FFU_BE_Defs.techLevel[1] - FFU_BE_Defs.techLevel[0]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[1] && researchValue <= FFU_BE_Defs.techLevel[2]) {
-				return (researchValue - FFU_BE_Defs.techLevel[1]) / (FFU_BE_Defs.techLevel[2] - FFU_BE_Defs.techLevel[1]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[2] && researchValue <= FFU_BE_Defs.techLevel[3]) {
-				return (researchValue - FFU_BE_Defs.techLevel[2]) / (FFU_BE_Defs.techLevel[3] - FFU_BE_Defs.techLevel[2]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[3] && researchValue <= FFU_BE_Defs.techLevel[4]) {
-				return (researchValue - FFU_BE_Defs.techLevel[3]) / (FFU_BE_Defs.techLevel[4] - FFU_BE_Defs.techLevel[3]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[4] && researchValue <= FFU_BE_Defs.techLevel[5]) {
-				return (researchValue - FFU_BE_Defs.techLevel[4]) / (FFU_BE_Defs.techLevel[5] - FFU_BE_Defs.techLevel[4]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[5] && researchValue <= FFU_BE_Defs.techLevel[6]) {
-				return (researchValue - FFU_BE_Defs.techLevel[5]) / (FFU_BE_Defs.techLevel[6] - FFU_BE_Defs.techLevel[5]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[6] && researchValue <= FFU_BE_Defs.techLevel[7]) {
-				return (researchValue - FFU_BE_Defs.techLevel[6]) / (FFU_BE_Defs.techLevel[7] - FFU_BE_Defs.techLevel[6]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[7] && researchValue <= FFU_BE_Defs.techLevel[8]) {
-				return (researchValue - FFU_BE_Defs.techLevel[7]) / (FFU_BE_Defs.techLevel[8] - FFU_BE_Defs.techLevel[7]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[8] && researchValue <= FFU_BE_Defs.techLevel[9]) {
-				return (researchValue - FFU_BE_Defs.techLevel[8]) / (FFU_BE_Defs.techLevel[9] - FFU_BE_Defs.techLevel[8]);
-			} else if (researchValue > FFU_BE_Defs.techLevel[9]) return 1f;
+			if (researchValue > (int)Core.TechLevel.T1 && researchValue <= (int)Core.TechLevel.T2) {
+				return (researchValue - (int)Core.TechLevel.T1) / ((int)Core.TechLevel.T2 - (int)Core.TechLevel.T1);
+			} else if (researchValue > (int)Core.TechLevel.T2 && researchValue <= (int)Core.TechLevel.T3) {
+				return (researchValue - (int)Core.TechLevel.T2) / ((int)Core.TechLevel.T3 - (int)Core.TechLevel.T2);
+			} else if (researchValue > (int)Core.TechLevel.T3 && researchValue <= (int)Core.TechLevel.T4) {
+				return (researchValue - (int)Core.TechLevel.T3) / ((int)Core.TechLevel.T4 - (int)Core.TechLevel.T3);
+			} else if (researchValue > (int)Core.TechLevel.T4 && researchValue <= (int)Core.TechLevel.T5) {
+				return (researchValue - (int)Core.TechLevel.T4) / ((int)Core.TechLevel.T5 - (int)Core.TechLevel.T4);
+			} else if (researchValue > (int)Core.TechLevel.T5 && researchValue <= (int)Core.TechLevel.T6) {
+				return (researchValue - (int)Core.TechLevel.T5) / ((int)Core.TechLevel.T6 - (int)Core.TechLevel.T5);
+			} else if (researchValue > (int)Core.TechLevel.T6 && researchValue <= (int)Core.TechLevel.T7) {
+				return (researchValue - (int)Core.TechLevel.T6) / ((int)Core.TechLevel.T7 - (int)Core.TechLevel.T6);
+			} else if (researchValue > (int)Core.TechLevel.T7 && researchValue <= (int)Core.TechLevel.T8) {
+				return (researchValue - (int)Core.TechLevel.T7) / ((int)Core.TechLevel.T8 - (int)Core.TechLevel.T7);
+			} else if (researchValue > (int)Core.TechLevel.T8 && researchValue <= (int)Core.TechLevel.T9) {
+				return (researchValue - (int)Core.TechLevel.T8) / ((int)Core.TechLevel.T9 - (int)Core.TechLevel.T8);
+			} else if (researchValue > (int)Core.TechLevel.T9 && researchValue <= (int)Core.TechLevel.TX) {
+				return (researchValue - (int)Core.TechLevel.T9) / ((int)Core.TechLevel.TX - (int)Core.TechLevel.T9);
+			} else if (researchValue > (int)Core.TechLevel.TX) return 1f;
 			return 0f;
 		}
 		public static int GetCraftedTier() {
 			float researchValue = FFU_BE_Defs.researchProgress;
-			if (researchValue > FFU_BE_Defs.techLevel[0] && researchValue <= FFU_BE_Defs.techLevel[1]) {
-				float prevTierChance = (researchValue - FFU_BE_Defs.techLevel[0]) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
-				float nextTierChance = (researchValue - FFU_BE_Defs.techLevel[0]) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
+			if (researchValue > (int)Core.TechLevel.T1 && researchValue <= (int)Core.TechLevel.T2) {
+				float prevTierChance = (researchValue - (int)Core.TechLevel.T1) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
+				float nextTierChance = (researchValue - (int)Core.TechLevel.T1) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
 				return (nextTierChance > prevTierChance) ? 2 : 1;
-			} else if (researchValue > FFU_BE_Defs.techLevel[1] && researchValue <= FFU_BE_Defs.techLevel[2]) {
-				float prevTierChance = (researchValue - FFU_BE_Defs.techLevel[1]) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
-				float nextTierChance = (researchValue - FFU_BE_Defs.techLevel[1]) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
+			} else if (researchValue > (int)Core.TechLevel.T2 && researchValue <= (int)Core.TechLevel.T3) {
+				float prevTierChance = (researchValue - (int)Core.TechLevel.T2) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
+				float nextTierChance = (researchValue - (int)Core.TechLevel.T2) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
 				return (nextTierChance > prevTierChance) ? 3 : 2;
-			} else if (researchValue > FFU_BE_Defs.techLevel[2] && researchValue <= FFU_BE_Defs.techLevel[3]) {
-				float prevTierChance = (researchValue - FFU_BE_Defs.techLevel[2]) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
-				float nextTierChance = (researchValue - FFU_BE_Defs.techLevel[2]) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
+			} else if (researchValue > (int)Core.TechLevel.T3 && researchValue <= (int)Core.TechLevel.T4) {
+				float prevTierChance = (researchValue - (int)Core.TechLevel.T3) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
+				float nextTierChance = (researchValue - (int)Core.TechLevel.T3) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
 				return (nextTierChance > prevTierChance) ? 4 : 3;
-			} else if (researchValue > FFU_BE_Defs.techLevel[3] && researchValue <= FFU_BE_Defs.techLevel[4]) {
-				float prevTierChance = (researchValue - FFU_BE_Defs.techLevel[3]) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
-				float nextTierChance = (researchValue - FFU_BE_Defs.techLevel[3]) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
+			} else if (researchValue > (int)Core.TechLevel.T4 && researchValue <= (int)Core.TechLevel.T5) {
+				float prevTierChance = (researchValue - (int)Core.TechLevel.T4) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
+				float nextTierChance = (researchValue - (int)Core.TechLevel.T4) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
 				return (nextTierChance > prevTierChance) ? 5 : 4;
-			} else if (researchValue > FFU_BE_Defs.techLevel[4] && researchValue <= FFU_BE_Defs.techLevel[5]) {
-				float prevTierChance = (researchValue - FFU_BE_Defs.techLevel[4]) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
-				float nextTierChance = (researchValue - FFU_BE_Defs.techLevel[4]) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
+			} else if (researchValue > (int)Core.TechLevel.T5 && researchValue <= (int)Core.TechLevel.T6) {
+				float prevTierChance = (researchValue - (int)Core.TechLevel.T5) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
+				float nextTierChance = (researchValue - (int)Core.TechLevel.T5) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
 				return (nextTierChance > prevTierChance) ? 6 : 5;
-			} else if (researchValue > FFU_BE_Defs.techLevel[5] && researchValue <= FFU_BE_Defs.techLevel[6]) {
-				float prevTierChance = (researchValue - FFU_BE_Defs.techLevel[5]) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
-				float nextTierChance = (researchValue - FFU_BE_Defs.techLevel[5]) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
+			} else if (researchValue > (int)Core.TechLevel.T6 && researchValue <= (int)Core.TechLevel.T7) {
+				float prevTierChance = (researchValue - (int)Core.TechLevel.T6) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
+				float nextTierChance = (researchValue - (int)Core.TechLevel.T6) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
 				return (nextTierChance > prevTierChance) ? 7 : 6;
-			} else if (researchValue > FFU_BE_Defs.techLevel[6] && researchValue <= FFU_BE_Defs.techLevel[7]) {
-				float prevTierChance = (researchValue - FFU_BE_Defs.techLevel[6]) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
-				float nextTierChance = (researchValue - FFU_BE_Defs.techLevel[6]) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
+			} else if (researchValue > (int)Core.TechLevel.T7 && researchValue <= (int)Core.TechLevel.T8) {
+				float prevTierChance = (researchValue - (int)Core.TechLevel.T7) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
+				float nextTierChance = (researchValue - (int)Core.TechLevel.T7) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
 				return (nextTierChance > prevTierChance) ? 8 : 7;
-			} else if (researchValue > FFU_BE_Defs.techLevel[7] && researchValue <= FFU_BE_Defs.techLevel[8]) {
-				float prevTierChance = (researchValue - FFU_BE_Defs.techLevel[7]) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
-				float nextTierChance = (researchValue - FFU_BE_Defs.techLevel[7]) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
+			} else if (researchValue > (int)Core.TechLevel.T8 && researchValue <= (int)Core.TechLevel.T9) {
+				float prevTierChance = (researchValue - (int)Core.TechLevel.T8) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
+				float nextTierChance = (researchValue - (int)Core.TechLevel.T8) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
 				return (nextTierChance > prevTierChance) ? 9 : 8;
-			} else if (researchValue > FFU_BE_Defs.techLevel[8] && researchValue <= FFU_BE_Defs.techLevel[9]) {
-				float prevTierChance = (researchValue - FFU_BE_Defs.techLevel[8]) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
-				float nextTierChance = (researchValue - FFU_BE_Defs.techLevel[8]) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
+			} else if (researchValue > (int)Core.TechLevel.T9 && researchValue <= (int)Core.TechLevel.TX) {
+				float prevTierChance = (researchValue - (int)Core.TechLevel.T9) * GetPrevTierChance(researchValue) * Random.Range(0f, 1f);
+				float nextTierChance = (researchValue - (int)Core.TechLevel.T9) * GetNextTierChance(researchValue) * Random.Range(0f, 1f);
 				return (nextTierChance > prevTierChance) ? 10 : 9;
-			} else if (researchValue > FFU_BE_Defs.techLevel[9]) return 10;
+			} else if (researchValue > (int)Core.TechLevel.TX) return 10;
 			return 1;
 		}
 		public static void SetModuleModifier(ShipModule shipModule, int moduleTier, Core.BonusMod moduleMod = Core.BonusMod.None) {
@@ -1040,7 +1049,7 @@ namespace FFU_Bleeding_Edge {
 				default: return;
 			}
 			var refModuleMaxHealth = AccessTools.FieldRefAccess<ShipModule, int>(refModule, "maxHealth");
-			var healthLossModifier =  Mathf.Max(Mathf.Pow(1 - FFU_BE_Defs.permanentModuleDamagePercent * FFU_BE_Defs.GetDifficultyModifier(), shipModule.MaxHealthLostCount), 0.05f);
+			var healthLossModifier =  Mathf.Max(Mathf.Pow(1 - FFU_BE_Defs.permanentModuleDamagePercent * FFU_BE_Defs.GetDifficultyFloatValue(), shipModule.MaxHealthLostCount), 0.05f);
 			if (shipModule.powerConsumed > 0) shipModule.powerConsumed = Mathf.RoundToInt(refModule.powerConsumed * GetTierBonus(moduleTier, Core.BonusType.Reduced));
 			if (!FFU_BE_Defs.IsStaticModuleType(shipModule)) AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = Mathf.RoundToInt(refModuleMaxHealth * GetTierBonus(moduleTier, Core.BonusType.Default) * healthLossModifier);
 			switch (moduleMofidier) {
@@ -1276,7 +1285,7 @@ namespace RST {
 			}
 			if (ship != null && ship.Ownership.GetOwner() == Ownership.Owner.Enemy && !FFU_BE_Defs.updatedShips.Contains(ship.InstanceId)) {
 				int enemyTechLevel = FFU_BE_Mod_Technology.GetEnemyTechLevel();
-				int newDoorHealth = (int)(35 * FFU_BE_Defs.GetDifficultyModifier() * enemyTechLevel);
+				int newDoorHealth = (int)(35 * FFU_BE_Defs.GetDifficultyFloatValue() * enemyTechLevel);
 				foreach (Door shipDoor in ship.Doors) {
 					shipDoor.displayName = "Sturdy Door " + FFU_BE_Mod_Technology.GetTierCodeText(enemyTechLevel);
 					AccessTools.FieldRefAccess<Door, int>(shipDoor, "maxHealth") = newDoorHealth;
@@ -1287,22 +1296,22 @@ namespace RST {
 					FFU_BE_Mod_Technology.GetTierCodeText(Mathf.Clamp(enemyTechLevel + 1, 1, 10)) + " range...");
 				ship.MaxHealthAdd = Mathf.RoundToInt(ship.MaxHealthAdd * FFU_BE_Defs.enemyShipHullHealthMult * (Sector.Instance != null ? 0.5f + enemyTechLevel / 2f : 1f));
 				if (Sector.Instance != null) {
-					int currentSector = Sector.Instance.number;
-					bool shipHasShieldGen = ship.Modules.Find(x => x.type == ShipModule.Type.ShieldGen && x.displayName.Contains("Generator")) != null ? true : false;
-					bool shipHasPointDef = ship.Modules.Find(x => x.type == ShipModule.Type.PointDefence) != null ? true : false;
-					bool shipHasECM = ship.Modules.Find(x => x.type == ShipModule.Type.PassiveECM) != null ? true : false;
-					bool shipHasAccuracy = ship.Modules.Find(x => x.type == ShipModule.Type.StealthDecryptor) != null ? true : false;
-					bool shipHasLab = ship.Modules.Find(x => x.type == ShipModule.Type.ResearchLab) != null ? true : false;
-					bool shipHasGarden = ship.Modules.Find(x => x.type == ShipModule.Type.Garden) != null ? true : false;
-					bool shipHasCryoBay = ship.Modules.Find(x => x.type == ShipModule.Type.Cryosleep) != null ? true : false;
-					bool shipHasHealthBay = ship.Modules.Find(x => x.type == ShipModule.Type.Dronebay || x.type == ShipModule.Type.Medbay) != null ? true : false;
-					bool shipHasFactory = ship.Modules.Find(x => x.type == ShipModule.Type.MaterialsConverter) != null ? true : false;
+					int sectorTechLevel = Mathf.Clamp(Mathf.RoundToInt(Sector.Instance.number + (FFU_BE_Defs.GetDifficultyIntValue() / 2.9999f)), 1, 10);
+					bool shipHasShieldGen = ship.Modules.Find(x => x.type == ShipModule.Type.ShieldGen && x.displayName.Contains("Generator")) != null;
+					bool shipHasPointDef = ship.Modules.Find(x => x.type == ShipModule.Type.PointDefence) != null;
+					bool shipHasECM = ship.Modules.Find(x => x.type == ShipModule.Type.PassiveECM) != null;
+					bool shipHasAccuracy = ship.Modules.Find(x => x.type == ShipModule.Type.StealthDecryptor) != null;
+					bool shipHasLab = ship.Modules.Find(x => x.type == ShipModule.Type.ResearchLab) != null;
+					bool shipHasGarden = ship.Modules.Find(x => x.type == ShipModule.Type.Garden) != null;
+					bool shipHasCryoBay = ship.Modules.Find(x => x.type == ShipModule.Type.Cryosleep) != null;
+					bool shipHasHealthBay = ship.Modules.Find(x => x.type == ShipModule.Type.Dronebay || x.type == ShipModule.Type.Medbay) != null;
+					bool shipHasFactory = ship.Modules.Find(x => x.type == ShipModule.Type.MaterialsConverter) != null;
 					foreach (ModuleSlotRoot moduleSlotRoot in ship.ModuleSlotRoots.ToList()) {
 						if (FFU_BE_Defs.visualDebug) moduleSlotRoot.Slot.displayName = ship.ModuleSlotRoots.ToList().IndexOf(moduleSlotRoot) + ": " + moduleSlotRoot.Slot.displayName;
 						if (moduleSlotRoot.Module != null) {
-							if (!FFU_BE_Defs.ModuleViableForSector(moduleSlotRoot.Module, currentSector)) {
+							if (!FFU_BE_Defs.ModuleViableForSector(moduleSlotRoot.Module, sectorTechLevel)) {
 								int prevTier = (int)FFU_BE_Mod_Technology.GetModuleTier(moduleSlotRoot.Module);
-								var replacementModulePrefab = FFU_BE_Defs.GetReplacementModule(moduleSlotRoot.Module, currentSector);
+								var replacementModulePrefab = FFU_BE_Defs.GetReplacementModule(moduleSlotRoot.Module, sectorTechLevel);
 								if (replacementModulePrefab != null) {
 									moduleSlotRoot.Module.gameObject.Destroy();
 									FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(replacementModulePrefab, moduleSlotRoot);
@@ -1321,46 +1330,46 @@ namespace RST {
 							AuxTypesList.Add("Armor");
 							var rolledAuxType = Core.RandomItemFromList(AuxTypesList, "Armor");
 							if (moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.Weapon_Nuke)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Weapon_Nuke, currentSector);
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Weapon_Nuke, sectorTechLevel);
 								if (newModulePrefab != null) FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot);
 							} else if (moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.Weapon)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Weapon, currentSector);
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Weapon, sectorTechLevel);
 								if (newModulePrefab != null) FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot);
 							} else if (!shipHasPointDef && moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.PointDefence)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.PointDefence, currentSector);
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.PointDefence, sectorTechLevel);
 								if (newModulePrefab != null) { FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot); shipHasPointDef = true; }
 							} else if (!shipHasShieldGen && moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.ShieldGen)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.ShieldGen, currentSector, "Generator");
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.ShieldGen, sectorTechLevel, "Generator");
 								if (newModulePrefab != null) { FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot); shipHasShieldGen = true; }
 							} else if (rolledAuxType == "ECM" && !shipHasECM && moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.PassiveECM)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.PassiveECM, currentSector);
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.PassiveECM, sectorTechLevel);
 								if (newModulePrefab != null) { FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot); shipHasECM = true; }
 							} else if (rolledAuxType == "Accuracy" && !shipHasAccuracy && moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.StealthDecryptor)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.StealthDecryptor, currentSector);
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.StealthDecryptor, sectorTechLevel);
 								if (newModulePrefab != null) { FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot); shipHasAccuracy = true; }
 							} else if (rolledAuxType == "Lab" && !shipHasLab && moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.ResearchLab)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.ResearchLab, currentSector);
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.ResearchLab, sectorTechLevel);
 								if (newModulePrefab != null) { FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot); shipHasLab = true; }
 							} else if (rolledAuxType == "Garden" && !shipHasGarden && moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.Garden)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Garden, currentSector);
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Garden, sectorTechLevel);
 								if (newModulePrefab != null) { FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot); shipHasGarden = true; }
 							} else if (rolledAuxType == "CryoBay" && !shipHasCryoBay && moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.Cryosleep)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Cryosleep, currentSector);
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Cryosleep, sectorTechLevel);
 								if (newModulePrefab != null) { FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot); shipHasCryoBay = true; }
 							} else if (rolledAuxType == "Health" && !shipHasHealthBay && (moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.Medbay) || moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.Dronebay))) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Medbay, currentSector);
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Medbay, sectorTechLevel);
 								if (newModulePrefab != null) { FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot); shipHasHealthBay = true; }
 							} else if (rolledAuxType == "Factory" && !shipHasFactory && moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.MaterialsConverter)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.MaterialsConverter, currentSector);
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.MaterialsConverter, sectorTechLevel);
 								if (newModulePrefab != null) { FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot); shipHasFactory = true; }
 							} else if (rolledAuxType == "Shield" && moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.ShieldGen)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.ShieldGen, currentSector, "Capacitor");
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.ShieldGen, sectorTechLevel, "Capacitor");
 								if (newModulePrefab != null) FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot);
 							} else if (rolledAuxType == "Armor" && moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.Integrity)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Integrity, currentSector);
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Integrity, sectorTechLevel);
 								if (newModulePrefab != null) FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot);
 							} else if (moduleSlotRoot.Slot.acceptedModuleTypes.Contains(ShipModule.Type.Storage)) {
-								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Other, currentSector);
+								var newModulePrefab = FFU_BE_Defs.GetRandomModuleType(ShipModule.Type.Other, sectorTechLevel);
 								if (newModulePrefab != null) FFU_BE_Mod_Technology.InstantiateNewModuleInSlot(newModulePrefab, moduleSlotRoot);
 							}
 						}
@@ -1487,7 +1496,7 @@ namespace RST.PlaymakerAction {
 				}
 				if (spaceShip.Ownership.GetOwner() == Ownership.Owner.Enemy) {
 					int enemyTechLevel = FFU_BE_Mod_Technology.GetEnemyTechLevel();
-					int newDoorHealth = (int)(35 * FFU_BE_Defs.GetDifficultyModifier() * enemyTechLevel);
+					int newDoorHealth = (int)(35 * FFU_BE_Defs.GetDifficultyFloatValue() * enemyTechLevel);
 					foreach (Door shipDoor in spaceShip.Doors) {
 						shipDoor.displayName = $"Section Door {FFU_BE_Mod_Technology.GetTierCodeText(enemyTechLevel)}";
 						AccessTools.FieldRefAccess<Door, int>(shipDoor, "maxHealth") = newDoorHealth;

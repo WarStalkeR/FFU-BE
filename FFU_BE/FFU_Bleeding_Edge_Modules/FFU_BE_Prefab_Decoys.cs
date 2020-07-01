@@ -8,6 +8,7 @@ namespace FFU_Bleeding_Edge {
 			int idx = 0;
 			if (moduleName == "shield decoy 1") return idx; idx++;
 			if (moduleName == "weapondecoy1") return idx; idx++;
+			if (moduleName == "weapondecoy_alien") return idx; idx++;
 			return idx + 100;
 		}
 		public static void UpdateDecoyModule(ShipModule shipModule, bool initItemData) {

@@ -246,6 +246,12 @@ namespace RST {
 		}
 	}
 	public class patch_WorldRules : WorldRules {
+		public class patch_ImpermanentRules : ImpermanentRules {
+		/// Custom Difficulty Settings
+			public bool PauseDisabled => FFU_BE_Defs.GetDifficultyAllowPause();
+			public bool PlayerShipsTakeMaxHpDamage => FFU_BE_Defs.GetDifficultyAllowSurvive();
+			public bool playerModulesTakeMaxHpDamage => FFU_BE_Defs.GetDifficultyAllowCrits();
+		}
 		[MonoModReplace] public float GetFireChancePercent(ShootAtDamageDealer.FireChanceLevel level) {
 		/// Alternative Fire Chance Levels
 			switch (level) {

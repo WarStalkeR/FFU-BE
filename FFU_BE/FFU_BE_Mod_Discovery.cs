@@ -114,7 +114,7 @@ namespace FFU_Bleeding_Edge {
 						ambusherFleet.speed = PlayerDatas.Me.GetCurrentStarmapSpeed(null) * 1.1f;
 						ambusherFleet.name += "MustExpireAfterMeeting";
 						if (playerFleet.warpAudioClip != null) ambusherFleet.AI.AudioSource.PlayOneShot(playerFleet.warpAudioClip);
-						foreach (TimePanelControls timePanelControls in Resources.FindObjectsOfTypeAll<TimePanelControls>()) if (WorldRules.Impermanent.ironman) Delegated.dDoSlowMotion(timePanelControls); else Delegated.dDoPause(timePanelControls);
+						foreach (TimePanelControls tPanel in Resources.FindObjectsOfTypeAll<TimePanelControls>()) if (FFU_BE_Defs.GetDifficultyAllowPause()) (tPanel as patch_TimePanelControls).SetPause(); else (tPanel as patch_TimePanelControls).SetSlowMo();
 						StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, "Warning! You've drawn too much attention from local forces! Enemy interdiction fleet has warped in and pursuing us at high speed!");
 						if (FFU_BE_Defs.debugMode) Debug.LogWarning("Hostile fleet came to intercept player's fleet at Hostile Awareness Level " + string.Format("{0:0}", FFU_BE_Defs.distanceTraveledInPeace));
 						FFU_BE_Defs.timesInterceptedByEnforcers[sectorInstance.number - 1]++;
@@ -483,6 +483,29 @@ namespace RST {
 	}
 	public class patch_ResearchModule : ResearchModule {
 		[MonoModIgnore] private ResourceValueGroup gen;
+		private PlayerData pData => PlayerDatas.Get(Module.Ownership.GetOwner());
+		private ResourceValueGroup passiveStored = ResourceValueGroup.Empty;
+		private float passiveProductionTimer = 0f;
+		private float passiveTimer = 0f;
+		private extern void orig_Update();
+		private void Update() {
+		/// Implement Passive Resource Production
+			orig_Update();
+			if (IsProducingPerDistance) {
+				passiveProductionTimer += Time.deltaTime;
+				passiveTimer += Time.deltaTime;
+				if (passiveTimer >= 1f) {
+					passiveStored += ProducedPerDistance;
+					passiveTimer = 0f;
+				}
+				if (passiveProductionTimer >= 10f) {
+					if (pData != null) {
+						FFU_BE_Defs.ProduceResources(pData, ref passiveStored, "laboratory passive production");
+						passiveProductionTimer = 0f;
+					}
+				}
+			}
+		}
 		public void AddDistanceTravelled(float delta) {
 		/// Generate research points if not Jammed
 			if (IsProducingPerDistance) {
@@ -503,6 +526,29 @@ namespace RST {
 		}
 	}
 	public class patch_GardenModule : GardenModule {
+		private PlayerData pData => PlayerDatas.Get(Module.Ownership.GetOwner());
+		private ResourceValueGroup passiveStored = ResourceValueGroup.Empty;
+		private float passiveProductionTimer = 0f;
+		private float passiveTimer = 0f;
+		private extern void orig_Update();
+		private void Update() {
+		/// Implement Passive Resource Production
+			orig_Update();
+			if (IsProducingPerDistance) {
+				passiveProductionTimer += Time.deltaTime;
+				passiveTimer += Time.deltaTime;
+				if (passiveTimer >= 1f) {
+					passiveStored += ProducedPerDistance;
+					passiveTimer = 0f;
+				}
+				if (passiveProductionTimer >= 10f) {
+					if (pData != null) {
+						FFU_BE_Defs.ProduceResources(pData, ref passiveStored, "greenhouse passive production");
+						passiveProductionTimer = 0f;
+					}
+				}
+			}
+		}
 		public ResourceValueGroup ProducedPerDistance {
 		/// Allow Greenhouse Modules to Produce All Types
 			get {

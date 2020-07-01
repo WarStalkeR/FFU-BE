@@ -2543,7 +2543,6 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").gameObject }},
 						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 1B").gameObject }}};
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
@@ -2977,8 +2976,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-25000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 1B").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").gameObject }}};
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
 							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel container 2").gameObject },
@@ -3506,14 +3504,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").gameObject }},
 						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").gameObject }},
 						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon monolith missile x1").gameObject }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+1x {Core.TT("Packed")} {perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName}" };
-					perk.menuSprite = perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().image;
+						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}" };
+					perk.menuSprite = perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().image;
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 5;
 					break;
@@ -3974,19 +3970,19 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 1B").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "ECM 02 terran").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Stealth decryptor 2 new human tec").gameObject }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "5 Human PD").gameObject }}};
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
 							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "dream recorder 2").gameObject },
 							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }}};
 					perk.randomizerMenuStrings = new string[]{
-						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+1x {Core.TT("Packed")} {perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+1x {Core.TT("Packed")} {perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName}",
+						$"+1x {Core.TT("Packed")} {perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
 					perk.isUnlockedByDefault = true;
@@ -4217,12 +4213,9 @@ namespace FFU_Bleeding_Edge {
 						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }},
 						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }},
 						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 1B").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator tiger").gameObject }}};
 					perk.randomizerMenuStrings = new string[]{
-						$"+{Core.TT("Packed Storages/Factories Set")}",
+						$"+{Core.TT("Packed Storages & State-of-Art Factory")}",
 						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+1x {Core.TT("Packed")} {perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
@@ -4733,7 +4726,7 @@ namespace RST {
 					}
 					if (owner == Ownership.Owner.Me && me != null && WorldRules.Impermanent.beginnerStartingBonus) {
 						WorldRules.StartingBonus beginnerStartingBonus = WorldRules.Instance.beginnerStartingBonus;
-						float startingBonusMult = FFU_BE_Defs.GetStartingModDiffMult();
+						float startingBonusMult = FFU_BE_Defs.GetDifficultyStartMod();
 						accuracyPercentAdd += Mathf.RoundToInt(beginnerStartingBonus.accuracyBonusPercent * startingBonusMult);
 						evasionPercentAdd += Mathf.RoundToInt(beginnerStartingBonus.evasionBonusPercent * startingBonusMult);
 						deflectChance += Mathf.RoundToInt(beginnerStartingBonus.deflectionBonusPercent * 0.01f * startingBonusMult);

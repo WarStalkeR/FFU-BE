@@ -152,6 +152,7 @@ namespace FFU_Bleeding_Edge {
 				}
 				MoveToMainList(FFU_BE_Defs.prefabModdedModulesList, true);
 				UpdateModuleEffects(FFU_BE_Defs.prefabModdedModulesList);
+				PrepareAuxEffects (FFU_BE_Defs.prefabModdedModulesList);
 				FFU_BE_Defs.prefabModdedModulesList.Sort((ShipModule x, ShipModule y) => FFU_BE_Defs.SortAllModules(x).CompareTo(FFU_BE_Defs.SortAllModules(y)));
 				if (FFU_BE_Defs.allModulesCraftable) {
 					foreach (ShipModule litedModule in FFU_BE_Defs.prefabModdedModulesList)
@@ -272,6 +273,12 @@ namespace FFU_Bleeding_Edge {
 			shipModules.Find(x => x.name.Contains("artifactmodule tec 35 data core makk")).image = shipModules.Find(x => x.name.Contains("explosives pack")).image;
 			shipModules.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").image = shipModules.Find(x => x.name.Contains("medical pack organics, synth")).image;
 			shipModules.Find(x => x.name == "artifactmodule tec 11 biostasis").image = shipModules.Find(x => x.name.Contains("medical pack organics, synth")).image;
+		}
+		public static void PrepareAuxEffects(List<ShipModule> shipModules) {
+			FFU_BE_Defs.therExplosionPool = shipModules.Find(x => x.PrefabId == 2146165248)?.Weapon?.ProjectileOrBeamPrefab?.Effects?.explosionPool;
+			FFU_BE_Defs.chemExplosionPool = shipModules.Find(x => x.PrefabId == 1771248833)?.Weapon?.ProjectileOrBeamPrefab?.Effects?.explosionPool;
+			FFU_BE_Defs.boomExplosionPool = shipModules.Find(x => x.PrefabId == 533676501)?.Weapon?.ProjectileOrBeamPrefab?.Effects?.explosionPool;
+			FFU_BE_Defs.specExplosionPool = shipModules.Find(x => x.PrefabId == 858424257)?.Weapon?.ProjectileOrBeamPrefab?.Effects?.explosionPool;
 		}
 		public static string GetModuleTypeName(ShipModule shipModule) {
 			switch (shipModule.type) {
@@ -635,8 +642,11 @@ namespace RST {
 		/// Do Permanent Damage to Module on Higher Difficulties
 			if (type == Type.Storage) return;
 			TakeDamage(dd.moduleDmg);
+			if (type == Type.Container) {
+
+			}
 			if (dd.moduleOverloadSeconds > 0) TryCauseOverload(dd.moduleOverloadSeconds);
-			if (dd.moduleDmg > 0 && Health > 0 && WorldRules.Impermanent.playerModulesTakeMaxHpDamage && Ownership.GetOwner() == Ownership.Owner.Me && RstRandom.value < (FFU_BE_Defs.permanentModuleDamageChance * FFU_BE_Defs.GetDifficultyModifier())) {
+			if (dd.moduleDmg > 0 && Health > 0 && FFU_BE_Defs.GetDifficultyAllowCrits() && Ownership.GetOwner() == Ownership.Owner.Me && RstRandom.value < (FFU_BE_Defs.permanentModuleDamageChance * FFU_BE_Defs.GetDifficultyFloatValue())) {
 				int permanentDamage = Mathf.CeilToInt(maxHealth * FFU_BE_Defs.permanentModuleDamagePercent);
 				if (permanentDamage > 0) {
 					int damageAmount = (permanentDamage >= Health) ? (Health - 1) : permanentDamage;
@@ -695,7 +705,7 @@ namespace RST {
 			WorldRules instance = WorldRules.Instance;
 			if (RstRandom.value <= instance.moduleOverchargeDamageChance) TakeDamage(UnityEngine.Random.Range(1, MaxHealth / 3 + 1));
 			if (RstRandom.value <= instance.moduleOverchargeOverloadChance) TryCauseOverload(UnityEngine.Random.Range(1f, 60f));
-			if (RstRandom.value <= instance.moduleOverchargeFireChance) if (Ship != null && Ship.Fire != null) Ship.Fire.SetFireAt(base.transform.position);
+			if (RstRandom.value <= instance.moduleOverchargeFireChance) if (Ship != null && Ship.Fire != null) Ship.Fire.SetFireAt(base.transform.position, 1.1f, 0.4f);
 			overchargeTimer.Restart(overchargeSeconds);
 			if (type == Type.Engine) if (Ship != null) UnityEngine.Object.Instantiate(VisualSettings.Instance.shipDodgeEffectPrefab, Ship.transform);
 			return true;
@@ -823,7 +833,7 @@ namespace RST {
 			return false;
 		}
 		[MonoModReplace] private void Update() {
-		/// Trigger Module Changes from Damage
+		/// Trigger Module Changes from Damage + Malfunction Chance
 			UpdateRegistrationWithParent<Ship, ShipModule>(ref cachedShip);
 			UpdateRegistrationWithParent<Ship, IRepairable>(ref cachedShip2);
 			if (IsUnpacking) {
@@ -853,6 +863,13 @@ namespace RST {
 			if (selfCombustible != null) {
 				bool isWorking = IsWorking;
 				if (selfCombustible.enabled != isWorking) selfCombustible.enabled = isWorking;
+			}
+			if (!HasFullHealth && Time.deltaTime < 0.2f && FFU_BE_Defs.CanMalfunction(this) && TurnedOnAndIsWorking && FFU_BE_Defs.DamagedButWorking(this)) {
+				float fireChance = FFU_BE_Defs.GetHealthEffect(this, 0.01f);
+				if (Ship != null && Ship.Fire != null && RstRandom.value < fireChance * Time.deltaTime) {
+					Ship.Fire.SetFireAt(base.transform.position, 1.1f, 0.7f);
+					StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, $"{DisplayNameLocalized} {Core.TT("malfunctioned and started fire")}");
+				}
 			}
 			if (IsDead && type != Type.Weapon_Nuke) {
 				GameObject gameObject = GameObjectPool.TakeRandomPrefab<GameObject>(Effects.explosionPool);
@@ -890,7 +907,8 @@ namespace RST {
 						float healthPercent = FFU_BE_Defs.GetHealthPercent(this);
 						if (healthPercent >= FFU_BE_Defs.moduleDamageThreshold) {
 							stringBuilder.Append("<color=red>").AppendFormat(MonoBehaviourExtended.TT("{0:0.0}% Damaged"), (1f - healthPercent) * 100f).Append("</color>");
-							if (type == Type.Weapon) stringBuilder.Append("<color=red>").Append($", {FFU_BE_Defs.GetHealthEffect(this, 0.5f) * 100f:0.0} Misfire Chance").Append("</color>");
+							if (type == Type.Weapon) stringBuilder.Append("\n").Append("<color=red>").Append($"{FFU_BE_Defs.GetHealthEffect(this, 0.5f) * 100f:0.###}% Misfire Chance").Append("</color>");
+							if (FFU_BE_Defs.CanMalfunction(this)) stringBuilder.Append("\n").Append("<color=red>").Append($"{FFU_BE_Defs.GetHealthEffect(this, 0.01f) * 100f:0.###}% Malfunction Chance").Append("</color>");
 						} else stringBuilder.Append("<color=red>").Append(MonoBehaviourExtended.TT("Broken")).Append("</color>");
 					} else stringBuilder.Append("<color=red>").AppendFormat(MonoBehaviourExtended.TT("Repaired in {0:0.0} seconds"), repairTime).Append("</color>");
 				} else if (!turnedOn) {

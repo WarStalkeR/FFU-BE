@@ -1557,8 +1557,8 @@ namespace RST {
 		[MonoModReplace] public bool CanLevelUpSkill(Skill skill, int inc) {
 		/// Allow Drones Skill Points Allocation
 			if (skill == Skill.Presence || skill == Skill.None || inc <= 0) return false;
-			int skill2 = GetSkill(skill);
-			if (unusedSkillPoints >= inc) return skill2 + inc <= 10;
+			int skillAmount = GetSkill(skill);
+			if (unusedSkillPoints >= inc) return skillAmount + inc <= 10;
 			return false;
 		}
 		public void BuyableAssignToStore(Shop shop) {
@@ -1609,7 +1609,7 @@ namespace RST {
 					Group group = groups[i];
 					Color color = Color.white;
 					if (group.matchCrewColor) RandomizeCrewmember.PickMatchedColor(group.Pool, out color);
-					int runCycles = ship.Ownership.GetOwner() != Ownership.Owner.Me ? FFU_BE_Defs.enemyShipCrewSizeMult : 1;
+					int runCycles = ship.Ownership.GetOwner() != Ownership.Owner.Me ? FFU_BE_Defs.GetDifficultyCrewMult() : 1;
 					for (int k = 0; k < runCycles; k++) {
 						int randomInt = group.count.GetRandomInt();
 						for (int j = 0; j < randomInt; j++) {

@@ -82,8 +82,6 @@ namespace FFU_Bleeding_Edge {
 					else { FFU_BE_Defs.minPlayerCrewSkillsLimit = 1; modConfigLog += "\n > " + "Property \"minPlayerCrewSkillsLimit\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.minPlayerCrewSkillsLimit.ToString(); }
 					if (modConfig["Multipliers"]["minEnemyCrewSkillsLimit"].TryConvertInt(out FFU_BE_Defs.minEnemyCrewSkillsLimit)) modConfigLog += "\n > " + "Property \"minEnemyCrewSkillsLimit\" loaded with value: " + FFU_BE_Defs.minEnemyCrewSkillsLimit.ToString();
 					else { FFU_BE_Defs.minEnemyCrewSkillsLimit = 1; modConfigLog += "\n > " + "Property \"minEnemyCrewSkillsLimit\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.minEnemyCrewSkillsLimit.ToString(); }
-					if (modConfig["Multipliers"]["enemyShipCrewSizeMult"].TryConvertInt(out FFU_BE_Defs.enemyShipCrewSizeMult)) modConfigLog += "\n > " + "Property \"enemyShipCrewSizeMult\" loaded with value: " + FFU_BE_Defs.enemyShipCrewSizeMult.ToString();
-					else { FFU_BE_Defs.enemyShipCrewSizeMult = 1; modConfigLog += "\n > " + "Property \"enemyShipCrewSizeMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.enemyShipCrewSizeMult.ToString(); }
 					if (modConfig["Multipliers"]["shipMaxEvasionLimit"].TryConvertInt(out FFU_BE_Defs.shipMaxEvasionLimit)) modConfigLog += "\n > " + "Property \"shipMaxEvasionLimit\" loaded with value: " + FFU_BE_Defs.shipMaxEvasionLimit.ToString();
 					else { FFU_BE_Defs.shipMaxEvasionLimit = 95; modConfigLog += "\n > " + "Property \"shipMaxEvasionLimit\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.shipMaxEvasionLimit.ToString(); }
 					if (modConfig["Multipliers"]["shipModuleHealthMult"].TryConvertFloat(out FFU_BE_Defs.shipModuleHealthMult)) modConfigLog += "\n > " + "Property \"shipModuleHealthMult\" loaded with value: " + FFU_BE_Defs.shipModuleHealthMult.ToString();
@@ -155,7 +153,6 @@ namespace FFU_Bleeding_Edge {
 			modConfig["Multipliers"]["addFreeCrewSkillPoints"] = 0;
 			modConfig["Multipliers"]["minPlayerCrewSkillsLimit"] = 1;
 			modConfig["Multipliers"]["minEnemyCrewSkillsLimit"] = 1;
-			modConfig["Multipliers"]["enemyShipCrewSizeMult"] = 1;
 			modConfig["Multipliers"]["shipMaxEvasionLimit"] = 95;
 			modConfig["Multipliers"]["shipModuleHealthMult"] = 3.0f;
 			modConfig["Multipliers"]["shipModuleUnpackTime"] = 60.0f;
