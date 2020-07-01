@@ -1431,7 +1431,8 @@ namespace RST {
 								shipLacksExotics = false;
 							}
 						}
-						if (shipModule.Ownership.GetOwner() == Ownership.Owner.Enemy) {
+						if (shipModule.Ownership.GetOwner() == Ownership.Owner.Enemy &&
+							shipModule.type != ShipModule.Type.Warp) {
 							shipModule.turnedOn = true;
 							shipModule.IsPowered = true;
 							shipModule.turnedOn = true;

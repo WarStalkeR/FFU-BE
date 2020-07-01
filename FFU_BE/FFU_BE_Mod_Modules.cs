@@ -642,9 +642,6 @@ namespace RST {
 		/// Do Permanent Damage to Module on Higher Difficulties
 			if (type == Type.Storage) return;
 			TakeDamage(dd.moduleDmg);
-			if (type == Type.Container) {
-
-			}
 			if (dd.moduleOverloadSeconds > 0) TryCauseOverload(dd.moduleOverloadSeconds);
 			if (dd.moduleDmg > 0 && Health > 0 && FFU_BE_Defs.GetDifficultyAllowCrits() && Ownership.GetOwner() == Ownership.Owner.Me && RstRandom.value < (FFU_BE_Defs.permanentModuleDamageChance * FFU_BE_Defs.GetDifficultyFloatValue())) {
 				int permanentDamage = Mathf.CeilToInt(maxHealth * FFU_BE_Defs.permanentModuleDamagePercent);
