@@ -18,10 +18,6 @@ namespace FFU_Bleeding_Edge {
 		//Temporary Data
 		public static bool dataMenuSpritesLoaded = false;
 		public static List<Sprite> dataMenuSpritesSet = new List<Sprite>();
-		public static GameObject therExplosionPool = null;
-		public static GameObject chemExplosionPool = null;
-		public static GameObject boomExplosionPool = null;
-		public static GameObject specExplosionPool = null;
 		//Internal Variables
 		public static bool firstRun = true;
 		public static bool firstInst = true;

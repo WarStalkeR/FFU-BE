@@ -172,15 +172,24 @@ namespace FFU_Bleeding_Edge {
 				moduleData += shipModule.Reactor.ConsumedPerDistance.exotics > 0 ? $" > {Core.TT("Exotics")}: {shipModule.Reactor.ConsumedPerDistance.exotics * 100:0}/100{Core.TT("ru")}\n" : null;
 				break;
 				case ShipModule.Type.Container:
+				ContainerModule refCont = shipModule.Container;
 				instanceText = isInst ? $"{Core.TT(GetModuleGenText(shipModule))} {Core.TT("Gen.")} " : null;
 				moduleData += $"{Core.TT("Type")}: {instanceText}{Core.TT("Storage Container")}\n";
 				if (isInst) moduleData += $"{Core.TT("Modifier")}: {Core.TT(GetModuleModText(shipModule))}\n";
-				moduleData += shipModule.Container.MaxOrganics > 0 ? $"{Core.TT("Organics Storage")}: {shipModule.Container.MaxOrganics:0}\n" : null;
-				moduleData += shipModule.Container.MaxFuel > 0 ? $"{Core.TT("Starfuel Storage")}: {shipModule.Container.MaxFuel:0}\n" : null;
-				moduleData += shipModule.Container.MaxMetals > 0 ? $"{Core.TT("Metals Storage")}: {shipModule.Container.MaxMetals:0}\n" : null;
-				moduleData += shipModule.Container.MaxSynthetics > 0 ? $"{Core.TT("Synthetics Storage")}: {shipModule.Container.MaxSynthetics:0}\n" : null;
-				moduleData += shipModule.Container.MaxExplosives > 0 ? $"{Core.TT("Explosives Storage")}: {shipModule.Container.MaxExplosives:0}\n" : null;
-				moduleData += shipModule.Container.MaxExotics > 0 ? $"{Core.TT("Exotics Storage")}: {shipModule.Container.MaxExotics:0}\n" : null;
+				moduleData += refCont.MaxOrganics > 0 || refCont.MaxFuel > 0 || refCont.MaxMetals > 0 || refCont.MaxSynthetics > 0 || refCont.MaxExplosives > 0 || refCont.MaxExotics > 0 ? $"{Core.TT("Storage Capacity")}:\n" : null;
+				moduleData += shipModule.Container.MaxOrganics > 0 ? $" > {Core.TT("Organics")}: {shipModule.Container.MaxOrganics:0}\n" : null;
+				moduleData += shipModule.Container.MaxFuel > 0 ? $" > {Core.TT("Starfuel")}: {shipModule.Container.MaxFuel:0}\n" : null;
+				moduleData += shipModule.Container.MaxMetals > 0 ? $" > {Core.TT("Metals")}: {shipModule.Container.MaxMetals:0}\n" : null;
+				moduleData += shipModule.Container.MaxSynthetics > 0 ? $" > {Core.TT("Synthetics")}: {shipModule.Container.MaxSynthetics:0}\n" : null;
+				moduleData += shipModule.Container.MaxExplosives > 0 ? $" > {Core.TT("Explosives")}: {shipModule.Container.MaxExplosives:0}\n" : null;
+				moduleData += shipModule.Container.MaxExotics > 0 ? $" > {Core.TT("Exotics")}: {shipModule.Container.MaxExotics:0}\n" : null;
+				moduleData += refCont.organicsCanLeak || refCont.fuelCanLeak || refCont.metalsCanLeak || refCont.syntheticsCanLeak || refCont.explosivesCanLeak || refCont.exoticsCanLeak ? $"{Core.TT("Leak Vulnerability")}:\n" : null;
+				moduleData += shipModule.Container.organicsCanLeak ? $" > {Core.TT("Organics")}\n" : null;
+				moduleData += shipModule.Container.fuelCanLeak ? $" > {Core.TT("Starfuel")}\n" : null;
+				moduleData += shipModule.Container.metalsCanLeak ? $" > {Core.TT("Metals")}\n" : null;
+				moduleData += shipModule.Container.syntheticsCanLeak ? $" > {Core.TT("Synthetics")}\n" : null;
+				moduleData += shipModule.Container.explosivesCanLeak ? $" > {Core.TT("Explosives")}\n" : null;
+				moduleData += shipModule.Container.exoticsCanLeak ? $" > {Core.TT("Exotics")}\n" : null;
 				break;
 				case ShipModule.Type.Integrity:
 				instanceText = isInst ? $"{Core.TT(GetModuleGenText(shipModule))} {Core.TT("Gen.")} " : null;

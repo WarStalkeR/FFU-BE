@@ -152,7 +152,6 @@ namespace FFU_Bleeding_Edge {
 				}
 				MoveToMainList(FFU_BE_Defs.prefabModdedModulesList, true);
 				UpdateModuleEffects(FFU_BE_Defs.prefabModdedModulesList);
-				PrepareAuxEffects (FFU_BE_Defs.prefabModdedModulesList);
 				FFU_BE_Defs.prefabModdedModulesList.Sort((ShipModule x, ShipModule y) => FFU_BE_Defs.SortAllModules(x).CompareTo(FFU_BE_Defs.SortAllModules(y)));
 				if (FFU_BE_Defs.allModulesCraftable) {
 					foreach (ShipModule litedModule in FFU_BE_Defs.prefabModdedModulesList)
@@ -273,12 +272,6 @@ namespace FFU_Bleeding_Edge {
 			shipModules.Find(x => x.name.Contains("artifactmodule tec 35 data core makk")).image = shipModules.Find(x => x.name.Contains("explosives pack")).image;
 			shipModules.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").image = shipModules.Find(x => x.name.Contains("medical pack organics, synth")).image;
 			shipModules.Find(x => x.name == "artifactmodule tec 11 biostasis").image = shipModules.Find(x => x.name.Contains("medical pack organics, synth")).image;
-		}
-		public static void PrepareAuxEffects(List<ShipModule> shipModules) {
-			FFU_BE_Defs.therExplosionPool = shipModules.Find(x => x.PrefabId == 2146165248)?.Weapon?.ProjectileOrBeamPrefab?.Effects?.explosionPool;
-			FFU_BE_Defs.chemExplosionPool = shipModules.Find(x => x.PrefabId == 1771248833)?.Weapon?.ProjectileOrBeamPrefab?.Effects?.explosionPool;
-			FFU_BE_Defs.boomExplosionPool = shipModules.Find(x => x.PrefabId == 533676501)?.Weapon?.ProjectileOrBeamPrefab?.Effects?.explosionPool;
-			FFU_BE_Defs.specExplosionPool = shipModules.Find(x => x.PrefabId == 858424257)?.Weapon?.ProjectileOrBeamPrefab?.Effects?.explosionPool;
 		}
 		public static string GetModuleTypeName(ShipModule shipModule) {
 			switch (shipModule.type) {
