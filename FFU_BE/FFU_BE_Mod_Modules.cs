@@ -855,7 +855,7 @@ namespace RST {
 				if (selfCombustible.enabled != isWorking) selfCombustible.enabled = isWorking;
 			}
 			if (!HasFullHealth && Time.deltaTime < 0.2f && FFU_BE_Defs.CanMalfunction(this) && TurnedOnAndIsWorking && FFU_BE_Defs.DamagedButWorking(this)) {
-				float fireChance = FFU_BE_Defs.GetHealthEffect(this, 0.01f);
+				float fireChance = FFU_BE_Defs.GetHealthEffect(this, 0.01f * FFU_BE_Defs.moduleFireStartChance);
 				if (Ship != null && Ship.Fire != null && RstRandom.value < fireChance * Time.deltaTime) {
 					Ship.Fire.SetFireAt(base.transform.position, 1.1f, 0.7f);
 					StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, $"{DisplayNameLocalized} {Core.TT("malfunctioned and started fire")}");

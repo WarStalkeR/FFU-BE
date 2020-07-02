@@ -14,17 +14,33 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using UnityEngine.EventSystems;
 
 namespace RST.UI {
 	public class patch_MenuPanel : MenuPanel {
+		private extern void orig_Update();
 		private extern void orig_OnEnable();
 		private Text textNewGameButton => transform.GetChild(2).GetChild(2).GetChild(1).GetChild(1).GetComponent<Text>();
+		private bool switchIDDQD = false;
 		private void OnEnable() {
 		/// Load Features + Rename Button
 			FFU_BE_Defs.LoadModPropsAndFeatures();
 			orig_OnEnable();
 			if (textNewGameButton.text.Contains("New game")) textNewGameButton.text = Core.TT("New Game\n(Shift: IDDQD Mode)");
 			else textNewGameButton.text = Core.TT("Retire\n(Shift: IDDQD Mode)");
+		}
+		private void Update() {
+		/// Hold Shift to Switch Difficulties
+			orig_Update();
+			if (newGamePanel.activeSelf && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && !switchIDDQD) {
+				newGamePanel.SetActive(false);
+				newGamePanel.SetActive(true);
+				switchIDDQD = true;
+			} else if (newGamePanel.activeSelf && !Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift) && switchIDDQD) {
+				newGamePanel.SetActive(false);
+				newGamePanel.SetActive(true);
+				switchIDDQD = false;
+			}
 		}
 	}
 }

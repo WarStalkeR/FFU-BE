@@ -90,6 +90,8 @@ namespace FFU_Bleeding_Edge {
 					else { FFU_BE_Defs.shipModuleUnpackTime = 60f; modConfigLog += "\n > " + "Property \"shipModuleUnpackTime\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.shipModuleUnpackTime.ToString(); }
 					if (modConfig["Multipliers"]["shipModuleCraftTime"].TryConvertFloat(out FFU_BE_Defs.shipModuleCraftTime)) modConfigLog += "\n > " + "Property \"shipModuleCraftTime\" loaded with value: " + FFU_BE_Defs.shipModuleCraftTime.ToString();
 					else { FFU_BE_Defs.shipModuleCraftTime = 120f; modConfigLog += "\n > " + "Property \"shipModuleCraftTime\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.shipModuleCraftTime.ToString(); }
+					if (modConfig["Multipliers"]["moduleFireStartChance"].TryConvertFloat(out FFU_BE_Defs.moduleFireStartChance)) modConfigLog += "\n > " + "Property \"moduleFireStartChance\" loaded with value: " + FFU_BE_Defs.moduleFireStartChance.ToString();
+					else { FFU_BE_Defs.moduleFireStartChance = 1f; modConfigLog += "\n > " + "Property \"moduleFireStartChance\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.moduleFireStartChance.ToString(); }
 					if (modConfig["Multipliers"]["coreSlotsHealthMult"].TryConvertFloat(out FFU_BE_Defs.coreSlotsHealthMult)) modConfigLog += "\n > " + "Property \"coreSlotsHealthMult\" loaded with value: " + FFU_BE_Defs.coreSlotsHealthMult.ToString();
 					else { FFU_BE_Defs.coreSlotsHealthMult = 1f; modConfigLog += "\n > " + "Property \"coreSlotsHealthMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.coreSlotsHealthMult.ToString(); }
 					if (modConfig["Multipliers"]["enemyResourcesLootMinMult"].TryConvertFloat(out FFU_BE_Defs.enemyResourcesLootMinMult)) modConfigLog += "\n > " + "Property \"enemyResourcesLootMinMult\" loaded with value: " + FFU_BE_Defs.enemyResourcesLootMinMult.ToString();
@@ -157,6 +159,7 @@ namespace FFU_Bleeding_Edge {
 			modConfig["Multipliers"]["shipModuleHealthMult"] = 3.0f;
 			modConfig["Multipliers"]["shipModuleUnpackTime"] = 60.0f;
 			modConfig["Multipliers"]["shipModuleCraftTime"] = 120.0f;
+			modConfig["Multipliers"]["moduleFireStartChance"] = 1.0f;
 			modConfig["Multipliers"]["coreSlotsHealthMult"] = 1.0f;
 			modConfig["Multipliers"]["enemyResourcesLootMinMult"] = 2.0f;
 			modConfig["Multipliers"]["enemyResourcesLootMaxMult"] = 5.0f;

@@ -336,15 +336,6 @@ namespace RST.UI {
 		public Image entryButton1Background => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>();
 		public Image entryButton2Background => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(0).GetChild(0).GetComponent<Image>();
 		public Image entryButton3Background => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(0).GetComponent<Image>();
-		public UIColorOverride entryButton1ClrA => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(0).GetChild(2).GetComponent<UIColorOverride>();
-		public UIColorOverride entryButton1ClrB => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(1).GetChild(2).GetComponent<UIColorOverride>();
-		public UIColorOverride entryButton1ClrC => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(2).GetChild(2).GetComponent<UIColorOverride>();
-		public UIColorOverride entryButton2ClrA => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(0).GetChild(2).GetComponent<UIColorOverride>();
-		public UIColorOverride entryButton2ClrB => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(1).GetChild(2).GetComponent<UIColorOverride>();
-		public UIColorOverride entryButton2ClrC => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(2).GetChild(2).GetComponent<UIColorOverride>();
-		public UIColorOverride entryButton3ClrA => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(0).GetChild(2).GetComponent<UIColorOverride>();
-		public UIColorOverride entryButton3ClrB => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(1).GetChild(2).GetComponent<UIColorOverride>();
-		public UIColorOverride entryButton3ClrC => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(2).GetChild(2).GetComponent<UIColorOverride>();
 		private bool isIDDQDmode;
 		private void OnEnable() {
 			orig_OnEnable();

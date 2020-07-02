@@ -14,7 +14,7 @@ using System;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "0.9.8.0";
+		public static string modVersion = "1.0.0.0";
 		//Temporary Data
 		public static bool dataMenuSpritesLoaded = false;
 		public static List<Sprite> dataMenuSpritesSet = new List<Sprite>();
@@ -253,6 +253,7 @@ namespace FFU_Bleeding_Edge {
 		public static float shipModuleHealthMult = 3f;
 		public static float shipModuleUnpackTime = 60f;
 		public static float shipModuleCraftTime = 120f;
+		public static float moduleFireStartChance = 1f;
 		public static float coreSlotsHealthMult = 1f;
 		public static float enemyResourcesLootMinMult = 2f;
 		public static float enemyResourcesLootMaxMult = 5f;
