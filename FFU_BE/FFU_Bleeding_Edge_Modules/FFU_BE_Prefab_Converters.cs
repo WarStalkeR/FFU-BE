@@ -26,6 +26,7 @@ namespace FFU_Bleeding_Edge {
 			switch (refModuleName) {
 				case "explosives combinator diy":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Makeshift <color=#" + colorFactory + "ff>Chemical Reactor</color>";
 				shipModule.description = "Makeshift chemical factory. Has horrible efficiency and performance, but when there are no other options, it is still best possible solution and solace of hope in this dark and unforgiving universe.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 100f, metals = 500f, synthetics = 250f, exotics = 3f };
@@ -43,6 +44,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "fuel combinator 1A old":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Ancient <color=#" + colorFactory + "ff>Industrial Refinery</color>";
 				shipModule.description = "A very ancient industrial factory that was used centuries ago. Usable even to these days, but constant leaks and permanent cracks hold starship and all crewmembers under pressure of danger.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 1000f, synthetics = 500f, exotics = 6f };
@@ -62,6 +64,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "oilcake converter":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.3f);
 				shipModule.displayName = "Emporium <color=#" + colorFactory + "ff>Chemical Reactor</color>";
 				shipModule.description = "An attempt of Rat Empire to reverse engineer end create their own industrial factory that anyway resulted in chemical factory that miraculously can convert starfuel into properly consumable organics.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 300f, metals = 1500f, synthetics = 750f, exotics = 9f };
@@ -81,6 +84,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "fuel processor 1B":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
 				shipModule.displayName = "Modern <color=#" + colorFactory + "ff>Industrial Refinery</color>";
 				shipModule.description = "Modern and upgraded industrial factory that guarantees constant production of starfuel, synthetics and metals on your journey, as long as you can supply enough organics. Very fast efficiency dissipation.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 400f, metals = 1750f, synthetics = 1000f, exotics = 12f };
@@ -100,6 +104,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "synthetics cooker 1":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.1f);
 				shipModule.displayName = "MarsCorp <color=#" + colorFactory + "ff>Military Refinery</color>";
 				shipModule.description = "A military grade factory that allows to produce explosives in addition to base resources. Mediocrity at its finest. Can't be any more mediocre, but can at very least can produce explosives.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2000f, synthetics = 1250f, exotics = 15f };
@@ -121,6 +126,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "explosives combinator 1":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.0f);
 				shipModule.displayName = "TerraSec <color=#" + colorFactory + "ff>Military Refinery</color>";
 				shipModule.description = "An improved military grade factory with improved explosives production and processing line. Has mediocre efficiency and parameters, but enough armored to stay intact after close-up reactor meltdown.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 2500f, synthetics = 1750f, exotics = 20f };
@@ -144,6 +150,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "biotech explosives recycler":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.2f);
 				shipModule.displayName = "GeneForce <color=#" + colorFactory + "ff>Biotic Refinery</color>";
 				shipModule.description = "A unique factory of organic, but shady origin. Extremely efficient with organic related productivity and allow to use it instead of originally intended materials in some cases. Consumes almost no energy.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1000f, organics = 3000f, synthetics = 2000f, exotics = 25f };
@@ -169,6 +176,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "fuel processor 2":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.9f);
 				shipModule.displayName = "MicroProse <color=#" + colorFactory + "ff>Quantum Furnace</color>";
 				shipModule.description = "Advanced factory that utilizes quantum entanglement technology to effectively resources. Has great initial warm-up output, but consumes serious amount of energy and has fast efficiency dissipation, when inactive.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1250f, metals = 4000f, synthetics = 2750f, exotics = 35f };
@@ -194,6 +202,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case "explosives combinator tiger":
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.8f);
 				shipModule.displayName = "StarFurnace <color=#" + colorFactory + "ff>Singularity Core</color>";
 				shipModule.description = "Extremely advanced factory that uses active singularity to refine and process almost all types of resources with high efficiency. Consumes a lot of energy and has very long productivity warm-up time.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1500f, metals = 5000f, synthetics = 3500f, exotics = 50f };
