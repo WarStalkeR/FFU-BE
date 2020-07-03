@@ -331,11 +331,11 @@ namespace FFU_Bleeding_Edge {
 		}
 		public static string GetScanLevelText() {
 			switch (FFU_BE_Defs.discoveryScanLevel) {
-				case 0: return "Low-Energy Signature (" + FFU_BE_Defs.scanResolution[0] + "nm)";
-				case 1: return "High-Energy Signature (" + FFU_BE_Defs.scanResolution[1] + "nm)";
-				case 2: return "Hyperspace Slipstream (" + FFU_BE_Defs.scanResolution[2] + "nm)";
-				case 3: return "Multi-Phased Subspace (" + FFU_BE_Defs.scanResolution[3] + "nm)";
-				case 4: return "Wave-Folding Quantum (" + FFU_BE_Defs.scanResolution[4] + "nm)";
+				case 0: return $"Low-Energy Signature ({(float)Core.ScanRes.LowEnergy:0}nm)";
+				case 1: return $"High-Energy Signature ({(float)Core.ScanRes.HighEnergy:0}nm)";
+				case 2: return $"Hyperspace Slipstream ({(float)Core.ScanRes.Hyperspace:0}nm)";
+				case 3: return $"Multi-Phased Subspace ({(float)Core.ScanRes.MultiPhased:0}nm)";
+				case 4: return $"Wave-Folding Quantum ({(float)Core.ScanRes.WaveFolding:0}nm)";
 				default: return "Unknown Scan";
 			}
 		}

@@ -119,6 +119,13 @@ namespace FFU_Bleeding_Edge {
 			T9 = 46000,
 			TX = 60000
 		}
+		public enum ScanRes {
+			LowEnergy = 5000,
+			HighEnergy = 3000,
+			Hyperspace = 1500,
+			MultiPhased = 1000,
+			WaveFolding = 500
+		}
 		public enum BonusMod {
 			None,
 			Sustained, Unstable,

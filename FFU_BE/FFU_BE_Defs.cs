@@ -221,7 +221,7 @@ namespace FFU_Bleeding_Edge {
 		public static float scanFrequency = 1600f;
 		public static float energyEmission = 300f;
 		public static float distanceTraveledInPeace = 0f;
-		public static float[] scanResolution = new float[] { 5000f, 3000f, 1500f, 1000f, 500f };
+		public static float[] scanResolution = new float[] { (float)Core.ScanRes.LowEnergy, (float)Core.ScanRes.HighEnergy, (float)Core.ScanRes.Hyperspace, (float)Core.ScanRes.MultiPhased, (float)Core.ScanRes.WaveFolding };
 		public static int[] killedFleetsTrigger = new int[] { 3, 6, 10, 15, 21, 27, 34, 42, 50 };
 		public static int[] timesInterceptedByEnforcers = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		public static float empowerLocalForcesChance = 0.45f;
