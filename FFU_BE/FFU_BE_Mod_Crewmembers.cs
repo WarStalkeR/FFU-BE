@@ -1542,10 +1542,10 @@ namespace RST {
 			}
 		}
 		[MonoModReplace] public void EnterPod() {
-		/// Kill Boarding Party when Leaving Ship
+			/// Kill Boarding Party when Leaving Ship
 			if (name.Contains("ShortLifeSpan")) {
-				SpacePodInstance.gameObject.Destroy();
-				gameObject.Destroy();
+				if (SpacePodInstance != null) SpacePodInstance.gameObject.Destroy();
+				if (gameObject != null) gameObject.Destroy();
 				return;
 			}
 			SpacePodInstance = UnityEngine.Object.Instantiate(Effects.spacePodPrefab, base.transform.position, base.transform.rotation, base.transform);

@@ -28,9 +28,13 @@ namespace FFU_Bleeding_Edge {
 		public static void ApplyInitialModuleTier(ShipModule shipModule) {
 			int rolledTier = Random.Range(2, 6);
 			Core.BonusMod rolledMod = GetInitialModuleModifier(shipModule);
-			if (shipModule != null) if (shipModule.type == ShipModule.Type.Container) rolledTier = 5;
-			if (shipModule != null) if (shipModule.type == ShipModule.Type.Container) rolledMod = Core.BonusMod.Durable;
-			if (shipModule != null) if (shipModule.type == ShipModule.Type.MaterialsConverter) rolledMod = Core.BonusMod.Efficient;
+			if (shipModule != null) {
+				if (shipModule.type == ShipModule.Type.Container) rolledTier = 5;
+				if (shipModule.type == ShipModule.Type.StealthDecryptor) rolledTier = 6;
+				if (shipModule.type == ShipModule.Type.Container) rolledMod = Core.BonusMod.Durable;
+				if (shipModule.type == ShipModule.Type.StealthDecryptor) rolledMod = Core.BonusMod.Enhanced;
+				if (shipModule.type == ShipModule.Type.MaterialsConverter) rolledMod = Core.BonusMod.Efficient;
+			}
 			if (!shipModule.name.Contains("MK-") || !ModuleHasModifier(shipModule)) SetModuleModifier(shipModule, rolledTier, rolledMod);
 			if (shipModule.name.Contains("MK-") && ModuleHasModifier(shipModule)) ApplyModuleModifiedStatsAndParameters(shipModule);
 		}
