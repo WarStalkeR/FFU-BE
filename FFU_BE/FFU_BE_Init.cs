@@ -57,6 +57,9 @@ namespace RST {
 				yield return PrefabFinder.Load();
 				Destroy(gameIsLoadingInstance);
 			}
+			if (FFU_BE_Defs.dumpAllPrefabs)
+				foreach (var entry in PrefabFinder.PrefabDict)
+					Debug.LogWarning($"Prefab: [{entry.Key}] {entry.Value.name}");
 			FFU_BE_Defs.LoadBleedingEdgeWelcome();
 			StartWaitingForGameLoad = false;
 			yield return null;

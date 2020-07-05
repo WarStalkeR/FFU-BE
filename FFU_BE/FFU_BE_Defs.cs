@@ -14,8 +14,9 @@ using System;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "1.0.0.0";
+		public static string modVersion = "1.0.0.5";
 		//Temporary Data
+		public static bool flagDLC_SupPak = false;
 		public static bool dataMenuSpritesLoaded = false;
 		public static List<Sprite> dataMenuSpritesSet = new List<Sprite>();
 		//Internal Variables
@@ -25,6 +26,7 @@ namespace FFU_Bleeding_Edge {
 		public static bool debugMode = false;
 		public static bool visualDebug = false;
 		public static bool canSpawnCrew = false;
+		public static bool dumpAllPrefabs = false;
 		public static bool dumpObjectLists = false;
 		public static bool dumpInstructions = false;
 		public static bool allStatProps = false;
@@ -198,7 +200,7 @@ namespace FFU_Bleeding_Edge {
 			22001514,   /* Green Death Chemical Nuke */
 			381835966,  /* Apocalypse Boarding Nuke */
 			1558344950, /* Void Fire Strategic Nuke */ });
-		public static List<int> discoveredModuleIDs = initialModuleIDs;
+		public static List<int> discoveredModuleIDs = new List<int>();
 		public static List<int> unresearchedModuleIDs = new List<int>();
 		public static List<int> perkModuleBlueprintIDs = new List<int>();
 		public static float unusedReverseProgress = 0f;
@@ -336,6 +338,7 @@ namespace FFU_Bleeding_Edge {
 			}
 			if (firstRun) {
 				Debug.LogWarning("Loading modded data and custom variables for the first time...");
+				InitDLCsDetection();
 				InitGameTextUpdate();
 				InitWorldPermVariables();
 				InitGameInterfaceUpdate();
@@ -367,16 +370,18 @@ namespace FFU_Bleeding_Edge {
 				if (ES2.Exists("start.es2?tag=summonAttempted")) summonAttempted = ES2.Load<bool>("start.es2?tag=summonAttempted");
 				if (ES2.Exists("start.es2?tag=shipCurrentStorageCap")) shipCurrentStorageCap = ES2.Load<int>("start.es2?tag=shipCurrentStorageCap");
 				if (ES2.Exists("permanent.es2?tag=discoveredModuleIDs")) discoveredModuleIDs = ES2.LoadList<int>("permanent.es2?tag=discoveredModuleIDs");
-				else ES2.Save(discoveredModuleIDs, "permanent.es2?tag=discoveredModuleIDs");
+				else {
+					foreach (int initialID in initialModuleIDs) if (!discoveredModuleIDs.Contains(initialID)) discoveredModuleIDs.Add(initialID);
+					ES2.Save(discoveredModuleIDs, "permanent.es2?tag=discoveredModuleIDs");
+				}
+				foreach (int initialID in initialModuleIDs) if (!discoveredModuleIDs.Contains(initialID)) discoveredModuleIDs.Add(initialID);
 				if (ES2.Exists("start.es2?tag=modDifficulty")) gameDifficulty = (Core.Difficulty)ES2.Load<int>("start.es2?tag=modDifficulty");
 				else ES2.Save(1, "start.es2?tag=modDifficulty");
-				foreach (int initialID in initialModuleIDs) if (!discoveredModuleIDs.Contains(initialID)) discoveredModuleIDs.Add(initialID);
 				if (goFullASMD) {
 					if (restartUnlocksEverything) ES2.Save(FFU_BE_Base.allPerksList, "permanent.es2?tag=unlockedItemIds");
-					foreach (int moduleID in essentialTopModuleIDs)
-						if (!discoveredModuleIDs.Contains(moduleID) &&
-							!unresearchedModuleIDs.Contains(moduleID))
-							discoveredModuleIDs.Add(moduleID);
+					foreach (int moduleID in essentialTopModuleIDs) if (!discoveredModuleIDs.Contains(moduleID) &&
+							!unresearchedModuleIDs.Contains(moduleID)) discoveredModuleIDs.Add(moduleID);
+					ES2.Save(discoveredModuleIDs, "permanent.es2?tag=discoveredModuleIDs");
 					goFullASMD = false;
 				}
 				firstRun = false;
@@ -427,6 +432,9 @@ namespace FFU_Bleeding_Edge {
 				AccessTools.FieldRefAccess<Door, int>(door, "maxHealth") = 150;
 				AccessTools.FieldRefAccess<Door, int>(door, "health") = 150;
 			}
+		}
+		public static void InitDLCsDetection() {
+			if (PrefabFinder.PrefabDict.ContainsKey(1452660923)) flagDLC_SupPak = true;
 		}
 		public static void InitGameTextUpdate() {
 			string colorLaserEmt = "ffff60";

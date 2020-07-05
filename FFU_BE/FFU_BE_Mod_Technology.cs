@@ -1479,7 +1479,8 @@ namespace RST.PlaymakerAction {
 			if (FFU_BE_Defs.firstInst) {
 				if (!FFU_BE_Defs.allModulesCraftable) {
 					ModuleSlotActionsPanel.altCraftableModulePrefabs = new List<ShipModule>();
-					foreach (int discoveredModuleID in FFU_BE_Defs.discoveredModuleIDs.ToList()) ModuleSlotActionsPanel.altCraftableModulePrefabs.Add(FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == discoveredModuleID));
+					foreach (int discoveredModuleID in FFU_BE_Defs.discoveredModuleIDs.ToList()) if (FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == discoveredModuleID) != null)
+						ModuleSlotActionsPanel.altCraftableModulePrefabs.Add(FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == discoveredModuleID));
 					ModuleSlotActionsPanel.altCraftableModulePrefabs.Sort((ShipModule x, ShipModule y) => FFU_BE_Defs.SortAllModules(x).CompareTo(FFU_BE_Defs.SortAllModules(y)));
 				}
 				foreach (Fleet fleet in Resources.FindObjectsOfTypeAll<Fleet>().ToList()) {
