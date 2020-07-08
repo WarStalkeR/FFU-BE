@@ -14,7 +14,7 @@ using System;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "1.0.0.5";
+		public static string modVersion = "1.0.1.0";
 		//Temporary Data
 		public static bool flagDLC_SupPak = false;
 		public static bool dataMenuSpritesLoaded = false;
@@ -188,7 +188,7 @@ namespace FFU_Bleeding_Edge {
 			1119228548, /* Particle-Folding Quantum Engine */
 			685017033,  /* Mechanical Upgrades Cache */
 			957508477,  /* Biological Implants Cache */
-			760711671,  /* Laser Type Weapons Cache */
+			1316302015, /* Assault Class Weapons Cache */
 			938711464,  /* Iron Dome Tactical CIWS */
 			1571322820, /* Annihilator Rocket Launcher */
 			876704941,  /* Shockwave Plasma Howitzer */
@@ -233,6 +233,10 @@ namespace FFU_Bleeding_Edge {
 		public static ResourceValueGroup initialResources = new ResourceValueGroup { };
 		public static Core.Difficulty chosenDifficulty = Core.Difficulty.None;
 		public static Core.Difficulty gameDifficulty = Core.Difficulty.None;
+		public static List<string> weaponSelectionList = new List<string>();
+		public static string currentlySelectedWeapon = "";
+		public static int weaponSelectionCount = 0;
+		public static int weaponSelectionIndex = 0;
 		//Configuration Variables
 		public static bool advancedWelcomePopup = false;
 		public static bool restartUnlocksEverything = false;

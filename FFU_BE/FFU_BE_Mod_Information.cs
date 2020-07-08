@@ -17,6 +17,7 @@ using UnityEngine.UI;
 using FFU_Bleeding_Edge;
 using System.Text;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Information {
@@ -1520,7 +1521,8 @@ namespace RST.UI {
 			SafeUpdateField(10, crewText, FFU_BE_Mod_Information.IsCacheModule(m) && FFU_BE_Mod_Information.GetCacheSets(m) > 0 ? $"{FFU_BE_Mod_Information.GetCacheSets(m)} <size=16>{Localization.TT("Sets")}</size>" : null);
 			SafeUpdateField(20, medbayHealSpotsText, FFU_BE_Mod_Information.IsCacheModule(m) && FFU_BE_Mod_Information.GetCacheHPIncrease(m) > 0 ? $"+{FFU_BE_Mod_Information.GetCacheHPIncrease(m)} <size=16>{Localization.TT("Increase")}</size>" : null);
 			SafeUpdateField(30, dmgToCrewText, FFU_BE_Mod_Information.IsCacheModule(m) && FFU_BE_Mod_Information.GetCacheHPLimit(m) > 0 ? $"{FFU_BE_Mod_Information.GetCacheHPLimit(m)} <size=16>{Localization.TT("Limit")}</size>" : null);
-			SafeUpdateField(40, storageSizeText, FFU_BE_Mod_Information.IsCacheModule(m) && !FFU_BE_Mod_Information.GetCacheWeapons(m).IsEmpty() ? $"<size=14>{string.Join("\n", FFU_BE_Mod_Information.GetCacheWeapons(m, " "))}</size>" : null);
+			if (m.Ownership.GetOwner() == Ownership.Owner.Me) SafeUpdateField(40, pointDefDmgToProjectilesText, FFU_BE_Mod_Information.IsCacheModule(m) && !FFU_BE_Mod_Information.GetCacheWeapons(m).IsEmpty() ? $"<size=14>{GetSelectedWeapon()}</size>" : null);
+			SafeUpdateField(50, storageSizeText, FFU_BE_Mod_Information.IsCacheModule(m) && !FFU_BE_Mod_Information.GetCacheWeapons(m).IsEmpty() ? $"<size=14>{string.Join("\n", FFU_BE_Mod_Information.GetCacheWeapons(m, " "))}</size>" : null);
 			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
 			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
@@ -1533,6 +1535,7 @@ namespace RST.UI {
 				crewOpsHover.HoverText = $"{Localization.TT("Shows how much equipment or upgrade sets cache contains.")}";
 				medbayHealSpotsHover.HoverText = $"{Localization.TT("Shows health points increase amount cache will provide to crewmembers, when applied.")}";
 				dmgToCrewTextHover.HoverText = $"{Localization.TT("Shows health points increase limit after which upgrade cache will have no effect.")}";
+				pointDefDmgToProjectilesHover.HoverText = $"{Localization.TT("Shows currently selected weapon type that crewmembers will equip.\nCan be changed with PAGE UP and PAGE DOWN hotkeys.")}";
 				storageSizeHover.HoverText = $"{Localization.TT("Shows list of potentials weapons that crewmembers can equip, when cache is opened.")}";
 				sSpeedBonusHover.HoverText = $"{Localization.TT("Shows interstellar travel speed increase artifact provides to the ship.")}";
 				sAsteroidDeflBonusHover.HoverText = $"{Localization.TT("Shows protection efficiency against asteroids that artifact provides to the ship.")}";
@@ -1542,6 +1545,23 @@ namespace RST.UI {
 				sMaxHealthBonusHover.HoverText = $"{Localization.TT("Shows durability increase artifact provides to the ship.")}";
 				starmapStealthDetMaxHover.HoverText = $"{Localization.TT("How much energy artifact currently emits and by how much it inflates ship's signature.")}";
 			}
+		}
+		private string GetSelectedWeapon() {
+			List<string> weaponList = FFU_BE_Mod_Crewmembers.GetWeaponDualIDsFromCacheID(m.PrefabId);
+			if (!weaponList.Contains(FFU_BE_Defs.currentlySelectedWeapon) || FFU_BE_Defs.weaponSelectionCount != weaponList.Count) {
+				FFU_BE_Defs.weaponSelectionCount = weaponList.Count;
+				FFU_BE_Defs.weaponSelectionIndex = 0;
+			}
+			if (weaponList.Count > 1 && !Input.GetKeyDown(KeyCode.PageUp) && Input.GetKeyDown(KeyCode.PageDown)) {
+				if (FFU_BE_Defs.weaponSelectionIndex < FFU_BE_Defs.weaponSelectionCount - 1) FFU_BE_Defs.weaponSelectionIndex++;
+				else FFU_BE_Defs.weaponSelectionIndex = 0;
+			}
+			if (weaponList.Count > 1 && Input.GetKeyDown(KeyCode.PageUp) && !Input.GetKeyDown(KeyCode.PageDown)) {
+				if (FFU_BE_Defs.weaponSelectionIndex > 0) FFU_BE_Defs.weaponSelectionIndex--;
+				else FFU_BE_Defs.weaponSelectionIndex = FFU_BE_Defs.weaponSelectionCount - 1;
+			}
+			FFU_BE_Defs.currentlySelectedWeapon = weaponList[FFU_BE_Defs.weaponSelectionIndex];
+			return FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == FFU_BE_Defs.currentlySelectedWeapon)?.displayName;
 		}
 		[MonoModReplace] private void DoWeaponCrewDmg(WeaponModule w, ShootAtDamageDealer.CrewDmgLevel crewDmgLevel) {
 		/// Show Updated Crew Damage in Module Panel

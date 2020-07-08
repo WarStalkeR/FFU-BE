@@ -122,10 +122,91 @@ namespace FFU_Bleeding_Edge {
 					"Hand weapon assaultrifle",
 					"Hand weapon diylasergun" };
 				case 1316302015: return new List<string> {
+					"Hand weapon diyrailgun",
+					"Hand weapon precisiongatling",
+					"Hand weapon laserrifle",
+					"Hand weapon handcannon" };
+				default: return null;
+			}
+		}
+		public static List<string> GetWeaponDualIDsFromCacheID(int cachePrefabID) {
+			switch (cachePrefabID) {
+				case 1745395900:
+				return new List<string> {
+					"Hand weapon tazerfists",
+					"Hand weapon tazerfists",
+					"Hand weapon welder double",
+					"Hand weapon welder double",
+					"Hand weapon flamepistol",
+					"Hand weapon flamepistol",
+					"Hand weapon acidgun",
+					"Hand weapon acidgun" }; ;
+				case 179311957:
+				return new List<string> {
+					"Hand weapon revolver large acc",
+					"Hand weapon revolver large acc",
+					"Hand weapon uzi",
+					"Hand weapon uzi",
+					"Hand weapon shotgun",
+					"Hand weapon shotgun",
+					"Hand weapon assaultrifle",
+					"Hand weapon assaultrifle",
+					"Hand weapon precisiongatling",
 					"Hand weapon precisiongatling",
 					"Hand weapon handcannon",
+					"Hand weapon handcannon",
 					"Hand weapon diyrailgun",
+					"Hand weapon diyrailgun" };
+				case 760711671:
+				return new List<string> {
+					"Hand weapon laser pistol",
+					"Hand weapon laser pistol",
+					"Hand weapon diylasergun",
+					"Hand weapon diylasergun",
+					"Hand weapon laserrifle",
 					"Hand weapon laserrifle" };
+				case 656277331:
+				return new List<string> {
+					"Hand weapon insect pinkray pistol",
+					"Hand weapon insect pinkray pistol",
+					"Hand weapon insect pinkray rifle",
+					"Hand weapon insect pinkray rifle",
+					"Hand weapon warpeffector",
+					"Hand weapon warpeffector",
+					"Hand weapon yellow raypistol",
+					"Hand weapon yellow raypistol" };
+				case 760711667:
+				return new List<string> {
+					"Hand weapon autopistol",
+					"Hand weapon autopistol",
+					"Hand weapon revolver small",
+					"Hand weapon revolver small",
+					"Hand weapon revolver large",
+					"Hand weapon revolver large",
+					"Hand weapon revolver large acc",
+					"Hand weapon revolver large acc",
+					"Hand weapon laser pistol",
+					"Hand weapon laser pistol" };
+				case 1279608160:
+				return new List<string> {
+					"Hand weapon uzi",
+					"Hand weapon uzi",
+					"Hand weapon shotgun",
+					"Hand weapon shotgun",
+					"Hand weapon assaultrifle",
+					"Hand weapon assaultrifle",
+					"Hand weapon diylasergun",
+					"Hand weapon diylasergun" };
+				case 1316302015:
+				return new List<string> {
+					"Hand weapon diyrailgun",
+					"Hand weapon diyrailgun",
+					"Hand weapon precisiongatling",
+					"Hand weapon precisiongatling",
+					"Hand weapon laserrifle",
+					"Hand weapon laserrifle",
+					"Hand weapon handcannon",
+					"Hand weapon handcannon" };
 				default: return null;
 			}
 		}
@@ -152,7 +233,7 @@ namespace FFU_Bleeding_Edge {
 				case 760711671: listedItems = new List<string> {
 					Localization.TT("Laser Pistol"),
 					Localization.TT("Laser Rifle"),
-					Localization.TT("Laser Cannon")};
+					Localization.TT("Laser Minicannon")};
 				if (!string.IsNullOrEmpty(itemSpacing)) listedItems.Add(itemSpacing);
 				return listedItems;
 				case 656277331: listedItems = new List<string> {
@@ -375,7 +456,6 @@ namespace FFU_Bleeding_Edge {
 			ShipModule refModule = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId);
 			string moodMessage = GetMoodTextFromWeapon(refWeapon.name);
 			StringBuilder cacheUsedMessage = null;
-			List<string> availableWeapons = new List<string>();
 			foreach (Crewmember cachedCrewmember in PerFrameCache.CachedCrewmembers.Where(x => x.Ownership.GetOwner() == Ownership.Owner.Me && Vector2.Distance(refSource.transform.position, x.transform.position) <= FFU_BE_Defs.equipmentChangeDist)) {
 				if (refSource != null && refModule != null & availableSets > 0) {
 					switch (refModule.name) {
@@ -400,102 +480,23 @@ namespace FFU_Bleeding_Edge {
 							}
 						} break;
 						case "artifactmodule tec 17 broken screen gizmo, data":
-						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = GetWeaponNameIDsFromCacheID(1745395900);
-							EQUIP_CQC:
-							cacheUsedMessage = RstShared.StringBuilder;
-							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
-							if (refWeapon != null) {
-								CrewmemberSetWeapon(cachedCrewmember, refWeapon);
-								moodMessage = GetMoodTextFromWeapon(refWeapon.name);
-								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} has equipped {1}{2}"), cachedCrewmember.DisplayNameLocalized, refWeapon.DisplayNameLocalized, moodMessage);
-								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
-								availableSets--;
-							} else goto EQUIP_CQC;
-						} break;
 						case "artifactmodule tec 25 broken screen gizmo":
-						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = GetWeaponNameIDsFromCacheID(179311957);
-							EQUIP_KINETIC:
-							cacheUsedMessage = RstShared.StringBuilder;
-							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
-							if (refWeapon != null) {
-								CrewmemberSetWeapon(cachedCrewmember, refWeapon);
-								moodMessage = GetMoodTextFromWeapon(refWeapon.name);
-								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} has equipped {1}{2}"), cachedCrewmember.DisplayNameLocalized, refWeapon.DisplayNameLocalized, moodMessage);
-								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
-								availableSets--;
-							} else goto EQUIP_KINETIC;
-						} break;
 						case "artifactmodule tec 32 broken container gizmo":
-						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = GetWeaponNameIDsFromCacheID(760711671);
-							EQUIP_LASERS:
-							cacheUsedMessage = RstShared.StringBuilder;
-							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
-							if (refWeapon != null) {
-								CrewmemberSetWeapon(cachedCrewmember, refWeapon);
-								moodMessage = GetMoodTextFromWeapon(refWeapon.name);
-								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} has equipped {1}{2}"), cachedCrewmember.DisplayNameLocalized, refWeapon.DisplayNameLocalized, moodMessage);
-								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
-								availableSets--;
-							} else goto EQUIP_LASERS;
-						} break;
 						case "artifactmodule tec 37 ripped quarter of a dome":
-						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = GetWeaponNameIDsFromCacheID(656277331);
-							EQUIP_ENERGY:
-							cacheUsedMessage = RstShared.StringBuilder;
-							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
-							if (refWeapon != null) {
-								CrewmemberSetWeapon(cachedCrewmember, refWeapon);
-								moodMessage = GetMoodTextFromWeapon(refWeapon.name);
-								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} has equipped {1}{2}"), cachedCrewmember.DisplayNameLocalized, refWeapon.DisplayNameLocalized, moodMessage);
-								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
-								availableSets--;
-							} else goto EQUIP_ENERGY;
-						} break;
 						case "artifactmodule tec 36 broken gizmo":
-						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = GetWeaponNameIDsFromCacheID(760711667);
-							EQUIP_BACKUP:
-							cacheUsedMessage = RstShared.StringBuilder;
-							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
-							if (refWeapon != null) {
-								CrewmemberSetWeapon(cachedCrewmember, refWeapon);
-								moodMessage = GetMoodTextFromWeapon(refWeapon.name);
-								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} has equipped {1}{2}"), cachedCrewmember.DisplayNameLocalized, refWeapon.DisplayNameLocalized, moodMessage);
-								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
-								availableSets--;
-							} else goto EQUIP_BACKUP;
-						} break;
 						case "artifactmodule tec 34 data core grammofon":
-						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = GetWeaponNameIDsFromCacheID(1279608160);
-							EQUIP_TACTICAL:
-							cacheUsedMessage = RstShared.StringBuilder;
-							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
-							if (refWeapon != null) {
-								CrewmemberSetWeapon(cachedCrewmember, refWeapon);
-								moodMessage = GetMoodTextFromWeapon(refWeapon.name);
-								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} has equipped {1}{2}"), cachedCrewmember.DisplayNameLocalized, refWeapon.DisplayNameLocalized, moodMessage);
-								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
-								availableSets--;
-							} else goto EQUIP_TACTICAL;
-						} break;
 						case "artifactmodule tec 35 data core makk":
 						if (cachedCrewmember.HandWeaponPrefab != null && !FFU_BE_Defs.builtInWeaponTypes.Contains(cachedCrewmember.HandWeaponPrefab.name)) {
-							availableWeapons = GetWeaponNameIDsFromCacheID(1316302015);
-							EQUIP_ASSAULT:
+							EQUIP_WEAPON:
 							cacheUsedMessage = RstShared.StringBuilder;
-							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == Core.RandomItemFromList(availableWeapons));
+							refWeapon = FFU_BE_Defs.prefabModdedFirearmsList.Find(x => x.name == FFU_BE_Defs.currentlySelectedWeapon);
 							if (refWeapon != null) {
 								CrewmemberSetWeapon(cachedCrewmember, refWeapon);
 								moodMessage = GetMoodTextFromWeapon(refWeapon.name);
 								cacheUsedMessage.AppendFormat(MonoBehaviourExtended.TT("{0} has equipped {1}{2}"), cachedCrewmember.DisplayNameLocalized, refWeapon.DisplayNameLocalized, moodMessage);
 								StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, cacheUsedMessage.ToString());
 								availableSets--;
-							} else goto EQUIP_ASSAULT;
+							} else goto EQUIP_WEAPON;
 						} break;
 					}
 				}
