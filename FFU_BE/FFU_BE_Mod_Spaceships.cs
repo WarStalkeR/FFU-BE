@@ -4779,7 +4779,7 @@ namespace RST {
 					if (FFU_BE_Defs.debugMode) Debug.Log("Dropped Module: [" + droppedModule.name + "] Health: " + droppedModule.Health + "/" + droppedModule.MaxHealth);
 					bool wasDropped = (FFU_BE_Defs.intactModuleDropChance * FFU_BE_Defs.GetHealthPercent(droppedModule)) >= UnityEngine.Random.Range(0f, 1f);
 					if (droppedModule.type == ShipModule.Type.Weapon_Nuke) wasDropped = FFU_BE_Defs.GetHealthPercent(droppedModule) >= UnityEngine.Random.Range(0f, 1f);
-					if (droppedModule.displayName.Contains("Cache")) wasDropped = true;
+					if (droppedModule.type == ShipModule.Type.Other) wasDropped = true;
 					if (wasDropped) DetatchModule(droppedModule);
 				}
 			}
