@@ -4,28 +4,25 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Bridges {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName == "bridge 1crew DIY") return idx; idx++;
-			if (moduleName == "bridge 1crew insectoid") return idx; idx++;
-			if (moduleName == "bridge 1crew") return idx; idx++;
-			if (moduleName == "bridge 2crew") return idx; idx++;
-			if (moduleName == "bridge 2crew tiger") return idx; idx++;
-			if (moduleName == "bridge 3crew") return idx; idx++;
-			if (moduleName == "bridge 3crew floral") return idx; idx++;
-			if (moduleName == "bridge 3crew plastarmor") return idx; idx++;
-			if (moduleName == "bridge blackspider") return idx; idx++;
-			if (moduleName == "bridge 3crew metalarmor") return idx; idx++;
+			if (moduleID == 983196801) return idx; idx++; //bridge 1crew DIY
+			if (moduleID == 81067369) return idx; idx++; //bridge 1crew insectoid
+			if (moduleID == 810647225) return idx; idx++; //bridge 1crew
+			if (moduleID == 1003445460) return idx; idx++; //bridge 2crew
+			if (moduleID == 171768739) return idx; idx++; //bridge 2crew tiger
+			if (moduleID == 2085174639) return idx; idx++; //bridge 3crew
+			if (moduleID == 1200522469) return idx; idx++; //bridge 3crew floral
+			if (moduleID == 436212146) return idx; idx++; //bridge 3crew plastarmor
+			if (moduleID == 954068497) return idx; idx++; //bridge blackspider
+			if (moduleID == 1148319565) return idx; idx++; //bridge 3crew metalarmor
 			return idx + 100;
 		}
 		public static void UpdateBridgeModule(ShipModule shipModule, bool initItemData) {
 			string colorBridge = "ff794d";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "bridge 1crew DIY":
+			switch (shipModule.PrefabId) {
+				case 983196801: //bridge 1crew DIY
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.1f);
 				shipModule.displayName = "Makeshift <color=#" + colorBridge + "ff>Command Bridge</color>";
@@ -36,7 +33,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 30;
 				break;
-				case "bridge 1crew insectoid":
+				case 81067369: //bridge 1crew insectoid
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
 				shipModule.displayName = "Ancient <color=#" + colorBridge + "ff>Command Bridge</color>";
@@ -47,7 +44,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 8;
 				shipModule_maxHealth = 40;
 				break;
-				case "bridge 1crew":
+				case 810647225: //bridge 1crew
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.3f);
 				shipModule.displayName = "Frigate <color=#" + colorBridge + "ff>Command Bridge</color>";
@@ -58,7 +55,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 10;
 				shipModule_maxHealth = 50;
 				break;
-				case "bridge 2crew":
+				case 1003445460: //bridge 2crew
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Destroyer <color=#" + colorBridge + "ff>Command Bridge</color>";
@@ -69,7 +66,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 12;
 				shipModule_maxHealth = 60;
 				break;
-				case "bridge 2crew tiger":
+				case 171768739: //bridge 2crew tiger
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Tactical <color=#" + colorBridge + "ff>Command Bridge</color>";
@@ -80,7 +77,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 14;
 				shipModule_maxHealth = 70;
 				break;
-				case "bridge 3crew":
+				case 2085174639: //bridge 3crew
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Cruiser <color=#" + colorBridge + "ff>Command Bridge</color>";
@@ -91,7 +88,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 16;
 				shipModule_maxHealth = 80;
 				break;
-				case "bridge 3crew floral":
+				case 1200522469: //bridge 3crew floral
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.7f);
 				shipModule.displayName = "Biouplink <color=#" + colorBridge + "ff>Command Bridge</color>";
@@ -102,7 +99,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 18;
 				shipModule_maxHealth = 90;
 				break;
-				case "bridge 3crew plastarmor":
+				case 436212146: //bridge 3crew plastarmor
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Battleship <color=#" + colorBridge + "ff>Command Bridge</color>";
@@ -113,7 +110,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 20;
 				shipModule_maxHealth = 100;
 				break;
-				case "bridge blackspider":
+				case 954068497: //bridge blackspider
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Hiveworld <color=#" + colorBridge + "ff>Command Bridge</color>";
@@ -124,7 +121,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 22;
 				shipModule_maxHealth = 120;
 				break;
-				case "bridge 3crew metalarmor":
+				case 1148319565: //bridge 3crew metalarmor
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Dreadnought <color=#" + colorBridge + "ff>Command Bridge</color>";

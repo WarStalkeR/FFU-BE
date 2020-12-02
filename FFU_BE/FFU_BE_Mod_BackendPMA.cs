@@ -117,7 +117,7 @@ namespace RST.PlaymakerAction {
 			fsmVariables.GetFsmString("crewNameOverride").Value = crewNameOverride.Value;
 			fsmVariables.GetFsmString("crewDescriptionOverride").Value = crewDescriptionOverride.Value;
 			int count = ParseIntExpr(ModuleCount.Value, null);
-			List<ShipModule> modulePoolList = InstantiateFromPool.DoIt<ShipModule>(Array.ConvertAll(modulePool.Values, (object p) => (GameObject)p), modulePoolAllowDuplicates.Value, PlayerDatas.Instance?.transform, count);
+			List<ShipModule> modulePoolList = InstantiateFromPool.Do<ShipModule>(Array.ConvertAll<object, GameObject>(this.modulePool.Values, (object p) => PrefabFinder.ReLookup((GameObject)p)), this.modulePoolAllowDuplicates.Value, (PlayerDatas.Instance != null) ? PlayerDatas.Instance.transform : null, count);
 			foreach (ShipModule item in modulePoolList) {
 				item.transform.position = new Vector3(10000f, 0f, 0f);
 				item.Ownership.SetOwner(Ownership.Owner.Inherit);
@@ -159,7 +159,7 @@ namespace RST.PlaymakerAction {
 		[MonoModReplace] public static List<Ship> GetAllPlayableShips() {
 		/// Class-based Ship Sorting
 			List<Ship> list = PrefabFinder.Instance.FindAll("IntViewShip", (Ship s) => s.isPlayableShip || AllowedShip(s));
-			list.Sort((Ship a, Ship b) => FFU_BE_Defs.SortAllShips(a.PrefabId).CompareTo(FFU_BE_Defs.SortAllShips(b.PrefabId)));
+			list.Sort((Ship a, Ship b) => FFU_BE_Mod_Spaceships.SortAllShips(a.PrefabId).CompareTo(FFU_BE_Mod_Spaceships.SortAllShips(b.PrefabId)));
 			return list;
 		}
 		[MonoModReplace] private void UpdateShipSelection() {
@@ -242,73 +242,89 @@ namespace RST.PlaymakerAction {
 	}
 	public class patch_PerksSelection : PerksSelection {
 		[MonoModIgnore] private void BackClicked() { }
+		
 		[MonoModIgnore] private void ResetClicked() { }
 		[MonoModIgnore] private void UpdateDisplay() { }
 		[MonoModIgnore] private void FinishThisAction() { }
-		[MonoModIgnore] private void ConfirmationNoClicked() { }
 		[MonoModIgnore] private void ClearSelectedPerkInfo() { }
-		[MonoModIgnore] private bool CanStartGame() { return false; }
+		[MonoModIgnore] private void ConfirmationNoClicked() { }
 		[MonoModIgnore] private int SumPerksTotalRepCost() { return 0; }
+		[MonoModIgnore] private bool CanStartGame() { return true; }
 		[MonoModIgnore] private string DefaultShipName { get { return null; } }
-		[MonoModIgnore] private void OnToggleChanged(PerkUIGridElement item, bool ticked) { }
 		[MonoModIgnore] private void ChangeCrewName(Crewmember crew, string newName) { }
-		[MonoModIgnore] private List<PerkUIGridElement> perkUiElements = new List<PerkUIGridElement>();
+		[MonoModIgnore] private void OnToggleChanged(PerkUIGridElement item, bool ticked) { }
 		[MonoModIgnore] private static Crewmember InstantiateCrewWithSeed(Crewmember crewPrefab, int seed, string matchingComment, Perk perkPrefab = null) { return null; }
-		[MonoModIgnore] private int prevTotalFate;
-		[MonoModIgnore] private int fateFromPermanentPerks;
+		[MonoModIgnore] private int TotalFate => prevRunFate + sectorFate.Value + firstRunFate + fateFromPermanentPerks;
+		[MonoModIgnore] private List<PerkUIGridElement> perkUiElements = new List<PerkUIGridElement>();
+		[MonoModIgnore] private List<int> purchasedPermPerkIds;
 		[MonoModIgnore] private List<int> unlockedItemIds;
 		[MonoModIgnore] private List<int> shipSpecificPerkIds;
-		[MonoModIgnore] private List<int> purchasedPermPerkIds;
-		[MonoModIgnore] private int TotalFate => prevRunFate.Value + sectorFate.Value + firstRunFate.Value + fateFromPermanentPerks;
+		[MonoModIgnore] private int fateFromPermanentPerks;
+		[MonoModIgnore] private int prevRunFate;
+		[MonoModIgnore] private int firstRunFate;
+		[MonoModIgnore] private int prevTotalFate;
 		[MonoModReplace] public override void OnEnter() {
-		/// Configurable Starting Fate
-			if (FFU_BE_Defs.newStartingFateBonus > 0) firstRunFate.Value = FFU_BE_Defs.newStartingFateBonus;
+			group.SetActive(true);
 			backButton.onClick.AddListener(BackClicked);
 			doneButton.onClick.AddListener(DoneClicked);
 			resetButton.onClick.AddListener(ResetClicked);
-			(confirmationYesButton.Value as Button).onClick.AddListener(ConfirmationYesClicked);
-			(confirmationNoButton.Value as Button).onClick.AddListener(ConfirmationNoClicked);
-			confirmationGroup.Value.SetActive(false);
+			confirmationYesButton.onClick.AddListener(ConfirmationYesClicked);
+			confirmationNoButton.onClick.AddListener(ConfirmationNoClicked);
+			confirmationGroup.SetActive(false);
+			string identifier = "start.es2?tag=fatePoints";
+			if (ES2.Exists(identifier)) {
+				prevRunFate = ES2.Load<int>(identifier);
+				firstRunFate = 0;
+			} else {
+				prevRunFate = 0;
+				firstRunFate = 5;
+			}
+			if (FFU_BE_Defs.newStartingFateBonus > 0) firstRunFate = FFU_BE_Defs.newStartingFateBonus;
 			prevTotalFate = TotalFate;
 			List<Perk> list = new List<Perk>();
 			purchasedPermPerkIds = Perk.LoadPurchasedPermPerkIds();
 			unlockedItemIds = UnlockItem.LoadUnlockedItems();
 			shipSpecificPerkIds = new List<int>();
-			GameObjectPool gameObjectPool = WorldRules.Instance.perksPoolRef.Prefab?.GetComponent<GameObjectPool>();
-			if (gameObjectPool != null) {
-				foreach (GameObject item in gameObjectPool.items) {
-					if (item != null) {
-						Perk component = item.GetComponent<Perk>();
-						if (component != null) list.Add(component);
+			PrefabPool prefabPool = WorldRules.Instance.perksPoolRef.Prefab?.GetComponent<PrefabPool>();
+			if (prefabPool != null) {
+				foreach (PrefabRef item in prefabPool.items) {
+					Perk perk2 = item.Prefab?.GetComponent<Perk>();
+					if (perk2 != null) {
+						list.Add(perk2);
 					}
 				}
 			}
-			if (!FFU_BE_Defs.unusedPerkIDs.IsEmpty()) foreach (int perkId in FFU_BE_Defs.unusedPerkIDs) list.Add(FFU_BE_Defs.prefabPerkList.Find(p => p.PrefabId == perkId));
-			InputField obj = shipNameInput.Value as InputField;
+			foreach (int perkID in FFU_BE_Defs.unusedPerkIDs) {
+				Perk unusedPerk = FFU_BE_Defs.prefabPerkList.Find(x => x.PrefabId == perkID);
+				if (unusedPerk != null) list.Add(unusedPerk);
+			}
 			string defaultShipName = DefaultShipName;
-			obj.text = ((storeShipName.Value != defaultShipName) ? storeShipName.Value : "");
-			obj.placeholder.GetComponent<Text>().text = Localization.TT("Default name:") + " " + DefaultShipName;
+			shipNameInput.text = ((storeShipName.Value != defaultShipName) ? storeShipName.Value : "");
+			shipNameInput.placeholder.GetComponent<Text>().text = Localization.TT("Default name:") + " " + DefaultShipName;
 			if (chosenMothership.Value != null) {
-				Ship component2 = chosenMothership.Value.GetComponent<Ship>();
-				if (component2 != null) {
-					ShipSpecificPerks cachedComponent = component2.GetCachedComponent<ShipSpecificPerks>(true);
+				Ship component = chosenMothership.Value.GetComponent<Ship>();
+				if (component != null) {
+					ShipSpecificPerks cachedComponent = component.GetCachedComponent<ShipSpecificPerks>(true);
 					if (cachedComponent != null) {
 						Perk[] perkPrefabs = cachedComponent.PerkPrefabs;
-						foreach (Perk perk2 in perkPrefabs) {
-							if (perk2 != null) {
-								shipSpecificPerkIds.Add(perk2.PrefabId);
-								list.Add(perk2);
+						foreach (Perk perk3 in perkPrefabs) {
+							if (perk3 != null) {
+								shipSpecificPerkIds.Add(perk3.PrefabId);
+								list.Add(perk3);
 							}
 						}
 					}
 				}
 			}
 			fateFromPermanentPerks = 0;
-			perkUiElements = RstUtil.RebuildUiList((grid.Value as GridLayoutGroup).transform, gridItemProto.Value as PerkUIGridElement, list, delegate (PerkUIGridElement ui, Perk perk) {
+			perkUiElements = RstUtil.RebuildUiList(grid.transform, gridItemProto, list, delegate (PerkUIGridElement ui, Perk perk)
+			{
 				patch_PerksSelection perksSelection = this;
 				ui.FillWithDataFrom(perk, unlockedItemIds, purchasedPermPerkIds, shipSpecificPerkIds);
 				bool flag = perk.isPermanent && purchasedPermPerkIds.Contains(perk.PrefabId);
-				if (flag) fateFromPermanentPerks += perk.fateBonusInPerkSelection;
+				if (flag) {
+					fateFromPermanentPerks += perk.fateBonusInPerkSelection;
+				}
 				if (ui.toggle.isOn != flag) {
 					Toggle.ToggleTransition toggleTransition = ui.toggle.toggleTransition;
 					ui.toggle.toggleTransition = Toggle.ToggleTransition.None;
@@ -321,18 +337,14 @@ namespace RST.PlaymakerAction {
 			});
 			UpdateDisplay();
 			ClearSelectedPerkInfo();
-			if (perkInfoGroup.Value != null) {
-				perkInfoGroup.Value.SetActive(false);
-			}
 		}
 		[MonoModReplace] private void DoneClicked() {
 		/// Set Difficulty & Allow Added Crew to Spawn
 			if (!CanStartGame()) return;
 			if (TotalFate - SumPerksTotalRepCost() > 0) {
-				confirmationGroup.Value.SetActive(true);
+				confirmationGroup.SetActive(true);
 				RstAudioManager instance = RstAudioManager.Instance;
-				AudioClip audioClip = confirmationOpenSound.Value as AudioClip;
-				if (instance != null && audioClip != null) instance.PlayUiSound(audioClip);
+				if (instance != null && confirmationOpenSound != null) instance.PlayUiSound(confirmationOpenSound);
 			} else {
 				FFU_BE_Defs.gameDifficulty = FFU_BE_Defs.chosenDifficulty;
 				FFU_BE_Defs.canSpawnCrew = true;
@@ -340,8 +352,8 @@ namespace RST.PlaymakerAction {
 			}
 		}
 		[MonoModReplace] private void ConfirmationYesClicked() {
-			/// Set Difficulty & Allow Added Crew to Spawn
-			confirmationGroup.Value.SetActive(false);
+		/// Set Difficulty & Allow Added Crew to Spawn
+			confirmationGroup.SetActive(false);
 			if (CanStartGame()) {
 				FFU_BE_Defs.gameDifficulty = FFU_BE_Defs.chosenDifficulty;
 				FFU_BE_Defs.canSpawnCrew = true;
@@ -349,7 +361,7 @@ namespace RST.PlaymakerAction {
 			}
 		}
 		[MonoModReplace] private void UpdateResourceAndBonusesDisplay() {
-		/// Usage of Data from Modded Variables
+			/// Usage of Data from Modded Variables
 			Ship ship = chosenMothership.Value?.GetComponent<Ship>();
 			if (ship == null) return;
 			AddResourcesToShip[] componentsInChildren = ship.GetComponentsInChildren<AddResourcesToShip>();
@@ -406,7 +418,7 @@ namespace RST.PlaymakerAction {
 					if (group.matchCrewColor) RandomizeCrewmember.PickMatchedColor(group.Pool, out color);
 					int randomInt = group.count.GetRandomInt();
 					for (int l = 0; l < randomInt; l++) {
-						Crewmember crewmember = GameObjectPool.TakeRandomPrefab<Crewmember>(group.Pool);
+						Crewmember crewmember = PrefabPool.TakeRandomPrefab<Crewmember>(group.Pool);
 						if (crewmember != null) {
 							int newSeed = Mathf.Abs(addCrewToShip.seed + k * 100 + l);
 							Crewmember newCrewmember = InstantiateCrewWithSeed(crewmember, newSeed, group.chooseWithMatchingComment);
@@ -435,7 +447,7 @@ namespace RST.PlaymakerAction {
 				baseEvasion += perkUIGridElement.perkPrefab.addShipEvasionPercent;
 				RstRandom.InitState(Mathf.Abs(seed + 5555 + perkUIGridElement.perkPrefab.name.GetHashCode()));
 				for (int n = 0; n < perkUIGridElement.perkPrefab.extraCrew.Length; n++) {
-					Crewmember crewmember3 = GameObjectPool.TakeRandomPrefab<Crewmember>(perkUIGridElement.perkPrefab.extraCrew[n].Prefabs);
+					Crewmember crewmember3 = PrefabPool.TakeRandomPrefab<Crewmember>(perkUIGridElement.perkPrefab.extraCrew[n].Prefabs);
 					if (crewmember3 != null) {
 						int seed3 = Mathf.Abs(seed + perkUIGridElement.perkPrefab.name.GetHashCode() + n);
 						Crewmember crewmember4 = InstantiateCrewWithSeed(crewmember3, seed3, perkUIGridElement.perkPrefab.extraCrewChooseWithMatchingComment, perkUIGridElement.perkPrefab);
@@ -448,7 +460,7 @@ namespace RST.PlaymakerAction {
 						FFU_BE_Defs.perkModuleBlueprintIDs.Add(moduleID);
 				extraModules += perkUIGridElement.perkPrefab.extraModules.Length;
 			}
-			(shipHealth.Value as Text).text = baseMaxHP.ToString("0") + "/" + baseMaxHP.ToString("0");
+			shipHealth.text = baseMaxHP.ToString("0") + "/" + baseMaxHP.ToString("0");
 			WorldRules.StartingBonus startingBonus = WorldRules.Instance.beginnerStartingBonus;
 			SetResourceElementText(fuel, fuelWarning, baseFuel, Mathf.RoundToInt(coreFuel.min * FFU_BE_Defs.GetDifficultyStartRes(true)));
 			SetResourceElementText(organics, organicsWarning, baseOrganics, Mathf.RoundToInt(coreOrganics.min * FFU_BE_Defs.GetDifficultyStartRes(true)));
@@ -467,9 +479,9 @@ namespace RST.PlaymakerAction {
 			float startingBonusMult = FFU_BE_Defs.GetDifficultyStartMod(true);
 			string bonusColor = startingBonusMult > 0 ? "lime" : "red";
 			string valueSign = startingBonusMult > 0 ? "↑" : "↓";
-			(shipAccuracyBonus.Value as Text).text = $"{baseAccuracy.ToString("0")}{(startingBonusMult != 0 ? $" <color={bonusColor}>{valueSign}{Mathf.Abs(startingBonus.accuracyBonusPercent * startingBonusMult):0}</color>" : null)}%";
-			(shipDeflectionBonus.Value as Text).text = $"{baseDefelection.ToString("0")}{(startingBonusMult != 0 ? $" <color={bonusColor}>{valueSign}{Mathf.Abs(startingBonus.deflectionBonusPercent * startingBonusMult):0}</color>" : null)}%";
-			(shipEvasionBonus.Value as Text).text = $"{baseEvasion.ToString("0")}{(startingBonusMult != 0 ? $" <color={bonusColor}>{valueSign}{Mathf.Abs(startingBonus.evasionBonusPercent * startingBonusMult):0}</color>" : null)}°/ₘ";
+			shipAccuracyBonus.text = $"{baseAccuracy.ToString("0")}{(startingBonusMult != 0 ? $" <color={bonusColor}>{valueSign}{Mathf.Abs(startingBonus.accuracyBonusPercent * startingBonusMult):0}</color>" : null)}%";
+			shipDeflectionBonus.text = $"{baseDefelection.ToString("0")}{(startingBonusMult != 0 ? $" <color={bonusColor}>{valueSign}{Mathf.Abs(startingBonus.deflectionBonusPercent * startingBonusMult):0}</color>" : null)}%";
+			shipEvasionBonus.text = $"{baseEvasion.ToString("0")}{(startingBonusMult != 0 ? $" <color={bonusColor}>{valueSign}{Mathf.Abs(startingBonus.evasionBonusPercent * startingBonusMult):0}</color>" : null)}°/ₘ";
 			int crewRegular = 0;
 			int crewPets = 0;
 			int crewDrones = 0;
@@ -482,19 +494,19 @@ namespace RST.PlaymakerAction {
 					}
 				}
 			}
-			(crewCount.Value as Text).text = crewRegular.ToString();
-			(petCount.Value as Text).text = crewPets.ToString();
-			(droneCount.Value as Text).text = crewDrones.ToString();
-			RstUtil.RebuildUiList(crewList.Value.transform, crewListItemProto.Value as CrewOnPerksSelectionListItem, list, delegate (CrewOnPerksSelectionListItem ui, Crewmember crew) {
+			crewCount.text = crewRegular.ToString();
+			petCount.text = crewPets.ToString();
+			droneCount.text = crewDrones.ToString();
+			RstUtil.RebuildUiList(crewList, crewListItemProto, list, delegate (CrewOnPerksSelectionListItem ui, Crewmember crew) {
 				patch_PerksSelection perksSelection = this;
 				ui.FillWithDataFrom(crew);
 				ui.displayName.onEndEdit.RemoveAllListeners();
 				ui.displayName.onEndEdit.AddListener(delegate (string newName) { perksSelection.ChangeCrewName(crew, newName); });
 			});
 			int storageSizeInShipPrefab = GetStorageSizeInShipPrefab(ship);
-			(extraModulesCount.Value as Text).text = extraModules + "/" + storageSizeInShipPrefab;
+			extraModulesCount.text = extraModules + "/" + storageSizeInShipPrefab;
 			bool flag = extraModules > storageSizeInShipPrefab;
-			if (extraModulesWarning.Value.activeSelf != flag) extraModulesWarning.Value.SetActive(flag);
+			if (extraModulesWarning.activeSelf != flag) extraModulesWarning.SetActive(flag);
 		}
 		[MonoModReplace] private static int GetStorageSizeInShipPrefab(Ship shipPrefab) {
 		/// Storage Capacity from Modded Dictionary
@@ -509,15 +521,14 @@ namespace RST.PlaymakerAction {
 						}
 					}
 				}
-			}
-			return 0;
+			} return 0;
 		}
-		private static void SetResourceElementText(FsmObject textObj, FsmGameObject warningGO, FloatMinMax value, int startingBonus) {
+		private static void SetResourceElementText(Text textObj, GameObject warningGO, FloatMinMax value, int startingBonus) {
 		/// Color base on Starting Bonus Amount
 			string valueSign = startingBonus > 0 ? "↑" : "↓";
 			bool notEnoughRes = value.min + startingBonus < 0f || value.max + startingBonus < 0f;
-			(textObj.Value as Text).text = notEnoughRes ? $"<color=red>{value.ToString("0")} {(startingBonus != 0 ? $"{valueSign}{Mathf.Abs(startingBonus)}" : null)}</color>" : $"{value.ToString("0")} <color={(startingBonus > 0 ? "lime" : "red")}>{(startingBonus != 0 ? $"{valueSign}{Mathf.Abs(startingBonus)}" : null)}</color>";
-			warningGO.Value.SetActive(notEnoughRes);
+			textObj.text = notEnoughRes ? $"<color=red>{value.ToString("0")} {(startingBonus != 0 ? $"{valueSign}{Mathf.Abs(startingBonus)}" : null)}</color>" : $"{value.ToString("0")} <color={(startingBonus > 0 ? "lime" : "red")}>{(startingBonus != 0 ? $"{valueSign}{Mathf.Abs(startingBonus)}" : null)}</color>";
+			warningGO.SetActive(notEnoughRes);
 		}
 	}
 	public class patch_CrewResumeCmd : CrewResumeCmd {

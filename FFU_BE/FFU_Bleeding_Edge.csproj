@@ -37,10 +37,6 @@
       <HintPath>..\..\..\BepInEx\core\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\Data\Managed\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="ES2">
       <HintPath>..\..\..\Data\Managed\ES2.dll</HintPath>
       <Private>False</Private>
@@ -60,6 +56,12 @@
     <Reference Include="PlayMaker">
       <HintPath>..\..\..\Data\Managed\PlayMaker.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="PolynavAsm">
+      <HintPath>..\..\..\Data\Managed\PolynavAsm.dll</HintPath>
+    </Reference>
+    <Reference Include="RstAsm">
+      <HintPath>..\..\..\Data\Managed\RstAsm.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -145,6 +147,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)..\..\BepInEx\monomod\Assembly-CSharp.FFU_BE.mm.dll" /Y</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)..\..\BepInEx\monomod\RstAsm.FFU_BE.mm.dll" /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>

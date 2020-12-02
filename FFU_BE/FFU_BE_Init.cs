@@ -45,7 +45,8 @@ namespace RST.UI {
 	}
 }
 
-namespace RST {
+namespace RST.UI
+	{
 	public class patch_GameLoader : GameLoader {
 		[MonoModIgnore] private bool StartWaitingForGameLoad;
 		[MonoModIgnore] private static bool WelcomeScreenShown;

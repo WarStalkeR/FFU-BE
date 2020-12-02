@@ -4,33 +4,30 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Armors {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName.Contains("integrity 0 DIY metal")) return idx; idx++;
-			if (moduleName.Contains("integrity 0 DIY biotech")) return idx; idx++;
-			if (moduleName.Contains("integrity 0 DIY plastic")) return idx; idx++;
-			if (moduleName.Contains("integrity 0 DIY scaled")) return idx; idx++;
-			if (moduleName.Contains("integrity 0 DIY carbon")) return idx; idx++;
-			if (moduleName.Contains("integrity 01 bronze")) return idx; idx++;
-			if (moduleName.Contains("integrity 01 silver")) return idx; idx++;
-			if (moduleName.Contains("integrity 0 ancient")) return idx; idx++;
-			if (moduleName.Contains("integrity 03 bio tissue")) return idx; idx++;
-			if (moduleName.Contains("integrity 04 jade scales")) return idx; idx++;
-			if (moduleName.Contains("integrity 05 blue scales")) return idx; idx++;
-			if (moduleName.Contains("integrity 06 big green scales")) return idx; idx++;
-			if (moduleName.Contains("integrity 06 spideraa")) return idx; idx++;
-			if (moduleName.Contains("integrity 00 Ratty")) return idx; idx++;
-			if (moduleName.Contains("integrity tiger")) return idx; idx++;
+			if (moduleID == 429768775) return idx; idx++; //integrity 0 DIY metal
+			if (moduleID == 1030243901) return idx; idx++; //integrity 0 DIY biotech
+			if (moduleID == 1391715479) return idx; idx++; //integrity 0 DIY plastic
+			if (moduleID == 1683167527) return idx; idx++; //integrity 0 DIY scaled
+			if (moduleID == 1626770136) return idx; idx++; //integrity 0 DIY carbon
+			if (moduleID == 1955952396) return idx; idx++; //integrity 01 bronze
+			if (moduleID == 786297542) return idx; idx++; //integrity 01 silver
+			if (moduleID == 786297541) return idx; idx++; //integrity 0 ancient
+			if (moduleID == 1152326902) return idx; idx++; //integrity 01 bio tissue
+			if (moduleID == 716815312) return idx; idx++; //integrity 04 jade scales
+			if (moduleID == 2071389332) return idx; idx++; //integrity 05 blue scales
+			if (moduleID == 1152328828) return idx; idx++; //integrity 06 big green scales
+			if (moduleID == 989518264) return idx; idx++; //integrity 06 spideraa
+			if (moduleID == 786297539) return idx; idx++; //integrity 00 Ratty
+			if (moduleID == 1196638242) return idx; idx++; //integrity tiger
 			return idx + 100;
 		}
 		public static void UpdateArmorModule(ShipModule shipModule, bool initItemData) {
 			string colorArmor = "dbdb70";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "integrity 0 DIY metal":
+			switch (shipModule.PrefabId) {
+				case 429768775: //integrity 0 DIY metal
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				shipModule.displayName = "Makeshift <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from metal scrap and other useless junk. While it provides very basic degree of protection, it is still better then nothing at all.";
@@ -40,7 +37,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 30;
 				shipModule_maxHealth = 60;
 				break;
-				case "integrity 0 DIY biotech":
+				case 1030243901: //integrity 0 DIY biotech
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				shipModule.displayName = "Organic <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from compressed simple organic fiber. Just a little bit better then makeshift integrity armor, but better nonetheless.";
@@ -50,7 +47,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 40;
 				shipModule_maxHealth = 68;
 				break;
-				case "integrity 0 DIY plastic":
+				case 1391715479: //integrity 0 DIY plastic
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				shipModule.displayName = "Synthetic <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from semi-elastic synthetic plates. Provides more or less decent degree of protection, but still far cry from proper integrity armor.";
@@ -60,7 +57,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 50;
 				shipModule_maxHealth = 76;
 				break;
-				case "integrity 0 DIY scaled":
+				case 1683167527: //integrity 0 DIY scaled
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
 				shipModule.displayName = "Composite <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from multiple metal-synthetic composite layers, thus has decent flexibility and durability. Provides decent degree of protection.";
@@ -70,7 +67,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 60;
 				shipModule_maxHealth = 84;
 				break;
-				case "integrity 0 DIY carbon":
+				case 1626770136: //integrity 0 DIY carbon
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				shipModule.displayName = "Carboninte <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from thin synthesized carbon-fiber layers. Has good durability and light weight. Provides decent degree of protection.";
@@ -80,7 +77,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 70;
 				shipModule_maxHealth = 92;
 				break;
-				case "integrity 01 bronze":
+				case 1955952396: //integrity 01 bronze
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				shipModule.displayName = "Reactive <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from metallic segments filled with mini-explosive packages that detonate on projectile's impact and use released energy to divert incoming kinetic force.";
@@ -90,7 +87,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 85;
 				shipModule_maxHealth = 100;
 				break;
-				case "integrity 01 silver":
+				case 786297542: //integrity 01 silver
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				shipModule.displayName = "Titanite <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from multiple layers of tempered titanium alloy. Production and maintenance costs are higher then normal, but provides good degree of protection.";
@@ -100,7 +97,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 100;
 				shipModule_maxHealth = 110;
 				break;
-				case "integrity 0 ancient":
+				case 786297541: //integrity 0 ancient
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6);
 				shipModule.displayName = "Ceramite <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from heavily tempered overlapped ceramic plates. Provides good degree of protection. Partially erased bluish omega symbols can be seen at some places.";
@@ -110,7 +107,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 120;
 				shipModule_maxHealth = 120;
 				break;
-				case "integrity 03 bio tissue":
+				case 1152326902: //integrity 01 bio tissue
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				shipModule.displayName = "Biontite <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from multiple interconnected living microfibers. Has good flexibility and provides very degree of protection. Don't worry, it won't spawn creep.";
@@ -120,7 +117,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 140;
 				shipModule_maxHealth = 130;
 				break;
-				case "integrity 04 jade scales":
+				case 716815312: //integrity 04 jade scales
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7);
 				shipModule.displayName = "Refractive <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from special segments that use explosive kinetic energy to dampen incoming kinetic force with receiving damage. Provides serious degree of protection.";
@@ -130,7 +127,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 165;
 				shipModule_maxHealth = 140;
 				break;
-				case "integrity 05 blue scales":
+				case 2071389332: //integrity 05 blue scales
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				shipModule.displayName = "Crystalline <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from unknown beautiful crystalline fibers that can store ambient energy to strengthen itself even further. Provides great degree of protection.";
@@ -140,7 +137,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 190;
 				shipModule_maxHealth = 150;
 				break;
-				case "integrity 06 big green scales":
+				case 1152328828: //integrity 06 big green scales
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8);
 				shipModule.displayName = "Dragonscale <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from unknown material of organic origin that has great durability and flexibility at the same time. Equipping it won't turn your ship into dragon slayer.";
@@ -150,7 +147,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 215;
 				shipModule_maxHealth = 160;
 				break;
-				case "integrity 06 spideraa":
+				case 989518264: //integrity 06 spideraa
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				shipModule.displayName = "Megacyte <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from material with unknown properties that has quite an aggressive external appearance. Lack of aesthetics doesn't make it any less durable.";
@@ -160,7 +157,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 240;
 				shipModule_maxHealth = 180;
 				break;
-				case "integrity 00 Ratty":
+				case 786297539: //integrity 00 Ratty
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9);
 				shipModule.displayName = "Adamantite <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Made from strongest existing alloy that was ripped off from something that resembles interstellar drifting gothic cathedral. Provides immense degree of protection.";
@@ -170,7 +167,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 270;
 				shipModule_maxHealth = 200;
 				break;
-				case "integrity tiger":
+				case 1196638242: //integrity tiger
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				shipModule.displayName = "Nanometric <color=#" + colorArmor + "ff>Integrity Armor</color>";
 				shipModule.description = "Experimental armor made from active nanomachines that almost instantly react to any type of incoming damage to negate it. Provides immense degree of protection.";

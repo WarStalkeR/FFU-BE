@@ -4,41 +4,38 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Reactors {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName == "reactor 4 diy 1") return idx; idx++;
-			if (moduleName == "reactor 5 diy 2 backup") return idx; idx++;
-			if (moduleName == "reactor 7 diy 3") return idx; idx++;
-			if (moduleName == "reactor 6 smalltrapho") return idx; idx++;
-			if (moduleName == "reactor 8 smallmulty") return idx; idx++;
-			if (moduleName == "reactor 9 biotech DIY") return idx; idx++;
-			if (moduleName == "reactor 9 small old") return idx; idx++;
-			if (moduleName == "reactor 10 small") return idx; idx++;
-			if (moduleName == "reactor 11 single biofruit DIY") return idx; idx++;
-			if (moduleName == "reactor 12 custom old") return idx; idx++;
-			if (moduleName == "reactor 13 single biofruit") return idx; idx++;
-			if (moduleName == "reactor 13 rats") return idx; idx++;
-			if (moduleName == "reactor 13 classic cooled") return idx; idx++;
-			if (moduleName == "reactor 15 medium") return idx; idx++;
-			if (moduleName == "reactor 16 explosives eater") return idx; idx++;
-			if (moduleName == "reactor 17 emperorbanks") return idx; idx++;
-			if (moduleName == "reactor 17 flower") return idx; idx++;
-			if (moduleName == "reactor 18 weird alien biotech") return idx; idx++;
-			if (moduleName == "reactor 20 biofruit") return idx; idx++;
-			if (moduleName == "reactor 22 spideraa small") return idx; idx++;
-			if (moduleName == "reactor 20 fusion") return idx; idx++;
-			if (moduleName == "reactor 25 spideraa large") return idx; idx++;
-			if (moduleName == "reactor 22 cube") return idx; idx++;
+			if (moduleID == 482395317) return idx; idx++; //reactor 4 diy 1
+			if (moduleID == 1700526886) return idx; idx++; //reactor 5 diy 2 backup
+			if (moduleID == 482395319) return idx; idx++; //reactor 7 diy 3
+			if (moduleID == 833760257) return idx; idx++; //reactor 6 smalltrapho
+			if (moduleID == 1796369958) return idx; idx++; //reactor 8 smallmulty
+			if (moduleID == 45764579) return idx; idx++; //reactor 9 biotech DIY
+			if (moduleID == 1554868377) return idx; idx++; //reactor 9 small old
+			if (moduleID == 813614528) return idx; idx++; //reactor 10 small
+			if (moduleID == 1088784368) return idx; idx++; //reactor 11 single biofruit DIY
+			if (moduleID == 1939016857) return idx; idx++; //reactor 12 custom old
+			if (moduleID == 694263055) return idx; idx++; //reactor 13 single biofruit
+			if (moduleID == 1515340139) return idx; idx++; //reactor 13 rats
+			if (moduleID == 549367690) return idx; idx++; //reactor 13 classic cooled
+			if (moduleID == 1633550495) return idx; idx++; //reactor 15 medium
+			if (moduleID == 220275185) return idx; idx++; //reactor 16 explosives eater
+			if (moduleID == 1573051329) return idx; idx++; //reactor 17 emperorbanks
+			if (moduleID == 433363694) return idx; idx++; //reactor 17 flower
+			if (moduleID == 933867895) return idx; idx++; //reactor 18 weird alien biotech
+			if (moduleID == 2093337887) return idx; idx++; //reactor 20 biofruit
+			if (moduleID == 585779358) return idx; idx++; //reactor 22 spideraa small
+			if (moduleID == 423938228) return idx; idx++; //reactor 20 fusion
+			if (moduleID == 627812931) return idx; idx++; //reactor 25 spideraa large
+			if (moduleID == 1699316752) return idx; idx++; //reactor 22 cube
 			return idx + 100;
 		}
 		public static void UpdateReactorModule(ShipModule shipModule, bool initItemData) {
 			string colorReactor = "ff4d4d";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "reactor 4 diy 1":
+			switch (shipModule.PrefabId) {
+				case 482395317: //reactor 4 diy 1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
 				shipModule.displayName = "Light Scrap <color=#" + colorReactor + "ff>Reactor</color>";
@@ -50,7 +47,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 6;
 				break;
-				case "reactor 5 diy 2 backup":
+				case 1700526886: //reactor 5 diy 2 backup
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
 				shipModule.displayName = "Medium Scrap <color=#" + colorReactor + "ff>Reactor</color>";
@@ -62,7 +59,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 8;
 				break;
-				case "reactor 7 diy 3":
+				case 482395319: //reactor 7 diy 3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
 				shipModule.displayName = "Heavy Scrap <color=#" + colorReactor + "ff>Reactor</color>";
@@ -74,7 +71,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 10;
 				break;
-				case "reactor 6 smalltrapho":
+				case 833760257: //reactor 6 smalltrapho
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.6f);
 				shipModule.displayName = "Light Fission <color=#" + colorReactor + "ff>Reactor</color>";
@@ -86,7 +83,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 12;
 				break;
-				case "reactor 8 smallmulty":
+				case 1796369958: //reactor 8 smallmulty
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.6f);
 				shipModule.displayName = "Heavy Fission <color=#" + colorReactor + "ff>Reactor</color>";
@@ -98,7 +95,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 15;
 				break;
-				case "reactor 9 biotech DIY":
+				case 45764579: //reactor 9 biotech DIY
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Zapfruit <color=#" + colorReactor + "ff>Bio-Reactor</color>";
@@ -110,7 +107,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 14;
 				break;
-				case "reactor 9 small old":
+				case 1554868377: //reactor 9 small old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.6f);
 				shipModule.displayName = "Ancient Fusion <color=#" + colorReactor + "ff>Reactor</color>";
@@ -122,7 +119,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 18;
 				break;
-				case "reactor 10 small":
+				case 813614528: //reactor 10 small
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = "Modern Fusion <color=#" + colorReactor + "ff>Reactor</color>";
@@ -134,7 +131,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 20;
 				break;
-				case "reactor 11 single biofruit DIY":
+				case 1088784368: //reactor 11 single biofruit DIY
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Makeshift <color=#" + colorReactor + "ff>Bio-Reactor</color>";
@@ -146,7 +143,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 16;
 				break;
-				case "reactor 12 custom old":
+				case 1939016857: //reactor 12 custom old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Light Ion <color=#" + colorReactor + "ff>Reactor</color>";
@@ -158,7 +155,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 22;
 				break;
-				case "reactor 13 single biofruit":
+				case 694263055: //reactor 13 single biofruit
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Light <color=#" + colorReactor + "ff>Bio-Reactor</color>";
@@ -170,7 +167,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 18;
 				break;
-				case "reactor 13 rats":
+				case 1515340139: //reactor 13 rats
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Imperial <color=#" + colorReactor + "ff>Reactor</color>";
@@ -182,7 +179,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 24;
 				break;
-				case "reactor 13 classic cooled":
+				case 549367690: //reactor 13 classic cooled
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Heavy Ion <color=#" + colorReactor + "ff>Reactor</color>";
@@ -194,7 +191,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 26;
 				break;
-				case "reactor 15 medium":
+				case 1633550495: //reactor 15 medium
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Cold Fusion <color=#" + colorReactor + "ff>Reactor</color>";
@@ -206,7 +203,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 28;
 				break;
-				case "reactor 16 explosives eater":
+				case 220275185: //reactor 16 explosives eater
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = "Ordnance Blast <color=#" + colorReactor + "ff>Reactor</color>";
@@ -218,7 +215,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 45;
 				break;
-				case "reactor 17 emperorbanks":
+				case 1573051329: //reactor 17 emperorbanks
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Commercial <color=#" + colorReactor + "ff>Reactor</color>";
@@ -230,7 +227,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 30;
 				break;
-				case "reactor 17 flower":
+				case 433363694: //reactor 17 flower
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Photovatic <color=#" + colorReactor + "ff>Bio-Reactor</color>";
@@ -242,7 +239,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 20;
 				break;
-				case "reactor 18 weird alien biotech":
+				case 933867895: //reactor 18 weird alien biotech
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Resonance <color=#" + colorReactor + "ff>Bio-Reactor</color>";
@@ -254,7 +251,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 22;
 				break;
-				case "reactor 20 biofruit":
+				case 2093337887: //reactor 20 biofruit
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Heavy <color=#" + colorReactor + "ff>Bio-Reactor</color>";
@@ -266,7 +263,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 25;
 				break;
-				case "reactor 22 spideraa small":
+				case 585779358: //reactor 22 spideraa small
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Light Repulsor <color=#" + colorReactor + "ff>Reactor</color>";
@@ -278,7 +275,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 35;
 				break;
-				case "reactor 20 fusion":
+				case 423938228: //reactor 20 fusion
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Quantum <color=#" + colorReactor + "ff>Reactor</color>";
@@ -290,7 +287,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 32;
 				break;
-				case "reactor 25 spideraa large":
+				case 627812931: //reactor 25 spideraa large
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Heavy Repulsor <color=#" + colorReactor + "ff>Reactor</color>";
@@ -302,7 +299,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 45;
 				break;
-				case "reactor 22 cube":
+				case 1699316752: //reactor 22 cube
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Antimatter <color=#" + colorReactor + "ff>Reactor</color>";

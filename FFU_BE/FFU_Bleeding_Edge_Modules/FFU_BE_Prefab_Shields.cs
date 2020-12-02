@@ -4,41 +4,38 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Shields {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName.Contains("shield 1 diy")) return idx; idx++;
-			if (moduleName.Contains("shield 1 round old")) return idx; idx++;
-			if (moduleName.Contains("shield 2 manualrats")) return idx; idx++;
-			if (moduleName.Contains("shield 2 round")) return idx; idx++;
-			if (moduleName.Contains("shield 2 small,single")) return idx; idx++;
-			if (moduleName.Contains("shield 3 brass, single")) return idx; idx++;
-			if (moduleName.Contains("shield 3 threespace")) return idx; idx++;
-			if (moduleName.Contains("shield 4 greendome")) return idx; idx++;
-			if (moduleName.Contains("shield 5 spideraa")) return idx; idx++;
-			if (moduleName.Contains("shield 4 solitary")) return idx; idx++;
-			if (moduleName.Contains("shield tigership")) return idx; idx++;
-			if (moduleName.Contains("shieldbat 0 diy")) return idx; idx++;
-			if (moduleName.Contains("shieldbat 1 diy")) return idx; idx++;
-			if (moduleName.Contains("shieldbat 1.5 rats diy")) return idx; idx++;
-			if (moduleName.Contains("shieldbat 2 rats")) return idx; idx++;
-			if (moduleName.Contains("shieldbat 2 terran")) return idx; idx++;
-			if (moduleName.Contains("shieldbat 4 alien fragile")) return idx; idx++;
-			if (moduleName.Contains("shieldbat 3 gmo biotech")) return idx; idx++;
-			if (moduleName.Contains("shieldbat 4 EB")) return idx; idx++;
-			if (moduleName.Contains("shieldbat 5 floral")) return idx; idx++;
-			if (moduleName.Contains("shieldbat 3 generic alien")) return idx; idx++;
-			if (moduleName.Contains("shieldbat tiger")) return idx; idx++;
+			if (moduleID == 126798266) return idx; idx++; //shield 1 diy
+			if (moduleID == 1518301159) return idx; idx++; //shield 1 round old
+			if (moduleID == 60711451) return idx; idx++; //shield 2 manualrats
+			if (moduleID == 2128566595) return idx; idx++; //shield 2 round
+			if (moduleID == 1005084746) return idx; idx++; //shield 2 small,single
+			if (moduleID == 813097155) return idx; idx++; //shield 3 brass, single
+			if (moduleID == 1967967252) return idx; idx++; //shield 3 threespace
+			if (moduleID == 1646813987) return idx; idx++; //shield 4 greendome
+			if (moduleID == 437077239) return idx; idx++; //shield 5 spideraa
+			if (moduleID == 1386797426) return idx; idx++; //shield 4 solitary
+			if (moduleID == 1427874574) return idx; idx++; //shield tigership
+			if (moduleID == 741193982) return idx; idx++; //shieldbat 0 diy
+			if (moduleID == 741188605) return idx; idx++; //shieldbat 1 diy
+			if (moduleID == 1494179234) return idx; idx++; //shieldbat 1.5 rats diy
+			if (moduleID == 1750659454) return idx; idx++; //shieldbat 2 rats
+			if (moduleID == 911395348) return idx; idx++; //shieldbat 2 terran
+			if (moduleID == 362125527) return idx; idx++; //shieldbat 4 alien fragile
+			if (moduleID == 74390932) return idx; idx++; //shieldbat 3 gmo biotech
+			if (moduleID == 613933919) return idx; idx++; //shieldbat 4 EB
+			if (moduleID == 1094609544) return idx; idx++; //shieldbat 5 floral
+			if (moduleID == 1179432425) return idx; idx++; //shieldbat 3 generic alien
+			if (moduleID == 1424188745) return idx; idx++; //shieldbat tiger
 			return idx + 100;
 		}
 		public static void UpdateShieldModule(ShipModule shipModule, bool initItemData) {
 			string colorShieldGen = "4d79ff";
 			string colorShieldCap = "4da6ff";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "shield 1 diy":
+			switch (shipModule.PrefabId) {
+				case 126798266: //shield 1 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.1f);
 				shipModule.displayName = "Makeshift <color=#" + colorShieldGen + "ff>Shield Generator</color>";
@@ -50,7 +47,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 1;
 				shipModule_maxHealth = 25;
 				break;
-				case "shield 1 round old":
+				case 1518301159: //shield 1 round old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.05f);
 				shipModule.displayName = "Ancient <color=#" + colorShieldGen + "ff>Shield Generator</color>";
@@ -62,7 +59,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 1;
 				shipModule_maxHealth = 27;
 				break;
-				case "shield 2 manualrats":
+				case 60711451: //shield 2 manualrats
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Imperial <color=#" + colorShieldGen + "ff>Shield Generator</color>";
@@ -74,7 +71,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 2;
 				shipModule_maxHealth = 30;
 				break;
-				case "shield 2 round":
+				case 2128566595: //shield 2 round
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.95f);
 				shipModule.displayName = "Modern <color=#" + colorShieldGen + "ff>Shield Generator</color>";
@@ -86,7 +83,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 2;
 				shipModule_maxHealth = 34;
 				break;
-				case "shield 2 small,single":
+				case 1005084746: //shield 2 small,single
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Fission <color=#" + colorShieldGen + "ff>Shield Generator</color>";
@@ -98,7 +95,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 3;
 				shipModule_maxHealth = 38;
 				break;
-				case "shield 3 brass, single":
+				case 813097155: //shield 3 brass, single
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.85f);
 				shipModule.displayName = "Aegis <color=#" + colorShieldGen + "ff>Shield Generator</color>";
@@ -110,7 +107,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 3;
 				shipModule_maxHealth = 42;
 				break;
-				case "shield 3 threespace":
+				case 1967967252: //shield 3 threespace
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Fusion <color=#" + colorShieldGen + "ff>Shield Generator</color>";
@@ -122,7 +119,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 4;
 				shipModule_maxHealth = 46;
 				break;
-				case "shield 4 greendome":
+				case 1646813987: //shield 4 greendome
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.75f);
 				shipModule.displayName = "Antimatter <color=#" + colorShieldGen + "ff>Shield Generator</color>";
@@ -134,7 +131,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 4;
 				shipModule_maxHealth = 50;
 				break;
-				case "shield 5 spideraa":
+				case 437077239: //shield 5 spideraa
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.7f);
 				shipModule.displayName = "Repulsor <color=#" + colorShieldGen + "ff>Shield Generator</color>";
@@ -146,7 +143,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 55;
 				break;
-				case "shield 4 solitary":
+				case 1386797426: //shield 4 solitary
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.65f);
 				shipModule.displayName = "Void-Wave <color=#" + colorShieldGen + "ff>Shield Generator</color>";
@@ -158,7 +155,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 60;
 				break;
-				case "shield tigership":
+				case 1427874574: //shield tigership
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Zero Point <color=#" + colorShieldGen + "ff>Shield Generator</color>";
@@ -170,7 +167,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 75;
 				break;
-				case "shieldbat 0 diy":
+				case 741193982: //shieldbat 0 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Makeshift <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
@@ -181,7 +178,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 1;
 				shipModule_maxHealth = 10;
 				break;
-				case "shieldbat 1 diy":
+				case 741188605: //shieldbat 1 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.75f);
 				shipModule.displayName = "Salvaged <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
@@ -192,7 +189,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 1;
 				shipModule_maxHealth = 13;
 				break;
-				case "shieldbat 1.5 rats diy":
+				case 1494179234: //shieldbat 1.5 rats diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.7f);
 				shipModule.displayName = "Fission <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
@@ -203,7 +200,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 2;
 				shipModule_maxHealth = 16;
 				break;
-				case "shieldbat 2 rats":
+				case 1750659454: //shieldbat 2 rats
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.65f);
 				shipModule.displayName = "Imperial <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
@@ -214,7 +211,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 2;
 				shipModule_maxHealth = 19;
 				break;
-				case "shieldbat 2 terran":
+				case 911395348: //shieldbat 2 terran
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Fusion <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
@@ -225,7 +222,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 3;
 				shipModule_maxHealth = 22;
 				break;
-				case "shieldbat 4 alien fragile":
+				case 362125527: //shieldbat 4 alien fragile
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.55f);
 				shipModule.displayName = "Exotic <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
@@ -236,7 +233,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 3;
 				shipModule_maxHealth = 25;
 				break;
-				case "shieldbat 3 gmo biotech":
+				case 74390932: //shieldbat 3 gmo biotech
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Antimatter <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
@@ -247,7 +244,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 4;
 				shipModule_maxHealth = 28;
 				break;
-				case "shieldbat 4 EB":
+				case 613933919: //shieldbat 4 EB
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.45f);
 				shipModule.displayName = "Commercial <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
@@ -258,7 +255,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 4;
 				shipModule_maxHealth = 32;
 				break;
-				case "shieldbat 5 floral":
+				case 1094609544: //shieldbat 5 floral
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Bionic <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
@@ -269,7 +266,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 36;
 				break;
-				case "shieldbat 3 generic alien":
+				case 1179432425: //shieldbat 3 generic alien
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.35f);
 				shipModule.displayName = "Void-Wave <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
@@ -280,7 +277,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 40;
 				break;
-				case "shieldbat tiger":
+				case 1424188745: //shieldbat tiger
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.3f);
 				shipModule.displayName = "Zero Point <color=#" + colorShieldCap + "ff>Shield Capacitor</color>";
@@ -291,7 +288,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 50;
 				break;
-				case "shield decoy 1":
+				case 2047550720: //shield decoy 1
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.1f);
 				shipModule.displayName = "Decoy Shield Generator";
 				shipModule.description = "A highly armored shield capacitor with low capacity that somewhat strengthens ships integrity and already existing shields. Appears as shield generator to the enemy sensors.";

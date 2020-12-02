@@ -24,32 +24,10 @@ using System.Linq;
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Modules {
 		public static List<ShipModule> originalList = new List<ShipModule>();
-		public static List<ShipModule> sortedListPacks = new List<ShipModule>();
-		public static List<ShipModule> sortedListNukes = new List<ShipModule>();
-		public static List<ShipModule> sortedListWeapons = new List<ShipModule>();
-		public static List<ShipModule> sortedListPDs = new List<ShipModule>();
-		public static List<ShipModule> sortedListBridges = new List<ShipModule>();
-		public static List<ShipModule> sortedListEngines = new List<ShipModule>();
-		public static List<ShipModule> sortedListWDrives = new List<ShipModule>();
-		public static List<ShipModule> sortedListReactors = new List<ShipModule>();
-		public static List<ShipModule> sortedListContainers = new List<ShipModule>();
-		public static List<ShipModule> sortedListArmors = new List<ShipModule>();
-		public static List<ShipModule> sortedListShields = new List<ShipModule>();
-		public static List<ShipModule> sortedListSensors = new List<ShipModule>();
-		public static List<ShipModule> sortedListDecryptors = new List<ShipModule>();
-		public static List<ShipModule> sortedListCountermeasures = new List<ShipModule>();
-		public static List<ShipModule> sortedListDronebays = new List<ShipModule>();
-		public static List<ShipModule> sortedListMedbays = new List<ShipModule>();
-		public static List<ShipModule> sortedListCryosleeps = new List<ShipModule>();
-		public static List<ShipModule> sortedListLabs = new List<ShipModule>();
-		public static List<ShipModule> sortedListGardens = new List<ShipModule>();
-		public static List<ShipModule> sortedListMattConvs = new List<ShipModule>();
-		public static List<ShipModule> sortedListDecoys = new List<ShipModule>();
-		public static List<ShipModule> sortedListMisc = new List<ShipModule>();
 		public static void InitShipSlotsList() {
 			try {
 				foreach (ModuleSlot moduleSlot in Resources.FindObjectsOfTypeAll<ModuleSlot>()) {
-					if (FFU_BE_Defs.dumpObjectLists) Debug.Log(moduleSlot.name + " [" + moduleSlot.PrefabId + "] " + moduleSlot.displayName + " (H:" + moduleSlot.shipMaxHealthAdd + "/D:" + moduleSlot.deflectChance + ")");
+					if (FFU_BE_Defs.dumpObjectLists) Debug.Log($"Interface: [{moduleSlot.name}] ({moduleSlot.PrefabId}) {moduleSlot.displayName} (H:{moduleSlot.shipMaxHealthAdd}/D:{moduleSlot.deflectChance})");
 					ApplySlotChanges(moduleSlot);
 					FFU_BE_Defs.prefabModdedSlotsList.Add(moduleSlot);
 				}
@@ -143,33 +121,31 @@ namespace FFU_Bleeding_Edge {
 				ModuleSlotActionsPanel.altCraftableModulePrefabs = new List<ShipModule>();
 				originalList = new List<ShipModule>(Resources.FindObjectsOfTypeAll<ShipModule>());
 				foreach (ShipModule shipModule in originalList) {
-					if (FFU_BE_Defs.dumpObjectLists) Debug.Log("Module, " + GetModuleTypeName(shipModule) + ": [" + shipModule.name + "] (" + shipModule.PrefabId + ") " + shipModule.displayName);
+					if (FFU_BE_Defs.dumpObjectLists) Debug.Log($"Module, {GetModuleTypeName(shipModule)} [{shipModule.name}] ({shipModule.PrefabId}) {shipModule.displayName}");
 					ApplyModuleEffects(shipModule, true);
 					ApplyModuleChanges(shipModule, true);
 					ApplyMaxCoreHealth(shipModule);
-					SortModuleByType(shipModule);
 					if (FFU_BE_Defs.moduleCraftingForFree) AllowCraftForFree(shipModule);
+					FFU_BE_Defs.prefabModdedModulesList.Add(shipModule);
 				}
-				MoveToMainList(FFU_BE_Defs.prefabModdedModulesList, true);
 				UpdateModuleEffects(FFU_BE_Defs.prefabModdedModulesList);
 				FFU_BE_Defs.prefabModdedModulesList.Sort((ShipModule x, ShipModule y) => FFU_BE_Defs.SortAllModules(x).CompareTo(FFU_BE_Defs.SortAllModules(y)));
 				if (FFU_BE_Defs.allModulesCraftable) {
 					foreach (ShipModule litedModule in FFU_BE_Defs.prefabModdedModulesList)
-						if (FFU_BE_Defs.IsAllowedModuleToList(litedModule)) ModuleSlotActionsPanel.altCraftableModulePrefabs.Add(litedModule);
-						else if (!FFU_BE_Defs.IsAllowedModuleToList(litedModule) && FFU_BE_Defs.allTypesCraftable) ModuleSlotActionsPanel.altCraftableModulePrefabs.Add(litedModule);
+						if (FFU_BE_Defs.IsAllowedModuleCategory(litedModule)) ModuleSlotActionsPanel.altCraftableModulePrefabs.Add(litedModule);
+						else if (!FFU_BE_Defs.IsAllowedModuleCategory(litedModule) && FFU_BE_Defs.allTypesCraftable) ModuleSlotActionsPanel.altCraftableModulePrefabs.Add(litedModule);
 					ModuleSlotActionsPanel.altCraftableModulePrefabs.Sort((ShipModule x, ShipModule y) => FFU_BE_Defs.SortAllModules(x).CompareTo(FFU_BE_Defs.SortAllModules(y)));
 				}
 				if (FFU_BE_Defs.createModulesCSV) WeaponListCreateCSV(FFU_BE_Defs.prefabModdedModulesList);
-				CleanMinorModuleLists();
 				if (FFU_BE_Defs.showSortedList && FFU_BE_Defs.showPrefabIDs && FFU_BE_Defs.showDescription) foreach (ShipModule shipModule in FFU_BE_Defs.prefabModdedModulesList) Debug.Log(shipModule.name + " [" + shipModule.PrefabId + "]" + " (" + shipModule.displayName + ") {" + shipModule.description + "}");
 				else if (FFU_BE_Defs.showSortedList && FFU_BE_Defs.showPrefabIDs && !FFU_BE_Defs.showDescription) foreach (ShipModule shipModule in FFU_BE_Defs.prefabModdedModulesList) Debug.Log(shipModule.name + " [" + shipModule.PrefabId + "]" + " (" + shipModule.displayName + ")");
 				else if (FFU_BE_Defs.showSortedList && !FFU_BE_Defs.showPrefabIDs && !FFU_BE_Defs.showDescription) foreach (ShipModule shipModule in FFU_BE_Defs.prefabModdedModulesList) Debug.Log(shipModule.name);
 				if (FFU_BE_Defs.dumpObjectLists) {
 					foreach (ShipModule shipModule in FFU_BE_Defs.prefabModdedModulesList)
 						if (shipModule.type == ShipModule.Type.Weapon_Nuke)
-							if (shipModule.Weapon.ProjectileOrBeamPrefab.spawnIntruderPrefabRef.Prefab != null)
-								foreach (GameObject gameObject in GameObjectPool.TakePrefabList<GameObject>(shipModule.Weapon.ProjectileOrBeamPrefab.spawnIntruderPrefabRef.Prefab))
-									Debug.Log("Intruder, " + shipModule.name + " [" + shipModule.Weapon.ProjectileOrBeamPrefab.name + "]: " + gameObject.name);
+							if (shipModule.Weapon.ProjectileOrBeamPrefab.SpawnIntruderPrefab?.GetComponents<Crewmember>() != null) 
+								foreach (Crewmember intruderCrew in shipModule.Weapon.ProjectileOrBeamPrefab.SpawnIntruderPrefab.GetComponents<Crewmember>())
+									Debug.Log($"Intruder, {shipModule.name} [{shipModule.Weapon.ProjectileOrBeamPrefab.name}] {intruderCrew.name} ({intruderCrew.PrefabId}) {intruderCrew.displayName}");
 				}
 				originalList = null;
 			} catch (Exception ex) { Debug.LogError(ex); }
@@ -196,82 +172,99 @@ namespace FFU_Bleeding_Edge {
 			} catch (Exception ex) { Debug.LogError(ex); }
 		}
 		public static void ApplyModuleEffects(ShipModule shipModule, bool initItemData = false) {
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "weapon miscmissile x4":
+			switch (shipModule.PrefabId) {
+				case 185094886: //weapon miscmissile x4
 				shipModule.Weapon.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDamageDealersList.Find(prj => prj.name == "missile rats d2");
 				break;
-				case "weapon ATK-MK1":
-				case "weapon ATK-MK1 old":
+				case 1281856982: //weapon ATK-MK1
+				case 1521997681: //weapon ATK-MK1 old
 				shipModule.Weapon.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDamageDealersList.Find(prj => prj.name == "Cannon projectile 1 d2");
 				break;
-				case "weapon gatling Tiger":
-				case "weapon Segmented cannonx2 A":
-				case "weapon Segmented cannonx2 B":
-				case "weapon Segmented cannonx2 C":
+				case 412909021: //weapon gatling Tiger
+				case 1086561638: //weapon Segmented cannonx2 A
+				case 1086561639: //weapon Segmented cannonx2 B
+				case 1086561640: //weapon Segmented cannonx2 C
 				shipModule.Weapon.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDamageDealersList.Find(prj => prj.name == "Cannon projectile rocketsound d2");
 				break;
-				case "weapon cubecannon1":
-				case "weapon cubecannon1x3":
+				case 1316645801: //weapon cubecannon1
+				case 1615383632: //weapon cubecannon1x3
 				shipModule.Weapon.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDamageDealersList.Find(prj => prj.name == "Cannon projectile2 d2");
 				break;
-				case "weapon gatling RatA 14,4":
-				case "weapon gatling RatB 15,5":
-				case "weapon gatling whiteA 13,4":
-				case "weapon gatling whiteB 14,5":
+				case 704483685: //weapon gatling RatA 14,4
+				case 123083978: //weapon gatling RatB 15,5
+				case 1092529672: //weapon gatling whiteA 13,4
+				case 689245145: //weapon gatling whiteB 14,5
 				shipModule.Weapon.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDamageDealersList.Find(prj => prj.name == "Gatling projectile thin");
 				break;
-				case "weapon gatling ClawA 12,4":
-				case "weapon gatling ClawB 14,5":
+				case 1501025877: //weapon gatling ClawA 12,4
+				case 1566651491: //weapon gatling ClawB 14,5
 				shipModule.Weapon.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDamageDealersList.Find(prj => prj.name == "Gatling projectile medium");
 				break;
-				case "weapon Sniper cannon 0 DIY":
-				case "weapon Sniper cannon 0":
-				case "weapon Sniper cannon 2":
-				case "weapon Sniper cannon 3":
-				case "weapon Sniper cannon 2 insectoid":
+				case 1751631045: //weapon Sniper cannon 0 DIY
+				case 514626098: //weapon Sniper cannon 0
+				case 1499937036: //weapon Sniper cannon 2
+				case 918537329: //weapon Sniper cannon 3
+				case 1240034396: //weapon Sniper cannon 2 insectoid
 				shipModule.Weapon.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDamageDealersList.Find(prj => prj.name == "Gatling projectile thick");
 				break;
-				case "0 DIY PD":
-				case "1 Rat PD":
-				case "3 Rat PD 2":
-				shipModule.PointDefence.projectileOrBeamPrefab = FFU_BE_Defs.prefabDefDealersList.Find(def => def.name == "pointdef beam gatling single");
+				case 893617597: //0 DIY PD
+				shipModule.PointDefence.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDefDealersList.Find(def => def.name == "pointdef beam gatling single");
 				break;
-				case "6 Squid PD":
-				case "4 Insectoid PD":
-				case "5 Human PD":
-				shipModule.PointDefence.projectileOrBeamPrefab = FFU_BE_Defs.prefabDefDealersList.Find(def => def.name == "pointdef beam gatling");
+				case 687853920: //1 Rat PD
+				case 106454213: //3 Rat PD 2
+				shipModule.PointDefence.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDefDealersList.Find(def => def.name == (FFU_BE_Defs.flagDLC_OldEnm ? "pointdef beam gatling" : "pointdef beam gatling single"));
 				break;
-				case "7 Red PD":
-				case "2 Tiger PD":
-				shipModule.PointDefence.projectileOrBeamPrefab = FFU_BE_Defs.prefabDefDealersList.Find(def => def.name == "pointdef beam");
+				case 804479599: //6 Squid PD
+				case 583909453: //4 Insectoid PD
+				shipModule.PointDefence.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDefDealersList.Find(def => def.name == (FFU_BE_Defs.flagDLC_OldEnm ? "pointdef beam" : "pointdef beam gatling"));
+				break;
+				case 1468502746: //5 Human PD
+				shipModule.PointDefence.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDefDealersList.Find(def => def.name == (FFU_BE_Defs.flagDLC_OldEnm ? "pointdef laser doubledam" : "pointdef beam gatling"));
+				break;
+				case 1381757148: //7 Red PD
+				shipModule.PointDefence.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDefDealersList.Find(def => def.name == (FFU_BE_Defs.flagDLC_OldEnm ? "pointdef laser doubledam" : "pointdef beam"));
+				break;
+				case 507685108: //8 Chunk PD
+				case 1230723452: //10 laser PD
+				shipModule.PointDefence.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDefDealersList.Find(def => def.name == (FFU_BE_Defs.flagDLC_OldEnm ? "pointdef beam gatling doubledam" : "pointdef beam"));
+				break;
+				case 1495856276: //8 Crystal PD
+				case 938711464: //2 Tiger PD
+				shipModule.PointDefence.ProjectileOrBeamPrefab = FFU_BE_Defs.prefabDefDealersList.Find(def => def.name == (FFU_BE_Defs.flagDLC_OldEnm ? "pointdef bluelaser doubledam" : "pointdef beam"));
 				break;
 				default: break;
 			}
 		}
 		public static void UpdateModuleEffects(List<ShipModule> shipModules) {
-			shipModules.Find(x => x.name.Contains("weapon gatling Tiger")).Weapon.barrelTipExhaustPrefab = shipModules.Find(x => x.name.Contains("weapon Segmented cannonx2 C")).Weapon.barrelTipExhaustPrefab;
-			shipModules.Find(x => x.name.Contains("00 DIY decoy nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool = shipModules.Find(x => x.name.Contains("00 DIY EMP nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool;
-			shipModules.Find(x => x.name.Contains("04 DIY plastics launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool = shipModules.Find(x => x.name.Contains("08c Green nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool;
-			shipModules.Find(x => x.name.Contains("07 DIY acid nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool = shipModules.Find(x => x.name.Contains("08c Green nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool;
-			shipModules.Find(x => x.name.Contains("13 nanopellet nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool = shipModules.Find(x => x.name.Contains("08c Green nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool;
-			shipModules.Find(x => x.name.Contains("07 Weirdship Chem nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool = shipModules.Find(x => x.name.Contains("08c Green nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool;
-			if (FFU_BE_Defs.flagDLC_SupPak) shipModules.Find(x => x.name.Contains("Tiger sharpnel nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool = shipModules.Find(x => x.name.Contains("08c Green nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool;
-			shipModules.Find(x => x.name.Contains("07 DIY bionuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool = shipModules.Find(x => x.name.Contains("07 Weirdship Minibio nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool;
-			shipModules.Find(x => x.name.Contains("99 maggot spawner launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool = shipModules.Find(x => x.name.Contains("07 Weirdship Minibio nuke launcher")).Weapon.ProjectileOrBeamPrefab.Effects.explosionPool;
-			shipModules.Find(x => x.name.Contains("07 DIY bionuke launcher")).Weapon.ProjectileOrBeamPrefab.spawnIntruderPrefabRef.Prefab = shipModules.Find(x => x.name.Contains("99 maggot spawner launcher")).Weapon.ProjectileOrBeamPrefab.spawnIntruderPrefabRef.Prefab;
-			shipModules.Find(x => x.name.Contains("07 Weirdship Minibio nuke launcher")).Weapon.ProjectileOrBeamPrefab.spawnIntruderPrefabRef.Prefab = shipModules.Find(x => x.name.Contains("99 maggot spawner launcher")).Weapon.ProjectileOrBeamPrefab.spawnIntruderPrefabRef.Prefab;
-			shipModules.Find(x => x.name.Contains("artifactmodule tec 17 broken screen gizmo, data")).image = shipModules.Find(x => x.name.Contains("explosives pack")).image;
-			shipModules.Find(x => x.name.Contains("artifactmodule tec 25 broken screen gizmo")).image = shipModules.Find(x => x.name.Contains("explosives pack")).image;
-			shipModules.Find(x => x.name.Contains("artifactmodule tec 32 broken container gizmo")).image = shipModules.Find(x => x.name.Contains("explosives pack")).image;
-			shipModules.Find(x => x.name.Contains("artifactmodule tec 37 ripped quarter of a dome")).image = shipModules.Find(x => x.name.Contains("explosives pack")).image;
-			shipModules.Find(x => x.name.Contains("artifactmodule tec 36 broken gizmo")).image = shipModules.Find(x => x.name.Contains("explosives pack")).image;
-			shipModules.Find(x => x.name.Contains("artifactmodule tec 34 data core grammofon")).image = shipModules.Find(x => x.name.Contains("explosives pack")).image;
-			shipModules.Find(x => x.name.Contains("artifactmodule tec 35 data core makk")).image = shipModules.Find(x => x.name.Contains("explosives pack")).image;
-			shipModules.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").image = shipModules.Find(x => x.name.Contains("medical pack organics, synth")).image;
-			shipModules.Find(x => x.name == "artifactmodule tec 11 biostasis").image = shipModules.Find(x => x.name.Contains("medical pack organics, synth")).image;
+			//Definitions
+			var effectRailgun = shipModules.Find(x => x.PrefabId == 1086561640).Weapon.barrelTipExhaustPrefabRef; //weapon Segmented cannonx2 C
+			var explosionEMP = shipModules.Find(x => x.PrefabId == 430038657).Weapon.ProjectileOrBeamPrefab.Effects.explosionPoolRef; //00 DIY EMP nuke launcher
+			var explosionCHEM = shipModules.Find(x => x.PrefabId == 22001514).Weapon.ProjectileOrBeamPrefab.Effects.explosionPoolRef; //08c Green nuke launcher
+			var explosionBIO = shipModules.Find(x => x.PrefabId == 141822690).Weapon.ProjectileOrBeamPrefab.Effects.explosionPoolRef; //07 Weirdship Minibio nuke launcher
+			var spawnerMaggot = shipModules.Find(x => x.PrefabId == 1350933427).Weapon.ProjectileOrBeamPrefab.spawnIntruderPrefabRef; //99 maggot spawner launcher
+			var packImplants = shipModules.Find(x => x.PrefabId == 89687050).image; //medical pack organics, synth
+			var packWeapons = shipModules.Find(x => x.PrefabId == 813048445).image; //explosives pack
+			//Alterations
+			shipModules.Find(x => x.PrefabId == 412909021).Weapon.barrelTipExhaustPrefabRef = effectRailgun; //weapon gatling Tiger
+			shipModules.Find(x => x.PrefabId == 92356131).Weapon.ProjectileOrBeamPrefab.Effects.explosionPoolRef = explosionEMP; //00 DIY decoy nuke launcher
+			shipModules.Find(x => x.PrefabId == 1771248833).Weapon.ProjectileOrBeamPrefab.Effects.explosionPoolRef = explosionCHEM; //04 DIY plastics launcher
+			shipModules.Find(x => x.PrefabId == 955652403).Weapon.ProjectileOrBeamPrefab.Effects.explosionPoolRef = explosionCHEM; //07 DIY acid nuke launcher
+			shipModules.Find(x => x.PrefabId == 1178343825).Weapon.ProjectileOrBeamPrefab.Effects.explosionPoolRef = explosionCHEM; //13 nanopellet nuke launcher
+			shipModules.Find(x => x.PrefabId == 475763260).Weapon.ProjectileOrBeamPrefab.Effects.explosionPoolRef = explosionCHEM; //07 Weirdship Chem nuke launcher
+			if (FFU_BE_Defs.flagDLC_SupPak) shipModules.Find(x => x.PrefabId == 1711403825).Weapon.ProjectileOrBeamPrefab.Effects.explosionPoolRef = explosionCHEM; //Tiger sharpnel nuke launcher
+			shipModules.Find(x => x.PrefabId == 2053889862).Weapon.ProjectileOrBeamPrefab.Effects.explosionPoolRef = explosionBIO; //07 DIY bionuke launcher
+			shipModules.Find(x => x.PrefabId == 1350933427).Weapon.ProjectileOrBeamPrefab.Effects.explosionPoolRef = explosionBIO; //99 maggot spawner launcher
+			shipModules.Find(x => x.PrefabId == 2053889862).Weapon.ProjectileOrBeamPrefab.spawnIntruderPrefabRef = spawnerMaggot; //07 DIY bionuke launcher
+			shipModules.Find(x => x.PrefabId == 141822690).Weapon.ProjectileOrBeamPrefab.spawnIntruderPrefabRef = spawnerMaggot; //07 Weirdship Minibio nuke launcher
+			shipModules.Find(x => x.PrefabId == 1745395900).image = packWeapons; //artifactmodule tec 17 broken screen gizmo, data
+			shipModules.Find(x => x.PrefabId == 179311957).image = packWeapons; //artifactmodule tec 25 broken screen gizmo
+			shipModules.Find(x => x.PrefabId == 760711671).image = packWeapons; //artifactmodule tec 32 broken container gizmo
+			shipModules.Find(x => x.PrefabId == 656277331).image = packWeapons; //artifactmodule tec 37 ripped quarter of a dome
+			shipModules.Find(x => x.PrefabId == 760711667).image = packWeapons; //artifactmodule tec 36 broken gizmo
+			shipModules.Find(x => x.PrefabId == 1279608160).image = packWeapons; //artifactmodule tec 34 data core grammofon
+			shipModules.Find(x => x.PrefabId == 1316302015).image = packWeapons; //artifactmodule tec 35 data core makk
+			shipModules.Find(x => x.PrefabId == 685017033).image = packImplants; //artifactmodule tec 33 biostasis nice worm
+			shipModules.Find(x => x.PrefabId == 957508477).image = packImplants; //artifactmodule tec 11 biostasis
 		}
 		public static string GetModuleTypeName(ShipModule shipModule) {
 			switch (shipModule.type) {
@@ -298,108 +291,6 @@ namespace FFU_Bleeding_Edge {
 				case ShipModule.Type.Decoy: return "Decoy Module";
 				default: return "Unknown/Uncategorized";
 			}
-		}
-		private static void SortModuleByType(ShipModule shipModule) {
-			if ((shipModule.name.Contains("decoy") || shipModule.name.Contains("Decoy")) && shipModule.type != ShipModule.Type.Weapon_Nuke) sortedListDecoys.Add(shipModule);
-			else if (shipModule.name.Contains("artifact") || shipModule.name.Contains("tutorial") || shipModule.name.Contains("bossweapon")) sortedListMisc.Add(shipModule);
-			else {
-				switch (shipModule.type) {
-					case ShipModule.Type.ResourcePack: sortedListPacks.Add(shipModule); break;
-					case ShipModule.Type.Weapon_Nuke: sortedListNukes.Add(shipModule); break;
-					case ShipModule.Type.Weapon: sortedListWeapons.Add(shipModule); break;
-					case ShipModule.Type.PointDefence: sortedListPDs.Add(shipModule); break;
-					case ShipModule.Type.Bridge: sortedListBridges.Add(shipModule); break;
-					case ShipModule.Type.Engine: sortedListEngines.Add(shipModule); break;
-					case ShipModule.Type.Warp: sortedListWDrives.Add(shipModule); break;
-					case ShipModule.Type.Reactor: sortedListReactors.Add(shipModule); break;
-					case ShipModule.Type.Container: sortedListContainers.Add(shipModule); break;
-					case ShipModule.Type.Integrity: sortedListArmors.Add(shipModule); break;
-					case ShipModule.Type.ShieldGen: sortedListShields.Add(shipModule); break;
-					case ShipModule.Type.Sensor: sortedListSensors.Add(shipModule); break;
-					case ShipModule.Type.StealthDecryptor: sortedListDecryptors.Add(shipModule); break;
-					case ShipModule.Type.PassiveECM: sortedListCountermeasures.Add(shipModule); break;
-					case ShipModule.Type.Dronebay: sortedListDronebays.Add(shipModule); break;
-					case ShipModule.Type.Medbay: sortedListMedbays.Add(shipModule); break;
-					case ShipModule.Type.Cryosleep: sortedListCryosleeps.Add(shipModule); break;
-					case ShipModule.Type.ResearchLab: sortedListLabs.Add(shipModule); break;
-					case ShipModule.Type.Garden: sortedListGardens.Add(shipModule); break;
-					case ShipModule.Type.MaterialsConverter: sortedListMattConvs.Add(shipModule); break;
-					case ShipModule.Type.Decoy: sortedListDecoys.Add(shipModule); break;
-					default: sortedListMisc.Add(shipModule); break;
-				}
-			}
-		}
-		private static void SortListedModules() {
-			sortedListPacks.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_ResPacks.SortModules(x.name).CompareTo(FFU_BE_Prefab_ResPacks.SortModules(y.name)));
-			sortedListNukes.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Nukes.SortModules(x.name).CompareTo(FFU_BE_Prefab_Nukes.SortModules(y.name)));
-			sortedListWeapons.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Weapons.SortModules(x.name).CompareTo(FFU_BE_Prefab_Weapons.SortModules(y.name)));
-			sortedListPDs.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_PointDefences.SortModules(x.name).CompareTo(FFU_BE_Prefab_PointDefences.SortModules(y.name)));
-			sortedListBridges.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Bridges.SortModules(x.name).CompareTo(FFU_BE_Prefab_Bridges.SortModules(y.name)));
-			sortedListEngines.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Engines.SortModules(x.name).CompareTo(FFU_BE_Prefab_Engines.SortModules(y.name)));
-			sortedListWDrives.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Drives.SortModules(x.name).CompareTo(FFU_BE_Prefab_Drives.SortModules(y.name)));
-			sortedListReactors.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Reactors.SortModules(x.name).CompareTo(FFU_BE_Prefab_Reactors.SortModules(y.name)));
-			sortedListContainers.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Storages.SortModules(x.name).CompareTo(FFU_BE_Prefab_Storages.SortModules(y.name)));
-			sortedListArmors.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Armors.SortModules(x.name).CompareTo(FFU_BE_Prefab_Armors.SortModules(y.name)));
-			sortedListShields.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Shields.SortModules(x.name).CompareTo(FFU_BE_Prefab_Shields.SortModules(y.name)));
-			sortedListSensors.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Sensors.SortModules(x.name).CompareTo(FFU_BE_Prefab_Sensors.SortModules(y.name)));
-			sortedListDecryptors.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Decryptors.SortModules(x.name).CompareTo(FFU_BE_Prefab_Decryptors.SortModules(y.name)));
-			sortedListCountermeasures.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_PassiveECMs.SortModules(x.name).CompareTo(FFU_BE_Prefab_PassiveECMs.SortModules(y.name)));
-			sortedListDronebays.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_HealthBays.SortModules(x.name).CompareTo(FFU_BE_Prefab_HealthBays.SortModules(y.name)));
-			sortedListMedbays.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_HealthBays.SortModules(x.name).CompareTo(FFU_BE_Prefab_HealthBays.SortModules(y.name)));
-			sortedListCryosleeps.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_CryoBays.SortModules(x.name).CompareTo(FFU_BE_Prefab_CryoBays.SortModules(y.name)));
-			sortedListLabs.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Laboratories.SortModules(x.name).CompareTo(FFU_BE_Prefab_Laboratories.SortModules(y.name)));
-			sortedListGardens.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Greenhouses.SortModules(x.name).CompareTo(FFU_BE_Prefab_Greenhouses.SortModules(y.name)));
-			sortedListMattConvs.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Converters.SortModules(x.name).CompareTo(FFU_BE_Prefab_Converters.SortModules(y.name)));
-			sortedListDecoys.Sort((ShipModule x, ShipModule y) => FFU_BE_Prefab_Decoys.SortModules(x.name).CompareTo(FFU_BE_Prefab_Decoys.SortModules(y.name)));
-			sortedListMisc.Sort((ShipModule x, ShipModule y) => x.name.CompareTo(y.name));
-		}
-		private static void MoveToMainList(List<ShipModule> mainList, bool ignoreLimits) {
-			if (sortedListPacks.Count > 0) foreach (ShipModule sModule in sortedListPacks) mainList.Add(sModule);
-			if (sortedListNukes.Count > 0) foreach (ShipModule sModule in sortedListNukes) mainList.Add(sModule);
-			if (sortedListWeapons.Count > 0) foreach (ShipModule sModule in sortedListWeapons) mainList.Add(sModule);
-			if (sortedListPDs.Count > 0) foreach (ShipModule sModule in sortedListPDs) mainList.Add(sModule);
-			if (sortedListBridges.Count > 0) foreach (ShipModule sModule in sortedListBridges) mainList.Add(sModule);
-			if (sortedListEngines.Count > 0) foreach (ShipModule sModule in sortedListEngines) mainList.Add(sModule);
-			if (sortedListWDrives.Count > 0) foreach (ShipModule sModule in sortedListWDrives) mainList.Add(sModule);
-			if (sortedListReactors.Count > 0) foreach (ShipModule sModule in sortedListReactors) mainList.Add(sModule);
-			if (sortedListContainers.Count > 0) foreach (ShipModule sModule in sortedListContainers) mainList.Add(sModule);
-			if (sortedListArmors.Count > 0) foreach (ShipModule sModule in sortedListArmors) mainList.Add(sModule);
-			if (sortedListShields.Count > 0) foreach (ShipModule sModule in sortedListShields) mainList.Add(sModule);
-			if (sortedListSensors.Count > 0) foreach (ShipModule sModule in sortedListSensors) mainList.Add(sModule);
-			if (sortedListDecryptors.Count > 0) foreach (ShipModule sModule in sortedListDecryptors) mainList.Add(sModule);
-			if (sortedListCountermeasures.Count > 0) foreach (ShipModule sModule in sortedListCountermeasures) mainList.Add(sModule);
-			if (sortedListDronebays.Count > 0) foreach (ShipModule sModule in sortedListDronebays) mainList.Add(sModule);
-			if (sortedListMedbays.Count > 0) foreach (ShipModule sModule in sortedListMedbays) mainList.Add(sModule);
-			if (sortedListCryosleeps.Count > 0) foreach (ShipModule sModule in sortedListCryosleeps) mainList.Add(sModule);
-			if (sortedListLabs.Count > 0) foreach (ShipModule sModule in sortedListLabs) mainList.Add(sModule);
-			if (sortedListGardens.Count > 0) foreach (ShipModule sModule in sortedListGardens) mainList.Add(sModule);
-			if (sortedListMattConvs.Count > 0) foreach (ShipModule sModule in sortedListMattConvs) mainList.Add(sModule);
-			if (sortedListDecoys.Count > 0) foreach (ShipModule sModule in sortedListDecoys) mainList.Add(sModule);
-			if (ignoreLimits) if (sortedListMisc.Count > 0) foreach (ShipModule sModule in sortedListMisc) mainList.Add(sModule);
-		}
-		private static void CleanMinorModuleLists() {
-			sortedListPacks = null;
-			sortedListNukes = null;
-			sortedListWeapons = null;
-			sortedListPDs = null;
-			sortedListBridges = null;
-			sortedListEngines = null;
-			sortedListWDrives = null;
-			sortedListReactors = null;
-			sortedListContainers = null;
-			sortedListArmors = null;
-			sortedListShields = null;
-			sortedListSensors = null;
-			sortedListDecryptors = null;
-			sortedListCountermeasures = null;
-			sortedListDronebays = null;
-			sortedListMedbays = null;
-			sortedListCryosleeps = null;
-			sortedListLabs = null;
-			sortedListGardens = null;
-			sortedListMattConvs = null;
-			sortedListDecoys = null;
-			sortedListMisc = null;
 		}
 		public static void ApplyModuleChanges(ShipModule shipModule, bool initItemData = false) {
 			CraftCostFallback(shipModule);
@@ -447,7 +338,7 @@ namespace FFU_Bleeding_Edge {
 		}
 		public static void UpdateCommonStats(ShipModule shipModule) {
 			UpdateCommonStatsCore(shipModule);
-			if (shipModule.type != ShipModule.Type.Integrity && !shipModule.name.Contains("bossweapon") && !shipModule.name.Contains("artifactmodule")) shipModule.maxHealthAdd = 0;
+			if (shipModule.type != ShipModule.Type.Integrity && !FFU_BE_Defs.IsUnusableModule(shipModule) && !shipModule.name.Contains("artifactmodule")) shipModule.maxHealthAdd = 0;
 		}
 		public static void UpdateCommonStatsCore(ShipModule shipModule) {
 			RecalcModuleShopPrice(shipModule);
@@ -612,7 +503,7 @@ namespace RST {
 		[MonoModIgnore] private static void ScrapGetResources(PlayerResource resource, int amount, StringBuilder logLineSb) { }
 		[MonoModIgnore] private static void ScrapGetCredits(PlayerData pd, int amount, StringBuilder logLineSb) { }
 		[MonoModIgnore] public MaterialsConverterModule MaterialsConverter => GetCachedComponent<MaterialsConverterModule>(true);
-		[MonoModReplace] public void StartUnpacking(bool useCraftTime) {
+		[MonoModReplace] [ContextMenu("Start unpacking")] public void StartUnpacking(bool useCraftTime) {
 		/// Tactical Unpack Times
 			UnpackShared();
 			UnpackTime = useCraftTime ? FFU_BE_Defs.shipModuleCraftTime : FFU_BE_Defs.shipModuleUnpackTime;
@@ -633,7 +524,7 @@ namespace RST {
 		}
 		public void TakeDamage(ShootAtDamageDealer.Damage dd, Vector2 hitPos) {
 		/// Do Permanent Damage to Module on Higher Difficulties
-			if (type == Type.Storage) return;
+			if (IsImmortal) { TryCauseOverload(Mathf.Clamp(dd.moduleDmg + (dd.moduleOverloadSeconds > 0 ? dd.moduleOverloadSeconds : 0), WorldRules.Instance.immortalModuleHitOverloadTime, 60)); return; }
 			TakeDamage(dd.moduleDmg);
 			if (dd.moduleOverloadSeconds > 0) TryCauseOverload(dd.moduleOverloadSeconds);
 			if (dd.moduleDmg > 0 && Health > 0 && FFU_BE_Defs.GetDifficultyAllowCrits() && Ownership.GetOwner() == Ownership.Owner.Me && RstRandom.value < (FFU_BE_Defs.permanentModuleDamageChance * FFU_BE_Defs.GetDifficultyFloatValue())) {
@@ -686,7 +577,7 @@ namespace RST {
 			if (Container != null) PlayerResource.RedistributeAllTo(Container, Ownership.GetOwner());
 			base.enabled = false;
 			UnityEngine.Object.Destroy(base.gameObject);
-			GameObject gameObject = (!IsPacked) ? Effects.scrappedPrefab : ((!InStorage) ? Effects.scrappedPackedPrefab : null);
+			GameObject gameObject = (!IsPacked) ? Effects.scrappedPrefabRef.Prefab : ((!InStorage) ? Effects.scrappedPackedPrefabRef.Prefab : null);
 			if (gameObject != null) UnityEngine.Object.Instantiate(gameObject, base.transform.position, base.transform.rotation);
 		}
 		[MonoModReplace] public bool StartOvercharge() {
@@ -697,7 +588,7 @@ namespace RST {
 			if (RstRandom.value <= instance.moduleOverchargeOverloadChance) TryCauseOverload(UnityEngine.Random.Range(1f, 60f));
 			if (RstRandom.value <= instance.moduleOverchargeFireChance) if (Ship != null && Ship.Fire != null) Ship.Fire.SetFireAt(base.transform.position, 1.1f, 0.4f);
 			overchargeTimer.Restart(overchargeSeconds);
-			if (type == Type.Engine) if (Ship != null) UnityEngine.Object.Instantiate(VisualSettings.Instance.shipDodgeEffectPrefab, Ship.transform);
+			if (type == Type.Engine) if (Ship != null) UnityEngine.Object.Instantiate(VisualSettings.Instance.shipDodgeEffectPrefabRef.Prefab, Ship.transform);
 			return true;
 		}
 		public bool IsOperatableNow {
@@ -844,9 +735,9 @@ namespace RST {
 			}
 			if (!overloadTimer.ReachedZero && overloadTimer.Update(PerFrameCache.IsGoodSituation ? 10f : 1f)) EndOverload();
 			if (IsPacked && IsOverloaded) EndOverload();
-			if (!RstTime.IsPaused && jammedPrefab != null) {
+			if (!RstTime.IsPaused && Effects.jammedPrefabRef.Prefab != null) {
 				bool isJammed = IsJammed;
-				if (isJammed && isJammedInstance == null) isJammedInstance = UnityEngine.Object.Instantiate(jammedPrefab, base.transform.position, base.transform.rotation, base.transform.parent);
+				if (isJammed && isJammedInstance == null) isJammedInstance = UnityEngine.Object.Instantiate(Effects.jammedPrefabRef.Prefab, base.transform.position, base.transform.rotation, base.transform.parent);
 				else if (!isJammed && isJammedInstance != null) UnityEngine.Object.Destroy(isJammedInstance);
 			}
 			SelfCombustible selfCombustible = SelfCombustible;
@@ -862,7 +753,7 @@ namespace RST {
 				}
 			}
 			if (IsDead && type != Type.Weapon_Nuke) {
-				GameObject gameObject = GameObjectPool.TakeRandomPrefab<GameObject>(Effects.explosionPool);
+				GameObject gameObject = PrefabPool.TakeRandomPrefab<GameObject>(this.Effects.explosionPoolRef.Prefab);
 				if (gameObject != null) Explosion.InstantiateExplosion(gameObject, base.transform, base.transform.parent);
 				StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Bad, (Ownership.GetOwner() == Ownership.Owner.Enemy) ? 
 					string.Format(MonoBehaviourExtended.TT("Enemy module {0} destroyed"), DisplayNameLocalized) : 
@@ -871,7 +762,7 @@ namespace RST {
 			}
 			Animator animator = Animator;
 			if (animator != null) animator.SetBool("operational", (type != Type.Warp) ? 
-				(TurnedOnAndIsWorking && (PrefabId != 1088715096 || !Weapon.inShootSequence || !Weapon.shotMade)) : 
+				(TurnedOnAndIsWorking && (!OpAnimNeedsWeaponShootingSync || !Weapon.inShootSequence || !Weapon.shotMade)) : 
 				(FFU_BE_Defs.DamagedButWorking(this) && EnoughOps && EnoughResources && !IsPacked));
 			UpdateAppearance();
 			OutlineHoverAndSelect outlineHoverAndSelect = OutlineHoverAndSelect;
@@ -981,7 +872,7 @@ namespace RST {
 			}
 			Ship ship = Module.Ship;
 			GunnerySkillEffects gunnerySkillEffects = WorldRules.Instance.gunnerySkillEffects;
-			float shipAccuracyBonus = ((ship != null) ? (1f + ship.GetAccuracy(null) * 0.01f) : 1f) * num;
+			float shipAccuracyBonus = Mathf.Max(((ship != null) ? (1f + ship.GetAccuracy(null) * 0.01f) : 1f) * num, 0);
 			if (Module.type == ShipModule.Type.Weapon_Nuke) return 0f;
 			else if (Module.displayName.ToLower().Contains("rail")) return Mathf.Clamp(gunnerySkillEffects.EffectiveAngle(this) * (1f / shipAccuracyBonus), 1f, 30f);
 			else return Mathf.Clamp(gunnerySkillEffects.EffectiveAngle(this) * (1f / shipAccuracyBonus), 4f, 90f);
@@ -1258,7 +1149,7 @@ namespace RST {
 		}
 	}
 	public class patch_GardenSkillEffects : GardenSkillEffects {
-		[MonoModReplace] public int EffectiveOrganicsProduction(ShipModule m) {
+		[MonoModReplace] public int EffectiveProduction(ShipModule m) {
 		/// Allow Greenhouse Modules to Produce All Types
 			return EffectiveSkillPoints(m) * skillPointBonusProduction;
 		}

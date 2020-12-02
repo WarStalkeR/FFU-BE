@@ -5,57 +5,57 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Miscellaneous {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName == "artifactmodule tec 33 biostasis nice worm") return idx; idx++;
-			if (moduleName == "artifactmodule tec 11 biostasis") return idx; idx++;
-			if (moduleName == "artifactmodule tec 17 broken screen gizmo, data") return idx; idx++;
-			if (moduleName == "artifactmodule tec 25 broken screen gizmo") return idx; idx++;
-			if (moduleName == "artifactmodule tec 32 broken container gizmo") return idx; idx++;
-			if (moduleName == "artifactmodule tec 37 ripped quarter of a dome") return idx; idx++;
-			if (moduleName == "artifactmodule tec 36 broken gizmo") return idx; idx++;
-			if (moduleName == "artifactmodule tec 34 data core grammofon") return idx; idx++;
-			if (moduleName == "artifactmodule tec 35 data core makk") return idx; idx++;
-			if (moduleName == "artifactmodule nat bluecrystal") return idx; idx++;
-			if (moduleName == "artifactmodule nat eleriumite") return idx; idx++;
-			if (moduleName == "artifactmodule nat rahn") return idx; idx++;
-			if (moduleName == "artifactmodule nat redcrystal") return idx; idx++;
-			if (moduleName == "artifactmodule nat whitecrystal") return idx; idx++;
-			if (moduleName == "artifactmodule nat young eleriumite") return idx; idx++;
-			if (moduleName == "artifactmodule10 rahn tutorial") return idx; idx++;
-			if (moduleName == "artifactmodule nat bone") return idx; idx++;
-			if (moduleName == "artifactmodule nat skull") return idx; idx++;
-			if (moduleName == "artifactmodule nat fossilbug") return idx; idx++;
-			//if (moduleName == "artifactmodule tec 33 biostasis nice worm") return idx; idx++;
-			//if (moduleName == "artifactmodule tec 11 biostasis") return idx; idx++;
-			//if (moduleName == "artifactmodule tec 17 broken screen gizmo, data") return idx; idx++;
-			//if (moduleName == "artifactmodule tec 25 broken screen gizmo") return idx; idx++;
-			//if (moduleName == "artifactmodule tec 32 broken container gizmo") return idx; idx++;
-			//if (moduleName == "artifactmodule tec 37 ripped quarter of a dome") return idx; idx++;
-			//if (moduleName == "artifactmodule tec 36 broken gizmo") return idx; idx++;
-			//if (moduleName == "artifactmodule tec 34 data core grammofon") return idx; idx++;
-			//if (moduleName == "artifactmodule tec 35 data core makk") return idx; idx++;
-			if (moduleName == "artifactmodule tec 24 broken warp gizmo ECM") return idx; idx++;
-			if (moduleName == "artifactmodule tec 31 data core node small lamp dome") return idx; idx++;
-			if (moduleName == "artifactmodule tec biotech eyeball asteroid predictor") return idx; idx++;
-			if (moduleName == "artifactmodule tec 21 data core rectangle gizmo") return idx; idx++;
-			if (moduleName == "artifactmodule tec 12 data square gizmo with minidomes") return idx; idx++;
-			if (moduleName == "artifactmodule tec screamer egg ECM") return idx; idx++;
-			if (moduleName == "artifactmodule tec green slime integrity") return idx; idx++;
-			if (moduleName == "artifactmodule tec metal rainbow integrity") return idx; idx++;
-			if (moduleName == "artifactmodule tec 22 metal synt gizmo ECM") return idx; idx++;
-			if (moduleName == "artifactmodule tec 23 metal gizmo with light") return idx; idx++;
-			if (moduleName == "artifactmodule tec 28 data core giant chip ECM internal") return idx; idx++;
-			if (moduleName == "artifactmodule tec 39 accuracy advanced data core") return idx; idx++;
-			if (moduleName == "artifactmodule tec engine booster 1") return idx; idx++;
-			if (moduleName == "artifactmodule tec 38 accuracy datacore manysquares") return idx; idx++;
-			if (moduleName == "artifactmodule tec 13 data core brassdome ECM") return idx; idx++;
-			if (moduleName == "artifactmodule tec engine booster 2") return idx; idx++;
-			if (moduleName == "artifactmodule tec ingergity and asteroid predictor") return idx; idx++;
-			if (moduleName == "long range sensor 2 old (tutorial, not saveable)") return idx; idx++;
-			if (moduleName == "bossweapon insectoid ship") return idx; idx++;
-			if (moduleName == "bossweapon weirdaxer") return idx; idx++;
-			if (moduleName == "storage container 3x4") return idx; idx++;
+			if (moduleID == 685017033) return idx; idx++; //artifactmodule tec 33 biostasis nice worm
+			if (moduleID == 957508477) return idx; idx++; //artifactmodule tec 11 biostasis
+			if (moduleID == 1745395900) return idx; idx++; //artifactmodule tec 17 broken screen gizmo, data
+			if (moduleID == 179311957) return idx; idx++; //artifactmodule tec 25 broken screen gizmo
+			if (moduleID == 760711671) return idx; idx++; //artifactmodule tec 32 broken container gizmo
+			if (moduleID == 656277331) return idx; idx++; //artifactmodule tec 37 ripped quarter of a dome
+			if (moduleID == 760711667) return idx; idx++; //artifactmodule tec 36 broken gizmo
+			if (moduleID == 1279608160) return idx; idx++; //artifactmodule tec 34 data core grammofon
+			if (moduleID == 1316302015) return idx; idx++; //artifactmodule tec 35 data core makk
+			if (moduleID == 2016575469) return idx; idx++; //artifactmodule nat bluecrystal
+			if (moduleID == 1567870807) return idx; idx++; //artifactmodule nat eleriumite
+			if (moduleID == 1689256804) return idx; idx++; //artifactmodule nat rahn
+			if (moduleID == 1270337569) return idx; idx++; //artifactmodule nat redcrystal
+			if (moduleID == 951480953) return idx; idx++; //artifactmodule nat whitecrystal
+			if (moduleID == 193928381) return idx; idx++; //artifactmodule nat young eleriumite
+			if (moduleID == 606853666) return idx; idx++; //artifactmodule10 rahn tutorial
+			if (moduleID == 1696261283) return idx; idx++; //artifactmodule nat bone
+			if (moduleID == 1666228140) return idx; idx++; //artifactmodule nat skull
+			if (moduleID == 874868118) return idx; idx++; //artifactmodule nat fossilbug
+			//if (moduleID == 685017033) return idx; idx++; //artifactmodule tec 33 biostasis nice worm
+			//if (moduleID == 957508477) return idx; idx++; //artifactmodule tec 11 biostasis
+			//if (moduleID == 1745395900) return idx; idx++; //artifactmodule tec 17 broken screen gizmo, data
+			//if (moduleID == 179311957) return idx; idx++; //artifactmodule tec 25 broken screen gizmo
+			//if (moduleID == 760711671) return idx; idx++; //artifactmodule tec 32 broken container gizmo
+			//if (moduleID == 656277331) return idx; idx++; //artifactmodule tec 37 ripped quarter of a dome
+			//if (moduleID == 760711667) return idx; idx++; //artifactmodule tec 36 broken gizmo
+			//if (moduleID == 1279608160) return idx; idx++; //artifactmodule tec 34 data core grammofon
+			//if (moduleID == 1316302015) return idx; idx++; //artifactmodule tec 35 data core makk
+			if (moduleID == 177900583) return idx; idx++; //artifactmodule tec 24 broken warp gizmo ECM
+			if (moduleID == 1664024110) return idx; idx++; //artifactmodule tec 31 data core node small lamp dome
+			if (moduleID == 374327078) return idx; idx++; //artifactmodule tec biotech eyeball asteroid predictor
+			if (moduleID == 179311961) return idx; idx++; //artifactmodule tec 21 data core rectangle gizmo
+			if (moduleID == 1745395905) return idx; idx++; //artifactmodule tec 12 data square gizmo with minidomes
+			if (moduleID == 1919746609) return idx; idx++; //artifactmodule tec screamer egg ECM
+			if (moduleID == 389977561) return idx; idx++; //artifactmodule tec green slime integrity
+			if (moduleID == 1986591663) return idx; idx++; //artifactmodule tec metal rainbow integrity
+			if (moduleID == 179311964) return idx; idx++; //artifactmodule tec 22 metal synt gizmo ECM
+			if (moduleID == 179311963) return idx; idx++; //artifactmodule tec 23 metal gizmo with light ECM
+			if (moduleID == 1985410647) return idx; idx++; //artifactmodule tec 28 data core giant chip ECM internal
+			if (moduleID == 1776726075) return idx; idx++; //artifactmodule tec 39 accuracy advanced data core
+			if (moduleID == 1971358425) return idx; idx++; //artifactmodule tec engine booster 1
+			if (moduleID == 1392338414) return idx; idx++; //artifactmodule tec 38 accuracy datacore manysquares
+			if (moduleID == 1745395904) return idx; idx++; //artifactmodule tec 13 data core brassdome ECM
+			if (moduleID == 266571173) return idx; idx++; //artifactmodule tec engine booster 2
+			if (moduleID == 674530774) return idx; idx++; //artifactmodule tec ingergity and asteroid predictor
+			if (moduleID == 1934368951) return idx; idx++; //weapon EMP perm DLC
+			if (moduleID == 1801315413) return idx; idx++; //bossweapon insectoid ship
+			if (moduleID == 1088715096) return idx; idx++; //bossweapon weirdaxer
+			if (moduleID == 1819161633) return idx; idx++; //storage container 3x4
 			return idx + 100;
 		}
 		public static void UpdateMsicModule(ShipModule shipModule, bool initItemData) {
@@ -67,11 +67,8 @@ namespace FFU_Bleeding_Edge {
 			shipModule.starmapSpeedAdd = 0;
 			shipModule.maxHealthAdd = 0;
 			shipModule.powerConsumed = 0;
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "artifactmodule tec 33 biostasis nice worm":
+			switch (shipModule.PrefabId) {
+				case 685017033: //artifactmodule tec 33 biostasis nice worm
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				if (!FFU_BE_Defs.cacheTypeIDs["Upgrades"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Upgrades"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Mechanical <color=#" + colorCache + "ff>Upgrades</color> Cache";
@@ -80,7 +77,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec 11 biostasis":
+				case 957508477: //artifactmodule tec 11 biostasis
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				if (!FFU_BE_Defs.cacheTypeIDs["Implants"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Implants"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Biological <color=#" + colorCache + "ff>Implants</color> Cache";
@@ -89,7 +86,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec 17 broken screen gizmo, data":
+				case 1745395900: //artifactmodule tec 17 broken screen gizmo, data
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "CQC Class <color=#" + colorCache + "ff>Weapons</color> Cache";
@@ -98,7 +95,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec 25 broken screen gizmo":
+				case 179311957: //artifactmodule tec 25 broken screen gizmo
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Kinetic Type <color=#" + colorCache + "ff>Weapons</color> Cache";
@@ -107,7 +104,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec 32 broken container gizmo":
+				case 760711671: //artifactmodule tec 32 broken container gizmo
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Laser Type <color=#" + colorCache + "ff>Weapons</color> Cache";
@@ -117,7 +114,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec 37 ripped quarter of a dome":
+				case 656277331: //artifactmodule tec 37 ripped quarter of a dome
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Energy Type <color=#" + colorCache + "ff>Weapons</color> Cache";
@@ -127,7 +124,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec 36 broken gizmo":
+				case 760711667: //artifactmodule tec 36 broken gizmo
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Backup Class <color=#" + colorCache + "ff>Weapons</color> Cache";
@@ -136,7 +133,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec 34 data core grammofon":
+				case 1279608160: //artifactmodule tec 34 data core grammofon
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Tactical Class <color=#" + colorCache + "ff>Weapons</color> Cache";
@@ -145,7 +142,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec 35 data core makk":
+				case 1316302015: //artifactmodule tec 35 data core makk
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				if (!FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.cacheTypeIDs["Weapons"].Add(shipModule.PrefabId);
 				shipModule.displayName = "Assault Class <color=#" + colorCache + "ff>Weapons</color> Cache";
@@ -154,177 +151,177 @@ namespace FFU_Bleeding_Edge {
 				shipModule.scrapGet = new ResourceValueGroup { };
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule nat bluecrystal":
+				case 2016575469: //artifactmodule nat bluecrystal
 				shipModule.displayName = "Yellow Exotic Crystal";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 2000f, exotics = 100f, credits = 500f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 25;
 				break;
-				case "artifactmodule nat eleriumite":
+				case 1567870807: //artifactmodule nat eleriumite
 				shipModule.displayName = "Volatile Crystal";
 				shipModule.scrapGet = new ResourceValueGroup { fuel = 2000f, explosives = 3000f, credits = 375f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 25;
 				break;
-				case "artifactmodule nat rahn":
+				case 1689256804: //artifactmodule nat rahn
 				shipModule.displayName = "Beige Exotic Crystal";
 				shipModule.scrapGet = new ResourceValueGroup { fuel = 1750f, exotics = 75f, credits = 750f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 25;
 				break;
-				case "artifactmodule nat redcrystal":
+				case 1270337569: //artifactmodule nat redcrystal
 				shipModule.displayName = "Lilac Exotic Crystal";
 				shipModule.scrapGet = new ResourceValueGroup { synthetics = 2000f, exotics = 150f, credits = 1750f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 25;
 				break;
-				case "artifactmodule nat whitecrystal":
+				case 951480953: //artifactmodule nat whitecrystal
 				shipModule.displayName = "White Exotic Crystal";
 				shipModule.scrapGet = new ResourceValueGroup { fuel = 1000f, metals = 1500f, exotics = 125, credits = 2500f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 25;
 				break;
-				case "artifactmodule nat young eleriumite":
+				case 193928381: //artifactmodule nat young eleriumite
 				shipModule.displayName = "Eleriumite Crystal";
 				shipModule.scrapGet = new ResourceValueGroup { fuel = 1500f, metals = 1250f, explosives = 2500f, credits = 1250f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 25;
 				break;
-				case "artifactmodule10 rahn tutorial":
+				case 606853666: //artifactmodule10 rahn tutorial
 				shipModule.displayName = "Solidified Exotic Essence";
 				shipModule.scrapGet = new ResourceValueGroup { exotics = 750f, credits = 7500f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 25;
 				break;
-				case "artifactmodule nat bone":
+				case 1696261283: //artifactmodule nat bone
 				shipModule.displayName = "Fossilized Bone";
 				shipModule.scrapGet = new ResourceValueGroup { organics = 1750f, metals = 1250f, exotics = 50f, credits = 1500f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 25;
 				break;
-				case "artifactmodule nat skull":
+				case 1666228140: //artifactmodule nat skull
 				shipModule.displayName = "Fossilized Skull";
 				shipModule.scrapGet = new ResourceValueGroup { organics = 1750f, synthetics = 1250f, exotics = 50f, credits = 1500f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 25;
 				break;
-				case "artifactmodule nat fossilbug":
+				case 874868118: //artifactmodule nat fossilbug
 				shipModule.displayName = "Fossilized Insectoid";
 				shipModule.scrapGet = new ResourceValueGroup { organics = 1750f, explosives = 1250f, exotics = 50f, credits = 1500f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 25;
 				break;
-				/*case "artifactmodule tec 33 biostasis nice worm":
+				/*case 685017033: //artifactmodule tec 33 biostasis nice worm
 				shipModule.displayName = "Light Biostasis Unit";
 				shipModule.scrapGet = new ResourceValueGroup { organics = 2500f, explosives = 750f, metals = 750f, synthetics = 750f, exotics = 25f, credits = 1750f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec 11 biostasis":
+				case 957508477: //artifactmodule tec 11 biostasis
 				shipModule.displayName = "Heavy Biostasis Unit";
 				shipModule.scrapGet = new ResourceValueGroup { organics = 3750f, explosives = 1250f, metals = 1250f, synthetics = 1250f, exotics = 50f, credits = 2500f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec 17 broken screen gizmo, data":
+				case 1745395900: //artifactmodule tec 17 broken screen gizmo, data
 				shipModule.displayName = "Data Projector Device";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 2000f, synthetics = 1000f, fuel = 750f, exotics = 35f, credits = 1250f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec 25 broken screen gizmo":
+				case 179311957: //artifactmodule tec 25 broken screen gizmo
 				shipModule.displayName = "Active Matrix Device";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 1000f, synthetics = 2000f, fuel = 750f, exotics = 35f, credits = 1250f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec 32 broken container gizmo":
+				case 760711671: //artifactmodule tec 32 broken container gizmo
 				shipModule.displayName = "Sealed Container Device";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 1000f, synthetics = 1000f, fuel = 1750f, exotics = 35f, credits = 1250f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec 37 ripped quarter of a dome":
+				case 656277331: //artifactmodule tec 37 ripped quarter of a dome
 				shipModule.displayName = "Broken External Shielding";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 1750f, synthetics = 750f, exotics = 25f, credits = 500f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec 36 broken gizmo":
+				case 760711667: //artifactmodule tec 36 broken gizmo
 				shipModule.displayName = "Broken Temporal Coils";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 1750f, synthetics = 750f, exotics = 25f, credits = 500f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec 34 data core grammofon":
+				case 1279608160: //artifactmodule tec 34 data core grammofon
 				shipModule.displayName = "Antique Memory Unit";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 750f, synthetics = 1250f, exotics = 5f, credits = 5000f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec 35 data core makk":
+				case 1316302015: //artifactmodule tec 35 data core makk
 				shipModule.displayName = "Ancient Memory Unit";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 750f, synthetics = 1250f, exotics = 5f, credits = 5000f };
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 50;
 				break;*/
-				case "artifactmodule tec 24 broken warp gizmo ECM":
+				case 177900583: //artifactmodule tec 24 broken warp gizmo ECM
 				shipModule.displayName = "Damaged Warp Coils";
 				shipModule.scrapGet = new ResourceValueGroup { synthetics = 1250f, exotics = 15f, credits = 1750f };
 				shipModule.shipEvasionPercentAdd = 5;
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec 31 data core node small lamp dome":
+				case 1664024110: //artifactmodule tec 31 data core node small lamp dome
 				shipModule.displayName = "External Observation Unit";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 1250f, exotics = 15f, credits = 1750f };
 				shipModule.maxHealthAdd = 5;
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec biotech eyeball asteroid predictor":
+				case 374327078: //artifactmodule tec biotech eyeball asteroid predictor
 				shipModule.displayName = "Asteroid Prediction Unit";
 				shipModule.scrapGet = new ResourceValueGroup { organics = 1250f, exotics = 15f, credits = 1750f };
 				shipModule.asteroidDeflectionPercentAdd = 10;
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec 21 data core rectangle gizmo":
+				case 179311961: //artifactmodule tec 21 data core rectangle gizmo
 				shipModule.displayName = "Solid State Data Core";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 750f, synthetics = 2750f, exotics = 10f, credits = 1250f };
 				shipModule.maxHealthAdd = 5;
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec 12 data square gizmo with minidomes":
+				case 1745395905: //artifactmodule tec 12 data square gizmo with minidomes
 				shipModule.displayName = "Matrix Data Core";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 2750f, synthetics = 750f, exotics = 10f, credits = 1250f };
 				shipModule.maxHealthAdd = 5;
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec screamer egg ECM":
+				case 1919746609: //artifactmodule tec screamer egg ECM
 				shipModule.displayName = "Organic Disruption Emitter";
 				shipModule.scrapGet = new ResourceValueGroup { organics = 2750f, synthetics = 1750f, exotics = 15f, credits = 2250f };
 				shipModule.shipEvasionPercentAdd = 5;
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 50;
 				break;
-				case "artifactmodule tec green slime integrity":
+				case 389977561: //artifactmodule tec green slime integrity
 				shipModule.displayName = "Pseudo-Creep Coating Array";
 				shipModule.scrapGet = new ResourceValueGroup { organics = 3750f, synthetics = 1250f, exotics = 5f, credits = 2000f };
 				shipModule.maxHealthAdd = 25;
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 125;
 				break;
-				case "artifactmodule tec metal rainbow integrity":
+				case 1986591663: //artifactmodule tec metal rainbow integrity
 				shipModule.displayName = "Prismatic Mirror Array";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 3750f, synthetics = 1250f, exotics = 5f, credits = 2000f };
 				shipModule.maxHealthAdd = 25;
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 125;
 				break;
-				case "artifactmodule tec 22 metal synt gizmo ECM":
+				case 179311964: //artifactmodule tec 22 metal synt gizmo ECM
 				shipModule.displayName = "Dampener Data Core";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 1250f, synthetics = 1250f, exotics = 15f, credits = 2500f };
 				shipModule.shipEvasionPercentAdd = 7;
@@ -332,7 +329,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec 23 metal gizmo with light":
+				case 179311963: //artifactmodule tec 23 metal gizmo with light ECM
 				shipModule.displayName = "Suppressor Data Core";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 1250f, synthetics = 1250f, exotics = 15f, credits = 2500f };
 				shipModule.shipEvasionPercentAdd = 7;
@@ -340,7 +337,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec 28 data core giant chip ECM internal":
+				case 1985410647: //artifactmodule tec 28 data core giant chip ECM internal
 				shipModule.displayName = "Processing Data Core";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 500f, synthetics = 2000f, exotics = 15f, credits = 2500f };
 				shipModule.shipEvasionPercentAdd = 7;
@@ -348,7 +345,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec 39 accuracy advanced data core":
+				case 1776726075: //artifactmodule tec 39 accuracy advanced data core
 				shipModule.displayName = "Enumeration Processing Unit";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 1500f, synthetics = 1000f, exotics = 15f, credits = 2500f };
 				shipModule.shipAccuracyPercentAdd = 20;
@@ -356,7 +353,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec engine booster 1":
+				case 1971358425: //artifactmodule tec engine booster 1
 				shipModule.displayName = "Fuel Optimization Unit";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 2000f, synthetics = 500f, exotics = 15f, credits = 2500f };
 				shipModule.starmapSpeedAdd = 5f;
@@ -364,7 +361,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 75;
 				break;
-				case "artifactmodule tec 38 accuracy datacore manysquares":
+				case 1392338414: //artifactmodule tec 38 accuracy datacore manysquares
 				shipModule.displayName = "Array Processing Unit";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 1000f, synthetics = 4000f, exotics = 25f, credits = 5000f };
 				shipModule.shipAccuracyPercentAdd = 40;
@@ -372,7 +369,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 100;
 				break;
-				case "artifactmodule tec 13 data core brassdome ECM":
+				case 1745395904: //artifactmodule tec 13 data core brassdome ECM
 				shipModule.displayName = "Disruptor Data Core";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 3500f, synthetics = 1500f, exotics = 25f, credits = 5000f };
 				shipModule.shipEvasionPercentAdd = 10;
@@ -380,7 +377,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 100;
 				break;
-				case "artifactmodule tec engine booster 2":
+				case 266571173: //artifactmodule tec engine booster 2
 				shipModule.displayName = "Engine Thermal Shielding";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 4000f, synthetics = 1000f, exotics = 25f, credits = 5000f };
 				shipModule.starmapSpeedAdd = 10;
@@ -388,7 +385,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 100;
 				break;
-				case "artifactmodule tec ingergity and asteroid predictor":
+				case 674530774: //artifactmodule tec ingergity and asteroid predictor
 				shipModule.displayName = "Collision Detection Unit";
 				shipModule.scrapGet = new ResourceValueGroup { metals = 2500f, synthetics = 2500f, exotics = 25f, credits = 5000f };
 				shipModule.asteroidDeflectionPercentAdd = 50;
@@ -396,8 +393,8 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 100;
 				break;
-				case "storage container 3x3":
-				case "storage container 3x4":
+				case 1819161636: //storage container 3x3
+				case 1819161633: //storage container 3x4
 				shipModule.displayName = "Modular Storage Compartment";
 				shipModule.description = "Universal storage unit that stores disassembled modules in highly compact form and requires quite some time to assemble them back. Also holds answer to the Ultimate Question of Life, the Universe, and Everything.";
 				shipModule.Storage.slotCount = 12;

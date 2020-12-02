@@ -4,30 +4,27 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_CryoBays {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName.Contains("dream recorder 1 DIY")) return idx; idx++;
-			if (moduleName.Contains("dream recorder 1 rats")) return idx; idx++;
-			if (moduleName.Contains("dream recorder 2")) return idx; idx++;
-			if (moduleName.Contains("dream recorder 4x weird biotech")) return idx; idx++;
-			if (moduleName.Contains("cryosleep 6x human standard")) return idx; idx++;
-			if (moduleName.Contains("cryosleep 1 DIY")) return idx; idx++;
-			if (moduleName.Contains("cryosleep 2x human small")) return idx; idx++;
-			if (moduleName.Contains("cryosleep 3x rats armor")) return idx; idx++;
-			if (moduleName.Contains("cryosleep 3x medical")) return idx; idx++;
-			if (moduleName.Contains("cryosleep 4x alien family")) return idx; idx++;
-			if (moduleName.Contains("cryosleep 8x insect")) return idx; idx++;
+			if (moduleID == 1290558229) return idx; idx++; //dream recorder 1 DIY
+			if (moduleID == 1018033786) return idx; idx++; //dream recorder 1 rats
+			if (moduleID == 1813199311) return idx; idx++; //dream recorder 2
+			if (moduleID == 1484543824) return idx; idx++; //dream recorder 4x weird biotech
+			if (moduleID == 41460892) return idx; idx++; //cryosleep 6x human standard
+			if (moduleID == 1398713621) return idx; idx++; //cryosleep 1 DIY
+			if (moduleID == 41460888) return idx; idx++; //cryosleep 2x human small
+			if (moduleID == 623034016) return idx; idx++; //cryosleep 3x rats armor
+			if (moduleID == 703894034) return idx; idx++; //cryosleep 3x medical
+			if (moduleID == 2091145418) return idx; idx++; //cryosleep 4x alien family
+			if (moduleID == 2059107150) return idx; idx++; //cryosleep 8x insect
 			return idx + 100;
 		}
 		public static void UpdateCryosleepModule(ShipModule shipModule, bool initItemData) {
 			string colorDream = "d966ff";
 			string colorSleep = "ff66d9";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "dream recorder 1 DIY":
+			switch (shipModule.PrefabId) {
+				case 1290558229: //dream recorder 1 DIY
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Makeshift <color=#" + colorDream + "ff>Cryodream Bay</color>";
@@ -44,7 +41,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 5;
 				break;
-				case "dream recorder 1 rats":
+				case 1018033786: //dream recorder 1 rats
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Imperial <color=#" + colorDream + "ff>Cryodream Bay</color>";
@@ -61,7 +58,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 10;
 				break;
-				case "dream recorder 2":
+				case 1813199311: //dream recorder 2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Standard <color=#" + colorDream + "ff>Cryodream Bay</color>";
@@ -78,7 +75,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 15;
 				break;
-				case "dream recorder 4x weird biotech":
+				case 1484543824: //dream recorder 4x weird biotech
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Advanced <color=#" + colorDream + "ff>Cryodream Bay</color>";
@@ -95,7 +92,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 20;
 				break;
-				case "cryosleep 6x human standard":
+				case 41460892: //cryosleep 6x human standard
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Exploration <color=#" + colorDream + "ff>Cryodream Bay</color>";
@@ -112,7 +109,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 30;
 				break;
-				case "cryosleep 1 DIY":
+				case 1398713621: //cryosleep 1 DIY
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Makeshift <color=#" + colorSleep + "ff>Cryosleep Bay</color>";
@@ -124,7 +121,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 5;
 				break;
-				case "cryosleep 2x human small":
+				case 41460888: //cryosleep 2x human small
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Standard <color=#" + colorSleep + "ff>Cryosleep Bay</color>";
@@ -136,7 +133,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 10;
 				break;
-				case "cryosleep 3x rats armor":
+				case 623034016: //cryosleep 3x rats armor
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Imperial <color=#" + colorSleep + "ff>Cryosleep Bay</color>";
@@ -148,7 +145,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 20;
 				break;
-				case "cryosleep 3x medical":
+				case 703894034: //cryosleep 3x medical
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Medical <color=#" + colorSleep + "ff>Cryosleep Bay</color>";
@@ -160,7 +157,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 15;
 				break;
-				case "cryosleep 4x alien family":
+				case 2091145418: //cryosleep 4x alien family
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Luxurious <color=#" + colorSleep + "ff>Cryosleep Bay</color>";
@@ -172,7 +169,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 20;
 				break;
-				case "cryosleep 8x insect":
+				case 2059107150: //cryosleep 8x insect
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Military <color=#" + colorSleep + "ff>Cryosleep Bay</color>";

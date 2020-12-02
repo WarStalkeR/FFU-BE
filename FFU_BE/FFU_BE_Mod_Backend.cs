@@ -38,11 +38,12 @@ namespace FFU_Bleeding_Edge {
 
 namespace RST {
 	public class patch_ShootAtDamageDealer : ShootAtDamageDealer {
+		[MonoModIgnore] public WeaponModule SourceWeapon { get; private set; }
 		[MonoModReplace] public virtual void SetInitialCondition(WeaponModule sourceWeapon, GameObject targetGo, Vector2 targetPos, float exactTargetDistance, Shield shieldToIgnore) {
 		/// Force Misfire Damaged Weapon Module
 			if (exactTargetDistance <= 0f) exactTargetDistance = 100f;
 			effectDone = false;
-			this.sourceWeapon = sourceWeapon;
+			SourceWeapon = sourceWeapon;
 			float num = (sourceWeapon != null) ? sourceWeapon.CalculateHitSectorDepth(exactTargetDistance) : 0f;
 			targetDistance = exactTargetDistance + RstRandom.Range(0f - num, num);
 			if (sourceWeapon != null && sourceWeapon.Module != null && !sourceWeapon.Module.HasFullHealth)
@@ -63,7 +64,7 @@ namespace RST {
 			}
 			shield.PlayHitAnimation();
 			shield.ShieldPoints = Mathf.Max(0, shield.ShieldPoints - damage.shieldDmg);
-			GameObject gameObject = GameObjectPool.TakeRandomPrefab<GameObject>(Effects.explosionOnShieldPool);
+			GameObject gameObject = PrefabPool.TakeRandomPrefab<GameObject>(this.Effects.explosionOnShieldPoolRef.Prefab);
 			if (gameObject != null) Explosion.InstantiateExplosion(gameObject, base.transform, target);
 		}
 		[MonoModReplace] protected void DoHit(Collider2D[] hits, int hitCount, Vector2 hitPos) {
@@ -89,11 +90,11 @@ namespace RST {
 					}
 				}
 			}
-			GameObject gameObject = GameObjectPool.TakeRandomPrefab<GameObject>(Effects.explosionPool);
+			GameObject gameObject = PrefabPool.TakeRandomPrefab<GameObject>(this.Effects.explosionPoolRef.Prefab);
 			if (gameObject != null) Explosion.InstantiateExplosion(gameObject, base.transform, target);
 			if (!(collider2D != null)) return;
 			float num = 0.2f;
-			if (hitOwner == Ownership.Owner.None) hitOwner = (Ownership != null) ? Ownership.GetOwner() : ((sourceWeapon != null) ? sourceWeapon.Module.Ownership.GetOwner() : Ownership.Owner.None);
+			if (hitOwner == Ownership.Owner.None) hitOwner = (Ownership != null) ? Ownership.GetOwner() : ((SourceWeapon != null) ? SourceWeapon.Module.Ownership.GetOwner() : Ownership.Owner.None);
 			if (hitOwner == Ownership.Owner.None) return;
 			int moddedSpawnCount = spawnIntruderCount > 0 ? (int)FFU_BE_Defs.GetIntruderCountFromName(this) : 0;
 			int randomSpawnCount = spawnIntruderCount > 0 ? (int)UnityEngine.Random.Range(moddedSpawnCount / 3f * 2f, moddedSpawnCount / 3f * 5f) : 0;
@@ -182,15 +183,17 @@ namespace RST {
 			if (!wasLoaded) {
 				moduleCommissionFeeSeed = RstRandom.positiveIntValue;
 				if (crewStation) {
-					int crewPoolSize = crewPoolTakeMax; //RstRandom.Range(crewPoolTakeMin, crewPoolTakeMax + 1);
-					foreach (Crewmember shopMember in InstantiateFromPool.DoIt<Crewmember>(crewPool, crewPoolAllowDuplicates, buyableCrewContainer, (crewPoolSize <= 0) ? crewPool.Length : crewPoolSize)) {
+					int crewPoolSize = crewPoolTakeMax;
+					List<GameObject> crewPool = crewPoolRefs.ConvertAll((PrefabRef p) => p.Prefab);
+					foreach (Crewmember shopMember in InstantiateFromPool.Do<Crewmember>(crewPool, crewPoolAllowDuplicates, buyableCrewContainer, (crewPoolSize <= 0) ? crewPool.Count : crewPoolSize)) {
 						shopMember.Randomize();
 						shopMember.BuyableAssignToStore(this);
 					}
 				}
 				if (moduleStation) {
-					int modulePoolSize = modulePoolTakeMax; //RstRandom.Range(modulePoolTakeMin, modulePoolTakeMax + 1);
-					foreach (ShipModule shopModule in InstantiateFromPool.DoIt<ShipModule>(modulePool, modulePoolAllowDuplicates, buyableModulesContainer, (modulePoolSize <= 0) ? modulePool.Length : modulePoolSize)) {
+					int modulePoolSize = modulePoolTakeMax;
+					List<GameObject> modulePool = modulePoolRefs.ConvertAll((PrefabRef p) => p.Prefab);
+					foreach (ShipModule shopModule in InstantiateFromPool.Do<ShipModule>(modulePool, modulePoolAllowDuplicates, buyableModulesContainer, (modulePoolSize <= 0) ? modulePool.Count : modulePoolSize)) {
 						shopModule.SetHealthToPercent(100f - RstRandom.Range(moduleDamagePercentMin, moduleDamagePercentMax));
 						shopModule.BuyableAssignToStore(this);
 					}
@@ -271,7 +274,7 @@ namespace RST {
 				PlayerFleet fleetInstance = PlayerFleet.Instance;
 				Sector sectorInstance = Sector.Instance;
 				if (fleetInstance != null && sectorInstance != null) {
-					GameObject gameObject = GameObjectPool.TakeRandomPrefab<GameObject>(sectorInstance.sosPoiPrefabOrPool);
+					GameObject gameObject = PrefabPool.TakeRandomPrefab<GameObject>(sectorInstance.sosPoiPoolRef.Prefab);
 					if (gameObject != null && fleetInstance != null) {
 						Vector2 a = fleetInstance.transform.position;
 						Vector2 a2 = (UnityEngine.Random.value < 0.5f) ? new Vector2(0f, (UnityEngine.Random.value < 0.5f) ? 1 : (-1)) : new Vector2((UnityEngine.Random.value < 0.5f) ? 1 : (-1), 0f);
@@ -463,6 +466,7 @@ namespace RST {
 			VisualizeByActivating(disabledByEnemy, !module.IsPacked && isJammed);
 			VisualizeByActivating(unpacking, module.IsUnpacking);
 			VisualizeByActivating(darken, !module.IsPacked && (!module.HasFullHealth || !module.IsPowered), vector * 1.1f);
+			if (darken.activeSelf && module.PrefabId == 1934368951) darken.transform.localPosition = new Vector2(2f, 0f);
 			bool show = !module.IsPacked && !module.HasFullHealth;
 			VisualizeByActivating(broken, show, vector);
 			VisualizeByActivating(brokenUnscaled, show);

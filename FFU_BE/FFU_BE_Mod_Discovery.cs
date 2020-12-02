@@ -390,29 +390,6 @@ namespace RST {
 			return usableWarpModule.StartWarpingTo(targetPos, targetStar.transform, false);
 		}
 	}
-	public class patch_WarningsVisualizer : WarningsVisualizer {
-		private extern void orig_UpdateData();
-		private void UpdateData() {
-		/// Remove Modules and Upgrades Notification Icon
-			orig_UpdateData();
-			if (moduleSlotUpgradesAvailable != null) moduleSlotUpgradesAvailable = null;
-			if (moduleCraftsAvailable != null) moduleCraftsAvailable = null;
-		}
-		public static bool PlayerFleetJammedWarning {
-		/// Null Reference Exception Patch-Fix
-			get {
-				try { return PlayerFleet.Instance != null && PlayerFleet.Instance.IsJammed; } 
-				catch { return true; }
-			}
-		}
-		[MonoModReplace] public static bool WarpIsDisabledForOwner(Ownership.Owner forOwner) {
-		/// Advanced Warp Drive Jamming Feature
-			Ownership.Owner enemyOwner = Ownership.GetOpposite(forOwner);
-			try { return PerFrameCache.CachedShips.Exists((Ship s) => s != null && s.disablesEnemyWarp && s.Ownership.GetOwner() == enemyOwner) ||
-				(forOwner == Ownership.Owner.Me && WarningsVisualizer.PlayerFleetJammedWarning && FFU_BE_Defs.distanceTraveledInPeace < 5f);
-			} catch { return PerFrameCache.CachedShips.Exists((Ship s) => s != null && s.disablesEnemyWarp && s.Ownership.GetOwner() == enemyOwner); }
-		}
-	}
 	public class patch_WarpModule : WarpModule {
 		[MonoModIgnore] public Vector2 Destination { get; private set; }
 		[MonoModIgnore] public Transform DestinationNewParent { get; private set; }
@@ -552,10 +529,38 @@ namespace RST {
 		public ResourceValueGroup ProducedPerDistance {
 		/// Allow Greenhouse Modules to Produce All Types
 			get {
-				int effectiveGreenhouseProduction = Module.TurnedOnAndIsWorking ? WorldRules.Instance.gardenSkillEffects.EffectiveOrganicsProduction(Module) : 0;
+				int effectiveGreenhouseProduction = Module.TurnedOnAndIsWorking ? WorldRules.Instance.gardenSkillEffects.EffectiveProduction(Module) : 0;
 				if (Module.HasFullHealth) return producedPerSkillPoint * (effectiveGreenhouseProduction / 100f);
 				else return producedPerSkillPoint * (effectiveGreenhouseProduction / 100f) * FFU_BE_Defs.GetHealthPercent(Module);
 			}
 		}
 	}
+}
+
+namespace RST.UI {
+	public class patch_WarningsVisualizer : WarningsVisualizer {
+		private extern void orig_UpdateData();
+		private void UpdateData() {
+			/// Remove Modules and Upgrades Notification Icon
+			orig_UpdateData();
+			if (moduleSlotUpgradesAvailable != null) moduleSlotUpgradesAvailable = null;
+			if (moduleCraftsAvailable != null) moduleCraftsAvailable = null;
+		}
+		public static bool PlayerFleetJammedWarning {
+			/// Null Reference Exception Patch-Fix
+			get {
+				try { return PlayerFleet.Instance != null && PlayerFleet.Instance.IsJammed; } catch { return true; }
+			}
+		}
+		[MonoModReplace]
+		public static bool WarpIsDisabledForOwner(Ownership.Owner forOwner) {
+			/// Advanced Warp Drive Jamming Feature
+			Ownership.Owner enemyOwner = Ownership.GetOpposite(forOwner);
+			try {
+				return PerFrameCache.CachedShips.Exists((Ship s) => s != null && s.disablesEnemyWarp && s.Ownership.GetOwner() == enemyOwner) ||
+			  (forOwner == Ownership.Owner.Me && WarningsVisualizer.PlayerFleetJammedWarning && FFU_BE_Defs.distanceTraveledInPeace < 5f);
+			} catch { return PerFrameCache.CachedShips.Exists((Ship s) => s != null && s.disablesEnemyWarp && s.Ownership.GetOwner() == enemyOwner); }
+		}
+	}
+
 }

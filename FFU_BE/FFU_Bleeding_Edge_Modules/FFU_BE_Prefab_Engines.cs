@@ -4,35 +4,32 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Engines {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName.Contains("engine 0 diy")) return idx; idx++;
-			if (moduleName.Contains("engine 01 brittle")) return idx; idx++;
-			if (moduleName.Contains("engine 01 primitive")) return idx; idx++;
-			if (moduleName.Contains("engine 2 rats")) return idx; idx++;
-			if (moduleName.Contains("engine 2.5 classic")) return idx; idx++;
-			if (moduleName.Contains("engine 2 floral")) return idx; idx++;
-			if (moduleName.Contains("engine 01 tiger")) return idx; idx++;
-			if (moduleName.Contains("engine 2.5 weird")) return idx; idx++;
-			if (moduleName.Contains("engine 2.5 terran")) return idx; idx++;
-			if (moduleName.Contains("engine 03 emperor banks")) return idx; idx++;
-			if (moduleName.Contains("engine 04 red")) return idx; idx++;
-			if (moduleName.Contains("engine 03 bioship")) return idx; idx++;
-			if (moduleName.Contains("engine 2 large robust")) return idx; idx++;
-			if (moduleName.Contains("engine 4 spideraa")) return idx; idx++;
-			if (moduleName.Contains("engine 04 xblack")) return idx; idx++;
-			if (moduleName.Contains("engine 2 F-gulper")) return idx; idx++;
+			if (moduleID == 1284816050) return idx; idx++; //engine 0 diy
+			if (moduleID == 1364709951) return idx; idx++; //engine 01 brittle
+			if (moduleID == 497175846) return idx; idx++; //engine 01 primitive
+			if (moduleID == 1708644704) return idx; idx++; //engine 2 rats
+			if (moduleID == 533178690) return idx; idx++; //engine 2.5 classic
+			if (moduleID == 245228012) return idx; idx++; //engine 2 floral
+			if (moduleID == 362626339) return idx; idx++; //engine 01 tiger
+			if (moduleID == 229499087) return idx; idx++; //engine 2.5 weird
+			if (moduleID == 2023634410) return idx; idx++; //engine 2.5 terran
+			if (moduleID == 84732634) return idx; idx++; //engine 03 emperor banks
+			if (moduleID == 1131227094) return idx; idx++; //engine 04 red
+			if (moduleID == 292475796) return idx; idx++; //engine 03 bioship
+			if (moduleID == 1508923010) return idx; idx++; //engine 2 large robust
+			if (moduleID == 1536420907) return idx; idx++; //engine 4 spideraa
+			if (moduleID == 366713264) return idx; idx++; //engine 04 xblack
+			if (moduleID == 1119228548) return idx; idx++; //engine 2 F-gulper
 			return idx + 100;
 		}
 		public static void UpdateEngineModule(ShipModule shipModule, bool initItemData) {
 			string colorEngine = "ffd24d";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
 			var shipModule_Engine_consumedPerDistance = AccessTools.FieldRefAccess<EngineModule, ResourceValueGroup>(shipModule.Engine, "consumedPerDistance");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "engine 0 diy":
+			switch (shipModule.PrefabId) {
+				case 1284816050: //engine 0 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
 				shipModule.displayName = "Makeshift <color=#" + colorEngine + "ff>Chemical Engine</color>";
@@ -48,7 +45,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 10;
 				break;
-				case "engine 01 brittle":
+				case 1364709951: //engine 01 brittle
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.8f);
 				shipModule.displayName = "Mass-Produced <color=#" + colorEngine + "ff>Chemical Engine</color>";
@@ -65,7 +62,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 15;
 				break;
-				case "engine 01 primitive":
+				case 497175846: //engine 01 primitive
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.7f);
 				shipModule.displayName = "Ancient <color=#" + colorEngine + "ff>Fission Engine</color>";
@@ -82,7 +79,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 20;
 				break;
-				case "engine 2 rats":
+				case 1708644704: //engine 2 rats
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.6f);
 				shipModule.displayName = "Imperial <color=#" + colorEngine + "ff>Fission Engine</color>";
@@ -99,7 +96,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 25;
 				break;
-				case "engine 2.5 classic":
+				case 533178690: //engine 2.5 classic
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.5f);
 				shipModule.displayName = "Modern <color=#" + colorEngine + "ff>Fission Engine</color>";
@@ -116,7 +113,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 10;
 				shipModule_maxHealth = 30;
 				break;
-				case "engine 2 floral":
+				case 245228012: //engine 2 floral
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = "Organic <color=#" + colorEngine + "ff>Biochemical Engine</color>";
@@ -133,7 +130,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 30;
 				break;
-				case "engine 01 tiger":
+				case 362626339: //engine 01 tiger
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.3f);
 				shipModule.displayName = "Industrial <color=#" + colorEngine + "ff>Fusion Engine</color>";
@@ -150,7 +147,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 15;
 				shipModule_maxHealth = 35;
 				break;
-				case "engine 2.5 weird":
+				case 229499087: //engine 2.5 weird
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Exotic <color=#" + colorEngine + "ff>Biochemical Engine</color>";
@@ -167,7 +164,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 35;
 				break;
-				case "engine 2.5 terran":
+				case 2023634410: //engine 2.5 terran
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.1f);
 				shipModule.displayName = "Military Navy <color=#" + colorEngine + "ff>Fusion Engine</color>";
@@ -184,7 +181,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 15;
 				shipModule_maxHealth = 40;
 				break;
-				case "engine 03 emperor banks":
+				case 84732634: //engine 03 emperor banks
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Commercial <color=#" + colorEngine + "ff>Plasma Engine</color>";
@@ -201,7 +198,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 15;
 				shipModule_maxHealth = 40;
 				break;
-				case "engine 04 red":
+				case 1131227094: //engine 04 red
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Interceptor <color=#" + colorEngine + "ff>Plasma Engine</color>";
@@ -218,7 +215,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 10;
 				shipModule_maxHealth = 40;
 				break;
-				case "engine 03 bioship":
+				case 292475796: //engine 03 bioship
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Heavy Ion <color=#" + colorEngine + "ff>Prismatic Engine</color>";
@@ -235,7 +232,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 10;
 				shipModule_maxHealth = 45;
 				break;
-				case "engine 2 large robust":
+				case 1508923010: //engine 2 large robust
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.7f);
 				shipModule.displayName = "Prototype <color=#" + colorEngine + "ff>Antimatter Engine</color>";
@@ -252,7 +249,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 15;
 				shipModule_maxHealth = 45;
 				break;
-				case "engine 4 spideraa":
+				case 1536420907: //engine 4 spideraa
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Repulsor <color=#" + colorEngine + "ff>Meta-Kinetic Engine</color>";
@@ -269,7 +266,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 10;
 				shipModule_maxHealth = 50;
 				break;
-				case "engine 04 xblack":
+				case 366713264: //engine 04 xblack
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Assault <color=#" + colorEngine + "ff>Antimatter Engine</color>";
@@ -286,7 +283,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 10;
 				shipModule_maxHealth = 50;
 				break;
-				case "engine 2 F-gulper":
+				case 1119228548: //engine 2 F-gulper
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Particle-Folding <color=#" + colorEngine + "ff>Quantum Engine</color>";

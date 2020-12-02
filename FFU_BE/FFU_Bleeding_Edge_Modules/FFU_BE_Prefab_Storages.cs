@@ -4,65 +4,65 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Storages {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
 			//Multi
-			if (moduleName.Contains("multicontainer DIY EE")) return idx; idx++;
-			if (moduleName.Contains("multicontainer DIY FO")) return idx; idx++;
-			if (moduleName.Contains("multicontainer FExo DIY armor")) return idx; idx++;
-			if (moduleName.Contains("multicontainer MS-1")) return idx; idx++;
-			if (moduleName.Contains("multicontainer biotec-scaled FO")) return idx; idx++;
-			if (moduleName.Contains("multicontainer ESM-1")) return idx; idx++;
-			if (moduleName.Contains("multicontainer ESM-2")) return idx; idx++;
-			if (moduleName.Contains("multicontainer FEO-1")) return idx; idx++;
-			if (moduleName.Contains("multicontainer FOO-1")) return idx; idx++;
-			if (moduleName.Contains("multicontainer MFE retro futu")) return idx; idx++;
-			if (moduleName.Contains("multicontainer MFO retro futu")) return idx; idx++;
-			if (moduleName.Contains("multicontainer OMS biotech")) return idx; idx++;
-			if (moduleName.Contains("multicontainer FSEE biotech")) return idx; idx++;
-			if (moduleName.Contains("multicontainer FOS biotec")) return idx; idx++;
-			if (moduleName.Contains("multicontainer OME mechanical")) return idx; idx++;
-			if (moduleName.Contains("multicontainer FE armor")) return idx; idx++;
-			if (moduleName.Contains("multicontainer FSE biotech")) return idx; idx++;
-			if (moduleName.Contains("multicontainer EOME spideraa")) return idx; idx++;
+			if (moduleID == 825891570) return idx; idx++; //multicontainer DIY EE
+			if (moduleID == 1404265275) return idx; idx++; //multicontainer DIY FO
+			if (moduleID == 1158881065) return idx; idx++; //multicontainer FExo DIY armor
+			if (moduleID == 1380487708) return idx; idx++; //multicontainer MS-1
+			if (moduleID == 1384130728) return idx; idx++; //multicontainer biotec-scaled FO
+			if (moduleID == 1008150789) return idx; idx++; //multicontainer ESM-1
+			if (moduleID == 426751082) return idx; idx++; //multicontainer ESM-2
+			if (moduleID == 1165288718) return idx; idx++; //multicontainer FEO-1
+			if (moduleID == 1165288404) return idx; idx++; //multicontainer FOO-1
+			if (moduleID == 1366723332) return idx; idx++; //multicontainer MFE retro futu
+			if (moduleID == 1366723326) return idx; idx++; //multicontainer MFO retro futu
+			if (moduleID == 1973225425) return idx; idx++; //multicontainer OMS biotech
+			if (moduleID == 1847976825) return idx; idx++; //multicontainer FSEE biotech
+			if (moduleID == 2141167320) return idx; idx++; //multicontainer FOS biotec
+			if (moduleID == 920367928) return idx; idx++; //multicontainer OME mechanical
+			if (moduleID == 619214127) return idx; idx++; //multicontainer FE armor
+			if (moduleID == 1904770087) return idx; idx++; //multicontainer FSE biotech
+			if (moduleID == 1270396661) return idx; idx++; //multicontainer EOME spideraa
 			//Organics
-			if (moduleName.Contains("organics container 0 diy")) return idx; idx++;
-			if (moduleName.Contains("organics container 1 bio")) return idx; idx++;
-			if (moduleName.Contains("organics container 1 small")) return idx; idx++;
-			if (moduleName.Contains("organics container 2 medium")) return idx; idx++;
-			if (moduleName.Contains("organics container 3 large")) return idx; idx++;
-			if (moduleName.Contains("organics container 4 extra large")) return idx; idx++;
-			if (moduleName.Contains("organics container 5 ultra large")) return idx; idx++;
+			if (moduleID == 1449641283) return idx; idx++; //organics container 0 diy
+			if (moduleID == 812439290) return idx; idx++; //organics container 1 bio
+			if (moduleID == 940750901) return idx; idx++; //organics container 1 small
+			if (moduleID == 82212496) return idx; idx++; //organics container 2 medium
+			if (moduleID == 1530196661) return idx; idx++; //organics container 3 large
+			if (moduleID == 1906398666) return idx; idx++; //organics container 4 extra large
+			if (moduleID == 1969497769) return idx; idx++; //organics container 5 ultra large
 			//Fuel
-			if (moduleName.Contains("fuel container 0 diy")) return idx; idx++;
-			if (moduleName.Contains("fuel container 1 bio")) return idx; idx++;
-			if (moduleName.Contains("fuel container 1")) return idx; idx++;
-			if (moduleName.Contains("fuel container 2")) return idx; idx++;
-			if (moduleName.Contains("fuel container 3")) return idx; idx++;
-			if (moduleName.Contains("fuel container 4")) return idx; idx++;
-			if (moduleName.Contains("fuel container 5")) return idx; idx++;
-			if (moduleName.Contains("fuel container tiger")) return idx; idx++;
+			if (moduleID == 1477762477) return idx; idx++; //fuel container 0 diy
+			if (moduleID == 1140021200) return idx; idx++; //fuel container 1 bio
+			if (moduleID == 1391027202) return idx; idx++; //fuel container 1
+			if (moduleID == 809627495) return idx; idx++; //fuel container 2
+			if (moduleID == 228227788) return idx; idx++; //fuel container 3
+			if (moduleID == 3058441) return idx; idx++; //fuel container 4
+			if (moduleID == 1569142382) return idx; idx++; //fuel container 5
+			if (moduleID == 1061408062) return idx; idx++; //fuel container tiger
 			//Metals
-			if (moduleName.Contains("metals container 0 diy")) return idx; idx++;
-			if (moduleName.Contains("metals container 1 small")) return idx; idx++;
-			if (moduleName.Contains("metals container 2 medium")) return idx; idx++;
-			if (moduleName.Contains("metals container 3 large")) return idx; idx++;
-			if (moduleName.Contains("metals container 4 extralarge")) return idx; idx++;
+			if (moduleID == 340918825) return idx; idx++; //metals container 0 diy
+			if (moduleID == 349484391) return idx; idx++; //metals container 1 small
+			if (moduleID == 1448463490) return idx; idx++; //metals container 2 medium
+			if (moduleID == 851515731) return idx; idx++; //metals container 3 large
+			if (moduleID == 350762646) return idx; idx++; //metals container 4 extralarge
 			//Synthetics
-			if (moduleName.Contains("synthetics container 0 diy")) return idx; idx++;
-			if (moduleName.Contains("synthetics container1 small")) return idx; idx++;
-			if (moduleName.Contains("synthetics container2 medium")) return idx; idx++;
-			if (moduleName.Contains("synthetics container3 large")) return idx; idx++;
+			if (moduleID == 165493307) return idx; idx++; //synthetics container 0 diy
+			if (moduleID == 620471997) return idx; idx++; //synthetics container1 small
+			if (moduleID == 376986556) return idx; idx++; //synthetics container2 medium
+			if (moduleID == 637430109) return idx; idx++; //synthetics container3 large
 			//Explosives
-			if (moduleName.Contains("explosives container 0 diy")) return idx; idx++;
-			if (moduleName.Contains("explosives container 1 small")) return idx; idx++;
-			if (moduleName.Contains("explosives container 2 medium")) return idx; idx++;
-			if (moduleName.Contains("explosives container 3 large")) return idx; idx++;
+			if (moduleID == 271236703) return idx; idx++; //explosives container 0 diy
+			if (moduleID == 96469373) return idx; idx++; //explosives container 1 small
+			if (moduleID == 907034562) return idx; idx++; //explosives container 2 medium
+			if (moduleID == 311517981) return idx; idx++; //explosives container 3 large
 			//Exotics
-			if (moduleName.Contains("exotics container 0 diy")) return idx; idx++;
-			if (moduleName.Contains("exotics container 1 small")) return idx; idx++;
-			if (moduleName.Contains("exotics container 2 medium")) return idx; idx++;
-			if (moduleName.Contains("exotics container 3 large")) return idx; idx++;
+			if (moduleID == 168523420) return idx; idx++; //exotics container 0 diy
+			if (moduleID == 19531542) return idx; idx++; //exotics container 1 small
+			if (moduleID == 584489047) return idx; idx++; //exotics container 2 medium
+			if (moduleID == 1606402988) return idx; idx++; //exotics container 3 large
 			return idx + 100;
 		}
 		public static void UpdateStorageModule(ShipModule shipModule, bool initItemData) {
@@ -86,11 +86,8 @@ namespace FFU_Bleeding_Edge {
 			shipModule.Container.explosivesCanLeak = false;
 			shipModule.Container.exoticsCanLeak = false;
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "multicontainer DIY EE":
+			switch (shipModule.PrefabId) {
+				case 825891570: //multicontainer DIY EE
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Makeshift XE <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Makeshift storage container that increases explosives and exotics storage capacity. If breached, explosives and exotics will start to leak out.";
@@ -101,7 +98,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.exoticsCanLeak = true;
 				shipModule_maxHealth = 45;
 				break;
-				case "multicontainer DIY FO":
+				case 1404265275: //multicontainer DIY FO
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Makeshift FO <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Makeshift storage container that increases fuel and organics storage capacity. If breached, starfuel and organics will start to leak out.";
@@ -112,7 +109,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.fuelCanLeak = true;
 				shipModule_maxHealth = 45;
 				break;
-				case "multicontainer FExo DIY armor":
+				case 1158881065: //multicontainer FExo DIY armor
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Makeshift FE <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Makeshift storage container that increases fuel and exotics storage capacity. If breached, starfuel and exotics will start to leak out.";
@@ -123,7 +120,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.exoticsCanLeak = true;
 				shipModule_maxHealth = 75;
 				break;
-				case "multicontainer MS-1":
+				case 1380487708: //multicontainer MS-1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Standard MS <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Storage container that increases metals and synthetics storage capacity. If breached, synthetics will start to leak out.";
@@ -133,7 +130,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.syntheticsCanLeak = true;
 				shipModule_maxHealth = 75;
 				break;
-				case "multicontainer biotec-scaled FO":
+				case 1384130728: //multicontainer biotec-scaled FO
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Standard FO <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Storage container that increases fuel and organics storage capacity. If breached, starfuel and organics will start to leak out.";
@@ -144,7 +141,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.fuelCanLeak = true;
 				shipModule_maxHealth = 75;
 				break;
-				case "multicontainer ESM-1":
+				case 1008150789: //multicontainer ESM-1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Standard XSM <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Storage container that increases metals and synthetics storage capacity. If breached, synthetics and explosives will start to leak out.";
@@ -156,7 +153,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.explosivesCanLeak = true;
 				shipModule_maxHealth = 75;
 				break;
-				case "multicontainer ESM-2":
+				case 426751082: //multicontainer ESM-2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Capital XSM <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Massive storage container that increases explosives, metals and synthetics storage capacity. If breached, synthetics and explosives will start to leak out.";
@@ -168,7 +165,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.explosivesCanLeak = true;
 				shipModule_maxHealth = 105;
 				break;
-				case "multicontainer FEO-1":
+				case 1165288718: //multicontainer FEO-1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Capital FEO <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Massive storage container that increases fuel, exotics and organics storage capacity. If breached, starfuel, organics and exotics will start to leak out.";
@@ -181,7 +178,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.exoticsCanLeak = true;
 				shipModule_maxHealth = 105;
 				break;
-				case "multicontainer FOO-1":
+				case 1165288404: //multicontainer FOO-1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Capital FOO <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Massive storage container that increases fuel and organics storage capacity. If breached, starfuel and organics will start to leak out.";
@@ -192,7 +189,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.fuelCanLeak = true;
 				shipModule_maxHealth = 105;
 				break;
-				case "multicontainer MFE retro futu":
+				case 1366723332: //multicontainer MFE retro futu
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Capital MFX <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Massive storage container that increases metals, fuel and explosives storage capacity. If breached, starfuel and explosives will start to leak out.";
@@ -204,7 +201,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.explosivesCanLeak = true;
 				shipModule_maxHealth = 105;
 				break;
-				case "multicontainer MFO retro futu":
+				case 1366723326: //multicontainer MFO retro futu
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Capital MFO <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Massive storage container that increases metals, fuel and organics storage capacity. If breached, starfuel and organics will start to leak out.";
@@ -216,7 +213,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.fuelCanLeak = true;
 				shipModule_maxHealth = 105;
 				break;
-				case "multicontainer OMS biotech":
+				case 1973225425: //multicontainer OMS biotech
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Capital OMS <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Massive storage container that increases organics, metals and synthetics storage capacity. If breached, organics and synthetics will start to leak out.";
@@ -228,7 +225,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.syntheticsCanLeak = true;
 				shipModule_maxHealth = 105;
 				break;
-				case "multicontainer FSEE biotech":
+				case 1847976825: //multicontainer FSEE biotech
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Capital FSXE <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Massive storage container that increases fuel, synthetics, explosives and exotics storage capacity. If breached, starfuel, synthetics, explosives and exotics will start to leak out.";
@@ -243,7 +240,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.exoticsCanLeak = true;
 				shipModule_maxHealth = 105;
 				break;
-				case "multicontainer FOS biotec":
+				case 2141167320: //multicontainer FOS biotec
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Capital FOS <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Massive storage container that increases fuel, organics and synthetics storage capacity. If breached, starfuel, organics and synthetics will start to leak out.";
@@ -256,7 +253,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.syntheticsCanLeak = true;
 				shipModule_maxHealth = 105;
 				break;
-				case "multicontainer OME mechanical":
+				case 920367928: //multicontainer OME mechanical
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Capital OME <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Massive storage container that increases organics, metals and exotics storage capacity. If breached, organics and exotics will start to leak out.";
@@ -268,7 +265,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.exoticsCanLeak = true;
 				shipModule_maxHealth = 105;
 				break;
-				case "multicontainer FE armor":
+				case 619214127: //multicontainer FE armor
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Armored FX <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Armored storage container that increases fuel and explosives storage capacity. Specialized mechanisms prevent resource leak, even if containment was breached.";
@@ -277,7 +274,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.MaxExplosives = 7500;
 				shipModule_maxHealth = 135;
 				break;
-				case "multicontainer FSE biotech":
+				case 1904770087: //multicontainer FSE biotech
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Armored FSE <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Armored storage container that increases fuel, synthetics and exotics storage capacity. Specialized mechanisms prevent resource leak, even if containment was breached.";
@@ -287,7 +284,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.MaxExotics = 500;
 				shipModule_maxHealth = 135;
 				break;
-				case "multicontainer EOME spideraa":
+				case 1270396661: //multicontainer EOME spideraa
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Exotic XOME <color=#" + colorMulti + "ff>Multicontainer</color>";
 				shipModule.description = "Exotic storage container that increases explosives, organics, metals and exotics storage capacity. If breached, organics, metals, explosives and exotics will start to leak out.";
@@ -302,7 +299,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.exoticsCanLeak = true;
 				shipModule_maxHealth = 75;
 				break;
-				case "organics container 0 diy":
+				case 1449641283: //organics container 0 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Makeshift <color=#" + colorContOrg + "ff>Organics Container</color>";
 				shipModule.description = "Makeshift storage container that increases organics storage capacity. If breached, organics will start to leak out. If breached, organics will start to leak out.";
@@ -311,7 +308,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.organicsCanLeak = true;
 				shipModule_maxHealth = 30;
 				break;
-				case "organics container 1 bio":
+				case 812439290: //organics container 1 bio
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Bionic <color=#" + colorContOrg + "ff>Organics Container</color>";
 				shipModule.description = "Bionic storage container that increases organics storage capacity. Regenerating organic tissue of this container prevents organics leak, even if containment was breached.";
@@ -319,7 +316,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.MaxOrganics = 4500;
 				shipModule_maxHealth = 60;
 				break;
-				case "organics container 1 small":
+				case 940750901: //organics container 1 small
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Small <color=#" + colorContOrg + "ff>Organics Container</color>";
 				shipModule.description = "Small storage container that increases organics storage capacity. If breached, organics will start to leak out.";
@@ -328,7 +325,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.organicsCanLeak = true;
 				shipModule_maxHealth = 45;
 				break;
-				case "organics container 2 medium":
+				case 82212496: //organics container 2 medium
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Medium <color=#" + colorContOrg + "ff>Organics Container</color>";
 				shipModule.description = "Medium storage container that increases organics storage capacity. If breached, organics will start to leak out.";
@@ -337,7 +334,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.organicsCanLeak = true;
 				shipModule_maxHealth = 60;
 				break;
-				case "organics container 3 large":
+				case 1530196661: //organics container 3 large
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Large <color=#" + colorContOrg + "ff>Organics Container</color>";
 				shipModule.description = "Large storage container that increases organics storage capacity. If breached, organics will start to leak out.";
@@ -346,7 +343,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.organicsCanLeak = true;
 				shipModule_maxHealth = 75;
 				break;
-				case "organics container 4 extra large":
+				case 1906398666: //organics container 4 extra large
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Huge <color=#" + colorContOrg + "ff>Organics Container</color>";
 				shipModule.description = "Huge storage container that increases organics storage capacity. If breached, organics will start to leak out.";
@@ -355,7 +352,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.organicsCanLeak = true;
 				shipModule_maxHealth = 75;
 				break;
-				case "organics container 5 ultra large":
+				case 1969497769: //organics container 5 ultra large
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Capital <color=#" + colorContOrg + "ff>Organics Container</color>";
 				shipModule.description = "Massive storage container that increases organics storage capacity. If breached, organics will start to leak out.";
@@ -364,7 +361,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.organicsCanLeak = true;
 				shipModule_maxHealth = 90;
 				break;
-				case "fuel container 0 diy":
+				case 1477762477: //fuel container 0 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Makeshift <color=#" + colorContFul + "ff>Fuel Container</color>";
 				shipModule.description = "Makeshift storage container that increases fuel storage capacity. If breached, starfuel will start to leak out.";
@@ -373,7 +370,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.fuelCanLeak = true;
 				shipModule_maxHealth = 30;
 				break;
-				case "fuel container 1 bio":
+				case 1140021200: //fuel container 1 bio
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Bionic <color=#" + colorContFul + "ff>Fuel Container</color>";
 				shipModule.description = "Bionic storage container that increases fuel storage capacity. Regenerating organic tissue of this container prevents starfuel leak, even if containment was breached.";
@@ -381,7 +378,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.MaxFuel = 4500;
 				shipModule_maxHealth = 60;
 				break;
-				case "fuel container 1":
+				case 1391027202: //fuel container 1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Small <color=#" + colorContFul + "ff>Fuel Container</color>";
 				shipModule.description = "Small storage container that increases fuel storage capacity. If breached, starfuel will start to leak out.";
@@ -390,7 +387,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.fuelCanLeak = true;
 				shipModule_maxHealth = 45;
 				break;
-				case "fuel container 2":
+				case 809627495: //fuel container 2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Medium <color=#" + colorContFul + "ff>Fuel Container</color>";
 				shipModule.description = "Medium storage container that increases fuel storage capacity. If breached, starfuel will start to leak out.";
@@ -399,7 +396,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.fuelCanLeak = true;
 				shipModule_maxHealth = 60;
 				break;
-				case "fuel container 3":
+				case 228227788: //fuel container 3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Large <color=#" + colorContFul + "ff>Fuel Container</color>";
 				shipModule.description = "Large storage container that increases fuel storage capacity. If breached, starfuel will start to leak out.";
@@ -408,7 +405,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.fuelCanLeak = true;
 				shipModule_maxHealth = 75;
 				break;
-				case "fuel container 4":
+				case 3058441: //fuel container 4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Huge <color=#" + colorContFul + "ff>Fuel Container</color>";
 				shipModule.description = "Huge storage container that increases fuel storage capacity. If breached, starfuel will start to leak out.";
@@ -417,7 +414,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.fuelCanLeak = true;
 				shipModule_maxHealth = 75;
 				break;
-				case "fuel container 5":
+				case 1569142382: //fuel container 5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Capital <color=#" + colorContFul + "ff>Fuel Container</color>";
 				shipModule.description = "Massive storage container that increases fuel storage capacity. If breached, starfuel will start to leak out.";
@@ -426,7 +423,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.fuelCanLeak = true;
 				shipModule_maxHealth = 90;
 				break;
-				case "fuel container tiger":
+				case 1061408062: //fuel container tiger
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Dreadnought <color=#" + colorContFul + "ff>Fuel Container</color>";
 				shipModule.description = "Massive storage container that increases fuel storage capacity. Specialized mechanisms prevent starfuel leak, even if containment was breached.";
@@ -434,7 +431,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.MaxFuel = 30000;
 				shipModule_maxHealth = 150;
 				break;
-				case "metals container 0 diy":
+				case 340918825: //metals container 0 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Makeshift <color=#" + colorContMet + "ff>Metals Container</color>";
 				shipModule.description = "Makeshift storage container that increases metals storage capacity. So brittle, that even with simple breach metals will start to leak out.";
@@ -443,7 +440,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.metalsCanLeak = true;
 				shipModule_maxHealth = 30;
 				break;
-				case "metals container 1 small":
+				case 349484391: //metals container 1 small
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Small <color=#" + colorContMet + "ff>Metals Container</color>";
 				shipModule.description = "Small storage container that increases metals storage capacity. Sturdy enough to ensure that no metals leak occur, even if containment was breached.";
@@ -451,7 +448,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.MaxMetals = 4000;
 				shipModule_maxHealth = 45;
 				break;
-				case "metals container 2 medium":
+				case 1448463490: //metals container 2 medium
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Medium <color=#" + colorContMet + "ff>Metals Container</color>";
 				shipModule.description = "Medium storage container that increases metals storage capacity. Sturdy enough to ensure that no metals leak occur, even if containment was breached.";
@@ -459,7 +456,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.MaxMetals = 8000;
 				shipModule_maxHealth = 60;
 				break;
-				case "metals container 3 large":
+				case 851515731: //metals container 3 large
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Large <color=#" + colorContMet + "ff>Metals Container</color>";
 				shipModule.description = "Large storage container that increases metals storage capacity. Sturdy enough to ensure that no metals leak occur, even if containment was breached.";
@@ -467,7 +464,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.MaxMetals = 12000;
 				shipModule_maxHealth = 75;
 				break;
-				case "metals container 4 extralarge":
+				case 350762646: //metals container 4 extralarge
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Huge <color=#" + colorContMet + "ff>Metals Container</color>";
 				shipModule.description = "Huge storage container that increases metals storage capacity. Sturdy enough to ensure that no metals leak occur, even if containment was breached.";
@@ -475,7 +472,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.MaxMetals = 20000;
 				shipModule_maxHealth = 90;
 				break;
-				case "synthetics container 0 diy":
+				case 165493307: //synthetics container 0 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Makeshift <color=#" + colorContSyn + "ff>Synthetics Container</color>";
 				shipModule.description = "Makeshift storage container that increases synthetics storage capacity. If breached, synthetics will start to leak out.";
@@ -484,7 +481,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.syntheticsCanLeak = true;
 				shipModule_maxHealth = 30;
 				break;
-				case "synthetics container1 small":
+				case 620471997: //synthetics container1 small
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Medium <color=#" + colorContSyn + "ff>Synthetics Container</color>";
 				shipModule.description = "Medium storage container that increases synthetics storage capacity. If breached, synthetics will start to leak out.";
@@ -493,7 +490,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.syntheticsCanLeak = true;
 				shipModule_maxHealth = 60;
 				break;
-				case "synthetics container2 medium":
+				case 376986556: //synthetics container2 medium
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Large <color=#" + colorContSyn + "ff>Synthetics Container</color>";
 				shipModule.description = "Large storage container that increases synthetics storage capacity. If breached, synthetics will start to leak out.";
@@ -502,7 +499,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.syntheticsCanLeak = true;
 				shipModule_maxHealth = 75;
 				break;
-				case "synthetics container3 large":
+				case 637430109: //synthetics container3 large
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Huge <color=#" + colorContSyn + "ff>Synthetics Container</color>";
 				shipModule.description = "Huge storage container that increases synthetics storage capacity. If breached, synthetics will start to leak out.";
@@ -511,7 +508,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.syntheticsCanLeak = true;
 				shipModule_maxHealth = 90;
 				break;
-				case "explosives container 0 diy":
+				case 271236703: //explosives container 0 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Makeshift <color=#" + colorContExp + "ff>Explosives Container</color>";
 				shipModule.description = "Makeshift storage container that increases explosives storage capacity. If breached, explosives will start to leak out.";
@@ -520,7 +517,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.explosivesCanLeak = true;
 				shipModule_maxHealth = 30;
 				break;
-				case "explosives container 1 small":
+				case 96469373: //explosives container 1 small
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Medium <color=#" + colorContExp + "ff>Explosives Container</color>";
 				shipModule.description = "Medium storage container that increases explosives storage capacity. If breached, explosives will start to leak out.";
@@ -529,7 +526,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.explosivesCanLeak = true;
 				shipModule_maxHealth = 60;
 				break;
-				case "explosives container 2 medium":
+				case 907034562: //explosives container 2 medium
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Large <color=#" + colorContExp + "ff>Explosives Container</color>";
 				shipModule.description = "Large storage container that increases explosives storage capacity. If breached, explosives will start to leak out.";
@@ -538,7 +535,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.explosivesCanLeak = true;
 				shipModule_maxHealth = 75;
 				break;
-				case "explosives container 3 large":
+				case 311517981: //explosives container 3 large
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Huge <color=#" + colorContExp + "ff>Explosives Container</color>";
 				shipModule.description = "Huge storage container that increases explosives storage capacity. If breached, explosives will start to leak out.";
@@ -547,7 +544,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.explosivesCanLeak = true;
 				shipModule_maxHealth = 90;
 				break;
-				case "exotics container 0 diy":
+				case 168523420: //exotics container 0 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Makeshift <color=#" + colorContExo + "ff>Exotics Container</color>";
 				shipModule.description = "Makeshift storage container that increases exotics storage capacity. If breached, exotics will start to leak out.";
@@ -556,7 +553,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.exoticsCanLeak = true;
 				shipModule_maxHealth = 30;
 				break;
-				case "exotics container 1 small":
+				case 19531542: //exotics container 1 small
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Small <color=#" + colorContExo + "ff>Exotics Container</color>";
 				shipModule.description = "Small storage container that increases exotics storage capacity. Specialized mechanisms prevent exotics leak, even if containment was breached.";
@@ -564,7 +561,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.MaxExotics = 400;
 				shipModule_maxHealth = 45;
 				break;
-				case "exotics container 2 medium":
+				case 584489047: //exotics container 2 medium
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Medium <color=#" + colorContExo + "ff>Exotics Container</color>";
 				shipModule.description = "Medium storage container that increases exotics storage capacity. Specialized mechanisms prevent exotics leak, even if containment was breached.";
@@ -572,7 +569,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.MaxExotics = 800;
 				shipModule_maxHealth = 60;
 				break;
-				case "exotics container 3 large":
+				case 1606402988: //exotics container 3 large
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId);
 				shipModule.displayName = "Large <color=#" + colorContExo + "ff>Exotics Container</color>";
 				shipModule.description = "Large storage container that increases exotics storage capacity. Specialized mechanisms prevent exotics leak, even if containment was breached.";
@@ -580,7 +577,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Container.MaxExotics = 1200;
 				shipModule_maxHealth = 75;
 				break;
-				case "fuel container 3 exotic artifact":
+				case 1925655786: //fuel container 3 exotic artifact
 				shipModule.displayName = "Fuel Container Artifact";
 				shipModule.description = "Fuel container storage of completely alien origin. Unique containment mechanism prevents fuel leak in case of even severe damage.";
 				shipModule.Container.MaxFuel = 6750;

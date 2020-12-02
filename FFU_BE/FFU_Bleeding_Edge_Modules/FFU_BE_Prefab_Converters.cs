@@ -4,27 +4,24 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Converters {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName == "explosives combinator diy") return idx; idx++;
-			if (moduleName == "fuel combinator 1A old") return idx; idx++;
-			if (moduleName == "oilcake converter") return idx; idx++;
-			if (moduleName == "fuel processor 1B") return idx; idx++;
-			if (moduleName == "synthetics cooker 1") return idx; idx++;
-			if (moduleName == "explosives combinator 1") return idx; idx++;
-			if (moduleName == "biotech explosives recycler") return idx; idx++;
-			if (moduleName == "fuel processor 2") return idx; idx++;
-			if (moduleName == "explosives combinator tiger") return idx; idx++;
+			if (moduleID == 1515661102) return idx; idx++; //explosives combinator diy
+			if (moduleID == 1531409027) return idx; idx++; //fuel combinator 1A old
+			if (moduleID == 166404798) return idx; idx++; //oilcake converter
+			if (moduleID == 194638103) return idx; idx++; //fuel processor 1B
+			if (moduleID == 373200662) return idx; idx++; //synthetics cooker 1
+			if (moduleID == 1615170861) return idx; idx++; //explosives combinator 1
+			if (moduleID == 1405176791) return idx; idx++; //biotech explosives recycler
+			if (moduleID == 1482294420) return idx; idx++; //fuel processor 2
+			if (moduleID == 1363987393) return idx; idx++; //explosives combinator tiger
 			return idx + 100;
 		}
 		public static void UpdateConverterModule(ShipModule shipModule, bool initItemData) {
 			string colorFactory = "dbc470";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "explosives combinator diy":
+			switch (shipModule.PrefabId) {
+				case 1515661102: //explosives combinator diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Makeshift <color=#" + colorFactory + "ff>Chemical Reactor</color>";
@@ -42,7 +39,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 20;
 				break;
-				case "fuel combinator 1A old":
+				case 1531409027: //fuel combinator 1A old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Ancient <color=#" + colorFactory + "ff>Industrial Refinery</color>";
@@ -62,7 +59,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 30;
 				break;
-				case "oilcake converter":
+				case 166404798: //oilcake converter
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.3f);
 				shipModule.displayName = "Emporium <color=#" + colorFactory + "ff>Chemical Reactor</color>";
@@ -82,7 +79,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 40;
 				break;
-				case "fuel processor 1B":
+				case 194638103: //fuel processor 1B
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
 				shipModule.displayName = "Modern <color=#" + colorFactory + "ff>Industrial Refinery</color>";
@@ -102,7 +99,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 11;
 				shipModule_maxHealth = 50;
 				break;
-				case "synthetics cooker 1":
+				case 373200662: //synthetics cooker 1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.1f);
 				shipModule.displayName = "MarsCorp <color=#" + colorFactory + "ff>Military Refinery</color>";
@@ -124,7 +121,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 14;
 				shipModule_maxHealth = 60;
 				break;
-				case "explosives combinator 1":
+				case 1615170861: //explosives combinator 1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.0f);
 				shipModule.displayName = "TerraSec <color=#" + colorFactory + "ff>Military Refinery</color>";
@@ -148,7 +145,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 17;
 				shipModule_maxHealth = 150;
 				break;
-				case "biotech explosives recycler":
+				case 1405176791: //biotech explosives recycler
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.2f);
 				shipModule.displayName = "GeneForce <color=#" + colorFactory + "ff>Biotic Refinery</color>";
@@ -174,7 +171,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 45;
 				break;
-				case "fuel processor 2":
+				case 1482294420: //fuel processor 2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.9f);
 				shipModule.displayName = "MicroProse <color=#" + colorFactory + "ff>Quantum Furnace</color>";
@@ -200,7 +197,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 21;
 				shipModule_maxHealth = 80;
 				break;
-				case "explosives combinator tiger":
+				case 1363987393: //explosives combinator tiger
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.8f);
 				shipModule.displayName = "StarFurnace <color=#" + colorFactory + "ff>Singularity Core</color>";

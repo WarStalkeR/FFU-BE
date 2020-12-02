@@ -4,56 +4,56 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Nukes {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
 			//Kinetic
-			if (moduleName == "02 Decoy nuke launcher") return idx; idx++;
-			if (moduleName == "07 Greentail nuke launcher") return idx; idx++;
-			if (moduleName == "02 Spideraa decoy nuke launcher") return idx; idx++;
-			if (moduleName == "07 Greentail nuke launcher 2") return idx; idx++;
-			if (moduleName == "Tiger Monolith nuke launcher") return idx; idx++;
-			if (moduleName == "Monolith nuke launcher") return idx; idx++;
+			if (moduleID == 1012765355) return idx; idx++; //02 Decoy nuke launcher
+			if (moduleID == 247153919) return idx; idx++; //07 Greentail nuke launcher
+			if (moduleID == 1025580152) return idx; idx++; //02 Spideraa decoy nuke launcher
+			if (moduleID == 1441404901) return idx; idx++; //07 Greentail nuke launcher 2
+			if (moduleID == 2070090696) return idx; idx++; //Tiger Monolith nuke launcher
+			if (moduleID == 1851270005) return idx; idx++; //Monolith nuke launcher
 			//Energy
-			if (moduleName == "00 DIY decoy nuke launcher") return idx; idx++;
-			if (moduleName == "00 DIY EMP nuke launcher") return idx; idx++;
-			if (moduleName == "00 DIY shieldbreaker nuke launcher") return idx; idx++;
-			if (moduleName == "16 EMP rat nuke launcher") return idx; idx++;
-			if (moduleName == "Tiger EMP dual nuke launcher") return idx; idx++;
-			if (moduleName == "11 EMP nuke launcher") return idx; idx++;
+			if (moduleID == 92356131) return idx; idx++; //00 DIY decoy nuke launcher
+			if (moduleID == 430038657) return idx; idx++; //00 DIY EMP nuke launcher
+			if (moduleID == 1073969324) return idx; idx++; //00 DIY shieldbreaker nuke launcher
+			if (moduleID == 1773946856) return idx; idx++; //16 EMP rat nuke launcher
+			if (moduleID == 120056764) return idx; idx++; //Tiger EMP dual nuke launcher
+			if (moduleID == 2106923011) return idx; idx++; //11 EMP nuke launcher
 			//Thermal
-			if (moduleName == "04 DIY fuel pack launcher") return idx; idx++;
-			if (moduleName == "00 DIY Rat fireball nuke launcher") return idx; idx++;
-			if (moduleName == "03 Barrel nuke launcher") return idx; idx++;
-			if (moduleName == "09 Rat nuke launcher") return idx; idx++;
-			if (moduleName == "13 Bullseye nuke launcher") return idx; idx++;
-			if (moduleName == "04 Fueltank nuke launcher") return idx; idx++;
+			if (moduleID == 2146165248) return idx; idx++; //04 DIY fuel pack launcher
+			if (moduleID == 507989399) return idx; idx++; //00 DIY Rat fireball nuke launcher
+			if (moduleID == 949056369) return idx; idx++; //03 Barrel nuke launcher
+			if (moduleID == 787880682) return idx; idx++; //09 Rat nuke launcher
+			if (moduleID == 697717866) return idx; idx++; //13 Bullseye nuke launcher
+			if (moduleID == 780823633) return idx; idx++; //04 Fueltank nuke launcher
 			//Tactical
-			if (moduleName == "04 DIY explo pack launcher") return idx; idx++;
-			if (moduleName == "08e thin speeder nuke launcher") return idx; idx++;
-			if (moduleName == "06 Tiger nuke launcher") return idx; idx++;
-			if (moduleName == "14 Red EB nuke launcher") return idx; idx++;
-			if (moduleName == "08d Spearhead nuke launcher") return idx; idx++;
-			if (moduleName == "Tiger 8x nuke launcher") return idx; idx++;
+			if (moduleID == 533676501) return idx; idx++; //04 DIY explo pack launcher
+			if (moduleID == 686511980) return idx; idx++; //08e thin speeder nuke launcher
+			if (moduleID == 157230770) return idx; idx++; //06 Tiger nuke launcher
+			if (moduleID == 997641622) return idx; idx++; //14 Red EB nuke launcher
+			if (moduleID == 342953834) return idx; idx++; //08d Spearhead nuke launcher
+			if (moduleID == 120466776) return idx; idx++; //Tiger 8x nuke launcher
 			//Chemical
-			if (moduleName == "04 DIY plastics launcher") return idx; idx++;
-			if (moduleName == "07 DIY acid nuke launcher") return idx; idx++;
-			if (moduleName == "13 nanopellet nuke launcher") return idx; idx++;
-			if (moduleName == "07 Weirdship Chem nuke launcher") return idx; idx++;
-			if (moduleName == "Tiger sharpnel nuke launcher") return idx; idx++;
-			if (moduleName == "08c Green nuke launcher") return idx; idx++;
+			if (moduleID == 1771248833) return idx; idx++; //04 DIY plastics launcher
+			if (moduleID == 955652403) return idx; idx++; //07 DIY acid nuke launcher
+			if (moduleID == 1178343825) return idx; idx++; //13 nanopellet nuke launcher
+			if (moduleID == 475763260) return idx; idx++; //07 Weirdship Chem nuke launcher
+			if (moduleID == 1711403825) return idx; idx++; //Tiger sharpnel nuke launcher
+			if (moduleID == 22001514) return idx; idx++; //08c Green nuke launcher
 			//Boarding
-			if (moduleName == "07 DIY bionuke launcher") return idx; idx++;
-			if (moduleName == "07 Weirdship Minibio nuke launcher") return idx; idx++;
-			if (moduleName == "99 maggot spawner launcher") return idx; idx++;
-			if (moduleName == "99 pirate spawner launcher 1") return idx; idx++;
-			if (moduleName == "Tiger intruderbot nuke launcher") return idx; idx++;
+			if (moduleID == 2053889862) return idx; idx++; //07 DIY bionuke launcher
+			if (moduleID == 141822690) return idx; idx++; //07 Weirdship Minibio nuke launcher
+			if (moduleID == 1350933427) return idx; idx++; //99 maggot spawner launcher
+			if (moduleID == 1043100994) return idx; idx++; //99 pirate spawner launcher 1
+			if (moduleID == 381835966) return idx; idx++; //Tiger intruderbot nuke launcher
 			//Strategic
-			if (moduleName == "04 DIY exotics nuke launcher") return idx; idx++;
-			if (moduleName == "06 DIY probe nuke launcher") return idx; idx++;
-			if (moduleName == "08a Happy nuke launcher") return idx; idx++;
-			if (moduleName == "08b Old nuke launcher") return idx; idx++;
-			if (moduleName == "10 White nuke launcher") return idx; idx++;
-			if (moduleName == "15 Black nuke launcher") return idx; idx++;
+			if (moduleID == 858424257) return idx; idx++; //04 DIY exotics nuke launcher
+			if (moduleID == 1207909377) return idx; idx++; //06 DIY probe nuke launcher
+			if (moduleID == 227136891) return idx; idx++; //08a Happy nuke launcher
+			if (moduleID == 415755100) return idx; idx++; //08b Old nuke launcher
+			if (moduleID == 1392399452) return idx; idx++; //10 White nuke launcher
+			if (moduleID == 1558344950) return idx; idx++; //15 Black nuke launcher
 			return idx + 100;
 		}
 		public static void UpdateNukeModule(ShipModule shipModule, bool initItemData) {
@@ -66,11 +66,8 @@ namespace FFU_Bleeding_Edge {
 			string colorNukeStr = "ff0000";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
 			HomingMovement shipModule_Weapon_ProjectileOrBeamPrefab_HomingMovement = (HomingMovement)AccessTools.PropertyGetter(typeof(Projectile), "HomingMovement").Invoke(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile, null);
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "02 Decoy nuke launcher":
+			switch (shipModule.PrefabId) {
+				case 1012765355: //02 Decoy nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Iron Harvest <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
@@ -90,7 +87,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 150;
 				shipModule_maxHealth = 35;
 				break;
-				case "07 Greentail nuke launcher":
+				case 247153919: //07 Greentail nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Biotic Thorn <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
@@ -110,7 +107,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 12;
 				shipModule_maxHealth = 35;
 				break;
-				case "02 Spideraa decoy nuke launcher":
+				case 1025580152: //02 Spideraa decoy nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Hunter Killer <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
@@ -130,7 +127,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 18;
 				shipModule_maxHealth = 35;
 				break;
-				case "07 Greentail nuke launcher 2":
+				case 1441404901: //07 Greentail nuke launcher 2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Biotic Spike <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
@@ -150,7 +147,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 24;
 				shipModule_maxHealth = 35;
 				break;
-				case "Tiger Monolith nuke launcher":
+				case 2070090696: //Tiger Monolith nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Bright Fury <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
@@ -170,7 +167,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 30;
 				shipModule_maxHealth = 35;
 				break;
-				case "Monolith nuke launcher":
+				case 1851270005: //Monolith nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Blackhammer <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
@@ -190,7 +187,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 35;
 				shipModule_maxHealth = 35;
 				break;
-				case "00 DIY decoy nuke launcher":
+				case 92356131: //00 DIY decoy nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Powerpack <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
@@ -210,7 +207,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 2;
 				shipModule_maxHealth = 25;
 				break;
-				case "00 DIY EMP nuke launcher":
+				case 430038657: //00 DIY EMP nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Discharge <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
@@ -230,7 +227,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 3;
 				shipModule_maxHealth = 25;
 				break;
-				case "00 DIY shieldbreaker nuke launcher":
+				case 1073969324: //00 DIY shieldbreaker nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Disruptor <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
@@ -250,7 +247,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 5;
 				shipModule_maxHealth = 25;
 				break;
-				case "16 EMP rat nuke launcher":
+				case 1773946856: //16 EMP rat nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Pulse Wave <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
@@ -270,7 +267,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 7;
 				shipModule_maxHealth = 25;
 				break;
-				case "Tiger EMP dual nuke launcher":
+				case 120056764: //Tiger EMP dual nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Dual Shock <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
@@ -290,7 +287,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 10;
 				shipModule_maxHealth = 25;
 				break;
-				case "11 EMP nuke launcher":
+				case 2106923011: //11 EMP nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Ion Storm <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
@@ -310,7 +307,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 13;
 				shipModule_maxHealth = 25;
 				break;
-				case "04 DIY fuel pack launcher":
+				case 2146165248: //04 DIY fuel pack launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Firepack <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
@@ -330,7 +327,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 2;
 				shipModule_maxHealth = 15;
 				break;
-				case "00 DIY Rat fireball nuke launcher":
+				case 507989399: //00 DIY Rat fireball nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Fireball <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
@@ -350,7 +347,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 2;
 				shipModule_maxHealth = 15;
 				break;
-				case "03 Barrel nuke launcher":
+				case 949056369: //03 Barrel nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Phosphate <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
@@ -370,7 +367,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 3;
 				shipModule_maxHealth = 15;
 				break;
-				case "09 Rat nuke launcher":
+				case 787880682: //09 Rat nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Blazefire <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
@@ -390,7 +387,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 4;
 				shipModule_maxHealth = 15;
 				break;
-				case "13 Bullseye nuke launcher":
+				case 697717866: //13 Bullseye nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Firestorm <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
@@ -410,7 +407,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 5;
 				shipModule_maxHealth = 15;
 				break;
-				case "04 Fueltank nuke launcher":
+				case 780823633: //04 Fueltank nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Hellfire <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
@@ -430,7 +427,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 7;
 				shipModule_maxHealth = 15;
 				break;
-				case "04 DIY explo pack launcher":
+				case 533676501: //04 DIY explo pack launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Explopack <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
@@ -450,7 +447,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 5;
 				shipModule_maxHealth = 25;
 				break;
-				case "08e thin speeder nuke launcher":
+				case 686511980: //08e thin speeder nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Stingray <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
@@ -470,7 +467,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 8;
 				shipModule_maxHealth = 25;
 				break;
-				case "06 Tiger nuke launcher":
+				case 157230770: //06 Tiger nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Sub-Seismic <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
@@ -490,7 +487,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 10;
 				shipModule_maxHealth = 25;
 				break;
-				case "14 Red EB nuke launcher":
+				case 997641622: //14 Red EB nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Commercial <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
@@ -510,7 +507,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 12;
 				shipModule_maxHealth = 25;
 				break;
-				case "08d Spearhead nuke launcher":
+				case 342953834: //08d Spearhead nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Avalanche <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
@@ -530,7 +527,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 15;
 				shipModule_maxHealth = 25;
 				break;
-				case "Tiger 8x nuke launcher":
+				case 120466776: //Tiger 8x nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Cataclysm <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
@@ -550,7 +547,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 5;
 				shipModule_maxHealth = 25;
 				break;
-				case "04 DIY plastics launcher":
+				case 1771248833: //04 DIY plastics launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Synthpack <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
@@ -570,7 +567,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 2;
 				shipModule_maxHealth = 15;
 				break;
-				case "07 DIY acid nuke launcher":
+				case 955652403: //07 DIY acid nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Corrosion <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
@@ -590,7 +587,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 3;
 				shipModule_maxHealth = 15;
 				break;
-				case "13 nanopellet nuke launcher":
+				case 1178343825: //13 nanopellet nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Green Mist <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
@@ -610,7 +607,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 4;
 				shipModule_maxHealth = 15;
 				break;
-				case "07 Weirdship Chem nuke launcher":
+				case 475763260: //07 Weirdship Chem nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Deathmite <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
@@ -630,7 +627,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 5;
 				shipModule_maxHealth = 15;
 				break;
-				case "Tiger sharpnel nuke launcher":
+				case 1711403825: //Tiger sharpnel nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Acid Rain <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
@@ -650,7 +647,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 6;
 				shipModule_maxHealth = 15;
 				break;
-				case "08c Green nuke launcher":
+				case 22001514: //08c Green nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Green Death <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
@@ -670,7 +667,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 7;
 				shipModule_maxHealth = 15;
 				break;
-				case "07 DIY bionuke launcher":
+				case 2053889862: //07 DIY bionuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Micromite <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
@@ -691,7 +688,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 4;
 				shipModule_maxHealth = 25;
 				break;
-				case "07 Weirdship Minibio nuke launcher":
+				case 141822690: //07 Weirdship Minibio nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Deathspore <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
@@ -712,7 +709,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 8;
 				shipModule_maxHealth = 25;
 				break;
-				case "99 maggot spawner launcher":
+				case 1350933427: //99 maggot spawner launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Infestator <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
@@ -733,7 +730,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 12;
 				shipModule_maxHealth = 25;
 				break;
-				case "99 pirate spawner launcher 1":
+				case 1043100994: //99 pirate spawner launcher 1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Ramshackle <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
@@ -754,7 +751,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 16;
 				shipModule_maxHealth = 25;
 				break;
-				case "Tiger intruderbot nuke launcher":
+				case 381835966: //Tiger intruderbot nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Apocalypse <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
@@ -775,7 +772,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 20;
 				shipModule_maxHealth = 25;
 				break;
-				case "04 DIY exotics nuke launcher":
+				case 858424257: //04 DIY exotics nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "Exopack <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
@@ -795,7 +792,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 5;
 				shipModule_maxHealth = 25;
 				break;
-				case "06 DIY probe nuke launcher":
+				case 1207909377: //06 DIY probe nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "Satellite <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
@@ -815,7 +812,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 8;
 				shipModule_maxHealth = 25;
 				break;
-				case "08a Happy nuke launcher":
+				case 227136891: //08a Happy nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "Happy World <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
@@ -835,7 +832,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 10;
 				shipModule_maxHealth = 25;
 				break;
-				case "08b Old nuke launcher":
+				case 415755100: //08b Old nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "SS-18 Satan <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
@@ -855,7 +852,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 10;
 				shipModule_maxHealth = 25;
 				break;
-				case "10 White nuke launcher":
+				case 1392399452: //10 White nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "White Death <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
@@ -875,7 +872,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.overrideProjectileHealth = 12;
 				shipModule_maxHealth = 25;
 				break;
-				case "15 Black nuke launcher":
+				case 1558344950: //15 Black nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "Void Fire <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";

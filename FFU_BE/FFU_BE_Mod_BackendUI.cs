@@ -20,6 +20,7 @@ using MonoMod;
 using System;
 using System.Text.RegularExpressions;
 using HarmonyLib;
+using ClickToBind;
 
 namespace RST.UI {
 	[ExecuteInEditMode]
@@ -450,19 +451,11 @@ namespace RST.UI {
 				else if (RstTime.IsFastForward) DoFastForward();
 				lastTimeScale = RstTime.timeScale;
 			}
-			bool controlsDisabled = ControlsDisabled;
-			if (!controlsDisabled && KeyBindingManager.GetKeyUp(KeyAction.TimeToggle, KeyAction.TimeToggleAlt)) {
+			if (!TimePanelControls.ControlsDisabled && KeyBindingManager.GetKeyUp(KeyAction.TimeToggle, KeyAction.TimeToggleAlt)) {
 				if (RstTime.IsNormalSpeed) {
 					if (!FFU_BE_Defs.GetDifficultyAllowPause()) slowMotionButton.onClick.Invoke();
 					else pauseButton.onClick.Invoke();
 				} else playButton.onClick.Invoke();
-			}
-			if (lastControlsDisabled != controlsDisabled) {
-				pauseButton.interactable = !controlsDisabled;
-				slowMotionButton.interactable = !controlsDisabled;
-				playButton.interactable = !controlsDisabled;
-				fastForwardButton.interactable = !controlsDisabled;
-				lastControlsDisabled = controlsDisabled;
 			}
 			bool pauseDisabled = !FFU_BE_Defs.GetDifficultyAllowPause();
 			if (lastPauseDisabled != pauseDisabled) {
@@ -505,7 +498,7 @@ namespace RST.UI {
 			bool isTutorial = MainQuest.Instance != null && MainQuest.Instance.isTutorial;
 			switch (FFU_BE_Defs.GetDifficultyIntValue()) {
 				case 0: nameText = Datas.diffTextEasy; descText = $"{Core.TT(Datas.diffPauseYes)}\n{Core.TT(Datas.diffTechNone)}\n{Core.TT(Datas.diffBonusEasy)}"; break;
-				case 1: nameText = Datas.diffTechMed; descText = $"{Core.TT(Datas.diffPauseYes)}\n{Core.TT(Datas.diffTechNone)}\n{Core.TT(Datas.diffBonusMed)}"; break;
+				case 1: nameText = Datas.diffTextMed; descText = $"{Core.TT(Datas.diffPauseYes)}\n{Core.TT(Datas.diffTechNone)}\n{Core.TT(Datas.diffBonusMed)}"; break;
 				case 2: nameText = Datas.diffTextHard; descText = $"{Core.TT(Datas.diffPauseYes)}\n{Core.TT(Datas.diffTechLow)}\n{Core.TT(Datas.diffBonusHard)}"; break;
 				case 3: nameText = Datas.diffTextBrut; descText = $"{Core.TT(Datas.diffPauseNo)}\n{Core.TT(Datas.diffTechMed)}\n{Core.TT(Datas.diffBonusBrut)}"; break;
 				case 4: nameText = Datas.diffTextIns; descText = $"{Core.TT(Datas.diffPauseNo)}\n{Core.TT(Datas.diffTechHigh)}\n{Core.TT(Datas.diffBonusIns)}"; break;

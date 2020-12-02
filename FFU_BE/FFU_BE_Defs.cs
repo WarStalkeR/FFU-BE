@@ -14,9 +14,10 @@ using System;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "1.0.1.0";
+		public static string modVersion = "1.0.3.0";
 		//Temporary Data
 		public static bool flagDLC_SupPak = false;
+		public static bool flagDLC_OldEnm = false;
 		public static bool dataMenuSpritesLoaded = false;
 		public static List<Sprite> dataMenuSpritesSet = new List<Sprite>();
 		//Internal Variables
@@ -26,9 +27,10 @@ namespace FFU_Bleeding_Edge {
 		public static bool debugMode = false;
 		public static bool visualDebug = false;
 		public static bool canSpawnCrew = false;
+		public static bool dumpGameTexts = false;
 		public static bool dumpAllPrefabs = false;
 		public static bool dumpObjectLists = false;
-		public static bool dumpInstructions = false;
+		public static bool dumpObjectDatas = false;
 		public static bool allStatProps = false;
 		public static bool allModuleProps = false;
 		public static bool showSortedList = false;
@@ -246,6 +248,7 @@ namespace FFU_Bleeding_Edge {
 		public static bool fuelIsCraftingEnergy = true;
 		public static bool fuelIsScrapRefunded = false;
 		public static bool relativeEnemyCrewSkills = true;
+		public static bool listAllCrewmemberTypes = false;
 		public static float containerSizeMultiplier = 1.0f;
 		public static float resourcesScrapFraction = 0.2f;
 		public static int newStartingFateBonus = 0;
@@ -270,55 +273,63 @@ namespace FFU_Bleeding_Edge {
 		public static float warpProducedResearchMult = 0.8f;
 		public static float warpProducedResourcesMult = 0.8f;
 		public static float enemyCrewHealthSectorMult = 0.1f;
-		public static IDictionary<int, List<KeyValuePair<string, int>>> initialCrew = new Dictionary<int, List<KeyValuePair<string, int>>>() {
-			{ 516057105,  new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
-				new KeyValuePair<string, int>("Combat Drone Humanoid", 2),
-				new KeyValuePair<string, int>("Drone tigerspider", 2)})},
-			{ 487234563,  new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
-				new KeyValuePair<string, int>("Heavy security drone", 2),
-				new KeyValuePair<string, int>("Drone CT2 gunnery", 2)})},
-			{ 1809014558, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
-				new KeyValuePair<string, int>("Redripper crew", 2),
-				new KeyValuePair<string, int>("Beedroid crew", 2)})},
-			{ 578937222,  new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
-				new KeyValuePair<string, int>("Drone DIY gunjunker", 2),
-				new KeyValuePair<string, int>("Drone DIY gunnery pirates cannon", 2)})},
-			{ 1106792042, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
-				new KeyValuePair<string, int>("Combat Drone Humanoid", 4),
-				new KeyValuePair<string, int>("Drone tigerspider", 2)})},
-			{ 2103659466, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
-				new KeyValuePair<string, int>("Combat Drone Humanoid", 2),
-				new KeyValuePair<string, int>("Heavy security drone", 4)})},
-			{ 1772361532, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
-				new KeyValuePair<string, int>("Drone DIY science", 4),
-				new KeyValuePair<string, int>("Drone tigerspider", 4)})},
-			{ 1920692188, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
-				new KeyValuePair<string, int>("Combat Drone Humanoid", 6),
-				new KeyValuePair<string, int>("Heavy security drone", 2)})},
-			{ 1251918188, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
-				new KeyValuePair<string, int>("Combat Drone Humanoid", 2),
-				new KeyValuePair<string, int>("Redripper crew", 6)})},
-			{ 1452660923, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
-				new KeyValuePair<string, int>("Combat Drone Humanoid", 4),
-				new KeyValuePair<string, int>("Heavy security drone", 2),
-				new KeyValuePair<string, int>("Drone tigerspider assaulter", 2),
-				new KeyValuePair<string, int>("Drone tigerdog", 2)})},
-			{ 1939804939, new List<KeyValuePair<string, int>>(new KeyValuePair<string, int>[]{
-				new KeyValuePair<string, int>("Combat Drone Humanoid", 4),
-				new KeyValuePair<string, int>("Heavy security drone", 2),
-				new KeyValuePair<string, int>("Drone tigerspider pirates", 4)})}};
-		public static IDictionary<int, List<KeyValuePair<string, int>>> startingCrew = new Dictionary<int, List<KeyValuePair<string, int>>>() {
-			{ 516057105,  new List<KeyValuePair<string, int>>()},	//_Tigerfish
-			{ 487234563,  new List<KeyValuePair<string, int>>()},	//_NukeRunner
-			{ 578937222,  new List<KeyValuePair<string, int>>()},	//_RogueRat
-			{ 1809014558, new List<KeyValuePair<string, int>>()},	//_Weirdship
-			{ 1920692188, new List<KeyValuePair<string, int>>()},	//_EasyTiger
-			{ 1106792042, new List<KeyValuePair<string, int>>()},	//_Gardenship
-			{ 2103659466, new List<KeyValuePair<string, int>>()},	//_Atlas
-			{ 1772361532, new List<KeyValuePair<string, int>>()},	//_Bluestar
-			{ 1251918188, new List<KeyValuePair<string, int>>()},	//_Roundship
-			{ 1452660923, new List<KeyValuePair<string, int>>()},	//_BattleTiger
-			{ 1939804939, new List<KeyValuePair<string, int>>()}};	//_Endurance
+		public static IDictionary<int, List<KeyValuePair<int, int>>> initialCrew = new Dictionary<int, List<KeyValuePair<int, int>>>() {
+			{ 516057105,  new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(826379097, 2),
+				new KeyValuePair<int, int>(1481089982, 2)})},
+			{ 487234563,  new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(190195895, 2),
+				new KeyValuePair<int, int>(1589791427, 2)})},
+			{ 578937222,  new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(745155399, 2),
+				new KeyValuePair<int, int>(1349353450, 2)})},
+			{ 66885230, new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(768455465, 4)})},
+			{ 1809014558, new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(488555786, 2),
+				new KeyValuePair<int, int>(768455465, 2)})},
+			{ 1920692188, new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(826379097, 4),
+				new KeyValuePair<int, int>(1727276051, 2)})},
+			{ 1106792042, new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(826379097, 4),
+				new KeyValuePair<int, int>(1481089982, 2)})},
+			{ 2103659466, new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(826379097, 2),
+				new KeyValuePair<int, int>(190195895, 4)})},
+			{ 1772361532, new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(421109168, 4),
+				new KeyValuePair<int, int>(1481089982, 4)})},
+			{ 1251918188, new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(826379097, 2),
+				new KeyValuePair<int, int>(488555786, 6)})},
+			{ 853503871, new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(826379097, 2),
+				new KeyValuePair<int, int>(190195895, 2),
+				new KeyValuePair<int, int>(1351800556, 4)})},
+			{ 1452660923, new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(826379097, 4),
+				new KeyValuePair<int, int>(190195895, 2),
+				new KeyValuePair<int, int>(1481089982, 2),
+				new KeyValuePair<int, int>(1727276051, 2)})},
+			{ 1939804939, new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(826379097, 4),
+				new KeyValuePair<int, int>(190195895, 4),
+				new KeyValuePair<int, int>(1351800556, 4)})}};
+		public static IDictionary<int, List<KeyValuePair<int, int>>> startingCrew = new Dictionary<int, List<KeyValuePair<int, int>>>() {
+			{ 516057105,  new List<KeyValuePair<int, int>>()},	//_Tigerfish
+			{ 487234563,  new List<KeyValuePair<int, int>>()},	//_NukeRunner
+			{ 578937222,  new List<KeyValuePair<int, int>>()},	//_RogueRat
+			{ 66885230,	  new List<KeyValuePair<int, int>>()},	//_Exception
+			{ 2103659466, new List<KeyValuePair<int, int>>()},	//_Atlas
+			{ 1920692188, new List<KeyValuePair<int, int>>()},	//_EasyTiger
+			{ 1251918188, new List<KeyValuePair<int, int>>()},	//_Roundship
+			{ 1809014558, new List<KeyValuePair<int, int>>()},	//_Weirdship
+			{ 1452660923, new List<KeyValuePair<int, int>>()},	//_BattleTiger
+			{ 853503871,  new List<KeyValuePair<int, int>>()},	//_Engiship
+			{ 1772361532, new List<KeyValuePair<int, int>>()},	//_Bluestar
+			{ 1106792042, new List<KeyValuePair<int, int>>()},	//_Gardenship
+			{ 1939804939, new List<KeyValuePair<int, int>>()}};	//_Endurance
 		public static void LoadModPropsAndFeatures() {
 			if (!firstRun) {
 				Debug.LogWarning("Updating and saving custom variables...");
@@ -359,6 +370,8 @@ namespace FFU_Bleeding_Edge {
 				FFU_BE_Mod_Spaceships.InitShipResourcePrefabs();
 				FFU_BE_Mod_Spaceships.InitSpaceShipsPrefabList();
 				FFU_BE_Mod_Spaceships.InitLockedPerksAllocation();
+				//ES2.Save(FFU_BE_Base.allPerksList, "permanent.es2?tag=unlockedItemIds");
+				//foreach (Fleet fleet in Resources.FindObjectsOfTypeAll<Fleet>()) Debug.LogWarning($"Fleet: {fleet.name}");
 				if (ES2.Exists("start.es2?tag=researchProgress")) researchProgress = ES2.Load<float>("start.es2?tag=researchProgress");
 				if (ES2.Exists("start.es2?tag=moduleResearchGoal")) moduleResearchGoal = ES2.Load<float>("start.es2?tag=moduleResearchGoal");
 				if (ES2.Exists("start.es2?tag=unusedReverseProgress")) unusedReverseProgress = ES2.Load<float>("start.es2?tag=unusedReverseProgress");
@@ -400,11 +413,11 @@ namespace FFU_Bleeding_Edge {
 		}
 		public static void InitGameInterfaceUpdate() {
 			foreach (HoverableUI hoverableUI in Resources.FindObjectsOfTypeAll<HoverableUI>()) {
-				if (dumpObjectLists) Debug.LogWarning("[HoverableUI] " + hoverableUI.name + ": " + hoverableUI.hoverText);
+				if (dumpGameTexts) Debug.LogWarning("[HoverableUI] " + hoverableUI.name + ": " + hoverableUI.hoverText);
 			}
 			foreach (GridLayoutGroup gridLayoutGroup in Resources.FindObjectsOfTypeAll<GridLayoutGroup>()) {
 				if (gridLayoutGroup.name == "Grid" && gridLayoutGroup.constraintCount == 6) gridLayoutGroup.constraintCount = 12;
-				if (dumpObjectLists) Debug.LogWarning("[GridLayoutGroup] " + gridLayoutGroup.name + ": " + 
+				if (dumpGameTexts) Debug.LogWarning("[GridLayoutGroup] " + gridLayoutGroup.name + ": " + 
 				gridLayoutGroup.constraintCount + ", " + gridLayoutGroup.constraint + ", " +
 				gridLayoutGroup.cellSize.x + ", " + gridLayoutGroup.cellSize.y);
 			}
@@ -438,7 +451,9 @@ namespace FFU_Bleeding_Edge {
 			}
 		}
 		public static void InitDLCsDetection() {
+			//foreach (DLCButton button in Resources.FindObjectsOfTypeAll<DLCButton>()) Debug.LogWarning($"{button.name}: {button.prefabIdToCheck}");
 			if (PrefabFinder.PrefabDict.ContainsKey(1452660923)) flagDLC_SupPak = true;
+			if (PrefabFinder.PrefabDict.ContainsKey(527148320)) flagDLC_OldEnm = true;
 		}
 		public static void InitGameTextUpdate() {
 			string colorLaserEmt = "ffff60";
@@ -834,7 +849,7 @@ namespace FFU_Bleeding_Edge {
 					"pirates, their hideouts and legitimate loot filled with resources, credits, rare exotic substances and even unknown " +
 					"artifacts. As result, hunting down Pirates and Slavers earns not only respect and bounty, but also various " +
 					"resources salvaged from wrecks of their ships.";
-				if (dumpObjectLists) Debug.Log("[Game Text] " + txt.name + ": " + txt.text);
+				if (dumpGameTexts) Debug.Log("[Game Text] " + txt.name + ": " + txt.text);
 			}
 		}
 		public static void LoadBleedingEdgeWelcome() {
@@ -863,7 +878,7 @@ namespace FFU_Bleeding_Edge {
 						"Anyway, you can <color=#3366ff>reset all data and just unlock all ships</color> or <color=#ff3333>reset all data and unlock " +
 						"all ships with all perks</color> depending on mod's configuration. To do it just follow (no, not a white rabbit) IDKFA and " +
 						"take the pill.\n</size>";
-				if (dumpObjectLists) Debug.Log("[Welcome Text] " + txt.name + ": " + txt.text);
+				if (dumpGameTexts) Debug.Log("[Welcome Text] " + txt.name + ": " + txt.text);
 			}
 		}
 		public static void ProduceResources(PlayerData pData, ref ResourceValueGroup pStored, string pReason) {
@@ -1086,123 +1101,91 @@ namespace FFU_Bleeding_Edge {
 			for (int i = 0; i < tObject.GetComponents<object>().Length; i++) Debug.LogWarning($"{itemSpacing.ToString()}  - {tObject.GetComponents<object>()[i]?.ToString()}");
 			for (int i = 0; i < tObject.childCount; i++) GetComponentsListTree(tObject.GetChild(i), cOrder + 1, i);
 		}
-		public static int SortAllShips(int shipPrefabID) {
-			switch (shipPrefabID) {
-				case 516057105: return 10;
-				case 487234563: return 20;
-				case 578937222: return 30;
-				case 1809014558: return 40;
-				case 1920692188: return 50;
-				case 1106792042: return 60;
-				case 2103659466: return 70;
-				case 1772361532: return 80;
-				case 1251918188: return 90;
-				case 1452660923: return 100;
-				case 1939804939: return 110;
-				default: return 1000;
-			}
-		}
 		public static int SortAllModules(ShipModule shipModule) {
 			switch (shipModule.type) {
 				case ShipModule.Type.ResourcePack:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 1000 + FFU_BE_Prefab_ResPacks.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 1000 + FFU_BE_Prefab_ResPacks.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Weapon_Nuke:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 2000 + FFU_BE_Prefab_Nukes.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 2000 + FFU_BE_Prefab_Nukes.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Weapon:
-				if (!shipModule.name.ToLower().Contains("bossweapon"))
-					return 3000 + FFU_BE_Prefab_Weapons.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 3000 + FFU_BE_Prefab_Weapons.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.PointDefence:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 4000 + FFU_BE_Prefab_PointDefences.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 4000 + FFU_BE_Prefab_PointDefences.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Bridge:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 5000 + FFU_BE_Prefab_Bridges.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 5000 + FFU_BE_Prefab_Bridges.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Engine:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 6000 + FFU_BE_Prefab_Engines.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 6000 + FFU_BE_Prefab_Engines.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Warp:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 7000 + FFU_BE_Prefab_Drives.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 7000 + FFU_BE_Prefab_Drives.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Reactor:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 8000 + FFU_BE_Prefab_Reactors.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 8000 + FFU_BE_Prefab_Reactors.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Container:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 9000 + FFU_BE_Prefab_Storages.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 9000 + FFU_BE_Prefab_Storages.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Integrity:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 10000 + FFU_BE_Prefab_Armors.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 10000 + FFU_BE_Prefab_Armors.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.ShieldGen:
-				if (!shipModule.name.ToLower().Contains("artifact") && !shipModule.name.ToLower().Contains("decoy"))
-					return 11000 + FFU_BE_Prefab_Shields.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 11000 + FFU_BE_Prefab_Shields.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Sensor:
-				if (!shipModule.name.ToLower().Contains("tutorial"))
-					return 12000 + FFU_BE_Prefab_Sensors.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 12000 + FFU_BE_Prefab_Sensors.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.StealthDecryptor:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 13000 + FFU_BE_Prefab_Decryptors.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 13000 + FFU_BE_Prefab_Decryptors.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.PassiveECM:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 14000 + FFU_BE_Prefab_PassiveECMs.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 14000 + FFU_BE_Prefab_PassiveECMs.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Dronebay:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 15000 + FFU_BE_Prefab_HealthBays.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 15000 + FFU_BE_Prefab_HealthBays.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Medbay:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 16000 + FFU_BE_Prefab_HealthBays.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 16000 + FFU_BE_Prefab_HealthBays.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Cryosleep:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 17000 + FFU_BE_Prefab_CryoBays.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 17000 + FFU_BE_Prefab_CryoBays.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.ResearchLab:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 18000 + FFU_BE_Prefab_Laboratories.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 18000 + FFU_BE_Prefab_Laboratories.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Garden:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 19000 + FFU_BE_Prefab_Greenhouses.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 19000 + FFU_BE_Prefab_Greenhouses.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.MaterialsConverter:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 20000 + FFU_BE_Prefab_Converters.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 20000 + FFU_BE_Prefab_Converters.SortModules(shipModule.PrefabId);
 				case ShipModule.Type.Decoy:
-				if (!shipModule.name.ToLower().Contains("artifact"))
-					return 21000 + FFU_BE_Prefab_Decoys.SortModules(shipModule.name);
-				else goto default;
+				if (IsNotAllowedOrDecoy(shipModule)) goto default;
+				else return 21000 + FFU_BE_Prefab_Decoys.SortModules(shipModule.PrefabId);
 				default:
+				if (IsCacheModule(shipModule))
+					return 22000 + FFU_BE_Prefab_Miscellaneous.SortModules(shipModule.PrefabId);
 				if (shipModule.name.ToLower().Contains("decoy"))
-					return 21000 + FFU_BE_Prefab_Decoys.SortModules(shipModule.name);
+					return 23000 + FFU_BE_Prefab_Decoys.SortModules(shipModule.PrefabId);
 				if (shipModule.name.ToLower().Contains("artifact"))
-					return 22000 + FFU_BE_Prefab_Miscellaneous.SortModules(shipModule.name);
+					return 24000 + FFU_BE_Prefab_Miscellaneous.SortModules(shipModule.PrefabId);
 				if (shipModule.name.ToLower().Contains("tutorial"))
-					return 23000 + FFU_BE_Prefab_Miscellaneous.SortModules(shipModule.name);
-				if (shipModule.name.ToLower().Contains("bossweapon"))
-					return 24000 + FFU_BE_Prefab_Miscellaneous.SortModules(shipModule.name);
-				return 25000;
+					return 25000 + FFU_BE_Prefab_Miscellaneous.SortModules(shipModule.PrefabId);
+				if (IsProhibitedModule(shipModule))
+					return 26000 + FFU_BE_Prefab_Miscellaneous.SortModules(shipModule.PrefabId);
+				return 100000;
 			}
+		}
+		public static bool IsNotAllowedOrDecoy(ShipModule shipModule) {
+			return !IsAllowedModuleCategory(shipModule) || IsCacheModule(shipModule) || shipModule.name.ToLower().Contains("decoy");
 		}
 		public static bool IsAllowedModuleCategory(ShipModule shipModule) {
-			if (shipModule.displayName.Contains("Cache")) return true;
-			if (shipModule.name.Contains("bossweapon")) return false;
+			if (IsCacheModule(shipModule)) return true;
+			if (IsProhibitedModule(shipModule)) return false;
 			if (shipModule.name.Contains("tutorial")) return false;
 			if (shipModule.name.Contains("artifact")) return false;
 			switch (shipModule.type) {
@@ -1225,38 +1208,6 @@ namespace FFU_Bleeding_Edge {
 				case ShipModule.Type.ResearchLab:
 				case ShipModule.Type.Garden:
 				case ShipModule.Type.MaterialsConverter:
-				case ShipModule.Type.Decoy: return true;
-				default: return false;
-			}
-		}
-		public static bool IsAllowedModuleToList(ShipModule shipModule) {
-			if (shipModule.displayName.Contains("Cache")) return true;
-			if (shipModule.name.Contains("bossweapon")) return false;
-			if (shipModule.name.Contains("tutorial")) return false;
-			if (shipModule.name.Contains("artifact")) return false;
-			switch (shipModule.type) {
-				case ShipModule.Type.Weapon:
-				case ShipModule.Type.Weapon_Nuke:
-				case ShipModule.Type.PointDefence:
-				case ShipModule.Type.Bridge:
-				case ShipModule.Type.Engine:
-				case ShipModule.Type.Warp:
-				case ShipModule.Type.Reactor:
-				case ShipModule.Type.Container:
-				case ShipModule.Type.Integrity:
-				case ShipModule.Type.ShieldGen:
-				case ShipModule.Type.Sensor:
-				case ShipModule.Type.StealthDecryptor:
-				case ShipModule.Type.PassiveECM:
-				case ShipModule.Type.Dronebay:
-				case ShipModule.Type.Medbay:
-				case ShipModule.Type.Cryosleep:
-				case ShipModule.Type.ResearchLab:
-				case ShipModule.Type.Garden:
-				case ShipModule.Type.MaterialsConverter:
-				case ShipModule.Type.Storage:
-				case ShipModule.Type.ResourcePack:
-				case ShipModule.Type.Fighter:
 				case ShipModule.Type.Decoy: return true;
 				default: return false;
 			}
@@ -1266,9 +1217,33 @@ namespace FFU_Bleeding_Edge {
 			return false;
 		}
 		public static bool IsProhibitedModule(ShipModule shipModule) {
-			if (shipModule.PrefabId == 1801315413) return true;
-			if (shipModule.PrefabId == 1088715096) return true;
-			return false;
+			switch (shipModule.PrefabId) {
+				case 1801315413:
+				case 1088715096:
+				case 1934368951: return true;
+				default: return false;
+			}
+		}
+		public static bool IsUnusableModule(ShipModule shipModule) {
+			switch (shipModule.PrefabId) {
+				case 1088715096:
+				case 1934368951: return true;
+				default: return false;
+			}
+		}
+		public static bool IsCacheModule(ShipModule shipModule) {
+			switch (shipModule.PrefabId) {
+				case 685017033:
+				case 957508477:
+				case 1745395900:
+				case 179311957:
+				case 760711671:
+				case 656277331:
+				case 760711667:
+				case 1279608160:
+				case 1316302015: return true;
+				default: return false;
+			}
 		}
 		public static bool IsCraftedToStorage(ShipModule shipModule) {
 			if (shipModule.type == ShipModule.Type.ResourcePack) return true;
@@ -1544,9 +1519,7 @@ namespace FFU_Bleeding_Edge {
 			return shipModule.Weapon.overrideProjectileHealth * intruderCountMult / 40f;
 		}
 		public static bool ModuleViableForSector(ShipModule shipModule, int sectorNum) {
-			if (shipModule.name.Contains("bossweapon")) return true;
-			else if (shipModule.name.Contains("tutorial")) return true;
-			else if (shipModule.name.Contains("artifact")) return true;
+			if (!IsAllowedModuleCategory(shipModule)) return true;
 			else return sectorViableModuleIDs[sectorNum].Contains(shipModule.PrefabId);
 		}
 		public static int ModuleAvailableSector(ShipModule shipModule) {

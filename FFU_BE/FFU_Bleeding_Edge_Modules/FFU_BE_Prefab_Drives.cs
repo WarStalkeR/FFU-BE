@@ -4,28 +4,25 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Drives {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName.Contains("warp 0 DIY")) return idx; idx++;
-			if (moduleName.Contains("warp 01 greencrystal")) return idx; idx++;
-			if (moduleName.Contains("warp 05 spiralcrystal")) return idx; idx++;
-			if (moduleName.Contains("warp 02 bluecrystal")) return idx; idx++;
-			if (moduleName.Contains("warp 03 neoncrystal")) return idx; idx++;
-			if (moduleName.Contains("warp 05 rotor metal")) return idx; idx++;
-			if (moduleName.Contains("warp 04 emperorbanks")) return idx; idx++;
-			if (moduleName.Contains("warp 06 rotor blue")) return idx; idx++;
-			if (moduleName.Contains("warp 09 spideraa")) return idx; idx++;
-			if (moduleName.Contains("warp 07 rotor glass")) return idx; idx++;
+			if (moduleID == 2136288774) return idx; idx++; //warp 0 DIY
+			if (moduleID == 1503624866) return idx; idx++; //warp 01 greencrystal
+			if (moduleID == 2005632838) return idx; idx++; //warp 05 spiralcrystal
+			if (moduleID == 1622263161) return idx; idx++; //warp 02 bluecrystal
+			if (moduleID == 458296297) return idx; idx++; //warp 03 neoncrystal
+			if (moduleID == 2018774202) return idx; idx++; //warp 05 rotor metal
+			if (moduleID == 1951229269) return idx; idx++; //warp 04 emperorbanks
+			if (moduleID == 45815679) return idx; idx++; //warp 06 rotor blue
+			if (moduleID == 1528213811) return idx; idx++; //warp 09 spideraa
+			if (moduleID == 1559705412) return idx; idx++; //warp 07 rotor glass
 			return idx + 100;
 		}
 		public static void UpdateWarpDriveModule(ShipModule shipModule, bool initItemData) {
 			string colorDrive = "b366ff";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "warp 0 DIY":
+			switch (shipModule.PrefabId) {
+				case 2136288774: //warp 0 DIY
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
 				shipModule.displayName = "Makeshift <color=#" + colorDrive + "ff>Warp Drive</color>";
@@ -37,7 +34,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 20;
 				break;
-				case "warp 01 greencrystal":
+				case 1503624866: //warp 01 greencrystal
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
 				shipModule.displayName = "Fission <color=#" + colorDrive + "ff>Warp Drive</color>";
@@ -49,7 +46,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 24;
 				break;
-				case "warp 05 spiralcrystal":
+				case 2005632838: //warp 05 spiralcrystal
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.9f);
 				shipModule.displayName = "Biochemical <color=#" + colorDrive + "ff>Warp Drive</color>";
@@ -61,7 +58,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 26;
 				break;
-				case "warp 02 bluecrystal":
+				case 1622263161: //warp 02 bluecrystal
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.8f);
 				shipModule.displayName = "Immaterium <color=#" + colorDrive + "ff>Warp Drive</color>";
@@ -73,7 +70,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 28;
 				break;
-				case "warp 03 neoncrystal":
+				case 458296297: //warp 03 neoncrystal
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.7f);
 				shipModule.displayName = "Prismatic <color=#" + colorDrive + "ff>Warp Drive</color>";
@@ -85,7 +82,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 30;
 				break;
-				case "warp 05 rotor metal":
+				case 2018774202: //warp 05 rotor metal
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.6f);
 				shipModule.displayName = "Fusion <color=#" + colorDrive + "ff>Warp Drive</color>";
@@ -97,7 +94,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 10;
 				shipModule_maxHealth = 33;
 				break;
-				case "warp 04 emperorbanks":
+				case 1951229269: //warp 04 emperorbanks
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.5f);
 				shipModule.displayName = "Commerical <color=#" + colorDrive + "ff>Warp Drive</color>";
@@ -109,7 +106,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 10;
 				shipModule_maxHealth = 36;
 				break;
-				case "warp 06 rotor blue":
+				case 45815679: //warp 06 rotor blue
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = "Antimatter <color=#" + colorDrive + "ff>Warp Drive</color>";
@@ -121,7 +118,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 10;
 				shipModule_maxHealth = 39;
 				break;
-				case "warp 09 spideraa":
+				case 1528213811: //warp 09 spideraa
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.3f);
 				shipModule.displayName = "Repulsor <color=#" + colorDrive + "ff>Warp Drive</color>";
@@ -133,7 +130,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 10;
 				shipModule_maxHealth = 41;
 				break;
-				case "warp 07 rotor glass":
+				case 1559705412: //warp 07 rotor glass
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Quantum <color=#" + colorDrive + "ff>Warp Drive</color>";

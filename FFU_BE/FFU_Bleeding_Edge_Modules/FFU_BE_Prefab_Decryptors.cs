@@ -4,26 +4,23 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Decryptors {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName.Contains("Stealth decryptor 1 diy")) return idx; idx++;
-			if (moduleName.Contains("Stealth decryptor 1 ventilator")) return idx; idx++;
-			if (moduleName.Contains("Stealth decryptor 1 ivory old")) return idx; idx++;
-			if (moduleName.Contains("Stealth decryptor 1 rats")) return idx; idx++;
-			if (moduleName.Contains("Stealth decryptor 2 new human tec")) return idx; idx++;
-			if (moduleName.Contains("Stealth decryptor 3 bio")) return idx; idx++;
-			if (moduleName.Contains("Stealth decryptor 2 biobrain")) return idx; idx++;
-			if (moduleName.Contains("Stealth decryptor 3 newest human tec")) return idx; idx++;
+			if (moduleID == 1769741276) return idx; idx++; //Stealth decryptor 1 diy
+			if (moduleID == 1276182165) return idx; idx++; //Stealth decryptor 1 ventilator
+			if (moduleID == 1107135249) return idx; idx++; //Stealth decryptor 1 ivory old
+			if (moduleID == 1799114982) return idx; idx++; //Stealth decryptor 1 rats
+			if (moduleID == 1276182163) return idx; idx++; //Stealth decryptor 2 new human tec
+			if (moduleID == 1451295920) return idx; idx++; //Stealth decryptor 3 bio
+			if (moduleID == 29772476) return idx; idx++; //Stealth decryptor 2 biobrain
+			if (moduleID == 1276182160) return idx; idx++; //Stealth decryptor 3 newest human tec
 			return idx + 100;
 		}
 		public static void UpdateDecryptorModule(ShipModule shipModule, bool initItemData) {
 			string colorTarget = "4dffa6";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "Stealth decryptor 1 diy":
+			switch (shipModule.PrefabId) {
+				case 1769741276: //Stealth decryptor 1 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -22.0f);
 				shipModule.displayName = "Makeshift <color=#" + colorTarget + "ff>Stealth Generator</color>";
@@ -35,7 +32,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 1;
 				shipModule_maxHealth = 5;
 				break;
-				case "Stealth decryptor 1 ventilator":
+				case 1276182165: //Stealth decryptor 1 ventilator
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -22.6f);
 				shipModule.displayName = "Civilian <color=#" + colorTarget + "ff>Stealth Generator</color>";
@@ -47,7 +44,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 2;
 				shipModule_maxHealth = 7;
 				break;
-				case "Stealth decryptor 1 ivory old":
+				case 1107135249: //Stealth decryptor 1 ivory old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -23.2f);
 				shipModule.displayName = "Ancient <color=#" + colorTarget + "ff>Stealth Generator</color>";
@@ -59,7 +56,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 2;
 				shipModule_maxHealth = 10;
 				break;
-				case "Stealth decryptor 1 rats":
+				case 1799114982: //Stealth decryptor 1 rats
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -23.8f);
 				shipModule.displayName = "Imperial <color=#" + colorTarget + "ff>Stealth Generator</color>";
@@ -71,7 +68,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 3;
 				shipModule_maxHealth = 13;
 				break;
-				case "Stealth decryptor 2 new human tec":
+				case 1276182163: //Stealth decryptor 2 new human tec
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -24.4f);
 				shipModule.displayName = "Modern <color=#" + colorTarget + "ff>Stealth Generator</color>";
@@ -83,7 +80,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 3;
 				shipModule_maxHealth = 15;
 				break;
-				case "Stealth decryptor 3 bio":
+				case 1451295920: //Stealth decryptor 3 bio
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -25.0f);
 				shipModule.displayName = "Bionic <color=#" + colorTarget + "ff>Stealth Generator</color>";
@@ -95,7 +92,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 4;
 				shipModule_maxHealth = 18;
 				break;
-				case "Stealth decryptor 2 biobrain":
+				case 29772476: //Stealth decryptor 2 biobrain
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -25.6f);
 				shipModule.displayName = "Hybrid <color=#" + colorTarget + "ff>Stealth Generator</color>";
@@ -107,7 +104,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 4;
 				shipModule_maxHealth = 22;
 				break;
-				case "Stealth decryptor 3 newest human tec":
+				case 1276182160: //Stealth decryptor 3 newest human tec
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -26.2f);
 				shipModule.displayName = "Phased <color=#" + colorTarget + "ff>Stealth Generator</color>";

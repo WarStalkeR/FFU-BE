@@ -1220,7 +1220,7 @@ namespace RST {
 			newlyCraftedItemDeployedMessage.AppendFormat(MonoBehaviourExtended.TT("Crafted {0}. Used {1}"), module.DisplayNameLocalized, craftingConsumedResources);
 			StarmapLogPanelUI.AddLine(StarmapLogPanelUI.MsgType.Normal, newlyCraftedItemDeployedMessage.ToString());
 			if (FFU_BE_Defs.debugMode) Debug.LogWarning("Crafted: " + module.name + " [" + module.PrefabId + "]");
-			if (prefab.Effects.unpackedPrefab != null) UnityEngine.Object.Instantiate(prefab.Effects.unpackedPrefab, base.transform.position, base.transform.rotation);
+			if (prefab.Effects.unpackedPrefabRef.Prefab != null) UnityEngine.Object.Instantiate(prefab.Effects.unpackedPrefabRef.Prefab, base.transform.position, base.transform.rotation);
 			FFU_BE_Defs.AddModuleCraftingProficiency(module);
 			return true;
 		}
@@ -1528,11 +1528,18 @@ namespace RST.PlaymakerAction {
 								FFU_BE_Mod_Modules.ApplyModuleChanges(item.GetComponent<ShipModule>());
 								FFU_BE_Mod_Technology.ApplyInitialModuleTier(item.GetComponent<ShipModule>());
 								FFU_BE_Mod_Modules.ApplyRelativeNewHealth(item.GetComponent<ShipModule>(), storedHealthPercent);
+								if (FFU_BE_Defs.IsUnusableModule(item.GetComponent<ShipModule>()) && item.GetComponent<ShipModule>().InstanceId > 0 && item.GetComponent<ShipModule>().Ownership.GetOwner() == Ownership.Owner.Me) {
+									item.GetComponent<ShipModule>().Weapon.ProjectileOrBeamPrefab.GetDamage(item.GetComponent<ShipModule>().Weapon).moduleOverloadSeconds = 0;
+									item.GetComponent<ShipModule>().Weapon.ProjectileOrBeamPrefab.GetDamage(item.GetComponent<ShipModule>().Weapon).damageAreaRadius = 0;
+									item.GetComponent<ShipModule>().Weapon.ProjectileOrBeamPrefab.GetDamage(item.GetComponent<ShipModule>().Weapon).shieldDmg = 0;
+									item.GetComponent<ShipModule>().Weapon.ProjectileOrBeamPrefab.GetDamage(item.GetComponent<ShipModule>().Weapon).moduleDmg = 0;
+									item.GetComponent<ShipModule>().Weapon.ProjectileOrBeamPrefab.GetDamage(item.GetComponent<ShipModule>().Weapon).shipDmg = 0;
+								}
 							}
 						}
 					}
 				}
-				if (shipModule.displayName.Contains("bossweapon") && shipModule.InstanceId > 0 && shipModule.Ownership.GetOwner() == Ownership.Owner.Me) {
+				if (FFU_BE_Defs.IsUnusableModule(shipModule) && shipModule.InstanceId > 0 && shipModule.Ownership.GetOwner() == Ownership.Owner.Me) {
 					shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
 					shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 0;
 					shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 0;

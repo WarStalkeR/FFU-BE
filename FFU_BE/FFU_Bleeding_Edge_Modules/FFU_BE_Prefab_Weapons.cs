@@ -25,143 +25,143 @@ namespace FFU_Bleeding_Edge {
 		public static float reloadBeamHeatRay = 55f;
 		public static float reloadBeamDisruptor = 50f;
 		public static float reloadBeamExoticRay = 60f;
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
 			//Rockets
-			if (moduleName == "weapon DIY Rockets x1") return idx; idx++;
-			if (moduleName == "weapon ratmissile x2") return idx; idx++;
-			if (moduleName == "weapon ratmissile x3") return idx; idx++;
-			if (moduleName == "weapon miscmissile x4") return idx; idx++;
-			if (moduleName == "weapon emperormissile large x5") return idx; idx++;
-			if (moduleName == "weapon emperormissiles small x2") return idx; idx++;
-			if (moduleName == "weapon tigermissile x2") return idx; idx++;
-			if (moduleName == "weapon alienmissile x5") return idx; idx++;
-			if (moduleName == "weapon alienmissile x7") return idx; idx++;
-			if (moduleName == "weapon spideraamissilex3") return idx; idx++;
-			if (moduleName == "weapon spideraamissilex4") return idx; idx++;
-			if (moduleName == "weapon monolith missile x1") return idx; idx++;
-			if (moduleName == "weapon ancientrockets x3") return idx; idx++;
-			if (moduleName == "weapon tigermissile large") return idx; idx++;
+			if (moduleID == 821254137) return idx; idx++; //weapon DIY Rockets x1
+			if (moduleID == 597713891) return idx; idx++; //weapon ratmissile x2
+			if (moduleID == 777119861) return idx; idx++; //weapon ratmissile x3
+			if (moduleID == 185094886) return idx; idx++; //weapon miscmissile x4
+			if (moduleID == 1975811673) return idx; idx++; //weapon emperormissile large x5
+			if (moduleID == 759200248) return idx; idx++; //weapon emperormissiles small x2
+			if (moduleID == 97880399) return idx; idx++; //weapon tigermissile x2
+			if (moduleID == 7208646) return idx; idx++; //weapon alienmissile x5
+			if (moduleID == 1170008060) return idx; idx++; //weapon alienmissile x7
+			if (moduleID == 85351226) return idx; idx++; //weapon spideraamissilex3
+			if (moduleID == 1473319987) return idx; idx++; //weapon spideraamissilex4
+			if (moduleID == 1348589878) return idx; idx++; //weapon monolith missile x1
+			if (moduleID == 469527491) return idx; idx++; //weapon ancientrockets x3
+			if (moduleID == 1571322820) return idx; idx++; //weapon tigermissile large
 			//Autocannons
-			if (moduleName == "weapon DIY Minicannon ancient 2,3") return idx; idx++;
-			if (moduleName == "weapon gatling 01 ancient dual 14,4") return idx; idx++;
-			if (moduleName == "weapon gatling 02 rat small 12,4") return idx; idx++;
-			if (moduleName == "weapon gatling RatA 14,4") return idx; idx++;
-			if (moduleName == "weapon gatling RatB 15,5") return idx; idx++;
-			if (moduleName == "weapon gatling whiteA 13,4") return idx; idx++;
-			if (moduleName == "weapon gatling whiteB 14,5") return idx; idx++;
-			if (moduleName == "weapon Sniper cannon 4") return idx; idx++;
-			if (moduleName == "weapon gatling ClawA 12,4") return idx; idx++;
-			if (moduleName == "weapon gatling ClawB 14,5") return idx; idx++;
-			if (moduleName == "weapon gatling blaster small 12,5") return idx; idx++;
-			if (moduleName == "weapon gatling Insectoid plasma 18,4x2") return idx; idx++;
-			if (moduleName == "weapon gatling Insectoid cyano 15,4") return idx; idx++;
+			if (moduleID == 1780996798) return idx; idx++; //weapon DIY Minicannon ancient 2,3
+			if (moduleID == 1363897257) return idx; idx++; //weapon gatling 01 ancient dual 14,4
+			if (moduleID == 1957651014) return idx; idx++; //weapon gatling 02 rat small 12,4
+			if (moduleID == 704483685) return idx; idx++; //weapon gatling RatA 14,4
+			if (moduleID == 123083978) return idx; idx++; //weapon gatling RatB 15,5
+			if (moduleID == 1092529672) return idx; idx++; //weapon gatling whiteA 13,4
+			if (moduleID == 689245145) return idx; idx++; //weapon gatling whiteB 14,5
+			if (moduleID == 698348090) return idx; idx++; //weapon Sniper cannon 4
+			if (moduleID == 1501025877) return idx; idx++; //weapon gatling ClawA 12,4
+			if (moduleID == 1566651491) return idx; idx++; //weapon gatling ClawB 14,5
+			if (moduleID == 1890403578) return idx; idx++; //weapon gatling blaster small 12,5
+			if (moduleID == 992516328) return idx; idx++; //weapon gatling Insectoid plasma 18,4x2
+			if (moduleID == 458272126) return idx; idx++; //weapon gatling Insectoid cyano 15,4
 			//Howitzers
-			if (moduleName == "weapon ATK-MK1 old") return idx; idx++;
-			if (moduleName == "weapon ATK-MK2 old") return idx; idx++;
-			if (moduleName == "weapon ATK-MK3 old") return idx; idx++;
-			if (moduleName == "weapon ATK-MK1") return idx; idx++;
-			if (moduleName == "weapon ATK-MK2") return idx; idx++;
-			if (moduleName == "weapon ATK-MK3") return idx; idx++;
-			if (moduleName == "weapon cubecannon huge old") return idx; idx++;
-			if (moduleName == "weapon cubecannon huge") return idx; idx++;
-			if (moduleName == "weapon emperorbanks cannon1x") return idx; idx++;
-			if (moduleName == "weapon emperorbanks cannon2x") return idx; idx++;
-			if (moduleName == "weapon emperorbanks cannon large") return idx; idx++;
-			if (moduleName == "weapon ratcannon high velocity") return idx; idx++;
-			if (moduleName == "weapon ratcannon fire1") return idx; idx++;
-			if (moduleName == "weapon ratcannon fire2") return idx; idx++;
-			if (moduleName == "weapon ratcannon fire3") return idx; idx++;
-			if (moduleName == "weapon diyfirebomber1") return idx; idx++;
-			if (moduleName == "weapon diyfirebomber2") return idx; idx++;
-			if (moduleName == "weapon Energy cannon x1") return idx; idx++;
-			if (moduleName == "weapon Energy cannon x2") return idx; idx++;
-			if (moduleName == "weapon Energy cannon OP") return idx; idx++;
-			if (moduleName == "weapon EMP energyball") return idx; idx++;
-			if (moduleName == "weapon EMP energyball 3x Tiger") return idx; idx++;
-			if (moduleName == "weapon Floral cannon") return idx; idx++;
-			if (moduleName == "weapon exoticscannon1") return idx; idx++;
+			if (moduleID == 1521997681) return idx; idx++; //weapon ATK-MK1 old
+			if (moduleID == 1118713154) return idx; idx++; //weapon ATK-MK2 old
+			if (moduleID == 537313447) return idx; idx++; //weapon ATK-MK3 old
+			if (moduleID == 1281856982) return idx; idx++; //weapon ATK-MK1
+			if (moduleID == 1685141509) return idx; idx++; //weapon ATK-MK2
+			if (moduleID == 119057568) return idx; idx++; //weapon ATK-MK3
+			if (moduleID == 1675488140) return idx; idx++; //weapon cubecannon huge old
+			if (moduleID == 114834467) return idx; idx++; //weapon cubecannon huge
+			if (moduleID == 865561327) return idx; idx++; //weapon emperorbanks cannon1x
+			if (moduleID == 865561324) return idx; idx++; //weapon emperorbanks cannon2x
+			if (moduleID == 533548711) return idx; idx++; //weapon emperorbanks cannon large
+			if (moduleID == 887190895) return idx; idx++; //weapon ratcannon high velocity
+			if (moduleID == 1662502911) return idx; idx++; //weapon ratcannon fire1
+			if (moduleID == 2065787438) return idx; idx++; //weapon ratcannon fire2
+			if (moduleID == 499703497) return idx; idx++; //weapon ratcannon fire3
+			if (moduleID == 30747850) return idx; idx++; //weapon diyfirebomber1
+			if (moduleID == 30747849) return idx; idx++; //weapon diyfirebomber2
+			if (moduleID == 1532741738) return idx; idx++; //weapon Energy cannon x1
+			if (moduleID == 1532741737) return idx; idx++; //weapon Energy cannon x2
+			if (moduleID == 1768012478) return idx; idx++; //weapon Energy cannon OP
+			if (moduleID == 1482677315) return idx; idx++; //weapon EMP energyball
+			if (moduleID == 876704941) return idx; idx++; //weapon EMP energyball 3x Tiger
+			if (moduleID == 790917823) return idx; idx++; //weapon Floral cannon
+			if (moduleID == 1983239915) return idx; idx++; //weapon exoticscannon1
 			//Railguns
-			if (moduleName == "weapon Sniper cannon 0 DIY") return idx; idx++;
-			if (moduleName == "weapon Sniper cannon 0") return idx; idx++;
-			if (moduleName == "weapon Sniper cannon 2") return idx; idx++;
-			if (moduleName == "weapon Sniper cannon 3") return idx; idx++;
-			if (moduleName == "weapon Sniper cannon 2 insectoid") return idx; idx++;
-			if (moduleName == "weapon sniper cannon EMP") return idx; idx++;
-			if (moduleName == "weapon Spideraa shuriken") return idx; idx++;
+			if (moduleID == 1751631045) return idx; idx++; //weapon Sniper cannon 0 DIY
+			if (moduleID == 514626098) return idx; idx++; //weapon Sniper cannon 0
+			if (moduleID == 1499937036) return idx; idx++; //weapon Sniper cannon 2
+			if (moduleID == 918537329) return idx; idx++; //weapon Sniper cannon 3
+			if (moduleID == 1240034396) return idx; idx++; //weapon Sniper cannon 2 insectoid
+			if (moduleID == 1567764648) return idx; idx++; //weapon sniper cannon EMP
+			if (moduleID == 985673324) return idx; idx++; //weapon Spideraa shuriken
 			//Railcannons
-			if (moduleName == "weapon cubecannon1") return idx; idx++;
-			if (moduleName == "weapon cubecannon1x3") return idx; idx++;
-			if (moduleName == "weapon Segmented cannon1") return idx; idx++;
-			if (moduleName == "weapon Segmented cannonx2 A") return idx; idx++;
-			if (moduleName == "weapon Segmented cannonx2 B") return idx; idx++;
-			if (moduleName == "weapon Segmented cannonx2 C") return idx; idx++;
-			if (moduleName == "weapon gatling Tiger") return idx; idx++;
+			if (moduleID == 1316645801) return idx; idx++; //weapon cubecannon1
+			if (moduleID == 1615383632) return idx; idx++; //weapon cubecannon1x3
+			if (moduleID == 894416346) return idx; idx++; //weapon Segmented cannon1
+			if (moduleID == 1086561638) return idx; idx++; //weapon Segmented cannonx2 A
+			if (moduleID == 1086561639) return idx; idx++; //weapon Segmented cannonx2 B
+			if (moduleID == 1086561640) return idx; idx++; //weapon Segmented cannonx2 C
+			if (moduleID == 412909021) return idx; idx++; //weapon gatling Tiger
 			//Lasers
-			if (moduleName == "weapon mininglaser 0 old") return idx; idx++;
-			if (moduleName == "weapon mininglaser 0 defective") return idx; idx++;
-			if (moduleName == "weapon mininglaser 2 defective") return idx; idx++;
-			if (moduleName == "weapon mininglaser 3 defective") return idx; idx++;
-			if (moduleName == "weapon mininglaser 4 defective") return idx; idx++;
-			if (moduleName == "weapon mininglaser 1") return idx; idx++;
-			if (moduleName == "weapon mininglaser 2") return idx; idx++;
-			if (moduleName == "weapon mininglaser 3") return idx; idx++;
-			if (moduleName == "weapon mininglaser 4") return idx; idx++;
-			if (moduleName == "weapon mininglaser 5") return idx; idx++;
-			if (moduleName == "weapon mininglaser 6") return idx; idx++;
-			if (moduleName == "weapon ratlaser 5") return idx; idx++;
-			if (moduleName == "weapon ratlaser small no armor") return idx; idx++;
-			if (moduleName == "weapon ratlaser small with armor") return idx; idx++;
-			if (moduleName == "weapon emperor minilaser") return idx; idx++;
-			if (moduleName == "weapon emperor laser double") return idx; idx++;
-			if (moduleName == "weapon emperor laser large") return idx; idx++;
-			if (moduleName == "weapon Insectoid old fast laser") return idx; idx++;
-			if (moduleName == "weapon Insectoid old fast laser 5x") return idx; idx++;
+			if (moduleID == 842299308) return idx; idx++; //weapon mininglaser 0 old
+			if (moduleID == 1386594796) return idx; idx++; //weapon mininglaser 0 defective
+			if (moduleID == 1362762978) return idx; idx++; //weapon mininglaser 2 defective
+			if (moduleID == 109007005) return idx; idx++; //weapon mininglaser 3 defective
+			if (moduleID == 292919296) return idx; idx++; //weapon mininglaser 4 defective
+			if (moduleID == 1594290506) return idx; idx++; //weapon mininglaser 1
+			if (moduleID == 1191005979) return idx; idx++; //weapon mininglaser 2
+			if (moduleID == 609606272) return idx; idx++; //weapon mininglaser 3
+			if (moduleID == 206321745) return idx; idx++; //weapon mininglaser 4
+			if (moduleID == 1772405686) return idx; idx++; //weapon mininglaser 5
+			if (moduleID == 1369121159) return idx; idx++; //weapon mininglaser 6
+			if (moduleID == 1019707953) return idx; idx++; //weapon ratlaser 5
+			if (moduleID == 1724240697) return idx; idx++; //weapon ratlaser small no armor
+			if (moduleID == 1345622970) return idx; idx++; //weapon ratlaser small with armor
+			if (moduleID == 474553624) return idx; idx++; //weapon emperor minilaser
+			if (moduleID == 1340539166) return idx; idx++; //weapon emperor laser double
+			if (moduleID == 681262058) return idx; idx++; //weapon emperor laser large
+			if (moduleID == 109243084) return idx; idx++; //weapon Insectoid old fast laser
+			if (moduleID == 2100491633) return idx; idx++; //weapon Insectoid old fast laser 5x
 			//Beams
-			if (moduleName == "weapon DIY Laser") return idx; idx++;
-			if (moduleName == "weapon DIY raygun") return idx; idx++;
-			if (moduleName == "weapon bigbeamer1") return idx; idx++;
-			if (moduleName == "weapon bigbeamer2") return idx; idx++;
-			if (moduleName == "weapon bigbeamer3") return idx; idx++;
-			if (moduleName == "weapon ratlaser short") return idx; idx++;
-			if (moduleName == "weapon ratlaser long") return idx; idx++;
-			if (moduleName == "weapon tigerlaser MK1") return idx; idx++;
-			if (moduleName == "weapon tigerlaser MK2") return idx; idx++;
-			if (moduleName == "weapon powerbeam-MK1") return idx; idx++;
-			if (moduleName == "weapon powerbeam-MK2") return idx; idx++;
-			if (moduleName == "weapon powerbeam-MK3") return idx; idx++;
-			if (moduleName == "weapon spideraa triplelaser") return idx; idx++;
-			if (moduleName == "weapon spideraa quadlaser") return idx; idx++;
-			if (moduleName == "weapon insectoid fast laser") return idx; idx++;
-			if (moduleName == "weapon Insectoid slowlaser") return idx; idx++;
+			if (moduleID == 55650103) return idx; idx++; //weapon DIY Laser
+			if (moduleID == 144623758) return idx; idx++; //weapon DIY raygun
+			if (moduleID == 176876935) return idx; idx++; //weapon bigbeamer1
+			if (moduleID == 176876934) return idx; idx++; //weapon bigbeamer2
+			if (moduleID == 176876933) return idx; idx++; //weapon bigbeamer3
+			if (moduleID == 1281020726) return idx; idx++; //weapon ratlaser short
+			if (moduleID == 1447130390) return idx; idx++; //weapon ratlaser long
+			if (moduleID == 306184113) return idx; idx++; //weapon tigerlaser MK1
+			if (moduleID == 306184114) return idx; idx++; //weapon tigerlaser MK2
+			if (moduleID == 1860805838) return idx; idx++; //weapon powerbeam-MK1
+			if (moduleID == 1457521311) return idx; idx++; //weapon powerbeam-MK2
+			if (moduleID == 876121604) return idx; idx++; //weapon powerbeam-MK3
+			if (moduleID == 30426038) return idx; idx++; //weapon spideraa triplelaser
+			if (moduleID == 1999515951) return idx; idx++; //weapon spideraa quadlaser
+			if (moduleID == 848686115) return idx; idx++; //weapon insectoid fast laser
+			if (moduleID == 849984806) return idx; idx++; //weapon Insectoid slowlaser
 			//Heat Rays
-			if (moduleName == "weapon DIY raygun orange") return idx; idx++;
-			if (moduleName == "weapon Heatray emitter") return idx; idx++;
-			if (moduleName == "weapon Heatray emitter x red") return idx; idx++;
-			if (moduleName == "weapon Squid beamer heatray") return idx; idx++;
+			if (moduleID == 981179656) return idx; idx++; //weapon DIY raygun orange
+			if (moduleID == 1307272377) return idx; idx++; //weapon Heatray emitter
+			if (moduleID == 1322541741) return idx; idx++; //weapon Heatray emitter x red
+			if (moduleID == 728051246) return idx; idx++; //weapon Squid beamer heatray
 			//Disruptors
-			if (moduleName == "weapon DIY raygun blue") return idx; idx++;
-			if (moduleName == "weapon DIY EMP") return idx; idx++;
-			if (moduleName == "weapon dual EMP") return idx; idx++;
-			if (moduleName == "weapon DIY exotics EMP sniper") return idx; idx++;
-			if (moduleName == "weapon Insectoid shield disruptor") return idx; idx++;
-			if (moduleName == "weapon spideraa disruptor") return idx; idx++;
-			if (moduleName == "weapon Squid beamer EMP") return idx; idx++;
-			if (moduleName == "weapon rare warp shield breaker EMP") return idx; idx++;
+			if (moduleID == 1386212334) return idx; idx++; //weapon DIY raygun blue
+			if (moduleID == 708268486) return idx; idx++; //weapon DIY EMP
+			if (moduleID == 1249253086) return idx; idx++; //weapon dual EMP
+			if (moduleID == 1403294598) return idx; idx++; //weapon DIY exotics EMP sniper
+			if (moduleID == 2067779357) return idx; idx++; //weapon Insectoid shield disruptor
+			if (moduleID == 1411264531) return idx; idx++; //weapon spideraa disruptor
+			if (moduleID == 1535460222) return idx; idx++; //weapon Squid beamer EMP
+			if (moduleID == 1317545673) return idx; idx++; //weapon rare warp shield breaker EMP
 			//Exotic Rays
-			if (moduleName == "weapon DIY exoticslaser") return idx; idx++;
-			if (moduleName == "weapon DIY exoticslaser dual") return idx; idx++;
-			if (moduleName == "weapon Florallaser") return idx; idx++;
-			if (moduleName == "weapon Squid beamer single") return idx; idx++;
-			if (moduleName == "weapon Squid beamer double") return idx; idx++;
-			if (moduleName == "weapon Squid warp ray effector") return idx; idx++;
-			if (moduleName == "weapon rarelaserblue1") return idx; idx++;
-			if (moduleName == "weapon rarelaserblue2") return idx; idx++;
-			if (moduleName == "weapon rarelaserblue2 dual") return idx; idx++;
-			if (moduleName == "weapon spideraa laser") return idx; idx++;
-			if (moduleName == "weapon BFGx9 for bluestar") return idx; idx++;
-			if (moduleName == "weapon rarelasergothic small") return idx; idx++;
-			if (moduleName == "weapon rarelasergothic") return idx; idx++;
+			if (moduleID == 2075523594) return idx; idx++; //weapon DIY exoticslaser
+			if (moduleID == 1049561624) return idx; idx++; //weapon DIY exoticslaser dual
+			if (moduleID == 599402385) return idx; idx++; //weapon Florallaser
+			if (moduleID == 1356678884) return idx; idx++; //weapon Squid beamer single
+			if (moduleID == 1281152896) return idx; idx++; //weapon Squid beamer double
+			if (moduleID == 1028495088) return idx; idx++; //weapon Squid warp ray effector
+			if (moduleID == 1433969244) return idx; idx++; //weapon rarelaserblue1
+			if (moduleID == 1433969243) return idx; idx++; //weapon rarelaserblue2
+			if (moduleID == 68261259) return idx; idx++; //weapon rarelaserblue2 dual
+			if (moduleID == 737829770) return idx; idx++; //weapon spideraa laser
+			if (moduleID == 1238435842) return idx; idx++; //weapon BFGx9 for bluestar
+			if (moduleID == 842752468) return idx; idx++; //weapon rarelasergothic small
+			if (moduleID == 452279033) return idx; idx++; //weapon rarelasergothic
 			return idx + 100;
 		}
 		public static void UpdateWeaponModule(ShipModule shipModule, bool initItemData) {
@@ -180,11 +180,8 @@ namespace FFU_Bleeding_Edge {
 			shipModule.Weapon.resourcesPerShot = new ResourceValueGroup();
 			int shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
 			int shipModule_Weapon_ProjectileOrBeamPrefab_pointDefPriority = shipModule.Weapon.ProjectileOrBeamPrefab as Projectile != null ? AccessTools.FieldRefAccess<Projectile, int>(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile, "pointDefPriority") : 0;
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "weapon DIY Rockets x1":
+			switch (shipModule.PrefabId) {
+				case 821254137: //weapon DIY Rockets x1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -214,7 +211,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 20;
 				break;
-				case "weapon ratmissile x2":
+				case 597713891: //weapon ratmissile x2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -244,7 +241,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 30;
 				break;
-				case "weapon ratmissile x3":
+				case 777119861: //weapon ratmissile x3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -274,7 +271,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 30;
 				break;
-				case "weapon miscmissile x4":
+				case 185094886: //weapon miscmissile x4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -304,7 +301,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 30;
 				break;
-				case "weapon emperormissile large x5":
+				case 1975811673: //weapon emperormissile large x5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -334,7 +331,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon emperormissiles small x2":
+				case 759200248: //weapon emperormissiles small x2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -364,7 +361,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon tigermissile x2":
+				case 97880399: //weapon tigermissile x2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -394,7 +391,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon alienmissile x5":
+				case 7208646: //weapon alienmissile x5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -424,7 +421,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon alienmissile x7":
+				case 1170008060: //weapon alienmissile x7
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -454,7 +451,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon spideraamissilex3":
+				case 85351226: //weapon spideraamissilex3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -484,7 +481,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon spideraamissilex4":
+				case 1473319987: //weapon spideraamissilex4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -514,7 +511,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon monolith missile x1":
+				case 1348589878: //weapon monolith missile x1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -544,7 +541,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon ancientrockets x3":
+				case 469527491: //weapon ancientrockets x3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -574,7 +571,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon tigermissile large":
+				case 1571322820: //weapon tigermissile large
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Launchers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -604,7 +601,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon DIY Minicannon ancient 2,3":
+				case 1780996798: //weapon DIY Minicannon ancient 2,3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
@@ -634,7 +631,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 20;
 				break;
-				case "weapon gatling 01 ancient dual 14,4":
+				case 1363897257: //weapon gatling 01 ancient dual 14,4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
@@ -664,7 +661,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 25;
 				break;
-				case "weapon gatling 02 rat small 12,4":
+				case 1957651014: //weapon gatling 02 rat small 12,4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
@@ -694,7 +691,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 0;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon gatling RatA 14,4":
+				case 704483685: //weapon gatling RatA 14,4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
@@ -724,7 +721,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 30;
 				break;
-				case "weapon gatling RatB 15,5":
+				case 123083978: //weapon gatling RatB 15,5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
@@ -754,7 +751,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 30;
 				break;
-				case "weapon gatling whiteA 13,4":
+				case 1092529672: //weapon gatling whiteA 13,4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
@@ -784,7 +781,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon gatling whiteB 14,5":
+				case 689245145: //weapon gatling whiteB 14,5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
@@ -814,7 +811,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon Sniper cannon 4":
+				case 698348090: //weapon Sniper cannon 4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
@@ -844,7 +841,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon gatling ClawA 12,4":
+				case 1501025877: //weapon gatling ClawA 12,4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -874,7 +871,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 45;
 				break;
-				case "weapon gatling ClawB 14,5":
+				case 1566651491: //weapon gatling ClawB 14,5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -904,7 +901,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 45;
 				break;
-				case "weapon gatling blaster small 12,5":
+				case 1890403578: //weapon gatling blaster small 12,5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
@@ -934,7 +931,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon gatling Insectoid plasma 18,4x2":
+				case 992516328: //weapon gatling Insectoid plasma 18,4x2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
@@ -964,7 +961,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon gatling Insectoid cyano 15,4":
+				case 458272126: //weapon gatling Insectoid cyano 15,4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Autocannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -994,7 +991,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon ATK-MK1 old":
+				case 1521997681: //weapon ATK-MK1 old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -1023,7 +1020,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon ATK-MK2 old":
+				case 1118713154: //weapon ATK-MK2 old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -1052,7 +1049,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon ATK-MK3 old":
+				case 537313447: //weapon ATK-MK3 old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -1081,7 +1078,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 45;
 				break;
-				case "weapon ATK-MK1":
+				case 1281856982: //weapon ATK-MK1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -1110,7 +1107,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon ATK-MK2":
+				case 1685141509: //weapon ATK-MK2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -1139,7 +1136,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 55;
 				break;
-				case "weapon ATK-MK3":
+				case 119057568: //weapon ATK-MK3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -1168,7 +1165,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon cubecannon huge old":
+				case 1675488140: //weapon cubecannon huge old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -1197,7 +1194,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon cubecannon huge":
+				case 114834467: //weapon cubecannon huge
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -1226,7 +1223,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 70;
 				break;
-				case "weapon emperorbanks cannon1x":
+				case 865561327: //weapon emperorbanks cannon1x
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -1255,7 +1252,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon emperorbanks cannon2x":
+				case 865561324: //weapon emperorbanks cannon2x
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -1284,7 +1281,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon emperorbanks cannon large":
+				case 533548711: //weapon emperorbanks cannon large
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
@@ -1313,7 +1310,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 80;
 				break;
-				case "weapon ratcannon high velocity":
+				case 887190895: //weapon ratcannon high velocity
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
@@ -1342,7 +1339,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon ratcannon fire1":
+				case 1662502911: //weapon ratcannon fire1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
@@ -1371,7 +1368,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon ratcannon fire2":
+				case 2065787438: //weapon ratcannon fire2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
@@ -1400,7 +1397,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon ratcannon fire3":
+				case 499703497: //weapon ratcannon fire3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
@@ -1429,7 +1426,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 45;
 				break;
-				case "weapon diyfirebomber1":
+				case 30747850: //weapon diyfirebomber1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
@@ -1458,7 +1455,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon diyfirebomber2":
+				case 30747849: //weapon diyfirebomber2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
@@ -1487,7 +1484,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 2;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon Energy cannon x1":
+				case 1532741738: //weapon Energy cannon x1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
@@ -1516,7 +1513,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon Energy cannon x2":
+				case 1532741737: //weapon Energy cannon x2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
@@ -1545,7 +1542,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 7;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon Energy cannon OP":
+				case 1768012478: //weapon Energy cannon OP
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
@@ -1574,7 +1571,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon EMP energyball":
+				case 1482677315: //weapon EMP energyball
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
@@ -1603,7 +1600,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon EMP energyball 3x Tiger":
+				case 876704941: //weapon EMP energyball 3x Tiger
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
@@ -1632,7 +1629,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 15;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon Floral cannon":
+				case 790917823: //weapon Floral cannon
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
@@ -1661,7 +1658,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 55;
 				break;
-				case "weapon exoticscannon1":
+				case 1983239915: //weapon exoticscannon1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Howitzers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
@@ -1683,14 +1680,14 @@ namespace FFU_Bleeding_Edge {
 				shipModule_Weapon_ProjectileOrBeamPrefab_pointDefPriority = 2;
 				shipModule.Weapon.reloadInterval = reloadProjHowitzer - 10f;
 				shipModule.Weapon.overridePointDefCanSeeThis = true;
-				shipModule.Weapon.overrideProjectileHealth = 10;
+				shipModule.Weapon.overrideProjectileHealth = 20;
 				shipModule.Weapon.shotInterval = 0.85f;
 				shipModule.Weapon.magazineSize = 1;
 				shipModule.Weapon.accuracy = 17;
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 45;
 				break;
-				case "weapon Sniper cannon 0 DIY":
+				case 1751631045: //weapon Sniper cannon 0 DIY
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railguns"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railguns"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
@@ -1719,7 +1716,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 25;
 				break;
-				case "weapon Sniper cannon 0":
+				case 514626098: //weapon Sniper cannon 0
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railguns"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railguns"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
@@ -1748,7 +1745,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon Sniper cannon 2":
+				case 1499937036: //weapon Sniper cannon 2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railguns"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railguns"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
@@ -1777,7 +1774,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 7;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon Sniper cannon 3":
+				case 918537329: //weapon Sniper cannon 3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railguns"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railguns"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
@@ -1806,7 +1803,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 45;
 				break;
-				case "weapon Sniper cannon 2 insectoid":
+				case 1240034396: //weapon Sniper cannon 2 insectoid
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railguns"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railguns"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
@@ -1835,7 +1832,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 45;
 				break;
-				case "weapon sniper cannon EMP":
+				case 1567764648: //weapon sniper cannon EMP
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railguns"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railguns"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
@@ -1864,7 +1861,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 45;
 				break;
-				case "weapon Spideraa shuriken":
+				case 985673324: //weapon Spideraa shuriken
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railguns"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railguns"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
@@ -1893,7 +1890,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 45;
 				break;
-				case "weapon cubecannon1":
+				case 1316645801: //weapon cubecannon1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railcannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railcannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
@@ -1922,7 +1919,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon cubecannon1x3":
+				case 1615383632: //weapon cubecannon1x3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railcannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railcannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
@@ -1951,7 +1948,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon Segmented cannon1":
+				case 894416346: //weapon Segmented cannon1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railcannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railcannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
@@ -1980,7 +1977,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 45;
 				break;
-				case "weapon Segmented cannonx2 A":
+				case 1086561638: //weapon Segmented cannonx2 A
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railcannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railcannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
@@ -2009,7 +2006,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon Segmented cannonx2 B":
+				case 1086561639: //weapon Segmented cannonx2 B
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railcannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railcannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
@@ -2038,7 +2035,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 55;
 				break;
-				case "weapon Segmented cannonx2 C":
+				case 1086561640: //weapon Segmented cannonx2 C
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railcannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railcannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
@@ -2067,7 +2064,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 12;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon gatling Tiger":
+				case 412909021: //weapon gatling Tiger
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Railcannons"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Railcannons"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
@@ -2096,7 +2093,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 20;
 				shipModule_maxHealth = 80;
 				break;
-				case "weapon mininglaser 0 old":
+				case 842299308: //weapon mininglaser 0 old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2120,7 +2117,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 5;
 				break;
-				case "weapon mininglaser 0 defective":
+				case 1386594796: //weapon mininglaser 0 defective
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2144,7 +2141,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 4;
 				break;
-				case "weapon mininglaser 2 defective":
+				case 1362762978: //weapon mininglaser 2 defective
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2168,7 +2165,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 6;
 				break;
-				case "weapon mininglaser 3 defective":
+				case 109007005: //weapon mininglaser 3 defective
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2192,7 +2189,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 7;
 				shipModule_maxHealth = 8;
 				break;
-				case "weapon mininglaser 4 defective":
+				case 292919296: //weapon mininglaser 4 defective
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2216,7 +2213,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 10;
 				break;
-				case "weapon mininglaser 1":
+				case 1594290506: //weapon mininglaser 1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2240,7 +2237,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 10;
 				break;
-				case "weapon mininglaser 2":
+				case 1191005979: //weapon mininglaser 2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2264,7 +2261,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 15;
 				break;
-				case "weapon mininglaser 3":
+				case 609606272: //weapon mininglaser 3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2288,7 +2285,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 20;
 				break;
-				case "weapon mininglaser 4":
+				case 206321745: //weapon mininglaser 4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2312,7 +2309,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 25;
 				break;
-				case "weapon mininglaser 5":
+				case 1772405686: //weapon mininglaser 5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2336,7 +2333,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 7;
 				shipModule_maxHealth = 30;
 				break;
-				case "weapon mininglaser 6":
+				case 1369121159: //weapon mininglaser 6
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2360,7 +2357,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon ratlaser 5":
+				case 1019707953: //weapon ratlaser 5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2384,7 +2381,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon ratlaser small no armor":
+				case 1724240697: //weapon ratlaser small no armor
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2408,7 +2405,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon ratlaser small with armor":
+				case 1345622970: //weapon ratlaser small with armor
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2432,7 +2429,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon emperor minilaser":
+				case 474553624: //weapon emperor minilaser
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2456,7 +2453,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 25;
 				break;
-				case "weapon emperor laser double":
+				case 1340539166: //weapon emperor laser double
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2480,7 +2477,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 7;
 				shipModule_maxHealth = 30;
 				break;
-				case "weapon emperor laser large":
+				case 681262058: //weapon emperor laser large
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2504,7 +2501,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon Insectoid old fast laser":
+				case 109243084: //weapon Insectoid old fast laser
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2528,7 +2525,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 30;
 				break;
-				case "weapon Insectoid old fast laser 5x":
+				case 2100491633: //weapon Insectoid old fast laser 5x
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Lasers"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2552,7 +2549,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 12;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon DIY Laser":
+				case 55650103: //weapon DIY Laser
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.0f);
@@ -2576,7 +2573,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 10;
 				break;
-				case "weapon DIY raygun":
+				case 144623758: //weapon DIY raygun
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2600,7 +2597,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 15;
 				break;
-				case "weapon bigbeamer1":
+				case 176876935: //weapon bigbeamer1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2624,7 +2621,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 20;
 				break;
-				case "weapon bigbeamer2":
+				case 176876934: //weapon bigbeamer2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2648,7 +2645,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 25;
 				break;
-				case "weapon bigbeamer3":
+				case 176876933: //weapon bigbeamer3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2672,7 +2669,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 30;
 				break;
-				case "weapon ratlaser short":
+				case 1281020726: //weapon ratlaser short
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2696,7 +2693,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 7;
 				shipModule_maxHealth = 30;
 				break;
-				case "weapon ratlaser long":
+				case 1447130390: //weapon ratlaser long
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2720,7 +2717,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon tigerlaser MK1":
+				case 306184113: //weapon tigerlaser MK1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2744,7 +2741,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon tigerlaser MK2":
+				case 306184114: //weapon tigerlaser MK2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2768,7 +2765,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 12;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon powerbeam-MK1":
+				case 1860805838: //weapon powerbeam-MK1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2792,7 +2789,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon powerbeam-MK2":
+				case 1457521311: //weapon powerbeam-MK2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2816,7 +2813,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 9;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon powerbeam-MK3":
+				case 876121604: //weapon powerbeam-MK3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2840,7 +2837,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 12;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon spideraa triplelaser":
+				case 30426038: //weapon spideraa triplelaser
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2864,7 +2861,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 12;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon spideraa quadlaser":
+				case 1999515951: //weapon spideraa quadlaser
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2888,7 +2885,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 15;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon insectoid fast laser":
+				case 848686115: //weapon insectoid fast laser
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2912,7 +2909,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 15;
 				shipModule_maxHealth = 80;
 				break;
-				case "weapon Insectoid slowlaser":
+				case 849984806: //weapon Insectoid slowlaser
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Beams"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.6f);
@@ -2936,7 +2933,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 20;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon DIY raygun orange":
+				case 981179656: //weapon DIY raygun orange
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs["Heat Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Heat Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
@@ -2961,7 +2958,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 15;
 				break;
-				case "weapon Heatray emitter":
+				case 1307272377: //weapon Heatray emitter
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Heat Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Heat Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
@@ -2986,7 +2983,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 45;
 				break;
-				case "weapon Heatray emitter x red":
+				case 1322541741: //weapon Heatray emitter x red
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs["Heat Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Heat Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
@@ -3011,7 +3008,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon Squid beamer heatray":
+				case 728051246: //weapon Squid beamer heatray
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Heat Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Heat Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
@@ -3036,7 +3033,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 12;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon DIY raygun blue":
+				case 1386212334: //weapon DIY raygun blue
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Disruptors"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Disruptors"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.4f);
@@ -3061,7 +3058,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 15;
 				break;
-				case "weapon DIY EMP":
+				case 708268486: //weapon DIY EMP
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Disruptors"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Disruptors"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.4f);
@@ -3086,7 +3083,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 20;
 				break;
-				case "weapon dual EMP":
+				case 1249253086: //weapon dual EMP
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Disruptors"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Disruptors"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.4f);
@@ -3111,7 +3108,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 25;
 				break;
-				case "weapon DIY exotics EMP sniper":
+				case 1403294598: //weapon DIY exotics EMP sniper
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Disruptors"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Disruptors"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.4f);
@@ -3136,7 +3133,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 11;
 				shipModule_maxHealth = 25;
 				break;
-				case "weapon Insectoid shield disruptor":
+				case 2067779357: //weapon Insectoid shield disruptor
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs["Disruptors"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Disruptors"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.4f);
@@ -3161,7 +3158,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 12;
 				shipModule_maxHealth = 30;
 				break;
-				case "weapon spideraa disruptor":
+				case 1411264531: //weapon spideraa disruptor
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs["Disruptors"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Disruptors"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.4f);
@@ -3186,7 +3183,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 13;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon Squid beamer EMP":
+				case 1535460222: //weapon Squid beamer EMP
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.weaponTypeIDs["Disruptors"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Disruptors"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.4f);
@@ -3211,7 +3208,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 14;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon rare warp shield breaker EMP":
+				case 1317545673: //weapon rare warp shield breaker EMP
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Disruptors"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Disruptors"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.4f);
@@ -3236,7 +3233,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 15;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon DIY exoticslaser":
+				case 2075523594: //weapon DIY exoticslaser
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3261,7 +3258,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 20;
 				break;
-				case "weapon DIY exoticslaser dual":
+				case 1049561624: //weapon DIY exoticslaser dual
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3286,7 +3283,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 25;
 				break;
-				case "weapon Florallaser":
+				case 599402385: //weapon Florallaser
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3311,7 +3308,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 25;
 				break;
-				case "weapon Squid beamer single":
+				case 1356678884: //weapon Squid beamer single
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3336,7 +3333,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 30;
 				break;
-				case "weapon Squid beamer double":
+				case 1281152896: //weapon Squid beamer double
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3361,7 +3358,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon Squid warp ray effector":
+				case 1028495088: //weapon Squid warp ray effector
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3386,7 +3383,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 12;
 				shipModule_maxHealth = 35;
 				break;
-				case "weapon rarelaserblue1":
+				case 1433969244: //weapon rarelaserblue1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3411,7 +3408,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 12;
 				shipModule_maxHealth = 40;
 				break;
-				case "weapon rarelaserblue2":
+				case 1433969243: //weapon rarelaserblue2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3436,7 +3433,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 14;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon rarelaserblue2 dual":
+				case 68261259: //weapon rarelaserblue2 dual
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3461,7 +3458,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 16;
 				shipModule_maxHealth = 60;
 				break;
-				case "weapon spideraa laser":
+				case 737829770: //weapon spideraa laser
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3486,7 +3483,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 17;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon BFGx9 for bluestar":
+				case 1238435842: //weapon BFGx9 for bluestar
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3511,7 +3508,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 18;
 				shipModule_maxHealth = 80;
 				break;
-				case "weapon rarelasergothic small":
+				case 842752468: //weapon rarelasergothic small
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3536,7 +3533,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 19;
 				shipModule_maxHealth = 50;
 				break;
-				case "weapon rarelasergothic":
+				case 452279033: //weapon rarelasergothic
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
@@ -3561,7 +3558,29 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 20;
 				shipModule_maxHealth = 60;
 				break;
-				case "bossweapon insectoid ship":
+				case 1934368951: //weapon EMP perm DLC
+				shipModule.displayName = "Solar Flare Oscillator";
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 10.0f);
+				shipModule.description = "A powerful built-in exotic weapon that generates miniature solar flares overflowing with raw energy that contained and guided by quantum intangibility fields. Each activation consumes huge amount of exotics, beside huge energy requirements and very long recharge times.";
+				shipModule.craftCost = new ResourceValueGroup { organics = 15000f, fuel = 3750f, metals = 5000f, synthetics = 9500f, exotics = 250f };
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = false;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.High;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.High;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 120;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 6.0f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 750;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 125;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 250;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).doorDmg = 75;
+				shipModule.Weapon.reloadInterval = 180f;
+				shipModule.Weapon.shotInterval = 3.0f;
+				shipModule.Weapon.magazineSize = 1;
+				shipModule.Weapon.accuracy = 25;
+				shipModule.powerConsumed = 60;
+				shipModule_maxHealth = 350;
+				break;
+				case 1801315413: //bossweapon insectoid ship
 				shipModule.displayName = "Sub-Atomic Disintegrator";
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 5.0f);
 				shipModule.description = "Power readings are off the scale. It morphs in unexpected ways before shooting.";
@@ -3583,7 +3602,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 20;
 				shipModule_maxHealth = 150;
 				break;
-				case "bossweapon weirdaxer":
+				case 1088715096: //bossweapon weirdaxer
 				shipModule.displayName = "Planet Killer Annihilator";
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 8.0f);
 				shipModule.description = "Power readings are off the scale. It morphs in unexpected ways before shooting.";

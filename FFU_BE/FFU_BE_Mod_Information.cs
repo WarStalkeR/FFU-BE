@@ -23,11 +23,11 @@ namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Mod_Information {
 		public static string GetSelectedWeaponExactData(HandWeapon handWeapon, bool showColors = true) {
 			string weaponData = null;
-			weaponData += handWeapon.damageDealerPrefab.GetDamage(handWeapon).crewDmg > 0 ? $"{Core.TT("Crew Damage")}: {(handWeapon.magazineSize > 1 ? handWeapon.magazineSize + "x" : null)}{handWeapon.damageDealerPrefab.GetDamage(handWeapon).crewDmg}\n" : null;
-			weaponData += handWeapon.damageDealerPrefab.GetDamage(handWeapon).doorDmg > 0 ? $"{Core.TT("Door Damage")}: {(handWeapon.magazineSize > 1 ? handWeapon.magazineSize + "x" : null)}{handWeapon.damageDealerPrefab.GetDamage(handWeapon).doorDmg}\n" : null;
-			weaponData += handWeapon.damageDealerPrefab.GetDamage(handWeapon).shipDmg > 0 ? $"{Core.TT("Hull Damage")}: {(handWeapon.magazineSize > 1 ? handWeapon.magazineSize + "x" : null)}{handWeapon.damageDealerPrefab.GetDamage(handWeapon).shipDmg}\n" : null;
-			weaponData += handWeapon.damageDealerPrefab.GetDamage(handWeapon).moduleDmg > 0 ? $"{Core.TT("Module Damage")}: {(handWeapon.magazineSize > 1 ? handWeapon.magazineSize + "x" : null)}{handWeapon.damageDealerPrefab.GetDamage(handWeapon).moduleDmg}\n" : null;
-			weaponData += handWeapon.damageDealerPrefab.GetDamage(handWeapon).moduleDmgChance > 0 ? $"{Core.TT("Module Hit Chance")}: {handWeapon.damageDealerPrefab.GetDamage(handWeapon).moduleDmgChance * 100f:0}%\n" : null;
+			weaponData += handWeapon.DamageDealerPrefab.GetDamage(handWeapon).crewDmg > 0 ? $"{Core.TT("Crew Damage")}: {(handWeapon.magazineSize > 1 ? handWeapon.magazineSize + "x" : null)}{handWeapon.DamageDealerPrefab.GetDamage(handWeapon).crewDmg}\n" : null;
+			weaponData += handWeapon.DamageDealerPrefab.GetDamage(handWeapon).doorDmg > 0 ? $"{Core.TT("Door Damage")}: {(handWeapon.magazineSize > 1 ? handWeapon.magazineSize + "x" : null)}{handWeapon.DamageDealerPrefab.GetDamage(handWeapon).doorDmg}\n" : null;
+			weaponData += handWeapon.DamageDealerPrefab.GetDamage(handWeapon).shipDmg > 0 ? $"{Core.TT("Hull Damage")}: {(handWeapon.magazineSize > 1 ? handWeapon.magazineSize + "x" : null)}{handWeapon.DamageDealerPrefab.GetDamage(handWeapon).shipDmg}\n" : null;
+			weaponData += handWeapon.DamageDealerPrefab.GetDamage(handWeapon).moduleDmg > 0 ? $"{Core.TT("Module Damage")}: {(handWeapon.magazineSize > 1 ? handWeapon.magazineSize + "x" : null)}{handWeapon.DamageDealerPrefab.GetDamage(handWeapon).moduleDmg}\n" : null;
+			weaponData += handWeapon.DamageDealerPrefab.GetDamage(handWeapon).moduleDmgChance > 0 ? $"{Core.TT("Module Hit Chance")}: {handWeapon.DamageDealerPrefab.GetDamage(handWeapon).moduleDmgChance * 100f:0}%\n" : null;
 			weaponData += handWeapon.farthestAttackDistance > 0 ? $"{Core.TT("Effective Range")}: {handWeapon.farthestAttackDistance}{Core.TT("m")}\n" : null;
 			weaponData += handWeapon.reloadInterval > 0 ? $"{Core.TT("Reload Time")}: {handWeapon.reloadInterval}{Core.TT("s")}\n" : null;
 			weaponData += handWeapon.shotInterval > 0 ? $"{Core.TT("Salvo Delay")}: {handWeapon.shotInterval}{Core.TT("s")}\n" : null;
@@ -39,8 +39,6 @@ namespace FFU_Bleeding_Edge {
 		public static string GetSelectedModuleExactData(ShipModule shipModule, bool isInst = true, bool debugInfo = false, bool showDesc = true, bool hideUnique = true, bool showColors = true) {
 			string moduleData = null;
 			string instanceText = null;
-			if (shipModule.name.Contains("bossweapon") && hideUnique) return $"<color=lime>{Core.TT("Type")}: {Core.TT("Unidentified")}</color>\n{shipModule.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit)}";
-			if (shipModule.name.Contains("tutorial") && hideUnique) return $"<color=lime>{Core.TT("Type")}: {Core.TT("Unidentified")}</color>\n{shipModule.description.Wrap(lineLength: FFU_BE_Defs.wordWrapLimit)}";
 			if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += $"{Core.TT("Module Identifier")}: {shipModule.name}\n";
 			if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += $"{Core.TT("Module Prefab ID")}: {shipModule.PrefabId}\n";
 			switch (shipModule.type) {
@@ -118,9 +116,9 @@ namespace FFU_Bleeding_Edge {
 				if (isInst) moduleData += $"{Core.TT("Modifier")}: {Core.TT(GetModuleModText(shipModule))}\n";
 				moduleData += shipModule.PointDefence.reloadInterval > 0 ? $"{Core.TT("Reload Time")}: {shipModule.PointDefence.reloadInterval:0.##}{Core.TT("s")}\n" : null;
 				moduleData += shipModule.PointDefence.coverRadius > 0 ? $"{Core.TT("Cover Radius")}: {shipModule.PointDefence.coverRadius * 10f:0.##}{Core.TT("m")}\n" : null;
-				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += $"{Core.TT("Interceptor Identifier")}: {shipModule.PointDefence.projectileOrBeamPrefab.name}\n";
-				moduleData += shipModule.PointDefence.projectileOrBeamPrefab.projectileDmg > 0 ? $"{Core.TT("Interception Damage")}: {shipModule.PointDefence.projectileOrBeamPrefab.projectileDmg}\n" : null;
-				moduleData += shipModule.PointDefence.projectileOrBeamPrefab.lifetime > 0 ? $"{Core.TT("Interception Delay")}: {shipModule.PointDefence.projectileOrBeamPrefab.lifetime:0.##}{Core.TT("s")}\n" : null;
+				if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += $"{Core.TT("Interceptor Identifier")}: {shipModule.PointDefence.ProjectileOrBeamPrefab.name}\n";
+				moduleData += shipModule.PointDefence.ProjectileOrBeamPrefab.projectileDmg > 0 ? $"{Core.TT("Interception Damage")}: {shipModule.PointDefence.ProjectileOrBeamPrefab.projectileDmg}\n" : null;
+				moduleData += shipModule.PointDefence.ProjectileOrBeamPrefab.lifetime > 0 ? $"{Core.TT("Interception Delay")}: {shipModule.PointDefence.ProjectileOrBeamPrefab.lifetime:0.##}{Core.TT("s")}\n" : null;
 				moduleData += !shipModule.PointDefence.resourcesPerShot.IsEmpty ? $"{Core.TT("Resources Per Shot")}:\n" : null;
 				moduleData += shipModule.PointDefence.resourcesPerShot.credits > 0 ? $" > {Core.TT("Credits")}: {shipModule.PointDefence.resourcesPerShot.credits:0}\n" : null;
 				moduleData += shipModule.PointDefence.resourcesPerShot.organics > 0 ? $" > {Core.TT("Organics")}: {shipModule.PointDefence.resourcesPerShot.organics:0}\n" : null;
@@ -974,7 +972,7 @@ namespace RST.UI {
 		[MonoModReplace] private void DoPointDefence() {
 		/// Updated Point Defense Information
 			PointDefenceModule pointDefence = m.PointDefence;
-			PointDefDamageDealer projectileOrBeamPrefab = pointDefence.projectileOrBeamPrefab;
+			PointDefDamageDealer projectileOrBeamPrefab = pointDefence.ProjectileOrBeamPrefab;
 			ResourceValueGroup resourcesPerShot = pointDefence.resourcesPerShot;
 			string argPer = Localization.TT("per");
 			GunnerySkillEffects gunnerySkillEffects = WorldRules.Instance.gunnerySkillEffects;
@@ -1397,7 +1395,7 @@ namespace RST.UI {
 				UpdateHoverFlags(doResearchHovers: true);
 				crewOpsHover.HoverText = $"{Localization.TT("Shows current occupancy and limit of how much scientists can work in the laboratory at the same time.")}";
 				sEvasionBonusHover.HoverText = $"{Localization.TT("Shows by how much laboratory currently increases technology research progress for 100ru of travel.")}";
-				sAccuracyBonusHover.HoverText = $"{Localization.TT("Shows by how much laboratory currently increases research engineering progress for 100ru of travel.")}";
+				sAccuracyBonusHover.HoverText = $"{Localization.TT("Shows by how much laboratory currently increases reverse engineering progress for 100ru of travel.")}";
 				organicsProdHover.HoverText = $"{Localization.TT("Shows how much organics laboratory produces per 100ru of travel.")}";
 				fuelProdHover.HoverText = $"{Localization.TT("Shows how much starfuel laboratory produces per 100ru of travel.")}";
 				metalsProdHover.HoverText = $"{Localization.TT("Shows how much metal laboratory produces per 100ru of travel.")}";

@@ -10,18 +10,20 @@ using System.Linq;
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Base {
 		public static readonly string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\LocalLow\Interactive Fate\Shortest Trip To Earth\";
-		private static readonly string[] shipEntries = { "Tigerfish", "NukeRunner", "RogueRat", "Weirdship", "EasyTiger", "Gardenship", "Atlas", "Bluestar", "Roundship", "BattleTiger", "Endurance" };
+		private static readonly string[] shipEntries = { "Tigerfish", "NukeRunner", "RogueRat", "Exception", "Weirdship", "EasyTiger", "Atlas", "Roundship", "BattleTiger", "Engiship", "Bluestar", "Gardenship", "Endurance" };
 		private static int GetShipPrefabID(string shipType) {
 			switch (shipType) {
 				case "Tigerfish": return 516057105;
 				case "NukeRunner": return 487234563;
 				case "RogueRat": return 578937222;
+				case "Exception": return 66885230;
 				case "Weirdship": return 1809014558;
 				case "EasyTiger": return 1920692188;
 				case "Gardenship": return 1106792042;
 				case "Atlas": return 2103659466;
 				case "Bluestar": return 1772361532;
 				case "Roundship": return 1251918188;
+				case "Engiship": return 853503871;
 				case "BattleTiger": return 1452660923;
 				case "Endurance": return 1939804939;
 				default: return -1;
@@ -32,12 +34,14 @@ namespace FFU_Bleeding_Edge {
 				case 516057105: return "Tigerfish";
 				case 487234563: return "Nuke Runner";
 				case 578937222: return "Rogue Rat";
+				case 66885230: return "The Exception";
 				case 1809014558: return "Fierce Sincerity";
 				case 1920692188: return "Easy Tiger";
 				case 1106792042: return "Pumpkin Hammer";
 				case 2103659466: return "Atlas";
 				case 1772361532: return "Bluestar";
 				case 1251918188: return "Warpshell";
+				case 853503871: return "Riggy";
 				case 1452660923: return "Battle Tiger";
 				case 1939804939: return "Endurance";
 				default: return "???";
@@ -70,6 +74,8 @@ namespace FFU_Bleeding_Edge {
 					else { FFU_BE_Defs.fuelIsScrapRefunded = false; modConfigLog += "\n > " + "Property \"fuelIsScrapRefunded\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.fuelIsScrapRefunded.ToString(); }
 					if (modConfig["Settings"]["relativeEnemyCrewSkills"].TryConvertBool(out FFU_BE_Defs.relativeEnemyCrewSkills)) modConfigLog += "\n > " + "Property \"relativeEnemyCrewSkills\" loaded with value: " + FFU_BE_Defs.relativeEnemyCrewSkills.ToString();
 					else { FFU_BE_Defs.relativeEnemyCrewSkills = true; modConfigLog += "\n > " + "Property \"relativeEnemyCrewSkills\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.relativeEnemyCrewSkills.ToString(); }
+					if (modConfig["Settings"]["listAllCrewmemberTypes"].TryConvertBool(out FFU_BE_Defs.listAllCrewmemberTypes)) modConfigLog += "\n > " + "Property \"listAllCrewmemberTypes\" loaded with value: " + FFU_BE_Defs.listAllCrewmemberTypes.ToString();
+					else { FFU_BE_Defs.listAllCrewmemberTypes = false; modConfigLog += "\n > " + "Property \"listAllCrewmemberTypes\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.listAllCrewmemberTypes.ToString(); }
 					if (modConfig["Multipliers"]["containerSizeMultiplier"].TryConvertFloat(out FFU_BE_Defs.containerSizeMultiplier)) modConfigLog += "\n > " + "Property \"containerSizeMultiplier\" loaded with value: " + FFU_BE_Defs.containerSizeMultiplier.ToString();
 					else { FFU_BE_Defs.containerSizeMultiplier = 1.0f; modConfigLog += "\n > " + "Property \"containerSizeMultiplier\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.containerSizeMultiplier.ToString(); }
 					if (modConfig["Multipliers"]["resourcesScrapFraction"].TryConvertFloat(out FFU_BE_Defs.resourcesScrapFraction)) modConfigLog += "\n > " + "Property \"resourcesScrapFraction\" loaded with value: " + FFU_BE_Defs.resourcesScrapFraction.ToString();
@@ -113,24 +119,36 @@ namespace FFU_Bleeding_Edge {
 					if (modConfig["Multipliers"]["enemyCrewHealthSectorMult"].TryConvertFloat(out FFU_BE_Defs.enemyCrewHealthSectorMult)) modConfigLog += "\n > " + "Property \"enemyCrewHealthSectorMult\" loaded with value: " + FFU_BE_Defs.enemyCrewHealthSectorMult.ToString();
 					else { FFU_BE_Defs.enemyCrewHealthSectorMult = 0.1f; modConfigLog += "\n > " + "Property \"enemyCrewHealthSectorMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.enemyCrewHealthSectorMult.ToString(); }
 					foreach (string shipEntry in shipEntries) {
-						if (!string.IsNullOrEmpty(modConfig["CrewSpawn"]["ship" + shipEntry + "Types"].GetString()) && !string.IsNullOrEmpty(modConfig["CrewSpawn"]["ship" + shipEntry + "Numbers"].GetString())) {
-							string[] tmpStrArrT = modConfig["CrewSpawn"]["ship" + shipEntry + "Types"].GetString().Split('|');
-							string[] tmpStrArrN = modConfig["CrewSpawn"]["ship" + shipEntry + "Numbers"].GetString().Split('|');
-							if (!FFU_BE_Defs.startingCrew.ContainsKey(GetShipPrefabID(shipEntry))) FFU_BE_Defs.startingCrew.Add(new KeyValuePair<int, List<KeyValuePair<string, int>>>(GetShipPrefabID(shipEntry), new List<KeyValuePair<string, int>>()));
-							if (FFU_BE_Defs.startingCrew.ContainsKey(GetShipPrefabID(shipEntry))) {
-								for (int i = 0; i < tmpStrArrT.Length && i < tmpStrArrN.Length; i++) {
-									KeyValuePair<string, int> crewEntry = FFU_BE_Defs.startingCrew[GetShipPrefabID(shipEntry)].Find(x => x.Key == tmpStrArrT[i]);
-									if (FFU_BE_Defs.startingCrew[GetShipPrefabID(shipEntry)].Where(x => x.Key == tmpStrArrT[i]).Count() > 0) FFU_BE_Defs.startingCrew[GetShipPrefabID(shipEntry)].RemoveAt(FFU_BE_Defs.startingCrew[GetShipPrefabID(shipEntry)].IndexOf(crewEntry));
-									FFU_BE_Defs.startingCrew[GetShipPrefabID(shipEntry)].Add(new KeyValuePair<string, int>(tmpStrArrT[i], int.Parse(tmpStrArrN[i])));
+						if (!string.IsNullOrEmpty(modConfig["CrewSpawn"]["ship" + shipEntry].GetString())) {
+							string[] crewSets = modConfig["CrewSpawn"]["ship" + shipEntry].GetString().Split('|');
+							int[] crewTypes = new int[crewSets.Length];
+							int[] crewNumbers = new int[crewSets.Length];
+							if (crewSets.Length > 0) {
+								for (int i = 0; i < crewSets.Length; i++) {
+									string[] tmpStrArr = crewSets[i].Split('*');
+									if (tmpStrArr.Length == 2) { 
+										bool typeParse = int.TryParse(tmpStrArr[0], out crewTypes[i]);
+										bool numParse = int.TryParse(tmpStrArr[1], out crewNumbers[i]);
+										if (!typeParse || !numParse) Debug.LogWarning($"Syntax error in \"ship{shipEntry}\" #{i}! Please follow \"PrefabID*Number|PrefabID*Number\" syntax!");
+									} else Debug.LogWarning($"Syntax error in \"ship{shipEntry}\" #{i}! Please follow \"PrefabID*Number|PrefabID*Number\" syntax!");
+								}
+								if (!FFU_BE_Defs.startingCrew.ContainsKey(GetShipPrefabID(shipEntry)))
+									FFU_BE_Defs.startingCrew.Add(new KeyValuePair<int, List<KeyValuePair<int, int>>>(GetShipPrefabID(shipEntry), new List<KeyValuePair<int, int>>()));
+								if (FFU_BE_Defs.startingCrew.ContainsKey(GetShipPrefabID(shipEntry))) {
+									for (int i = 0; i < crewTypes.Length && i < crewNumbers.Length; i++) {
+										if (crewTypes[i] > 0 && crewNumbers[i] > 0) {
+											KeyValuePair<int, int> crewEntry = FFU_BE_Defs.startingCrew[GetShipPrefabID(shipEntry)].Find(x => x.Key == crewTypes[i]);
+											if (FFU_BE_Defs.startingCrew[GetShipPrefabID(shipEntry)].Where(x => x.Key == crewTypes[i]).Count() > 0) FFU_BE_Defs.startingCrew[GetShipPrefabID(shipEntry)].RemoveAt(FFU_BE_Defs.startingCrew[GetShipPrefabID(shipEntry)].IndexOf(crewEntry));
+											FFU_BE_Defs.startingCrew[GetShipPrefabID(shipEntry)].Add(new KeyValuePair<int, int>(crewTypes[i], crewNumbers[i]));
+										}
+									}
 								}
 							}
 						}
 					}
 					foreach (var coreCrewEntry in FFU_BE_Defs.startingCrew) {
 						modConfigLog += $"\n > Additional \"{GetShipNameByID(coreCrewEntry.Key)}\" Crew: ";
-						foreach (var subCrewEntry in coreCrewEntry.Value) {
-							modConfigLog += $"{subCrewEntry.Value}x {subCrewEntry.Key}{(coreCrewEntry.Value.Last().Key != subCrewEntry.Key ? ", " : "")}";
-						}
+						foreach (var subCrewEntry in coreCrewEntry.Value) modConfigLog += $"{subCrewEntry.Value}x {FFU_BE_Mod_Crewmembers.GetCrewNameFromID(subCrewEntry.Key)}{(coreCrewEntry.Value.Last().Key != subCrewEntry.Key ? ", " : "")}";
 					}
 					Debug.LogWarning(modConfigLog);
 				} else CreateModConfiguration(modConfDir, modConfFile);
@@ -170,31 +188,23 @@ namespace FFU_Bleeding_Edge {
 			modConfig["Multipliers"]["warpProducedResearchMult"] = 0.8f;
 			modConfig["Multipliers"]["warpProducedResourcesMult"] = 0.8f;
 			modConfig["Multipliers"]["enemyCrewHealthSectorMult"] = 0.1f;
-			modConfig["CrewSpawn"]["shipTigerfishTypes"] = "Combat Drone Humanoid|Drone tigerspider";
-			modConfig["CrewSpawn"]["shipTigerfishNumbers"] = "2|2";
-			modConfig["CrewSpawn"]["shipNukeRunnerTypes"] = "Heavy security drone|Drone CT2 gunnery";
-			modConfig["CrewSpawn"]["shipNukeRunnerNumbers"] = "2|2";
-			modConfig["CrewSpawn"]["shipRogueRatTypes"] = "Drone DIY gunjunker|Drone DIY gunnery pirates cannon";
-			modConfig["CrewSpawn"]["shipRogueRatNumbers"] = "2|2";
-			modConfig["CrewSpawn"]["shipWeirdshipTypes"] = "Redripper crew|Beedroid crew";
-			modConfig["CrewSpawn"]["shipWeirdshipNumbers"] = "2|2";
-			modConfig["CrewSpawn"]["shipEasyTigerTypes"] = "Combat Drone Humanoid|Drone tigerdog";
-			modConfig["CrewSpawn"]["shipEasyTigerNumbers"] = "4|2";
-			modConfig["CrewSpawn"]["shipGardenshipTypes"] = "Combat Drone Humanoid|Drone tigerspider";
-			modConfig["CrewSpawn"]["shipGardenshipNumbers"] = "4|2";
-			modConfig["CrewSpawn"]["shipAtlasTypes"] = "Combat Drone Humanoid|Heavy security drone";
-			modConfig["CrewSpawn"]["shipAtlasNumbers"] = "2|4";
-			modConfig["CrewSpawn"]["shipBluestarTypes"] = "Drone DIY science|Drone tigerspider";
-			modConfig["CrewSpawn"]["shipBluestarNumbers"] = "4|4";
-			modConfig["CrewSpawn"]["shipRoundshipTypes"] = "Combat Drone Humanoid|Redripper crew";
-			modConfig["CrewSpawn"]["shipRoundshipNumbers"] = "2|6";
-			modConfig["CrewSpawn"]["shipBattleTigerTypes"] = "Combat Drone Humanoid|Heavy security drone|Drone tigerspider|Drone tigerdog";
-			modConfig["CrewSpawn"]["shipBattleTigerNumbers"] = "4|2|2|2";
-			modConfig["CrewSpawn"]["shipEnduranceTypes"] = "Combat Drone Humanoid|Heavy security drone|Drone tigerspider pirates";
-			modConfig["CrewSpawn"]["shipEnduranceNumbers"] = "4|4|4";
+			modConfig["CrewSpawn"]["shipTigerfish"] = "826379097*2|1481089982*2";
+			modConfig["CrewSpawn"]["shipNukeRunner"] = "190195895*2|1589791427*2";
+			modConfig["CrewSpawn"]["shipRogueRat"] = "745155399*2|1349353450*2";
+			modConfig["CrewSpawn"]["shipException"] = "768455465*4";
+			modConfig["CrewSpawn"]["shipAtlas"] = "826379097*2|190195895*4";
+			modConfig["CrewSpawn"]["shipEasyTiger"] = "826379097*4|1727276051*2";
+			modConfig["CrewSpawn"]["shipRoundship"] = "826379097*2|488555786*6";
+			modConfig["CrewSpawn"]["shipWeirdship"] = "488555786*2|768455465*2";
+			modConfig["CrewSpawn"]["shipBattleTiger"] = "826379097*4|190195895*2|1481089982*2|1727276051*2";
+			modConfig["CrewSpawn"]["shipEngiship"] = "826379097*2|190195895*2|1351800556*4";
+			modConfig["CrewSpawn"]["shipBluestar"] = "421109168*4|1481089982*4";
+			modConfig["CrewSpawn"]["shipGardenship"] = "826379097*4|1481089982*2";
+			modConfig["CrewSpawn"]["shipEndurance"] = "826379097*4|190195895*4|1351800556*4";
 			modConfig.Save(appDataPath + modConfDir + modConfFile);
 		}
 		public static List<int> allPerksList = new List<int>(new int[] {
+			66885230,
 			487234563,
 			516057105,
 			578937222,
@@ -234,6 +244,7 @@ namespace FFU_Bleeding_Edge {
 			209451390,
 			225180168,
 			237545307,
+			260900693,
 			272967497,
 			283158951,
 			285860403,
@@ -249,6 +260,8 @@ namespace FFU_Bleeding_Edge {
 			430920595,
 			450353830,
 			450636944,
+			462414045,
+			463511730,
 			484808345,
 			507217483,
 			522883132,
@@ -257,6 +270,7 @@ namespace FFU_Bleeding_Edge {
 			566836399,
 			584291632,
 			600376461,
+			610158979,
 			611909834,
 			633108626,
 			655868932,
@@ -277,6 +291,7 @@ namespace FFU_Bleeding_Edge {
 			873320189,
 			883360183,
 			889458515,
+			905925927,
 			907765912,
 			907839204,
 			910502010,
@@ -305,6 +320,7 @@ namespace FFU_Bleeding_Edge {
 			1246169320,
 			1248482139,
 			1252646026,
+			1260454991,
 			1273038811,
 			1289207917,
 			1304884710,
@@ -394,9 +410,11 @@ namespace FFU_Bleeding_Edge {
 			2140969742
 		});
 		public static List<int> allShipsList = new List<int>(new int[] {
+			66885230,
 			487234563,
 			516057105,
 			578937222,
+			853503871,
 			1106792042,
 			1251918188,
 			1772361532,

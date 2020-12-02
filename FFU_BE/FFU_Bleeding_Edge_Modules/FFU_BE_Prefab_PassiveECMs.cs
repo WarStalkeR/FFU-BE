@@ -4,27 +4,24 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_PassiveECMs {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName.Contains("ECM 0 DIY")) return idx; idx++;
-			if (moduleName.Contains("ECM 0 terran old")) return idx; idx++;
-			if (moduleName.Contains("ECM 0 ancient")) return idx; idx++;
-			if (moduleName.Contains("ECM 03 insectoid")) return idx; idx++;
-			if (moduleName.Contains("ECM 01 terran")) return idx; idx++;
-			if (moduleName.Contains("ECM 03 biotech")) return idx; idx++;
-			if (moduleName.Contains("ECM 02 terran")) return idx; idx++;
-			if (moduleName.Contains("ECM 04 spideraa")) return idx; idx++;
-			if (moduleName.Contains("ECM 03 terran")) return idx; idx++;
+			if (moduleID == 236853983) return idx; idx++; //ECM 0 DIY
+			if (moduleID == 1717910481) return idx; idx++; //ECM 0 terran old
+			if (moduleID == 1078640904) return idx; idx++; //ECM 0 ancient
+			if (moduleID == 178792571) return idx; idx++; //ECM 03 insectoid
+			if (moduleID == 738383848) return idx; idx++; //ECM 01 terran
+			if (moduleID == 1804253033) return idx; idx++; //ECM 03 biotech
+			if (moduleID == 738383845) return idx; idx++; //ECM 02 terran
+			if (moduleID == 1754358032) return idx; idx++; //ECM 04 spideraa
+			if (moduleID == 738383846) return idx; idx++; //ECM 03 terran
 			return idx + 100;
 		}
 		public static void UpdateCountermeasureModule(ShipModule shipModule, bool initItemData) {
 			string colorCounter = "4dd2ff";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "ECM 0 DIY":
+			switch (shipModule.PrefabId) {
+				case 236853983: //ECM 0 DIY
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -8.0f);
 				shipModule.displayName = "Makeshift <color=#" + colorCounter + "ff>ECM Array</color>";
@@ -35,7 +32,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 2;
 				shipModule_maxHealth = 15;
 				break;
-				case "ECM 0 terran old":
+				case 1717910481: //ECM 0 terran old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -8.2f);
 				shipModule.displayName = "Ancient <color=#" + colorCounter + "ff>ECM Array</color>";
@@ -46,7 +43,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 3;
 				shipModule_maxHealth = 18;
 				break;
-				case "ECM 0 ancient":
+				case 1078640904: //ECM 0 ancient
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -8.4f);
 				shipModule.displayName = "Imperial <color=#" + colorCounter + "ff>ECM Array</color>";
@@ -57,7 +54,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 4;
 				shipModule_maxHealth = 20;
 				break;
-				case "ECM 03 insectoid":
+				case 178792571: //ECM 03 insectoid
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -8.6f);
 				shipModule.displayName = "Velocity <color=#" + colorCounter + "ff>ECM Array</color>";
@@ -68,7 +65,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 5;
 				shipModule_maxHealth = 22;
 				break;
-				case "ECM 01 terran":
+				case 738383848: //ECM 01 terran
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -8.8f);
 				shipModule.displayName = "Reflector <color=#" + colorCounter + "ff>ECM Array</color>";
@@ -79,7 +76,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 6;
 				shipModule_maxHealth = 24;
 				break;
-				case "ECM 03 biotech":
+				case 1804253033: //ECM 03 biotech
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -9.0f);
 				shipModule.displayName = "Bionic <color=#" + colorCounter + "ff>ECM Array</color>";
@@ -90,7 +87,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 7;
 				shipModule_maxHealth = 27;
 				break;
-				case "ECM 02 terran":
+				case 738383845: //ECM 02 terran
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -9.2f);
 				shipModule.displayName = "Prismatic <color=#" + colorCounter + "ff>ECM Array</color>";
@@ -101,7 +98,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 8;
 				shipModule_maxHealth = 31;
 				break;
-				case "ECM 04 spideraa":
+				case 1754358032: //ECM 04 spideraa
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -9.4f);
 				shipModule.displayName = "Repulsor <color=#" + colorCounter + "ff>ECM Array</color>";
@@ -112,7 +109,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 9;
 				shipModule_maxHealth = 35;
 				break;
-				case "ECM 03 terran":
+				case 738383846: //ECM 03 terran
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -9.6f);
 				shipModule.displayName = "Quantum <color=#" + colorCounter + "ff>ECM Array</color>";
@@ -123,7 +120,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.maxHealthAdd = 10;
 				shipModule_maxHealth = 40;
 				break;
-				case "ECM 02.2 ancient artifact, slicer dicer":
+				case 355331213: //ECM 02.2 ancient artifact, slicer dicer
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, -9.0f);
 				shipModule.displayName = "ECM Array Artifact";
 				shipModule_maxHealth = 50;

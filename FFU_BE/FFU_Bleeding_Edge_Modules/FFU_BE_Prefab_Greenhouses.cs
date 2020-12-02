@@ -4,24 +4,21 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Greenhouses {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName == "garden 1 DIY") return idx; idx++;
-			if (moduleName == "garden 2 minigrow") return idx; idx++;
-			if (moduleName == "garden 3 shroomery") return idx; idx++;
-			if (moduleName == "garden 5 greenhouse") return idx; idx++;
-			if (moduleName == "garden 4 greenhouse") return idx; idx++;
-			if (moduleName == "garden 6 synthethics") return idx; idx++;
+			if (moduleID == 1902866107) return idx; idx++; //garden 1 DIY
+			if (moduleID == 1785710223) return idx; idx++; //garden 2 minigrow
+			if (moduleID == 1832274586) return idx; idx++; //garden 3 shroomery
+			if (moduleID == 1579035116) return idx; idx++; //garden 5 greenhouse
+			if (moduleID == 728608876) return idx; idx++; //garden 4 greenhouse
+			if (moduleID == 737359377) return idx; idx++; //garden 6 synthethics
 			return idx + 100;
 		}
 		public static void UpdateGreenhouseModule(ShipModule shipModule, bool initItemData) {
 			string colorGarden = "4dff4d";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "garden 1 DIY":
+			switch (shipModule.PrefabId) {
+				case 1902866107: //garden 1 DIY
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Makeshift <color=#" + colorGarden + "ff>Greenery</color>";
@@ -31,7 +28,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 5;
 				break;
-				case "garden 2 minigrow":
+				case 1785710223: //garden 2 minigrow
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Standard <color=#" + colorGarden + "ff>Greenery</color>";
@@ -41,7 +38,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 1;
 				shipModule_maxHealth = 10;
 				break;
-				case "garden 3 shroomery":
+				case 1832274586: //garden 3 shroomery
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Mushroom <color=#" + colorGarden + "ff>Hothouse</color>";
@@ -51,7 +48,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 15;
 				break;
-				case "garden 5 greenhouse":
+				case 1579035116: //garden 5 greenhouse
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Farmland <color=#" + colorGarden + "ff>Greenhouse</color>";
@@ -61,7 +58,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 20;
 				break;
-				case "garden 4 greenhouse":
+				case 728608876: //garden 4 greenhouse
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.6f);
 				shipModule.displayName = "Replicator <color=#" + colorGarden + "ff>Greenhouse</color>";
@@ -71,7 +68,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 20;
 				break;
-				case "garden 6 synthethics":
+				case 737359377: //garden 6 synthethics
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
 				shipModule.displayName = "Exogenetic <color=#" + colorGarden + "ff>Greenhouse</color>";

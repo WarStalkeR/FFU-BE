@@ -4,34 +4,31 @@ using UnityEngine;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Prefab_Sensors {
-		public static int SortModules(string moduleName) {
+		public static int SortModules(int moduleID) {
 			int idx = 0;
-			if (moduleName.Contains("sensor 0-C diy")) return idx; idx++;
-			if (moduleName.Contains("sensor 1-L DIY")) return idx; idx++;
-			if (moduleName.Contains("sensor 2 saucer old")) return idx; idx++;
-			if (moduleName.Contains("sensor 3 L terran simple")) return idx; idx++;
-			if (moduleName.Contains("sensor 3 planty")) return idx; idx++;
-			if (moduleName.Contains("sensor 4 saucer new")) return idx; idx++;
-			if (moduleName.Contains("sensor 5 EB saucer s1")) return idx; idx++;
-			if (moduleName.Contains("sensor 8 sunpanel old s1")) return idx; idx++;
-			if (moduleName.Contains("sensor 5 futu saucer s1")) return idx; idx++;
-			if (moduleName.Contains("sensor 10 terran s2")) return idx; idx++;
-			if (moduleName.Contains("sensor 11 blue adv s2")) return idx; idx++;
-			if (moduleName.Contains("sensor 11 sophisiticated s2")) return idx; idx++;
-			if (moduleName.Contains("sensor 12 spideraa")) return idx; idx++;
-			if (moduleName.Contains("sensor 11 seashell s2")) return idx; idx++;
-			if (moduleName.Contains("sensor 10 tiger")) return idx; idx++;
-			if (moduleName.Contains("sensor 9 sunpanel new s2")) return idx; idx++;
+			if (moduleID == 930742757) return idx; idx++; //sensor 0-C diy
+			if (moduleID == 2117018739) return idx; idx++; //sensor 1-L DIY
+			if (moduleID == 948524677) return idx; idx++; //sensor 2 saucer old
+			if (moduleID == 1084722255) return idx; idx++; //sensor 3 L terran simple
+			if (moduleID == 1995820130) return idx; idx++; //sensor 3 planty
+			if (moduleID == 2063928716) return idx; idx++; //sensor 4 saucer new
+			if (moduleID == 1536566470) return idx; idx++; //sensor 5 EB saucer s1
+			if (moduleID == 1451617742) return idx; idx++; //sensor 8 sunpanel old s1
+			if (moduleID == 1241054343) return idx; idx++; //sensor 5 futu saucer s1
+			if (moduleID == 171954196) return idx; idx++; //sensor 10 terran s2
+			if (moduleID == 204974912) return idx; idx++; //sensor 11 blue adv s2
+			if (moduleID == 680853891) return idx; idx++; //sensor 11 sophisiticated s2
+			if (moduleID == 588186350) return idx; idx++; //sensor 12 spideraa
+			if (moduleID == 524731680) return idx; idx++; //sensor 11 seashell s2
+			if (moduleID == 160051026) return idx; idx++; //sensor 10 tiger
+			if (moduleID == 171954197) return idx; idx++; //sensor 9 sunpanel new s2
 			return idx + 100;
 		}
 		public static void UpdateSensorModule(ShipModule shipModule, bool initItemData) {
 			string colorSensor = "4dff79";
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
-			var refModuleName = string.Empty;
-			if (!initItemData) refModuleName = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == shipModule.PrefabId)?.name;
-			if (string.IsNullOrEmpty(refModuleName)) refModuleName = Core.GetOriginalName(shipModule.name);
-			switch (refModuleName) {
-				case "sensor 0-C diy":
+			switch (shipModule.PrefabId) {
+				case 930742757: //sensor 0-C diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Makeshift <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -42,7 +39,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 5;
 				break;
-				case "sensor 1-L DIY":
+				case 2117018739: //sensor 1-L DIY
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Salvaged <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -53,7 +50,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 6;
 				break;
-				case "sensor 2 saucer old":
+				case 948524677: //sensor 2 saucer old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Ancient <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -64,7 +61,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 7;
 				break;
-				case "sensor 3 L terran simple":
+				case 1084722255: //sensor 3 L terran simple
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
 				shipModule.displayName = "Civilian <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -75,7 +72,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 8;
 				break;
-				case "sensor 3 planty":
+				case 1995820130: //sensor 3 planty
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Bionic <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -86,7 +83,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 9;
 				break;
-				case "sensor 4 saucer new":
+				case 2063928716: //sensor 4 saucer new
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Modern <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -97,7 +94,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 10;
 				break;
-				case "sensor 5 EB saucer s1":
+				case 1536566470: //sensor 5 EB saucer s1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.7f);
 				shipModule.displayName = "Commercial <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -110,7 +107,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 11;
 				break;
-				case "sensor 8 sunpanel old s1":
+				case 1451617742: //sensor 8 sunpanel old s1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.7f);
 				shipModule.displayName = "Auspex <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -123,7 +120,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 12;
 				break;
-				case "sensor 5 futu saucer s1":
+				case 1241054343: //sensor 5 futu saucer s1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Refraction <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -136,7 +133,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 7;
 				shipModule_maxHealth = 14;
 				break;
-				case "sensor 10 terran s2":
+				case 171954196: //sensor 10 terran s2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Tempest <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -149,7 +146,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 7;
 				shipModule_maxHealth = 16;
 				break;
-				case "sensor 11 blue adv s2":
+				case 204974912: //sensor 11 blue adv s2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Exotic <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -162,7 +159,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 18;
 				break;
-				case "sensor 11 sophisiticated s2":
+				case 680853891: //sensor 11 sophisiticated s2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
 				shipModule.displayName = "Multi-Spectrum <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -175,7 +172,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 20;
 				break;
-				case "sensor 12 spideraa":
+				case 588186350: //sensor 12 spideraa
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Repulsor <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -188,7 +185,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 9;
 				shipModule_maxHealth = 23;
 				break;
-				case "sensor 11 seashell s2":
+				case 524731680: //sensor 11 seashell s2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Subspace <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -201,7 +198,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 9;
 				shipModule_maxHealth = 26;
 				break;
-				case "sensor 10 tiger":
+				case 160051026: //sensor 10 tiger
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.3f);
 				shipModule.displayName = "Multi-Wave <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -214,7 +211,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 30;
 				break;
-				case "sensor 9 sunpanel new s2":
+				case 171954197: //sensor 9 sunpanel new s2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 9, 10);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.3f);
 				shipModule.displayName = "Multi-Phased <color=#" + colorSensor + "ff>Sensor Array</color>";
@@ -227,7 +224,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 10;
 				shipModule_maxHealth = 35;
 				break;
-				case "long range sensor 2 old tutorial":
+				case 168562189: //long range sensor 2 old tutorial
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Damaged <color=#" + colorSensor + "ff>Sensor Array</color>";
 				shipModule.description = "This sensor array has been though a lot. Amount of impacts and damage it received isn't any less then hull of any long serving border patrol battleship.";
