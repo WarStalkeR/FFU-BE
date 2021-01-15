@@ -48,15 +48,13 @@ namespace FFU_Bleeding_Edge {
 				shipModule.PointDefence.reloadInterval = 1.9f;
 				shipModule.PointDefence.ProjectileOrBeamPrefab.projectileDmg = 1;
 				shipModule.PointDefence.ProjectileOrBeamPrefab.lifetime = 0.3f;
-				shipModule.asteroidDeflectionPercentAdd = FFU_BE_Defs.flagDLC_OldEnm ? 8 : 10;
+				shipModule.asteroidDeflectionPercentAdd = ProcessDLC.GetAsteroidDeflection(shipModule.PrefabId);
 				shipModule.powerConsumed = 1;
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 20;
 				break;
 				case 106454213: //3 Rat PD 2
-				if (initItemData) {
-					if (FFU_BE_Defs.flagDLC_OldEnm) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
-					else FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5); }
+				if (initItemData) ProcessDLC.ApplySectorViablility(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Imperial <color=#" + colorPointDef + "ff>Standard CIWS</color>";
 				shipModule.description = "Close-in weapon system that was developed by Rat Empire. Can intercept missiles, projectiles, asteroids and boarding pods at mediocre, but still lacking as point defense.";
@@ -65,7 +63,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.PointDefence.reloadInterval = 1.8f;
 				shipModule.PointDefence.ProjectileOrBeamPrefab.projectileDmg = 1;
 				shipModule.PointDefence.ProjectileOrBeamPrefab.lifetime = 0.3f;
-				shipModule.asteroidDeflectionPercentAdd = FFU_BE_Defs.flagDLC_OldEnm ? 10 : 12;
+				shipModule.asteroidDeflectionPercentAdd = ProcessDLC.GetAsteroidDeflection(shipModule.PrefabId);
 				shipModule.powerConsumed = 1;
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 25;
@@ -80,15 +78,13 @@ namespace FFU_Bleeding_Edge {
 				shipModule.PointDefence.reloadInterval = 1.65f;
 				shipModule.PointDefence.ProjectileOrBeamPrefab.projectileDmg = 2;
 				shipModule.PointDefence.ProjectileOrBeamPrefab.lifetime = 0.2f;
-				shipModule.asteroidDeflectionPercentAdd = FFU_BE_Defs.flagDLC_OldEnm ? 12 : 15;
+				shipModule.asteroidDeflectionPercentAdd = ProcessDLC.GetAsteroidDeflection(shipModule.PrefabId);
 				shipModule.powerConsumed = 2;
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 30;
 				break;
 				case 583909453: //4 Insectoid PD
-				if (initItemData) {
-					if (FFU_BE_Defs.flagDLC_OldEnm) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6);
-					else FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7); }
+				if (initItemData) ProcessDLC.ApplySectorViablility(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Marauder <color=#" + colorPointDef + "ff>Advanced CIWS</color>";
 				shipModule.description = "Close-in weapon system that is used by various unlawful organizations. Can intercept missiles, projectiles, asteroids and boarding pods at decent range with good rate.";
@@ -97,41 +93,37 @@ namespace FFU_Bleeding_Edge {
 				shipModule.PointDefence.reloadInterval = 1.5f;
 				shipModule.PointDefence.ProjectileOrBeamPrefab.projectileDmg = 2;
 				shipModule.PointDefence.ProjectileOrBeamPrefab.lifetime = 0.2f;
-				shipModule.asteroidDeflectionPercentAdd = FFU_BE_Defs.flagDLC_OldEnm ? 15 : 18;
+				shipModule.asteroidDeflectionPercentAdd = ProcessDLC.GetAsteroidDeflection(shipModule.PrefabId);
 				shipModule.powerConsumed = 2;
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 35;
 				break;
 				case 1468502746: //5 Human PD
-				if (initItemData) {
-					if (FFU_BE_Defs.flagDLC_OldEnm) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
-					else FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8); }
-				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, FFU_BE_Defs.flagDLC_OldEnm ? 1.8f : 1.6f);
+				if (initItemData) ProcessDLC.ApplySectorViablility(shipModule.PrefabId);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, ProcessDLC.GetEmission(shipModule.PrefabId));
 				shipModule.displayName = "Phalanx <color=#" + colorPointDef + "ff>Advanced CIWS</color>";
 				shipModule.description = "Military issued close-in weapon system for ships at intensive conflict zones. Can intercept missiles, projectiles, asteroids and boarding pods at good range with great rate.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 1500f, synthetics = 1000f, exotics = 5f };
 				shipModule.PointDefence.coverRadius = 18.0f;
-				shipModule.PointDefence.reloadInterval = FFU_BE_Defs.flagDLC_OldEnm ? 1.4f : 1.35f;
-				shipModule.PointDefence.ProjectileOrBeamPrefab.projectileDmg = FFU_BE_Defs.flagDLC_OldEnm ? 3 : 2;
+				shipModule.PointDefence.reloadInterval = ProcessDLC.GetReloadInterval(shipModule.PrefabId);
+				shipModule.PointDefence.ProjectileOrBeamPrefab.projectileDmg = ProcessDLC.GetProjectileDamage(shipModule.PrefabId);
 				shipModule.PointDefence.ProjectileOrBeamPrefab.lifetime = 0.2f;
-				shipModule.asteroidDeflectionPercentAdd = FFU_BE_Defs.flagDLC_OldEnm ? 18 : 21;
-				shipModule.powerConsumed = FFU_BE_Defs.flagDLC_OldEnm ? 3 : 2;
+				shipModule.asteroidDeflectionPercentAdd = ProcessDLC.GetAsteroidDeflection(shipModule.PrefabId);
+				shipModule.powerConsumed = ProcessDLC.GetPowerConsumption(shipModule.PrefabId);
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 40;
 				break;
 				case 1381757148: //7 Red PD
-				if (initItemData) {
-					if (FFU_BE_Defs.flagDLC_OldEnm) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
-					else FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9); }
+				if (initItemData) ProcessDLC.ApplySectorViablility(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Commercial <color=#" + colorPointDef + "ff>Tactical CIWS</color>";
 				shipModule.description = "A close-in weapon system that was developed for sake of profit and is sold to anybody who can afford it. Can intercept incoming targets at good range with high rate.";
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1000f, metals = 2000f, synthetics = 1500f, exotics = 7f };
-				shipModule.PointDefence.coverRadius = FFU_BE_Defs.flagDLC_OldEnm ? 20.0f : 21.0f;
-				shipModule.PointDefence.reloadInterval = FFU_BE_Defs.flagDLC_OldEnm ? 1.3f : 1.2f;
+				shipModule.PointDefence.coverRadius = ProcessDLC.GetCoverRadius(shipModule.PrefabId);
+				shipModule.PointDefence.reloadInterval = ProcessDLC.GetReloadInterval(shipModule.PrefabId);
 				shipModule.PointDefence.ProjectileOrBeamPrefab.projectileDmg = 3;
-				shipModule.PointDefence.ProjectileOrBeamPrefab.lifetime = FFU_BE_Defs.flagDLC_OldEnm ? 0.2f : 0.1f;
-				shipModule.asteroidDeflectionPercentAdd = FFU_BE_Defs.flagDLC_OldEnm ? 21 : 25;
+				shipModule.PointDefence.ProjectileOrBeamPrefab.lifetime = ProcessDLC.GetProjectileLifetime(shipModule.PrefabId);
+				shipModule.asteroidDeflectionPercentAdd = ProcessDLC.GetAsteroidDeflection(shipModule.PrefabId);
 				shipModule.powerConsumed = 3;
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 45;
@@ -179,20 +171,17 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 35;
 				break;
 				case 938711464: //2 Tiger PD
-				if (initItemData) {
-					if (FFU_BE_Defs.flagDLC_OldEnm) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 9, 10);
-					else FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10); }
-				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, FFU_BE_Defs.flagDLC_OldEnm ? 2.2f : 1.8f);
+				if (initItemData) ProcessDLC.ApplySectorViablility(shipModule.PrefabId);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, ProcessDLC.GetEmission(shipModule.PrefabId));
 				shipModule.displayName = "Iron Dome <color=#" + colorPointDef + "ff>Tactical CIWS</color>";
 				shipModule.description = "Best close-in weapon system that used on ships participating in most dangerous expeditions. Can perfectly intercept missiles, projectiles, asteroids and boarding pods.";
-				if (FFU_BE_Defs.flagDLC_OldEnm) shipModule.craftCost = new ResourceValueGroup { fuel = 2500f, metals = 3500f, synthetics = 3000f, exotics = 20f };
-				else shipModule.craftCost = new ResourceValueGroup { fuel = 1500f, metals = 2750f, synthetics = 2250f, exotics = 10f };
+				shipModule.craftCost = ProcessDLC.GetCraftingCost(shipModule.PrefabId);
 				shipModule.PointDefence.coverRadius = 25.0f;
 				shipModule.PointDefence.reloadInterval = 1.0f;
-				shipModule.PointDefence.ProjectileOrBeamPrefab.projectileDmg = FFU_BE_Defs.flagDLC_OldEnm ? 5 : 3;
+				shipModule.PointDefence.ProjectileOrBeamPrefab.projectileDmg = ProcessDLC.GetProjectileDamage(shipModule.PrefabId);
 				shipModule.PointDefence.ProjectileOrBeamPrefab.lifetime = 0.1f;
 				shipModule.asteroidDeflectionPercentAdd = 30;
-				shipModule.powerConsumed = FFU_BE_Defs.flagDLC_OldEnm ? 5 : 3;
+				shipModule.powerConsumed = ProcessDLC.GetPowerConsumption(shipModule.PrefabId);
 				shipModule.maxHealthAdd = 0;
 				shipModule_maxHealth = 50;
 				break;
@@ -208,6 +197,123 @@ namespace FFU_Bleeding_Edge {
 			shipModule.craftCost.exotics *= 2;
 			AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = shipModule_maxHealth;
 			FFU_BE_Mod_Modules.UpdateCommonStats(shipModule);
+		}
+		public class ProcessDLC {
+			public static void ApplySectorViablility(int moduleId) {
+				switch (moduleId) {
+					case 106454213: //3 Rat PD 2
+					if (FFU_BE_Defs.flagDLC_OldEnm) FFU_BE_Defs.SetViableForSectors(moduleId, 3, 4);
+					else FFU_BE_Defs.SetViableForSectors(moduleId, 3, 4, 5);
+					break;
+					case 583909453: //4 Insectoid PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) FFU_BE_Defs.SetViableForSectors(moduleId, 5, 6);
+					else FFU_BE_Defs.SetViableForSectors(moduleId, 5, 6, 7);
+					break;
+					case 1468502746: //5 Human PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) FFU_BE_Defs.SetViableForSectors(moduleId, 5, 6, 7);
+					else FFU_BE_Defs.SetViableForSectors(moduleId, 6, 7, 8);
+					break;
+					case 1381757148: //7 Red PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) FFU_BE_Defs.SetViableForSectors(moduleId, 6, 7, 8);
+					else FFU_BE_Defs.SetViableForSectors(moduleId, 7, 8, 9);
+					break;
+					case 938711464: //2 Tiger PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) FFU_BE_Defs.SetViableForSectors(moduleId, 9, 10);
+					else FFU_BE_Defs.SetViableForSectors(moduleId, 8, 9, 10);
+					break;
+				}
+			}
+			public static ResourceValueGroup GetCraftingCost(int moduleId) {
+				switch (moduleId) {
+					case 938711464: //2 Tiger PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return new ResourceValueGroup { fuel = 2500f, metals = 3500f, synthetics = 3000f, exotics = 20f };
+					else return new ResourceValueGroup { fuel = 1500f, metals = 2750f, synthetics = 2250f, exotics = 10f };
+					default: return new ResourceValueGroup { fuel = 1000f, metals = 1000f, synthetics = 1000f, exotics = 10f };
+				}
+			}
+			public static float GetCoverRadius(int moduleId) {
+				switch (moduleId) {
+					case 1381757148: //7 Red PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 20f;
+					else return 21f;
+					default: return 10f;
+				}
+			}
+			public static float GetReloadInterval(int moduleId) {
+				switch (moduleId) {
+					case 1468502746: //5 Human PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 1.4f;
+					else return 1.35f;
+					case 1381757148: //7 Red PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 1.3f;
+					else return 1.2f;
+					default: return 2.5f;
+				}
+			}
+			public static int GetProjectileDamage(int moduleId) {
+				switch (moduleId) {
+					case 1468502746: //5 Human PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 3;
+					else return 2;
+					case 938711464: //2 Tiger PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 5;
+					else return 3;
+					default: return 1;
+				}
+			}
+			public static float GetProjectileLifetime(int moduleId) {
+				switch (moduleId) {
+					case 1381757148: //7 Red PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 0.2f;
+					else return 0.1f;
+					default: return 0.5f;
+				}
+			}
+			public static int GetAsteroidDeflection(int moduleId) {
+				switch (moduleId) {
+					case 687853920: //1 Rat PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 8;
+					else return 10;
+					case 106454213: //3 Rat PD 2
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 10;
+					else return 12;
+					case 804479599: //6 Squid PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 12;
+					else return 15;
+					case 583909453: //4 Insectoid PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 15;
+					else return 18;
+					case 1468502746: //5 Human PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 18;
+					else return 21;
+					case 1381757148: //7 Red PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 21;
+					else return 25;
+					default: return 5;
+				}
+			}
+			public static int GetPowerConsumption(int moduleId) {
+				switch (moduleId) {
+					case 1468502746: //5 Human PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 3;
+					else return 2;
+					case 938711464: //2 Tiger PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 5;
+					else return 3;
+					default: return 1;
+				}
+			}
+			public static float GetEmission(int moduleId) {
+				switch (moduleId) {
+					case 1468502746: //5 Human PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 1.8f;
+					else return 1.6f;
+					case 938711464: //2 Tiger PD
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 2.2f;
+					else return 1.8f;
+					default: return 1f;
+				}
+			}
 		}
 	}
 }

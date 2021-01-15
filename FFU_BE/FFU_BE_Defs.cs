@@ -1181,7 +1181,7 @@ namespace FFU_Bleeding_Edge {
 			}
 		}
 		public static bool IsNotAllowedOrDecoy(ShipModule shipModule) {
-			return !IsAllowedModuleCategory(shipModule) || IsCacheModule(shipModule) || shipModule.name.ToLower().Contains("decoy");
+			return !IsAllowedModuleCategory(shipModule) || IsCacheModule(shipModule) || (shipModule.name.ToLower().Contains("decoy") && shipModule.type != ShipModule.Type.Weapon_Nuke);
 		}
 		public static bool IsAllowedModuleCategory(ShipModule shipModule) {
 			if (IsCacheModule(shipModule)) return true;
