@@ -43,6 +43,26 @@ namespace RST.UI {
 			}
 		}
 	}
+	public class patch_GameLinksUI : GameLinksUI {
+		private extern void orig_Start();
+		private void Start() {
+			orig_Start();
+			versionText.transform.parent.parent.GetChild(1).GetComponent<Text>().text = $"Modification Loaded";
+			versionText.transform.parent.parent.GetChild(3).GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetComponent<Text>().text = "If you see this, it " +
+			"means that <color=orange>Fight For Universe: Bleeding Edge</color> mod for <color=#4fd376>Shortest Trip to Earth</color> loaded successfully and you " +
+			"can go full IDDQD, because original amount of <color=#cc0000>death and desperation</color> was not enough. Developed by <color=orange>WarStalkeR</color>. " +
+			"Don't forget to read updated game manual (<color=orange>F1</color> hotkey) to find out about completely new features modded into the game! Enjoy!";
+		}
+		[MonoModReplace] public static string ReplaceVersionPlaceholders(string template) {
+			return $"FFU: Bleeding Edge v{FFU_BE_Defs.modVersion}";
+		}
+	}
+	public class patch_PersistentUI: PersistentUI {
+		[MonoModReplace] private void OnEnable() {
+			versionText.text = $"FFU:BE v{FFU_BE_Defs.modVersion}";
+			versionText.rectTransform.sizeDelta = new Vector2 { x = 160f, y = 16f };
+		}
+	}
 }
 
 namespace RST.UI
@@ -67,9 +87,8 @@ namespace RST.UI
 			yield return null;
 			yield return ScreenFader.FadeOut();
 			if (!WelcomeScreenShown) {
-				welcomeGroup.SetActive(!FFU_BE_Defs.advancedWelcomePopup);
-				eaWelcomeGroup.SetActive(FFU_BE_Defs.advancedWelcomePopup);
-				eaResetConfirmGroup.SetActive(false);
+				welcomeGroup.SetActive(true);
+				ProcessInitConfig();
 				yield return ScreenFader.FadeIn();
 				while (!StartWaitingForGameLoad) yield return null;
 				WelcomeScreenShown = true;
@@ -79,23 +98,32 @@ namespace RST.UI
 			SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
 			Destroy(gameObject);
 		}
-		[MonoModReplace] private void ResetYesClicked() {
-			eaResetConfirmGroup.SetActive(false);
-			SavegameManager.DeleteAllSavedDataExceptProfileUID();
-			Debug.LogWarning("Deleted all saved data and preferences");
-			if (FFU_BE_Defs.restartUnlocksEverything) {
-				Debug.LogWarning("All ships and perks are unlocked!");
-				ES2.Save(FFU_BE_Base.allPerksList, "permanent.es2?tag=unlockedItemIds");
-			} else {
-				Debug.LogWarning("All available player ships are unlocked!");
-				ES2.Save(FFU_BE_Base.allShipsList, "permanent.es2?tag=unlockedItemIds");
+		private void ProcessInitConfig() {
+			IniFile modConfig = new IniFile();
+			string modConfigPath = FFU_BE_Base.appDataPath + FFU_BE_Base.modConfDir + FFU_BE_Base.modConfFile;
+			modConfig.Load(modConfigPath);
+			if (modConfig["InitConfig"]["fullGameReset"].ToBool(false)) {
+				Debug.LogWarning("All game save files were removed.");
+				SavegameManager.DeleteAllSavedDataExceptProfileUID();
+				if (modConfig["InitConfig"]["unlockShips"].ToBool(false)) {
+					if (modConfig["InitConfig"]["unlockPerks"].ToBool(false)) {
+						Debug.LogWarning("All ships and perks are unlocked!");
+						ES2.Save(FFU_BE_Base.allPerksList, "permanent.es2?tag=unlockedItemIds");
+					} else {
+						Debug.LogWarning("All available player ships are unlocked!");
+						ES2.Save(FFU_BE_Base.allShipsList, "permanent.es2?tag=unlockedItemIds");
+					}
+				}
 			}
-			StartWaitingForGameLoad = true;
-		}
-		[MonoModReplace] private void DiscardPermanentlyClicked() {
-			Debug.LogWarning("Top tier module crafting licenses granted!");
-			FFU_BE_Defs.goFullASMD = true;
-			StartWaitingForGameLoad = true;
+			if (modConfig["InitConfig"]["grantTopTech"].ToBool(false)) {
+				Debug.LogWarning("Top tier module crafting licenses granted!");
+				FFU_BE_Defs.goFullASMD = true;
+			}
+			modConfig["InitConfig"]["unlockShips"] = false;
+			modConfig["InitConfig"]["unlockPerks"] = false;
+			modConfig["InitConfig"]["grantTopTech"] = false;
+			modConfig["InitConfig"]["fullGameReset"] = false;
+			modConfig.Save(modConfigPath);
 		}
 	}
 }

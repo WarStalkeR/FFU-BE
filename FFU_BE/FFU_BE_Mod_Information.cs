@@ -39,8 +39,8 @@ namespace FFU_Bleeding_Edge {
 		public static string GetSelectedModuleExactData(ShipModule shipModule, bool isInst = true, bool debugInfo = false, bool showDesc = true, bool hideUnique = true, bool showColors = true) {
 			string moduleData = null;
 			string instanceText = null;
-			if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += $"{Core.TT("Module Identifier")}: {shipModule.name}\n";
-			if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += $"{Core.TT("Module Prefab ID")}: {shipModule.PrefabId}\n";
+			if (FFU_BE_Defs.allModuleProps || debugInfo) moduleData += $"{Core.TT("Prefab Name")}: {shipModule.name}\n";
+			moduleData += $"{Core.TT("Prefab ID")}: {shipModule.PrefabId}\n";
 			switch (shipModule.type) {
 				case ShipModule.Type.Weapon:
 				instanceText = isInst ? $"{Core.TT(GetModuleGenText(shipModule))} {Core.TT("Gen.")} " : null;
@@ -60,7 +60,7 @@ namespace FFU_Bleeding_Edge {
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel != ShootAtDamageDealer.CrewDmgLevel.None ? $"{Core.TT("Crew Hit Chance")}: {GetCrewHitChance(shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel)}\n" : null;
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel != ShootAtDamageDealer.FireChanceLevel.None ? $"{Core.TT("Fire Ignite Chance")}: {GetFireIgniteChance(shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel)}\n" : null;
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds > 0 ? $"{Core.TT("EMP Effect")}: {shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds}{Core.TT("s")}\n" : null;
-				moduleData += !shipModule.Weapon.resourcesPerShot.IsEmpty ? $"{Core.TT("Resources Per Shot")}:\n" : null;
+				moduleData += !shipModule.Weapon.resourcesPerShot.IsEmpty ? $"{Core.TT("Resources Per Salvo")}:\n" : null;
 				moduleData += shipModule.Weapon.resourcesPerShot.credits > 0 ? $" > {Core.TT("Credits")}: {shipModule.Weapon.resourcesPerShot.credits:0}\n" : null;
 				moduleData += shipModule.Weapon.resourcesPerShot.organics > 0 ? $" > {Core.TT("Organics")}: {shipModule.Weapon.resourcesPerShot.organics:0}\n" : null;
 				moduleData += shipModule.Weapon.resourcesPerShot.fuel > 0 ? $" > {Core.TT("Starfuel")}: {shipModule.Weapon.resourcesPerShot.fuel:0}\n" : null;

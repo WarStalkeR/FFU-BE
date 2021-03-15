@@ -894,7 +894,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				default:
 				if (initItemData) Debug.LogWarning($"[NEW NUKE] {FFU_BE_Mod_Information.GetSelectedModuleExactData(shipModule, false, true, false, false, false)}");
-				shipModule.displayName = "(NUKE) " + shipModule.displayName;
+				shipModule.displayName = $"(NUKE) {shipModule.displayName}";
 				break;
 			}
 			(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).speed = 0.01f;

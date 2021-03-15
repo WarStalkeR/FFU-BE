@@ -24,6 +24,9 @@ namespace FFU_Bleeding_Edge {
 		public static bool firstRun = true;
 		public static bool firstInst = true;
 		public static bool goFullASMD = false;
+		public static bool goUnlockShips = false;
+		public static bool goUnlockPerks = false;
+		public static bool goRestartGame = false;
 		public static bool debugMode = false;
 		public static bool visualDebug = false;
 		public static bool canSpawnCrew = false;
@@ -240,8 +243,6 @@ namespace FFU_Bleeding_Edge {
 		public static int weaponSelectionCount = 0;
 		public static int weaponSelectionIndex = 0;
 		//Configuration Variables
-		public static bool advancedWelcomePopup = false;
-		public static bool restartUnlocksEverything = false;
 		public static bool allModulesCraftable = false;
 		public static bool allTypesCraftable = false;
 		public static bool moduleCraftingForFree = false;
@@ -395,7 +396,7 @@ namespace FFU_Bleeding_Edge {
 				if (ES2.Exists("start.es2?tag=modDifficulty")) gameDifficulty = (Core.Difficulty)ES2.Load<int>("start.es2?tag=modDifficulty");
 				else ES2.Save(1, "start.es2?tag=modDifficulty");
 				if (goFullASMD) {
-					if (restartUnlocksEverything) ES2.Save(FFU_BE_Base.allPerksList, "permanent.es2?tag=unlockedItemIds");
+					if (goUnlockPerks) ES2.Save(FFU_BE_Base.allPerksList, "permanent.es2?tag=unlockedItemIds");
 					foreach (int moduleID in essentialTopModuleIDs) if (!discoveredModuleIDs.Contains(moduleID) &&
 							!unresearchedModuleIDs.Contains(moduleID)) discoveredModuleIDs.Add(moduleID);
 					ES2.Save(discoveredModuleIDs, "permanent.es2?tag=discoveredModuleIDs");
@@ -469,6 +470,10 @@ namespace FFU_Bleeding_Edge {
 			string colorNukeBrd = "8060ff";
 			string colorNukeStr = "ff0000";
 			foreach (Text txt in Resources.FindObjectsOfTypeAll<Text>()) {
+				if (txt.name.Contains("Continued development")) txt.text = $"FFU: Bleeding Edge v{modVersion}";
+				if (txt.name.Contains("After many good years of work")) txt.text = "If you see this message, it means that you've installed " +
+					"<color=orange>Fight For Universe: Bleeding Edge</color> mod for <color=#4fd376>Shortest Trip to Earth</color>, because original " +
+					"amount of <color=#cc0000>death and desperation</color> was not enough and you decided to go full IDDQD.";
 				if (txt.name.Contains("WeaponIgnoresShieldValue")) txt.text = "Shield Bypass";
 				if (txt.name.Contains("WeaponNeverDeflectsValue")) txt.text = "Deflect Ignore";
 				if (txt.name.Contains("WeaponTracksTargetValue")) txt.text = "<color=lime>Tracks Target</color>";
@@ -858,7 +863,7 @@ namespace FFU_Bleeding_Edge {
 				if (txt.text.ToLower().Contains("start game")) txt.text = "ENTER WORLD OF PAIN";
 				if (txt.text.ToLower().Contains("discard this offer permanently")) txt.text = "I HAVE ASMD SHOCK RIFLE";
 				if (txt.text.ToLower().Contains("reset progress & unlock all ships")) txt.text = "HARD RESET + IDKFA";
-				if (txt.text.ToLower().Contains("yes, reset progress and unlock all ships")) txt.text = "TAKE THE " + (restartUnlocksEverything ? "RED" : "BLUE") + " PILL";
+				if (txt.text.ToLower().Contains("yes, reset progress and unlock all ships")) txt.text = "TAKE THE " + (goUnlockPerks ? "RED" : "BLUE") + " PILL";
 				if (txt.text.ToLower().Contains("visit the steam forums if you have questions"))
 					txt.text = "If you see this message, it means that you've installed <color=orange>Fight For Universe: Bleeding Edge</color> " +
 					"mod for <color=#4fd376>Shortest Trip to Earth</color>, because original amount of <color=#cc0000>death and desperation</color> " +

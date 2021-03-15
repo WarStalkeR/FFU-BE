@@ -10,6 +10,8 @@ using System.Linq;
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Base {
 		public static readonly string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\LocalLow\Interactive Fate\Shortest Trip To Earth\";
+		public static readonly string modConfDir = @"ModsConf\";
+		public static readonly string modConfFile = @"FFU_Bleeding_Edge.ini";
 		private static readonly string[] shipEntries = { "Tigerfish", "NukeRunner", "RogueRat", "Exception", "Weirdship", "EasyTiger", "Atlas", "Roundship", "BattleTiger", "Engiship", "Bluestar", "Gardenship", "Endurance" };
 		private static int GetShipPrefabID(string shipType) {
 			switch (shipType) {
@@ -49,75 +51,72 @@ namespace FFU_Bleeding_Edge {
 		}
 		public static void LoadModConfiguration() {
 			if (!string.IsNullOrEmpty(appDataPath)) {
-				string modConfDir = @"ModsConf\";
-				string modConfFile = @"FFU_Bleeding_Edge.ini";
 				Debug.LogWarning("Initializing mod configuration for Fight For Universe: Bleeding Edge v" + FFU_BE_Defs.modVersion);
 				if (!Directory.Exists(appDataPath + modConfDir)) Directory.CreateDirectory(appDataPath + modConfDir);
 				if (File.Exists(appDataPath + modConfDir + modConfFile)) {
 					IniFile modConfig = new IniFile();
 					modConfig.Load(appDataPath + modConfDir + modConfFile);
-					string modConfigLog = "Loading mod configuration from " + appDataPath + modConfDir + modConfFile;
-					if (string.IsNullOrEmpty(modConfig["InitConfig"]["modVersion"].Value) || modConfig["InitConfig"]["modVersion"].ToString() != FFU_BE_Defs.modVersion) { CreateModConfiguration(modConfDir, modConfFile); return; }
-					if (modConfig["Settings"]["advancedWelcomePopup"].TryConvertBool(out FFU_BE_Defs.advancedWelcomePopup)) modConfigLog += "\n > " + "Property \"advancedWelcomePopup\" loaded with value: " + FFU_BE_Defs.advancedWelcomePopup.ToString();
-					else { FFU_BE_Defs.advancedWelcomePopup = false; modConfigLog += "\n > " + "Property \"advancedWelcomePopup\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.advancedWelcomePopup.ToString(); }
-					if (modConfig["Settings"]["restartUnlocksEverything"].TryConvertBool(out FFU_BE_Defs.restartUnlocksEverything)) modConfigLog += "\n > " + "Property \"restartUnlocksEverything\" loaded with value: " + FFU_BE_Defs.restartUnlocksEverything.ToString();
-					else { FFU_BE_Defs.restartUnlocksEverything = false; modConfigLog += "\n > " + "Property \"restartUnlocksEverything\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.restartUnlocksEverything.ToString(); }
-					if (modConfig["Settings"]["allModulesCraftable"].TryConvertBool(out FFU_BE_Defs.allModulesCraftable)) modConfigLog += "\n > " + "Property \"allModulesCraftable\" loaded with value: " + FFU_BE_Defs.allModulesCraftable.ToString();
-					else { FFU_BE_Defs.allModulesCraftable = false; modConfigLog += "\n > " + "Property \"allModulesCraftable\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.allModulesCraftable.ToString(); }
-					if (modConfig["Settings"]["allTypesCraftable"].TryConvertBool(out FFU_BE_Defs.allTypesCraftable)) modConfigLog += "\n > " + "Property \"allTypesCraftable\" loaded with value: " + FFU_BE_Defs.allTypesCraftable.ToString();
-					else { FFU_BE_Defs.allTypesCraftable = false; modConfigLog += "\n > " + "Property \"allTypesCraftable\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.allTypesCraftable.ToString(); }
-					if (modConfig["Settings"]["moduleCraftingForFree"].TryConvertBool(out FFU_BE_Defs.moduleCraftingForFree)) modConfigLog += "\n > " + "Property \"moduleCraftingForFree\" loaded with value: " + FFU_BE_Defs.moduleCraftingForFree.ToString();
-					else { FFU_BE_Defs.moduleCraftingForFree = false; modConfigLog += "\n > " + "Property \"moduleCraftingForFree\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.moduleCraftingForFree.ToString(); }
-					if (modConfig["Settings"]["fuelIsCraftingEnergy"].TryConvertBool(out FFU_BE_Defs.fuelIsCraftingEnergy)) modConfigLog += "\n > " + "Property \"fuelIsCraftingEnergy\" loaded with value: " + FFU_BE_Defs.fuelIsCraftingEnergy.ToString();
-					else { FFU_BE_Defs.fuelIsCraftingEnergy = true; modConfigLog += "\n > " + "Property \"fuelIsCraftingEnergy\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.fuelIsCraftingEnergy.ToString(); }
-					if (modConfig["Settings"]["fuelIsScrapRefunded"].TryConvertBool(out FFU_BE_Defs.fuelIsScrapRefunded)) modConfigLog += "\n > " + "Property \"fuelIsScrapRefunded\" loaded with value: " + FFU_BE_Defs.fuelIsScrapRefunded.ToString();
-					else { FFU_BE_Defs.fuelIsScrapRefunded = false; modConfigLog += "\n > " + "Property \"fuelIsScrapRefunded\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.fuelIsScrapRefunded.ToString(); }
-					if (modConfig["Settings"]["relativeEnemyCrewSkills"].TryConvertBool(out FFU_BE_Defs.relativeEnemyCrewSkills)) modConfigLog += "\n > " + "Property \"relativeEnemyCrewSkills\" loaded with value: " + FFU_BE_Defs.relativeEnemyCrewSkills.ToString();
-					else { FFU_BE_Defs.relativeEnemyCrewSkills = true; modConfigLog += "\n > " + "Property \"relativeEnemyCrewSkills\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.relativeEnemyCrewSkills.ToString(); }
-					if (modConfig["Settings"]["listAllCrewmemberTypes"].TryConvertBool(out FFU_BE_Defs.listAllCrewmemberTypes)) modConfigLog += "\n > " + "Property \"listAllCrewmemberTypes\" loaded with value: " + FFU_BE_Defs.listAllCrewmemberTypes.ToString();
-					else { FFU_BE_Defs.listAllCrewmemberTypes = false; modConfigLog += "\n > " + "Property \"listAllCrewmemberTypes\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.listAllCrewmemberTypes.ToString(); }
-					if (modConfig["Multipliers"]["containerSizeMultiplier"].TryConvertFloat(out FFU_BE_Defs.containerSizeMultiplier)) modConfigLog += "\n > " + "Property \"containerSizeMultiplier\" loaded with value: " + FFU_BE_Defs.containerSizeMultiplier.ToString();
-					else { FFU_BE_Defs.containerSizeMultiplier = 1.0f; modConfigLog += "\n > " + "Property \"containerSizeMultiplier\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.containerSizeMultiplier.ToString(); }
-					if (modConfig["Multipliers"]["resourcesScrapFraction"].TryConvertFloat(out FFU_BE_Defs.resourcesScrapFraction)) modConfigLog += "\n > " + "Property \"resourcesScrapFraction\" loaded with value: " + FFU_BE_Defs.resourcesScrapFraction.ToString();
-					else { FFU_BE_Defs.resourcesScrapFraction = 0.2f; modConfigLog += "\n > " + "Property \"resourcesScrapFraction\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.resourcesScrapFraction.ToString(); }
-					if (modConfig["Multipliers"]["newStartingFateBonus"].TryConvertInt(out FFU_BE_Defs.newStartingFateBonus)) modConfigLog += "\n > " + "Property \"newStartingFateBonus\" loaded with value: " + FFU_BE_Defs.newStartingFateBonus.ToString();
-					else { FFU_BE_Defs.newStartingFateBonus = 0; modConfigLog += "\n > " + "Property \"newStartingFateBonus\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.newStartingFateBonus.ToString(); }
-					if (modConfig["Multipliers"]["addFreeCrewSkillPoints"].TryConvertInt(out FFU_BE_Defs.addFreeCrewSkillPoints)) modConfigLog += "\n > " + "Property \"addFreeCrewSkillPoints\" loaded with value: " + FFU_BE_Defs.addFreeCrewSkillPoints.ToString();
-					else { FFU_BE_Defs.addFreeCrewSkillPoints = 0; modConfigLog += "\n > " + "Property \"addFreeCrewSkillPoints\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.addFreeCrewSkillPoints.ToString(); }
-					if (modConfig["Multipliers"]["minPlayerCrewSkillsLimit"].TryConvertInt(out FFU_BE_Defs.minPlayerCrewSkillsLimit)) modConfigLog += "\n > " + "Property \"minPlayerCrewSkillsLimit\" loaded with value: " + FFU_BE_Defs.minPlayerCrewSkillsLimit.ToString();
-					else { FFU_BE_Defs.minPlayerCrewSkillsLimit = 1; modConfigLog += "\n > " + "Property \"minPlayerCrewSkillsLimit\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.minPlayerCrewSkillsLimit.ToString(); }
-					if (modConfig["Multipliers"]["minEnemyCrewSkillsLimit"].TryConvertInt(out FFU_BE_Defs.minEnemyCrewSkillsLimit)) modConfigLog += "\n > " + "Property \"minEnemyCrewSkillsLimit\" loaded with value: " + FFU_BE_Defs.minEnemyCrewSkillsLimit.ToString();
-					else { FFU_BE_Defs.minEnemyCrewSkillsLimit = 1; modConfigLog += "\n > " + "Property \"minEnemyCrewSkillsLimit\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.minEnemyCrewSkillsLimit.ToString(); }
-					if (modConfig["Multipliers"]["shipMaxEvasionLimit"].TryConvertInt(out FFU_BE_Defs.shipMaxEvasionLimit)) modConfigLog += "\n > " + "Property \"shipMaxEvasionLimit\" loaded with value: " + FFU_BE_Defs.shipMaxEvasionLimit.ToString();
-					else { FFU_BE_Defs.shipMaxEvasionLimit = 95; modConfigLog += "\n > " + "Property \"shipMaxEvasionLimit\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.shipMaxEvasionLimit.ToString(); }
-					if (modConfig["Multipliers"]["shipModuleHealthMult"].TryConvertFloat(out FFU_BE_Defs.shipModuleHealthMult)) modConfigLog += "\n > " + "Property \"shipModuleHealthMult\" loaded with value: " + FFU_BE_Defs.shipModuleHealthMult.ToString();
-					else { FFU_BE_Defs.shipModuleHealthMult = 3f; modConfigLog += "\n > " + "Property \"shipModuleHealthMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.shipModuleHealthMult.ToString(); }
-					if (modConfig["Multipliers"]["shipModuleUnpackTime"].TryConvertFloat(out FFU_BE_Defs.shipModuleUnpackTime)) modConfigLog += "\n > " + "Property \"shipModuleUnpackTime\" loaded with value: " + FFU_BE_Defs.shipModuleUnpackTime.ToString();
-					else { FFU_BE_Defs.shipModuleUnpackTime = 60f; modConfigLog += "\n > " + "Property \"shipModuleUnpackTime\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.shipModuleUnpackTime.ToString(); }
-					if (modConfig["Multipliers"]["shipModuleCraftTime"].TryConvertFloat(out FFU_BE_Defs.shipModuleCraftTime)) modConfigLog += "\n > " + "Property \"shipModuleCraftTime\" loaded with value: " + FFU_BE_Defs.shipModuleCraftTime.ToString();
-					else { FFU_BE_Defs.shipModuleCraftTime = 120f; modConfigLog += "\n > " + "Property \"shipModuleCraftTime\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.shipModuleCraftTime.ToString(); }
-					if (modConfig["Multipliers"]["moduleFireStartChance"].TryConvertFloat(out FFU_BE_Defs.moduleFireStartChance)) modConfigLog += "\n > " + "Property \"moduleFireStartChance\" loaded with value: " + FFU_BE_Defs.moduleFireStartChance.ToString();
-					else { FFU_BE_Defs.moduleFireStartChance = 1f; modConfigLog += "\n > " + "Property \"moduleFireStartChance\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.moduleFireStartChance.ToString(); }
-					if (modConfig["Multipliers"]["coreSlotsHealthMult"].TryConvertFloat(out FFU_BE_Defs.coreSlotsHealthMult)) modConfigLog += "\n > " + "Property \"coreSlotsHealthMult\" loaded with value: " + FFU_BE_Defs.coreSlotsHealthMult.ToString();
-					else { FFU_BE_Defs.coreSlotsHealthMult = 1f; modConfigLog += "\n > " + "Property \"coreSlotsHealthMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.coreSlotsHealthMult.ToString(); }
-					if (modConfig["Multipliers"]["enemyResourcesLootMinMult"].TryConvertFloat(out FFU_BE_Defs.enemyResourcesLootMinMult)) modConfigLog += "\n > " + "Property \"enemyResourcesLootMinMult\" loaded with value: " + FFU_BE_Defs.enemyResourcesLootMinMult.ToString();
-					else { FFU_BE_Defs.enemyResourcesLootMinMult = 2; modConfigLog += "\n > " + "Property \"enemyResourcesLootMinMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.enemyResourcesLootMinMult.ToString(); }
-					if (modConfig["Multipliers"]["enemyResourcesLootMaxMult"].TryConvertFloat(out FFU_BE_Defs.enemyResourcesLootMaxMult)) modConfigLog += "\n > " + "Property \"enemyResourcesLootMaxMult\" loaded with value: " + FFU_BE_Defs.enemyResourcesLootMaxMult.ToString();
-					else { FFU_BE_Defs.enemyResourcesLootMaxMult = 5f; modConfigLog += "\n > " + "Property \"enemyResourcesLootMaxMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.enemyResourcesLootMaxMult.ToString(); }
-					if (modConfig["Multipliers"]["enemyShipHullHealthMult"].TryConvertFloat(out FFU_BE_Defs.enemyShipHullHealthMult)) modConfigLog += "\n > " + "Property \"enemyShipHullHealthMult\" loaded with value: " + FFU_BE_Defs.enemyShipHullHealthMult.ToString();
-					else { FFU_BE_Defs.enemyShipHullHealthMult = 10f; modConfigLog += "\n > " + "Property \"enemyShipHullHealthMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.enemyShipHullHealthMult.ToString(); }
-					if (modConfig["Multipliers"]["tierResearchSpeedMult"].TryConvertFloat(out FFU_BE_Defs.tierResearchSpeedMult)) modConfigLog += "\n > " + "Property \"tierResearchSpeedMult\" loaded with value: " + FFU_BE_Defs.tierResearchSpeedMult.ToString();
-					else { FFU_BE_Defs.tierResearchSpeedMult = 1f; modConfigLog += "\n > " + "Property \"tierResearchSpeedMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.tierResearchSpeedMult.ToString(); }
-					if (modConfig["Multipliers"]["moduleResearchSpeedMult"].TryConvertFloat(out FFU_BE_Defs.moduleResearchSpeedMult)) modConfigLog += "\n > " + "Property \"moduleResearchSpeedMult\" loaded with value: " + FFU_BE_Defs.moduleResearchSpeedMult.ToString();
-					else { FFU_BE_Defs.moduleResearchSpeedMult = 1f; modConfigLog += "\n > " + "Property \"moduleResearchSpeedMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.moduleResearchSpeedMult.ToString(); }
-					if (modConfig["Multipliers"]["intactModuleDropChance"].TryConvertFloat(out FFU_BE_Defs.intactModuleDropChance)) modConfigLog += "\n > " + "Property \"intactModuleDropChance\" loaded with value: " + FFU_BE_Defs.intactModuleDropChance.ToString();
-					else { FFU_BE_Defs.intactModuleDropChance = 0.85f; modConfigLog += "\n > " + "Property \"intactModuleDropChance\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.intactModuleDropChance.ToString(); }
-					if (modConfig["Multipliers"]["warpProducedResearchMult"].TryConvertFloat(out FFU_BE_Defs.warpProducedResearchMult)) modConfigLog += "\n > " + "Property \"warpProducedResearchMult\" loaded with value: " + FFU_BE_Defs.warpProducedResearchMult.ToString();
-					else { FFU_BE_Defs.warpProducedResearchMult = 0.8f; modConfigLog += "\n > " + "Property \"warpProducedResearchMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.warpProducedResearchMult.ToString(); }
-					if (modConfig["Multipliers"]["warpProducedResourcesMult"].TryConvertFloat(out FFU_BE_Defs.warpProducedResourcesMult)) modConfigLog += "\n > " + "Property \"warpProducedResourcesMult\" loaded with value: " + FFU_BE_Defs.warpProducedResourcesMult.ToString();
-					else { FFU_BE_Defs.warpProducedResourcesMult = 0.8f; modConfigLog += "\n > " + "Property \"warpProducedResourcesMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.warpProducedResourcesMult.ToString(); }
-					if (modConfig["Multipliers"]["enemyCrewHealthSectorMult"].TryConvertFloat(out FFU_BE_Defs.enemyCrewHealthSectorMult)) modConfigLog += "\n > " + "Property \"enemyCrewHealthSectorMult\" loaded with value: " + FFU_BE_Defs.enemyCrewHealthSectorMult.ToString();
-					else { FFU_BE_Defs.enemyCrewHealthSectorMult = 0.1f; modConfigLog += "\n > " + "Property \"enemyCrewHealthSectorMult\" is not found or couldn't be parsed, using default value: " + FFU_BE_Defs.enemyCrewHealthSectorMult.ToString(); }
+					string modConfigLog = $"Loading mod configuration from {appDataPath + modConfDir + modConfFile}";
+					if (string.IsNullOrEmpty(modConfig["InitConfig"]["modVersion"].Value) || modConfig["InitConfig"]["modVersion"].ToString() != FFU_BE_Defs.modVersion) {
+						CreateModConfiguration(modConfDir, modConfFile); 
+						return;
+					}
+					FFU_BE_Defs.allModulesCraftable = modConfig["Settings"]["allModulesCraftable"].ToBool(FFU_BE_Defs.allModulesCraftable);
+					FFU_BE_Defs.allTypesCraftable = modConfig["Settings"]["allTypesCraftable"].ToBool(FFU_BE_Defs.allTypesCraftable);
+					FFU_BE_Defs.moduleCraftingForFree = modConfig["Settings"]["moduleCraftingForFree"].ToBool(FFU_BE_Defs.moduleCraftingForFree);
+					FFU_BE_Defs.fuelIsCraftingEnergy = modConfig["Settings"]["fuelIsCraftingEnergy"].ToBool(FFU_BE_Defs.fuelIsCraftingEnergy);
+					FFU_BE_Defs.fuelIsScrapRefunded = modConfig["Settings"]["fuelIsScrapRefunded"].ToBool(FFU_BE_Defs.fuelIsScrapRefunded);
+					FFU_BE_Defs.relativeEnemyCrewSkills = modConfig["Settings"]["relativeEnemyCrewSkills"].ToBool(FFU_BE_Defs.relativeEnemyCrewSkills);
+					FFU_BE_Defs.listAllCrewmemberTypes = modConfig["Settings"]["listAllCrewmemberTypes"].ToBool(FFU_BE_Defs.listAllCrewmemberTypes);
+					FFU_BE_Defs.containerSizeMultiplier = modConfig["Multipliers"]["containerSizeMultiplier"].ToFloat(FFU_BE_Defs.containerSizeMultiplier);
+					FFU_BE_Defs.resourcesScrapFraction = modConfig["Multipliers"]["resourcesScrapFraction"].ToFloat(FFU_BE_Defs.resourcesScrapFraction);
+					FFU_BE_Defs.newStartingFateBonus = modConfig["Multipliers"]["newStartingFateBonus"].ToInt(FFU_BE_Defs.newStartingFateBonus);
+					FFU_BE_Defs.addFreeCrewSkillPoints = modConfig["Multipliers"]["addFreeCrewSkillPoints"].ToInt(FFU_BE_Defs.addFreeCrewSkillPoints);
+					FFU_BE_Defs.minPlayerCrewSkillsLimit = modConfig["Multipliers"]["minPlayerCrewSkillsLimit"].ToInt(FFU_BE_Defs.minPlayerCrewSkillsLimit);
+					FFU_BE_Defs.minEnemyCrewSkillsLimit = modConfig["Multipliers"]["minEnemyCrewSkillsLimit"].ToInt(FFU_BE_Defs.minEnemyCrewSkillsLimit);
+					FFU_BE_Defs.shipMaxEvasionLimit = modConfig["Multipliers"]["shipMaxEvasionLimit"].ToInt(FFU_BE_Defs.shipMaxEvasionLimit);
+					FFU_BE_Defs.shipModuleHealthMult = modConfig["Multipliers"]["shipModuleHealthMult"].ToFloat(FFU_BE_Defs.shipModuleHealthMult);
+					FFU_BE_Defs.shipModuleUnpackTime = modConfig["Multipliers"]["shipModuleUnpackTime"].ToFloat(FFU_BE_Defs.shipModuleUnpackTime);
+					FFU_BE_Defs.shipModuleCraftTime = modConfig["Multipliers"]["shipModuleCraftTime"].ToFloat(FFU_BE_Defs.shipModuleCraftTime);
+					FFU_BE_Defs.moduleFireStartChance = modConfig["Multipliers"]["moduleFireStartChance"].ToFloat(FFU_BE_Defs.moduleFireStartChance);
+					FFU_BE_Defs.coreSlotsHealthMult = modConfig["Multipliers"]["coreSlotsHealthMult"].ToFloat(FFU_BE_Defs.coreSlotsHealthMult);
+					FFU_BE_Defs.enemyResourcesLootMinMult = modConfig["Multipliers"]["enemyResourcesLootMinMult"].ToFloat(FFU_BE_Defs.enemyResourcesLootMinMult);
+					FFU_BE_Defs.enemyResourcesLootMaxMult = modConfig["Multipliers"]["enemyResourcesLootMaxMult"].ToFloat(FFU_BE_Defs.enemyResourcesLootMaxMult);
+					FFU_BE_Defs.enemyShipHullHealthMult = modConfig["Multipliers"]["enemyShipHullHealthMult"].ToFloat(FFU_BE_Defs.enemyShipHullHealthMult);
+					FFU_BE_Defs.tierResearchSpeedMult = modConfig["Multipliers"]["tierResearchSpeedMult"].ToFloat(FFU_BE_Defs.tierResearchSpeedMult);
+					FFU_BE_Defs.moduleResearchSpeedMult = modConfig["Multipliers"]["moduleResearchSpeedMult"].ToFloat(FFU_BE_Defs.moduleResearchSpeedMult);
+					FFU_BE_Defs.intactModuleDropChance = modConfig["Multipliers"]["intactModuleDropChance"].ToFloat(FFU_BE_Defs.intactModuleDropChance);
+					FFU_BE_Defs.warpProducedResearchMult = modConfig["Multipliers"]["warpProducedResearchMult"].ToFloat(FFU_BE_Defs.warpProducedResearchMult);
+					FFU_BE_Defs.warpProducedResourcesMult = modConfig["Multipliers"]["warpProducedResourcesMult"].ToFloat(FFU_BE_Defs.warpProducedResourcesMult);
+					FFU_BE_Defs.enemyCrewHealthSectorMult = modConfig["Multipliers"]["enemyCrewHealthSectorMult"].ToFloat(FFU_BE_Defs.enemyCrewHealthSectorMult);
+					modConfigLog += $"\n > Property [allModulesCraftable] loaded with value: {FFU_BE_Defs.allModulesCraftable}";
+					modConfigLog += $"\n > Property [allTypesCraftable] loaded with value: {FFU_BE_Defs.allTypesCraftable}";
+					modConfigLog += $"\n > Property [moduleCraftingForFree] loaded with value: {FFU_BE_Defs.moduleCraftingForFree}";
+					modConfigLog += $"\n > Property [fuelIsCraftingEnergy] loaded with value: {FFU_BE_Defs.fuelIsCraftingEnergy}";
+					modConfigLog += $"\n > Property [fuelIsScrapRefunded] loaded with value: {FFU_BE_Defs.fuelIsScrapRefunded}";
+					modConfigLog += $"\n > Property [relativeEnemyCrewSkills] loaded with value: {FFU_BE_Defs.relativeEnemyCrewSkills}";
+					modConfigLog += $"\n > Property [listAllCrewmemberTypes] loaded with value: {FFU_BE_Defs.listAllCrewmemberTypes}";
+					modConfigLog += $"\n > Property [containerSizeMultiplier] loaded with value: {FFU_BE_Defs.containerSizeMultiplier}";
+					modConfigLog += $"\n > Property [resourcesScrapFraction] loaded with value: {FFU_BE_Defs.resourcesScrapFraction}";
+					modConfigLog += $"\n > Property [newStartingFateBonus] loaded with value: {FFU_BE_Defs.newStartingFateBonus}";
+					modConfigLog += $"\n > Property [addFreeCrewSkillPoints] loaded with value: {FFU_BE_Defs.addFreeCrewSkillPoints}";
+					modConfigLog += $"\n > Property [minPlayerCrewSkillsLimit] loaded with value: {FFU_BE_Defs.minPlayerCrewSkillsLimit}";
+					modConfigLog += $"\n > Property [minEnemyCrewSkillsLimit] loaded with value: {FFU_BE_Defs.minEnemyCrewSkillsLimit}";
+					modConfigLog += $"\n > Property [shipMaxEvasionLimit] loaded with value: {FFU_BE_Defs.shipMaxEvasionLimit}";
+					modConfigLog += $"\n > Property [shipModuleHealthMult] loaded with value: {FFU_BE_Defs.shipModuleHealthMult}";
+					modConfigLog += $"\n > Property [shipModuleUnpackTime] loaded with value: {FFU_BE_Defs.shipModuleUnpackTime}";
+					modConfigLog += $"\n > Property [shipModuleCraftTime] loaded with value: {FFU_BE_Defs.shipModuleCraftTime}";
+					modConfigLog += $"\n > Property [moduleFireStartChance] loaded with value: {FFU_BE_Defs.moduleFireStartChance}";
+					modConfigLog += $"\n > Property [coreSlotsHealthMult] loaded with value: {FFU_BE_Defs.coreSlotsHealthMult}";
+					modConfigLog += $"\n > Property [enemyResourcesLootMinMult] loaded with value: {FFU_BE_Defs.enemyResourcesLootMinMult}";
+					modConfigLog += $"\n > Property [enemyResourcesLootMaxMult] loaded with value: {FFU_BE_Defs.enemyResourcesLootMaxMult}";
+					modConfigLog += $"\n > Property [enemyShipHullHealthMult] loaded with value: {FFU_BE_Defs.enemyShipHullHealthMult}";
+					modConfigLog += $"\n > Property [tierResearchSpeedMult] loaded with value: {FFU_BE_Defs.tierResearchSpeedMult}";
+					modConfigLog += $"\n > Property [moduleResearchSpeedMult] loaded with value: {FFU_BE_Defs.moduleResearchSpeedMult}";
+					modConfigLog += $"\n > Property [intactModuleDropChance] loaded with value: {FFU_BE_Defs.intactModuleDropChance}";
+					modConfigLog += $"\n > Property [warpProducedResearchMult] loaded with value: {FFU_BE_Defs.warpProducedResearchMult}";
+					modConfigLog += $"\n > Property [warpProducedResourcesMult] loaded with value: {FFU_BE_Defs.warpProducedResourcesMult}";
+					modConfigLog += $"\n > Property [enemyCrewHealthSectorMult] loaded with value: {FFU_BE_Defs.enemyCrewHealthSectorMult}";
 					foreach (string shipEntry in shipEntries) {
 						if (!string.IsNullOrEmpty(modConfig["CrewSpawn"]["ship" + shipEntry].GetString())) {
 							string[] crewSets = modConfig["CrewSpawn"]["ship" + shipEntry].GetString().Split('|');
@@ -147,7 +146,7 @@ namespace FFU_Bleeding_Edge {
 						}
 					}
 					foreach (var coreCrewEntry in FFU_BE_Defs.startingCrew) {
-						modConfigLog += $"\n > Additional \"{GetShipNameByID(coreCrewEntry.Key)}\" Crew: ";
+						modConfigLog += $"\n > Additional [{GetShipNameByID(coreCrewEntry.Key)}] Crew: ";
 						foreach (var subCrewEntry in coreCrewEntry.Value) modConfigLog += $"{subCrewEntry.Value}x {FFU_BE_Mod_Crewmembers.GetCrewNameFromID(subCrewEntry.Key)}{(coreCrewEntry.Value.Last().Key != subCrewEntry.Key ? ", " : "")}";
 					}
 					Debug.LogWarning(modConfigLog);
@@ -159,14 +158,17 @@ namespace FFU_Bleeding_Edge {
 			Debug.LogWarning("Creating template mod configuration file at " + appDataPath + modConfDir + modConfFile);
 			IniFile modConfig = new IniFile();
 			modConfig["InitConfig"]["modVersion"] = FFU_BE_Defs.modVersion;
-			modConfig["Settings"]["advancedWelcomePopup"] = false;
-			modConfig["Settings"]["restartUnlocksEverything"] = false;
+			modConfig["InitConfig"]["unlockShips"] = false;
+			modConfig["InitConfig"]["unlockPerks"] = false;
+			modConfig["InitConfig"]["grantTopTech"] = false;
+			modConfig["InitConfig"]["fullGameReset"] = false;
 			modConfig["Settings"]["allModulesCraftable"] = false;
 			modConfig["Settings"]["allTypesCraftable"] = false;
 			modConfig["Settings"]["moduleCraftingForFree"] = false;
 			modConfig["Settings"]["fuelIsCraftingEnergy"] = true;
 			modConfig["Settings"]["fuelIsScrapRefunded"] = false;
 			modConfig["Settings"]["relativeEnemyCrewSkills"] = true;
+			modConfig["Settings"]["listAllCrewmemberTypes"] = false;
 			modConfig["Multipliers"]["containerSizeMultiplier"] = 1.0f;
 			modConfig["Multipliers"]["resourcesScrapFraction"] = 0.2f;
 			modConfig["Multipliers"]["newStartingFateBonus"] = 0;

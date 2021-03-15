@@ -34,74 +34,148 @@ namespace FFU_Bleeding_Edge {
 			} catch (Exception ex) { Debug.LogError(ex); }
 		}
 		public static void ApplySlotChanges(ModuleSlot moduleSlot) {
-			if (moduleSlot.name.Contains("Bridge slot")) {
+			switch(moduleSlot.PrefabId) {
+				case 1212275043:
 				moduleSlot.displayName = "Bridge Interface";
 				moduleSlot.description = "Allows installation and interfacing with Bridge-type modules that allow crewmembers to operate ship.";
 				moduleSlot.shipMaxHealthAdd = 50;
-			} else if (moduleSlot.name.Contains("Warp slot")) {
+				break;
+				case 675697120:
 				moduleSlot.displayName = "FTL Interface";
 				moduleSlot.description = "Allows installation and interfacing with Faster-Then-Light navigation modules such as Warp Drives and Hyper-Drives.";
 				moduleSlot.shipMaxHealthAdd = 50;
-			} else if (moduleSlot.name.Contains("Engine slot")) {
+				break;
+				case 1369182328:
 				moduleSlot.displayName = "Engine Interface";
 				moduleSlot.description = "Allows installation and interfacing with Engine-type modules that generate thrust for efficient sub-light navigation.";
 				moduleSlot.shipMaxHealthAdd = 50;
-			} else if (moduleSlot.name.Contains("Weapon slot")) {
+				break;
+				case 1972530845:
+				moduleSlot.displayName = "Armored Interface";
+				moduleSlot.description = "Allows installation and interfacing with same type modules as weapon interface, but with additional layer of protection.";
+				moduleSlot.shipMaxHealthAdd = 35;
+				foreach (ModuleSlot.Upgrade upgrade in moduleSlot.upgrades) {
+					if (upgrade.isDowngrade) {
+						upgrade.cost = new ResourceValueGroup { fuel = 2000f, metals = 5000f, synthetics = 5000f, exotics = 50f };
+						upgrade.text = Core.TT("Downgrade to Weapon Interface");
+					}
+				}
+				break;
+				case 1837849614:
 				moduleSlot.displayName = "Weapon Interface";
 				moduleSlot.description = "Allows installation and interfacing with weapon and ordnance systems beside automated defenses and internal-type modules.";
 				moduleSlot.shipMaxHealthAdd = 20;
 				foreach (ModuleSlot.Upgrade upgrade in moduleSlot.upgrades) {
-					if (upgrade.isDowngrade) upgrade.cost = new ResourceValueGroup { fuel = 1500f, metals = 3750f, synthetics = 3750f, exotics = 20f };
+					if (!upgrade.isDowngrade) {
+						upgrade.cost = new ResourceValueGroup { fuel = 3500f, metals = 7500f, synthetics = 7500f, exotics = 100f };
+						upgrade.text = Core.TT("Upgrade to Armored Interface");
+					}
+					if (upgrade.isDowngrade) {
+						upgrade.cost = new ResourceValueGroup { fuel = 1500f, metals = 3750f, synthetics = 3750f, exotics = 20f };
+						upgrade.text = Core.TT("Downgrade to Hybrid Interface");
+					}
 				}
-			} else if (moduleSlot.name.Contains("Hybrid slot")) {
+				break;
+				case 1229851820:
 				moduleSlot.displayName = "Hybrid Interface";
 				moduleSlot.description = "Allows installation and interfacing with automated defenses and electronic warfare systems beside internal-type modules.";
 				moduleSlot.shipMaxHealthAdd = 15;
 				foreach (ModuleSlot.Upgrade upgrade in moduleSlot.upgrades) {
-					if (upgrade.isDowngrade) upgrade.cost = new ResourceValueGroup { fuel = 1000f, metals = 2625f, synthetics = 2625f, exotics = 10f };
-					if (!upgrade.isDowngrade) upgrade.cost = new ResourceValueGroup { fuel = 2500f, metals = 5000f, synthetics = 5000f, exotics = 50f };
+					if (!upgrade.isDowngrade) {
+						upgrade.cost = new ResourceValueGroup { fuel = 2500f, metals = 5000f, synthetics = 5000f, exotics = 50f };
+						upgrade.text = Core.TT("Upgrade to Weapon Interface");
+					} else {
+						upgrade.cost = new ResourceValueGroup { fuel = 1000f, metals = 2500f, synthetics = 2500f, exotics = 10f };
+						upgrade.text = Core.TT("Downgrade to Core Interface");
+					}
 				}
-			} else if (moduleSlot.name.Contains("Internal core slot")) {
+				break;
+				case 1582226742:
 				moduleSlot.displayName = "Core Interface";
 				moduleSlot.description = "Allows installation and interfacing with same internal-type modules, but at the same time reinforces ship's integrity.";
 				moduleSlot.shipMaxHealthAdd = 10;
 				foreach (ModuleSlot.Upgrade upgrade in moduleSlot.upgrades) {
-					if (upgrade.isDowngrade) upgrade.cost = new ResourceValueGroup { fuel = 500f, metals = 1875f, synthetics = 1875f, exotics = 5f };
-					if (!upgrade.isDowngrade) upgrade.cost = new ResourceValueGroup { fuel = 1500f, metals = 3500f, synthetics = 3500f, exotics = 25f };
+					if (!upgrade.isDowngrade) {
+						upgrade.cost = new ResourceValueGroup { fuel = 1500f, metals = 3500f, synthetics = 3500f, exotics = 25f };
+						upgrade.text = Core.TT("Upgrade to Hybrid Interface");
+					} else {
+						upgrade.cost = new ResourceValueGroup { fuel = 500f, metals = 1875f, synthetics = 1875f, exotics = 5f };
+						upgrade.text = Core.TT("Downgrade to Internal Interface");
+					}
 				}
-			} else if (moduleSlot.name.Contains("Internal slot")) {
+				break;
+				case 905884163:
 				moduleSlot.displayName = "Internal Interface";
 				moduleSlot.description = "Allows installation and interfacing with all internal-type modules such as reactors, shields, armors, greenhouses & etc.";
 				moduleSlot.shipMaxHealthAdd = 5;
 				foreach (ModuleSlot.Upgrade upgrade in moduleSlot.upgrades) {
-					if (!upgrade.isDowngrade) upgrade.cost = new ResourceValueGroup { fuel = 750f, metals = 2500f, synthetics = 2500f, exotics = 10f };
+					if (!upgrade.isDowngrade) {
+						upgrade.cost = new ResourceValueGroup { fuel = 750f, metals = 2500f, synthetics = 2500f, exotics = 10f };
+						upgrade.text = Core.TT("Upgrade to Core Interface");
+					}
 				}
-			} else if (moduleSlot.name.Contains("Storage slot")) {
+				break;
+				case 225222637:
 				moduleSlot.displayName = "Storage Interface";
 				moduleSlot.description = "Allows installation and interfacing with modular storage compartment. Has complex built-in module repackaging mechanism.";
 				moduleSlot.shipMaxHealthAdd = 0;
-			} else if (moduleSlot.name.Contains("Container slot")) {
+				break;
+				case 43861595:
 				moduleSlot.displayName = "Container Interface";
 				moduleSlot.description = "Allows installation and interfacing with basic container-type modules that doesn't require heavy processing power.";
 				moduleSlot.shipMaxHealthAdd = 0;
-			} else if (moduleSlot.name.Contains("Nuke launcher slot")) {
+				break;
+				case 1354376818:
+				case 2143122961:
+				case 1929108273:
+				case 492576463:
+				case 817468931:
+				case 2111684389:
+				case 566477054:
+				case 805858018:
+				case 2009558963:
+				case 872202749:
 				moduleSlot.displayName = "Capital Ordnance Interface";
 				moduleSlot.description = "Allows installation, operation and interfacing with massive single-use payloads with anti-capital capabilities.";
 				moduleSlot.shipMaxHealthAdd = 0;
-			} else if (moduleSlot.name.Contains("Undeveloped") && moduleSlot.name.Contains("nuke")) {
-				moduleSlot.displayName = "Unfinished Ordnance Interface";
-				moduleSlot.description = "Capital ordnance interface that was left unfinished and useless due to certain circumstances. Can be upgraded.";
+				break;
+				case 1111859389:
+				case 2084138964:
+				case 370452004:
+				case 1718683524:
+				case 2038951581:
+				moduleSlot.displayName = "Sealed Ordnance Interface";
+				moduleSlot.description = "Capital ordnance interface that was left sealed due to the damage or other issues and wasn't repaired in time. Can be fixed.";
 				moduleSlot.shipMaxHealthAdd = 0;
 				foreach (ModuleSlot.Upgrade upgrade in moduleSlot.upgrades) {
-					if (!upgrade.isDowngrade) upgrade.cost = new ResourceValueGroup { fuel = 1000f, metals = 2500f, synthetics = 1500f, exotics = 10f };
+					if (!upgrade.isDowngrade) {
+						upgrade.cost = new ResourceValueGroup { fuel = 1000f, metals = 2500f, synthetics = 1500f, exotics = 10f };
+						upgrade.text = Core.TT("Repair Ordnance Interface");
+					}
 				}
-			} else if (moduleSlot.name.Contains("Undeveloped internal slot")) {
-				moduleSlot.displayName = "Unfinished Internal Interface";
-				moduleSlot.description = "Internal module interface that was left unfinished and useless due to certain circumstances. Can be upgraded.";
+				break;
+				case 1261555984:
+				moduleSlot.displayName = "Sealed Internal Interface";
+				moduleSlot.description = "Internal module interface that was left sealed due to the damage or other issues and wasn't repaired in time. Can be fixed.";
 				moduleSlot.shipMaxHealthAdd = 0;
 				foreach (ModuleSlot.Upgrade upgrade in moduleSlot.upgrades) {
-					if (!upgrade.isDowngrade) upgrade.cost = new ResourceValueGroup { fuel = 500f, metals = 1250f, synthetics = 750f, exotics = 5f };
+					if (!upgrade.isDowngrade) {
+						upgrade.cost = new ResourceValueGroup { fuel = 500f, metals = 1250f, synthetics = 750f, exotics = 5f };
+						upgrade.text = Core.TT("Repair Internal Interface");
+					}
 				}
+				break;
+				default:
+				string newSlotInfo = $"[NEW SLOT] Identifier: {moduleSlot.name}";
+				newSlotInfo += $"\n > Name: {moduleSlot.displayName}";
+				newSlotInfo += $"\n > Prefab ID: {moduleSlot.PrefabId}";
+				newSlotInfo += $"\n > Description: {moduleSlot.description}";
+				newSlotInfo += $"\n > HP Increase: {moduleSlot.shipMaxHealthAdd}";
+				foreach (ModuleSlot.Upgrade upgrade in moduleSlot.upgrades) {
+					if (upgrade.isDowngrade) newSlotInfo += $"\n > Downgrade: {upgrade.text}";
+					else newSlotInfo += $"\n > Upgrade: {upgrade.text}"; }
+				Debug.LogWarning(newSlotInfo);
+				break;
 			}
 			if (moduleSlot.shipMaxHealthAdd > 0) moduleSlot.shipMaxHealthAdd = Mathf.RoundToInt(moduleSlot.shipMaxHealthAdd * FFU_BE_Defs.coreSlotsHealthMult);
 			if (FFU_BE_Defs.moduleCraftingForFree) {
