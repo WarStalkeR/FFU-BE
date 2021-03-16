@@ -103,7 +103,7 @@ namespace RST.UI
 			string modConfigPath = FFU_BE_Base.appDataPath + FFU_BE_Base.modConfDir + FFU_BE_Base.modConfFile;
 			modConfig.Load(modConfigPath);
 			if (modConfig["InitConfig"]["fullGameReset"].ToBool(false)) {
-				Debug.LogWarning("All game save files were removed.");
+				Debug.LogWarning("All persistent playthrough data was removed.");
 				SavegameManager.DeleteAllSavedDataExceptProfileUID();
 				if (modConfig["InitConfig"]["unlockShips"].ToBool(false)) {
 					if (modConfig["InitConfig"]["unlockPerks"].ToBool(false)) {

@@ -86,7 +86,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case ShipModule.Type.Weapon_Nuke:
 				instanceText = isInst ? $"{Core.TT(GetModuleGenText(shipModule))} {Core.TT("Gen.")} " : null;
-				moduleData += $"{Core.TT("Type")}: {instanceText}{Core.TT("Capital Missile")}\n";
+				moduleData += $"{Core.TT("Type")}: {instanceText}{Core.TT(GetNukeCategory(shipModule))}\n";
 				if (isInst) moduleData += $"{Core.TT("Modifier")}: {Core.TT(GetModuleModText(shipModule))}\n";
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius > 0 ? $"{Core.TT("Damage Radius")}: {shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius * 10f:0.##}{Core.TT("m")}\n" : null;
 				moduleData += shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield ? $"{Core.TT("Ignores Shields")}: {Core.TT("Yes")}\n" : null;
@@ -432,22 +432,33 @@ namespace FFU_Bleeding_Edge {
 			}
 		}
 		public static string GetWeaponCategory(ShipModule shipModule) {
-			if (FFU_BE_Defs.weaponTypeIDs["Launchers"].Contains(shipModule.PrefabId)) return "Rocket Launcher";
-			else if (FFU_BE_Defs.weaponTypeIDs["Autocannons"].Contains(shipModule.PrefabId)) return "Autocannon";
-			else if (FFU_BE_Defs.weaponTypeIDs["Howitzers"].Contains(shipModule.PrefabId)) return "Howitzer";
-			else if (FFU_BE_Defs.weaponTypeIDs["Railguns"].Contains(shipModule.PrefabId)) return "Railgun";
-			else if (FFU_BE_Defs.weaponTypeIDs["Railcannons"].Contains(shipModule.PrefabId)) return "Railcannon";
-			else if (FFU_BE_Defs.weaponTypeIDs["Lasers"].Contains(shipModule.PrefabId)) return "Laser Emitter";
-			else if (FFU_BE_Defs.weaponTypeIDs["Beams"].Contains(shipModule.PrefabId)) return "Beam Emitter";
-			else if (FFU_BE_Defs.weaponTypeIDs["Heat Rays"].Contains(shipModule.PrefabId)) return "Heat Ray Projector";
-			else if (FFU_BE_Defs.weaponTypeIDs["Disruptors"].Contains(shipModule.PrefabId)) return "Energy Disruptor";
-			else if (FFU_BE_Defs.weaponTypeIDs["Exotic Rays"].Contains(shipModule.PrefabId)) return "Exotic Ray Projector";
+			if (FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Launcher].Contains(shipModule.PrefabId)) return "Rocket Launcher";
+			else if (FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) return "Autocannon";
+			else if (FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) return "Howitzer";
+			else if (FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Contains(shipModule.PrefabId)) return "Railgun";
+			else if (FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Contains(shipModule.PrefabId)) return "Railcannon";
+			else if (FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Laser].Contains(shipModule.PrefabId)) return "Laser Emitter";
+			else if (FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Beamer].Contains(shipModule.PrefabId)) return "Beam Emitter";
+			else if (FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Contains(shipModule.PrefabId)) return "Heat Ray Projector";
+			else if (FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Disruptor].Contains(shipModule.PrefabId)) return "Energy Disruptor";
+			else if (FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Contains(shipModule.PrefabId)) return "Radiation Accelerator";
+			else if (FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Contains(shipModule.PrefabId)) return "Exotic Disintegrator";
 			else return "Starship Weapon";
 		}
+		public static string GetNukeCategory(ShipModule shipModule) {
+			if (FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Contains(shipModule.PrefabId)) return "Kinetic Ordnance";
+			else if (FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Contains(shipModule.PrefabId)) return "Energy Ordnance";
+			else if (FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Contains(shipModule.PrefabId)) return "Thermal Ordnance";
+			else if (FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Contains(shipModule.PrefabId)) return "Tactical Ordnance";
+			else if (FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Contains(shipModule.PrefabId)) return "Chemical Ordnance";
+			else if (FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Boarding].Contains(shipModule.PrefabId)) return "Boarding Ordnance";
+			else if (FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Contains(shipModule.PrefabId)) return "Strategic Ordnance";
+			else return "Capital Ordnance";
+		}
 		public static string GetDefaultCategory(ShipModule shipModule) {
-			if (FFU_BE_Defs.cacheTypeIDs["Weapons"].Contains(shipModule.PrefabId)) return "Weapons Cache";
-			else if (FFU_BE_Defs.cacheTypeIDs["Implants"].Contains(shipModule.PrefabId)) return "Implants Cache";
-			else if (FFU_BE_Defs.cacheTypeIDs["Upgrades"].Contains(shipModule.PrefabId)) return "Upgrades Cache";
+			if (FFU_BE_Defs.cacheTypeIDs[Core.CacheType.Weapons].Contains(shipModule.PrefabId)) return "Weapons Cache";
+			else if (FFU_BE_Defs.cacheTypeIDs[Core.CacheType.Implants].Contains(shipModule.PrefabId)) return "Implants Cache";
+			else if (FFU_BE_Defs.cacheTypeIDs[Core.CacheType.Upgrades].Contains(shipModule.PrefabId)) return "Upgrades Cache";
 			else return "Artifact";
 		}
 		public static string GetCacheType(ShipModule shipModule) {
@@ -532,11 +543,424 @@ namespace FFU_Bleeding_Edge {
 
 namespace RST.UI {
 	public class patch_ModuleSlotActionsPanel : ModuleSlotActionsPanel {
-		private extern void orig_Update();
-		private void Update() {
-		/// Resize List of Modules based on Resolution
+		[MonoModIgnore] private bool repopulateList;
+		[MonoModIgnore] private ModuleSlot prevSlot;
+		[MonoModIgnore] private List<ModuleSlotListItem> uiItems;
+		[MonoModIgnore] private List<Item> items = new List<Item>();
+		[MonoModIgnore] private void Close() { }
+		[MonoModReplace] private void Start() {
+			repopulateList = true;
+			ReplaceToggleHoverableUI();
+			Update();
+		}
+		[MonoModReplace] private void Update() {
+		/// Resize List of Modules based on Resolution and Allow Module Grouping
 			maxItemsToFit = (float)(Screen.height / 75) - 2;
-			orig_Update();
+			if (!Input.GetKeyDown(KeyCode.PageUp) && Input.GetKeyDown(KeyCode.PageDown)) SelectNextSubCategory();
+			if (Input.GetKeyDown(KeyCode.PageUp) && !Input.GetKeyDown(KeyCode.PageDown)) SelectPrevSubCategory();
+			ModuleSlot exactlyOneSelectedItem = SelectionManager.GetExactlyOneSelectedItem<ModuleSlot>();
+			if (exactlyOneSelectedItem == null) {
+				Close();
+				return;
+			}
+			if (!group.activeSelf) {
+				group.SetActive(true);
+				GetCachedComponent<UIElementOrder>()?.SetRightSiblingIndex();
+			}
+			displayName.text = exactlyOneSelectedItem.DisplayNameLocalized;
+			description.text = MonoBehaviourExtended.TT(exactlyOneSelectedItem.description);
+			avatarRenderer.sprite = exactlyOneSelectedItem.avatar;
+			ModuleSlotRoot moduleSlotRoot = exactlyOneSelectedItem.ModuleSlotRoot;
+			ShipModule x = (moduleSlotRoot != null) ? moduleSlotRoot.Module : null;
+			bool isPlayerOwner = exactlyOneSelectedItem.Ownership.GetOwner() == Ownership.Owner.Me;
+			bool isSlotUpgradeBlocked = false;
+			if (isPlayerOwner && !WorldRules.Impermanent.slotUpgradeDisabled && x != null) {
+				isSlotUpgradeBlocked = true;
+				warnings.text = MonoBehaviourExtended.TT("A module is already in slot, some slot upgrades/downgrades and module crafting are not possible");
+			}
+			if (warningsGroup.activeSelf != isSlotUpgradeBlocked) {
+				warningsGroup.SetActive(isSlotUpgradeBlocked);
+			}
+			PlayerData me = PlayerDatas.Me;
+			ResourceValueGroup pr = (me != null) ? me.Resources : ResourceValueGroup.Empty;
+			if (prevSlot != exactlyOneSelectedItem) {
+				slotUpgradesToggle.group.SetAllTogglesOff();
+				repopulateList = true;
+				prevSlot = exactlyOneSelectedItem;
+			}
+			if (repopulateList) {
+				items.Clear();
+				bool slotUpgradesEnabled = false;
+				bool cargoModulesEnabled = false;
+				bool weaponModulesEnabled = false;
+				bool nukeModulesEnabled = false;
+				bool survivalModulesEnabled = false;
+				bool essentialModulesEnabled = false;
+				bool economyModulesEnabled = false;
+				bool otherModulesEnabled = false;
+				bool isAnyTogglesOn = !slotUpgradesToggle.group.AnyTogglesOn();
+				if (isPlayerOwner) {
+					if (!WorldRules.Impermanent.slotUpgradeDisabled) {
+						ModuleSlot.Upgrade[] upgrades = exactlyOneSelectedItem.upgrades;
+						foreach (ModuleSlot.Upgrade slotUpgrade in upgrades) {
+							slotUpgradesEnabled = true;
+							if (isAnyTogglesOn || slotUpgradesToggle.isOn) {
+								items.Add(new Item {
+									slotUpgrade = slotUpgrade,
+									slot = exactlyOneSelectedItem
+								});
+							}
+						}
+					}
+					if (!WorldRules.Impermanent.moduleCraftDisabled) {
+						IEnumerable<ShipModule> enumerable;
+						if (altCraftableModulePrefabs == null) {
+							IEnumerable<ShipModule> craftableModulePrefabs = exactlyOneSelectedItem.CraftableModulePrefabs;
+							enumerable = craftableModulePrefabs;
+						} else {
+							IEnumerable<ShipModule> craftableModulePrefabs = altCraftableModulePrefabs;
+							enumerable = craftableModulePrefabs;
+						}
+						foreach (ShipModule item in enumerable) {
+							if (exactlyOneSelectedItem.acceptedModuleTypes.Contains(item.type)) {
+								bool isMainCategorySelected = false;
+								switch (ShipModule.GetCraftCategory(item.type)) {
+									case ShipModule.CraftCategory.Cargo:
+									cargoModulesEnabled = true;
+									isMainCategorySelected = (isAnyTogglesOn || cargoToggle.isOn);
+									break;
+									case ShipModule.CraftCategory.Weapon:
+									weaponModulesEnabled = true;
+									isMainCategorySelected = (isAnyTogglesOn || weaponsToggle.isOn);
+									break;
+									case ShipModule.CraftCategory.Nuke:
+									nukeModulesEnabled = true;
+									isMainCategorySelected = (isAnyTogglesOn || nukesToggle.isOn);
+									break;
+									case ShipModule.CraftCategory.Survival:
+									survivalModulesEnabled = true;
+									isMainCategorySelected = (isAnyTogglesOn || survivalToggle.isOn);
+									break;
+									case ShipModule.CraftCategory.Essential:
+									essentialModulesEnabled = true;
+									isMainCategorySelected = (isAnyTogglesOn || essentialToggle.isOn);
+									break;
+									case ShipModule.CraftCategory.Economy:
+									economyModulesEnabled = true;
+									isMainCategorySelected = (isAnyTogglesOn || economyToggle.isOn);
+									break;
+									case ShipModule.CraftCategory.Other:
+									otherModulesEnabled = true;
+									isMainCategorySelected = (isAnyTogglesOn || otherToggle.isOn);
+									break;
+								}
+								if (isMainCategorySelected) {
+									if (cargoToggle.isOn) {
+										if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Any) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+										else if (FFU_BE_Defs.cargoTypeIDs[FFU_BE_Defs.chosenCargoType].Contains(item.PrefabId)) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+									} else if (weaponsToggle.isOn) {
+										if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Any) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+										else if (FFU_BE_Defs.weaponTypeIDs[FFU_BE_Defs.chosenWeaponType].Contains(item.PrefabId)) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+									} else if (nukesToggle.isOn) {
+										if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Any) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+										else if (FFU_BE_Defs.nukeTypeIDs[FFU_BE_Defs.chosenNukeType].Contains(item.PrefabId)) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+									} else if (survivalToggle.isOn) {
+										if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Any) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+										else if (FFU_BE_Defs.survivalTypeIDs[FFU_BE_Defs.chosenSurvivalType].Contains(item.PrefabId)) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+									} else if (essentialToggle.isOn) {
+										if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Any) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+										else if (FFU_BE_Defs.essentialTypeIDs[FFU_BE_Defs.chosenEssentialType].Contains(item.PrefabId)) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+									} else if (economyToggle.isOn) {
+										if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Any) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+										else if (FFU_BE_Defs.economyTypeIDs[FFU_BE_Defs.chosenEconomyType].Contains(item.PrefabId)) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+									} else if (otherToggle.isOn) {
+										if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Any) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+										else if (FFU_BE_Defs.cacheTypeIDs[FFU_BE_Defs.chosenCacheType].Contains(item.PrefabId)) items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+									} else items.Add(new Item { craftableModulePrefab = item, slot = exactlyOneSelectedItem });
+								}
+							}
+						}
+					}
+				}
+				uiItems = RstUtil.RebuildUiList(itemContainer.transform, itemProto, items, delegate (ModuleSlotListItem ui, Item item)
+				{
+					ui.FillWithDataFrom(item, pr);
+				});
+				slotUpgradesToggle.interactable = slotUpgradesEnabled;
+				cargoToggle.interactable = cargoModulesEnabled;
+				weaponsToggle.interactable = weaponModulesEnabled;
+				nukesToggle.interactable = nukeModulesEnabled;
+				survivalToggle.interactable = survivalModulesEnabled;
+				essentialToggle.interactable = essentialModulesEnabled;
+				economyToggle.interactable = economyModulesEnabled;
+				otherToggle.interactable = otherModulesEnabled;
+				repopulateList = false;
+			} else foreach (ModuleSlotListItem uiItem in uiItems) uiItem.Refresh(pr);
+			scrollView.preferredHeight = (itemProto.transform as RectTransform).sizeDelta.y * Mathf.Min(uiItems.Count, maxItemsToFit);
+			bool isCraftUpgradeDisabled = isPlayerOwner && WorldRules.Impermanent.slotUpgradeDisabled && WorldRules.Impermanent.moduleCraftDisabled;
+			if (craftAndUpgradeDisabledGroup.activeSelf != isCraftUpgradeDisabled) craftAndUpgradeDisabledGroup.SetActive(isCraftUpgradeDisabled);
+		}
+		private void ReplaceToggleHoverableUI() {
+			cargoToggle.transform.GetComponent<HoverableUI>().hoverText = Core.TT($"Click to list only craftable Containers and Resource Packs. When enabled, use PAGE UP/DOWN to change sub-category.");
+			weaponsToggle.transform.GetComponent<HoverableUI>().hoverText = Core.TT($"Click to list only craftable Weapons and Point Defenses. When enabled, use PAGE UP/DOWN to change sub-category.");
+			nukesToggle.transform.GetComponent<HoverableUI>().hoverText = Core.TT($"Click to list only craftable Capital Missiles and Torpedoes. When enabled, use PAGE UP/DOWN to change sub-category.");
+			survivalToggle.transform.GetComponent<HoverableUI>().hoverText = Core.TT($"Click to list only craftable Survival-related Starship Modules. When enabled, use PAGE UP/DOWN to change sub-category.");
+			essentialToggle.transform.GetComponent<HoverableUI>().hoverText = Core.TT($"Click to list only craftable Essential Starship Modules. When enabled, use PAGE UP/DOWN to change sub-category.");
+			economyToggle.transform.GetComponent<HoverableUI>().hoverText = Core.TT($"Click to list only craftable Economy-related Starship Modules. When enabled, use PAGE UP/DOWN to change sub-category.");
+			otherToggle.transform.GetComponent<HoverableUI>().hoverText = Core.TT($"Click to list only craftable Miscellaneous Starship Modules and Caches. When enabled, use PAGE UP/DOWN to change sub-category.");
+		}
+		private void SelectNextSubCategory() {
+			if (cargoToggle.isOn) {
+				if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Any) FFU_BE_Defs.chosenCargoType = Core.CargoType.Multi;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Multi) FFU_BE_Defs.chosenCargoType = Core.CargoType.Organics;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Organics) FFU_BE_Defs.chosenCargoType = Core.CargoType.Starfuel;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Starfuel) FFU_BE_Defs.chosenCargoType = Core.CargoType.Metals;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Metals) FFU_BE_Defs.chosenCargoType = Core.CargoType.Synthetics;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Synthetics) FFU_BE_Defs.chosenCargoType = Core.CargoType.Exoplosives;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Exoplosives) FFU_BE_Defs.chosenCargoType = Core.CargoType.Exotics;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Exotics) FFU_BE_Defs.chosenCargoType = Core.CargoType.ResPack;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.ResPack) FFU_BE_Defs.chosenCargoType = Core.CargoType.Any;
+				cargoToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenCargoType);
+				repopulateList = true;
+			} else if (weaponsToggle.isOn) {
+				if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Any) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Launcher;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Launcher) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Autocannon;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Autocannon) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Howitzer;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Howitzer) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Railgun;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Railgun) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Railcannon;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Railcannon) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Laser;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Laser) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Beamer;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Beamer) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.HeatRay;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.HeatRay) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Disruptor;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Disruptor) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Radiator;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Radiator) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.ExoticRay;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.ExoticRay) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.CIWS;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.CIWS) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Any;
+				weaponsToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenWeaponType);
+				repopulateList = true;
+			} else if (nukesToggle.isOn) {
+				if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Any) FFU_BE_Defs.chosenNukeType = Core.NukeType.Kinetic;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Kinetic) FFU_BE_Defs.chosenNukeType = Core.NukeType.Energy;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Energy) FFU_BE_Defs.chosenNukeType = Core.NukeType.Thermal;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Thermal) FFU_BE_Defs.chosenNukeType = Core.NukeType.Tactical;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Tactical) FFU_BE_Defs.chosenNukeType = Core.NukeType.Chemical;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Chemical) FFU_BE_Defs.chosenNukeType = Core.NukeType.Boarding;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Boarding) FFU_BE_Defs.chosenNukeType = Core.NukeType.Strategic;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Strategic) FFU_BE_Defs.chosenNukeType = Core.NukeType.Any;
+				nukesToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenNukeType);
+				repopulateList = true;
+			} else if (survivalToggle.isOn) {
+				if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Any) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Armor;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Armor) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Shield;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Shield) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Battery;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Battery) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Sensor;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Sensor) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Stealth;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Stealth) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.EWAR;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.EWAR) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Health;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Health) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Decoy;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Decoy) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Any;
+				survivalToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenSurvivalType);
+				repopulateList = true;
+			} else if (essentialToggle.isOn) {
+				if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Any) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Energy;
+				else if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Energy) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Reactor;
+				else if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Reactor) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Bionic;
+				else if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Bionic) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Bridge;
+				else if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Bridge) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Engine;
+				else if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Engine) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Drive;
+				else if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Drive) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Any;
+				essentialToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenEssentialType);
+				repopulateList = true;
+			} else if (economyToggle.isOn) {
+				if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Any) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Cryobay;
+				else if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Cryobay) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Cryodream;
+				else if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Cryodream) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Cryosleep;
+				else if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Cryosleep) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Laboratory;
+				else if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Laboratory) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Greenhouse;
+				else if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Greenhouse) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Refinery;
+				else if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Refinery) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Any;
+				economyToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenEconomyType);
+				repopulateList = true;
+			} else if (otherToggle.isOn) {
+				if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Any) FFU_BE_Defs.chosenCacheType = Core.CacheType.Default;
+				else if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Default) FFU_BE_Defs.chosenCacheType = Core.CacheType.Weapons;
+				else if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Weapons) FFU_BE_Defs.chosenCacheType = Core.CacheType.Implants;
+				else if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Implants) FFU_BE_Defs.chosenCacheType = Core.CacheType.Upgrades;
+				else if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Upgrades) FFU_BE_Defs.chosenCacheType = Core.CacheType.Artifact;
+				else if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Artifact) FFU_BE_Defs.chosenCacheType = Core.CacheType.Any;
+				otherToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenCacheType);
+				repopulateList = true;
+			}
+		}
+		private void SelectPrevSubCategory() {
+			if (cargoToggle.isOn) {
+				if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Any) FFU_BE_Defs.chosenCargoType = Core.CargoType.ResPack;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.ResPack) FFU_BE_Defs.chosenCargoType = Core.CargoType.Exotics;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Exotics) FFU_BE_Defs.chosenCargoType = Core.CargoType.Exoplosives;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Exoplosives) FFU_BE_Defs.chosenCargoType = Core.CargoType.Synthetics;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Synthetics) FFU_BE_Defs.chosenCargoType = Core.CargoType.Metals;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Metals) FFU_BE_Defs.chosenCargoType = Core.CargoType.Starfuel;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Starfuel) FFU_BE_Defs.chosenCargoType = Core.CargoType.Organics;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Organics) FFU_BE_Defs.chosenCargoType = Core.CargoType.Multi;
+				else if (FFU_BE_Defs.chosenCargoType == Core.CargoType.Multi) FFU_BE_Defs.chosenCargoType = Core.CargoType.Any;
+				cargoToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenCargoType);
+				repopulateList = true;
+			} else if (weaponsToggle.isOn) {
+				if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Any) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.CIWS;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.CIWS) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.ExoticRay;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.ExoticRay) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Radiator;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Radiator) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Disruptor;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Disruptor) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.HeatRay;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.HeatRay) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Beamer;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Beamer) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Laser;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Laser) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Railcannon;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Railcannon) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Railgun;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Railgun) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Howitzer;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Howitzer) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Autocannon;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Autocannon) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Launcher;
+				else if (FFU_BE_Defs.chosenWeaponType == Core.WeaponType.Launcher) FFU_BE_Defs.chosenWeaponType = Core.WeaponType.Any;
+				weaponsToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenWeaponType);
+				repopulateList = true;
+			} else if (nukesToggle.isOn) {
+				if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Any) FFU_BE_Defs.chosenNukeType = Core.NukeType.Strategic;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Strategic) FFU_BE_Defs.chosenNukeType = Core.NukeType.Boarding;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Boarding) FFU_BE_Defs.chosenNukeType = Core.NukeType.Chemical;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Chemical) FFU_BE_Defs.chosenNukeType = Core.NukeType.Tactical;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Tactical) FFU_BE_Defs.chosenNukeType = Core.NukeType.Thermal;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Thermal) FFU_BE_Defs.chosenNukeType = Core.NukeType.Energy;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Energy) FFU_BE_Defs.chosenNukeType = Core.NukeType.Kinetic;
+				else if (FFU_BE_Defs.chosenNukeType == Core.NukeType.Kinetic) FFU_BE_Defs.chosenNukeType = Core.NukeType.Any;
+				nukesToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenNukeType);
+				repopulateList = true;
+			} else if (survivalToggle.isOn) {
+				if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Any) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Decoy;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Decoy) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Health;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Health) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.EWAR;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.EWAR) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Stealth;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Stealth) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Sensor;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Sensor) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Battery;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Battery) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Shield;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Shield) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Armor;
+				else if (FFU_BE_Defs.chosenSurvivalType == Core.SurvivalType.Armor) FFU_BE_Defs.chosenSurvivalType = Core.SurvivalType.Any;
+				survivalToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenSurvivalType);
+				repopulateList = true;
+			} else if (essentialToggle.isOn) {
+				if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Any) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Drive;
+				else if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Drive) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Engine;
+				else if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Engine) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Bridge;
+				else if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Bridge) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Bionic;
+				else if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Bionic) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Reactor;
+				else if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Reactor) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Energy;
+				else if (FFU_BE_Defs.chosenEssentialType == Core.EssentialType.Energy) FFU_BE_Defs.chosenEssentialType = Core.EssentialType.Any;
+				essentialToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenEssentialType);
+				repopulateList = true;
+			} else if (economyToggle.isOn) {
+				if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Any) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Refinery;
+				else if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Refinery) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Greenhouse;
+				else if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Greenhouse) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Laboratory;
+				else if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Laboratory) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Cryosleep;
+				else if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Cryosleep) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Cryodream;
+				else if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Cryodream) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Cryobay;
+				else if (FFU_BE_Defs.chosenEconomyType == Core.EconomyType.Cryobay) FFU_BE_Defs.chosenEconomyType = Core.EconomyType.Any;
+				economyToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenEconomyType);
+				repopulateList = true;
+			} else if (otherToggle.isOn) {
+				if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Any) FFU_BE_Defs.chosenCacheType = Core.CacheType.Artifact;
+				else if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Artifact) FFU_BE_Defs.chosenCacheType = Core.CacheType.Upgrades;
+				else if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Upgrades) FFU_BE_Defs.chosenCacheType = Core.CacheType.Implants;
+				else if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Implants) FFU_BE_Defs.chosenCacheType = Core.CacheType.Weapons;
+				else if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Weapons) FFU_BE_Defs.chosenCacheType = Core.CacheType.Default;
+				else if (FFU_BE_Defs.chosenCacheType == Core.CacheType.Default) FFU_BE_Defs.chosenCacheType = Core.CacheType.Any;
+				otherToggle.transform.GetChild(1).GetComponent<Text>().text = HandleToggleText(FFU_BE_Defs.chosenCacheType);
+				repopulateList = true;
+			}
+		}
+		private static string HandleToggleText(Core.CargoType cargoType) {
+			switch (cargoType) {
+				case Core.CargoType.Multi: return "MULTICONTAINERS";
+				case Core.CargoType.Organics: return "ORGANICS STORAGES";
+				case Core.CargoType.Starfuel: return "STARFUEL STORAGES";
+				case Core.CargoType.Metals: return "METALS STORAGES";
+				case Core.CargoType.Synthetics: return "SYNTHETICS STORAGES";
+				case Core.CargoType.Exoplosives: return "EXOPLOSIVES STORAGES";
+				case Core.CargoType.Exotics: return "EXOTICS STORAGES";
+				case Core.CargoType.ResPack: return "RESOURCE PACKS";
+				default: return "CARGO";
+			}
+		}
+		private static string HandleToggleText(Core.WeaponType weaponType) {
+			switch (weaponType) {
+				case Core.WeaponType.Launcher: return "ROCKET LAUNCHERS";
+				case Core.WeaponType.Autocannon: return "AUTOCANNONS";
+				case Core.WeaponType.Howitzer: return "HOWITZERS";
+				case Core.WeaponType.Railgun: return "RAILGUNS";
+				case Core.WeaponType.Railcannon: return "RAILCANNONS";
+				case Core.WeaponType.Laser: return "LASER EMITTERS";
+				case Core.WeaponType.Beamer: return "BEAM EMITTERS";
+				case Core.WeaponType.HeatRay: return "HEAT RAY PROJECTORS";
+				case Core.WeaponType.Disruptor: return "ENERGY DISRUPTORS";
+				case Core.WeaponType.Radiator: return "RADIATION ACCELERATORS";
+				case Core.WeaponType.ExoticRay: return "EXOTIC DISINTEGRATORS";
+				case Core.WeaponType.CIWS: return "CLOSE-IN WEAPON SYSTEMS";
+				default: return "WEAPONS";
+			}
+		}
+		private static string HandleToggleText(Core.NukeType nukeType) {
+			switch (nukeType) {
+				case Core.NukeType.Kinetic: return "KINETIC NUKES";
+				case Core.NukeType.Energy: return "ENERGY NUKES";
+				case Core.NukeType.Thermal: return "THERMAL NUKES";
+				case Core.NukeType.Tactical: return "TACTICAL NUKES";
+				case Core.NukeType.Chemical: return "CHEMICAL NUKES";
+				case Core.NukeType.Boarding: return "BOARDING NUKES";
+				case Core.NukeType.Strategic: return "STRATEGIC NUKES";
+				default: return "NUKES";
+			}
+		}
+		private static string HandleToggleText(Core.SurvivalType survivalType) {
+			switch (survivalType) {
+				case Core.SurvivalType.Armor: return "ARMOR PLATES";
+				case Core.SurvivalType.Shield: return "SHIELD GENERATORS";
+				case Core.SurvivalType.Battery: return "SHIELD BATTERIES";
+				case Core.SurvivalType.Sensor: return "SENSOR ARRAYS";
+				case Core.SurvivalType.Stealth: return "STEALTH GENERATORS";
+				case Core.SurvivalType.EWAR: return "ELECTRONIC COUNTERMEASURES";
+				case Core.SurvivalType.Health: return "RESTORATION BAYS";
+				case Core.SurvivalType.Decoy: return "DECOY MODULES";
+				default: return "SURVIVAL";
+			}
+		}
+		private static string HandleToggleText(Core.EssentialType essentialType) {
+			switch (essentialType) {
+				case Core.EssentialType.Energy: return "ALL REACTORS";
+				case Core.EssentialType.Reactor: return "STANDARD REACTORS";
+				case Core.EssentialType.Bionic: return "ORGANIC REACTORS";
+				case Core.EssentialType.Bridge: return "COMMAND BRIDGES";
+				case Core.EssentialType.Engine: return "STARSHIP ENGINES";
+				case Core.EssentialType.Drive: return "HYPERSPACE DRIVES";
+				default: return "ESSENTIAL";
+			}
+		}
+		private static string HandleToggleText(Core.EconomyType economyType) {
+			switch (economyType) {
+				case Core.EconomyType.Cryobay: return "ALL CRYONIC BAYS";
+				case Core.EconomyType.Cryodream: return "CRYODREAM BAYS";
+				case Core.EconomyType.Cryosleep: return "CRYOSLEEP BAYS";
+				case Core.EconomyType.Laboratory: return "LABORATORIES";
+				case Core.EconomyType.Greenhouse: return "GREENHOUSES";
+				case Core.EconomyType.Refinery: return "RESOURCE CONVERTERS";
+				default: return "ECONOMY";
+			}
+		}
+		private static string HandleToggleText(Core.CacheType cacheType) {
+			switch (cacheType) {
+				case Core.CacheType.Default: return "ALL USABLE CACHES";
+				case Core.CacheType.Weapons: return "WEAPON CACHES";
+				case Core.CacheType.Implants: return "IMPLANT CACHES";
+				case Core.CacheType.Upgrades: return "UPGRADE CACHES";
+				case Core.CacheType.Artifact: return "ARTIFACT MODULES";
+				default: return "OTHER";
+			}
 		}
 	}
 	public class patch_ModuleSlotListItem : ModuleSlotListItem {

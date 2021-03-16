@@ -87,21 +87,72 @@ namespace FFU_Bleeding_Edge {
 		public static IDictionary<int, string> shipPrefabsDoorName = new Dictionary<int, string>();
 		public static IDictionary<int, float> moduleEmissionPrefabs = new Dictionary<int, float>();
 		public static IDictionary<int, int[]> perkStoredBlueprintIDs = new Dictionary<int, int[]>();
-		public static IDictionary<string, List<int>> weaponTypeIDs = new Dictionary<string, List<int>>() {
-			{"Launchers", new List<int>()},
-			{"Autocannons", new List<int>()},
-			{"Howitzers", new List<int>()},
-			{"Railguns", new List<int>()},
-			{"Railcannons", new List<int>()},
-			{"Lasers", new List<int>()},
-			{"Beams", new List<int>()},
-			{"Heat Rays", new List<int>()},
-			{"Disruptors", new List<int>()},
-			{"Exotic Rays", new List<int>()}};
-		public static IDictionary<string, List<int>> cacheTypeIDs = new Dictionary<string, List<int>>() {
-			{"Weapons", new List<int>()},
-			{"Implants", new List<int>()},
-			{"Upgrades", new List<int>()}};
+		public static Core.CargoType chosenCargoType = Core.CargoType.Any;
+		public static Core.WeaponType chosenWeaponType = Core.WeaponType.Any;
+		public static Core.NukeType chosenNukeType = Core.NukeType.Any;
+		public static Core.SurvivalType chosenSurvivalType = Core.SurvivalType.Any;
+		public static Core.EssentialType chosenEssentialType = Core.EssentialType.Any;
+		public static Core.EconomyType chosenEconomyType = Core.EconomyType.Any;
+		public static Core.CacheType chosenCacheType = Core.CacheType.Any;
+		public static IDictionary<Core.CargoType, List<int>> cargoTypeIDs = new Dictionary<Core.CargoType, List<int>>() {
+			{Core.CargoType.Multi, new List<int>()},
+			{Core.CargoType.Organics, new List<int>()},
+			{Core.CargoType.Starfuel, new List<int>()},
+			{Core.CargoType.Metals, new List<int>()},
+			{Core.CargoType.Synthetics, new List<int>()},
+			{Core.CargoType.Exoplosives, new List<int>()},
+			{Core.CargoType.Exotics, new List<int>()},
+			{Core.CargoType.ResPack, new List<int>()}};
+		public static IDictionary<Core.WeaponType, List<int>> weaponTypeIDs = new Dictionary<Core.WeaponType, List<int>>() {
+			{Core.WeaponType.Launcher, new List<int>()},
+			{Core.WeaponType.Autocannon, new List<int>()},
+			{Core.WeaponType.Howitzer, new List<int>()},
+			{Core.WeaponType.Railgun, new List<int>()},
+			{Core.WeaponType.Railcannon, new List<int>()},
+			{Core.WeaponType.Laser, new List<int>()},
+			{Core.WeaponType.Beamer, new List<int>()},
+			{Core.WeaponType.HeatRay, new List<int>()},
+			{Core.WeaponType.Disruptor, new List<int>()},
+			{Core.WeaponType.Radiator, new List<int>()},
+			{Core.WeaponType.ExoticRay, new List<int>()},
+			{Core.WeaponType.CIWS, new List<int>()}};
+		public static IDictionary<Core.NukeType, List<int>> nukeTypeIDs = new Dictionary<Core.NukeType, List<int>>() {
+			{Core.NukeType.Kinetic, new List<int>()},
+			{Core.NukeType.Energy, new List<int>()},
+			{Core.NukeType.Thermal, new List<int>()},
+			{Core.NukeType.Tactical, new List<int>()},
+			{Core.NukeType.Chemical, new List<int>()},
+			{Core.NukeType.Boarding, new List<int>()},
+			{Core.NukeType.Strategic, new List<int>()}};
+		public static IDictionary<Core.SurvivalType, List<int>> survivalTypeIDs = new Dictionary<Core.SurvivalType, List<int>>() {
+			{Core.SurvivalType.Armor, new List<int>()},
+			{Core.SurvivalType.Shield, new List<int>()},
+			{Core.SurvivalType.Battery, new List<int>()},
+			{Core.SurvivalType.Sensor, new List<int>()},
+			{Core.SurvivalType.Stealth, new List<int>()},
+			{Core.SurvivalType.EWAR, new List<int>()},
+			{Core.SurvivalType.Health, new List<int>()},
+			{Core.SurvivalType.Decoy, new List<int>()}};
+		public static IDictionary<Core.EssentialType, List<int>> essentialTypeIDs = new Dictionary<Core.EssentialType, List<int>>() {
+			{Core.EssentialType.Bridge, new List<int>()},
+			{Core.EssentialType.Engine, new List<int>()},
+			{Core.EssentialType.Drive, new List<int>()},
+			{Core.EssentialType.Reactor, new List<int>()},
+			{Core.EssentialType.Bionic, new List<int>()},
+			{Core.EssentialType.Energy, new List<int>()}};
+		public static IDictionary<Core.EconomyType, List<int>> economyTypeIDs = new Dictionary<Core.EconomyType, List<int>>() {
+			{Core.EconomyType.Cryodream, new List<int>()},
+			{Core.EconomyType.Cryosleep, new List<int>()},
+			{Core.EconomyType.Cryobay, new List<int>()},
+			{Core.EconomyType.Laboratory, new List<int>()},
+			{Core.EconomyType.Greenhouse, new List<int>()},
+			{Core.EconomyType.Refinery, new List<int>()}};
+		public static IDictionary<Core.CacheType, List<int>> cacheTypeIDs = new Dictionary<Core.CacheType, List<int>>() {
+			{Core.CacheType.Weapons, new List<int>()},
+			{Core.CacheType.Implants, new List<int>()},
+			{Core.CacheType.Upgrades, new List<int>()},
+			{Core.CacheType.Default, new List<int>()},
+			{Core.CacheType.Artifact, new List<int>()}};
 		public static IDictionary<int, List<int>> sectorViableModuleIDs = new Dictionary<int, List<int>>() {
 			{0, new List<int>()},
 			{1, new List<int>()},
@@ -139,9 +190,9 @@ namespace FFU_Bleeding_Edge {
 			1751631045, /* Dead Eye Kinetic Railgun */
 			842299308,  /* Ancient 1-Core Laser Emitter */
 			55650103,   /* Scrap Cutter Beam Emitter */
-			144623758,  /* Impulse Wave Beam Emitter */
 			981179656,  /* Thermal Wave Heat Ray Projector */
 			1386212334, /* Charged Wave Energy Disruptor */
+			144623758,  /* Impulse Wave Irradiation Emitter */
 			2075523594, /* Chromatic Flare Exotic Ray Projector */
 			893617597,  /* Makeshift Standard CIWS */
 			983196801,  /* Makeshift Command Bridge */
@@ -198,6 +249,12 @@ namespace FFU_Bleeding_Edge {
 			1571322820, /* Annihilator Rocket Launcher */
 			876704941,  /* Shockwave Plasma Howitzer */
 			412909021,  /* Liberator Kinetic Railcannon */
+			2100491633, /* Quint-Effector Laser Emitter */
+			849984806,  /* Ultra-Effector Beam Emitter */
+			728051246,  /* Aflame Inferno Heat Ray Projector */
+			1317545673, /* Singularity Energy Disruptor */
+			1238435842, /* BFG9000 Plus Radiation Accelerator */
+			452279033,  /* Hi-Gothic Relic Exotic Disintegrator */
 			1851270005, /* Blackhammer Kinetic Nuke */
 			2106923011, /* Ion Storm Energy Nuke */
 			780823633,  /* Hellfire Thermal Nuke */
@@ -470,10 +527,6 @@ namespace FFU_Bleeding_Edge {
 			string colorNukeBrd = "8060ff";
 			string colorNukeStr = "ff0000";
 			foreach (Text txt in Resources.FindObjectsOfTypeAll<Text>()) {
-				if (txt.name.Contains("Continued development")) txt.text = $"FFU: Bleeding Edge v{modVersion}";
-				if (txt.name.Contains("After many good years of work")) txt.text = "If you see this message, it means that you've installed " +
-					"<color=orange>Fight For Universe: Bleeding Edge</color> mod for <color=#4fd376>Shortest Trip to Earth</color>, because original " +
-					"amount of <color=#cc0000>death and desperation</color> was not enough and you decided to go full IDDQD.";
 				if (txt.name.Contains("WeaponIgnoresShieldValue")) txt.text = "Shield Bypass";
 				if (txt.name.Contains("WeaponNeverDeflectsValue")) txt.text = "Deflect Ignore";
 				if (txt.name.Contains("WeaponTracksTargetValue")) txt.text = "<color=lime>Tracks Target</color>";
@@ -1556,6 +1609,7 @@ namespace FFU_Bleeding_Edge {
 				else if (refModule.displayName.Contains("Beam")) lookupType = "Beam";
 				else if (refModule.displayName.Contains("Heat Ray")) lookupType = "Heat Ray";
 				else if (refModule.displayName.Contains("Disruptor")) lookupType = "Disruptor";
+				else if (refModule.displayName.Contains("Irradiation")) lookupType = "Irradiation";
 				else if (refModule.displayName.Contains("Exotic Ray")) lookupType = "Exotic Ray";
 				if (refModule.displayName.Contains("Explosive")) lookupSubType = "Explosive";
 				else if (refModule.displayName.Contains("Kinetic")) lookupSubType = "Kinetic";

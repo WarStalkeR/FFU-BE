@@ -25,6 +25,7 @@ namespace FFU_Bleeding_Edge {
 			switch (shipModule.PrefabId) {
 				case 893617597: //0 DIY PD
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Makeshift <color=#" + colorPointDef + "ff>Standard CIWS</color>";
 				shipModule.description = "Improvised close-in weapon system that made from spare weapon. Can intercept missiles, projectiles, asteroids and boarding pods at low range. Has very long reload time.";
@@ -40,6 +41,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 687853920: //1 Rat PD
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Ancient <color=#" + colorPointDef + "ff>Standard CIWS</color>";
 				shipModule.description = "Decommissioned close-in weapon system that was manufactured centuries ago. Can intercept missiles, projectiles, asteroids and boarding pods at low range with mediocre rate.";
@@ -55,6 +57,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 106454213: //3 Rat PD 2
 				if (initItemData) ProcessDLC.ApplySectorViablility(shipModule.PrefabId);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = "Imperial <color=#" + colorPointDef + "ff>Standard CIWS</color>";
 				shipModule.description = "Close-in weapon system that was developed by Rat Empire. Can intercept missiles, projectiles, asteroids and boarding pods at mediocre, but still lacking as point defense.";
@@ -70,6 +73,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 804479599: //6 Squid PD
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Biochemical <color=#" + colorPointDef + "ff>Advanced CIWS</color>";
 				shipModule.description = "Organic close-in weapon system that was grown in special environment. Can intercept missiles, projectiles, asteroids and boarding pods at moderate range with decent rate.";
@@ -85,6 +89,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 583909453: //4 Insectoid PD
 				if (initItemData) ProcessDLC.ApplySectorViablility(shipModule.PrefabId);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = "Marauder <color=#" + colorPointDef + "ff>Advanced CIWS</color>";
 				shipModule.description = "Close-in weapon system that is used by various unlawful organizations. Can intercept missiles, projectiles, asteroids and boarding pods at decent range with good rate.";
@@ -100,6 +105,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1468502746: //5 Human PD
 				if (initItemData) ProcessDLC.ApplySectorViablility(shipModule.PrefabId);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, ProcessDLC.GetEmission(shipModule.PrefabId));
 				shipModule.displayName = "Phalanx <color=#" + colorPointDef + "ff>Advanced CIWS</color>";
 				shipModule.description = "Military issued close-in weapon system for ships at intensive conflict zones. Can intercept missiles, projectiles, asteroids and boarding pods at good range with great rate.";
@@ -115,6 +121,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1381757148: //7 Red PD
 				if (initItemData) ProcessDLC.ApplySectorViablility(shipModule.PrefabId);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
 				shipModule.displayName = "Commercial <color=#" + colorPointDef + "ff>Tactical CIWS</color>";
 				shipModule.description = "A close-in weapon system that was developed for sake of profit and is sold to anybody who can afford it. Can intercept incoming targets at good range with high rate.";
@@ -130,6 +137,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 507685108: //8 Chunk PD
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Zweihander <color=#" + colorPointDef + "ff>Tactical CIWS</color>";
 				shipModule.description = "Heavily armored close-in weapon system that is mainly used heavily armored ships such as assault cruisers. Can intercept incoming targets at great range with very high rate.";
@@ -144,6 +152,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1230723452: //10 laser PD
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = "Parallax <color=#" + colorPointDef + "ff>Tactical CIWS</color>";
 				shipModule.description = "Advanced close-in weapon system filled to the brim with advanced tracking and targeting modules. Can intercept incoming targets at extreme range with very high rate.";
@@ -158,6 +167,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1495856276: //8 Crystal PD
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = "Prismatic <color=#" + colorPointDef + "ff>Tactical CIWS</color>";
 				shipModule.description = "Semi-organic close-in weapon system that is mainly made from exotic interconnected crystalline cells. Can intercept incoming targets at good range with excellent rate.";
@@ -172,6 +182,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 938711464: //2 Tiger PD
 				if (initItemData) ProcessDLC.ApplySectorViablility(shipModule.PrefabId);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.CIWS].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, ProcessDLC.GetEmission(shipModule.PrefabId));
 				shipModule.displayName = "Iron Dome <color=#" + colorPointDef + "ff>Tactical CIWS</color>";
 				shipModule.description = "Best close-in weapon system that used on ships participating in most dangerous expeditions. Can perfectly intercept missiles, projectiles, asteroids and boarding pods.";

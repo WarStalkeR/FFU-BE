@@ -69,6 +69,7 @@ namespace FFU_Bleeding_Edge {
 			switch (shipModule.PrefabId) {
 				case 1012765355: //02 Decoy nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Iron Harvest <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
 				shipModule.description = "Everything aside from engine is solid tungsten carbide alloy. Perfect as decoy due to immense durability. Impact can leave dents at ship's hull.";
@@ -89,6 +90,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 247153919: //07 Greentail nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Biotic Thorn <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
 				shipModule.description = "Semisolid bionic capital missile that uses reactive chemical reagent on impact to breach ship's hull and everything else in its way. Environmentally friendly.";
@@ -109,6 +111,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1025580152: //02 Spideraa decoy nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Hunter Killer <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
 				shipModule.description = "Mass-produced capital missile that concentrates and releases all destructive energy at one point on impact, that destroys everything in its direction.";
@@ -129,6 +132,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1441404901: //07 Greentail nuke launcher 2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Biotic Spike <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
 				shipModule.description = "Exotic semisolid bionic capital missile that uses extremely corrosive exotic chemical reagent on impact to breach ship's hull and everything else in its way.";
@@ -149,6 +153,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 2070090696: //Tiger Monolith nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Bright Fury <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
 				shipModule.description = "Specialized capital missile made from ultra-hard and ultra-heavy material that utilizes experimental antimatter thrusters to accelerate indefinitely toward the target.";
@@ -169,6 +174,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1851270005: //Monolith nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.02f);
 				shipModule.displayName = "Blackhammer <color=#" + colorNukeKin + "ff>Kinetic</color> Nuke";
 				shipModule.description = "An unconventional capital missile that on near-impact accelerates to the speed of light to generate destructive immense kinetic energy in tandem in a single direction.";
@@ -189,6 +195,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 92356131: //00 DIY decoy nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Powerpack <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
 				shipModule.description = "Made from printed steel boiler filled with volatile electronic scrap to the brim. Extremely cheap and extremely fragile, but provides at least some form of electronic warfare.";
@@ -209,6 +216,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 430038657: //00 DIY EMP nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Discharge <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
 				shipModule.description = "Manually assembled energy capital missile. Overloads shields and modules in the hit area. Fragile and may benefit from synced shots or decoys to distract enemy CIWS.";
@@ -229,6 +237,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1073969324: //00 DIY shieldbreaker nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Disruptor <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
 				shipModule.description = "This capital missile carries a strong energy emission payload that increases its shield overloading capability and effective EMP radius. May zap unprotected crew.";
@@ -249,6 +258,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1773946856: //16 EMP rat nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Pulse Wave <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
 				shipModule.description = "An improved energy capital missile that releases a very strong disharmony pulse wave that overloads shields, disables modules and electrifies crew a little bit.";
@@ -269,6 +279,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 120056764: //Tiger EMP dual nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Dual Shock <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
 				shipModule.description = "Specialized energy capital missile that uses resonance EMP generator to release pulse wave that overloads shields, disables modules and seriously electrifies crew.";
@@ -289,6 +300,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 2106923011: //11 EMP nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Energy].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.05f);
 				shipModule.displayName = "Ion Storm <color=#" + colorNukeEnr + "ff>Energy</color> Nuke";
 				shipModule.description = "Advanced energy capital missile that releases extremely strong electromagnetic pulse wave that overloads shields, disables modules and painfully electrifies crew.";
@@ -309,6 +321,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 2146165248: //04 DIY fuel pack launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Firepack <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
 				shipModule.description = "Thermal capital missile that was manually assembled from solidified starfuel, engines and crude armor. On impact effectively sets ship's interiors on fire.";
@@ -329,6 +342,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 507989399: //00 DIY Rat fireball nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Fireball <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
 				shipModule.description = "Improvised thermal capital missile that was made from various munitions and high pressure fuel tanks. Releases pressurized and self-igniting liquid on impact.";
@@ -349,6 +363,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 949056369: //03 Barrel nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Phosphate <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
 				shipModule.description = "Old external fuel tank modified into thermal capital missile by welding in engine and additional armor. Contains a lot of self-igniting pressurized liquid that is released on impact.";
@@ -369,6 +384,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 787880682: //09 Rat nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Blazefire <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
 				shipModule.description = "Thermal capital missile that contains specialized solid payload that self-ignites when leaves vacuum environment and comes into contact with other material or gases.";
@@ -389,6 +405,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 697717866: //13 Bullseye nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Firestorm <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
 				shipModule.description = "Improved thermal capital missile that uses highly radioactive and volatile liquid mixed with exotic materials that rise overall temperature of fires to the extreme levels.";
@@ -409,6 +426,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 780823633: //04 Fueltank nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Thermal].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Hellfire <color=#" + colorNukeThr + "ff>Thermal</color> Nuke";
 				shipModule.description = "Advanced thermal capital missile that uses extremely volatile payload of exotic origin that almost incinerates vacuum itself, when not contained in a specialized environment.";
@@ -429,6 +447,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 533676501: //04 DIY explo pack launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Explopack <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
 				shipModule.description = "A manually assembled tactical capital missile that does some external and internal damage to ship. Made form combined explosive packs with engines and crude armor.";
@@ -449,6 +468,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 686511980: //08e thin speeder nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Stingray <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
 				shipModule.description = "Cheap and effective tactical capital missile that was designed centuries. Originally was used by a certain organization that fought off alien invasions since 1994.";
@@ -469,6 +489,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 157230770: //06 Tiger nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Sub-Seismic <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
 				shipModule.description = "Originally a mining charge that was used for shattering colossal asteroids. Was found out that it is just as useful as tactical capital missile for shattering ship hulls.";
@@ -489,6 +510,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 997641622: //14 Red EB nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Commercial <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
 				shipModule.description = "Improved tactical capital missile that was developed for sake of profit and sold to anybody who can afford it. Self-assembly will result in breach of copyright agreements.";
@@ -509,6 +531,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 342953834: //08d Spearhead nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Avalanche <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
 				shipModule.description = "Advanced well-armored tactical capital missile that deals decent damage to interior and exterior of the ship, and releases self-igniting shrapnel that damages crew.";
@@ -529,6 +552,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 120466776: //Tiger 8x nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Tactical].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Cataclysm <color=#" + colorNukeTac + "ff>Tactical</color> Nuke";
 				shipModule.description = "Experimental capital missile with cluster warhead filled with 8 sub-munition charges. While each sub-munition charge doesn't have much of an impact, sheer quantity easily makes up for it.";
@@ -549,6 +573,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1771248833: //04 DIY plastics launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Synthpack <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
 				shipModule.description = "A manually assembled tactical capital missile that is used to poison and kill crewmembers of hostile ship. Made form combined synthetic packs with engines and crude armor.";
@@ -569,6 +594,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 955652403: //07 DIY acid nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Corrosion <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
 				shipModule.description = "Chemical capital missiles that releases a splash of extremely corrosive and acidic liquid that melts any organics (such as crew) and light robotic alloy composites.";
@@ -589,6 +615,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1178343825: //13 nanopellet nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Green Mist <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
 				shipModule.description = "This chemical capital missile releases a huge cloud of corrosive/acidic nanopellets on impact that causes severe damage to the crew and minor damage to everything else.";
@@ -609,6 +636,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 475763260: //07 Weirdship Chem nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Deathmite <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
 				shipModule.description = "Chemical capital missile of organic origin. Releases a pressurized, environmentally friendly, extremely corrosive liquid on impact that severely damages all crew.";
@@ -629,6 +657,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1711403825: //Tiger sharpnel nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Acid Rain <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
 				shipModule.description = "Specialized capital missile that utilizes synthetic, very corrosive and acidic reagent, which is contained under the high pressure and released on capital missile impact.";
@@ -649,6 +678,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 22001514: //08c Green nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Chemical].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.04f);
 				shipModule.displayName = "Green Death <color=#" + colorNukeChm + "ff>Chemical</color> Nuke";
 				shipModule.description = "Advanced chemical capital missile that contains extremely corrosive, acidic and exotic reagent under the highest pressure possible that is released on impact.";
@@ -669,6 +699,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 2053889862: //07 DIY bionuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Boarding].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Boarding].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Micromite <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
 				shipModule.description = "Experimental capital missile that uses instant-hatching cocoons as payload. Contains small amount of active organic payload: aggressive lifeforms with limited lifespan.";
@@ -690,6 +721,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 141822690: //07 Weirdship Minibio nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Boarding].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Boarding].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Deathspore <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
 				shipModule.description = "Semi-organic capital missile that has high capacity and suitable internal environment. Contains decent amount of active organic payload: aggressive lifeforms with limited lifespan.";
@@ -711,6 +743,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1350933427: //99 maggot spawner launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Boarding].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Boarding].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Infestator <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
 				shipModule.description = "Capital missile of unknown origin, but has huge capacity and perfect internal environment. Contains huge amount of active organic payload: aggressive lifeforms with limited lifespan.";
@@ -732,6 +765,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1043100994: //99 pirate spawner launcher 1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Boarding].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Boarding].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Ramshackle <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
 				shipModule.description = "Capital missile developed by pirate factions that especially fond of boarding enemy ships. Filled to brim with scrap-made berserk drones that are more then happy rip and tear everything.";
@@ -753,6 +787,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 381835966: //Tiger intruderbot nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Boarding].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Boarding].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.03f);
 				shipModule.displayName = "Apocalypse <color=#" + colorNukeBrd + "ff>Boarding</color> Nuke";
 				shipModule.description = "Capital missile developed by Terran Federation. Densely packed with sturdy, but expendable industrial drones that were reconfigured with military grade software for boarding operations.";
@@ -774,6 +809,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 858424257: //04 DIY exotics nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "Exopack <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
 				shipModule.description = "A makeshift strategic capital missiles that made from destabilized exotics combined with crude armor, engines and a small fuel tank. Damages hull and overloads modules on impact.";
@@ -794,6 +830,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1207909377: //06 DIY probe nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "Satellite <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
 				shipModule.description = "Improvised strategical capital missile that made by arming an old soviet probe with unstable reactor and packing it to brim with destabilized exotics for better effect.";
@@ -814,6 +851,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 227136891: //08a Happy nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "Happy World <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
 				shipModule.description = "A civilian use strategic capital missile with a reduced payload. On impact damages exterior and interior of the ships, ignites objects, damages crew and releases EMP blast wave.";
@@ -834,6 +872,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 415755100: //08b Old nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7, 8);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "SS-18 Satan <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
 				shipModule.description = "Ancient strategic capital missile that dates back to 1974, but still printed and used even to this day for its high area of effect, damage capacity and released EMP wave.";
@@ -854,6 +893,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1392399452: //10 White nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "White Death <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
 				shipModule.description = "Modern military-grade strategic capital missile that was developed not so long ago. Ignites objects, damages modules, crew and hull, and releases strong EMP wave on impact.";
@@ -874,6 +914,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1558344950: //15 Black nuke launcher
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Contains(shipModule.PrefabId)) FFU_BE_Defs.nukeTypeIDs[Core.NukeType.Strategic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.06f);
 				shipModule.displayName = "Void Fire <color=#" + colorNukeStr + "ff>Strategic</color> Nuke";
 				shipModule.description = "Experimental strategic capital missile that contains huge exotic payload that turns into overwhelming antimatter energy on impact with severe consequences for the target.";

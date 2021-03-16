@@ -996,8 +996,8 @@ namespace RST {
 			}
 			if (!module.TurnedOnAndIsWorking) reloadTimer.Restart(reloadInterval);
 			else if (!inShootSequence) {
-				if (module.HasFullHealth) reloadTimer.Update(reloadIntervalTakesNoBonuses ? 1f : 1f / WorldRules.Instance.gunnerySkillEffects.EffectiveSkillMultiplier(module, true));
-				else reloadTimer.Update(reloadIntervalTakesNoBonuses ? FFU_BE_Defs.GetHealthPercent(module) : 1f / WorldRules.Instance.gunnerySkillEffects.EffectiveSkillMultiplier(module, true) * FFU_BE_Defs.GetHealthPercent(module));
+				if (module.HasFullHealth) reloadTimer.Update(reloadIntervalTakesNoBonuses ? 1f : 1f / WorldRules.Instance.gunnerySkillEffects.EffectiveSkillMultiplier(module, true) * (PerFrameCache.IsGoodSituation ? 10f : 1f));
+				else reloadTimer.Update(reloadIntervalTakesNoBonuses ? FFU_BE_Defs.GetHealthPercent(module) : 1f / WorldRules.Instance.gunnerySkillEffects.EffectiveSkillMultiplier(module, true) * (PerFrameCache.IsGoodSituation ? 10f : 1f) * FFU_BE_Defs.GetHealthPercent(module));
 			}
 			AudioSource audioSource = module.AudioSource;
 			if (!inShootSequence) {

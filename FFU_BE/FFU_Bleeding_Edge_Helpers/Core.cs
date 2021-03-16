@@ -107,6 +107,79 @@ namespace FFU_Bleeding_Edge {
 			MK_IX,
 			MK_X
 		}
+		public enum CargoType {
+			Multi,
+			Organics,
+			Starfuel,
+			Metals,
+			Synthetics,
+			Exoplosives,
+			Exotics,
+			ResPack,
+			Any
+		}
+		public enum WeaponType {
+			Launcher,
+			Autocannon,
+			Howitzer,
+			Railgun,
+			Railcannon,
+			Laser,
+			Beamer,
+			HeatRay,
+			Disruptor,
+			Radiator,
+			ExoticRay,
+			CIWS,
+			Any
+		}
+		public enum NukeType {
+			Kinetic,
+			Energy,
+			Thermal,
+			Tactical,
+			Chemical,
+			Boarding,
+			Strategic,
+			Any
+		}
+		public enum SurvivalType {
+			Armor,
+			Shield,
+			Battery,
+			Sensor,
+			Stealth,
+			EWAR,
+			Health,
+			Decoy,
+			Any
+		}
+		public enum EssentialType {
+			Energy,
+			Reactor,
+			Bionic,
+			Bridge,
+			Engine,
+			Drive,
+			Any
+		}
+		public enum EconomyType {
+			Cryobay,
+			Cryodream,
+			Cryosleep,
+			Laboratory,
+			Greenhouse,
+			Refinery,
+			Any
+		}
+		public enum CacheType {
+			Default,
+			Weapons,
+			Implants,
+			Upgrades,
+			Artifact,
+			Any
+		}
 		public enum TechLevel {
 			T1 = 0,
 			T2 = 1500,
