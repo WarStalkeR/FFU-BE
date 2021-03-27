@@ -25,8 +25,9 @@ namespace FFU_Bleeding_Edge {
 			switch (shipModule.PrefabId) {
 				case 241738085: //dronebay 0 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
-				shipModule.displayName = "Makeshift <color=#" + colorDrone + "ff>Drone Bay</color>";
+				shipModule.displayName = Core.TT($"Makeshift <color=#{colorDrone}ff>Drone Bay</color>");
 				shipModule.Medbay.secondsPerHp = 5f;
 				shipModule.Medbay.resourcesPerHp.synthetics = 15f;
 				shipModule.Medbay.acceptCrewTypes = new Crewmember.Type[] { Crewmember.Type.Drone };
@@ -36,8 +37,9 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 383658151: //dronebay 1 basic
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6, 7);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.1f);
-				shipModule.displayName = "Industrial <color=#" + colorDrone + "ff>Drone Bay</color>";
+				shipModule.displayName = Core.TT($"Industrial <color=#{colorDrone}ff>Drone Bay</color>");
 				shipModule.Medbay.secondsPerHp = 2f;
 				shipModule.Medbay.resourcesPerHp.synthetics = 5f;
 				shipModule.Medbay.acceptCrewTypes = new Crewmember.Type[] { Crewmember.Type.Drone };
@@ -47,8 +49,9 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1219429018: //medbay0 diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
-				shipModule.displayName = "Makeshift <color=#" + colorCrew + "ff>Medical Bay</color>";
+				shipModule.displayName = Core.TT($"Makeshift <color=#{colorCrew}ff>Medical Bay</color>");
 				shipModule.Medbay.secondsPerHp = 10f;
 				shipModule.Medbay.resourcesPerHp.organics = 15f;
 				shipModule.Medbay.acceptCrewTypes = new Crewmember.Type[] { Crewmember.Type.Regular, Crewmember.Type.Pet };
@@ -58,8 +61,9 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1145518339: //medbay1 Rat
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.7f);
-				shipModule.displayName = "Ancient <color=#" + colorCrew + "ff>Medical Bay</color>";
+				shipModule.displayName = Core.TT($"Ancient <color=#{colorCrew}ff>Medical Bay</color>");
 				shipModule.Medbay.secondsPerHp = 7f;
 				shipModule.Medbay.resourcesPerHp.organics = 15f;
 				shipModule.Medbay.acceptCrewTypes = new Crewmember.Type[] { Crewmember.Type.Regular, Crewmember.Type.Pet };
@@ -69,8 +73,9 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 384091446: //medbay2 startversion
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
-				shipModule.displayName = "Nanite <color=#" + colorCrew + "ff>Medical Bay</color>";
+				shipModule.displayName = Core.TT($"Nanite <color=#{colorCrew}ff>Medical Bay</color>");
 				shipModule.Medbay.secondsPerHp = 5f;
 				shipModule.Medbay.resourcesPerHp.organics = 12f;
 				shipModule.Medbay.acceptCrewTypes = new Crewmember.Type[] { Crewmember.Type.Regular, Crewmember.Type.Pet };
@@ -80,8 +85,9 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1145518341: //medbay3 nanorepair
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
-				shipModule.displayName = "Modern <color=#" + colorCrew + "ff>Medical Bay</color>";
+				shipModule.displayName = Core.TT($"Modern <color=#{colorCrew}ff>Medical Bay</color>");
 				shipModule.Medbay.secondsPerHp = 3f;
 				shipModule.Medbay.resourcesPerHp.organics = 10f;
 				shipModule.Medbay.acceptCrewTypes = new Crewmember.Type[] { Crewmember.Type.Regular, Crewmember.Type.Pet };
@@ -91,8 +97,9 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1197296009: //medbay5 biofluid bath
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
-				shipModule.displayName = "Aura <color=#" + colorCrew + "ff>Medical Bay</color>";
+				shipModule.displayName = Core.TT($"Aura <color=#{colorCrew}ff>Medical Bay</color>");
 				shipModule.Medbay.secondsPerHp = 2f;
 				shipModule.Medbay.resourcesPerHp.organics = 7f;
 				shipModule.Medbay.acceptCrewTypes = new Crewmember.Type[] { Crewmember.Type.Regular, Crewmember.Type.Pet };
@@ -102,8 +109,9 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 463896999: //medbay6 biological
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.1f);
-				shipModule.displayName = "Biotic <color=#" + colorCrew + "ff>Medical Bay</color>";
+				shipModule.displayName = Core.TT($"Biotic <color=#{colorCrew}ff>Medical Bay</color>");
 				shipModule.Medbay.secondsPerHp = 2f;
 				shipModule.Medbay.resourcesPerHp.organics = 5f;
 				shipModule.Medbay.acceptCrewTypes = new Crewmember.Type[] { Crewmember.Type.Regular, Crewmember.Type.Pet };
@@ -113,9 +121,10 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1304112764: //medbay4 stem celler
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Health].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
-				shipModule.displayName = "Genesis <color=#" + colorBoth + "ff>Restoration Bay</color>";
-				shipModule.description = "Universal restoration bay that consumes synthetics and organics at the same time to replace damaged cells & mechanic components on subatomic levels.";
+				shipModule.displayName = Core.TT($"Genesis <color=#{colorBoth}ff>Restoration Bay</color>");
+				shipModule.description = Core.TT($"Universal restoration bay that consumes synthetics and organics at the same time to replace damaged cells & mechanic components on subatomic levels.");
 				shipModule.Medbay.secondsPerHp = 1f;
 				shipModule.Medbay.resourcesPerHp.organics = 2f;
 				shipModule.Medbay.resourcesPerHp.synthetics = 2f;
@@ -126,7 +135,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				default:
 				Debug.LogWarning($"[NEW HEALBAY] {FFU_BE_Mod_Information.GetSelectedModuleExactData(shipModule, false, true, false, false, false)}");
-				shipModule.displayName = "(HEALBAY) " + shipModule.displayName;
+				shipModule.displayName = $"(HEALBAY) {shipModule.name}";
 				break;
 			}
 			AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = shipModule_maxHealth;

@@ -15,22 +15,24 @@ namespace FFU_Bleeding_Edge {
 			var shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
 			switch (shipModule.PrefabId) {
 				case 340864347: //weapondecoy1
-				shipModule.displayName = "Decoy Ordnance Armament";
-				shipModule.description = "A highly armored hardpoint that strengthens ship's integrity. Manufactured in order to fool hostile targeting systems. Appears as weapons to the enemy sensors.";
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Decoy].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Decoy].Add(shipModule.PrefabId);
+				shipModule.displayName = Core.TT($"Decoy Ordnance Armament");
+				shipModule.description = Core.TT($"A highly armored hardpoint that strengthens ship's integrity. Manufactured in order to fool hostile targeting systems. Appears as weapons to the enemy sensors.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 100f, metals = 1000f };
 				shipModule.maxHealthAdd = 20;
 				shipModule_maxHealth = 100;
 				break;
 				case 1505324046: //weapondecoy_alien
-				shipModule.displayName = "Decoy Alien Armament";
-				shipModule.description = "A highly armored hardpoint that strengthens ship's integrity. Manufactured in order to fool hostile targeting systems. Appears as unknown alien weapon to the enemy sensors.";
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Decoy].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Decoy].Add(shipModule.PrefabId);
+				shipModule.displayName = Core.TT($"Decoy Alien Armament");
+				shipModule.description = Core.TT($"A highly armored hardpoint that strengthens ship's integrity. Manufactured in order to fool hostile targeting systems. Appears as unknown alien weapon to the enemy sensors.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 150f, metals = 1500f };
 				shipModule.maxHealthAdd = 30;
 				shipModule_maxHealth = 150;
 				break;
 				default:
 				Debug.LogWarning($"[NEW DECOY] {FFU_BE_Mod_Information.GetSelectedModuleExactData(shipModule, false, true, false, false, false)}");
-				shipModule.displayName = "(DECOY) " + shipModule.displayName;
+				shipModule.displayName = $"(DECOY) {shipModule.name}";
 				break;
 			}
 			AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = shipModule_maxHealth;

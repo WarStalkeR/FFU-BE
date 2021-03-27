@@ -116,6 +116,13 @@ namespace FFU_Bleeding_Edge {
 			{Core.WeaponType.Radiator, new List<int>()},
 			{Core.WeaponType.ExoticRay, new List<int>()},
 			{Core.WeaponType.CIWS, new List<int>()}};
+		public static IDictionary<Core.CannonType, List<int>> cannonTypeIDs = new Dictionary<Core.CannonType, List<int>>() {
+			{Core.CannonType.Explosive, new List<int>()},
+			{Core.CannonType.Kinetic, new List<int>()},
+			{Core.CannonType.Plasma, new List<int>()},
+			{Core.CannonType.Corrosive, new List<int>()},
+			{Core.CannonType.Incendiary, new List<int>()},
+			{Core.CannonType.Antimatter, new List<int>()}};
 		public static IDictionary<Core.NukeType, List<int>> nukeTypeIDs = new Dictionary<Core.NukeType, List<int>>() {
 			{Core.NukeType.Kinetic, new List<int>()},
 			{Core.NukeType.Energy, new List<int>()},
@@ -251,7 +258,7 @@ namespace FFU_Bleeding_Edge {
 			412909021,  /* Liberator Kinetic Railcannon */
 			2100491633, /* Quint-Effector Laser Emitter */
 			849984806,  /* Ultra-Effector Beam Emitter */
-			728051246,  /* Aflame Inferno Heat Ray Projector */
+			1322541741, /* Hellfire Inferno Heat Ray Projector */
 			1317545673, /* Singularity Energy Disruptor */
 			1238435842, /* BFG9000 Plus Radiation Accelerator */
 			452279033,  /* Hi-Gothic Relic Exotic Disintegrator */
@@ -308,7 +315,7 @@ namespace FFU_Bleeding_Edge {
 		public static bool relativeEnemyCrewSkills = true;
 		public static bool listAllCrewmemberTypes = false;
 		public static float containerSizeMultiplier = 1.0f;
-		public static float resourcesScrapFraction = 0.2f;
+		public static float resourcesScrapFraction = 0.35f;
 		public static int newStartingFateBonus = 0;
 		public static int addFreeCrewSkillPoints = 0;
 		public static int minPlayerCrewSkillsLimit = 1;
@@ -518,6 +525,7 @@ namespace FFU_Bleeding_Edge {
 			string colorBeamEmt = "ff9060";
 			string colorHeatRay = "ff6060";
 			string colorEnergyRay = "0090ff";
+			string colorRadAccel = "008000";
 			string colorExoticRay = "9060ff";
 			string colorNukeKin = "add8e6";
 			string colorNukeEnr = "0080ff";
@@ -636,8 +644,8 @@ namespace FFU_Bleeding_Edge {
 					"- <color=#" + colorBeamEmt + "ff>Beams</color>: moderate power and medium reload." + "\n" +
 					"- <color=#" + colorHeatRay + "ff>Heat Rays</color>: good for setting things on fire." + "\n" +
 					"- <color=#" + colorEnergyRay + "ff>Disruptors</color>: low damage, but great EMP effect." + "\n" +
-					"- <color=#" + colorExoticRay + "ff>Exotic Rays</color>: most ultimate & expensive damage." + "\n" +
-					"- Lack AoE and proper anti-personnel damage.";
+					"- <color=#" + colorRadAccel + "ff>Irradiators</color>: weak, but deadly to any personnel." + "\n" +
+					"- <color=#" + colorExoticRay + "ff>Exotic Rays</color>: most ultimate & expensive damage.";
 				if (txt.name == "Headline" && txt.text == "Missiles") txt.text = "Rocket Launcher Weapons";
 				if (txt.name == "Text" && txt.text.Contains("Fragile projectiles, vulnerable to point-defences"))
 					txt.text = "- Ignore shields and negate deflection." + "\n" +

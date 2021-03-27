@@ -83,7 +83,10 @@ namespace FFU_Bleeding_Edge {
 			if (moduleID == 1768012478) return idx; idx++; //weapon Energy cannon OP
 			if (moduleID == 1482677315) return idx; idx++; //weapon EMP energyball
 			if (moduleID == 876704941) return idx; idx++; //weapon EMP energyball 3x Tiger
+			if (moduleID == 1519934886) return idx; idx++; //weapon babycannon1
+			if (moduleID == 357135472) return idx; idx++; //weapon babycannon3
 			if (moduleID == 790917823) return idx; idx++; //weapon Floral cannon
+			if (moduleID == 605446971) return idx; idx++; //weapon hi-tec cannon
 			if (moduleID == 1983239915) return idx; idx++; //weapon exoticscannon1
 			//Railguns
 			if (moduleID == 1751631045) return idx; idx++; //weapon Sniper cannon 0 DIY
@@ -137,9 +140,13 @@ namespace FFU_Bleeding_Edge {
 			if (moduleID == 849984806) return idx; idx++; //weapon Insectoid slowlaser
 			//Heat Rays
 			if (moduleID == 981179656) return idx; idx++; //weapon DIY raygun orange
+			if (moduleID == 414020778) return idx; idx++; //weapon babylaser 1
+			if (moduleID == 995420485) return idx; idx++; //weapon babylaser 2
+			if (moduleID == 1576820192) return idx; idx++; //weapon babylaser 3
 			if (moduleID == 1307272377) return idx; idx++; //weapon Heatray emitter
-			if (moduleID == 1322541741) return idx; idx++; //weapon Heatray emitter x red
 			if (moduleID == 728051246) return idx; idx++; //weapon Squid beamer heatray
+			if (moduleID == 200034057) return idx; idx++; //weapon heavy energy ray
+			if (moduleID == 1322541741) return idx; idx++; //weapon Heatray emitter x red
 			//Disruptors
 			if (moduleID == 1386212334) return idx; idx++; //weapon DIY raygun blue
 			if (moduleID == 708268486) return idx; idx++; //weapon DIY EMP
@@ -154,7 +161,9 @@ namespace FFU_Bleeding_Edge {
 			if (moduleID == 176876935) return idx; idx++; //weapon bigbeamer1
 			if (moduleID == 176876934) return idx; idx++; //weapon bigbeamer2
 			if (moduleID == 176876933) return idx; idx++; //weapon bigbeamer3
+			if (moduleID == 629170598) return idx; idx++; //weapon black energy laser x2
 			if (moduleID == 599402385) return idx; idx++; //weapon Florallaser
+			if (moduleID == 1210570305) return idx; idx++; //weapon black energy laser x3
 			if (moduleID == 1238435842) return idx; idx++; //weapon BFGx9 for bluestar
 			//Exotic Disintegrators
 			if (moduleID == 2075523594) return idx; idx++; //weapon DIY exoticslaser
@@ -176,13 +185,13 @@ namespace FFU_Bleeding_Edge {
 			string colorKinetic = "add8e6";
 			string colorPlasma = "0080ff";
 			string colorIncendiary = "ff8040";
-			string colorChemical = "008000";
+			string colorCorrosive = "008000";
 			string colorExotical = "8060ff";
 			string colorLaserEmt = "ffff60";
 			string colorBeamEmt = "ff9060";
 			string colorHeatRay = "ff6060";
 			string colorEnergyRay = "0090ff";
-			string colorChemRay = "008000";
+			string colorRadAccel = "008000";
 			string colorExoticRay = "9060ff";
 			shipModule.Weapon.resourcesPerShot = new ResourceValueGroup();
 			int shipModule_maxHealth = AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth");
@@ -641,8 +650,9 @@ namespace FFU_Bleeding_Edge {
 				case 1780996798: //weapon DIY Minicannon ancient 2,3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
-				shipModule.displayName = Core.TT($"Dead Weight <color=#{colorExplosive}ff>Explosive</color> Autocannon");
+				shipModule.displayName = Core.TT($"Dead Weight <color=#{colorExplosive}ff>Burst</color> Autocannon");
 				shipModule.description = Core.TT($"Improvised autocannon that was assembled from weapon spare parts according to ancient designs. Long reload, mediocre rate of fire and low accuracy make this weapon less then desirable.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 25f, metals = 250f, synthetics = 150f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { metals = 1f, explosives = 1f };
@@ -671,8 +681,9 @@ namespace FFU_Bleeding_Edge {
 				case 1363897257: //weapon gatling 01 ancient dual 14,4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
-				shipModule.displayName = Core.TT($"Old Enforcer <color=#{colorExplosive}ff>Explosive</color> Autocannon");
+				shipModule.displayName = Core.TT($"Old Enforcer <color=#{colorExplosive}ff>Burst</color> Autocannon");
 				shipModule.description = Core.TT($"Ancient autocannon that was designed centuries ago and served as loyal companion in many battles through the history. Has improved rate of fire, but still troubled with long reload and low accuracy.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 400f, synthetics = 250f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { metals = 1f, explosives = 2f };
@@ -701,8 +712,9 @@ namespace FFU_Bleeding_Edge {
 				case 1957651014: //weapon gatling 02 rat small 12,4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
-				shipModule.displayName = Core.TT($"Dual Bridge <color=#{colorExplosive}ff>Explosive</color> Autocannon");
+				shipModule.displayName = Core.TT($"Dual Bridge <color=#{colorExplosive}ff>Burst</color> Autocannon");
 				shipModule.description = Core.TT($"Autocannon designed by Rat Empire and based on multiple designs of other ancient weapons. Loved by rat admirals for high capacity. Has improved rate of fire and improved accuracy, but still long reload.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 100f, metals = 600f, synthetics = 400f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { metals = 1f, explosives = 2f };
@@ -731,8 +743,9 @@ namespace FFU_Bleeding_Edge {
 				case 704483685: //weapon gatling RatA 14,4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
-				shipModule.displayName = Core.TT($"Dual Spitter <color=#{colorExplosive}ff>Explosive</color> Autocannon");
+				shipModule.displayName = Core.TT($"Dual Spitter <color=#{colorExplosive}ff>Burst</color> Autocannon");
 				shipModule.description = Core.TT($"Higher caliber autocannon designed by Rat Empire. Was developed after through research original ancient autocannons. Although higher caliber reduces rate of fire, it grants greater are of effect on impact.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 150f, metals = 800f, synthetics = 500f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { metals = 2f, explosives = 2f };
@@ -761,8 +774,9 @@ namespace FFU_Bleeding_Edge {
 				case 123083978: //weapon gatling RatB 15,5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
-				shipModule.displayName = Core.TT($"Triple Spitter <color=#{colorExplosive}ff>Explosive</color> Autocannon");
+				shipModule.displayName = Core.TT($"Triple Spitter <color=#{colorExplosive}ff>Burst</color> Autocannon");
 				shipModule.description = Core.TT($"Heavier version of high caliber autocannon designed by Rat Empire. Integration of additional barrel increases size of consecutive salvo, while not affecting negatively other properties such as rate of fire.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 1000f, synthetics = 600f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { metals = 2f, explosives = 3f };
@@ -791,8 +805,9 @@ namespace FFU_Bleeding_Edge {
 				case 1092529672: //weapon gatling whiteA 13,4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
-				shipModule.displayName = Core.TT($"Blizzard <color=#{colorExplosive}ff>Explosive</color> Autocannon");
+				shipModule.displayName = Core.TT($"Blizzard <color=#{colorExplosive}ff>Burst</color> Autocannon");
 				shipModule.description = Core.TT($"A modern rotary autocannon developed by Terran Federation for highly intensive combat zones. Has good rate of fire, improved targeting system that grants better accuracy, but average area of effect on impact.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 275f, metals = 1300f, synthetics = 750f, exotics = 2f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { metals = 2f, explosives = 4f };
@@ -821,8 +836,9 @@ namespace FFU_Bleeding_Edge {
 				case 689245145: //weapon gatling whiteB 14,5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
-				shipModule.displayName = Core.TT($"Hailstorm <color=#{colorExplosive}ff>Explosive</color> Autocannon");
+				shipModule.displayName = Core.TT($"Hailstorm <color=#{colorExplosive}ff>Burst</color> Autocannon");
 				shipModule.description = Core.TT($"This modern rotary autocannon has upgraded ignition chamber that increases amount of shots that it can do before cooling reagent is used up. Greater projectile density reduces risk of full interception by CIWS.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 350f, metals = 1600f, synthetics = 900f, exotics = 2f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { metals = 2f, explosives = 6f };
@@ -851,8 +867,9 @@ namespace FFU_Bleeding_Edge {
 				case 698348090: //weapon Sniper cannon 4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.2f);
-				shipModule.displayName = Core.TT($"Whirlwind <color=#{colorExplosive}ff>Explosive</color> Autocannon");
+				shipModule.displayName = Core.TT($"Whirlwind <color=#{colorExplosive}ff>Burst</color> Autocannon");
 				shipModule.description = Core.TT($"Advanced high caliber quad-barreled autocannon has immense projectile density, while keeping original specs of high caliber autocannons such as effective impact area, proper cooling speed and stable ignition chamber.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2400f, synthetics = 1600f, exotics = 6f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { metals = 2f, explosives = 8f };
@@ -881,6 +898,7 @@ namespace FFU_Bleeding_Edge {
 				case 1501025877: //weapon gatling ClawA 12,4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"Gauss Claw <color=#{colorKinetic}ff>Kinetic</color> Autocannon");
 				shipModule.description = Core.TT($"This autocannon uses gauss coils acceleration technology to launch dense metallic projectiles with immense velocity at enemy ships. At expense of high energy and metal consumption its projectiles ignore armor deflection.");
@@ -911,6 +929,7 @@ namespace FFU_Bleeding_Edge {
 				case 1566651491: //weapon gatling ClawB 14,5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"Gauss Talon <color=#{colorKinetic}ff>Kinetic</color> Autocannon");
 				shipModule.description = Core.TT($"A gauss autocannon that is upgraded with second barrel, which allows it to reduce strain on initial barrel and at the same time increase projectile destiny, while slightly increasing energy and metal consumption.");
@@ -941,6 +960,7 @@ namespace FFU_Bleeding_Edge {
 				case 1890403578: //weapon gatling blaster small 12,5
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = Core.TT($"Buckingham <color=#{colorPlasma}ff>Plasma</color> Autocannon");
 				shipModule.description = Core.TT($"An energy autocannon that consumes certain amount of fuel, which is passed through high voltage cyclotron that turns it into high emission energy projectiles that never deflect, but also incapable of ignoring shields.");
@@ -971,6 +991,7 @@ namespace FFU_Bleeding_Edge {
 				case 992516328: //weapon gatling Insectoid plasma 18,4x2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = Core.TT($"Tranquility <color=#{colorPlasma}ff>Plasma</color> Autocannon");
 				shipModule.description = Core.TT($"Advanced energy autocannon that has bigger high voltage cyclotron chamber that can process even more fuel at once in order to turn it into projectiles. It also has better particle accelerator that increases launch speed.");
@@ -1001,8 +1022,9 @@ namespace FFU_Bleeding_Edge {
 				case 458272126: //weapon gatling Insectoid cyano 15,4
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Corrosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Corrosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
-				shipModule.displayName = Core.TT($"Carnage Venom <color=#{colorChemical}ff>Chemical</color> Autocannon");
+				shipModule.displayName = Core.TT($"Carnage Venom <color=#{colorCorrosive}ff>Acid</color> Autocannon");
 				shipModule.description = Core.TT($"Specialized autocannon that shots highly acidic and corrosive projectiles with great area of effect that do immense damage to the crew of the targeted ship. Production of specialized corrosion reagents requires exotics.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 2500f, synthetics = 5000f, exotics = 10f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 10f, metals = 2f, synthetics = 2f, exotics = 1f };
@@ -1031,6 +1053,7 @@ namespace FFU_Bleeding_Edge {
 				case 797718711: //weapon weirdship gatling
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Autocannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Antimatter].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Antimatter].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"Euphoria <color=#{colorExotical}ff>Exotic</color> Autocannon");
 				shipModule.description = Core.TT($"Suppressive autocannon that shots huge amount of projectiles that allow to bypass even most advanced CIWS. Built-in printer requires exotic matter in order to produce enough ammunition withing limited time frame.");
@@ -1061,6 +1084,7 @@ namespace FFU_Bleeding_Edge {
 				case 1521997681: //weapon ATK-MK1 old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"F1-Bushwacker <color=#{colorExplosive}ff>Explosive</color> Howitzer");
 				shipModule.description = Core.TT($"Ancient single-barreled artillery weapon that was developed and often applied in conventional warfare centuries ago. Rusty, has faulty ammo printing mechanism and expired reloading mechanism.");
@@ -1090,6 +1114,7 @@ namespace FFU_Bleeding_Edge {
 				case 1118713154: //weapon ATK-MK2 old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"F2-Bushwacker <color=#{colorExplosive}ff>Explosive</color> Howitzer");
 				shipModule.description = Core.TT($"Ancient double-barreled artillery weapon that was developed and often applied in conventional warfare centuries ago. Rusty, has faulty ammo printing mechanism and expired reloading mechanism.");
@@ -1119,6 +1144,7 @@ namespace FFU_Bleeding_Edge {
 				case 537313447: //weapon ATK-MK3 old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"F3-Bushwacker <color=#{colorExplosive}ff>Explosive</color> Howitzer");
 				shipModule.description = Core.TT($"Ancient triple-barreled artillery weapon that was developed and often applied in conventional warfare centuries ago. Rusty, has faulty ammo printing mechanism and expired reloading mechanism.");
@@ -1148,6 +1174,7 @@ namespace FFU_Bleeding_Edge {
 				case 1281856982: //weapon ATK-MK1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"S1-Rebellion <color=#{colorExplosive}ff>Explosive</color> Howitzer");
 				shipModule.description = Core.TT($"Modern version of ancient single-barreled artillery weapon that was developed centuries ago. Has upgraded targeting system, pristine ammo printing mechanism and extremely optimized reloading system.");
@@ -1177,6 +1204,7 @@ namespace FFU_Bleeding_Edge {
 				case 1685141509: //weapon ATK-MK2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"S2-Rebellion <color=#{colorExplosive}ff>Explosive</color> Howitzer");
 				shipModule.description = Core.TT($"Modern version of ancient double-barreled artillery weapon that was developed centuries ago. Has upgraded targeting system, pristine ammo printing mechanism and extremely optimized reloading system.");
@@ -1206,6 +1234,7 @@ namespace FFU_Bleeding_Edge {
 				case 119057568: //weapon ATK-MK3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"S3-Rebellion <color=#{colorExplosive}ff>Explosive</color> Howitzer");
 				shipModule.description = Core.TT($"Modern version of ancient triple-barreled artillery weapon that was developed centuries ago. Has upgraded targeting system, pristine ammo printing mechanism and extremely optimized reloading system.");
@@ -1235,6 +1264,7 @@ namespace FFU_Bleeding_Edge {
 				case 1675488140: //weapon cubecannon huge old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"Detonator <color=#{colorExplosive}ff>Explosive</color> Howitzer");
 				shipModule.description = Core.TT($"Ancient huge artillery weapon that fires oversized projectiles with extremely volatile payload. Degraded printing mechanism no longer prints proper projectiles, but still consumes a lot of resources.");
@@ -1264,6 +1294,7 @@ namespace FFU_Bleeding_Edge {
 				case 114834467: //weapon cubecannon huge
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"Devastator <color=#{colorExplosive}ff>Explosive</color> Howitzer");
 				shipModule.description = Core.TT($"Modern version of ancient huge artillery weapon. Has same ammo caliber as original, but due to optimized payload distribution algorithm and upgraded targeting system, has greater impact power and accuracy. ");
@@ -1293,6 +1324,7 @@ namespace FFU_Bleeding_Edge {
 				case 865561327: //weapon emperorbanks cannon1x
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"X1-Coercer <color=#{colorExplosive}ff>Explosive</color> Howitzer");
 				shipModule.description = Core.TT($"Commercial single-barreled artillery weapon that relies on optimal use of explosives to print and propel large high impact projectiles at enemies of the corporation that breached unsigned copyright agreements.");
@@ -1322,6 +1354,7 @@ namespace FFU_Bleeding_Edge {
 				case 865561324: //weapon emperorbanks cannon2x
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"X2-Coercer <color=#{colorExplosive}ff>Explosive</color> Howitzer");
 				shipModule.description = Core.TT($"Commercial double-barreled artillery weapon that relies on optimal use of explosives to print and propel large high impact projectiles at enemies of the corporation that breached unsigned copyright agreements.");
@@ -1351,6 +1384,7 @@ namespace FFU_Bleeding_Edge {
 				case 533548711: //weapon emperorbanks cannon large
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
 				shipModule.displayName = Core.TT($"Scarlet Dawn <color=#{colorExplosive}ff>Explosive</color> Howitzer");
 				shipModule.description = Core.TT($"Commercial high-caliber artillery weapon that relies on abundant use of explosives to print and propel massive, almost nuke-sized projectiles at enemies of the corporation that breached unsigned copyright agreements.");
@@ -1380,6 +1414,7 @@ namespace FFU_Bleeding_Edge {
 				case 887190895: //weapon ratcannon high velocity
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = Core.TT($"Perforator <color=#{colorKinetic}ff>Kinetic</color> Howitzer");
 				shipModule.description = Core.TT($"The pinnacle of Rat Empire's technological development and creativity. This weapon prints and propels specialized non-deflecting projectiles with perforation cone that drill through hull on impact and explode inside.");
@@ -1409,6 +1444,7 @@ namespace FFU_Bleeding_Edge {
 				case 1662502911: //weapon ratcannon fire1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Incendiary].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Incendiary].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = Core.TT($"R1-Fireball <color=#{colorIncendiary}ff>Incendiary</color> Howitzer");
 				shipModule.description = Core.TT($"A single-barreled area denial weapon developed by Rat Empire. Prints and launches incendiary bombs filled with flammable mixture. Incendiary bombs are very fragile in nature thus can be easily intercepted by any CIWS.");
@@ -1438,6 +1474,7 @@ namespace FFU_Bleeding_Edge {
 				case 2065787438: //weapon ratcannon fire2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Incendiary].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Incendiary].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = Core.TT($"R2-Fireball <color=#{colorIncendiary}ff>Incendiary</color> Howitzer");
 				shipModule.description = Core.TT($"A double-barreled area denial weapon developed by Rat Empire. Prints and launches incendiary bombs filled with flammable mixture. Incendiary bombs are very fragile in nature thus can be easily intercepted by any CIWS.");
@@ -1467,6 +1504,7 @@ namespace FFU_Bleeding_Edge {
 				case 499703497: //weapon ratcannon fire3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Incendiary].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Incendiary].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = Core.TT($"R3-Fireball <color=#{colorIncendiary}ff>Incendiary</color> Howitzer");
 				shipModule.description = Core.TT($"A triple-barreled area denial weapon developed by Rat Empire. Prints and launches incendiary bombs filled with flammable mixture. Incendiary bombs are very fragile in nature thus can be easily intercepted by any CIWS.");
@@ -1496,6 +1534,7 @@ namespace FFU_Bleeding_Edge {
 				case 30747850: //weapon diyfirebomber1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Incendiary].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Incendiary].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = Core.TT($"Blazefire <color=#{colorIncendiary}ff>Incendiary</color> Howitzer");
 				shipModule.description = Core.TT($"Advanced double-cartridge area denial weapon that was developed by Black Market specialists. Prints and launches lightly armored incendiary bombs filled with extremely flammable, but solid compound that auto-ignites on impact.");
@@ -1525,6 +1564,7 @@ namespace FFU_Bleeding_Edge {
 				case 30747849: //weapon diyfirebomber2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Incendiary].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Incendiary].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
 				shipModule.displayName = Core.TT($"Firestorm <color=#{colorIncendiary}ff>Incendiary</color> Howitzer");
 				shipModule.description = Core.TT($"Advanced quadrupole-cartridge area denial weapon that was developed by Black Market specialists. Prints and launches lightly armored incendiary bombs filled with extremely flammable, but solid compound that auto-ignites on impact.");
@@ -1554,6 +1594,7 @@ namespace FFU_Bleeding_Edge {
 				case 1532741738: //weapon Energy cannon x1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = Core.TT($"Light Quasar <color=#{colorPlasma}ff>Plasma</color> Howitzer");
 				shipModule.description = Core.TT($"A simple, yet effective electromagnetic pulse cannon that ejects highly energized projectiles that can't be deflected. Overloads shields and disrupts working modules. May start fires and shock crew on direct hull impact.");
@@ -1583,6 +1624,7 @@ namespace FFU_Bleeding_Edge {
 				case 1532741737: //weapon Energy cannon x2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = Core.TT($"Heavy Quasar <color=#{colorPlasma}ff>Plasma</color> Howitzer");
 				shipModule.description = Core.TT($"A simple, yet effective dual-barreled electromagnetic pulse cannon that ejects highly energized projectiles that can't be deflected. Overloads shields and disrupts working modules. May start fires and shock crew on direct hull impact.");
@@ -1612,6 +1654,7 @@ namespace FFU_Bleeding_Edge {
 				case 1768012478: //weapon Energy cannon OP
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = Core.TT($"Neutron Quasar <color=#{colorPlasma}ff>Plasma</color> Howitzer");
 				shipModule.description = Core.TT($"A simple, yet effective overcharged electromagnetic pulse cannon that ejects highly energized projectiles that can't be deflected. Overloads shields and disrupts working modules. May start fires and shock crew on direct hull impact.");
@@ -1641,6 +1684,7 @@ namespace FFU_Bleeding_Edge {
 				case 1482677315: //weapon EMP energyball
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = Core.TT($"System Shock <color=#{colorPlasma}ff>Plasma</color> Howitzer");
 				shipModule.description = Core.TT($"A powerful electromagnetic pulse cannon that ejects high-intensity energized projectiles that can't be deflected. Greatly overloads shields and disrupts working modules. May start fires and shock crew on direct hull impact.");
@@ -1670,6 +1714,7 @@ namespace FFU_Bleeding_Edge {
 				case 876704941: //weapon EMP energyball 3x Tiger
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.2f);
 				shipModule.displayName = Core.TT($"Shockwave <color=#{colorPlasma}ff>Plasma</color> Howitzer");
 				shipModule.description = Core.TT($"An extremely powerful triple-barreled electromagnetic pulse cannon that ejects high-intensity energized projectiles that can't be deflected. Greatly overloads shields and disrupts working modules. May start fires and shock crew on direct hull impact.");
@@ -1696,12 +1741,73 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 15;
 				shipModule_maxHealth = 50;
 				break;
-				case 790917823: //weapon Floral cannon
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9, 10);
+				case 1519934886: //weapon babycannon1
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Corrosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Corrosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
-				shipModule.displayName = Core.TT($"Dessolution <color=#{colorChemical}ff>Chemical</color> Howitzer");
-				shipModule.description = Core.TT($"Anti-armor molecular acid cannon of organic origin. Consumes mainly organics and other materials to print and propel decently armored highly corrosive projectiles that melt matter and dissolve organics in huge radius on impact.");
+				shipModule.displayName = Core.TT($"Monoxide <color=#{colorCorrosive}ff>Corrosive</color> Howitzer");
+				shipModule.description = Core.TT($"Anti-armor corrosive cannon of unknown origin. Consumes mainly organics and other materials to print and launch fragile, but highly corrosive projectiles that melt matter and dissolve organics in decent radius on impact.");
+				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 2250f, synthetics = 1000f, exotics = 4f };
+				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 6f, synthetics = 1f, exotics = 1f };
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.High;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.None;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 1.15f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 0;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 3;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 6;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).doorDmg = 8;
+				(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).speed = prjSpeedHowitzerNormal;
+				shipModule_Weapon_ProjectileOrBeamPrefab_pointDefPriority = 2;
+				shipModule.Weapon.reloadInterval = reloadProjHowitzer - 10f;
+				shipModule.Weapon.overridePointDefCanSeeThis = true;
+				shipModule.Weapon.overrideProjectileHealth = 2;
+				shipModule.Weapon.shotInterval = 0.75f;
+				shipModule.Weapon.magazineSize = 1;
+				shipModule.Weapon.accuracy = 15;
+				shipModule.powerConsumed = 2;
+				shipModule_maxHealth = 35;
+				break;
+				case 357135472: //weapon babycannon3
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Corrosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Corrosive].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
+				shipModule.displayName = Core.TT($"Dihydrogen <color=#{colorCorrosive}ff>Corrosive</color> Howitzer");
+				shipModule.description = Core.TT($"Anti-armor corrosive multi-cannon of unknown origin. Consumes mainly organics and other materials to print and launch fragile, but highly corrosive projectiles that melt matter and dissolve organics in decent radius on impact.");
+				shipModule.craftCost = new ResourceValueGroup { fuel = 900f, metals = 3500f, synthetics = 2000f, exotics = 7f};
+				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 9f, synthetics = 2f, exotics = 1f };
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.High;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.None;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 1.45f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 0;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 2;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 5;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).doorDmg = 7;
+				(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).speed = prjSpeedHowitzerNormal;
+				shipModule_Weapon_ProjectileOrBeamPrefab_pointDefPriority = 2;
+				shipModule.Weapon.reloadInterval = reloadProjHowitzer - 5f;
+				shipModule.Weapon.overridePointDefCanSeeThis = true;
+				shipModule.Weapon.overrideProjectileHealth = 2;
+				shipModule.Weapon.shotInterval = 0.45f;
+				shipModule.Weapon.magazineSize = 3;
+				shipModule.Weapon.accuracy = 15;
+				shipModule.powerConsumed = 4;
+				shipModule_maxHealth = 45;
+				break;
+				case 790917823: //weapon Floral cannon
+				if (initItemData) ProcessDLC.ApplySectorViablility(shipModule.PrefabId);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Corrosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Corrosive].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
+				shipModule.displayName = Core.TT($"Dessolution <color=#{colorCorrosive}ff>Corrosive</color> Howitzer");
+				shipModule.description = Core.TT($"Anti-armor molecular acid cannon of organic origin. Consumes mainly organics and other materials to print and launch decently armored, highly corrosive projectiles that melt matter and dissolve organics in huge radius on impact.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1250f, metals = 1000f, synthetics = 2000f, exotics = 10f, organics = 4000f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 12f, synthetics = 3f, exotics = 1f };
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = true;
@@ -1718,18 +1824,49 @@ namespace FFU_Bleeding_Edge {
 				shipModule_Weapon_ProjectileOrBeamPrefab_pointDefPriority = 2;
 				shipModule.Weapon.reloadInterval = reloadProjHowitzer - 15f;
 				shipModule.Weapon.overridePointDefCanSeeThis = true;
-				shipModule.Weapon.overrideProjectileHealth = 3;
+				shipModule.Weapon.overrideProjectileHealth = 5;
 				shipModule.Weapon.shotInterval = 0.65f;
 				shipModule.Weapon.magazineSize = 2;
 				shipModule.Weapon.accuracy = 17;
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 55;
 				break;
-				case 1983239915: //weapon exoticscannon1
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9, 10);
+				case 605446971: //weapon hi-tec cannon
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Antimatter].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Antimatter].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
-				shipModule.displayName = Core.TT($"Para Bellum <color=#{colorExotical}ff>Exotic</color> Howitzer");
+				shipModule.displayName = Core.TT($"Hollow Point <color=#{colorExotical}ff>Antimatter</color> Howitzer");
+				shipModule.description = Core.TT($"Specialized weapon developed by force from far, far away galaxy. Pints and launches chunks of extremely durable, but volatile material that uses destabilized exotic matter as catalyst. Nearly perfect weapon, except very expensive to use.");
+				shipModule.craftCost = new ResourceValueGroup { fuel = 1250f, metals = 4250f, synthetics = 5750f, exotics = 30f };
+				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { metals = 3f, synthetics = 2f, explosives = 5f, exotics = 1f };
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.High;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.High;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 25;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 1.75f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 0;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 21;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 30;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).doorDmg = 12;
+				(shipModule.Weapon.ProjectileOrBeamPrefab as Projectile).speed = prjSpeedHowitzerFast;
+				shipModule_Weapon_ProjectileOrBeamPrefab_pointDefPriority = 2;
+				shipModule.Weapon.reloadInterval = reloadProjHowitzer - 5f;
+				shipModule.Weapon.overridePointDefCanSeeThis = true;
+				shipModule.Weapon.overrideProjectileHealth = 20;
+				shipModule.Weapon.shotInterval = 1.05f;
+				shipModule.Weapon.magazineSize = 1;
+				shipModule.Weapon.accuracy = 17;
+				shipModule.powerConsumed = 5;
+				shipModule_maxHealth = 40;
+				break;
+				case 1983239915: //weapon exoticscannon1
+				if (initItemData) ProcessDLC.ApplySectorViablility(shipModule.PrefabId);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Antimatter].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Antimatter].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
+				shipModule.displayName = Core.TT($"Para Bellum <color=#{colorExotical}ff>Antimatter</color> Howitzer");
 				shipModule.description = Core.TT($"Experimental weapon that pints and launches chunks of extremely durable, but volatile material that uses destabilized exotic matter as catalyst. Volatile energy that released on impact will destroy and disrupt everything in the area of effect.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1500f, metals = 5000f, synthetics = 7000f, exotics = 40f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { metals = 4f, synthetics = 2f, explosives = 6f, exotics = 1f };
@@ -1747,7 +1884,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule_Weapon_ProjectileOrBeamPrefab_pointDefPriority = 2;
 				shipModule.Weapon.reloadInterval = reloadProjHowitzer - 10f;
 				shipModule.Weapon.overridePointDefCanSeeThis = true;
-				shipModule.Weapon.overrideProjectileHealth = 20;
+				shipModule.Weapon.overrideProjectileHealth = ProcessDLC.GetProjectileHealth(shipModule.PrefabId);
 				shipModule.Weapon.shotInterval = 0.85f;
 				shipModule.Weapon.magazineSize = 1;
 				shipModule.Weapon.accuracy = 17;
@@ -1757,6 +1894,7 @@ namespace FFU_Bleeding_Edge {
 				case 1751631045: //weapon Sniper cannon 0 DIY
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = Core.TT($"Dead Eye <color=#{colorKinetic}ff>Kinetic</color> Railgun");
 				shipModule.description = Core.TT($"Light linear acceleration weapon that was assembled from spare parts and extra energy cores. Prints and launches fragile high velocity kinetic projectiles that penetrate shields and armor, while doing extra damage to modules.");
@@ -1786,6 +1924,7 @@ namespace FFU_Bleeding_Edge {
 				case 514626098: //weapon Sniper cannon 0
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = Core.TT($"H1-Redeemer <color=#{colorExplosive}ff>Explosive</color> Railgun");
 				shipModule.description = Core.TT($"Light single-barreled linear acceleration weapon that was developed by Terran Federation. Prints and launches fragile high velocity projectiles with explosive detonating cores that are extra effective against modules.");
@@ -1815,6 +1954,7 @@ namespace FFU_Bleeding_Edge {
 				case 1499937036: //weapon Sniper cannon 2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = Core.TT($"H2-Redeemer <color=#{colorExplosive}ff>Explosive</color> Railgun");
 				shipModule.description = Core.TT($"Light double-barreled linear acceleration weapon that was developed by Terran Federation. Prints and launches fragile high velocity projectiles with explosive detonating cores that are extra effective against modules.");
@@ -1844,6 +1984,7 @@ namespace FFU_Bleeding_Edge {
 				case 918537329: //weapon Sniper cannon 3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Explosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = Core.TT($"H3-Redeemer <color=#{colorExplosive}ff>Explosive</color> Railgun");
 				shipModule.description = Core.TT($"Light triple-barreled linear acceleration weapon that was developed by Terran Federation. Prints and launches fragile high velocity projectiles with explosive detonating cores that are extra effective against modules.");
@@ -1873,6 +2014,7 @@ namespace FFU_Bleeding_Edge {
 				case 1240034396: //weapon Sniper cannon 2 insectoid
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = Core.TT($"Rheinmetall <color=#{colorKinetic}ff>Kinetic</color> Railgun");
 				shipModule.description = Core.TT($"Light linear acceleration weapon that was developed by Black Market specialists. Prints and launches lightly armored high velocity projectiles with extra heavy and durable core that does extreme damage to the modules.");
@@ -1902,6 +2044,7 @@ namespace FFU_Bleeding_Edge {
 				case 1567764648: //weapon sniper cannon EMP
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Plasma].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
 				shipModule.displayName = Core.TT($"Suppressor <color=#{colorPlasma}ff>Disruptor</color> Railgun");
 				shipModule.description = Core.TT($"Light linear acceleration weapon that was developed by Black Market specialists. Prints and launches lightly armored high velocity projectiles that release short electric impulse that disrupts modules and shocks crew on impact.");
@@ -1931,8 +2074,9 @@ namespace FFU_Bleeding_Edge {
 				case 985673324: //weapon Spideraa shuriken
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Corrosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Corrosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
-				shipModule.displayName = Core.TT($"Flechette <color=#{colorChemical}ff>Chemical</color> Railgun");
+				shipModule.displayName = Core.TT($"Flechette <color=#{colorCorrosive}ff>Corrosive</color> Railgun");
 				shipModule.description = Core.TT($"Light linear acceleration weapon that was developed by unknown force. Prints and launches lightly armored high velocity projectiles that release flechette coated by extremely toxic anti-personnel reagents on impact.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 875f, metals = 3500f, synthetics = 1750f, exotics = 10f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 2f, metals = 1f };
@@ -1960,8 +2104,9 @@ namespace FFU_Bleeding_Edge {
 				case 1627732855: //weapon rapid cannon
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railgun].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Antimatter].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Antimatter].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
-				shipModule.displayName = Core.TT($"Sunstorm <color=#{colorExotical}ff>Exotic</color> Railgun");
+				shipModule.displayName = Core.TT($"Sunstorm <color=#{colorExotical}ff>Antimatter</color> Railgun");
 				shipModule.description = Core.TT($"Technologically advanced light linear acceleration weapon. Prints and launches moderately armored high velocity projectiles that release high-performance volatile exotic substance on impact with catastrophic consequences.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1000f, metals = 4500f, synthetics = 2500f, exotics = 20f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { exotics = 1f };
@@ -1989,6 +2134,7 @@ namespace FFU_Bleeding_Edge {
 				case 1316645801: //weapon cubecannon1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = Core.TT($"B1-Partisan <color=#{colorKinetic}ff>Kinetic</color> Railcannon");
 				shipModule.description = Core.TT($"Ancient single-barreled heavy linear acceleration weapon that was developed by civilization long gone. Prints and launches armored projectiles at high velocities that rip everything apart in their way, be it hull or modules.");
@@ -2018,6 +2164,7 @@ namespace FFU_Bleeding_Edge {
 				case 1615383632: //weapon cubecannon1x3
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = Core.TT($"B3-Partisan <color=#{colorKinetic}ff>Kinetic</color> Railcannon");
 				shipModule.description = Core.TT($"Ancient triple-barreled heavy linear acceleration weapon that was developed by civilization long gone. Prints and launches armored projectiles at high velocities that rip everything apart in their way, be it hull or modules.");
@@ -2047,6 +2194,7 @@ namespace FFU_Bleeding_Edge {
 				case 894416346: //weapon Segmented cannon1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = Core.TT($"Salvation <color=#{colorKinetic}ff>Kinetic</color> Railcannon");
 				shipModule.description = Core.TT($"Modern single-cartridge heavy linear acceleration weapon that was developed by Terran Federation. Prints and launches heavily armored kinetic projectiles at extreme velocities that are followed by extremely destructive inversion waves.");
@@ -2076,6 +2224,7 @@ namespace FFU_Bleeding_Edge {
 				case 1086561638: //weapon Segmented cannonx2 A
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = Core.TT($"Atonement <color=#{colorKinetic}ff>Kinetic</color> Railcannon");
 				shipModule.description = Core.TT($"Modern double-cartridge heavy linear acceleration weapon that was developed by Terran Federation. Prints and launches heavily armored kinetic projectiles at extreme velocities that are followed by extremely destructive inversion waves.");
@@ -2105,6 +2254,7 @@ namespace FFU_Bleeding_Edge {
 				case 1086561639: //weapon Segmented cannonx2 B
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8, 9);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = Core.TT($"Repentance <color=#{colorKinetic}ff>Kinetic</color> Railcannon");
 				shipModule.description = Core.TT($"Modern triple-cartridge heavy linear acceleration weapon that was developed by Terran Federation. Prints and launches heavily armored kinetic projectiles at extreme velocities that are followed by extremely destructive inversion waves.");
@@ -2134,6 +2284,7 @@ namespace FFU_Bleeding_Edge {
 				case 1086561640: //weapon Segmented cannonx2 C
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = Core.TT($"Redemption <color=#{colorKinetic}ff>Kinetic</color> Railcannon");
 				shipModule.description = Core.TT($"Modern quadruple-cartridge heavy linear acceleration weapon that was developed by Terran Federation. Prints and launches heavily armored kinetic projectiles at extreme velocities that are followed by extremely destructive inversion waves.");
@@ -2163,6 +2314,7 @@ namespace FFU_Bleeding_Edge {
 				case 412909021: //weapon gatling Tiger
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Railcannon].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Kinetic].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.4f);
 				shipModule.displayName = Core.TT($"Liberator <color=#{colorKinetic}ff>Kinetic</color> Railcannon");
 				shipModule.description = Core.TT($"A pinnacle of human creativity in linear acceleration weaponry: belt-fed rotary multi-barreled railcannon. Prints and launches heavily armored kinetic projectiles at extreme velocities that are followed by extremely destructive inversion waves.");
@@ -2946,7 +3098,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.Low;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.High;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
-				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 1.00f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 0.75f;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 2;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 1;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 5;
@@ -2958,13 +3110,38 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 6;
 				shipModule_maxHealth = 15;
 				break;
-				case 1307272377: //weapon Heatray emitter
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
+				case 414020778: //weapon babylaser 1
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
-				shipModule.displayName = Core.TT($"Imperial Fire <color=#{colorHeatRay}ff>Heat Ray</color> Projector");
-				shipModule.description = Core.TT($"Standard heat ray weapon that uses fuel as stable catalyst. To surprise of all sentient beings in the galaxy was first designed by Rat Empire engineers, when Rat Empire generals concluded that their current energy weapons doesn't pacify enemies fast enough.");
-				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 3000f, synthetics = 1500f, exotics = 10f };
+				shipModule.displayName = Core.TT($"LR1-Skyfire <color=#{colorHeatRay}ff>Heat Ray</color> Projector");
+				shipModule.description = Core.TT($"Partially organic heat ray weapon that uses fuel as stable catalyst and specialized crystalline conduit that gives heat ray blue tint. Not so effective against armored compartments per se, but very good at settings everything aflame.");
+				shipModule.craftCost = new ResourceValueGroup { fuel = 300f, metals = 1500f, synthetics = 750f, exotics = 7f };
+				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { fuel = 3f };
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = false;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.Low;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.High;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 1.00f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 3;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 1;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 6;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).doorDmg = 3;
+				shipModule.Weapon.reloadInterval = reloadBeamHeatRay;
+				shipModule.Weapon.shotInterval = 0.35f;
+				shipModule.Weapon.magazineSize = 1;
+				shipModule.Weapon.accuracy = 17;
+				shipModule.powerConsumed = 7;
+				shipModule_maxHealth = 20;
+				break;
+				case 995420485: //weapon babylaser 2
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
+				shipModule.displayName = Core.TT($"LR2-Skyfire <color=#{colorHeatRay}ff>Heat Ray</color> Projector");
+				shipModule.description = Core.TT($"Partially organic heat ray weapon that uses fuel as stable catalyst and specialized crystalline conduit that gives heat ray blue tint. Not so effective against armored compartments per se, but very good at settings everything aflame. Has dual emission channel.");
+				shipModule.craftCost = new ResourceValueGroup { fuel = 450f, metals = 2000f, synthetics = 1000f, exotics = 8f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { fuel = 4f };
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = false;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
@@ -2972,6 +3149,56 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.High;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 1.25f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 3;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 1;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 6;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).doorDmg = 3;
+				shipModule.Weapon.reloadInterval = reloadBeamHeatRay;
+				shipModule.Weapon.shotInterval = 0.35f;
+				shipModule.Weapon.magazineSize = 2;
+				shipModule.Weapon.accuracy = 17;
+				shipModule.powerConsumed = 10;
+				shipModule_maxHealth = 25;
+				break;
+				case 1576820192: //weapon babylaser 3
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
+				shipModule.displayName = Core.TT($"LR3-Skyfire <color=#{colorHeatRay}ff>Heat Ray</color> Projector");
+				shipModule.description = Core.TT($"Partially organic heat ray weapon that uses fuel as stable catalyst and specialized crystalline conduit that gives heat ray blue tint. Not so effective against armored compartments per se, but very good at settings everything aflame. Has triple emission channel.");
+				shipModule.craftCost = new ResourceValueGroup { fuel = 600f, metals = 2500f, synthetics = 1250f, exotics = 9f };
+				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { fuel = 5f };
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = false;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.Low;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.High;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 1.50f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 3;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 1;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 6;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).doorDmg = 3;
+				shipModule.Weapon.reloadInterval = reloadBeamHeatRay;
+				shipModule.Weapon.shotInterval = 0.35f;
+				shipModule.Weapon.magazineSize = 3;
+				shipModule.Weapon.accuracy = 17;
+				shipModule.powerConsumed = 13;
+				shipModule_maxHealth = 30;
+				break;
+				case 1307272377: //weapon Heatray emitter
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
+				shipModule.displayName = Core.TT($"Imperial Fire <color=#{colorHeatRay}ff>Heat Ray</color> Projector");
+				shipModule.description = Core.TT($"Standard heat ray weapon that uses fuel as stable catalyst. To surprise of all sentient beings in the galaxy was first designed by Rat Empire engineers, when Rat Empire generals concluded that their current energy weapons doesn't pacify enemies fast enough.");
+				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 3000f, synthetics = 1500f, exotics = 10f };
+				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { fuel = 4f };
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = false;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.Low;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.High;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 1.75f;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 3;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 1;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 7;
@@ -2983,20 +3210,20 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 8;
 				shipModule_maxHealth = 45;
 				break;
-				case 1322541741: //weapon Heatray emitter x red
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
+				case 728051246: //weapon Squid beamer heatray
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
 				shipModule.displayName = Core.TT($"Overcharged <color=#{colorHeatRay}ff>Heat Ray</color> Projector");
-				shipModule.description = Core.TT($"Improved heat ray weapon that uses fuel as stable catalyst. A rare case of weapon that Commercial Consortium can't put under copyright clause, because it was based on Rat Empire designs, which by default are always unofficially open source for the rest of the galaxy.");
-				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 3500f, synthetics = 2500f, exotics = 14f };
+				shipModule.description = Core.TT($"Improvedheat ray weapon that uses fuel as stable catalyst. Designed by Black Market specialists per special request. Probably somebody decided that existing methods of killing with fire are not intense enough. Delivers serenity and warmth to unruly enemy in effective manner.");
+				shipModule.craftCost = new ResourceValueGroup { fuel = 1000f, metals = 4500f, synthetics = 3250f, exotics = 14f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { fuel = 5f };
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = false;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.Low;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.High;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
-				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 1.50f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 2.35f;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 4;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 2;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 9;
@@ -3006,22 +3233,47 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.magazineSize = 1;
 				shipModule.Weapon.accuracy = 19;
 				shipModule.powerConsumed = 10;
-				shipModule_maxHealth = 60;
+				shipModule_maxHealth = 35;
 				break;
-				case 728051246: //weapon Squid beamer heatray
-				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9, 10);
+				case 200034057: //weapon heavy energy ray
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
-				shipModule.displayName = Core.TT($"Aflame Inferno <color=#{colorHeatRay}ff>Heat Ray</color> Projector");
-				shipModule.description = Core.TT($"Advanced heat ray weapon that uses fuel as stable catalyst. Designed by Black Market specialists per special request. Probably somebody decided that existing methods of killing with fire are not intense enough. Delivers serenity and warmth to unruly enemy in effective manner.");
-				shipModule.craftCost = new ResourceValueGroup { fuel = 1000f, metals = 4000f, synthetics = 3000f, exotics = 20f };
+				shipModule.displayName = Core.TT($"Cyg-Synthian <color=#{colorHeatRay}ff>Heat Ray</color> Projector");
+				shipModule.description = Core.TT($"Experimental heat ray weapon that uses fuel as stable catalyst. Designed by skilled, but eccentric engineer that likes toxic colors, overcharged capacitors and durable focusing lens. But even this flamboyant design can't defy deadly efficiency of this heat ray projector.");
+				shipModule.craftCost = new ResourceValueGroup { fuel = 1100f, metals = 5250f, synthetics = 3500f, exotics = 25f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { fuel = 6f };
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = false;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.Low;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.High;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
-				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 1.75f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 2.50f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 4;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 2;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 9;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).doorDmg = 6;
+				shipModule.Weapon.reloadInterval = reloadBeamHeatRay;
+				shipModule.Weapon.shotInterval = 0.60f;
+				shipModule.Weapon.magazineSize = 1;
+				shipModule.Weapon.accuracy = 19;
+				shipModule.powerConsumed = 11;
+				shipModule_maxHealth = 45;
+				break;
+				case 1322541741: //weapon Heatray emitter x red
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.HeatRay].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 3.2f);
+				shipModule.displayName = Core.TT($"Hellfire Inferno <color=#{colorHeatRay}ff>Heat Ray</color> Projector");
+				shipModule.description = Core.TT($"Advanced heat ray weapon that uses fuel as stable catalyst. A rare case of weapon that Commercial Consortium can't put under copyright clause, because it was based on Rat Empire designs, which by default are always unofficially open source for the rest of the galaxy.");
+				shipModule.craftCost = new ResourceValueGroup { fuel = 1250f, metals = 6000f, synthetics = 4000f, exotics = 40f };
+				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { fuel = 6f };
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = false;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.Low;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.High;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 3.00f;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 5;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 2;
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 11;
@@ -3031,7 +3283,7 @@ namespace FFU_Bleeding_Edge {
 				shipModule.Weapon.magazineSize = 1;
 				shipModule.Weapon.accuracy = 20;
 				shipModule.powerConsumed = 12;
-				shipModule_maxHealth = 35;
+				shipModule_maxHealth = 60;
 				break;
 				case 1386212334: //weapon DIY raygun blue
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
@@ -3237,7 +3489,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2, 3);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.2f);
-				shipModule.displayName = Core.TT($"Impulse Wave <color=#{colorChemRay}ff>Radiation</color> Accelerator");
+				shipModule.displayName = Core.TT($"Impulse Wave <color=#{colorRadAccel}ff>Radiation</color> Accelerator");
 				shipModule.description = Core.TT($"Basic radiation acceleration weapon that was designed by Black Market specialists for mass production and distribution. Has questionable quality, but still guarantees that every enemy crewmember that was hit by it will end up with severe health issues.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 300f, metals = 1200f, synthetics = 600f, exotics = 3f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 5f };
@@ -3262,7 +3514,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.2f);
-				shipModule.displayName = Core.TT($"Uranium-235 <color=#{colorChemRay}ff>Radiation</color> Accelerator");
+				shipModule.displayName = Core.TT($"Uranium-235 <color=#{colorRadAccel}ff>Radiation</color> Accelerator");
 				shipModule.description = Core.TT($"Improved radiation acceleration weapon that was designed by Black Market specialists. Has decent anti-personnel damage output and improved recharging mechanism. Quite cheap in production, but requires quite expensive maintenance to sustain integrity.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 450f, metals = 1600f, synthetics = 900f, exotics = 5f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 8f };
@@ -3287,7 +3539,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.2f);
-				shipModule.displayName = Core.TT($"Plutonium-239 <color=#{colorChemRay}ff>Radiation</color> Accelerator");
+				shipModule.displayName = Core.TT($"Plutonium-239 <color=#{colorRadAccel}ff>Radiation</color> Accelerator");
 				shipModule.description = Core.TT($"Improved radiation acceleration weapon that was designed by Black Market specialists. Has decent anti-personnel damage output and improved recharging mechanism. Upgraded with neutron reflection focusing mirrors that improve efficiency.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 600f, metals = 2000f, synthetics = 1300f, exotics = 7f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 12f };
@@ -3312,7 +3564,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.2f);
-				shipModule.displayName = Core.TT($"Isotope-244 <color=#{colorChemRay}ff>Radiation</color> Accelerator");
+				shipModule.displayName = Core.TT($"Isotope-244 <color=#{colorRadAccel}ff>Radiation</color> Accelerator");
 				shipModule.description = Core.TT($"Improved radiation acceleration weapon that was designed by Black Market specialists. Has decent anti-personnel damage output and improved recharging mechanism. Uses experimental isotope to generate extremely dense radiation stream.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 3000f, synthetics = 1600f, exotics = 9f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 16f };
@@ -3333,11 +3585,36 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 12;
 				shipModule_maxHealth = 30;
 				break;
+				case 629170598: //weapon black energy laser x2
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.2f);
+				shipModule.displayName = Core.TT($"Myrmidon <color=#{colorRadAccel}ff>Radiation</color> Accelerator");
+				shipModule.description = Core.TT($"Dual radiation acceleration weapon that was designed by unknown party. Compared to standard radiation accelerators, has reduced output and area of effect, which are compensated by multiple radiation emission chambers and neutron reflectors.");
+				shipModule.craftCost = new ResourceValueGroup { fuel = 825f, metals = 4000f, synthetics = 2250f, exotics = 15f };
+				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 18f };
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = false;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.High;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.None;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 1.40f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 1;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 1;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 1;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).doorDmg = 7;
+				shipModule.Weapon.reloadInterval = reloadBeamRadiator + 5;
+				shipModule.Weapon.shotInterval = 0.60f;
+				shipModule.Weapon.magazineSize = 2;
+				shipModule.Weapon.accuracy = 16;
+				shipModule.powerConsumed = 14;
+				shipModule_maxHealth = 35;
+				break;
 				case 599402385: //weapon Florallaser
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.2f);
-				shipModule.displayName = Core.TT($"Biochemical <color=#{colorChemRay}ff>Radiation</color> Accelerator");
+				shipModule.displayName = Core.TT($"Biochemical <color=#{colorRadAccel}ff>Radiation</color> Accelerator");
 				shipModule.description = Core.TT($"Radiation acceleration weapon of organic origin that converts organic elements into stable stream of neutrons in order to produce ray of contagious energy. Probably was developed by very thrifty individuals that wanted to conserve resources as much as possible.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 900f, metals = 1000f, synthetics = 1000f, exotics = 20f, organics = 6000f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 20f };
@@ -3358,11 +3635,36 @@ namespace FFU_Bleeding_Edge {
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 45;
 				break;
+				case 1210570305: //weapon black energy laser x3
+				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Add(shipModule.PrefabId);
+				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.2f);
+				shipModule.displayName = Core.TT($"Taenarus <color=#{colorRadAccel}ff>Radiation</color> Accelerator");
+				shipModule.description = Core.TT($"Triple radiation acceleration weapon that was designed by unknown party. Compared to standard radiation accelerators, has reduced output and area of effect, which are compensated by multiple radiation emission chambers and neutron reflectors.");
+				shipModule.craftCost = new ResourceValueGroup { fuel = 1125f, metals = 5250f, synthetics = 3000f, exotics = 25f };
+				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 24f };
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = false;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).neverDeflect = true;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).crewDmgLevel = ShootAtDamageDealer.CrewDmgLevel.High;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).fireChanceLevel = ShootAtDamageDealer.FireChanceLevel.None;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleOverloadSeconds = 0;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).damageAreaRadius = 1.60f;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shieldDmg = 1;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).moduleDmg = 1;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).shipDmg = 1;
+				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).doorDmg = 6;
+				shipModule.Weapon.reloadInterval = reloadBeamRadiator + 5;
+				shipModule.Weapon.shotInterval = 0.40f;
+				shipModule.Weapon.magazineSize = 3;
+				shipModule.Weapon.accuracy = 16;
+				shipModule.powerConsumed = 18;
+				shipModule_maxHealth = 40;
+				break;
 				case 1238435842: //weapon BFGx9 for bluestar
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Radiator].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.2f);
-				shipModule.displayName = Core.TT($"BFG9000 Plus <color=#{colorChemRay}ff>Radiation</color> Accelerator");
+				shipModule.displayName = Core.TT($"BFG9000 Plus <color=#{colorRadAccel}ff>Radiation</color> Accelerator");
 				shipModule.description = Core.TT($"Exceptional radiation acceleration weapon that converts destabilized isotopes into focused stream of extremely radioactive argent energy. Looks like design of human origin, but at the same time not. Has great damage output, but also great requirements.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1250f, metals = 6000f, synthetics = 3500f, exotics = 30f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 30f };
@@ -3659,8 +3961,8 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 60;
 				break;
 				case 1934368951: //weapon EMP perm DLC
-				shipModule.displayName = Core.TT($"Solar Flare Oscillator");
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 10.0f);
+				shipModule.displayName = Core.TT($"Solar Flare Oscillator");
 				shipModule.description = Core.TT($"A powerful built-in exotic weapon that generates miniature solar flares overflowing with raw energy that contained and guided by quantum intangibility fields. Each activation consumes huge amount of exotics, beside huge energy requirements and very long recharge times.");
 				shipModule.craftCost = new ResourceValueGroup { organics = 24000f, fuel = 3750f, metals = 10000f, synthetics = 19000f, exotics = 500f };
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = false;
@@ -3681,8 +3983,8 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 350;
 				break;
 				case 1801315413: //bossweapon insectoid ship
-				shipModule.displayName = Core.TT($"Sub-Atomic Disintegrator");
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 5.0f);
+				shipModule.displayName = Core.TT($"Sub-Atomic Disintegrator");
 				shipModule.description = Core.TT($"Power readings are off the scale. It morphs in unexpected ways before shooting.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 4250f, metals = 15000f, synthetics = 19000f, exotics = 750f };
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = false;
@@ -3703,8 +4005,8 @@ namespace FFU_Bleeding_Edge {
 				shipModule_maxHealth = 150;
 				break;
 				case 1088715096: //bossweapon weirdaxer
-				shipModule.displayName = Core.TT($"Planet Killer Annihilator");
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 8.0f);
+				shipModule.displayName = Core.TT($"Planet Killer Annihilator");
 				shipModule.description = Core.TT($"Power readings are off the scale. It morphs in unexpected ways before shooting.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 5000f, metals = 15000f, synthetics = 19000f, exotics = 1000f };
 				shipModule.Weapon.ProjectileOrBeamPrefab.GetDamage(shipModule.Weapon).ignoresShield = true;
@@ -3717,7 +4019,7 @@ namespace FFU_Bleeding_Edge {
 				break;
 				default:
 				if (initItemData) Debug.LogWarning($"[NEW WEAPON] {FFU_BE_Mod_Information.GetSelectedModuleExactData(shipModule, false, true, false, false, false)}");
-				shipModule.displayName = $"(WEAPON) {shipModule.displayName}";
+				shipModule.displayName = $"(WEAPON) {shipModule.name}";
 				break;
 			}
 			shipModule.asteroidDeflectionPercentAdd = 0;
@@ -3728,6 +4030,28 @@ namespace FFU_Bleeding_Edge {
 				AccessTools.FieldRefAccess<ShootAtDamageDealer, int>(shipModule.Weapon.ProjectileOrBeamPrefab, "maxHealth") = shipModule.Weapon.overrideProjectileHealth;
 			}
 			FFU_BE_Mod_Modules.UpdateCommonStats(shipModule);
+		}
+		public class ProcessDLC {
+			public static void ApplySectorViablility(int moduleId) {
+				switch (moduleId) {
+					case 790917823: //weapon Floral cannon
+					if (FFU_BE_Defs.flagDLC_OldEnm) FFU_BE_Defs.SetViableForSectors(moduleId, 8, 9, 10);
+					else FFU_BE_Defs.SetViableForSectors(moduleId, 6, 7, 8, 9, 10);
+					break;
+					case 1983239915: //weapon exoticscannon1
+					if (FFU_BE_Defs.flagDLC_OldEnm) FFU_BE_Defs.SetViableForSectors(moduleId, 8, 9, 10);
+					else FFU_BE_Defs.SetViableForSectors(moduleId, 7, 8, 9, 10);
+					break;
+				}
+			}
+			public static int GetProjectileHealth(int moduleId) {
+				switch (moduleId) {
+					case 1983239915: //weapon exoticscannon1
+					if (FFU_BE_Defs.flagDLC_OldEnm) return 25;
+					else return 20;
+					default: return 5;
+				}
+			}
 		}
 	}
 }

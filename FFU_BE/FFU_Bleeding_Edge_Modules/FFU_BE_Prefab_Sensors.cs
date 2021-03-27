@@ -30,75 +30,88 @@ namespace FFU_Bleeding_Edge {
 			switch (shipModule.PrefabId) {
 				case 930742757: //sensor 0-C diy
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
-				shipModule.displayName = "Makeshift <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Literally made form scraps and printed metal plates. Provides only very limited navigation capabilities, but still better then going blind.";
+				shipModule.displayName = Core.TT($"Makeshift <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Literally made form scraps and printed metal plates. Provides only very limited navigation capabilities, but still better then going blind.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 50f, metals = 100f, synthetics = 75f };
 				shipModule.Sensor.sectorRadarRange = 80;
 				shipModule.Sensor.starmapRadarRange = 8;
+				shipModule.starmapStealthDetectionLevelMax = 0;
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 5;
 				break;
 				case 2117018739: //sensor 1-L DIY
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 2.0f);
-				shipModule.displayName = "Salvaged <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Made from salvaged parts of expired or broken down sensory arrays. Navigation capabilities are little bit better, but still very limited.";
+				shipModule.displayName = Core.TT($"Salvaged <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Made from salvaged parts of expired or broken down sensory arrays. Navigation capabilities are little bit better, but still very limited.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 75f, metals = 150f, synthetics = 125f };
 				shipModule.Sensor.sectorRadarRange = 100;
 				shipModule.Sensor.starmapRadarRange = 10;
+				shipModule.starmapStealthDetectionLevelMax = 0;
 				shipModule.powerConsumed = 3;
 				shipModule_maxHealth = 6;
 				break;
 				case 948524677: //sensor 2 saucer old
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
-				shipModule.displayName = "Ancient <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "A couple centuries old sensor array that been though every imaginable situation possible. Still in workable condition and provides basic navigation capabilities.";
+				shipModule.displayName = Core.TT($"Ancient <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"A couple centuries old sensor array that been though every imaginable situation possible. Still in workable condition and provides basic navigation capabilities.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 125f, metals = 250f, synthetics = 175f };
 				shipModule.Sensor.sectorRadarRange = 120;
 				shipModule.Sensor.starmapRadarRange = 12;
+				shipModule.starmapStealthDetectionLevelMax = 0;
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 7;
 				break;
 				case 1084722255: //sensor 3 L terran simple
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.9f);
-				shipModule.displayName = "Civilian <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Installed on most civilian vessels due to low purchase barrier and cheap maintenance costs. Provides somewhat decent navigation capabilities.";
+				shipModule.displayName = Core.TT($"Civilian <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Installed on most civilian vessels due to low purchase barrier and cheap maintenance costs. Provides somewhat decent navigation capabilities.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 175f, metals = 400f, synthetics = 250f };
 				shipModule.Sensor.sectorRadarRange = 140;
 				shipModule.Sensor.starmapRadarRange = 14;
+				shipModule.starmapStealthDetectionLevelMax = 0;
 				shipModule.powerConsumed = 4;
 				shipModule_maxHealth = 8;
 				break;
 				case 1995820130: //sensor 3 planty
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
-				shipModule.displayName = "Bionic <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Sensor array of organic origin. Grown artificially in special environment, but contains all necessary ports for proper interfacing with spaceship's systems.";
+				shipModule.displayName = Core.TT($"Bionic <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Sensor array of organic origin. Grown artificially in special environment, but contains all necessary ports for proper interfacing with spaceship's systems.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, organics = 600f, synthetics = 400f };
 				shipModule.Sensor.sectorRadarRange = 160;
 				shipModule.Sensor.starmapRadarRange = 16;
+				shipModule.starmapStealthDetectionLevelMax = 0;
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 9;
 				break;
 				case 2063928716: //sensor 4 saucer new
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
-				shipModule.displayName = "Modern <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Freshly manufactured and mass produced sensor array. Mostly installed on more serious vessels. Provides decent navigation and detection capabilities.";
+				shipModule.displayName = Core.TT($"Modern <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Freshly manufactured and mass produced sensor array. Mostly installed on more serious vessels. Provides decent navigation and detection capabilities.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 350f, metals = 750f, synthetics = 500f };
 				shipModule.Sensor.sectorRadarRange = 180;
 				shipModule.Sensor.starmapRadarRange = 18;
+				shipModule.starmapStealthDetectionLevelMax = 0;
 				shipModule.powerConsumed = 5;
 				shipModule_maxHealth = 10;
 				break;
 				case 1536566470: //sensor 5 EB saucer s1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.7f);
-				shipModule.displayName = "Commercial <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Sensor array that was developed for sake of profit and sold to anybody who can afford it. Private manufacturing will lead to breach of copyright agreement and lawsuit.";
+				shipModule.displayName = Core.TT($"Commercial <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Sensor array that was developed for sake of profit and sold to anybody who can afford it. Private manufacturing will lead to breach of copyright agreement and lawsuit.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 450f, metals = 1000f, synthetics = 750f, exotics = 1f };
 				shipModule.Sensor.sectorRadarRange = 200;
 				shipModule.Sensor.starmapRadarRange = 20;
@@ -109,9 +122,10 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1451617742: //sensor 8 sunpanel old s1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.7f);
-				shipModule.displayName = "Auspex <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "More advanced sensor array with built-in targeting assistance system and basic anti-cloaking capabilities. Has good navigation and detection capabilities.";
+				shipModule.displayName = Core.TT($"Auspex <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"More advanced sensor array with built-in targeting assistance system and basic anti-cloaking capabilities. Has good navigation and detection capabilities.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 600f, metals = 1500f, synthetics = 500f, exotics = 2f };
 				shipModule.Sensor.sectorRadarRange = 230;
 				shipModule.Sensor.starmapRadarRange = 23;
@@ -122,9 +136,10 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 1241054343: //sensor 5 futu saucer s1
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
-				shipModule.displayName = "Refraction <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Sensor array that uses refraction method to scan and detect all kinds of natural and artificial objects in space. Has very good navigation capabilities.";
+				shipModule.displayName = Core.TT($"Refraction <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Sensor array that uses refraction method to scan and detect all kinds of natural and artificial objects in space. Has very good navigation capabilities.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 750f, metals = 1750f, synthetics = 750f, exotics = 3f };
 				shipModule.Sensor.sectorRadarRange = 260;
 				shipModule.Sensor.starmapRadarRange = 26;
@@ -135,9 +150,10 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 171954196: //sensor 10 terran s2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
-				shipModule.displayName = "Tempest <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Sensor array that utilizes tempest architecture deep space for unidentified objects and lock onto them. Has excellent navigation and detection capabilities.";
+				shipModule.displayName = Core.TT($"Tempest <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Sensor array that utilizes tempest architecture deep space for unidentified objects and lock onto them. Has excellent navigation and detection capabilities.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 900f, metals = 2250f, synthetics = 1000f, exotics = 5f };
 				shipModule.Sensor.sectorRadarRange = 290;
 				shipModule.Sensor.starmapRadarRange = 29;
@@ -148,9 +164,10 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 204974912: //sensor 11 blue adv s2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
-				shipModule.displayName = "Exotic <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Mostly built from exotic elements that resonate between each other and allow to use this resonance for scanning. Has great navigation capabilities.";
+				shipModule.displayName = Core.TT($"Exotic <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Mostly built from exotic elements that resonate between each other and allow to use this resonance for scanning. Has great navigation capabilities.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1050f, metals = 750f, synthetics = 500f, exotics = 50f };
 				shipModule.Sensor.sectorRadarRange = 320;
 				shipModule.Sensor.starmapRadarRange = 32;
@@ -161,9 +178,10 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 680853891: //sensor 11 sophisiticated s2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.5f);
-				shipModule.displayName = "Multi-Spectrum <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Uses multi-spectrum mirrors array to discover and lock on targets or coordinates at great distances. Has great navigation, detection and targeting capabilities.";
+				shipModule.displayName = Core.TT($"Multi-Spectrum <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Uses multi-spectrum mirrors array to discover and lock on targets or coordinates at great distances. Has great navigation, detection and targeting capabilities.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1250f, metals = 2750f, synthetics = 1750f, exotics = 7f };
 				shipModule.Sensor.sectorRadarRange = 350;
 				shipModule.Sensor.starmapRadarRange = 35;
@@ -174,9 +192,10 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 588186350: //sensor 12 spideraa
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
-				shipModule.displayName = "Repulsor <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Uses kinetic energy and unknown principles to send low-amplitude kinetic waves in a sonar-like way to discovered and lock on to targets at great distances.";
+				shipModule.displayName = Core.TT($"Repulsor <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Uses kinetic energy and unknown principles to send low-amplitude kinetic waves in a sonar-like way to discovered and lock on to targets at great distances.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1500f, metals = 3000f, synthetics = 2500f, exotics = 10f };
 				shipModule.Sensor.sectorRadarRange = 380;
 				shipModule.Sensor.starmapRadarRange = 38;
@@ -187,9 +206,10 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 524731680: //sensor 11 seashell s2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 7, 8, 9);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.4f);
-				shipModule.displayName = "Subspace <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Has built-in working subspace radio modulator that emits subspace waves that allow to detected objects at great distances. Almost perfect navigation capabilities.";
+				shipModule.displayName = Core.TT($"Subspace <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Has built-in working subspace radio modulator that emits subspace waves that allow to detected objects at great distances. Almost perfect navigation capabilities.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1750f, metals = 3500f, synthetics = 2750f, exotics = 15f };
 				shipModule.Sensor.sectorRadarRange = 420;
 				shipModule.Sensor.starmapRadarRange = 42;
@@ -200,9 +220,10 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 160051026: //sensor 10 tiger
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.3f);
-				shipModule.displayName = "Multi-Wave <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Utilizes harmony resonance technology that allows to gather exact data from resonance wave emissions that generated by great majority of interstellar objects.";
+				shipModule.displayName = Core.TT($"Multi-Wave <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Utilizes harmony resonance technology that allows to gather exact data from resonance wave emissions that generated by great majority of interstellar objects.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 2000f, metals = 4000f, synthetics = 3000f, exotics = 20f };
 				shipModule.Sensor.sectorRadarRange = 460;
 				shipModule.Sensor.starmapRadarRange = 46;
@@ -213,21 +234,22 @@ namespace FFU_Bleeding_Edge {
 				break;
 				case 171954197: //sensor 9 sunpanel new s2
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 9, 10);
+				if (!FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Contains(shipModule.PrefabId)) FFU_BE_Defs.survivalTypeIDs[Core.SurvivalType.Sensor].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.3f);
-				shipModule.displayName = "Multi-Phased <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "Has multitude of integrated mechanisms, which observe time and space at different phases that in confluence allow easy detection of any objects at immense distances.";
-				shipModule.craftCost = new ResourceValueGroup { fuel = 2500f, metals = 4500f, synthetics = 3500f, exotics = 25f };
-				shipModule.Sensor.sectorRadarRange = 500;
-				shipModule.Sensor.starmapRadarRange = 50;
+				shipModule.displayName = Core.TT($"Multi-Phased <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"Has multitude of integrated mechanisms, which observe time and space at different phases that in confluence allow easy detection of any objects at immense distances.");
+				shipModule.craftCost = ProcessDLC.GetCraftingCost(shipModule.PrefabId);
+				shipModule.Sensor.sectorRadarRange = ProcessDLC.GetSectorRadarRange(shipModule.PrefabId);
+				shipModule.Sensor.starmapRadarRange = ProcessDLC.GetStarmapRadarRange(shipModule.PrefabId);
 				shipModule.starmapStealthDetectionLevelMax = 5;
 				shipModule.shipAccuracyPercentAdd = 20;
 				shipModule.powerConsumed = 10;
-				shipModule_maxHealth = 35;
+				shipModule_maxHealth = ProcessDLC.GetMaxHealth(shipModule.PrefabId);
 				break;
 				case 168562189: //long range sensor 2 old tutorial
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.8f);
-				shipModule.displayName = "Damaged <color=#" + colorSensor + "ff>Sensor Array</color>";
-				shipModule.description = "This sensor array has been though a lot. Amount of impacts and damage it received isn't any less then hull of any long serving border patrol battleship.";
+				shipModule.displayName = Core.TT($"Damaged <color=#{colorSensor}ff>Sensor Array</color>");
+				shipModule.description = Core.TT($"This sensor array has been though a lot. Amount of impacts and damage it received isn't any less then hull of any long serving border patrol battleship.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 200f, metals = 500f, synthetics = 250f };
 				shipModule.Sensor.sectorRadarRange = 150;
 				shipModule.Sensor.starmapRadarRange = 15;
@@ -238,11 +260,45 @@ namespace FFU_Bleeding_Edge {
 				break;
 				default:
 				Debug.LogWarning($"[NEW SENSOR] {FFU_BE_Mod_Information.GetSelectedModuleExactData(shipModule, false, true, false, false, false)}");
-				shipModule.displayName = "(SENSOR) " + shipModule.displayName;
+				shipModule.displayName = $"(SENSOR) {shipModule.name}";
 				break;
 			}
 			AccessTools.FieldRefAccess<ShipModule, int>(shipModule, "maxHealth") = shipModule_maxHealth;
 			FFU_BE_Mod_Modules.UpdateCommonStats(shipModule);
+		}
+		public class ProcessDLC {
+			public static ResourceValueGroup GetCraftingCost(int moduleId) {
+				switch (moduleId) {
+					case 171954197: //sensor 9 sunpanel new s2
+					if (FFU_BE_Defs.flagDLC_SupPak) return new ResourceValueGroup { fuel = 2500f, metals = 4500f, synthetics = 3500f, exotics = 25f };
+					else return new ResourceValueGroup { fuel = 2000f, metals = 4000f, synthetics = 3000f, exotics = 20f };
+					default: return new ResourceValueGroup { fuel = 1000f, metals = 1000f, synthetics = 1000f, exotics = 10f };
+				}
+			}
+			public static int GetSectorRadarRange(int moduleId) {
+				switch (moduleId) {
+					case 171954197: //sensor 9 sunpanel new s2
+					if (FFU_BE_Defs.flagDLC_SupPak) return 500;
+					else return 450;
+					default: return 150;
+				}
+			}
+			public static int GetStarmapRadarRange(int moduleId) {
+				switch (moduleId) {
+					case 171954197: //sensor 9 sunpanel new s2
+					if (FFU_BE_Defs.flagDLC_SupPak) return 50;
+					else return 45;
+					default: return 15;
+				}
+			}
+			public static int GetMaxHealth(int moduleId) {
+				switch (moduleId) {
+					case 171954197: //sensor 9 sunpanel new s2
+					if (FFU_BE_Defs.flagDLC_SupPak) return 35;
+					else return 30;
+					default: return 10;
+				}
+			}
 		}
 	}
 }

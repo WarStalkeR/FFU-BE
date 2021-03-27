@@ -877,13 +877,13 @@ namespace RST.UI {
 		}
 		private static string HandleToggleText(Core.CargoType cargoType) {
 			switch (cargoType) {
-				case Core.CargoType.Multi: return "MULTICONTAINERS";
-				case Core.CargoType.Organics: return "ORGANICS STORAGES";
-				case Core.CargoType.Starfuel: return "STARFUEL STORAGES";
-				case Core.CargoType.Metals: return "METALS STORAGES";
-				case Core.CargoType.Synthetics: return "SYNTHETICS STORAGES";
-				case Core.CargoType.Exoplosives: return "EXOPLOSIVES STORAGES";
-				case Core.CargoType.Exotics: return "EXOTICS STORAGES";
+				case Core.CargoType.Multi: return "MULTI-CONTAINERS";
+				case Core.CargoType.Organics: return "ORGANICS CONTAINERS";
+				case Core.CargoType.Starfuel: return "STARFUEL CONTAINERS";
+				case Core.CargoType.Metals: return "METAL ALLOYS CONTAINERS";
+				case Core.CargoType.Synthetics: return "SYNTHETICS CONTAINERS";
+				case Core.CargoType.Exoplosives: return "EXOPLOSIVES CONTAINERS";
+				case Core.CargoType.Exotics: return "EXOTIC MATTER CONTAINERS";
 				case Core.CargoType.ResPack: return "RESOURCE PACKS";
 				default: return "CARGO";
 			}
@@ -919,9 +919,9 @@ namespace RST.UI {
 		}
 		private static string HandleToggleText(Core.SurvivalType survivalType) {
 			switch (survivalType) {
-				case Core.SurvivalType.Armor: return "ARMOR PLATES";
+				case Core.SurvivalType.Armor: return "INTEGRITY ARMORS";
 				case Core.SurvivalType.Shield: return "SHIELD GENERATORS";
-				case Core.SurvivalType.Battery: return "SHIELD BATTERIES";
+				case Core.SurvivalType.Battery: return "SHIELD CAPACITORS";
 				case Core.SurvivalType.Sensor: return "SENSOR ARRAYS";
 				case Core.SurvivalType.Stealth: return "STEALTH GENERATORS";
 				case Core.SurvivalType.EWAR: return "ELECTRONIC COUNTERMEASURES";

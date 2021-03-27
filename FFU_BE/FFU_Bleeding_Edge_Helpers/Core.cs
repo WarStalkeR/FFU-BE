@@ -133,6 +133,15 @@ namespace FFU_Bleeding_Edge {
 			CIWS,
 			Any
 		}
+		public enum CannonType {
+			Explosive,
+			Kinetic,
+			Plasma,
+			Incendiary,
+			Corrosive,
+			Antimatter,
+			Any
+		}
 		public enum NukeType {
 			Kinetic,
 			Energy,
