@@ -31,8 +31,8 @@ namespace FFU_Bleeding_Edge {
 				switch (perk.PrefabId) {
 					//Universal Perks
 					case 1828524155: //Perk add fuel
-					perk.displayName = "Additional Starfuel Stash";
-					perk.description = "Additional stash of starfuel provided by supporters of our endeavor. Supporters sent it anonymously.";
+					perk.displayName = Core.TT($"Additional Starfuel Stash");
+					perk.description = Core.TT($"Additional stash of starfuel provided by supporters of our endeavor. Supporters sent it anonymously.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue(1000);
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -46,8 +46,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 1;
 					break;
 					case 1636676426: //Perk add fuel 2, extra canisters
-					perk.displayName = "Emergency Starfuel Backup";
-					perk.description = "Emergency starfuel backup that we've prepared a long time ago, but eventually forgot about it. Good that now we've remembered about it.";
+					perk.displayName = Core.TT($"Emergency Starfuel Backup");
+					perk.description = Core.TT($"Emergency starfuel backup that we've prepared a long time ago, but eventually forgot about it. Good that now we've remembered about it.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue(2500);
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -61,8 +61,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 1636676425: //Perk add fuel 3, passing ship
-					perk.displayName = "Alliance Starfuel Supply";
-					perk.description = "Starfuel supply provided by Earth Alliance and the allies through hidden channels to aid us in our endeavor and fight against our eternal foe.";
+					perk.displayName = Core.TT($"Alliance Starfuel Supply");
+					perk.description = Core.TT($"Starfuel supply provided by Earth Alliance and the allies through hidden channels to aid us in our endeavor and fight against our eternal foe.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue(4500);
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -76,8 +76,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 3;
 					break;
 					case 1590596161: //Perk add organics 0
-					perk.displayName = "Additional Organics Stash";
-					perk.description = "Additional stash of organics provided by supporters of our endeavor. Supporters sent it anonymously.";
+					perk.displayName = Core.TT($"Additional Organics Stash");
+					perk.description = Core.TT($"Additional stash of organics provided by supporters of our endeavor. Supporters sent it anonymously.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(1000);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -91,8 +91,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 1;
 					break;
 					case 1672628015: //Perk add organics 2, increased nutrition
-					perk.displayName = "Sumptuous & Luxurious Feast";
-					perk.description = "Feast comparable to Manchu-Han Imperial Feast, made by locals to celebrate start of our great endeavor, whilst getting rid of our annoying presence.";
+					perk.displayName = Core.TT($"Sumptuous & Luxurious Feast");
+					perk.description = Core.TT($"Feast comparable to Manchu-Han Imperial Feast, made by locals to celebrate start of our great endeavor, whilst getting rid of our annoying presence.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(2500);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -106,8 +106,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 1672628016: //Perk add organics 3, braindead
-					perk.displayName = "Bionic Technology Remnants";
-					perk.description = "Generously donated by unknown 3rd party to support our endeavor. They were probably trying to get rid of the evidence after their failed experiments.";
+					perk.displayName = Core.TT($"Bionic Technology Remnants");
+					perk.description = Core.TT($"Generously donated by unknown 3rd party to support our endeavor. They were probably trying to get rid of the evidence after their failed experiments.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(1500);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -122,8 +122,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 945087461: //Perk add organics 5, dead animals
-					perk.displayName = "Herd of Exotic Animals";
-					perk.description = "We accidentally stumbled on a herd of wild animals and decided to turn them into space rations. During butchering we found out about their exotic nature.";
+					perk.displayName = Core.TT($"Herd of Exotic Animals");
+					perk.description = Core.TT($"We accidentally stumbled on a herd of wild animals and decided to turn them into space rations. During butchering we found out about their exotic nature.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(1500);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -138,8 +138,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 430920595: //Perk add organics 1, houseplant
-					perk.displayName = "Nitrocherry Tree Garden";
-					perk.description = "Somebody before their death left their will that designated us as inheritors of garden full of nitrocherry trees. We happily accepted and reprocessed them.";
+					perk.displayName = Core.TT($"Nitrocherry Tree Garden");
+					perk.description = Core.TT($"Somebody before their death left their will that designated us as inheritors of garden full of nitrocherry trees. We happily accepted and reprocessed them.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(1500);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -154,8 +154,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 75978646: //Perk add organics 4, dead insectoids
-					perk.displayName = "Alliance Organics Supply";
-					perk.description = "Organics supply provided by Earth Alliance and the allies through hidden channels to aid us in our endeavor and fight against our eternal foe.";
+					perk.displayName = Core.TT($"Alliance Organics Supply");
+					perk.description = Core.TT($"Organics supply provided by Earth Alliance and the allies through hidden channels to aid us in our endeavor and fight against our eternal foe.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(4500);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -169,8 +169,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 3;
 					break;
 					case 798752091: //Perk add metals
-					perk.displayName = "Additional Metals Stash";
-					perk.description = "Additional stash of metals provided by supporters of our endeavor. Supporters sent it anonymously.";
+					perk.displayName = Core.TT($"Additional Metals Stash");
+					perk.description = Core.TT($"Additional stash of metals provided by supporters of our endeavor. Supporters sent it anonymously.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(1000);
@@ -184,8 +184,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 1;
 					break;
 					case 1311577453: //Perk add metals 2, scrap tank
-					perk.displayName = "Ruined Battle Fortress";
-					perk.description = "Our scanning drones accidentally discovered Mobile Battle Fortress, but sadly we didn't have enough time to repair it before takeoff and had to melt it down into hefty stash of alloys.";
+					perk.displayName = Core.TT($"Ruined Battle Fortress");
+					perk.description = Core.TT($"Our scanning drones accidentally discovered Mobile Battle Fortress, but sadly we didn't have enough time to repair it before takeoff and had to melt it down into hefty stash of alloys.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(7000);
@@ -199,8 +199,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 4;
 					break;
 					case 1289207917: //Perk add synthetics
-					perk.displayName = "Additional Synthetics Stash";
-					perk.description = "Additional stash of synthetics provided by supporters of our endeavor. Supporters sent it anonymously.";
+					perk.displayName = Core.TT($"Additional Synthetics Stash");
+					perk.description = Core.TT($"Additional stash of synthetics provided by supporters of our endeavor. Supporters sent it anonymously.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -214,8 +214,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 1;
 					break;
 					case 1019109695: //Perk add synthetics 2, broken lamp
-					perk.displayName = "Fragmented Solar Furnace";
-					perk.description = "Once these were a solar furnace used to supply entire planet with energy and heat, but now this only a fragments of the past glory. We've discovered them accidentally, when we were exploring some ancient ruins.";
+					perk.displayName = Core.TT($"Fragmented Solar Furnace");
+					perk.description = Core.TT($"Once these were a solar furnace used to supply entire planet with energy and heat, but now this only a fragments of the past glory. We've discovered them accidentally, when we were exploring some ancient ruins.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(1500);
@@ -230,8 +230,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 3;
 					break;
 					case 1312794238: //Perk add synthetics and fuel
-					perk.displayName = "Enriched Tritium Rods";
-					perk.description = "Found in one of the abandoned power plants that were used centuries ago. Unexpectedly, power plant was completely cleaned up with only these rods left untouched. They probably were too heavy to steal. Or too radioactive.";
+					perk.displayName = Core.TT($"Enriched Tritium Rods");
+					perk.description = Core.TT($"Found in one of the abandoned power plants that were used centuries ago. Unexpectedly, power plant was completely cleaned up with only these rods left untouched. They probably were too heavy to steal. Or too radioactive.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue(3000);
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -246,8 +246,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 3;
 					break;
 					case 986856836: //Perk add synthetics 3, ex container
-					perk.displayName = "Alliance Synthetics Supply";
-					perk.description = "Synthetics supply provided by Earth Alliance and the allies through hidden channels to aid us in our endeavor and fight against our eternal foe.";
+					perk.displayName = Core.TT($"Alliance Synthetics Supply");
+					perk.description = Core.TT($"Synthetics supply provided by Earth Alliance and the allies through hidden channels to aid us in our endeavor and fight against our eternal foe.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -261,8 +261,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 3;
 					break;
 					case 153460441: //Perk add explosives
-					perk.displayName = "Additional Explosives Stash";
-					perk.description = "Additional stash of explosives provided by supporters of our endeavor. Supporters sent it anonymously.";
+					perk.displayName = Core.TT($"Additional Explosives Stash");
+					perk.description = Core.TT($"Additional stash of explosives provided by supporters of our endeavor. Supporters sent it anonymously.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -276,8 +276,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 1;
 					break;
 					case 1491789515: //Perk add explosives 2, explo sculpture
-					perk.displayName = "Alliance Explosives Supply";
-					perk.description = "Explosives supply provided by Earth Alliance and the allies through hidden channels to aid us in our endeavor and fight against our eternal foe.";
+					perk.displayName = Core.TT($"Alliance Explosives Supply");
+					perk.description = Core.TT($"Explosives supply provided by Earth Alliance and the allies through hidden channels to aid us in our endeavor and fight against our eternal foe.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -291,8 +291,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 3;
 					break;
 					case 1585922370: //Perk add exotics
-					perk.displayName = "Exotic Ur-Quanite Crystals";
-					perk.description = "Were discovered floating in lower layers of the atmosphere during atmospheric reentry by the crewmember that was nostalgically reminiscing about good old classic games that were released centuries ago.";
+					perk.displayName = Core.TT($"Exotic Ur-Quanite Crystals");
+					perk.description = Core.TT($"Were discovered floating in lower layers of the atmosphere during atmospheric reentry by the crewmember that was nostalgically reminiscing about good old classic games that were released centuries ago.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -306,8 +306,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 1;
 					break;
 					case 136575048: //Perk barter get exotics for credits
-					perk.displayName = "Exotic Low Quality Ore";
-					perk.description = "A months before takeoff we've managed to discover in one the excavated tunnels vein of low quality exotic ore. Sadly, only part of it found buyers. Rest of it had to be reprocessed.";
+					perk.displayName = Core.TT($"Exotic Low Quality Ore");
+					perk.description = Core.TT($"A months before takeoff we've managed to discover in one the excavated tunnels vein of low quality exotic ore. Sadly, only part of it found buyers. Rest of it had to be reprocessed.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -322,8 +322,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 1246169320: //Perk add exotics 2, broken sex toy
-					perk.displayName = "Rare Exotic Contraption";
-					perk.description = "Was accidentally discovered by one of the most curious crewmembers at some junkyard. Although we can only assume that this was some sort of a sex toy, we had no use for it and thus reprocessed it into marvelous amount of exotic matter.";
+					perk.displayName = Core.TT($"Rare Exotic Contraption");
+					perk.description = Core.TT($"Was accidentally discovered by one of the most curious crewmembers at some junkyard. Although we can only assume that this was some sort of a sex toy, we had no use for it and thus reprocessed it into marvelous amount of exotic matter.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -338,8 +338,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 3;
 					break;
 					case 28396574: //Perk barter get exotics for explosives
-					perk.displayName = "Exotics-Infused Ammunition";
-					perk.description = "Was discovered at one of the abandoned munitions factories. It was probably way too volatile and too unstable to steal as is. We had to spend some time to setup facilities to reprocess it into sumptuous amount of exotic matter.";
+					perk.displayName = Core.TT($"Exotics-Infused Ammunition");
+					perk.description = Core.TT($"Was discovered at one of the abandoned munitions factories. It was probably way too volatile and too unstable to steal as is. We had to spend some time to setup facilities to reprocess it into sumptuous amount of exotic matter.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -354,8 +354,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 3;
 					break;
 					case 1687140155: //Perk add credits
-					perk.displayName = "Anonymous Xenodata Donation";
-					perk.description = "Additional amount of credits provided by supporters of our endeavor. Supporters sent it anonymously.";
+					perk.displayName = Core.TT($"Anonymous Xenodata Donation");
+					perk.description = Core.TT($"Additional amount of credits provided by supporters of our endeavor. Supporters sent it anonymously.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -369,8 +369,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 1;
 					break;
 					case 83526129: //Perk barter get credits for explosives
-					perk.displayName = "Hidden Rebel Supply Stash";
-					perk.description = "As it seems we've discovered a hidden supply stash that was intended for the rebels. I'm pretty sure, if we will take it, nobody will be angry. We even will be the good ones who saved the day.";
+					perk.displayName = Core.TT($"Hidden Rebel Supply Stash");
+					perk.description = Core.TT($"As it seems we've discovered a hidden supply stash that was intended for the rebels. I'm pretty sure, if we will take it, nobody will be angry. We even will be the good ones who saved the day.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -385,8 +385,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 3;
 					break;
 					case 1722324010: //Perk add credits 2, personal savings
-					perk.displayName = "Hacked Ancient Xenodata Vault";
-					perk.description = "At one of the ancient archaeological sites we've discovered an untouched xenodata vault with priceless data. We've managed to bypass its protection due to the usage of centuries old encrypting algorithms in it.";
+					perk.displayName = Core.TT($"Hacked Ancient Xenodata Vault");
+					perk.description = Core.TT($"At one of the ancient archaeological sites we've discovered an untouched xenodata vault with priceless data. We've managed to bypass its protection due to the usage of centuries old encrypting algorithms in it.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -400,8 +400,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1569517835: //Perk pack, medical resources
-					perk.displayName = "Abandoned Artificer Stash";
-					perk.description = "As it seems somebody was in a hurry (or didn't had enough free space in storage) and left these stashes to collect the dust. I think they will be more useful during our endeavor. And nobody needs them anyway.";
+					perk.displayName = Core.TT($"Abandoned Artificer Stash");
+					perk.description = Core.TT($"As it seems somebody was in a hurry (or didn't had enough free space in storage) and left these stashes to collect the dust. I think they will be more useful during our endeavor. And nobody needs them anyway.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -410,19 +410,19 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "compressed exotics pack").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "compressed exotics pack").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "compressed exotics pack").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "compressed exotics pack").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "compressed exotics pack").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.isUnlockedByDefault = false;
 					perk.repCost = 15;
 					break;
 					case 1105713209: //Perk pack, organics
-					perk.displayName = "Helpful Military Requisition";
-					perk.description = "While we were stationed on this planet, we've made some connections with local representatives of different powers. When military representatives heard about our secret mission, they were more than happy to help us.";
+					perk.displayName = Core.TT($"Helpful Military Requisition");
+					perk.description = Core.TT($"While we were stationed on this planet, we've made some connections with local representatives of different powers. When military representatives heard about our secret mission, they were more than happy to help us.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -431,19 +431,19 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "general pack organics, synth, metal").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "general pack organics, synth, metal").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "general pack organics, synth, metal").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "general pack organics, synth, metal").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "general pack organics, synth, metal").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.isUnlockedByDefault = false;
 					perk.repCost = 10;
 					break;
 					case 917843686: //Perk pack, 3xsolid starfuel from level7
-					perk.displayName = "Supply Transport Wreckage";
-					perk.description = "During planetary surface scan with our printed satellites we've discovered a centuries old spaceship wreckage. Although it was left undiscovered, time is an unbeatable foe and majority of intact supplies ended up being spoiled.";
+					perk.displayName = Core.TT($"Supply Transport Wreckage");
+					perk.description = Core.TT($"During planetary surface scan with our printed satellites we've discovered a centuries old spaceship wreckage. Although it was left undiscovered, time is an unbeatable foe and majority of intact supplies ended up being spoiled.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -452,11 +452,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel pack").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel pack").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel pack").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives pack").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives pack").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(453797399) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(453797399) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(453797399) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(813048445) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(813048445) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+3x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+2x {perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName}" };
@@ -464,8 +464,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1105381290: //Perk module DIY medbay
-					perk.displayName = "Advanced Medical Bay Cache";
-					perk.description = "Discovered at one of the abandoned and locked down medical facilities during exploration. Contains completely working and packed module, encrypted blueprint and some resources required to operate.";
+					perk.displayName = Core.TT($"Advanced Medical Bay Cache");
+					perk.description = Core.TT($"Discovered at one of the abandoned and locked down medical facilities during exploration. Contains completely working and packed module, encrypted blueprint and some resources required to operate.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(2500);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -474,9 +474,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "medbay6 biological").gameObject }}};
-					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "medbay6 biological").PrefabId });
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(463896999) }}};
+					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[] { 463896999 });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
@@ -485,8 +484,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 15;
 					break;
 					case 411849296: //Perk module medbay 202
-					perk.displayName = "Universal Restoration Bay Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely anomalous location full of destructive ion storms. The only reason this cache was left intact is extremely protected bunker, where it was found.";
+					perk.displayName = Core.TT($"Universal Restoration Bay Cache");
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely anomalous location full of destructive ion storms. The only reason this cache was left intact is extremely protected bunker, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(2500);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -495,9 +494,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "medbay4 stem celler").gameObject }}};
-					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "medbay4 stem celler").PrefabId });
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1304112764) }}};
+					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[] { 1304112764 });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
@@ -507,8 +505,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 484808345: //Perk crew 1 human adventurer
-					perk.displayName = "Experienced Adventurer";
-					perk.description = "A trustworthy adventurer offers credits for the opportunity to travel back to Earth with us. They wear an armored helmet and promise to bring along a cool handgun.";
+					perk.displayName = Core.TT($"Experienced Adventurer");
+					perk.description = Core.TT($"A trustworthy adventurer offers credits for the opportunity to travel back to Earth with us. They wear an armored helmet and promise to bring along a cool handgun.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -523,8 +521,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 2060998335: //Perk crew best marine
-					perk.displayName = "Tactical Marine Graduate";
-					perk.description = "A marine with top grades from University of Tactical Land Warfare joins our mission. For the experience. They also carry a full set of live ammunition with them. Just in case.";
+					perk.displayName = Core.TT($"Tactical Marine Graduate");
+					perk.description = Core.TT($"A marine with top grades from University of Tactical Land Warfare joins our mission. For the experience. They also carry a full set of live ammunition with them. Just in case.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -539,8 +537,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 936025880: //Perk crew human scientist
-					perk.displayName = "Seasoned Quantum Physicist";
-					perk.description = "A scientist joins the mission, to research an obscure topic of time travel, causality manipulation, how it affects the universe and related to the meaning of life. They bring along some exotic supplies.";
+					perk.displayName = Core.TT($"Seasoned Quantum Physicist");
+					perk.description = Core.TT($"A scientist joins the mission, to research an obscure topic of time travel, causality manipulation, how it affects the universe and related to the meaning of life. They bring along some exotic supplies.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(500);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -556,8 +554,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 141752450: //Perk crew 2 beedroid engineer
-					perk.displayName = "Beedroid Engineer Veteran";
-					perk.description = "An alien cyborg joins the mission to repay an old favor. The entire species of Beedroids have transcended their biological bodies. They also bring a full set of tools to perform repairs and modifications.";
+					perk.displayName = Core.TT($"Beedroid Engineer Veteran");
+					perk.description = Core.TT($"An alien cyborg joins the mission to repay an old favor. The entire species of Beedroids have transcended their biological bodies. They also bring a full set of tools to perform repairs and modifications.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -572,8 +570,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 584291632: //Perk crew rat cook
-					perk.displayName = "Proficient Rat Cook";
-					perk.description = "This excellent Rat cook is also skilled in growing food and extinguishing fires. Both mastered during his years in the Rat Cooking University. They also bring along a set of precooked supplies.";
+					perk.displayName = Core.TT($"Proficient Rat Cook");
+					perk.description = Core.TT($"This excellent Rat cook is also skilled in growing food and extinguishing fires. Both mastered during his years in the Rat Cooking University. They also bring along a set of precooked supplies.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(500);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -588,8 +586,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 2140969742: //Perk crew rat mercs -creds
-					perk.displayName = "Ragtag Rat Mercenaries";
-					perk.description = "A band of ragtag mercenary rats join the mission for ability feed themselves. The poor fellas had mediocre skills and do not have any body augments. They also bring along a set of low quality metals to maintain their weapons.";
+					perk.displayName = Core.TT($"Ragtag Rat Mercenaries");
+					perk.description = Core.TT($"A band of ragtag mercenary rats join the mission for ability feed themselves. The poor fellas had mediocre skills and do not have any body augments. They also bring along a set of low quality metals to maintain their weapons.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(500);
@@ -604,8 +602,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 6;
 					break;
 					case 2036238841: //Perk crew gitchanki sensorist
-					perk.displayName = "Inexperienced Gitchanki Astronomer";
-					perk.description = "His regular lovers were a gang of female space marines who taught him everything about wrestling, handguns and ship sensors. They gave him some credits and sent him to adventure to get more life experience.";
+					perk.displayName = Core.TT($"Inexperienced Gitchanki Astronomer");
+					perk.description = Core.TT($"His regular lovers were a gang of female space marines who taught him everything about wrestling, handguns and ship sensors. They gave him some credits and sent him to adventure to get more life experience.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -620,8 +618,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 187729117: //Perk crew lizard firefighter
-					perk.displayName = "Monk of Infinite Fire Temple";
-					perk.description = "This old lizardfolk monk has improved fire resistance and firefighting skills due to years spent in the Temple of Infinite Fire. Likes to stay in the shower for hours. Has hobby of collecting exotic and volatile matter.";
+					perk.displayName = Core.TT($"Monk of Infinite Fire Temple");
+					perk.description = Core.TT($"This old lizardfolk monk has improved fire resistance and firefighting skills due to years spent in the Temple of Infinite Fire. Likes to stay in the shower for hours. Has hobby of collecting exotic and volatile matter.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -636,8 +634,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 1581853207: //Perk crew grippy gunner
-					perk.displayName = "Weaponry Ex-Specialist Grippy";
-					perk.description = "This snake-individual used to serve in a military warship as a gunnery officer. Experienced in using all kinds of ship weapons. Regularly consumes a cocktail of intoxicants, always has hidden stash of explosives. Just in case.";
+					perk.displayName = Core.TT($"Weaponry Ex-Specialist Grippy");
+					perk.description = Core.TT($"This snake-individual used to serve in a military warship as a gunnery officer. Experienced in using all kinds of ship weapons. Regularly consumes a cocktail of intoxicants, always has hidden stash of explosives. Just in case.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -652,8 +650,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 142590729: //Perk crew gormor gardener
-					perk.displayName = "Tranquil Gor-Mor Gardener";
-					perk.description = "This Gor-Mor individual is a famous gardener-philosopher, praised highly by political leaders and spiritual acolytes who seek enlightenment. He wants to help us in exchange for allowing him to meditate in our greenhouses.";
+					perk.displayName = Core.TT($"Tranquil Gor-Mor Gardener");
+					perk.description = Core.TT($"This Gor-Mor individual is a famous gardener-philosopher, praised highly by political leaders and spiritual acolytes who seek enlightenment. He wants to help us in exchange for allowing him to meditate in our greenhouses.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -668,8 +666,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 2075504578: //Perk augment 00a full checkup
-					perk.displayName = "Full Diagnostics & Maintenance";
-					perk.description = "Full testing of all ship components, modules and subroutines, and replacement of deprecated and faulty one ensures increased survivability of the ship and crew that uses it.";
+					perk.displayName = Core.TT($"Full Diagnostics & Maintenance");
+					perk.description = Core.TT($"Full testing of all ship components, modules and subroutines, and replacement of deprecated and faulty one ensures increased survivability of the ship and crew that uses it.");
 					perk.addShipMaxHealth = 50;
 					perk.addShipDeflectPercent = 0;
 					perk.addShipEvasionPercent = 0;
@@ -689,8 +687,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 344652167: //Perk augment 00b evasive manuever dbase update
-					perk.displayName = "Advanced Maneuvering Subroutines";
-					perk.description = "Refurbishment and upgrade of built-in maneuvering systems will increase ship's chances to successfully evade incoming hostile fire and break-off from enemy targeting systems.";
+					perk.displayName = Core.TT($"Advanced Maneuvering Subroutines");
+					perk.description = Core.TT($"Refurbishment and upgrade of built-in maneuvering systems will increase ship's chances to successfully evade incoming hostile fire and break-off from enemy targeting systems.");
 					perk.addShipMaxHealth = 0;
 					perk.addShipDeflectPercent = 0;
 					perk.addShipEvasionPercent = 5;
@@ -709,8 +707,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 237545307: //Perk augment 00c impact dampeners
-					perk.displayName = "Impact Dampening Armor Coating";
-					perk.description = "An experimental armor coating that eventually fuses into armor and becomes part of it, while increasing its deflective properties against incoming enemy fire.";
+					perk.displayName = Core.TT($"Impact Dampening Armor Coating");
+					perk.description = Core.TT($"An experimental armor coating that eventually fuses into armor and becomes part of it, while increasing its deflective properties against incoming enemy fire.");
 					perk.addShipMaxHealth = 0;
 					perk.addShipDeflectPercent = 5;
 					perk.addShipEvasionPercent = 0;
@@ -729,8 +727,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 918962338: //Perk augment 00d tactical predictor
-					perk.displayName = "Tactical Prediction Software";
-					perk.description = "Almost universal software that requires no hardware upgrades. Increases accuracy of all on-board and built-in weapon system without any negative drawbacks and consequences.";
+					perk.displayName = Core.TT($"Tactical Prediction Software");
+					perk.description = Core.TT($"Almost universal software that requires no hardware upgrades. Increases accuracy of all on-board and built-in weapon system without any negative drawbacks and consequences.");
 					perk.addShipMaxHealth = 0;
 					perk.addShipDeflectPercent = 0;
 					perk.addShipEvasionPercent = 0;
@@ -749,8 +747,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 780498261: //Perk augment 001a elastic augmentations
-					perk.displayName = "Carbon Fiber Integrity Upgrade";
-					perk.description = "Increases ship hull integrity by reinforcing ship's hardpoints and exposed inter-connectors with extremely durable carbon fibers that allow the ship to \"bend\" a little.";
+					perk.displayName = Core.TT($"Carbon Fiber Integrity Upgrade");
+					perk.description = Core.TT($"Increases ship hull integrity by reinforcing ship's hardpoints and exposed inter-connectors with extremely durable carbon fibers that allow the ship to \"bend\" a little.");
 					perk.addShipMaxHealth = 100;
 					perk.addShipDeflectPercent = 0;
 					perk.addShipEvasionPercent = 0;
@@ -770,8 +768,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 69059130: //Perk augment 001b exotic armor
-					perk.displayName = "Composite Exotic-Infused Armor";
-					perk.description = "Adds additional layer of composite exotic-infused armor over ship's hull that provides additional durability and increases overall integrity, thus increasing survivability of the ship.";
+					perk.displayName = Core.TT($"Composite Exotic-Infused Armor");
+					perk.description = Core.TT($"Adds additional layer of composite exotic-infused armor over ship's hull that provides additional durability and increases overall integrity, thus increasing survivability of the ship.");
 					perk.addShipMaxHealth = 200;
 					perk.addShipDeflectPercent = 0;
 					perk.addShipEvasionPercent = 0;
@@ -791,8 +789,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					case 2037439773: //Perk augment 02 Fortified subsections
-					perk.displayName = "Segmented Armored Subsections";
-					perk.description = "Complete rework of ship's interior. Replaces all standard subsection with heavily armored ones that follow strict segmentation standards to prevent uncontrolled decompression in cases of even extreme damage.";
+					perk.displayName = Core.TT($"Segmented Armored Subsections");
+					perk.description = Core.TT($"Complete rework of ship's interior. Replaces all standard subsection with heavily armored ones that follow strict segmentation standards to prevent uncontrolled decompression in cases of even extreme damage.");
 					perk.addShipMaxHealth = 150;
 					perk.addShipDeflectPercent = 0;
 					perk.addShipEvasionPercent = 0;
@@ -810,8 +808,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 1577853994: //Perk augment 03 targeting software
-					perk.displayName = "Combat Forensics Processing Units";
-					perk.description = "An entire full set of new hardware that is integrated into the core systems of the ship and even partially replaces built-in targeting systems. Allows to analyze on the fly hostile ships behavior and perform necessary targeting corrections.";
+					perk.displayName = Core.TT($"Combat Forensics Processing Units");
+					perk.description = Core.TT($"An entire full set of new hardware that is integrated into the core systems of the ship and even partially replaces built-in targeting systems. Allows to analyze on the fly hostile ships behavior and perform necessary targeting corrections.");
 					perk.addShipMaxHealth = 0;
 					perk.addShipDeflectPercent = 0;
 					perk.addShipEvasionPercent = 0;
@@ -829,8 +827,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 1913754090: //Perk augment 04 maneuvering jets
-					perk.displayName = "Reinforced Maneuvering Thrusters";
-					perk.description = "Replaces ship's original maneuvering thrusters and reaction control systems with more advanced and reinforced ones. Reinforced maneuvering thrusters and reaction control systems has much greater evasion capability due to enhanced durability.";
+					perk.displayName = Core.TT($"Reinforced Maneuvering Thrusters");
+					perk.description = Core.TT($"Replaces ship's original maneuvering thrusters and reaction control systems with more advanced and reinforced ones. Reinforced maneuvering thrusters and reaction control systems has much greater evasion capability due to enhanced durability.");
 					perk.addShipMaxHealth = 0;
 					perk.addShipDeflectPercent = 0;
 					perk.addShipEvasionPercent = 5;
@@ -848,8 +846,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 82318717: //Perk augment 05 deflection
-					perk.displayName = "Experimental Reflective Composite Armor";
-					perk.description = "Completely replaces original ship armor with experimental reflective composite one. Due to its exotic nature, this armor has improved deflective properties that equally effective for deflection of projectiles and reflection of beams.";
+					perk.displayName = Core.TT($"Experimental Reflective Composite Armor");
+					perk.description = Core.TT($"Completely replaces original ship armor with experimental reflective composite one. Due to its exotic nature, this armor has improved deflective properties that equally effective for deflection of projectiles and reflection of beams.");
 					perk.addShipMaxHealth = 0;
 					perk.addShipDeflectPercent = 5;
 					perk.addShipEvasionPercent = 0;
@@ -867,8 +865,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 406945286: //Perk add permanent credits
-					perk.displayName = "Detailed Spideraa Scientific Data";
-					perk.description = "Scientific data about the Spideraa species is worth a lot of credits once we've obtained it. This information is quite dangerous, so we had to invest a lot of time and money into comprehensive background checks before deciding on a buyer.";
+					perk.displayName = Core.TT($"Detailed Spideraa Scientific Data");
+					perk.description = Core.TT($"Scientific data about the Spideraa species is worth a lot of credits once we've obtained it. This information is quite dangerous, so we had to invest a lot of time and money into comprehensive background checks before deciding on a buyer.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -882,8 +880,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 1975921437: //Perk fate permanent 01 fortunate coincidence
-					perk.displayName = "A Fortunate Coincidence";
-					perk.description = "A fortunate coincidence helps you to prepare better for the upcoming journey.";
+					perk.displayName = Core.TT($"A Fortunate Coincidence");
+					perk.description = Core.TT($"A fortunate coincidence helps you to prepare better for the upcoming journey.");
 					perk.fateBonusInPerkSelection = 1 * FFU_BE_Defs.permanentFateMult;
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
@@ -891,8 +889,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 2;
 					break;
 					case 388240334: //Perk fate permanent 02 good luck
-					perk.displayName = "The Good Luck";
-					perk.description = "Somebody wished you good luck before the journey, and thanks to an unexpected series of events, their wish actually came true.";
+					perk.displayName = Core.TT($"The Good Luck");
+					perk.description = Core.TT($"Somebody wished you good luck before the journey, and thanks to an unexpected series of events, their wish actually came true.");
 					perk.fateBonusInPerkSelection = 2 * FFU_BE_Defs.permanentFateMult;
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
@@ -900,8 +898,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 4;
 					break;
 					case 1048034788: //Perk fate permanent 03 causal chain reaction
-					perk.displayName = "The Causal Chain Reaction";
-					perk.description = "Years ago, you helped somebody, changing their lives forever. It started a chain-reaction of events that led to somebody helping you today.";
+					perk.displayName = Core.TT($"The Causal Chain Reaction");
+					perk.description = Core.TT($"Years ago, you helped somebody, changing their lives forever. It started a chain-reaction of events that led to somebody helping you today.");
 					perk.fateBonusInPerkSelection = 3 * FFU_BE_Defs.permanentFateMult;
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
@@ -909,8 +907,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 6;
 					break;
 					case 873320189: //Perk fate permanent 04 generosity and abundance
-					perk.displayName = "The Seeds of Generosity";
-					perk.description = "By sowing the seeds of generosity in the past, you have arrived to the harvest of abundance in the present.";
+					perk.displayName = Core.TT($"The Seeds of Generosity");
+					perk.description = Core.TT($"By sowing the seeds of generosity in the past, you have arrived to the harvest of abundance in the present.");
 					perk.fateBonusInPerkSelection = 4 * FFU_BE_Defs.permanentFateMult;
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
@@ -918,8 +916,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 8;
 					break;
 					case 117807373: //Perk fate permanent 05 friend of truth
-					perk.displayName = "The Friend of Truth";
-					perk.description = "Awareness of your personal limitations has granted you an even deeper awareness of your freedom.";
+					perk.displayName = Core.TT($"The Friend of Truth");
+					perk.description = Core.TT($"Awareness of your personal limitations has granted you an even deeper awareness of your freedom.");
 					perk.fateBonusInPerkSelection = 5 * FFU_BE_Defs.permanentFateMult;
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
@@ -927,8 +925,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1109573451: //Perk fate permanent 06 focused one
-					perk.displayName = "The Focused One";
-					perk.description = "You understand something so deeply that it allows you to understand everything a bit better than individuals usually do.";
+					perk.displayName = Core.TT($"The Focused One");
+					perk.description = Core.TT($"You understand something so deeply that it allows you to understand everything a bit better than individuals usually do.");
 					perk.fateBonusInPerkSelection = 6 * FFU_BE_Defs.permanentFateMult;
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
@@ -936,8 +934,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 12;
 					break;
 					case 1840253454: //Perk fate permanent 07 masterful exister
-					perk.displayName = "The Masterful Exister";
-					perk.description = "Random coincidences seem to support the fulfillment of your wishes more than what is usually considered normal.";
+					perk.displayName = Core.TT($"The Masterful Exister");
+					perk.description = Core.TT($"Random coincidences seem to support the fulfillment of your wishes more than what is usually considered normal.");
 					perk.fateBonusInPerkSelection = 7 * FFU_BE_Defs.permanentFateMult;
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
@@ -945,8 +943,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 14;
 					break;
 					case 2098263678: //Perk fate permanent 08 the great peace
-					perk.displayName = "The Great Peace";
-					perk.description = "You're starting to realize your intimate connection with the Great Peace, remaining calm even in situations of utter distress.";
+					perk.displayName = Core.TT($"The Great Peace");
+					perk.description = Core.TT($"You're starting to realize your intimate connection with the Great Peace, remaining calm even in situations of utter distress.");
 					perk.fateBonusInPerkSelection = 8 * FFU_BE_Defs.permanentFateMult;
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
@@ -954,8 +952,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 16;
 					break;
 					case 786995751: //Perk fate permanent 09 optimality
-					perk.displayName = "The Optimality";
-					perk.description = "You are in the right place, at the right time and under the right circumstances.";
+					perk.displayName = Core.TT($"The Optimality");
+					perk.description = Core.TT($"You are in the right place, at the right time and under the right circumstances.");
 					perk.fateBonusInPerkSelection = 9 * FFU_BE_Defs.permanentFateMult;
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
@@ -963,8 +961,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 18;
 					break;
 					case 361125977: //Perk fate permanent 10 victory
-					perk.displayName = "The Taste of Victory";
-					perk.description = "Those who know what awaits at the end of the road can enjoy the road itself better. And you are such person.";
+					perk.displayName = Core.TT($"The Taste of Victory");
+					perk.description = Core.TT($"Those who know what awaits at the end of the road can enjoy the road itself better. And you are such person.");
 					perk.fateBonusInPerkSelection = 10 * FFU_BE_Defs.permanentFateMult;
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.fateBonusInPerkSelection} {Core.TT("Fate Points on Next Run")}" };
@@ -972,8 +970,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					case 326598807: //Perk module drone repair bay
-					perk.displayName = "Advanced Drone Bay Cache";
-					perk.description = "Discovered at one of the abandoned and locked down maintanance facilities during exploration. Contains completely working and packed module, encrypted blueprint and some resources required to operate.";
+					perk.displayName = Core.TT($"Advanced Drone Bay Cache");
+					perk.description = Core.TT($"Discovered at one of the abandoned and locked down maintanance facilities during exploration. Contains completely working and packed module, encrypted blueprint and some resources required to operate.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -993,8 +991,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 15;
 					break;
 					case 1108785668: //Perk drone 00 smallbot
-					perk.displayName = "Swearing Bot Drone Crew";
-					perk.description = "A small toy drone and its useful drone crew. Knows vulgar words in all human languages & draws fire from intruders during internal combat, while all its friends do proper work it is uncapable of.";
+					perk.displayName = Core.TT($"Swearing Bot Drone Crew");
+					perk.description = Core.TT($"A small toy drone and its useful drone crew. Knows vulgar words in all human languages & draws fire from intruders during internal combat, while all its friends do proper work it is uncapable of.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1003,11 +1001,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone pet").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY firesafety").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY repairer").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY science").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY sensor").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1349473499) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(791329320) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(229081020) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1179088392) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Swearing")} {Core.TT("Drone")} {Core.TT("Pet")}",
 						$"+1x {Core.TT("Makeshift")} {Core.TT("Fire Safety")} {Core.TT("Drone")}",
@@ -1018,8 +1016,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1425666963: //Perk drone 01 DIY fire safety
-					perk.displayName = "Basic Combat Drones";
-					perk.description = "A set of light walker chassis drones with built-in weaponry and friend/foe identification system to take care of uninvited intruders that decided to come into your ship. Do not expect much from their caterpillar-based AI.";
+					perk.displayName = Core.TT($"Basic Combat Drones");
+					perk.description = Core.TT($"A set of light walker chassis drones with built-in weaponry and friend/foe identification system to take care of uninvited intruders that decided to come into your ship. Do not expect much from their caterpillar-based AI.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1028,10 +1026,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY guard").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY guard").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY guard").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY guard").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1559583687) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1559583687) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1559583687) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1559583687) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Security")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1039,8 +1037,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 124153277: //Perk drone 02 DIY guard
-					perk.displayName = "Basic Gunnery Drones";
-					perk.description = "A set of light walker chassis drones with improved ship-to-ship targeting and interfacing systems that allow to operate weaponry of your ship. Do not expect much from their scorpion-based AI.";
+					perk.displayName = Core.TT($"Basic Gunnery Drones");
+					perk.description = Core.TT($"A set of light walker chassis drones with improved ship-to-ship targeting and interfacing systems that allow to operate weaponry of your ship. Do not expect much from their scorpion-based AI.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1049,10 +1047,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone CT2 gunnery").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone CT2 gunnery").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone CT2 gunnery").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone CT2 gunnery").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1589791427) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1589791427) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1589791427) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1589791427) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Weapon Operator")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1060,8 +1058,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1599767297: //Perk drone 03 DIY repairbot
-					perk.displayName = "Basic Maintenance Drones";
-					perk.description = "A set of light walker chassis drones with improved repairing and firefighting capabilities that allow to maintain ship operational and working. Do not expect much from their beetle-based AI.";
+					perk.displayName = Core.TT($"Basic Maintenance Drones");
+					perk.description = Core.TT($"A set of light walker chassis drones with improved repairing and firefighting capabilities that allow to maintain ship operational and working. Do not expect much from their beetle-based AI.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1070,10 +1068,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone CT1 maintenance").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone CT1 maintenance").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone CT1 maintenance").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone CT1 maintenance").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1444414821) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1444414821) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1444414821) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1444414821) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Maintenance")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1081,8 +1079,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1406333136: //Perk drone 04 fire safety x2
-					perk.displayName = "Basic Research Drones";
-					perk.description = "A set of light walker chassis drones with improved calculation and analysis capabilities that allow to perform basic research and data analysis. Do not expect much from their octopus-based AI.";
+					perk.displayName = Core.TT($"Basic Research Drones");
+					perk.description = Core.TT($"A set of light walker chassis drones with improved calculation and analysis capabilities that allow to perform basic research and data analysis. Do not expect much from their octopus-based AI.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1091,10 +1089,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY science").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY science").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY science").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY science").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Research")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1102,8 +1100,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 755906886: //Perk drone 05 gardening and repair
-					perk.displayName = "Heavy Maintenance Drones";
-					perk.description = "A set of heavy quadruple walker chassis drones with advanced repairing and firefighting capabilities that allow to maintain ship operational and working. In addition, they're absolutely resistant to fire.";
+					perk.displayName = Core.TT($"Heavy Maintenance Drones");
+					perk.description = Core.TT($"A set of heavy quadruple walker chassis drones with advanced repairing and firefighting capabilities that allow to maintain ship operational and working. In addition, they're absolutely resistant to fire.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1112,10 +1110,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Heavy Maintanance")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1123,8 +1121,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					case 1559698830: //Perk drone 06 DIY gunnery
-					perk.displayName = "Tactical Combat Drones";
-					perk.description = "A set of extremely versatile walker chassis drones with state of art tactical AI and software that allows them imitate operational capabilities of the living crew. In addition, they're absolutely resistant to fire.";
+					perk.displayName = Core.TT($"Tactical Combat Drones");
+					perk.description = Core.TT($"A set of extremely versatile walker chassis drones with state of art tactical AI and software that allows them imitate operational capabilities of the living crew. In addition, they're absolutely resistant to fire.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1133,10 +1131,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Tactical Combat")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1144,8 +1142,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					case 1559119211: //Perk drone 07 gunnery and repair
-					perk.displayName = "Heavy Security Drones";
-					perk.description = "A set of extremely armored walker chassis drones with state of art combat AI and unholy load of weapons that allows them to eradicated everything in their path. In addition, they're absolutely resistant to fire.";
+					perk.displayName = Core.TT($"Heavy Security Drones");
+					perk.description = Core.TT($"A set of extremely armored walker chassis drones with state of art combat AI and unholy load of weapons that allows them to eradicated everything in their path. In addition, they're absolutely resistant to fire.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1154,10 +1152,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Heavy Security")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1165,8 +1163,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					case 136621601: //Perk drone 08 DIY sentry tank
-					perk.displayName = "Armored Assault Drones";
-					perk.description = "A set of threaded and extremely armored chassis drones with great combat AI, decent weapons and unholy amount of armor comparable to the bona fide tank. In addition, they're absolutely resistant to fire.";
+					perk.displayName = Core.TT($"Armored Assault Drones");
+					perk.description = Core.TT($"A set of threaded and extremely armored chassis drones with great combat AI, decent weapons and unholy amount of armor comparable to the bona fide tank. In addition, they're absolutely resistant to fire.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1175,10 +1173,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY gunjunker").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY gunjunker").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY gunjunker").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone DIY gunjunker").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(745155399) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(745155399) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(745155399) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(745155399) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Armored Assault")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1186,8 +1184,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					case 1821549491: //Perk module artifact, nontech
-					perk.displayName = "Huge Assault Weapons Stash";
-					perk.description = "Accidental discovery of the underground entrance led us to the bunker that had left some assault weapons stashed away. As it seems this bunker was abandoned not so long ago and in a hurry.";
+					perk.displayName = Core.TT($"Huge Assault Weapons Stash");
+					perk.description = Core.TT($"Accidental discovery of the underground entrance led us to the bunker that had left some assault weapons stashed away. As it seems this bunker was abandoned not so long ago and in a hurry.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1196,19 +1194,19 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.isUnlockedByDefault = false;
 					perk.repCost = 10;
 					break;
 					case 907839204: //Perk module artifact, tech
-					perk.displayName = "Huge Mechanical Upgrades Stash";
-					perk.description = "Accidental discovery of the underground entrance led us to the bunker that had left some mechanical upgrades stashed away. As it seems this bunker was abandoned not so long ago and in a hurry.";
+					perk.displayName = Core.TT($"Huge Mechanical Upgrades Stash");
+					perk.description = Core.TT($"Accidental discovery of the underground entrance led us to the bunker that had left some mechanical upgrades stashed away. As it seems this bunker was abandoned not so long ago and in a hurry.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1217,19 +1215,19 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.isUnlockedByDefault = false;
 					perk.repCost = 10;
 					break;
 					case 522883132: //Perk module artifact, worm stasis
-					perk.displayName = "Huge Biological Implants Stash";
-					perk.description = "Accidental discovery of the underground entrance led us to the bunker that had left some biological stashed away. As it seems this bunker was abandoned not so long ago and in a hurry.";
+					perk.displayName = Core.TT($"Huge Biological Implants Stash");
+					perk.description = Core.TT($"Accidental discovery of the underground entrance led us to the bunker that had left some biological stashed away. As it seems this bunker was abandoned not so long ago and in a hurry.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1238,19 +1236,19 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }},
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}};
 					perk.randomizerMenuStrings = new string[]{
 						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.isUnlockedByDefault = false;
 					perk.repCost = 10;
 					break;
 					case 989922131: //Perk module artifact, data core
-					perk.displayName = "StarFurnace Singularity Core Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in ancient manufacturing complex full of active hostile defense systems. The only reason this cache was left intact is extremely protected compartment, where it was found.";
+					perk.displayName = Core.TT($"StarFurnace Singularity Core Cache");
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in ancient manufacturing complex full of active hostile defense systems. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1270,8 +1268,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 872216984: //Perk module DIY cryosleep
-					perk.displayName = "Medical Cryosleep Bay Cache";
-					perk.description = "Discovered at one of the abandoned and locked down cryogenic facilities during exploration. Contains completely working and packed module, and reverse engineerable encrypted blueprint.";
+					perk.displayName = Core.TT($"Medical Cryosleep Bay Cache");
+					perk.description = Core.TT($"Discovered at one of the abandoned and locked down cryogenic facilities during exploration. Contains completely working and packed module, and reverse engineerable encrypted blueprint.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1291,8 +1289,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 15;
 					break;
 					case 209451390: //Perk module DIY cryodream recorder
-					perk.displayName = "Military Cryosleep Bay Cache";
-					perk.description = "Discovered at one of the abandoned and locked down cryogenic facilities during exploration. Contains completely working and packed module, and reverse engineerable encrypted blueprint.";
+					perk.displayName = Core.TT($"Military Cryosleep Bay Cache");
+					perk.description = Core.TT($"Discovered at one of the abandoned and locked down cryogenic facilities during exploration. Contains completely working and packed module, and reverse engineerable encrypted blueprint.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1312,8 +1310,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 15;
 					break;
 					case 16054811: //Perk module lovers cryosleep
-					perk.displayName = "Exploration Cryodream Bay Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely anomalous location full of raging radiation emissions. The only reason this cache was left intact is extremely protected bunker, where it was found.";
+					perk.displayName = Core.TT($"Exploration Cryodream Bay Cache");
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely anomalous location full of raging radiation emissions. The only reason this cache was left intact is extremely protected bunker, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1333,8 +1331,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 1002977681: //Perk module DIY garden
-					perk.displayName = "Replicator Greenhouse Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely hazardous location full of hostile carnivorous and toxic plants. The only reason this cache was left intact is extremely protected bunker, where it was found.";
+					perk.displayName = Core.TT($"Replicator Greenhouse Cache");
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely hazardous location full of hostile carnivorous and toxic plants. The only reason this cache was left intact is extremely protected bunker, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1354,8 +1352,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 1610304684: //Perk module minigrowery
-					perk.displayName = "Exogenetic Greenhouse Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely hazardous location full of unstable and volatile exotic elements. The only reason this cache was left intact is extremely protected bunker, where it was found.";
+					perk.displayName = Core.TT($"Exogenetic Greenhouse Cache");
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely hazardous location full of unstable and volatile exotic elements. The only reason this cache was left intact is extremely protected bunker, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1375,8 +1373,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 1983487017: //Perk module DIY lab
-					perk.displayName = "Quantum Laboratory Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in hazardous experimental facility full of man-made horrors and abominations. The only reason this cache was left intact is extremely protected compartment, where it was found.";
+					perk.displayName = Core.TT($"Quantum Laboratory Cache");
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in hazardous experimental facility full of man-made horrors and abominations. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1396,8 +1394,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 450353830: //Perk module DIY sensor
-					perk.displayName = "Multi-Phased Sensor Array Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely hostile location full of constant firestorms and solar flares. The only reason this cache was left intact is extremely protected bunker, where it was found.";
+					perk.displayName = Core.TT($"Multi-Phased Sensor Array Cache");
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely hostile location full of constant firestorms and solar flares. The only reason this cache was left intact is extremely protected bunker, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1417,8 +1415,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 1860396564: //Perk module DIY backup warpdrive
-					perk.displayName = "Quantum Warp Drive Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely anomalous location full of destructive temporal fluctuations. The only reason this cache was left intact is extremely protected bunker, where it was found.";
+					perk.displayName = Core.TT($"Quantum Warp Drive Cache");
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely anomalous location full of destructive temporal fluctuations. The only reason this cache was left intact is extremely protected bunker, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1438,8 +1436,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 600376461: //Perk module DIY bridge
-					perk.displayName = "Dreadnought Command Bridge Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in ancient ruined dreadnought full of active hostile defense systems. The only reason this cache was left intact is extremely protected compartment, where it was found.";
+					perk.displayName = Core.TT($"Dreadnought Command Bridge Cache");
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in ancient ruined dreadnought full of active hostile defense systems. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1459,8 +1457,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 996292804: //Perk module DIY random nonweapon
-					perk.displayName = "Heavy Ion Reactors Cache";
-					perk.description = "We've managed to receive completely working and packed modules along with reverse engineerable encrypted blueprint as commission from Earth Alliance right before takeoff.";
+					perk.displayName = Core.TT($"Heavy Ion Reactors Cache");
+					perk.description = Core.TT($"We've managed to receive completely working and packed modules along with reverse engineerable encrypted blueprint as commission from Earth Alliance right before takeoff.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1482,8 +1480,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					case 1920833206: //Perk module DIY reactor
-					perk.displayName = "Heavy Bio-Reactors Cache";
-					perk.description = "Discovered at one of the abandoned and locked down experimental energy development facilities during exploration. Contains completely working and packed module, and reverse engineerable encrypted blueprint.";
+					perk.displayName = Core.TT($"Heavy Bio-Reactors Cache");
+					perk.description = Core.TT($"Discovered at one of the abandoned and locked down experimental energy development facilities during exploration. Contains completely working and packed module, and reverse engineerable encrypted blueprint.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1504,8 +1502,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 35;
 					break;
 					case 1809779126: //Perk module decommissioned DIY reactors x2
-					perk.displayName = "Antimatter Reactors Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely hostile location full of constant plasma and meteor storms. The only reason this cache was left intact is extremely protected bunker, where it was found.";
+					perk.displayName = Core.TT($"Antimatter Reactors Cache");
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in extremely hostile location full of constant plasma and meteor storms. The only reason this cache was left intact is extremely protected bunker, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1526,8 +1524,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 50;
 					break;
 					case 1607974324: //Perk module decommissioned DIY ecms x3
-					perk.displayName = "Quantum ECM Array Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned fortress full of active hostile defense systems. The only reason this cache was left intact is extremely protected compartment, where it was found.";
+					perk.displayName = Core.TT($"Quantum ECM Array Cache");
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned fortress full of active hostile defense systems. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1548,7 +1546,7 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case 1860627745: //Perk module DIY integrity
 					perk.displayName = (FFU_BE_Defs.flagDLC_SupPak ? "Nanometric" : "Adamantite") + " Integrity Armor Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned spaceship docks full of volatile active nanomachines. The only reason this cache was left intact is extremely protected compartment, where it was found.";
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned spaceship docks full of volatile active nanomachines. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1569,7 +1567,7 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case 1993735695: //Perk module DIY integrity 2
 					perk.displayName = (FFU_BE_Defs.flagDLC_SupPak ? "Zero Point" : "Void-Wave") + " Shield Capacitor Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned shield technology research center full of destructive dimensional fluctuations. The only reason this cache was left intact is extremely protected compartment, where it was found.";
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned shield technology research center full of destructive dimensional fluctuations. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1590,7 +1588,7 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case 450636944: //Perk module integrity 3
 					perk.displayName = (FFU_BE_Defs.flagDLC_SupPak ? "Zero Point" : "Void-Wave") + " Shield Generator Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned shield technology research center full of destructive dimensional fluctuations. The only reason this cache was left intact is extremely protected compartment, where it was found.";
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned shield technology research center full of destructive dimensional fluctuations. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1610,8 +1608,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 131783302: //Perk module container MS1
-					perk.displayName = "Phased Stealth Generator Cache";
-					perk.description = "We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned fortress full of active hostile defense systems. The only reason this cache was left intact is extremely protected compartment, where it was found.";
+					perk.displayName = Core.TT($"Phased Stealth Generator Cache");
+					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned fortress full of active hostile defense systems. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1631,8 +1629,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 1506790699: //Perk module EOME container
-					perk.displayName = "Capital Storages Manufacturing Cache";
-					perk.description = "We've found an official dealer that is ready to sell us a complete working set of storage containers and manufacturing license, along with blueprints. However, we still need to research blueprints, before we can manufacture them on our own.";
+					perk.displayName = Core.TT($"Capital Storages Manufacturing Cache");
+					perk.description = Core.TT($"We've found an official dealer that is ready to sell us a complete working set of storage containers and manufacturing license, along with blueprints. However, we still need to research blueprints, before we can manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1657,8 +1655,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 30;
 					break;
 					case 174917737: //Perk module DIY point-defence
-					perk.displayName = "Iron Dome Tactical CIWS Cache";
-					perk.description = "We've found a black market dealer that is ready to sell us a working set of highly advanced CIWS, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.";
+					perk.displayName = Core.TT($"Iron Dome Tactical CIWS Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced CIWS, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1681,8 +1679,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 50;
 					break;
 					case 225180168: //Perk module DIY weapon
-					perk.displayName = "Liberator Kinetic Railcannons Cache";
-					perk.description = "We've found a black market dealer that is ready to sell us a working set of highly advanced railcannons, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.";
+					perk.displayName = Core.TT($"Liberator Kinetic Railcannons Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced railcannons, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1705,8 +1703,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 50;
 					break;
 					case 22277590: //Perk module Rat weapon for exotics
-					perk.displayName = "Shockwave Plasma Howitzers Cache";
-					perk.description = "We've found a black market dealer that is ready to sell us a working set of highly advanced plasma howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.";
+					perk.displayName = Core.TT($"Shockwave Plasma Howitzers Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced plasma howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1730,7 +1728,7 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case 633108626: //Perk module weapon bank missile x2
 					perk.displayName = (FFU_BE_Defs.flagDLC_SupPak ? "Annihilator" : "Retaliator") + " Rocket Launchers Cache";
-					perk.description = "We've found a black market dealer that is ready to sell us a working set of highly advanced rocket launchers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.";
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced rocket launchers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1752,8 +1750,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 50;
 					break;
 					case 1252646026: //Perk module DIY exotic raygun 2
-					perk.displayName = "Hi-Gothic Relic Exotic Ray Cache";
-					perk.description = "We've found a black market dealer that is ready to sell us a working set of highly advanced exotic ray projectors, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.";
+					perk.displayName = Core.TT($"Hi-Gothic Relic Exotic Ray Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced exotic ray projectors, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1775,8 +1773,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 50;
 					break;
 					case 1260454991: //Perk nuke arsenal DIY
-					perk.displayName = "Dessolution Chemical Howitzer Cache";
-					perk.description = "We've found a black market dealer that is ready to sell us a working set of highly advanced chemical howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.";
+					perk.displayName = Core.TT($"Dessolution Chemical Howitzer Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced chemical howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1799,8 +1797,8 @@ namespace FFU_Bleeding_Edge {
 					//Unused Perks
 					case 2106414951: //Perk TESTER PACKAGE
 					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
-					perk.displayName = "Disintegrator Exotic Howitzer Cache";
-					perk.description = "We've found a black market dealer that is ready to sell us a working set of highly advanced exotic howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.";
+					perk.displayName = Core.TT($"Disintegrator Exotic Howitzer Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced exotic howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1823,8 +1821,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case 305450922: //Perk nuke thinspeeder for atlas, unlockable
 					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
-					perk.displayName = "Ultra-Effector Beam Emitter Cache";
-					perk.description = "We've found a black market dealer that is ready to sell us a working set of highly advanced exotic howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.";
+					perk.displayName = Core.TT($"Ultra-Effector Beam Emitter Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced exotic howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1847,8 +1845,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case 152890152: //Perk pack, random
 					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
-					perk.displayName = "Specialized Capital Missiles Cache";
-					perk.description = "We've found a black market dealer that is ready to sell us a working pack of kinetic, energy and thermal capital missiles, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.";
+					perk.displayName = Core.TT($"Specialized Capital Missiles Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working pack of kinetic, energy and thermal capital missiles, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1884,8 +1882,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case 2073380488: //Perk module DIY shield battery
 					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
-					perk.displayName = "Tactical Capital Missiles Cache";
-					perk.description = "We've found a black market dealer that is ready to sell us a working pack of tactical and boarding capital missiles, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.";
+					perk.displayName = Core.TT($"Tactical Capital Missiles Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working pack of tactical and boarding capital missiles, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1915,8 +1913,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case 1248482139: //Perk Replace 5x mininglasers with6x, for Gardenship
 					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
-					perk.displayName = "Cataclysm Capital Missiles Cache";
-					perk.description = "We've found a black market dealer that is ready to sell us a working pack of strategic and chemical capital missiles, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.";
+					perk.displayName = Core.TT($"Cataclysm Capital Missiles Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working pack of strategic and chemical capital missiles, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1946,8 +1944,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Tigerfish Perks
 					case 1512794172: //Perk module DIY exotic raygun
-					perk.displayName = "Recovered Exotic Ray Projector";
-					perk.description = "Right before takeoff, we've managed to restore to the working condition one of the exotic ray weapons, we've found earlier.";
+					perk.displayName = Core.TT($"Recovered Exotic Ray Projector");
+					perk.description = Core.TT($"Right before takeoff, we've managed to restore to the working condition one of the exotic ray weapons, we've found earlier.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1964,8 +1962,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 566836399: //Perk Replace Industrial lasers with MK2
-					perk.displayName = "Advanced Industrial Mining Upgrade";
-					perk.description = "This was last a day purchase that allowed us to replace our original industrial lasers with more advanced versions and smaller XSM storage container with a bigger one.";
+					perk.displayName = Core.TT($"Advanced Industrial Mining Upgrade");
+					perk.description = Core.TT($"This was last a day purchase that allowed us to replace our original industrial lasers with more advanced versions and smaller XSM storage container with a bigger one.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1974,8 +1972,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
-						new Perk.ModuleReplacement { 
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigerlaser MK1").gameObject }, 
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigerlaser MK1").gameObject },
 							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigerlaser MK2").gameObject }},
 						new Perk.ModuleReplacement {
 							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-1").gameObject },
@@ -1988,8 +1986,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1555035434: //Perk nuke Tigerfish
-					perk.displayName = "Remote Mining Charges Stash";
-					perk.description = "A surplus stash of remote mining charges converted into deadly nukes. Was sold at extremely low price at nearest unofficial supplier of industrial machinery.";
+					perk.displayName = Core.TT($"Remote Mining Charges Stash");
+					perk.description = Core.TT($"A surplus stash of remote mining charges converted into deadly nukes. Was sold at extremely low price at nearest unofficial supplier of industrial machinery.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2011,8 +2009,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1447363940: //Perk nuke DIY random
-					perk.displayName = "Capital Missiles Requisition";
-					perk.description = "An official requisition of military-grade capital missiles from Earth Alliance for symbolic amount of credits that were used as transportation fee at very most.";
+					perk.displayName = Core.TT($"Capital Missiles Requisition");
+					perk.description = Core.TT($"An official requisition of military-grade capital missiles from Earth Alliance for symbolic amount of credits that were used as transportation fee at very most.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2037,8 +2035,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1565459393: //Perk module DIY explo combinator, to 3ships
-					perk.displayName = "Advanced Industrial Module Deal";
-					perk.description = "A cache with freshly manufactured and neatly packed improved industrial module sold by official dealer for acceptable price. Has decent features and moderate conversion efficiency.";
+					perk.displayName = Core.TT($"Advanced Industrial Module Deal");
+					perk.description = Core.TT($"A cache with freshly manufactured and neatly packed improved industrial module sold by official dealer for acceptable price. Has decent features and moderate conversion efficiency.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2055,8 +2053,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1783804007: //Perk module synth cooker, to tigerfish
-					perk.displayName = "Emergency Industrial Module Deal";
-					perk.description = "A cache with freshly manufactured and neatly packed basic industrial module sold by official dealer for acceptable price. Doesn't have much features and efficiency, but rather durable.";
+					perk.displayName = Core.TT($"Emergency Industrial Module Deal");
+					perk.description = Core.TT($"A cache with freshly manufactured and neatly packed basic industrial module sold by official dealer for acceptable price. Doesn't have much features and efficiency, but rather durable.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2073,8 +2071,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1114131722: //Perk Replace shield 2old
-					perk.displayName = "Fusion Shield Modules Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed shield generation and capacity modules sold by official dealer for acceptable price. Contains fusion shield generator and fusion shield capacitor.";
+					perk.displayName = Core.TT($"Fusion Shield Modules Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed shield generation and capacity modules sold by official dealer for acceptable price. Contains fusion shield generator and fusion shield capacitor.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2094,8 +2092,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1908150008: //Perk Replace terran smallreactor old
-					perk.displayName = "Energy Systems Replacement";
-					perk.description = "Planned upgrade that takes some time and preparations to execute. Replaces older reactors of the ship with newer reactors available at the market.";
+					perk.displayName = Core.TT($"Energy Systems Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes some time and preparations to execute. Replaces older reactors of the ship with newer reactors available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1000);
@@ -2151,8 +2149,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1524517897: //Perk Replace combat sensor old with new
-					perk.displayName = "Utility Systems Replacement";
-					perk.description = "Planned upgrade that takes some time and preparations to execute. Replaces older utility modules of the ship with newer utility modules available at the market.";
+					perk.displayName = Core.TT($"Utility Systems Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes some time and preparations to execute. Replaces older utility modules of the ship with newer utility modules available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1000);
@@ -2200,8 +2198,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 858785858: //Perk drone for Tigerfish
-					perk.displayName = "Additional Drone Crew Support";
-					perk.description = "Additional set of all kinds of drones to delegate majority of routine work to autonomous machines. Was honestly acquired through official Earth Alliance channels due to reaching expiration date.";
+					perk.displayName = Core.TT($"Additional Drone Crew Support");
+					perk.description = Core.TT($"Additional set of all kinds of drones to delegate majority of routine work to autonomous machines. Was honestly acquired through official Earth Alliance channels due to reaching expiration date.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2226,8 +2224,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Nuke Runner Perks
 					case 883360183: //Perk Replace sniper2 with sniper3
-					perk.displayName = "Precision Weapon Upgrade";
-					perk.description = "Permitted military acquisition of an upgraded precision weapons from the official supplier. Was possible only due to the crewmembers' deep connections with military.";
+					perk.displayName = Core.TT($"Precision Weapon Upgrade");
+					perk.description = Core.TT($"Permitted military acquisition of an upgraded precision weapons from the official supplier. Was possible only due to the crewmembers' deep connections with military.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-500);
@@ -2248,8 +2246,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1819699687: //Perk Replace lasers for Nuke Runner
-					perk.displayName = "Energy Weapon Upgrade";
-					perk.description = "Permitted military acquisition of an upgraded precision energy from the official supplier. Was possible only due to the crewmembers' deep connections with military.";
+					perk.displayName = Core.TT($"Energy Weapon Upgrade");
+					perk.description = Core.TT($"Permitted military acquisition of an upgraded precision energy from the official supplier. Was possible only due to the crewmembers' deep connections with military.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-500);
@@ -2270,8 +2268,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1734489161: //Perk Replace autogatling with better one, for Nukerunner
-					perk.displayName = "Suppression Weapon Upgrade";
-					perk.description = "Permitted military acquisition of an upgraded suppression weapons from the official supplier. Was possible only due to the crewmembers' deep connections with military.";
+					perk.displayName = Core.TT($"Suppression Weapon Upgrade");
+					perk.description = Core.TT($"Permitted military acquisition of an upgraded suppression weapons from the official supplier. Was possible only due to the crewmembers' deep connections with military.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-500);
@@ -2292,8 +2290,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 6974583: //Perk nuke arsenal for SP33
-					perk.displayName = "Planetary Bombardment Arsenal";
-					perk.description = "A complete arsenal of a military-grade strategic capital missiles that can be used to bomb any single planet into complete oblivion. It was acquired when we signed a very-ethical-use-only declaration and paid additional fees.";
+					perk.displayName = Core.TT($"Planetary Bombardment Arsenal");
+					perk.description = Core.TT($"A complete arsenal of a military-grade strategic capital missiles that can be used to bomb any single planet into complete oblivion. It was acquired when we signed a very-ethical-use-only declaration and paid additional fees.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2322,8 +2320,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1995216412: //Perk module oilcake organics converter
-					perk.displayName = "Complex Industrial Module Deal";
-					perk.description = "A cache with freshly manufactured and neatly packed advanced industrial module sold by official dealer for acceptable price. Rather efficient and has many features, but most important - armored as nuclear bunker.";
+					perk.displayName = Core.TT($"Complex Industrial Module Deal");
+					perk.description = Core.TT($"A cache with freshly manufactured and neatly packed advanced industrial module sold by official dealer for acceptable price. Rather efficient and has many features, but most important - armored as nuclear bunker.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2340,8 +2338,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1138940531: //Perk crew top cadet
-					perk.displayName = "Excellent Tactical Marines Team";
-					perk.description = "Due to nature of our endeavor and military connections, this team of excellent tactical marines from best academy were willing to escort us through the dangers to gain hands-on experience and small payment.";
+					perk.displayName = Core.TT($"Excellent Tactical Marines Team");
+					perk.description = Core.TT($"Due to nature of our endeavor and military connections, this team of excellent tactical marines from best academy were willing to escort us through the dangers to gain hands-on experience and small payment.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2360,8 +2358,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1504797922: //Perk drone 09 light sec
-					perk.displayName = "Tactical Drones Primary Set";
-					perk.description = "A primary set of military tactical drones that will assist with daily operations of the ship, along with boarding and defensive actions.";
+					perk.displayName = Core.TT($"Tactical Drones Primary Set");
+					perk.description = Core.TT($"A primary set of military tactical drones that will assist with daily operations of the ship, along with boarding and defensive actions.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2379,8 +2377,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 161683945: //Perk drone 09b tactical sec
-					perk.displayName = "Tactical Drones Secondary Set";
-					perk.description = "A secondary set of military tactical drones that will assist with daily operations of the ship, along with boarding and defensive actions.";
+					perk.displayName = Core.TT($"Tactical Drones Secondary Set");
+					perk.description = Core.TT($"A secondary set of military tactical drones that will assist with daily operations of the ship, along with boarding and defensive actions.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2398,8 +2396,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1984849323: //Perk drone 09c Sentinel sec
-					perk.displayName = "Security Drones Boarding Party";
-					perk.description = "A complete squad of heavy security drones modified for advanced boarding and defensive operations. Drones were upgraded with military-grade hardware as well.";
+					perk.displayName = Core.TT($"Security Drones Boarding Party");
+					perk.description = Core.TT($"A complete squad of heavy security drones modified for advanced boarding and defensive operations. Drones were upgraded with military-grade hardware as well.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2421,8 +2419,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Rogue Rat Perks
 					case 2114506397: //Perk Replace Rat firecannon1 with 2
-					perk.displayName = "Specialized Armaments Upgrade";
-					perk.description = "Planned upgrade that takes some time and preparations to execute. Replaces older specialized weapons of the ship with newer weapons of similar type available at the market.";
+					perk.displayName = Core.TT($"Specialized Armaments Upgrade");
+					perk.description = Core.TT($"Planned upgrade that takes some time and preparations to execute. Replaces older specialized weapons of the ship with newer weapons of similar type available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1000);
@@ -2447,8 +2445,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1794605234: //Perk Replace Rat gatling cannon
-					perk.displayName = "Ballistic Armaments Upgrade";
-					perk.description = "Planned upgrade that takes some time and preparations to execute. Replaces older ballistic weapons of the ship with newer weapons of similar type available at the market.";
+					perk.displayName = Core.TT($"Ballistic Armaments Upgrade");
+					perk.description = Core.TT($"Planned upgrade that takes some time and preparations to execute. Replaces older ballistic weapons of the ship with newer weapons of similar type available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1000);
@@ -2469,8 +2467,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 2033479731: //Perk nuke diy decoy for Rogue Rat
-					perk.displayName = "Decommissioned Electromagnetic Nukes";
-					perk.description = "Widespread corruption in the Rat Empire ensures that everything is available for a price. Including these \"decommissioned\" capital missiles with greatly improved electromagnetic payload.";
+					perk.displayName = Core.TT($"Decommissioned Electromagnetic Nukes");
+					perk.description = Core.TT($"Widespread corruption in the Rat Empire ensures that everything is available for a price. Including these \"decommissioned\" capital missiles with greatly improved electromagnetic payload.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2493,8 +2491,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1042155144: //Perk nuke Rat DIY incendiary
-					perk.displayName = "Decommissioned Strategic Nukes";
-					perk.description = "Widespread corruption in the Rat Empire ensures that everything is available for a price. Including these \"decommissioned\" capital missiles with high-performance nuclear payload.";
+					perk.displayName = Core.TT($"Decommissioned Strategic Nukes");
+					perk.description = Core.TT($"Widespread corruption in the Rat Empire ensures that everything is available for a price. Including these \"decommissioned\" capital missiles with high-performance nuclear payload.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2517,8 +2515,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 746099772: //Perk nuke Rat incendiary for Rogue Rat
-					perk.displayName = "Decommissioned Incendiary Nukes";
-					perk.description = "Widespread corruption in the Rat Empire ensures that everything is available for a price. Including these \"decommissioned\" capital missiles with advanced incendiary payload.";
+					perk.displayName = Core.TT($"Decommissioned Incendiary Nukes");
+					perk.description = Core.TT($"Widespread corruption in the Rat Empire ensures that everything is available for a price. Including these \"decommissioned\" capital missiles with advanced incendiary payload.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2541,8 +2539,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 203859815: //Perk add explosives for Ratship
-					perk.displayName = "Abandoned Explosives Storage";
-					perk.description = "Explosives are abundant in the Rat Empire, and can be obtained quite easily. We've found a huge storage of explosives that was abandoned long ago and took what we could.";
+					perk.displayName = Core.TT($"Abandoned Explosives Storage");
+					perk.description = Core.TT($"Explosives are abundant in the Rat Empire, and can be obtained quite easily. We've found a huge storage of explosives that was abandoned long ago and took what we could.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2556,8 +2554,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1890494450: //Perk module old random
-					perk.displayName = "Corrupted Rat Empire Official Deal";
-					perk.description = "A shady deal with corrupted rat empire official for a meager amount of exotics allows us to upgrade majority of ship's modules to much higher grade modules acquired through not so official channels.";
+					perk.displayName = Core.TT($"Corrupted Rat Empire Official Deal");
+					perk.description = Core.TT($"A shady deal with corrupted rat empire official for a meager amount of exotics allows us to upgrade majority of ship's modules to much higher grade modules acquired through not so official channels.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2625,8 +2623,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					case 283158951: //Perk augment, jet tubing cleanup for Ratship
-					perk.displayName = "Thrusters Exhaust Refurbishment";
-					perk.description = "Full refurbishment of ship's thrusters exhaust tubes. Significantly increases thrust power ship-wide and as result boost maneuvering capabilities of the ship.";
+					perk.displayName = Core.TT($"Thrusters Exhaust Refurbishment");
+					perk.description = Core.TT($"Full refurbishment of ship's thrusters exhaust tubes. Significantly increases thrust power ship-wide and as result boost maneuvering capabilities of the ship.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2642,8 +2640,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1688834803: //Perk Replace engines with rat engines for rogue rat
-					perk.displayName = "Engine Systems Replacement";
-					perk.description = "Planned upgrade that takes some time and preparations to execute. Replaces older engines and thrusters of the ship with newer engines and thrusters available at the market.";
+					perk.displayName = Core.TT($"Engine Systems Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes some time and preparations to execute. Replaces older engines and thrusters of the ship with newer engines and thrusters available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1000);
@@ -2685,8 +2683,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1744683542: //Perk crew warrior princess x2
-					perk.displayName = "Twin Insectoid Warrior Princesses";
-					perk.description = "A pair of invertebrate mercenaries join our mission to feed their family of hundreds. A young insectoid princesses of a minor hive must survive 10 years of mercenary life before they can ascend into royal politics.";
+					perk.displayName = Core.TT($"Twin Insectoid Warrior Princesses");
+					perk.description = Core.TT($"A pair of invertebrate mercenaries join our mission to feed their family of hundreds. A young insectoid princesses of a minor hive must survive 10 years of mercenary life before they can ascend into royal politics.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(-1000);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2702,8 +2700,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Fierce Sincerity Perks
 					case 1511793584: //Perk module weapon Spideraa Shuriken
-					perk.displayName = "Flechette Chemical Railguns Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed weapon modules sold by official dealer for acceptable price. Contains pack of specialized anti-personnel flechette chemical railguns.";
+					perk.displayName = Core.TT($"Flechette Chemical Railguns Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed weapon modules sold by official dealer for acceptable price. Contains pack of specialized anti-personnel flechette chemical railguns.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2721,8 +2719,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1092748221: //Perk nuke bio
-					perk.displayName = "Deathspore Boarding Nukes Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of specialized boarding and breaching capital missiles.";
+					perk.displayName = Core.TT($"Deathspore Boarding Nukes Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of specialized boarding and breaching capital missiles.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2744,8 +2742,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 611909834: //Perk nuke bio 2 greentail
-					perk.displayName = "Biotic Spike Kinetic Nukes Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of specialized hull perforation kinetic impactor capital missiles.";
+					perk.displayName = Core.TT($"Biotic Spike Kinetic Nukes Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of specialized hull perforation kinetic impactor capital missiles.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2767,8 +2765,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 817992879: //Perk module Decoy Set x 3
-					perk.displayName = "Farmland Greenhouses Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed greenhouse modules sold by official dealer for acceptable price. Contains pack of high-tier greenhouse modules that will supply ship with organics during travel.";
+					perk.displayName = Core.TT($"Farmland Greenhouses Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed greenhouse modules sold by official dealer for acceptable price. Contains pack of high-tier greenhouse modules that will supply ship with organics during travel.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2787,8 +2785,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1960274027: //Perk artifact skull for Weirdship
-					perk.displayName = "Storage Modules Upgrade";
-					perk.description = "Planned upgrade that takes some time and preparations to execute. Replaces older storage modules of the ship with newer storage modules of similar type available at the market.";
+					perk.displayName = Core.TT($"Storage Modules Upgrade");
+					perk.description = Core.TT($"Planned upgrade that takes some time and preparations to execute. Replaces older storage modules of the ship with newer storage modules of similar type available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1000);
@@ -2812,8 +2810,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1904910966: //Perk module green integrity for weirdship
-					perk.displayName = "Engine Systems Replacement";
-					perk.description = "Planned upgrade that takes some time and preparations to execute. Replaces older engines and thrusters of the ship with newer engines and thrusters available at the market.";
+					perk.displayName = Core.TT($"Engine Systems Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes some time and preparations to execute. Replaces older engines and thrusters of the ship with newer engines and thrusters available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1000);
@@ -2834,8 +2832,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 28205014: //Perk module integrity blue scales, unlockable for weirdship
-					perk.displayName = "Dragonscale Integrity Armors Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed integrity armors sold by official dealer for acceptable price. Contains pack of quality integrity armors that will greatly boost survivability of the ship and its crew.";
+					perk.displayName = Core.TT($"Dragonscale Integrity Armors Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed integrity armors sold by official dealer for acceptable price. Contains pack of quality integrity armors that will greatly boost survivability of the ship and its crew.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2854,8 +2852,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 768469910: //Perk pet random
-					perk.displayName = "Best AI Friends Forever";
-					perk.description = "Since our journey will be long and all of our crewmembers will be occupied, we still need a way to entertain AI of our ship, before she will decide to blow ship out of pure boredom. And pets are best to keep her entertained.";
+					perk.displayName = Core.TT($"Best AI Friends Forever");
+					perk.description = Core.TT($"Since our journey will be long and all of our crewmembers will be occupied, we still need a way to entertain AI of our ship, before she will decide to blow ship out of pure boredom. And pets are best to keep her entertained.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2877,8 +2875,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 907765912: //Perk war animal for weirdship
-					perk.displayName = "Red Rippers Boarding Party";
-					perk.description = "A complete squad of red rippers, combat animals trained for advanced boarding and defensive operations. These red rippers undergone extremely strict military-grade training, examinations and enhancements.";
+					perk.displayName = Core.TT($"Red Rippers Boarding Party");
+					perk.description = Core.TT($"A complete squad of red rippers, combat animals trained for advanced boarding and defensive operations. These red rippers undergone extremely strict military-grade training, examinations and enhancements.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2900,8 +2898,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Easy Tiger Perks
 					case 1886509521: //Perk module DIY exotic EMP sniper
-					perk.displayName = "Recovered Exotic Ray Projector";
-					perk.description = "Right before takeoff, we've managed to restore to the working condition one of the exotic ray weapons, we've found earlier.";
+					perk.displayName = Core.TT($"Recovered Exotic Ray Projector");
+					perk.description = Core.TT($"Right before takeoff, we've managed to restore to the working condition one of the exotic ray weapons, we've found earlier.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2919,8 +2917,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Pumpkin Hammer Perks
 					case 1362449879: //Perk nuke barrel
-					perk.displayName = "Avalanche Tactical Nukes Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of standard-type tactical capital missiles with high-yield explosive warhead.";
+					perk.displayName = Core.TT($"Avalanche Tactical Nukes Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of standard-type tactical capital missiles with high-yield explosive warhead.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2943,8 +2941,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1852263270: //Perk nuke old
-					perk.displayName = "Happy World Strategic Nukes Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of civilian-grade strategic capital missiles with low-yield nuclear warhead.";
+					perk.displayName = Core.TT($"Happy World Strategic Nukes Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of civilian-grade strategic capital missiles with low-yield nuclear warhead.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2967,8 +2965,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 2032285499: //Perk Replace organics containers with betters for gardenship
-					perk.displayName = "Organics Storage Replacement";
-					perk.description = "Planned upgrade that takes some time and preparations to execute. Replaces older organics storage containers of the ship with newer organics storage containers available at the market.";
+					perk.displayName = Core.TT($"Organics Storage Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes some time and preparations to execute. Replaces older organics storage containers of the ship with newer organics storage containers available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1000);
@@ -2989,8 +2987,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 272967497: //Perk Replace fuel containers with betters
-					perk.displayName = "Earth Alliance Support Agreement";
-					perk.description = "Due to our achievements, Earth Alliance and the allies are ready to overhaul majority of equipment on our ship for free, given we can provide enough exotic matter to power temporary trans-dimensional gate.";
+					perk.displayName = Core.TT($"Earth Alliance Support Agreement");
+					perk.description = Core.TT($"Due to our achievements, Earth Alliance and the allies are ready to overhaul majority of equipment on our ship for free, given we can provide enough exotic matter to power temporary trans-dimensional gate.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3060,8 +3058,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					case 798912976: //Perk pack, explosive cargo for gardenship
-					perk.displayName = "Point Defenses Replacement";
-					perk.description = "Planned upgrade that takes some time and preparations to execute. Replaces older organics storage containers of the ship with newer organics storage containers available at the market.";
+					perk.displayName = Core.TT($"Point Defenses Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes some time and preparations to execute. Replaces older organics storage containers of the ship with newer organics storage containers available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1000);
@@ -3072,11 +3070,11 @@ namespace FFU_Bleeding_Edge {
 					perk.extraModules = new Perk.Pool[0];
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "0 DIY PD").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "7 Red PD").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(893617597) }, //0 DIY PD
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1381757148) }}, //7 Red PD
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "5 Human PD").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "7 Red PD").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1468502746) }, //5 Human PD
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1381757148) }}}; //7 Red PD
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
@@ -3086,8 +3084,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1420718850: //Perk pack, organic cargo for gardenship
-					perk.displayName = "Advanced Weapons Replacement";
-					perk.description = "Planned upgrade that takes some time and preparations to execute. Replaces older organics storage containers of the ship with newer organics storage containers available at the market.";
+					perk.displayName = Core.TT($"Advanced Weapons Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes some time and preparations to execute. Replaces older organics storage containers of the ship with newer organics storage containers available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1000);
@@ -3098,8 +3096,17 @@ namespace FFU_Bleeding_Edge {
 					perk.extraModules = new Perk.Pool[0];
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon mininglaser 4").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon ancientrockets x3").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1780996798) }, //weapon DIY Minicannon ancient 2,3
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(469527491) }}, //weapon ancientrockets x3
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1363897257) }, //weapon gatling 01 ancient dual 14,4
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(469527491) }}, //weapon ancientrockets x3
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1118713154) }, //weapon ATK-MK2 old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(469527491) }}, //weapon ancientrockets x3
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(206321745) }, //weapon mininglaser 4
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(469527491) }}}; //weapon ancientrockets x3
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
@@ -3110,8 +3117,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1711522921: //Perk module DIY shielding set x 2
-					perk.displayName = "Antimatter Shield Systems Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed shield generator and capacitors sold by official dealer for acceptable price. Contains set of high-tier antimatter shield generators and capacitors that will greatly boost survivability of the ship.";
+					perk.displayName = Core.TT($"Antimatter Shield Systems Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed shield generator and capacitors sold by official dealer for acceptable price. Contains set of high-tier antimatter shield generators and capacitors that will greatly boost survivability of the ship.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3131,8 +3138,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1304884710: //Perk module shroomery for gardenship
-					perk.displayName = "Greenhouse Modules Replacement";
-					perk.description = "Planned upgrade that takes some time and preparations to execute. Replaces older greenhouse modules of the ship with newer greenhouse modules available at the market.";
+					perk.displayName = Core.TT($"Greenhouse Modules Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes some time and preparations to execute. Replaces older greenhouse modules of the ship with newer greenhouse modules available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1000);
@@ -3153,8 +3160,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1461582440: //Perk maggot pet
-					perk.displayName = "Red Rippers Boarding Party";
-					perk.description = "A complete squad of red rippers, combat animals trained for advanced boarding and defensive operations. These red rippers undergone extremely strict military-grade training, examinations and enhancements.";
+					perk.displayName = Core.TT($"Red Rippers Boarding Party");
+					perk.description = Core.TT($"A complete squad of red rippers, combat animals trained for advanced boarding and defensive operations. These red rippers undergone extremely strict military-grade training, examinations and enhancements.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3174,8 +3181,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1101108011: //Perk crew warrior queen
-					perk.displayName = "Twin Insectoid Warrior Queens";
-					perk.description = "A leaders of a minor hives, looking to complete their ritual training. They brings along some resources as compensation for our effort.";
+					perk.displayName = Core.TT($"Twin Insectoid Warrior Queens");
+					perk.description = Core.TT($"A leaders of a minor hives, looking to complete their ritual training. They brings along some resources as compensation for our effort.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(5000);
@@ -3195,8 +3202,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Atlas Perks
 					case 656830655: //Perk nuke fueltank for atlas
-					perk.displayName = "Hellfire Thermal Nukes Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of experimental thermal capital missiles with volumetric instant-ignition warhead.";
+					perk.displayName = Core.TT($"Hellfire Thermal Nukes Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of experimental thermal capital missiles with volumetric instant-ignition warhead.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3218,8 +3225,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1071540180: //Perk Replace or improve bridge for atlas
-					perk.displayName = "Primary Modules Replacement";
-					perk.description = "Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older reactors, weapons and bridge modules of the ship with newer modules of same types available at the market.";
+					perk.displayName = Core.TT($"Primary Modules Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older reactors, weapons and bridge modules of the ship with newer modules of same types available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3258,8 +3265,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1765157179: //Perk Replace or improve growery for Atlas
-					perk.displayName = "Secondary Modules Replacement";
-					perk.description = "Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older shields, engines, sensors and warp drive modules of the ship with newer modules of same types available at the market.";
+					perk.displayName = Core.TT($"Secondary Modules Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older shields, engines, sensors and warp drive modules of the ship with newer modules of same types available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3295,8 +3302,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1512141944: //Perk Replace or improve lab for atlas
-					perk.displayName = "Auxiliary Modules Replacement";
-					perk.description = "Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older storage containers, greenhouses, laboratories and cryosleep bays of the ship with newer modules of same types available at the market.";
+					perk.displayName = Core.TT($"Auxiliary Modules Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older storage containers, greenhouses, laboratories and cryosleep bays of the ship with newer modules of same types available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3332,8 +3339,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 81789966: //Perk module fuel combinator, to atlas
-					perk.displayName = "Experimental Industrial Module Deal";
-					perk.description = "A cache with freshly manufactured/grown and neatly packed experimental industrial module sold by official dealer for acceptable price. Has great efficiency a lot of features, but very fragile.";
+					perk.displayName = Core.TT($"Experimental Industrial Module Deal");
+					perk.description = Core.TT($"A cache with freshly manufactured/grown and neatly packed experimental industrial module sold by official dealer for acceptable price. Has great efficiency a lot of features, but very fragile.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3350,8 +3357,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1163778916: //Perk crew human volunteer
-					perk.displayName = "Squad of Human Volunteers";
-					perk.description = "A squad of human volunteers joins the mission to aid us during journey. They also bring along some supplies and emergency equipment.";
+					perk.displayName = Core.TT($"Squad of Human Volunteers");
+					perk.description = Core.TT($"A squad of human volunteers joins the mission to aid us during journey. They also bring along some supplies and emergency equipment.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(1000);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(1000);
@@ -3375,8 +3382,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Bluestar Perks
 					case 1872158117: //Perk Replace dual mininglasers with triple, for Bluestar
-					perk.displayName = "Main Weapon Modules Replacement";
-					perk.description = "Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older weapon modules of the ship with newer modules of same types available at the market.";
+					perk.displayName = Core.TT($"Main Weapon Modules Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older weapon modules of the ship with newer modules of same types available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-2500);
@@ -3399,8 +3406,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1339234810: //Perk nuke EMP 9000
-					perk.displayName = "Ion Storm Energy Nukes Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade electromagnetic capital missiles with high-intensity pulse generators.";
+					perk.displayName = Core.TT($"Ion Storm Energy Nukes Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade electromagnetic capital missiles with high-intensity pulse generators.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3422,8 +3429,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 547639251: //Perk nuke DIY probe ual4 for bluestar
-					perk.displayName = "White Death Strategic Nukes Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade strategic capital missiles with high-yield nuclear warhead.";
+					perk.displayName = Core.TT($"White Death Strategic Nukes Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade strategic capital missiles with high-yield nuclear warhead.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3446,8 +3453,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 3870557: //Perk Replace sensor with new for bluestar
-					perk.displayName = "Reconnaissance Modules Replacement";
-					perk.description = "Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older sensor modules and point defenses of the ship with newer modules of same types available at the market.";
+					perk.displayName = Core.TT($"Reconnaissance Modules Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older sensor modules and point defenses of the ship with newer modules of same types available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1500);
@@ -3473,8 +3480,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 184540469: //Perk moleculaati pet
-					perk.displayName = "Best AI Friends' Friends Forever";
-					perk.description = "Since our journey will be long and all of our crewmembers will be occupied, we still need even more ways to entertain AI of our ship, before she will decide to blow ship out of pure boredom. And more pets are best to keep her entertained.";
+					perk.displayName = Core.TT($"Best AI Friends' Friends Forever");
+					perk.description = Core.TT($"Since our journey will be long and all of our crewmembers will be occupied, we still need even more ways to entertain AI of our ship, before she will decide to blow ship out of pure boredom. And more pets are best to keep her entertained.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3496,8 +3503,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1633476255: //Perk drone 05 DIY science
-					perk.displayName = "Security Drones Boarding Party";
-					perk.description = "A complete squad of heavy security drones modified for advanced boarding and defensive operations. Drones were upgraded with military-grade hardware as well.";
+					perk.displayName = Core.TT($"Security Drones Boarding Party");
+					perk.description = Core.TT($"A complete squad of heavy security drones modified for advanced boarding and defensive operations. Drones were upgraded with military-grade hardware as well.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3517,8 +3524,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1857941328: //Perk module artifact, nontech for Bluestar
-					perk.displayName = "Recovered Ancient Modules Cache";
-					perk.description = "Right before takeoff, we've managed to restore all modules from the ancient cache to the working condition, we've found earlier.";
+					perk.displayName = Core.TT($"Recovered Ancient Modules Cache");
+					perk.description = Core.TT($"Right before takeoff, we've managed to restore all modules from the ancient cache to the working condition, we've found earlier.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3538,8 +3545,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Warpshell Perks
 					case 548302033: //Perk nuke DIY shield breaker
-					perk.displayName = "Absolute Chemical Extravaganza";
-					perk.description = "A complete arsenal of a military-grade chemical capital missiles that can be used to purify any single planet from any sings of life. It was acquired when we signed a very-ethical-use-only declaration and paid additional fees.";
+					perk.displayName = Core.TT($"Absolute Chemical Extravaganza");
+					perk.description = Core.TT($"A complete arsenal of a military-grade chemical capital missiles that can be used to purify any single planet from any sings of life. It was acquired when we signed a very-ethical-use-only declaration and paid additional fees.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3568,8 +3575,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1763651597: //Perk warpshell extra deflection
-					perk.displayName = "External Tissue Enhancement";
-					perk.description = "The living part of the ship can be easily modified using a variety of biotechnological solutions. This one improves ship's internal and external kinetic bumpers, improving overall deflection efficiency.";
+					perk.displayName = Core.TT($"External Tissue Enhancement");
+					perk.description = Core.TT($"The living part of the ship can be easily modified using a variety of biotechnological solutions. This one improves ship's internal and external kinetic bumpers, improving overall deflection efficiency.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(-2500);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3588,8 +3595,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1570827982: //Perk warpshell extra hitpoints
-					perk.displayName = "Organic Integrity Enhancement";
-					perk.description = "The living part of the ship has a range of exotic nutrients it needs to consume couple of times a year. If correct biotechnological solutions added to the nutrients, the ship's living tissue will grow more resistant to damage.";
+					perk.displayName = Core.TT($"Organic Integrity Enhancement");
+					perk.description = Core.TT($"The living part of the ship has a range of exotic nutrients it needs to consume couple of times a year. If correct biotechnological solutions added to the nutrients, the ship's living tissue will grow more resistant to damage.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(-2500);
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3608,8 +3615,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1666507194: //Perk Replace terran smallreactor oldx2
-					perk.displayName = "Primary Modules Replacement";
-					perk.description = "Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older reactors, weapons and bridge modules of the ship with newer modules of same types available at the market.";
+					perk.displayName = Core.TT($"Primary Modules Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older reactors, weapons and bridge modules of the ship with newer modules of same types available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3653,8 +3660,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 335666066: //Perk Replace ECM of warpshell
-					perk.displayName = "Secondary Modules Replacement";
-					perk.description = "Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older shields, engines, sensors and warp drive modules of the ship with newer modules of same types available at the market.";
+					perk.displayName = Core.TT($"Secondary Modules Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older shields, engines, sensors and warp drive modules of the ship with newer modules of same types available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3692,8 +3699,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 367285597: //Perk Replace DIY FO with FOO
-					perk.displayName = "Auxiliary Modules Replacement";
-					perk.description = "Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older storage containers, greenhouses, laboratories and cryosleep bays of the ship with newer modules of same types available at the market.";
+					perk.displayName = Core.TT($"Auxiliary Modules Replacement");
+					perk.description = Core.TT($"Planned upgrade that takes exotic matter investments, some time and preparations to execute. Replaces older storage containers, greenhouses, laboratories and cryosleep bays of the ship with newer modules of same types available at the market.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3731,8 +3738,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Battle Tiger Perks
 					case 1494259635: //Perk nuke Tiger sharpnel
-					perk.displayName = "Acid Rain Chemical Nukes Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade chemical capital missiles with extremely corrosive payload.";
+					perk.displayName = Core.TT($"Acid Rain Chemical Nukes Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade chemical capital missiles with extremely corrosive payload.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3754,8 +3761,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1581121396: //Perk nuke Battle Tiger monolith
-					perk.displayName = "Bright Fury Kinetic Nukes Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade kinetic capital missiles with tandem-impactor kinetic warhead.";
+					perk.displayName = Core.TT($"Bright Fury Kinetic Nukes Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade kinetic capital missiles with tandem-impactor kinetic warhead.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3777,8 +3784,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 655868932: //Perk nuke Tiger dual EMP
-					perk.displayName = "Dual Shock Energy Nukes Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade electromagnetic capital missiles with high-intensity pulse generators.";
+					perk.displayName = Core.TT($"Dual Shock Energy Nukes Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade electromagnetic capital missiles with high-intensity pulse generators.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3800,8 +3807,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 850100445: //Perk nuke Tiger battery 8
-					perk.displayName = "Cataclysm Tactical Nukes Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade tactical capital missiles with octagonal cluster high-explosive high-yield warheads.";
+					perk.displayName = Core.TT($"Cataclysm Tactical Nukes Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade tactical capital missiles with octagonal cluster high-explosive high-yield warheads.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3823,8 +3830,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1273038811: //Perk nuke Tiger intruderbot nuke
-					perk.displayName = "Apocalypse Boarding Nukes Deal";
-					perk.description = "A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade boarding capital missiles with perforation capabilities that release military boarding drones on impact.";
+					perk.displayName = Core.TT($"Apocalypse Boarding Nukes Deal");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed capital missiles sold by official dealer for acceptable price. Contains pack of military-grade boarding capital missiles with perforation capabilities that release military boarding drones on impact.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3846,8 +3853,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 1137508603: //Perk pet Tiger dog drone
-					perk.displayName = "Earth Alliance Drone Legion";
-					perk.description = "Additional set of all kinds of drones to delegate majority of routine work to autonomous machines. Was properly acquired through official Earth Alliance channels for fraction of a price due to the direct support of our endeavor by high command.";
+					perk.displayName = Core.TT($"Earth Alliance Drone Legion");
+					perk.description = Core.TT($"Additional set of all kinds of drones to delegate majority of routine work to autonomous machines. Was properly acquired through official Earth Alliance channels for fraction of a price due to the direct support of our endeavor by high command.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3873,8 +3880,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 2073301424: //Perk pet DLC combat rabbit
-					perk.displayName = "Primary Systems Upgrade & Combat Rabbit Pet";
-					perk.description = "We've acquired this ancient combat organism from a Earth Alliance support channel as present, when we used their ship upgrade services. It is genetically modified for superior speed and strength, and digitally trained to attack enemies in close combat.";
+					perk.displayName = Core.TT($"Primary Systems Upgrade & Combat Rabbit Pet");
+					perk.description = Core.TT($"We've acquired this ancient combat organism from a Earth Alliance support channel as present, when we used their ship upgrade services. It is genetically modified for superior speed and strength, and digitally trained to attack enemies in close combat.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3913,8 +3920,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 910502010: //Perk pet DLC shocker lizard
-					perk.displayName = "Secondary Systems Upgrade & Shocker Lizard Pet";
-					perk.description = "We've acquired this ancient combat organism from a Earth Alliance support channel as present, when we used their ship upgrade services. The creature is quite intelligent and can shoot energy rays from its eyes.";
+					perk.displayName = Core.TT($"Secondary Systems Upgrade & Shocker Lizard Pet");
+					perk.description = Core.TT($"We've acquired this ancient combat organism from a Earth Alliance support channel as present, when we used their ship upgrade services. The creature is quite intelligent and can shoot energy rays from its eyes.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3946,8 +3953,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 507217483: //Perk pet DLC fire tortoise
-					perk.displayName = "Support Systems Upgrade & Fire Tortoise Pet";
-					perk.description = "We've acquired this ancient combat organism from a Earth Alliance support channel as present, when we used their ship upgrade services. The creature is very intelligent and can tend gardens. It can also naturally breathe fire at enemies.";
+					perk.displayName = Core.TT($"Support Systems Upgrade & Fire Tortoise Pet");
+					perk.description = Core.TT($"We've acquired this ancient combat organism from a Earth Alliance support channel as present, when we used their ship upgrade services. The creature is very intelligent and can tend gardens. It can also naturally breathe fire at enemies.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -3983,8 +3990,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 1491901717: //Perk pet DLC warp floater
-					perk.displayName = "Auxiliary Systems Upgrade & Warp Floater Pet";
-					perk.description = "We've acquired this ancient combat organism from a Earth Alliance support channel as present, when we used their ship upgrade services. This warp creature is an extreme rarity due to being able to effectively communicate with non-warp beings. It is quite intelligent and likes to stare into human eyes.";
+					perk.displayName = Core.TT($"Auxiliary Systems Upgrade & Warp Floater Pet");
+					perk.description = Core.TT($"We've acquired this ancient combat organism from a Earth Alliance support channel as present, when we used their ship upgrade services. This warp creature is an extreme rarity due to being able to effectively communicate with non-warp beings. It is quite intelligent and likes to stare into human eyes.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -4013,8 +4020,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Endurance Perks
 					case 28078182: //Perk module old triple cannon
-					perk.displayName = "Personnel Equipment Requisition";
-					perk.description = "A cache of freshly manufactured and neatly packed high-end personnel weapons, implants and upgrades supplied by an official Earth Alliance representative. We only had to pay transportation fee in credits and supply meager amount of exotic matter to power trans-dimensional gate.";
+					perk.displayName = Core.TT($"Personnel Equipment Requisition");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed high-end personnel weapons, implants and upgrades supplied by an official Earth Alliance representative. We only had to pay transportation fee in credits and supply meager amount of exotic matter to power trans-dimensional gate.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -4051,8 +4058,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 5;
 					break;
 					case 889458515: //Perk Replace ATK old with ATK new for Endurance
-					perk.displayName = "Experimental Weapons Requisition";
-					perk.description = "A cache of freshly manufactured and neatly packed multiple types of experimental weapons supplied by an official Earth Alliance representative. We only had to pay transportation fee in credits and supply meager amount of exotic matter to power trans-dimensional gate.";
+					perk.displayName = Core.TT($"Experimental Weapons Requisition");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed multiple types of experimental weapons supplied by an official Earth Alliance representative. We only had to pay transportation fee in credits and supply meager amount of exotic matter to power trans-dimensional gate.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -4077,8 +4084,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 285860403: //Perk nuke for Endurance
-					perk.displayName = "Ancient Capital Missiles Cache";
-					perk.description = "An ancient, but perfectly sealed cache with capital missiles of all types and classifications suitable for any objective. We had to pay a hefty price to one of the famous hackers to break the seal open without triggering self-destruction mechanism.";
+					perk.displayName = Core.TT($"Ancient Capital Missiles Cache");
+					perk.description = Core.TT($"An ancient, but perfectly sealed cache with capital missiles of all types and classifications suitable for any objective. We had to pay a hefty price to one of the famous hackers to break the seal open without triggering self-destruction mechanism.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -4115,8 +4122,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 873280599: //Perk Endurance extra hitpoints and deflection
-					perk.displayName = "Bulkheads & Armor Refurbishment";
-					perk.description = "A full refurbishment of all armor plates and integrity bulkheads will greatly increase durability of this ancient space vessel, as well its deflective and evasion properties, thus greatly increasing chances to reach the conclusion of our journey safely.";
+					perk.displayName = Core.TT($"Bulkheads & Armor Refurbishment");
+					perk.description = Core.TT($"A full refurbishment of all armor plates and integrity bulkheads will greatly increase durability of this ancient space vessel, as well its deflective and evasion properties, thus greatly increasing chances to reach the conclusion of our journey safely.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-5000);
@@ -4139,8 +4146,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					case 754443567: //Perk Replace containers with betters for Endurance
-					perk.displayName = "Earth Alliance Council Backing";
-					perk.description = "Due to our immense achievements, Earth Alliance and the allies are ready to overhaul all of equipment with high-end modules on our ship for free, given we can provide enough exotic matter to power temporary trans-dimensional gate.";
+					perk.displayName = Core.TT($"Earth Alliance Council Backing");
+					perk.description = Core.TT($"Due to our immense achievements, Earth Alliance and the allies are ready to overhaul all of equipment with high-end modules on our ship for free, given we can provide enough exotic matter to power temporary trans-dimensional gate.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -4221,8 +4228,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 40;
 					break;
 					case 1332005888: //Perk pack, solid starfuel for endurance
-					perk.displayName = "Support Modules Requisition";
-					perk.description = "A cache of freshly manufactured and neatly packed full range of support modules supplied by an official Earth Alliance representative. We only had to pay transportation fee in credits and supply meager amount of exotic matter to power trans-dimensional gate.";
+					perk.displayName = Core.TT($"Support Modules Requisition");
+					perk.description = Core.TT($"A cache of freshly manufactured and neatly packed full range of support modules supplied by an official Earth Alliance representative. We only had to pay transportation fee in credits and supply meager amount of exotic matter to power trans-dimensional gate.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -4248,8 +4255,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 10;
 					break;
 					case 2043215293: //Perk DIY drone army
-					perk.displayName = "Private Tactical Drone Company";
-					perk.description = "A private company of sentient tactical drones with built-in perfect loyalty lock that ready to help us on our journey for serious credit investment. We can delegate majority of our work to them and increase overall efficiency of the ship.";
+					perk.displayName = Core.TT($"Private Tactical Drone Company");
+					perk.description = Core.TT($"A private company of sentient tactical drones with built-in perfect loyalty lock that ready to help us on our journey for serious credit investment. We can delegate majority of our work to them and increase overall efficiency of the ship.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -4279,14 +4286,14 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					//Riggy Perks
-					case 905925927: //Perk module container experimental random for Riggy
-					break;
-					case 260900693: //Perk module container FO for Riggy
-					break;
+					//case 905925927: //Perk module container experimental random for Riggy
+					//break;
+					//case 260900693: //Perk module container FO for Riggy
+					//break;
 					//Exception Perks
 					case 463511730: //Perk Exception extra artifacts
-					perk.displayName = "Original Biomodular Interior";
-					perk.description = "Numerous technological artifacts of organic origin were excavated together with the Exception. Pulling some strings via our connections, we will ensure that they are still attached to the ship as they initially were.";
+					perk.displayName = Core.TT($"Original Biomodular Interior");
+					perk.description = Core.TT($"Numerous technological artifacts of organic origin were excavated together with the Exception. Pulling some strings via our connections, we will ensure that they are still attached to the ship as they initially were.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -4297,32 +4304,32 @@ namespace FFU_Bleeding_Edge {
 					perk.extraModules = new Perk.Pool[0];
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 1003445460).gameObject }, //bridge 2crew
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 1200522469).gameObject }}, //bridge 3crew floral
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1003445460) }, //bridge 2crew
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1200522469) }}, //bridge 3crew floral
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 2128566595).gameObject }, //shield 2 round
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 1646813987).gameObject }}, //shield 4 greendome
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2128566595) }, //shield 2 round
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1646813987) }}, //shield 4 greendome
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 228227788).gameObject }, //fuel container 3
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 1094609544).gameObject }}, //shieldbat 5 floral
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(228227788) }, //fuel container 3
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1094609544) }}, //shieldbat 5 floral
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 1391715479).gameObject }, //integrity 0 DIY plastic
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 1152328828).gameObject }}, //integrity 06 big green scales
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1391715479) }, //integrity 0 DIY plastic
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1152328828) }}, //integrity 06 big green scales
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 825891570).gameObject }, //multicontainer DIY EE
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 1847976825).gameObject }}, //multicontainer FSEE biotech
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(825891570) }, //multicontainer DIY EE
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1847976825) }}, //multicontainer FSEE biotech
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 930742757).gameObject }, //sensor 0-C diy
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 204974912).gameObject }}, //sensor 11 blue adv s2
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(930742757) }, //sensor 0-C diy
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(204974912) }}, //sensor 11 blue adv s2
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 1503624866).gameObject }, //warp 01 greencrystal
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 458296297).gameObject }}, //warp 03 neoncrystal
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1503624866) }, //warp 01 greencrystal
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(458296297) }}, //warp 03 neoncrystal
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 2023634410).gameObject }, //engine 2.5 terran
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 292475796).gameObject }}, //engine 03 bioship
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2023634410) }, //engine 2.5 terran
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(292475796) }}, //engine 03 bioship
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 1776726075).gameObject }, //artifactmodule tec 39 accuracy advanced data core
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 1405176791).gameObject }}}; //biotech explosives recycler
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1776726075) }, //artifactmodule tec 39 accuracy advanced data core
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1405176791) }}}; //biotech explosives recycler
 					perk.randomizerMenuStrings = new string[]{
 						$"+{Core.TT("Engine & Warp Drive")} {Core.TT("Upgrade")}",
 						$"+{Core.TT("Sensor & Armor Plates")} {Core.TT("Upgrade")}",
@@ -4334,10 +4341,42 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					case 462414045: //Perk Replace beamer laser for Exception
+					perk.displayName = Core.TT($"Exceptional Tactical Armaments");
+					perk.description = Core.TT($"Multiple armaments and ordnance of organic and crystalline origin was excavated together with the Exception. Pulling some strings via our connections, we will ensure that they are coming along with the ship as initially was intended.");
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue(-1000);
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue(-1000);
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue(-1000);
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-20000);
+					perk.extraModules = new Perk.Pool[0];
+					perk.moduleReplacements = new Perk.ModuleReplacement[] {
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(893617597) }, //0 DIY PD
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1495856276) }}, //8 Crystal PD
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(176876935) }, //weapon bigbeamer1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(599402385) }}, //weapon Florallaser
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1532741737) }, //weapon Energy cannon x2
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1768012478) }}, //weapon Energy cannon OP
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(55650103) }, //weapon DIY Laser
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(848686115) }}}; //weapon insectoid fast laser
+					perk.randomizerMenuStrings = new string[]{
+						$"+{Core.TT("Weapon Armaments")} {Core.TT("Upgrade")}",
+						$"+{Core.TT("Close-In Weapon Systems")} {Core.TT("Upgrade")}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}",
+						$"{perk.randomizerResources.organics.minValue} {Core.TT("Organics")}",
+						$"{perk.randomizerResources.metals.minValue} {Core.TT("Metals")}",
+						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 20;
 					break;
 					case 610158979: //Perk Exception extra hitpoints
-					perk.displayName = "Carbonated Exotics Diet";
-					perk.description = "Living parts of the Exception can be augmented by feeding it a special diet of carbon and exotics. As result ship's living tissue will acquire exotic properties and grow more resistant to every type of damage.";
+					perk.displayName = Core.TT($"Carbonated Exotics Diet");
+					perk.description = Core.TT($"Living parts of the Exception can be augmented by feeding it a special diet of carbon and exotics. As result ship's living tissue will acquire exotic properties and grow more resistant to every type of damage.");
 					perk.addShipMaxHealth = 100;
 					perk.addShipDeflectPercent = 5;
 					perk.addShipEvasionPercent = 5;
@@ -4406,16 +4445,34 @@ namespace FFU_Bleeding_Edge {
 				if (!perk.isUnlockedByDefault) FFU_BE_Defs.unlockablePerkList.Add(perk);
 				FFU_BE_Defs.prefabPerkList.Add(perk);
 			}
-			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk Replace containers with betters for Endurance").menuSprite = storedPerkSprites["Deal_Handshake_Sprite"];
-			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk Replace ATK old with ATK new for Endurance").menuSprite = storedPerkSprites["Random_Module_Sprite"];
-			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk Replace fuel containers with betters").menuSprite = storedPerkSprites["Deal_Handshake_Sprite"];
-			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk pack, solid starfuel for endurance").menuSprite = storedPerkSprites["Leftover_Module_Sprite"];
-			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk module old triple cannon").menuSprite = storedPerkSprites["Imperial_Crate_Sprite"];
-			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk drone 05 DIY science").menuSprite = storedPerkSprites["Security_Drone_Sprite"];
-			if (FFU_BE_Defs.flagDLC_SupPak) FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk pet Tiger dog drone").menuSprite = storedPerkSprites["Drone_Army_Sprite"];
-			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk nuke for Endurance").menuSprite = storedPerkSprites["Random_Nuke_Sprite"];
-			FFU_BE_Defs.prefabPerkList.Find(p => p.name == "Perk maggot pet").menuSprite = storedPerkSprites["Red_Ripper_Crew_Sprite"];
+			AssignNewSpriteToPerkID(754443567, storedPerkSprites["Deal_Handshake_Sprite"]);
+			AssignNewSpriteToPerkID(889458515, storedPerkSprites["Random_Module_Sprite"]);
+			AssignNewSpriteToPerkID(272967497, storedPerkSprites["Deal_Handshake_Sprite"]);
+			AssignNewSpriteToPerkID(1332005888, storedPerkSprites["Leftover_Module_Sprite"]);
+			AssignNewSpriteToPerkID(28078182, storedPerkSprites["Imperial_Crate_Sprite"]);
+			AssignNewSpriteToPerkID(1633476255, storedPerkSprites["Security_Drone_Sprite"]);
+			AssignNewSpriteToPerkID(1137508603, storedPerkSprites["Drone_Army_Sprite"]);
+			AssignNewSpriteToPerkID(285860403, storedPerkSprites["Random_Nuke_Sprite"]);
+			AssignNewSpriteToPerkID(1461582440, storedPerkSprites["Red_Ripper_Crew_Sprite"]);
+			AssignNewSpriteToPerkID(462414045, storedPerkSprites["Random_Module_Sprite"]);
 			if (FFU_BE_Defs.dumpObjectDatas) Debug.LogWarning(perksData);
+		}
+		private static GameObject GetPrefabIDCrewGO(int PrefabID) {
+			GameObject CrewGO = FFU_BE_Defs.prefabModdedCrewList.Find(x => x.PrefabId == PrefabID)?.gameObject;
+			if (CrewGO == null) Debug.LogError($"Crewmember with Prefab ID #{PrefabID} doesn't exist!");
+			return CrewGO;
+		}
+		private static GameObject GetPrefabIDModuleGO(int PrefabID) {
+			GameObject ModuleGO = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == PrefabID)?.gameObject;
+			if (ModuleGO == null) Debug.LogError($"Module with Prefab ID #{PrefabID} doesn't exist!");
+			return ModuleGO;
+		}
+		private static void AssignNewSpriteToPerkID(int perkID, Sprite newSprite) {
+			bool perkExists = FFU_BE_Defs.prefabPerkList.Find(p => p.PrefabId == perkID) != null;
+			if (perkExists) FFU_BE_Defs.prefabPerkList.Find(p => p.PrefabId == perkID).menuSprite = newSprite;
+		}
+		public class ProcessDLC {
+
 		}
 		public static void InitLockedPerksAllocation() {
 			List<GameObject> unusedPerks = new List<GameObject>();
