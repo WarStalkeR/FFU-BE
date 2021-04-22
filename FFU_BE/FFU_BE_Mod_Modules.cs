@@ -221,8 +221,33 @@ namespace FFU_Bleeding_Edge {
 								foreach (Crewmember intruderCrew in shipModule.Weapon.ProjectileOrBeamPrefab.SpawnIntruderPrefab.GetComponents<Crewmember>())
 									Debug.Log($"Intruder, {shipModule.name} [{shipModule.Weapon.ProjectileOrBeamPrefab.name}] {intruderCrew.name} ({intruderCrew.PrefabId}) {intruderCrew.displayName}");
 				}
+				List<int> temporaryList = FFU_BE_Defs.essentialTopModuleIDs.ToList();
+				List<int> intermediateList = FFU_BE_Defs.essentialTopModuleIDs.ToList();
+				foreach (int moduleID in FFU_BE_Defs.essentialTopModuleIDs) {
+					if (FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == moduleID) == null) {
+						temporaryList = intermediateList.ToList();
+						temporaryList.Remove(moduleID);
+						temporaryList.Add(GetModuleReplacementID(moduleID));
+						intermediateList = temporaryList.ToList();
+					}
+				}
+				FFU_BE_Defs.essentialTopModuleIDs = intermediateList.ToList();
+				intermediateList = null;
+				temporaryList = null;
 				originalList = null;
 			} catch (Exception ex) { Debug.LogError(ex); }
+		}
+		private static int GetModuleReplacementID(int PrefabID) {
+			switch (PrefabID) {
+				case 1363987393: return 1482294420; //explosives combinator tiger //fuel processor 2
+				case 1427874574: return 1386797426; //shield tigership //shield 4 solitary
+				case 1424188745: return 1179432425; //shield tigership //shieldbat 3 generic alien
+				case 1571322820: return 469527491; //weapon tigermissile large //weapon ancientrockets x3
+				case 876704941: return 1317545673; //weapon EMP energyball 3x Tiger //weapon rare warp shield breaker EMP
+				case 412909021: return 1086561640; //weapon gatling Tiger //weapon Segmented cannonx2 C
+				case 381835966: return 1043100994; //Tiger intruderbot nuke launcher //99 pirate spawner launcher 1
+				default: return 0;
+			}
 		}
 		public static void InitModuleMalfunctions() {
 			try {

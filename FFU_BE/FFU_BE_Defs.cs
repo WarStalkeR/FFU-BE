@@ -261,7 +261,7 @@ namespace FFU_Bleeding_Edge {
 			1322541741, /* Hellfire Inferno Heat Ray Projector */
 			1317545673, /* Singularity Energy Disruptor */
 			1238435842, /* BFG9000 Plus Radiation Accelerator */
-			452279033,  /* Hi-Gothic Relic Exotic Disintegrator */
+			452279033,  /* Hi-Gothic Relic Particle Disintegrator */
 			1851270005, /* Blackhammer Kinetic Nuke */
 			2106923011, /* Ion Storm Energy Nuke */
 			780823633,  /* Hellfire Thermal Nuke */
