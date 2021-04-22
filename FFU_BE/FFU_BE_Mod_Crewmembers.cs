@@ -327,6 +327,8 @@ namespace FFU_Bleeding_Edge {
 		public static bool CrewLacksHealth(Crewmember crewmember) {
 			switch (crewmember.PrefabId) {
 				case 735284731: //Cat1
+				case 1502599448: //Dog
+				case 1820607702: //Rabbit
 				case 1349473499: //Drone pet
 				case 1701486595: //Slime pet
 				case 822317379: //Larva small
@@ -339,6 +341,8 @@ namespace FFU_Bleeding_Edge {
 				case 85873966: //Human crew adventurer
 				case 1864623772: //Pirates humanoid crew
 				case 273813254: //Larva big
+				case 301730638: //Lizard
+				case 185113131: //Floater
 				return crewmember.MaxHealth < 15;
 				case 864651417: //GorMor crew
 				case 1385225782: //Grippy crew
@@ -347,6 +351,7 @@ namespace FFU_Bleeding_Edge {
 				case 121491827: //Testcrew 2
 				case 702891534: //Testcrew 3
 				case 1106176061: //Testcrew 4
+				case 1687575768: //Testcrew 5
 				case 1444414821: //Drone CT1 maintenance
 				case 1755418895: //Drone CT2 gunnery clawed
 				case 1589791427: //Drone CT2 gunnery
@@ -359,6 +364,7 @@ namespace FFU_Bleeding_Edge {
 				case 229081020: //Drone DIY repairer
 				case 421109168: //Drone DIY science
 				case 1179088392: //Drone DIY sensor
+				case 1696290198: //Human sunglasses crew
 				return crewmember.MaxHealth < 20;
 				case 1821850499: //Mantis crew
 				case 1370232170: //Slavers crew
@@ -368,6 +374,8 @@ namespace FFU_Bleeding_Edge {
 				case 40748862: //Drone DIY mincer pirates
 				case 1680322829: //Drone CT1 maintenance clawed
 				case 1349353450: //Drone DIY gunnery pirates cannon
+				case 2016189783: //Man cat crew
+				case 715571627: //Woman cat crew
 				return crewmember.MaxHealth < 25;
 				case 490627374: //Moleculaati
 				case 106092601: //Squid crew
@@ -377,9 +385,14 @@ namespace FFU_Bleeding_Edge {
 				case 928833842: //Spideraa crew
 				case 768455465: //Beedroid crew
 				case 826379097: //Combat Drone Humanoid
+				case 93253305: //Tortoise
+				case 1732412902: //Male cyborg crew
+				case 2094501679: //Female cyborg crew
 				return crewmember.MaxHealth < 35;
-				case 1351800556: //Drone tigerspider pirates
+				case 1727276051: //Drone tigerdog
 				case 1481089982: //Drone tigerspider
+				case 1351800556: //Drone tigerspider pirates
+				case 1800714178: //Drone tigerspider assaulter
 				return crewmember.MaxHealth < 50;
 				case 190195895: //Heavy security drone
 				return crewmember.MaxHealth < 75;
@@ -394,6 +407,8 @@ namespace FFU_Bleeding_Edge {
 		public static int GetCrewBaseHealth(Crewmember crewmember) {
 			switch (crewmember.PrefabId) {
 				case 735284731: //Cat1
+				case 1502599448: //Dog
+				case 1820607702: //Rabbit
 				case 1349473499: //Drone pet
 				case 1701486595: //Slime pet
 				case 822317379: //Larva small
@@ -406,6 +421,8 @@ namespace FFU_Bleeding_Edge {
 				case 85873966: //Human crew adventurer
 				case 1864623772: //Pirates humanoid crew
 				case 273813254: //Larva big
+				case 301730638: //Lizard
+				case 185113131: //Floater
 				return 15;
 				case 864651417: //GorMor crew
 				case 1385225782: //Grippy crew
@@ -414,6 +431,7 @@ namespace FFU_Bleeding_Edge {
 				case 121491827: //Testcrew 2
 				case 702891534: //Testcrew 3
 				case 1106176061: //Testcrew 4
+				case 1687575768: //Testcrew 5
 				case 1444414821: //Drone CT1 maintenance
 				case 1755418895: //Drone CT2 gunnery clawed
 				case 1589791427: //Drone CT2 gunnery
@@ -426,6 +444,7 @@ namespace FFU_Bleeding_Edge {
 				case 229081020: //Drone DIY repairer
 				case 421109168: //Drone DIY science
 				case 1179088392: //Drone DIY sensor
+				case 1696290198: //Human sunglasses crew
 				return 20;
 				case 1821850499: //Mantis crew
 				case 1370232170: //Slavers crew
@@ -435,6 +454,8 @@ namespace FFU_Bleeding_Edge {
 				case 40748862: //Drone DIY mincer pirates
 				case 1680322829: //Drone CT1 maintenance clawed
 				case 1349353450: //Drone DIY gunnery pirates cannon
+				case 2016189783: //Man cat crew
+				case 715571627: //Woman cat crew
 				return 25;
 				case 490627374: //Moleculaati
 				case 106092601: //Squid crew
@@ -444,9 +465,14 @@ namespace FFU_Bleeding_Edge {
 				case 928833842: //Spideraa crew
 				case 768455465: //Beedroid crew
 				case 826379097: //Combat Drone Humanoid
+				case 93253305: //Tortoise
+				case 1732412902: //Male cyborg crew
+				case 2094501679: //Female cyborg crew
 				return 35;
-				case 1351800556: //Drone tigerspider pirates
+				case 1727276051: //Drone tigerdog
 				case 1481089982: //Drone tigerspider
+				case 1351800556: //Drone tigerspider pirates
+				case 1800714178: //Drone tigerspider assaulter
 				return 50;
 				case 190195895: //Heavy security drone
 				return 75;

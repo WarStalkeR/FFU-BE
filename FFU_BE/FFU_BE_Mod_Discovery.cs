@@ -135,97 +135,167 @@ namespace FFU_Bleeding_Edge {
 				viableFleets.Add("Ambusher L1 Life taster");
 				viableFleets.Add("Ambusher L1 Rat pirate, old alone or with sstriker");
 				viableFleets.Add("Ambusher L1 Rats, 2 or 3 small ships");
-				viableFleets.Add("Ambusher L1 Rats, Royal + 1small");
+				viableFleets.Add("Ambusher L1 Rats, Royal alone");
 				viableFleets.Add("Ambusher L1 Rats, old cruiser +1small");
 				viableFleets.Add("Ambusher L1 Rats, red cruiser +1small");
 				viableFleets.Add("Ambusher L1 Solipsist small");
-				viableFleets.Add("Ambusher L1 Style guardians, redsaucer or tac");
+				viableFleets.Add("Ambusher L1 Style guardians, redsaucer");
+				if (FFU_BE_Defs.flagDLC_OldEnm) {
+					viableFleets.Add("Ambusher L1b Capitaalo 1 and 4 decoy");
+					viableFleets.Add("Ambusher L1b Capitaalo, 1 plus 2");
+					viableFleets.Add("Ambusher L1b Capitaalo, 2x cap 1");
+					viableFleets.Add("Ambusher L1b Capitaalo, 2x cap 2");
+					viableFleets.Add("Ambusher L1b Capitaalo, cap 3");
+					viableFleets.Add("Ambusher L1b Capitaalo, cap 3 and 1");
+					viableFleets.Add("Ambusher L1b and 2b Fighterclan pirates, 2 smalls");
+					viableFleets.Add("Ambusher L1b or 2b Moralor, 1 small");
+					viableFleets.Add("Ambusher L1b or 2b Phobian pirates x 2");
+				}
 				return Core.RandomItemFromList(viableFleets, "Ambusher L1 Life taster");
 				case 2:
-				viableFleets.Add("Ambusher L1 Solipsist small");
-				viableFleets.Add("Ambusher L1 Style guardians, redsaucer or tac");
-				viableFleets.Add("Ambusher L1 Life taster");
 				viableFleets.Add("SOS Ambusher Life taster 2");
+				viableFleets.Add("SOS Ambusher L2 pirates with decoy ship");
+				viableFleets.Add("Ambusher L2 Pirate Bluestar");
 				viableFleets.Add("Ambusher L2 Solipsist medium");
+				viableFleets.Add("Ambusher L2 pirates 1 or 2 pirate old arrowheads");
+				viableFleets.Add("Ambusher L2 pirates 2 pirate guardians, Decoy");
+				viableFleets.Add("Ambusher L2 pirates 3 smalls");
+				viableFleets.Add("Ambusher L2 pirates explorer and or pirate rat");
+				viableFleets.Add("Ambusher L2 pirates, DECOY ships");
+				viableFleets.Add("Ambusher L2 pirates, hammerhead + Hship");
+				viableFleets.Add("Ambusher L2 pirates, kalev + sstriker");
 				viableFleets.Add("Ambusher L2 pirates, rat pirates + slavers, intruderspawn");
 				viableFleets.Add("Ambusher L2 pirates, sstriker and arrowhead");
+				if (FFU_BE_Defs.flagDLC_OldEnm) {
+					viableFleets.Add("Ambusher L2b Phobians, londiste 1x3");
+					viableFleets.Add("Ambusher L2b Phobians, londiste 2 and 1 or londiste 2");
+					viableFleets.Add("Ambusher L2b Phobians, londiste 2x2 or londiste 3");
+					viableFleets.Add("Ambusher L2b Phobians, londiste 3 and 1");
+					viableFleets.Add("Ambusher L2b Phobians, londiste 4");
+					viableFleets.Add("Ambusher L2b and 3b Moleculaati mortal combat");
+				}
 				return Core.RandomItemFromList(viableFleets, "Ambusher L1 Life taster");
 				case 3:
-				viableFleets.Add("Ambusher L1 Solipsist small");
-				viableFleets.Add("Ambusher L1 Style guardians, redsaucer or tac");
-				viableFleets.Add("Ambusher L1 Life taster");
-				viableFleets.Add("SOS Ambusher Life taster 2");
-				viableFleets.Add("Ambusher L2 Solipsist medium");
+				viableFleets.Add("Ambusher L2 pirates 2 pirate guardians, Decoy");
+				viableFleets.Add("Ambusher L2 pirates explorer and or pirate rat");
+				viableFleets.Add("Ambusher L2 pirates, DECOY ships");
+				viableFleets.Add("Ambusher L2 pirates, hammerhead + Hship");
+				viableFleets.Add("Ambusher L2 pirates, kalev + sstriker");
 				viableFleets.Add("Ambusher L2 pirates, rat pirates + slavers, intruderspawn");
 				viableFleets.Add("Ambusher L2 pirates, sstriker and arrowhead");
+				if (FFU_BE_Defs.flagDLC_OldEnm) {
+					viableFleets.Add("Ambusher L2b Phobians, londiste 1x3");
+					viableFleets.Add("Ambusher L2b Phobians, londiste 2 and 1 or londiste 2");
+					viableFleets.Add("Ambusher L2b Phobians, londiste 2x2 or londiste 3");
+					viableFleets.Add("Ambusher L2b Phobians, londiste 3 and 1");
+					viableFleets.Add("Ambusher L2b Phobians, londiste 4");
+					viableFleets.Add("Ambusher L2b and 3b Moleculaati mortal combat");
+				}
+				viableFleets.Add("Ambusher L3 Squid bounty hunter");
+				if (FFU_BE_Defs.flagDLC_OldEnm) {
+					viableFleets.Add("Ambusher L3b Hunter Crab");
+					viableFleets.Add("Ambusher L3b pirates, 3x tigercubs");
+					viableFleets.Add("Ambusher L3b pirates, guardian 2");
+				}
 				return Core.RandomItemFromList(viableFleets, "Ambusher L1 Life taster");
 				case 4:
-				viableFleets.Add("Ambusher L2 Solipsist medium");
-				viableFleets.Add("SOS Ambusher Life taster 2");
 				viableFleets.Add("Ambusher L3 Squid bounty hunter");
+				if (FFU_BE_Defs.flagDLC_OldEnm) {
+					viableFleets.Add("Ambusher L3b Hunter Crab");
+					viableFleets.Add("Ambusher L3b pirates, 3x tigercubs");
+					viableFleets.Add("Ambusher L3b pirates, guardian 2");
+				}
 				viableFleets.Add("SOS Ambusher L4 Insectoid hunters");
 				viableFleets.Add("Ambusher L4 Insectoid bluebios, holy injustice");
 				viableFleets.Add("Ambusher L4 Insectoids floral bird + 1 floral small");
 				viableFleets.Add("Ambusher L4 Insectoids smallbeetle + 1or2 scarabeus");
 				viableFleets.Add("Ambusher L4 Insectoids wasp + 1 small");
 				viableFleets.Add("Ambusher L4 Style guardians, redsaucer or tac");
+				if (FFU_BE_Defs.flagDLC_OldEnm) 
+					viableFleets.Add("Ambusher L4b and chance for 5b Moralor testers, smalls");
 				return Core.RandomItemFromList(viableFleets, "Ambusher L1 Life taster");
 				case 5:
-				viableFleets.Add("SOS Ambusher Life taster 2");
-				viableFleets.Add("Ambusher L2 Solipsist medium");
-				viableFleets.Add("Ambusher L3 Squid bounty hunter");
+				viableFleets.Add("SOS Ambusher L4 Insectoid hunters");
+				viableFleets.Add("Ambusher L4 Insectoid bluebios, holy injustice");
+				viableFleets.Add("Ambusher L4 Insectoids floral bird + 1 floral small");
+				viableFleets.Add("Ambusher L4 Insectoids smallbeetle + 1or2 scarabeus");
+				viableFleets.Add("Ambusher L4 Insectoids wasp + 1 small");
 				viableFleets.Add("Ambusher L4 Style guardians, redsaucer or tac");
+				if (FFU_BE_Defs.flagDLC_OldEnm)
+					viableFleets.Add("Ambusher L4b and chance for 5b Moralor testers, smalls");
 				viableFleets.Add("Ambusher L5 slavers, 2x slaver arrowhead");
 				viableFleets.Add("Ambusher L5 slavers, 2x slaver bullet");
 				viableFleets.Add("Ambusher L5 slavers, 3x slaver bullet");
 				viableFleets.Add("Ambusher L5 slavers, arrow cmd + arrowhead");
 				viableFleets.Add("Ambusher L5 slavers, arrow cmd +srat +bullet");
+				if (FFU_BE_Defs.flagDLC_OldEnm) {
+					viableFleets.Add("Ambusher L5b Slaver Hunters");
+					viableFleets.Add("Ambusher L5b and chance for 4b Moralor redeemer 1 medium");
+				}
 				return Core.RandomItemFromList(viableFleets, "Ambusher L1 Life taster");
 				case 6:
-				viableFleets.Add("SOS Ambusher Life taster 2");
-				viableFleets.Add("Ambusher L2 Solipsist medium");
-				viableFleets.Add("Ambusher L3 Squid bounty hunter");
-				viableFleets.Add("Ambusher L4 Style guardians, redsaucer or tac");
+				viableFleets.Add("Ambusher L5 slavers, 2x slaver arrowhead");
+				viableFleets.Add("Ambusher L5 slavers, 2x slaver bullet");
+				viableFleets.Add("Ambusher L5 slavers, 3x slaver bullet");
+				viableFleets.Add("Ambusher L5 slavers, arrow cmd + arrowhead");
+				viableFleets.Add("Ambusher L5 slavers, arrow cmd +srat +bullet");
+				if (FFU_BE_Defs.flagDLC_OldEnm) {
+					viableFleets.Add("Ambusher L5b Slaver Hunters");
+					viableFleets.Add("Ambusher L5b and chance for 4b Moralor redeemer 1 medium");
+					viableFleets.Add("Ambusher L6b Phobian pirates x 3");
+					viableFleets.Add("Ambusher L6b Squid new smalls x3");
+					viableFleets.Add("Ambusher L6b, chance for 7b Moralor redeemer 1 large");
+				}
 				viableFleets.Add("Ambushers L6 squid patrol");
 				viableFleets.Add("Ambushers L6 squid patrol 1 medium");
 				viableFleets.Add("Ambushers L6 squid patrol 1 scout");
 				viableFleets.Add("Ambushers L6 squid patrol 2 scouts");
 				return Core.RandomItemFromList(viableFleets, "Ambusher L1 Life taster");
 				case 7:
-				viableFleets.Add("SOS Ambusher Life taster 2");
-				viableFleets.Add("Ambusher L2 Solipsist medium");
-				viableFleets.Add("Ambusher L3 Squid bounty hunter");
-				viableFleets.Add("Ambusher L4 Style guardians, redsaucer or tac");
+				if (FFU_BE_Defs.flagDLC_OldEnm) {
+					viableFleets.Add("Ambusher L6b Phobian pirates x 3");
+					viableFleets.Add("Ambusher L6b Squid new smalls x3");
+					viableFleets.Add("Ambusher L6b, chance for 7b Moralor redeemer 1 large");
+				}
 				viableFleets.Add("Ambushers L6 squid patrol");
 				viableFleets.Add("Ambushers L6 squid patrol 1 medium");
 				viableFleets.Add("Ambushers L6 squid patrol 1 scout");
 				viableFleets.Add("Ambushers L6 squid patrol 2 scouts");
+				viableFleets.Add("Ambusher L7 Squid assasnik");
+				if (FFU_BE_Defs.flagDLC_OldEnm)
+					viableFleets.Add("Ambusher L7b Moralors, medium and small");
 				return Core.RandomItemFromList(viableFleets, "Ambusher L1 Life taster");
 				case 8:
-				viableFleets.Add("SOS Ambusher Life taster 2");
-				viableFleets.Add("Ambusher L2 Solipsist medium");
-				viableFleets.Add("Ambusher L3 Squid bounty hunter");
-				viableFleets.Add("Ambusher L4 Style guardians, redsaucer or tac");
+				if (FFU_BE_Defs.flagDLC_OldEnm)
+					viableFleets.Add("Ambusher L6b, chance for 7b Moralor redeemer 1 large");
 				viableFleets.Add("Ambushers L6 squid patrol");
 				viableFleets.Add("Ambushers L6 squid patrol 1 medium");
-				viableFleets.Add("Ambushers L6 squid patrol 1 scout");
-				viableFleets.Add("Ambushers L6 squid patrol 2 scouts");
 				viableFleets.Add("Ambusher L7 Squid assasnik");
+				if (FFU_BE_Defs.flagDLC_OldEnm)
+					viableFleets.Add("Ambusher L7b Moralors, medium and small");
+				viableFleets.Add("Ambushers L9 sec corp light patrol");
+				viableFleets.Add("Ambushers L9 sec corp medium patrol");
+				if (FFU_BE_Defs.flagDLC_OldEnm)
+					viableFleets.Add("Ambusher L9b Moralors, large and small");
 				return Core.RandomItemFromList(viableFleets, "Ambusher L1 Life taster");
 				case 9:
-				viableFleets.Add("SOS Ambusher Life taster 2");
-				viableFleets.Add("Ambusher L2 Solipsist medium");
-				viableFleets.Add("Ambusher L4 Style guardians, redsaucer or tac");
 				viableFleets.Add("Ambusher L7 Squid assasnik");
+				if (FFU_BE_Defs.flagDLC_OldEnm)
+					viableFleets.Add("Ambusher L7b Moralors, medium and small");
 				viableFleets.Add("Ambushers L9 sec corp heavy patrol");
 				viableFleets.Add("Ambushers L9 sec corp light patrol");
 				viableFleets.Add("Ambushers L9 sec corp medium patrol");
+				if (FFU_BE_Defs.flagDLC_OldEnm)
+					viableFleets.Add("Ambusher L9b Moralors, large and small");
+				viableFleets.Add("Ambushers L10 neutralites 3 smalls");
 				return Core.RandomItemFromList(viableFleets, "Ambusher L1 Life taster");
 				case 10:
-				viableFleets.Add("SOS Ambusher Life taster 2");
-				viableFleets.Add("Ambusher L2 Solipsist medium");
-				viableFleets.Add("Ambusher L4 Style guardians, redsaucer or tac");
-				viableFleets.Add("Ambusher L7 Squid assasnik");
+				viableFleets.Add("Ambushers L9 Shokar Bossfight");
+				viableFleets.Add("Ambushers L9 sec corp heavy patrol");
+				viableFleets.Add("Ambushers L9 sec corp light patrol");
+				viableFleets.Add("Ambushers L9 sec corp medium patrol");
+				if (FFU_BE_Defs.flagDLC_OldEnm)
+					viableFleets.Add("Ambusher L9b Moralors, large and small");
 				viableFleets.Add("Ambushers L10 neutralites 2 medium");
 				viableFleets.Add("Ambushers L10 neutralites 3 smalls");
 				viableFleets.Add("Ambushers L10 neutralites large and small");
@@ -234,35 +304,82 @@ namespace FFU_Bleeding_Edge {
 				viableFleets.Add("Ambusher L1 Life taster");
 				viableFleets.Add("Ambusher L1 Rat pirate, old alone or with sstriker");
 				viableFleets.Add("Ambusher L1 Rats, 2 or 3 small ships");
-				viableFleets.Add("Ambusher L1 Rats, Royal + 1small");
+				viableFleets.Add("Ambusher L1 Rats, Royal alone");
 				viableFleets.Add("Ambusher L1 Rats, old cruiser +1small");
 				viableFleets.Add("Ambusher L1 Rats, red cruiser +1small");
 				viableFleets.Add("Ambusher L1 Solipsist small");
-				viableFleets.Add("Ambusher L1 Style guardians, redsaucer or tac");
+				viableFleets.Add("Ambusher L1 Style guardians, redsaucer");
+				if (FFU_BE_Defs.flagDLC_OldEnm) {
+					viableFleets.Add("Ambusher L1b Capitaalo 1 and 4 decoy");
+					viableFleets.Add("Ambusher L1b Capitaalo, 1 plus 2");
+					viableFleets.Add("Ambusher L1b Capitaalo, 2x cap 1");
+					viableFleets.Add("Ambusher L1b Capitaalo, 2x cap 2");
+					viableFleets.Add("Ambusher L1b Capitaalo, cap 3");
+					viableFleets.Add("Ambusher L1b Capitaalo, cap 3 and 1");
+					viableFleets.Add("Ambusher L1b and 2b Fighterclan pirates, 2 smalls");
+					viableFleets.Add("Ambusher L1b or 2b Moralor, 1 small");
+					viableFleets.Add("Ambusher L1b or 2b Phobian pirates x 2");
+				}
 				viableFleets.Add("SOS Ambusher Life taster 2");
+				viableFleets.Add("SOS Ambusher L2 pirates with decoy ship");
+				viableFleets.Add("Ambusher L2 Pirate Bluestar");
 				viableFleets.Add("Ambusher L2 Solipsist medium");
+				viableFleets.Add("Ambusher L2 pirates 1 or 2 pirate old arrowheads");
+				viableFleets.Add("Ambusher L2 pirates 2 pirate guardians, Decoy");
+				viableFleets.Add("Ambusher L2 pirates 3 smalls");
+				viableFleets.Add("Ambusher L2 pirates explorer and or pirate rat");
+				viableFleets.Add("Ambusher L2 pirates, DECOY ships");
+				viableFleets.Add("Ambusher L2 pirates, hammerhead + Hship");
+				viableFleets.Add("Ambusher L2 pirates, kalev + sstriker");
 				viableFleets.Add("Ambusher L2 pirates, rat pirates + slavers, intruderspawn");
 				viableFleets.Add("Ambusher L2 pirates, sstriker and arrowhead");
+				if (FFU_BE_Defs.flagDLC_OldEnm) {
+					viableFleets.Add("Ambusher L2b Phobians, londiste 1x3");
+					viableFleets.Add("Ambusher L2b Phobians, londiste 2 and 1 or londiste 2");
+					viableFleets.Add("Ambusher L2b Phobians, londiste 2x2 or londiste 3");
+					viableFleets.Add("Ambusher L2b Phobians, londiste 3 and 1");
+					viableFleets.Add("Ambusher L2b Phobians, londiste 4");
+					viableFleets.Add("Ambusher L2b and 3b Moleculaati mortal combat");
+				}
 				viableFleets.Add("Ambusher L3 Squid bounty hunter");
+				if (FFU_BE_Defs.flagDLC_OldEnm) {
+					viableFleets.Add("Ambusher L3b Hunter Crab");
+					viableFleets.Add("Ambusher L3b pirates, 3x tigercubs");
+					viableFleets.Add("Ambusher L3b pirates, guardian 2");
+				}
 				viableFleets.Add("SOS Ambusher L4 Insectoid hunters");
 				viableFleets.Add("Ambusher L4 Insectoid bluebios, holy injustice");
 				viableFleets.Add("Ambusher L4 Insectoids floral bird + 1 floral small");
 				viableFleets.Add("Ambusher L4 Insectoids smallbeetle + 1or2 scarabeus");
 				viableFleets.Add("Ambusher L4 Insectoids wasp + 1 small");
 				viableFleets.Add("Ambusher L4 Style guardians, redsaucer or tac");
+				if (FFU_BE_Defs.flagDLC_OldEnm) 
+					viableFleets.Add("Ambusher L4b and chance for 5b Moralor testers, smalls");
 				viableFleets.Add("Ambusher L5 slavers, 2x slaver arrowhead");
 				viableFleets.Add("Ambusher L5 slavers, 2x slaver bullet");
 				viableFleets.Add("Ambusher L5 slavers, 3x slaver bullet");
 				viableFleets.Add("Ambusher L5 slavers, arrow cmd + arrowhead");
 				viableFleets.Add("Ambusher L5 slavers, arrow cmd +srat +bullet");
+				if (FFU_BE_Defs.flagDLC_OldEnm) {
+					viableFleets.Add("Ambusher L5b Slaver Hunters");
+					viableFleets.Add("Ambusher L5b and chance for 4b Moralor redeemer 1 medium");
+					viableFleets.Add("Ambusher L6b Phobian pirates x 3");
+					viableFleets.Add("Ambusher L6b Squid new smalls x3");
+					viableFleets.Add("Ambusher L6b, chance for 7b Moralor redeemer 1 large");
+				}
 				viableFleets.Add("Ambushers L6 squid patrol");
 				viableFleets.Add("Ambushers L6 squid patrol 1 medium");
 				viableFleets.Add("Ambushers L6 squid patrol 1 scout");
 				viableFleets.Add("Ambushers L6 squid patrol 2 scouts");
 				viableFleets.Add("Ambusher L7 Squid assasnik");
+				if (FFU_BE_Defs.flagDLC_OldEnm) 
+					viableFleets.Add("Ambusher L7b Moralors, medium and small");
+				viableFleets.Add("Ambushers L9 Shokar Bossfight");
 				viableFleets.Add("Ambushers L9 sec corp heavy patrol");
 				viableFleets.Add("Ambushers L9 sec corp light patrol");
 				viableFleets.Add("Ambushers L9 sec corp medium patrol");
+				if (FFU_BE_Defs.flagDLC_OldEnm) 
+					viableFleets.Add("Ambusher L9b Moralors, large and small");
 				viableFleets.Add("Ambushers L10 neutralites 2 medium");
 				viableFleets.Add("Ambushers L10 neutralites 3 smalls");
 				viableFleets.Add("Ambushers L10 neutralites large and small");

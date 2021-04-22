@@ -286,6 +286,7 @@ namespace RST.UI {
 		[MonoModIgnore] private List<MaterialsConverterModule> items;
 		[MonoModIgnore] private List<MaterialsConverterModuleUI> uiItems;
 		public class patch_BuiltinConverterUI : BuiltinConverterUI {
+			[MonoModIgnore] private int step;
 			[MonoModIgnore] private bool ignoreSliderChangedEvent;
 			[MonoModIgnore] private void Calculate() { }
 			[MonoModReplace] public void Update() {
@@ -296,6 +297,7 @@ namespace RST.UI {
 					string strNum = $"<size=7>K</size>";
 					if ((int)slider.maxValue != MaxTargetRes) slider.maxValue = MaxTargetRes;
 					if ((int)slider.value != TargetRes) slider.value = TargetRes;
+					if ((int)slider.value % step != 0) slider.value = (int)slider.value / step * step;
 					if ((SourceResAvail - SourceRes) >= 1000f && (SourceResAvail - SourceRes) < 10000f) resRemaining.text = $"{(SourceResAvail - SourceRes) / 1000f:0.0}{strNum}";
 					else if ((SourceResAvail - SourceRes) >= 10000f) resRemaining.text = $"{(SourceResAvail - SourceRes) / 1000f:0}{strNum}";
 					else resRemaining.text = (SourceResAvail - SourceRes).ToString();

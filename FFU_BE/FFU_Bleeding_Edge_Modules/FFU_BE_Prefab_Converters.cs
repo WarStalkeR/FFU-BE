@@ -209,7 +209,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.economyTypeIDs[Core.EconomyType.Refinery].Contains(shipModule.PrefabId)) FFU_BE_Defs.economyTypeIDs[Core.EconomyType.Refinery].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 0.8f);
-				shipModule.displayName = Core.TT($"StarFurnace <color=#{colorFactory}ff>Singularity Core</color>");
+				shipModule.displayName = Core.TT($"StarCore <color=#{colorFactory}ff>Singularity Furnace</color>");
 				shipModule.description = Core.TT($"Extremely advanced factory that uses active singularity to refine and process almost all types of resources with high efficiency. Consumes a lot of energy and has very long productivity warm-up time.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1500f, metals = 5000f, synthetics = 3500f, exotics = 50f };
 				(shipModule as patch_ShipModule).MaterialsConverter.produceRecipes = new ResourceValueGroup[] {

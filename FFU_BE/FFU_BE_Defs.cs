@@ -516,6 +516,7 @@ namespace FFU_Bleeding_Edge {
 			}
 		}
 		public static void InitDLCsDetection() {
+			//foreach (Fleet fleet in Resources.FindObjectsOfTypeAll<Fleet>()) Debug.LogWarning($"{fleet.name}");
 			//foreach (DLCButton button in Resources.FindObjectsOfTypeAll<DLCButton>()) Debug.LogWarning($"{button.name}: {button.prefabIdToCheck}");
 			if (PrefabFinder.PrefabDict.ContainsKey(1452660923)) flagDLC_SupPak = true;
 			if (PrefabFinder.PrefabDict.ContainsKey(527148320)) flagDLC_OldEnm = true;
@@ -1324,15 +1325,15 @@ namespace FFU_Bleeding_Edge {
 			else if (damageDealer.name.Contains("Tiger intruderbot nuke")) spawnPoolType = Core.PayloadPool.Terran;
 			switch (spawnPoolType) {
 				case Core.PayloadPool.Squid:
-				if (rollValue >= 80f) return prefabModdedCrewList.Find(x => x.name.Contains("Moleculaati"));
-				else if (rollValue >= 50f) return prefabModdedCrewList.Find(x => x.name.Contains("Larva big"));
-				else return prefabModdedCrewList.Find(x => x.name.Contains("Larva small"));
+				if (rollValue >= 80f) return prefabModdedCrewList.Find(x => x.PrefabId == 490627374); //Moleculaati
+				else if (rollValue >= 50f) return prefabModdedCrewList.Find(x => x.PrefabId == 273813254); //Larva big
+				else return prefabModdedCrewList.Find(x => x.PrefabId == 822317379); //Larva small
 				case Core.PayloadPool.Pirate:
-				if (rollValue >= 80f) return prefabModdedCrewList.Find(x => x.name.Contains("Drone DIY gunnery pirates cannon"));
-				else if (rollValue >= 50f) return prefabModdedCrewList.Find(x => x.name.Contains("Drone DIY mincer pirates"));
-				else return prefabModdedCrewList.Find(x => x.name.Contains("Drone DIY fire safety clawed"));
+				if (rollValue >= 80f) return prefabModdedCrewList.Find(x => x.PrefabId == 1349353450); //Drone DIY gunnery pirates cannon
+				else if (rollValue >= 50f) return prefabModdedCrewList.Find(x => x.PrefabId == 40748862); //Drone DIY mincer pirates
+				else return prefabModdedCrewList.Find(x => x.PrefabId == 486815100); //Drone DIY fire safety clawed
 				case Core.PayloadPool.Terran:
-				return prefabModdedCrewList.Find(x => x.name.Contains("Drone tigerspider assaulter"));
+				return prefabModdedCrewList.Find(x => x.PrefabId == 1800714178); //Drone tigerspider assaulter
 				default: return null;
 			}
 		}

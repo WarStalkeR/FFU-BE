@@ -165,7 +165,7 @@ namespace FFU_Bleeding_Edge {
 			if (moduleID == 599402385) return idx; idx++; //weapon Florallaser
 			if (moduleID == 1210570305) return idx; idx++; //weapon black energy laser x3
 			if (moduleID == 1238435842) return idx; idx++; //weapon BFGx9 for bluestar
-			//Exotic Disintegrators
+			//Particle Disintegrators
 			if (moduleID == 2075523594) return idx; idx++; //weapon DIY exoticslaser
 			if (moduleID == 1049561624) return idx; idx++; //weapon DIY exoticslaser dual
 			if (moduleID == 1356678884) return idx; idx++; //weapon Squid beamer single
@@ -1806,7 +1806,7 @@ namespace FFU_Bleeding_Edge {
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.Howitzer].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Corrosive].Contains(shipModule.PrefabId)) FFU_BE_Defs.cannonTypeIDs[Core.CannonType.Corrosive].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 1.6f);
-				shipModule.displayName = Core.TT($"Dessolution <color=#{colorCorrosive}ff>Corrosive</color> Howitzer");
+				shipModule.displayName = Core.TT($"Dissolution <color=#{colorCorrosive}ff>Corrosive</color> Howitzer");
 				shipModule.description = Core.TT($"Anti-armor molecular acid cannon of organic origin. Consumes mainly organics and other materials to print and launch decently armored, highly corrosive projectiles that melt matter and dissolve organics in huge radius on impact.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1250f, metals = 1000f, synthetics = 2000f, exotics = 10f, organics = 4000f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { organics = 12f, synthetics = 3f, exotics = 1f };
@@ -3689,7 +3689,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 1, 2);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
-				shipModule.displayName = Core.TT($"Chromatic Flare <color=#{colorExoticRay}ff>Exotic</color> Disintegrator");
+				shipModule.displayName = Core.TT($"Chromatic Flare <color=#{colorExoticRay}ff>Particle</color> Disintegrator");
 				shipModule.description = Core.TT($"Basic exotic ray weapon that uses destabilized exotic matter to produce ray of destructive energy. Was designed by Black Market specialists, when exotic elements became more common and available. Very effective, but consumes exotic matter as ammunition.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 150f, metals = 700f, synthetics = 1000f, exotics = 2f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { exotics = 1f };
@@ -3714,7 +3714,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 2, 3, 4);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
-				shipModule.displayName = Core.TT($"Prismatic Flare <color=#{colorExoticRay}ff>Exotic</color> Disintegrator");
+				shipModule.displayName = Core.TT($"Prismatic Flare <color=#{colorExoticRay}ff>Particle</color> Disintegrator");
 				shipModule.description = Core.TT($"Basic exotic ray weapon that uses destabilized exotic matter to produce ray of destructive energy. Was designed by Black Market specialists, when exotic elements became more common and available. Was upgraded with second ray projector for improved damage output.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 250f, metals = 1000f, synthetics = 1400f, exotics = 4f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { exotics = 2f };
@@ -3739,7 +3739,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 3, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
-				shipModule.displayName = Core.TT($"Focal Deathray <color=#{colorExoticRay}ff>Exotic</color> Disintegrator");
+				shipModule.displayName = Core.TT($"Focal Deathray <color=#{colorExoticRay}ff>Particle</color> Disintegrator");
 				shipModule.description = Core.TT($"Advanced exotic ray weapon that uses destabilized exotic matter with application of uncertain technology to produce ray of destructive energy. Designed by an unknown party that believes in a Greater Good. Has very efficient damage output.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 500f, metals = 1500f, synthetics = 2000f, exotics = 7f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { exotics = 2f };
@@ -3764,7 +3764,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
-				shipModule.displayName = Core.TT($"Dual Deathray <color=#{colorExoticRay}ff>Exotic</color> Disintegrator");
+				shipModule.displayName = Core.TT($"Dual Deathray <color=#{colorExoticRay}ff>Particle</color> Disintegrator");
 				shipModule.description = Core.TT($"Advanced exotic ray weapon that uses destabilized exotic matter with application of uncertain technology to produce ray of destructive energy. Designed by an unknown party that believes in a Greater Good. Upgraded with second ray projector.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 650f, metals = 1800f, synthetics = 2400f, exotics = 10f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { exotics = 3f };
@@ -3789,7 +3789,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 4, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
-				shipModule.displayName = Core.TT($"Wave-Folding <color=#{colorExoticRay}ff>Exotic</color> Disintegrator");
+				shipModule.displayName = Core.TT($"Wave-Folding <color=#{colorExoticRay}ff>Particle</color> Disintegrator");
 				shipModule.description = Core.TT($"Advanced exotic ray weapon that uses destabilized exotic matter to tear miniature hole in reality and produce ray of destructive immaterium energy. Designed by an unknown party, but contains a lot of pointless \"Chaos Undivided\" scribbles.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 800f, metals = 2400f, synthetics = 3000f, exotics = 14f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { exotics = 3f };
@@ -3814,7 +3814,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
-				shipModule.displayName = Core.TT($"Light Nephrite <color=#{colorExoticRay}ff>Exotic</color> Disintegrator");
+				shipModule.displayName = Core.TT($"Light Nephrite <color=#{colorExoticRay}ff>Particle</color> Disintegrator");
 				shipModule.description = Core.TT($"Highly advanced light exotic ray weapon that uses destabilized exotic matter. Original designer is unknown, but nephrite core of the weapon has markings that decoded as \"Chmmr\" by our AI, whatever it could mean. Very efficient versus everything.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1000f, metals = 3000f, synthetics = 4000f, exotics = 18f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { exotics = 3f };
@@ -3839,7 +3839,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 5, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
-				shipModule.displayName = Core.TT($"Heavy Nephrite <color=#{colorExoticRay}ff>Exotic</color> Disintegrator");
+				shipModule.displayName = Core.TT($"Heavy Nephrite <color=#{colorExoticRay}ff>Particle</color> Disintegrator");
 				shipModule.description = Core.TT($"Highly advanced heavy exotic ray weapon that uses destabilized exotic matter. Original designer is unknown, but nephrite core of the weapon has markings that decoded as \"Chmmr\" by our AI, whatever it could mean. Has great damage output.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1250f, metals = 3500f, synthetics = 5000f, exotics = 24f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { exotics = 3f };
@@ -3864,7 +3864,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
-				shipModule.displayName = Core.TT($"Dual Nephrite <color=#{colorExoticRay}ff>Exotic</color> Disintegrator");
+				shipModule.displayName = Core.TT($"Dual Nephrite <color=#{colorExoticRay}ff>Particle</color> Disintegrator");
 				shipModule.description = Core.TT($"Highly advanced heavy exotic ray weapon that uses destabilized exotic matter. Original designer is unknown, but nephrite core of the weapon has markings that decoded as \"Chmmr\" by our AI, whatever it could mean. Upgraded with second ray projector.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1500f, metals = 4500f, synthetics = 5500f, exotics = 30f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { exotics = 4f };
@@ -3889,7 +3889,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 6, 7, 8);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
-				shipModule.displayName = Core.TT($"Warp Storm <color=#{colorExoticRay}ff>Exotic</color> Disintegrator");
+				shipModule.displayName = Core.TT($"Warp Storm <color=#{colorExoticRay}ff>Particle</color> Disintegrator");
 				shipModule.description = Core.TT($"Advanced exotic ray weapon that uses destabilized exotic matter under influence of repulsor waves to produce ray of destructive energy. Designed by unknown party with probably evil intentions. Has improved damage output, accuracy and area of effect.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 1750f, metals = 5000f, synthetics = 6500f, exotics = 50f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { exotics = 4f };
@@ -3914,7 +3914,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 8, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
-				shipModule.displayName = Core.TT($"Lo-Gothic Relic <color=#{colorExoticRay}ff>Exotic</color> Disintegrator");
+				shipModule.displayName = Core.TT($"Lo-Gothic Relic <color=#{colorExoticRay}ff>Particle</color> Disintegrator");
 				shipModule.description = Core.TT($"Light exotic ray weapon of unknown origin that uses destabilized exotic matter to produce ray of extremely destructive energy. Wasn't designed, but ripped off from something that resembles drifting interstellar gothic cathedral. Has extreme damage output.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 2250f, metals = 6500f, synthetics = 7250f, exotics = 80f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { exotics = 4f };
@@ -3939,7 +3939,7 @@ namespace FFU_Bleeding_Edge {
 				if (initItemData) FFU_BE_Defs.SetViableForSectors(shipModule.PrefabId, 9, 10);
 				if (!FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Contains(shipModule.PrefabId)) FFU_BE_Defs.weaponTypeIDs[Core.WeaponType.ExoticRay].Add(shipModule.PrefabId);
 				if (!FFU_BE_Defs.moduleEmissionPrefabs.ContainsKey(shipModule.PrefabId)) FFU_BE_Defs.moduleEmissionPrefabs.Add(shipModule.PrefabId, 4.0f);
-				shipModule.displayName = Core.TT($"Hi-Gothic Relic <color=#{colorExoticRay}ff>Exotic</color> Disintegrator");
+				shipModule.displayName = Core.TT($"Hi-Gothic Relic <color=#{colorExoticRay}ff>Particle</color> Disintegrator");
 				shipModule.description = Core.TT($"Heavy exotic ray weapon of unknown origin that uses destabilized exotic matter to produce ray of extremely destructive energy. Wasn't designed, but ripped off from something that resembles drifting interstellar gothic cathedral. Has immense damage output.");
 				shipModule.craftCost = new ResourceValueGroup { fuel = 3000f, metals = 8000f, synthetics = 9000f, exotics = 120f };
 				shipModule.Weapon.resourcesPerShot = new ResourceValueGroup { exotics = 5f };

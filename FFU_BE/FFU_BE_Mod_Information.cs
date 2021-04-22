@@ -900,7 +900,7 @@ namespace RST.UI {
 				case Core.WeaponType.HeatRay: return "HEAT RAY PROJECTORS";
 				case Core.WeaponType.Disruptor: return "ENERGY DISRUPTORS";
 				case Core.WeaponType.Radiator: return "RADIATION ACCELERATORS";
-				case Core.WeaponType.ExoticRay: return "EXOTIC DISINTEGRATORS";
+				case Core.WeaponType.ExoticRay: return "PARTICLE DISINTEGRATORS";
 				case Core.WeaponType.CIWS: return "CLOSE-IN WEAPON SYSTEMS";
 				default: return "WEAPONS";
 			}

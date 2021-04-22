@@ -410,11 +410,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }}, //compressed exotics pack
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }}, //compressed exotics pack
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }}, //compressed exotics pack
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }}, //compressed exotics pack
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(57217862) }}}; //compressed exotics pack
 					perk.randomizerMenuStrings = new string[]{
 						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.isUnlockedByDefault = false;
@@ -431,11 +431,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }}, //general pack organics, synth, metal
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }},	//general pack organics, synth, metal
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }},	//general pack organics, synth, metal
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }},	//general pack organics, synth, metal
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2025144458) }}}; //general pack organics, synth, metal
 					perk.randomizerMenuStrings = new string[]{
 						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.isUnlockedByDefault = false;
@@ -452,11 +452,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(453797399) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(453797399) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(453797399) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(813048445) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(813048445) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(453797399) }}, //fuel pack
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(453797399) }}, //fuel pack
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(453797399) }}, //fuel pack
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(813048445) }}, //explosives pack
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(813048445) }}}; //explosives pack
 					perk.randomizerMenuStrings = new string[]{
 						$"+3x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+2x {perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName}" };
@@ -474,7 +474,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(463896999) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(463896999) }}}; //medbay6 biological
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[] { 463896999 });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
@@ -494,7 +494,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1304112764) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1304112764) }}}; //medbay4 stem celler
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[] { 1304112764 });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
@@ -980,9 +980,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "dronebay 1 basic").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(383658151) }}}; //dronebay 1 basic
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "dronebay 1 basic").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
@@ -1001,11 +1001,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1349473499) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(791329320) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(229081020) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1179088392) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1349473499) }}, //Drone pet
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(791329320) }}, //Drone DIY firesafety
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(229081020) }}, //Drone DIY repairer
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }}, //Drone DIY science
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1179088392) }}}; //Drone DIY sensor
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Swearing")} {Core.TT("Drone")} {Core.TT("Pet")}",
 						$"+1x {Core.TT("Makeshift")} {Core.TT("Fire Safety")} {Core.TT("Drone")}",
@@ -1026,10 +1026,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1559583687) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1559583687) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1559583687) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1559583687) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1559583687) }}, //Drone DIY guard
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1559583687) }}, //Drone DIY guard
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1559583687) }}, //Drone DIY guard
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1559583687) }}}; //Drone DIY guard
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Security")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1047,10 +1047,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1589791427) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1589791427) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1589791427) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1589791427) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1589791427) }}, //Drone CT2 gunnery
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1589791427) }}, //Drone CT2 gunnery
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1589791427) }}, //Drone CT2 gunnery
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1589791427) }}}; //Drone CT2 gunnery
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Weapon Operator")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1068,10 +1068,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1444414821) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1444414821) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1444414821) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1444414821) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1444414821) }}, //Drone CT1 maintenance
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1444414821) }}, //Drone CT1 maintenance
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1444414821) }}, //Drone CT1 maintenance
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1444414821) }}}; //Drone CT1 maintenance
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Maintenance")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1089,10 +1089,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }},	 //Drone DIY science
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }},	 //Drone DIY science
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }},	 //Drone DIY science
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(421109168) }}}; //Drone DIY science
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Research")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1110,10 +1110,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }}, //Drone tigerspider
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }}, //Drone tigerspider
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }}, //Drone tigerspider
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }}}; //Drone tigerspider
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Heavy Maintanance")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1131,10 +1131,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }},	 //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }},	 //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }},	 //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}}; //Combat Drone Humanoid
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Tactical Combat")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1152,10 +1152,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }},	 //Heavy security drone
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }},	 //Heavy security drone
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }},	 //Heavy security drone
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }}}; //Heavy security drone
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Heavy Security")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1173,10 +1173,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(745155399) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(745155399) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(745155399) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(745155399) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(745155399) }},	 //Drone DIY gunjunker
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(745155399) }},	 //Drone DIY gunjunker
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(745155399) }},	 //Drone DIY gunjunker
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(745155399) }}}; //Drone DIY gunjunker
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Armored Assault")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -1194,11 +1194,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }},	//artifactmodule tec 35 data core makk
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }},	//artifactmodule tec 35 data core makk
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }},	//artifactmodule tec 35 data core makk
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }},	//artifactmodule tec 35 data core makk
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }}}; //artifactmodule tec 35 data core makk
 					perk.randomizerMenuStrings = new string[]{
 						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.isUnlockedByDefault = false;
@@ -1215,11 +1215,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}, //artifactmodule tec 33 biostasis nice worm
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}, //artifactmodule tec 33 biostasis nice worm
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}, //artifactmodule tec 33 biostasis nice worm
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}, //artifactmodule tec 33 biostasis nice worm
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}}; //artifactmodule tec 33 biostasis nice worm
 					perk.randomizerMenuStrings = new string[]{
 						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.isUnlockedByDefault = false;
@@ -1236,18 +1236,18 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}, //artifactmodule tec 11 biostasis
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}, //artifactmodule tec 11 biostasis
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}, //artifactmodule tec 11 biostasis
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}, //artifactmodule tec 11 biostasis
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}}; //artifactmodule tec 11 biostasis
 					perk.randomizerMenuStrings = new string[]{
 						$"+5x {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}" };
 					perk.isUnlockedByDefault = false;
 					perk.repCost = 10;
 					break;
 					case 989922131: //Perk module artifact, data core
-					perk.displayName = Core.TT($"StarFurnace Singularity Core Cache");
+					perk.displayName = Core.TT($"Efficient Industrial Facility Cache");
 					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in ancient manufacturing complex full of active hostile defense systems. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
@@ -1257,9 +1257,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator tiger").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1363987393, 1482294420) }}}; //explosives combinator tiger //fuel processor 2
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator tiger").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1278,9 +1278,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 3x medical").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(703894034) }}}; //cryosleep 3x medical
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 3x medical").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1299,9 +1299,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 8x insect").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2059107150) }}}; //cryosleep 8x insect
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 8x insect").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1320,9 +1320,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(41460892) }}}; //cryosleep 6x human standard
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1341,9 +1341,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 4 greenhouse").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(728608876) }}}; //garden 4 greenhouse
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 4 greenhouse").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1362,9 +1362,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 6 synthethics").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(737359377) }}}; //garden 6 synthethics
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 6 synthethics").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1383,9 +1383,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab 1xgood").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1448350571) }}}; //lab 1xgood
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab 1xgood").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1404,9 +1404,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 9 sunpanel new s2").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(171954197) }}}; //sensor 9 sunpanel new s2
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 9 sunpanel new s2").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1425,9 +1425,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 07 rotor glass").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1559705412) }}}; //warp 07 rotor glass
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 07 rotor glass").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1436,7 +1436,7 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 600376461: //Perk module DIY bridge
-					perk.displayName = Core.TT($"Dreadnought Command Bridge Cache");
+					perk.displayName = Core.TT($"Sturdiest Command Bridge Cache");
 					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in ancient ruined dreadnought full of active hostile defense systems. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
@@ -1446,9 +1446,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 3crew metalarmor").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1148319565) }}}; //bridge 3crew metalarmor
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 3crew metalarmor").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1467,10 +1467,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 13 classic cooled").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 13 classic cooled").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(549367690) }}, //reactor 13 classic cooled
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(549367690) }}}; //reactor 13 classic cooled
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 13 classic cooled").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1490,10 +1490,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 20 biofruit").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 20 biofruit").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2093337887) }}, //reactor 20 biofruit
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2093337887) }}}; //reactor 20 biofruit
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 20 biofruit").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1512,10 +1512,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 22 cube").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 22 cube").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1699316752) }},	//reactor 22 cube
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1699316752) }}}; //reactor 22 cube
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 22 cube").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1534,9 +1534,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "ECM 03 terran").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(738383846) }}}; //ECM 03 terran
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "ECM 03 terran").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1545,7 +1545,7 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 1860627745: //Perk module DIY integrity
-					perk.displayName = (FFU_BE_Defs.flagDLC_SupPak ? "Nanometric" : "Adamantite") + " Integrity Armor Cache";
+					perk.displayName = Core.TT($"Experimental Integrity Armor Cache");
 					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned spaceship docks full of volatile active nanomachines. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
@@ -1555,9 +1555,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "integrity tiger" : "integrity 00 Ratty")).gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1196638242, 786297539, ShipModule.Type.Integrity) }}}; //integrity tiger //integrity 00 Ratty
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "integrity tiger" : "integrity 00 Ratty")).PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1566,7 +1566,7 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 1993735695: //Perk module DIY integrity 2
-					perk.displayName = (FFU_BE_Defs.flagDLC_SupPak ? "Zero Point" : "Void-Wave") + " Shield Capacitor Cache";
+					perk.displayName = Core.TT($"High-Tech Shield Capacitor Cache");
 					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned shield technology research center full of destructive dimensional fluctuations. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
@@ -1576,9 +1576,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "shieldbat tiger" : "shieldbat 3 generic alien")).gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1424188745, 1179432425, ShipModule.Type.ShieldGen) }}}; //shieldbat tiger //shieldbat 3 generic alien
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "shieldbat tiger" : "shieldbat 3 generic alien")).PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1587,7 +1587,7 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 25;
 					break;
 					case 450636944: //Perk module integrity 3
-					perk.displayName = (FFU_BE_Defs.flagDLC_SupPak ? "Zero Point" : "Void-Wave") + " Shield Generator Cache";
+					perk.displayName = Core.TT($"High-Tech Shield Generator Cache");
 					perk.description = Core.TT($"We had to give an arm and a leg to acquire this module cache, literally. It was discovered in abandoned shield technology research center full of destructive dimensional fluctuations. The only reason this cache was left intact is extremely protected compartment, where it was found.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
@@ -1597,9 +1597,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "shield tigership" : "shield 4 solitary")).gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1427874574, 1386797426, ShipModule.Type.ShieldGen) }}}; //shield tigership //shield 4 solitary
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "shield tigership" : "shield 4 solitary")).PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1618,9 +1618,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Stealth decryptor 3 newest human tec").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1276182160) }}}; //Stealth decryptor 3 newest human tec
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Stealth decryptor 3 newest human tec").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}" };
@@ -1639,11 +1639,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-15000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1165288718) }}, //multicontainer FEO-1
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(426751082) }}}; //multicontainer ESM-2
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").PrefabId,
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId,
+						perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
@@ -1655,8 +1655,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 30;
 					break;
 					case 174917737: //Perk module DIY point-defence
-					perk.displayName = Core.TT($"Iron Dome Tactical CIWS Cache");
-					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced CIWS, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
+					perk.displayName = Core.TT($"Top of the Line CIWS Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of top of the line CIWS, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1665,10 +1665,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "2 Tiger PD").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "2 Tiger PD").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(938711464) }}, //2 Tiger PD
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(938711464) }}}; //2 Tiger PD
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "2 Tiger PD").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
@@ -1679,8 +1679,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 50;
 					break;
 					case 225180168: //Perk module DIY weapon
-					perk.displayName = Core.TT($"Liberator Kinetic Railcannons Cache");
-					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced railcannons, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
+					perk.displayName = Core.TT($"Advanced Kinetic Weapons Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced kinetic weapons, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1689,10 +1689,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon gatling Tiger").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon gatling Tiger").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(412909021, 1086561640, ShipModule.Type.Weapon) }}, //weapon gatling Tiger //weapon Segmented cannonx2 C
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(412909021, 1086561640, ShipModule.Type.Weapon) }}}; //weapon gatling Tiger //weapon Segmented cannonx2 C
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon gatling Tiger").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
@@ -1703,8 +1703,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 50;
 					break;
 					case 22277590: //Perk module Rat weapon for exotics
-					perk.displayName = Core.TT($"Shockwave Plasma Howitzers Cache");
-					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced plasma howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
+					perk.displayName = Core.TT($"Overloaded Energy Weapons Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced energy howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1713,10 +1713,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon EMP energyball 3x Tiger").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon EMP energyball 3x Tiger").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(876704941, 1317545673, ShipModule.Type.Weapon) }}, //weapon EMP energyball 3x Tiger //weapon rare warp shield breaker EMP
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(876704941, 1317545673, ShipModule.Type.Weapon) }}}; //weapon EMP energyball 3x Tiger	//weapon rare warp shield breaker EMP
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon EMP energyball 3x Tiger").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
@@ -1727,8 +1727,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 50;
 					break;
 					case 633108626: //Perk module weapon bank missile x2
-					perk.displayName = (FFU_BE_Defs.flagDLC_SupPak ? "Annihilator" : "Retaliator") + " Rocket Launchers Cache";
-					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced rocket launchers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
+					perk.displayName = Core.TT($"Volatile Rocket Launchers Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly volatile rocket launchers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1737,10 +1737,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "weapon tigermissile large" : "weapon ancientrockets x3")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "weapon tigermissile large" : "weapon ancientrockets x3")).gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1571322820, 469527491, ShipModule.Type.Weapon) }}, //weapon tigermissile large //weapon ancientrockets x3
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1571322820, 469527491, ShipModule.Type.Weapon) }}}; //weapon tigermissile large //weapon ancientrockets x3
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "weapon tigermissile large" : "weapon ancientrockets x3")).PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
@@ -1750,8 +1750,8 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 50;
 					break;
 					case 1252646026: //Perk module DIY exotic raygun 2
-					perk.displayName = Core.TT($"Hi-Gothic Relic Exotic Ray Cache");
-					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced exotic ray projectors, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
+					perk.displayName = Core.TT($"Exotic Relic Disintegrator Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced exotic disintegrator, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1760,21 +1760,21 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon rarelasergothic").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon rarelasergothic").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(452279033) }}, //weapon rarelasergothic
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(452279033) }}}; //weapon rarelasergothic
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon rarelasergothic").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
-						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Projector",string.Empty)}",
-						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Projector",string.Empty)} {Core.TT("Blueprint")}",
+						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Disintegrator"," Dstg.")}",
+						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Disintegrator"," Dstg.")} {Core.TT("Blueprint")}",
 						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
 					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
 					perk.isUnlockedByDefault = false;
 					perk.repCost = 50;
 					break;
 					case 1260454991: //Perk nuke arsenal DIY
-					perk.displayName = Core.TT($"Dessolution Chemical Howitzer Cache");
-					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced chemical howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
+					perk.displayName = Core.TT($"Extremely Corrosive Howitzer Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced corrosive howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1783,9 +1783,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 790917823).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == 790917823).gameObject }}};
-					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[] { 790917823 });
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(790917823) }}, //weapon Floral cannon
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(790917823) }}}; //weapon Floral cannon
+					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
@@ -1797,8 +1798,8 @@ namespace FFU_Bleeding_Edge {
 					//Unused Perks
 					case 2106414951: //Perk TESTER PACKAGE
 					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
-					perk.displayName = Core.TT($"Disintegrator Exotic Howitzer Cache");
-					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced exotic howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
+					perk.displayName = Core.TT($"Exotic Antimatter Howitzer Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced antimatter howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1807,13 +1808,13 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon exoticscannon1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon exoticscannon1").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1983239915) }},	//weapon exoticscannon1
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1983239915) }}}; //weapon exoticscannon1
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon exoticscannon1").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
-						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
+						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Howitzer"," Hwtz.")}",
+						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Howitzer"," Hwtz.")} {Core.TT("Blueprint")}",
 						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
 					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
 					perk.isUnlockedByDefault = false;
@@ -1821,8 +1822,56 @@ namespace FFU_Bleeding_Edge {
 					break;
 					case 305450922: //Perk nuke thinspeeder for atlas, unlockable
 					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
-					perk.displayName = Core.TT($"Ultra-Effector Beam Emitter Cache");
-					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of highly advanced exotic howitzers, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
+					perk.displayName = Core.TT($"Cataclysm Capital Missiles Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working pack of capital missiles of all types, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-500);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1851270005) }}, //Monolith nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1851270005) }}, //Monolith nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2106923011) }}, //11 EMP nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2106923011) }}, //11 EMP nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(780823633) }}, //04 Fueltank nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(780823633) }}, //04 Fueltank nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120466776, 342953834, ShipModule.Type.Weapon_Nuke) }}, //Tiger 8x nuke launcher //08d Spearhead nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120466776, 342953834, ShipModule.Type.Weapon_Nuke) }}, //Tiger 8x nuke launcher //08d Spearhead nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(22001514) }}, //08c Green nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(22001514) }}, //08c Green nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(381835966, 1043100994, ShipModule.Type.Weapon_Nuke) }}, //Tiger intruderbot nuke launcher //99 pirate spawner launcher 1
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(381835966, 1043100994, ShipModule.Type.Weapon_Nuke) }}, //Tiger intruderbot nuke launcher //99 pirate spawner launcher 1
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1558344950) }}, //15 Black nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1558344950) }}}; //15 Black nuke launcher
+					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId,
+						perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().PrefabId,
+						perk.extraModules[4].Prefabs[0].GetComponent<ShipModule>().PrefabId,
+						perk.extraModules[6].Prefabs[0].GetComponent<ShipModule>().PrefabId,
+						perk.extraModules[8].Prefabs[0].GetComponent<ShipModule>().PrefabId,
+						perk.extraModules[10].Prefabs[0].GetComponent<ShipModule>().PrefabId,
+						perk.extraModules[12].Prefabs[0].GetComponent<ShipModule>().PrefabId });
+					perk.randomizerMenuStrings = new string[]{
+						$"+14x {Core.TT("Packed Nukes (2x Each) & Blueprints")}: " +
+							$"{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)}, " +
+							$"{perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)}, " +
+							$"{perk.extraModules[4].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)}, " +
+							$"{perk.extraModules[6].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)}, " +
+							$"{perk.extraModules[8].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)}, " +
+							$"{perk.extraModules[10].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)} {Core.TT("and")} " +
+							$"{perk.extraModules[12].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)} {Core.TT("Nukes")}.",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.menuSprite = GetPrefabIDModuleGO(1043100994).GetComponent<ShipModule>().image;
+					perk.isUnlockedByDefault = false;
+					perk.repCost = 100;
+					break;
+					case 152890152: //Perk pack, random
+					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
+					perk.displayName = Core.TT($"Forge World Thermal Weapons Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of thermal weapons acquired directly from the forge world, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -1831,10 +1880,58 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Insectoid slowlaser").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Insectoid slowlaser").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1322541741) }},	//weapon Heatray emitter x red
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1322541741) }}}; //weapon Heatray emitter x red
 					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Insectoid slowlaser").PrefabId });
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
+					perk.randomizerMenuStrings = new string[]{
+						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Projector"," Proj.")}",
+						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Projector"," Proj.")} {Core.TT("Blueprint")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
+					perk.isUnlockedByDefault = false;
+					perk.repCost = 50;
+					break;
+					case 2073380488: //Perk module DIY shield battery
+					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
+					perk.displayName = Core.TT($"Illegal Radiation Weapons Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of illegal radiation weapons created, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1238435842) }},	//weapon BFGx9 for bluestar
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1238435842) }}}; //weapon BFGx9 for bluestar
+					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
+					perk.randomizerMenuStrings = new string[]{
+						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Accelerator"," Accl.")}",
+						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Accelerator"," Accl.")} {Core.TT("Blueprint")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
+					perk.isUnlockedByDefault = false;
+					perk.repCost = 50;
+					break;
+					case 1248482139: //Perk Replace 5x mininglasers with6x, for Gardenship
+					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
+					perk.displayName = Core.TT($"Overclocked Beam Emitter Cache");
+					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working set of extremely overclocked beam emitters, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
+					perk.extraModules = new Perk.Pool[]{
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(849984806) }}, //weapon Insectoid slowlaser
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(849984806) }}}; //weapon Insectoid slowlaser
+					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
+						perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().PrefabId });
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
@@ -1843,108 +1940,9 @@ namespace FFU_Bleeding_Edge {
 					perk.isUnlockedByDefault = false;
 					perk.repCost = 50;
 					break;
-					case 152890152: //Perk pack, random
-					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
-					perk.displayName = Core.TT($"Specialized Capital Missiles Cache");
-					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working pack of kinetic, energy and thermal capital missiles, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
-					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
-					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
-					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Monolith nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Monolith nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Monolith nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }}};
-					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Monolith nuke launcher").PrefabId,
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").PrefabId,
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").PrefabId });
-					perk.randomizerMenuStrings = new string[]{
-						$"+3x {Core.TT("Packed")} {perk.extraModules[6].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+3x {Core.TT("Packed")} {perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+3x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+{perk.extraModules[6].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
-						$"+{perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
-						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
-						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
-					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
-					perk.isUnlockedByDefault = false;
-					perk.repCost = 50;
-					break;
-					case 2073380488: //Perk module DIY shield battery
-					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
-					perk.displayName = Core.TT($"Tactical Capital Missiles Cache");
-					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working pack of tactical and boarding capital missiles, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
-					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
-					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
-					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger 8x nuke launcher" : "08d Spearhead nuke launcher")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger 8x nuke launcher" : "08d Spearhead nuke launcher")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger 8x nuke launcher" : "08d Spearhead nuke launcher")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger intruderbot nuke launcher" : "99 pirate spawner launcher 1")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger intruderbot nuke launcher" : "99 pirate spawner launcher 1")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger intruderbot nuke launcher" : "99 pirate spawner launcher 1")).gameObject }}};
-					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger 8x nuke launcher" : "08d Spearhead nuke launcher")).PrefabId,
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger intruderbot nuke launcher" : "99 pirate spawner launcher 1")).PrefabId });
-					perk.randomizerMenuStrings = new string[]{
-						$"+3x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+3x {Core.TT("Packed")} {perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
-						$"+{perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
-						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
-					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
-					perk.isUnlockedByDefault = false;
-					perk.repCost = 50;
-					break;
-					case 1248482139: //Perk Replace 5x mininglasers with6x, for Gardenship
-					FFU_BE_Defs.unusedPerkIDs.Add(perk.PrefabId);
-					perk.displayName = Core.TT($"Cataclysm Capital Missiles Cache");
-					perk.description = Core.TT($"We've found a black market dealer that is ready to sell us a working pack of strategic and chemical capital missiles, along with encrypted blueprints for hefty amount of exotics. Given enough time for research, we will be able to manufacture them on our own.");
-					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
-					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
-					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
-					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "15 Black nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "15 Black nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "15 Black nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08c Green nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08c Green nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08c Green nuke launcher").gameObject }}};
-					if (!FFU_BE_Defs.perkStoredBlueprintIDs.ContainsKey(perk.PrefabId)) FFU_BE_Defs.perkStoredBlueprintIDs.Add(perk.PrefabId, new int[]{
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "15 Black nuke launcher").PrefabId,
-						FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08c Green nuke launcher").PrefabId });
-					perk.randomizerMenuStrings = new string[]{
-						$"+3x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+3x {Core.TT("Packed")} {perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName}",
-						$"+{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
-						$"+{perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Blueprint")}",
-						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
-					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
-					perk.isUnlockedByDefault = false;
-					perk.repCost = 50;
-					break;
 					//Tigerfish Perks
 					case 1512794172: //Perk module DIY exotic raygun
-					perk.displayName = Core.TT($"Recovered Exotic Ray Projector");
+					perk.displayName = Core.TT($"Recovered Exotic Disintegrator");
 					perk.description = Core.TT($"Right before takeoff, we've managed to restore to the working condition one of the exotic ray weapons, we've found earlier.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
@@ -1954,9 +1952,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon rarelaserblue2 dual").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(68261259) }}}; //weapon rarelaserblue2 dual
 					perk.randomizerMenuStrings = new string[]{
-						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Projector",string.Empty)}" };
+						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Disintegrator"," Dstg.")}" };
 					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 10;
@@ -1973,11 +1971,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigerlaser MK1").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigerlaser MK2").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(306184113) }, //weapon tigerlaser MK1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(306184114) }}, //weapon tigerlaser MK2
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-1").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1008150789) }, //multicontainer ESM-1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(426751082) }}}; //multicontainer ESM-2
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"+{perk.moduleReplacements[1].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -1996,12 +1994,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "06 Tiger nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "06 Tiger nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "06 Tiger nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "06 Tiger nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "06 Tiger nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "06 Tiger nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(157230770) }}, //06 Tiger nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(157230770) }}, //06 Tiger nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(157230770) }}, //06 Tiger nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(157230770) }}, //06 Tiger nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(157230770) }}, //06 Tiger nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(157230770) }}}; //06 Tiger nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2019,12 +2017,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger Monolith nuke launcher" : "07 Greentail nuke launcher 2")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger Monolith nuke launcher" : "07 Greentail nuke launcher 2")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger EMP dual nuke launcher" : "16 EMP rat nuke launcher")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger EMP dual nuke launcher" : "16 EMP rat nuke launcher")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger sharpnel nuke launcher" : "07 Weirdship Chem nuke launcher")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger sharpnel nuke launcher" : "07 Weirdship Chem nuke launcher")).gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2070090696, 1441404901, ShipModule.Type.Weapon_Nuke) }}, //Tiger Monolith nuke launcher //07 Greentail nuke launcher 2
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2070090696, 1441404901, ShipModule.Type.Weapon_Nuke) }}, //Tiger Monolith nuke launcher //07 Greentail nuke launcher 2
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120056764, 1773946856, ShipModule.Type.Weapon_Nuke) }}, //Tiger EMP dual nuke launcher //16 EMP rat nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120056764, 1773946856, ShipModule.Type.Weapon_Nuke) }}, //Tiger EMP dual nuke launcher //16 EMP rat nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1711403825, 475763260, ShipModule.Type.Weapon_Nuke) }}, //Tiger sharpnel nuke launcher //07 Weirdship Chem nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1711403825, 475763260, ShipModule.Type.Weapon_Nuke) }}}; //Tiger sharpnel nuke launcher //07 Weirdship Chem nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+2x {Core.TT("Packed")} {perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName}",
@@ -2045,7 +2043,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics cooker 1").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(373200662) }}}; //synthetics cooker 1
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2063,7 +2061,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-2500);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "oilcake converter").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(166404798) }}}; //oilcake converter
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2081,8 +2079,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 3 threespace").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 2 terran").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1967967252) }}, //shield 3 threespace
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(911395348) }}}; //shieldbat 2 terran
 					perk.moduleReplacements = new Perk.ModuleReplacement[0];
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
@@ -2103,44 +2101,44 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 4 diy 1").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(482395317) }, //reactor 4 diy 1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 5 diy 2 backup").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1700526886) }, //reactor 5 diy 2 backup
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 7 diy 3").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(482395319) }, //reactor 7 diy 3
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 6 smalltrapho").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(833760257) }, //reactor 6 smalltrapho
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 8 smallmulty").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1796369958) }, //reactor 8 smallmulty
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 9 biotech DIY").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(45764579) }, //reactor 9 biotech DIY
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 9 small old").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1554868377) }, //reactor 9 small old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 10 small").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(813614528) }, //reactor 10 small
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 11 single biofruit DIY").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1088784368) }, //reactor 11 single biofruit DIY
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 12 custom old").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1939016857) }, //reactor 12 custom old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 13 single biofruit").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(694263055) }, //reactor 13 single biofruit
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 13 rats").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1515340139) }, //reactor 13 rats
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 13 classic cooled").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(549367690) }, //reactor 13 classic cooled
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}}; //reactor 15 medium
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
@@ -2160,35 +2158,35 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 0-C diy").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 4 saucer new").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(930742757) }, //sensor 0-C diy
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2063928716) }}, //sensor 4 saucer new
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 1-L DIY").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 4 saucer new").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2117018739) }, //sensor 1-L DIY
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2063928716) }}, //sensor 4 saucer new
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 2 saucer old").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 4 saucer new").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(948524677) }, //sensor 2 saucer old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2063928716) }}, //sensor 4 saucer new
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 3 L terran simple").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 4 saucer new").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1084722255) }, //sensor 3 L terran simple
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2063928716) }}, //sensor 4 saucer new
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 3 planty").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 4 saucer new").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1995820130) }, //sensor 3 planty
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2063928716) }}, //sensor 4 saucer new
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 0 DIY").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 05 rotor metal").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2136288774) }, //warp 0 DIY
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2018774202) }}, //warp 05 rotor metal
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 01 greencrystal").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 05 rotor metal").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1503624866) }, //warp 01 greencrystal
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2018774202) }}, //warp 05 rotor metal
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 05 spiralcrystal").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 05 rotor metal").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2005632838) }, //warp 05 spiralcrystal
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2018774202) }}, //warp 05 rotor metal
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 02 bluecrystal").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 05 rotor metal").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1622263161) }, //warp 02 bluecrystal
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2018774202) }}, //warp 05 rotor metal
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 03 neoncrystal").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 05 rotor metal").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(458296297) }, //warp 03 neoncrystal
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2018774202) }}}; //warp 05 rotor metal
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"+{perk.moduleReplacements[5].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -2208,12 +2206,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }}, //Drone tigerspider
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1481089982) }}, //Drone tigerspider
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }},	 //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}, //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }},	 //Heavy security drone
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }}}; //Heavy security drone
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Heavy Security")} {Core.TT("Drones")}",
 						$"+2x {Core.TT("Tactical Combat")} {Core.TT("Drones")}",
@@ -2235,8 +2233,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Sniper cannon 2").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon sniper cannon EMP").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1499937036) }, //weapon Sniper cannon 2
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1567764648) }}}; //weapon sniper cannon EMP
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
@@ -2257,8 +2255,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon powerbeam-MK1").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon powerbeam-MK3").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1860805838) }, //weapon powerbeam-MK1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(876121604) }}}; //weapon powerbeam-MK3
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
@@ -2279,10 +2277,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon gatling whiteA 13,4").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Sniper cannon 4").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1092529672) }, //weapon gatling whiteA 13,4
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(698348090) }}}; //weapon Sniper cannon 4
 					perk.randomizerMenuStrings = new string[]{
-						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName.Replace("Explosive","Expl.")} {Core.TT("Upgrade")}",
+						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
 						$"{perk.randomizerResources.metals.minValue} {Core.TT("Metals")}" };
 					perk.menuSprite = perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().image;
@@ -2300,18 +2298,18 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }},	//10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }},	//10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }},	//10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }},	//10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }},	//10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }},	//10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }},	//10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }},	//10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }},	//10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }},	//10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }},	//10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }}}; //10 White nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+12x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2330,7 +2328,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1615170861) }}}; //explosives combinator 1
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2430,11 +2428,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon ratcannon fire1").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon ratcannon fire3").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1662502911) }, //weapon ratcannon fire1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(499703497) }}, //weapon ratcannon fire3
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon ratlaser short").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon ratlaser long").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1281020726) }, //weapon ratlaser short
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1447130390) }}}; //weapon ratlaser long
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"+{perk.moduleReplacements[1].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -2456,8 +2454,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon gatling RatA 14,4").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon gatling RatB 15,5").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(704483685) }, //weapon gatling RatA 14,4
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(123083978) }}}; //weapon gatling RatB 15,5
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
@@ -2477,12 +2475,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "16 EMP rat nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "16 EMP rat nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "16 EMP rat nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "16 EMP rat nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "16 EMP rat nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "16 EMP rat nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1773946856) }}, //16 EMP rat nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1773946856) }}, //16 EMP rat nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1773946856) }}, //16 EMP rat nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1773946856) }}, //16 EMP rat nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1773946856) }}, //16 EMP rat nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1773946856) }}}; //16 EMP rat nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2501,12 +2499,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08b Old nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08b Old nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08b Old nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08b Old nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08b Old nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08b Old nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(415755100) }}, //08b Old nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(415755100) }}, //08b Old nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(415755100) }}, //08b Old nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(415755100) }}, //08b Old nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(415755100) }}, //08b Old nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(415755100) }}}; //08b Old nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2525,12 +2523,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "09 Rat nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "09 Rat nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "09 Rat nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "09 Rat nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "09 Rat nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "09 Rat nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(787880682) }}, //09 Rat nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(787880682) }}, //09 Rat nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(787880682) }}, //09 Rat nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(787880682) }}, //09 Rat nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(787880682) }}, //09 Rat nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(787880682) }}}; //09 Rat nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2564,53 +2562,53 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 1B").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(194638103) }}}; //fuel processor 1B
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 3 gmo biotech").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 5 floral").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(74390932) }, //shieldbat 3 gmo biotech
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1094609544) }}, //shieldbat 5 floral
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 1.5 rats diy").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 2 rats").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1494179234) }, //shieldbat 1.5 rats diy
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1750659454) }}, //shieldbat 2 rats
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 3 brass, single").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 4 greendome").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(813097155) }, //shield 3 brass, single
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1646813987) }}, //shield 4 greendome
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 2 manualrats").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 3 brass, single").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(60711451) }, //shield 2 manualrats
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(813097155) }}, //shield 3 brass, single
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 3 planty").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 5 futu saucer s1").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1995820130) }, //sensor 3 planty
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1241054343) }}, //sensor 5 futu saucer s1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 2 saucer old").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 8 sunpanel old s1").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(948524677) }, //sensor 2 saucer old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1451617742) }}, //sensor 8 sunpanel old s1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab rats x3").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab module x3").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1027857851) }, //lab rats x3
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1863175212) }}, //lab module x3
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 13 single biofruit").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 17 flower").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(694263055) }, //reactor 13 single biofruit
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(433363694) }}, //reactor 17 flower
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 12 custom old").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 13 rats").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1939016857) }, //reactor 12 custom old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1515340139) }}, //reactor 13 rats
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 8x insect").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2059107150) }, //cryosleep 8x insect
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(41460892) }}, //cryosleep 6x human standard
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 3x rats armor").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 8x insect").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(623034016) }, //cryosleep 3x rats armor
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2059107150) }}, //cryosleep 8x insect
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 05 spiralcrystal").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 03 neoncrystal").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2005632838) }, //warp 05 spiralcrystal
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(458296297) }}, //warp 03 neoncrystal
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 01 greencrystal").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 03 neoncrystal").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1503624866) }, //warp 01 greencrystal
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(458296297) }}, //warp 03 neoncrystal
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 3 shroomery").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab module x3").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1832274586) }, //garden 3 shroomery
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1863175212) }}, //lab module x3
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "dream recorder 1 rats").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "dream recorder 4x weird biotech").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1018033786) }, //dream recorder 1 rats
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1484543824) }}}; //dream recorder 4x weird biotech
 					perk.randomizerMenuStrings = new string[]{
 						$"+{Core.TT("Reactors & Warp Drive")} {Core.TT("Upgrade")}",
 						$"+{Core.TT("Sensors & Laboratories")} {Core.TT("Upgrade")}",
@@ -2651,29 +2649,29 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 0 diy").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2.5 terran").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1284816050) }, //engine 0 diy
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2023634410) }}, //engine 2.5 terran
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 01 brittle").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2.5 terran").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1364709951) }, //engine 01 brittle
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2023634410) }}, //engine 2.5 terran
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 01 primitive").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2.5 terran").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(497175846) }, //engine 01 primitive
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2023634410) }}, //engine 2.5 terran
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2 rats").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2.5 terran").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1708644704) }, //engine 2 rats
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2023634410) }}, //engine 2.5 terran
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2.5 classic").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2.5 terran").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(533178690) }, //engine 2.5 classic
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2023634410) }}, //engine 2.5 terran
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2 floral").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2.5 terran").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(245228012) }, //engine 2 floral
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2023634410) }}, //engine 2.5 terran
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 01 tiger").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2.5 terran").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(362626339) }, //engine 01 tiger
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2023634410) }}, //engine 2.5 terran
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2.5 weird").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2.5 terran").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(229499087) }, //engine 2.5 weird
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2023634410) }}}; //engine 2.5 terran
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
@@ -2710,8 +2708,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Spideraa shuriken").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Spideraa shuriken").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(985673324) }}, //weapon Spideraa shuriken
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(985673324) }}}; //weapon Spideraa shuriken
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2729,12 +2727,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Minibio nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Minibio nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Minibio nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Minibio nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Minibio nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Minibio nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(141822690) }}, //07 Weirdship Minibio nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(141822690) }}, //07 Weirdship Minibio nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(141822690) }}, //07 Weirdship Minibio nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(141822690) }}, //07 Weirdship Minibio nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(141822690) }}, //07 Weirdship Minibio nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(141822690) }}}; //07 Weirdship Minibio nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2752,12 +2750,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Greentail nuke launcher 2").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Greentail nuke launcher 2").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Greentail nuke launcher 2").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Greentail nuke launcher 2").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Greentail nuke launcher 2").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Greentail nuke launcher 2").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1441404901) }}, //07 Greentail nuke launcher 2
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1441404901) }}, //07 Greentail nuke launcher 2
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1441404901) }}, //07 Greentail nuke launcher 2
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1441404901) }}, //07 Greentail nuke launcher 2
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1441404901) }}, //07 Greentail nuke launcher 2
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1441404901) }}}; //07 Greentail nuke launcher 2
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2775,8 +2773,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 5 greenhouse").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 5 greenhouse").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1579035116) }}, //garden 5 greenhouse
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1579035116) }}}; //garden 5 greenhouse
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2796,11 +2794,11 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "exotics container 0 diy").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(168523420) }, //exotics container 0 diy
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1165288718) }}, //multicontainer FEO-1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel container 1 bio").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1140021200) }, //fuel container 1 bio
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1165288718) }}}; //multicontainer FEO-1
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
@@ -2821,8 +2819,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2 floral").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2.5 weird").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(245228012) }, //engine 2 floral
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(229499087) }}}; //engine 2.5 weird
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
@@ -2842,8 +2840,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "integrity 06 big green scales").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "integrity 06 big green scales").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1152328828) }}, //integrity 06 big green scales
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1152328828) }}}; //integrity 06 big green scales 
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2862,15 +2860,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Dog" : "Cat1")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Cat1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Rabbit" : "Slime pet")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Slime pet").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1502599448, 735284731) }}, //Dog //Cat1
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(735284731) }}, //Cat1
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1820607702, 1701486595) }}, //Rabbit //Slime pet
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1701486595) }}}; //Slime pet
 					perk.randomizerMenuStrings = new string[]{
-						$"+1x {Core.TT(FFU_BE_Defs.flagDLC_SupPak ? "Dog" : "Cat")}",
-						$"+1x {Core.TT("Cat")}",
-						$"+1x {Core.TT("Slime")}",
-						$"+1x {Core.TT(FFU_BE_Defs.flagDLC_SupPak ? "Rabbit" : "Slime")}" };
+						$"+4x {Core.TT("Different Pets")}" };
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 5;
 					break;
@@ -2898,8 +2893,8 @@ namespace FFU_Bleeding_Edge {
 					break;
 					//Easy Tiger Perks
 					case 1886509521: //Perk module DIY exotic EMP sniper
-					perk.displayName = Core.TT($"Recovered Exotic Ray Projector");
-					perk.description = Core.TT($"Right before takeoff, we've managed to restore to the working condition one of the exotic ray weapons, we've found earlier.");
+					perk.displayName = Core.TT($"Recovered Radiation Accelerator");
+					perk.description = Core.TT($"Right before takeoff, we've managed to restore to the working condition one of the exotic disintegrator weapons, we've found earlier.");
 					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
@@ -2908,9 +2903,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon BFGx9 for bluestar").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1238435842) }}}; //weapon BFGx9 for bluestar
 					perk.randomizerMenuStrings = new string[]{
-						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Projector",string.Empty)}" };
+						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Accelerator"," Accl.")}" };
 					perk.menuSprite = perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().image;
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 10;
@@ -2927,12 +2922,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08d Spearhead nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08d Spearhead nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08d Spearhead nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08d Spearhead nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08d Spearhead nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08d Spearhead nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(342953834) }}, //08d Spearhead nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(342953834) }}, //08d Spearhead nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(342953834) }}, //08d Spearhead nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(342953834) }}, //08d Spearhead nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(342953834) }}, //08d Spearhead nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(342953834) }}}; //08d Spearhead nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2951,12 +2946,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08a Happy nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08a Happy nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08a Happy nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08a Happy nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08a Happy nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08a Happy nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(227136891) }}, //08a Happy nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(227136891) }}, //08a Happy nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(227136891) }}, //08a Happy nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(227136891) }}, //08a Happy nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(227136891) }}, //08a Happy nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(227136891) }}}; //08a Happy nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -2976,8 +2971,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "organics container 3 large").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "organics container 5 ultra large").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1530196661) }, //organics container 3 large
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1969497769) }}}; //organics container 5 ultra large
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
@@ -2997,56 +2992,56 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-250);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-25000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1482294420) }}}; //fuel processor 2
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel container 2").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel container 5").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(809627495) }, //fuel container 2
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1569142382) }}, //fuel container 5
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "organics container 2 medium").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(82212496) }, //organics container 2 medium
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1165288718) }}, //multicontainer FEO-1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "exotics container 2 medium").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(584489047) }, //exotics container 2 medium
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1165288718) }}, //multicontainer FEO-1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer MS-1").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1380487708) }, //multicontainer MS-1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(426751082) }}, //multicontainer ESM-2
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives container 3 large").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(311517981) }, //explosives container 3 large
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(426751082) }}, //multicontainer ESM-2
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 20 fusion").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }, //reactor 15 medium
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(423938228) }}, //reactor 20 fusion
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 13 classic cooled").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 18 weird alien biotech").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(549367690) }, //reactor 13 classic cooled
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(933867895) }}, //reactor 18 weird alien biotech
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 6 smalltrapho").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(833760257) }, //reactor 6 smalltrapho
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 01 greencrystal").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 05 rotor metal").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1503624866) }, //warp 01 greencrystal
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2018774202) }}, //warp 05 rotor metal
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 1 round old").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 4 greendome").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1518301159) }, //shield 1 round old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1646813987) }}, //shield 4 greendome
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 2 terran").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 3 gmo biotech").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(911395348) }, //shieldbat 2 terran
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(74390932) }}, //shieldbat 3 gmo biotech
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "ECM 0 ancient").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "ECM 03 terran").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1078640904) }, //ECM 0 ancient
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(738383846) }}, //ECM 03 terran
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "medbay2 startversion").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "medbay4 stem celler").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(384091446) }, //medbay2 startversion
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1304112764) }}, //medbay4 stem celler
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 8 sunpanel old s1").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 11 sophisiticated s2").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1451617742) }, //sensor 8 sunpanel old s1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(680853891) }}, //sensor 11 sophisiticated s2
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab module x3").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab 1xgood").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1863175212) }, //lab module x3
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1448350571) }}, //lab 1xgood
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 2crew").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 3crew plastarmor").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1003445460) }, //bridge 2crew
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(436212146) }}}; //bridge 3crew plastarmor
 					perk.randomizerMenuStrings = new string[]{
 						$"+{Core.TT("Reactors & Warp Drive")} {Core.TT("Upgrade")}",
 						$"+{Core.TT("Sensors & Laboratories")} {Core.TT("Upgrade")}",
@@ -3127,9 +3122,9 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-15000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 4 greendome").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 3 gmo biotech").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 3 gmo biotech").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1646813987) }}, //shield 4 greendome
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(74390932) }}, //shieldbat 3 gmo biotech
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(74390932) }}};  //shieldbat 3 gmo biotech
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+2x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
@@ -3150,8 +3145,8 @@ namespace FFU_Bleeding_Edge {
 					perk.extraModules = new Perk.Pool[0];
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 1 DIY").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 3 shroomery").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1902866107) }, //garden 1 DIY
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1832274586) }}}; //garden 3 shroomery
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
@@ -3170,10 +3165,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-15000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(c => c.name == "Redripper crew").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(c => c.name == "Redripper crew").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(c => c.name == "Redripper crew").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(c => c.name == "Redripper crew").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(488555786) }}, //Redripper crew
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(488555786) }}, //Redripper crew
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(488555786) }}, //Redripper crew
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(488555786) }}}; //Redripper crew
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Red Ripper")} {Core.TT("Combat Animals")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -3212,12 +3207,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(780823633) }}, //04 Fueltank nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(780823633) }}, //04 Fueltank nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(780823633) }}, //04 Fueltank nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(780823633) }}, //04 Fueltank nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(780823633) }}, //04 Fueltank nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(780823633) }}}; //04 Fueltank nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -3237,23 +3232,23 @@ namespace FFU_Bleeding_Edge {
 					perk.extraModules = new Perk.Pool[0];
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "5 Human PD").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "2 Tiger PD").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1468502746) }, //5 Human PD
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1230723452, 938711464, ShipModule.Type.PointDefence) }}, //10 laser PD //2 Tiger PD
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Sniper cannon 0").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon sniper cannon EMP").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(514626098) }, //weapon Sniper cannon 0
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1567764648) }}, //weapon sniper cannon EMP
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon ATK-MK2").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Segmented cannonx2 C").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1685141509) }, //weapon ATK-MK2
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1086561640) }}, //weapon Segmented cannonx2 C
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon powerbeam-MK2").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon insectoid fast laser").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1457521311) }, //weapon powerbeam-MK2
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(848686115) }}, //weapon insectoid fast laser
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 9 small old").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 20 fusion").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1554868377) }, //reactor 9 small old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(423938228) }}, //reactor 20 fusion
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 2crew").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 3crew plastarmor").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1003445460) }, //bridge 2crew
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(436212146) }}}; //bridge 3crew plastarmor
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[4].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -3277,20 +3272,20 @@ namespace FFU_Bleeding_Edge {
 					perk.extraModules = new Perk.Pool[0];
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 1 round old").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 4 solitary").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1518301159) }, //shield 1 round old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1386797426) }}, //shield 4 solitary
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 2 terran").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 3 generic alien").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(911395348) }, //shieldbat 2 terran
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1179432425) }}, //shieldbat 3 generic alien
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2 large robust").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 04 xblack").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1508923010) }, //engine 2 large robust
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(366713264) }}, //engine 04 xblack
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 01 greencrystal").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 06 rotor blue").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1503624866) }, //warp 01 greencrystal
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(45815679) }}, //warp 06 rotor blue
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 3 L terran simple").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 11 sophisiticated s2").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1084722255) }, //sensor 3 L terran simple
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(680853891) }}}; //sensor 11 sophisiticated s2
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[3].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"+{perk.moduleReplacements[2].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -3314,20 +3309,20 @@ namespace FFU_Bleeding_Edge {
 					perk.extraModules = new Perk.Pool[0];
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 3x medical").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(703894034) }, //cryosleep 3x medical
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(41460892) }}, //cryosleep 6x human standard
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab module x3").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab 1xgood").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1863175212) }, //lab module x3
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1448350571) }}, //lab 1xgood
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 2 minigrow").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 4 greenhouse").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1785710223) }, //garden 2 minigrow
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(728608876) }}, //garden 4 greenhouse
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "organics container 1 small").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(940750901) }, //organics container 1 small
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1165288718) }}, //multicontainer FEO-1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel container 3").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(228227788) }, //fuel container 3
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(426751082) }}}; //multicontainer ESM-2
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[1].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"+{perk.moduleReplacements[2].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -3349,7 +3344,7 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "biotech explosives recycler").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1405176791) }}}; //biotech explosives recycler
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -3394,8 +3389,8 @@ namespace FFU_Bleeding_Edge {
 					perk.extraModules = new Perk.Pool[0];
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon mininglaser 2").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon exoticscannon1").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1191005979) }, //weapon mininglaser 2
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1983239915) }}}; //weapon exoticscannon1
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"{perk.randomizerResources.synthetics.minValue} {Core.TT("Synthetics")}",
@@ -3416,12 +3411,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-15000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2106923011) }}, //11 EMP nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2106923011) }}, //11 EMP nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2106923011) }}, //11 EMP nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2106923011) }}, //11 EMP nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2106923011) }}, //11 EMP nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2106923011) }}}; //11 EMP nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -3439,12 +3434,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-15000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }}, //10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }}, //10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }}, //10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }}, //10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }}, //10 White nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1392399452) }}}; //10 White nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -3465,11 +3460,11 @@ namespace FFU_Bleeding_Edge {
 					perk.extraModules = new Perk.Pool[0];
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "5 Human PD").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "7 Red PD").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1468502746) }, //5 Human PD
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1495856276, 1381757148, ShipModule.Type.PointDefence) }}, //8 Crystal PD //7 Red PD
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 3 L terran simple").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 10 tiger").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1084722255) }, //sensor 3 L terran simple
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(160051026, 524731680, ShipModule.Type.Sensor) }}}; //sensor 10 tiger //sensor 11 seashell s2
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"+{perk.moduleReplacements[1].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -3490,15 +3485,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Lizard" : "Moleculaati")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Floater" : "Moleculaati")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tortoise" : "Moleculaati")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Moleculaati").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(301730638, 490627374) }}, //Lizard //Moleculaati
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(185113131, 490627374) }}, //Floater //Moleculaati
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(93253305, 490627374) }}, //Tortoise //Moleculaati
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(490627374) }}}; //Moleculaati
 					perk.randomizerMenuStrings = new string[]{
-						$"+1x {Core.TT(FFU_BE_Defs.flagDLC_SupPak ? "Lizard" : "Moleculaati")}",
-						$"+1x {Core.TT(FFU_BE_Defs.flagDLC_SupPak ? "Floater" : "Moleculaati")}",
-						$"+1x {Core.TT(FFU_BE_Defs.flagDLC_SupPak ? "Tortoise" : "Moleculaati")}",
-						$"+1x {Core.TT("Moleculaati")}" };
+						$"+4x {Core.TT("More Different Pets")}" };
 					perk.isUnlockedByDefault = true;
 					perk.repCost = 5;
 					break;
@@ -3513,10 +3505,10 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }}, //Heavy security drone
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }}, //Heavy security drone
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }}, //Heavy security drone
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }}}; //Heavy security drone
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Heavy Security")} {Core.TT("Drones")}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -3534,8 +3526,8 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator 1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon monolith missile x1").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1615170861) }}, //explosives combinator 1
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1348589878) }}}; //weapon monolith missile x1
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}" };
@@ -3555,18 +3547,18 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "07 Weirdship Chem nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(475763260) }}, //07 Weirdship Chem nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(475763260) }}, //07 Weirdship Chem nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(475763260) }}, //07 Weirdship Chem nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(475763260) }}, //07 Weirdship Chem nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(475763260) }}, //07 Weirdship Chem nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(475763260) }}, //07 Weirdship Chem nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(475763260) }}, //07 Weirdship Chem nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(475763260) }}, //07 Weirdship Chem nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(475763260) }}, //07 Weirdship Chem nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(475763260) }}, //07 Weirdship Chem nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(475763260) }}, //07 Weirdship Chem nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(475763260) }}}; //07 Weirdship Chem nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+12x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -3625,30 +3617,30 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-100);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "7 Red PD").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "7 Red PD").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1495856276, 1381757148, ShipModule.Type.PointDefence) }}, //8 Crystal PD //7 Red PD
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1495856276, 1381757148, ShipModule.Type.PointDefence) }}}; //8 Crystal PD //7 Red PD
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "5 Human PD").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "7 Red PD").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1468502746) }, //5 Human PD
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1495856276, 1381757148, ShipModule.Type.PointDefence) }}, //8 Crystal PD //7 Red PD
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon sniper cannon EMP").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Floral cannon").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1567764648) }, //weapon sniper cannon EMP
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(790917823) }}, //weapon Floral cannon
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon EMP energyball").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon Floral cannon").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1482677315) }, //weapon EMP energyball
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(790917823) }}, //weapon Floral cannon
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon dual EMP").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon exoticscannon1").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1249253086) }, //weapon dual EMP
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1983239915) }}, //weapon exoticscannon1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 5 diy 2 backup").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 20 biofruit").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1700526886) }, //reactor 5 diy 2 backup
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2093337887) }}, //reactor 20 biofruit
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 9 small old").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 20 biofruit").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1554868377) }, //reactor 9 small old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2093337887) }}, //reactor 20 biofruit
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 1crew DIY").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 3crew floral").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(983196801) }, //bridge 1crew DIY
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1200522469) }}}; //bridge 3crew floral
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[5].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -3670,24 +3662,24 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-100);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat 3 generic alien").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Stealth decryptor 2 biobrain").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1179432425) }}, //shieldbat 3 generic alien
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(29772476) }}};  //Stealth decryptor 2 biobrain
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 1 diy").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 4 solitary").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(126798266) }, //shield 1 diy
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1386797426) }}, //shield 4 solitary
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "ECM 01 terran").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "ECM 02 terran").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(738383848) }, //ECM 01 terran
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(738383845) }}, //ECM 02 terran
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 0 diy").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 03 bioship").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1284816050) }, //engine 0 diy
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(292475796) }}, //engine 03 bioship
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 0 DIY").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 06 rotor blue").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2136288774) }, //warp 0 DIY
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(45815679) }}, //warp 06 rotor blue
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 0-C diy").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 11 seashell s2").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(930742757) }, //sensor 0-C diy
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(524731680) }}}; //sensor 11 seashell s2
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[1].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"+{perk.moduleReplacements[3].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -3709,23 +3701,23 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-100);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue();
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "medbay4 stem celler").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 6 synthethics").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab 1xgood").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(41460892) }}, //cryosleep 6x human standard
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1304112764) }}, //medbay4 stem celler
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(737359377) }}, //garden 6 synthethics
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1448350571) }}}; //lab 1xgood
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer DIY FO").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1404265275) }, //multicontainer DIY FO
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1165288718) }}, //multicontainer FEO-1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer MFO retro futu").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1366723326) }, //multicontainer MFO retro futu
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1165288718) }}, //multicontainer FEO-1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "exotics container 2 medium").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(584489047) }, //exotics container 2 medium
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(426751082) }}, //multicontainer ESM-2
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-1").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1008150789) }, //multicontainer ESM-1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(426751082) }}}; //multicontainer ESM-2
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.extraModules[3].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"+{perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -3748,12 +3740,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger sharpnel nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger sharpnel nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger sharpnel nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger sharpnel nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger sharpnel nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger sharpnel nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1711403825) }}, //Tiger sharpnel nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1711403825) }}, //Tiger sharpnel nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1711403825) }}, //Tiger sharpnel nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1711403825) }}, //Tiger sharpnel nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1711403825) }}, //Tiger sharpnel nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1711403825) }}}; //Tiger sharpnel nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -3771,12 +3763,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger Monolith nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger Monolith nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger Monolith nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger Monolith nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger Monolith nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger Monolith nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2070090696) }}, //Tiger Monolith nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2070090696) }}, //Tiger Monolith nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2070090696) }}, //Tiger Monolith nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2070090696) }}, //Tiger Monolith nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2070090696) }}, //Tiger Monolith nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2070090696) }}}; //Tiger Monolith nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -3794,12 +3786,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger EMP dual nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger EMP dual nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger EMP dual nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger EMP dual nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger EMP dual nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger EMP dual nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120056764) }}, //Tiger EMP dual nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120056764) }}, //Tiger EMP dual nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120056764) }}, //Tiger EMP dual nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120056764) }}, //Tiger EMP dual nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120056764) }}, //Tiger EMP dual nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120056764) }}}; //Tiger EMP dual nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -3817,12 +3809,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger 8x nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120466776) }}, //Tiger 8x nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120466776) }}, //Tiger 8x nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120466776) }}, //Tiger 8x nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120466776) }}, //Tiger 8x nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120466776) }}, //Tiger 8x nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120466776) }}}; //Tiger 8x nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -3840,12 +3832,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Tiger intruderbot nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(381835966) }}, //Tiger intruderbot nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(381835966) }}, //Tiger intruderbot nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(381835966) }}, //Tiger intruderbot nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(381835966) }}, //Tiger intruderbot nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(381835966) }}, //Tiger intruderbot nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(381835966) }}}; //Tiger intruderbot nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}" };
@@ -3863,14 +3855,14 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-20000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerdog").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerdog").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Heavy security drone").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1727276051, 1481089982) }}, //Drone tigerdog
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1727276051, 1481089982) }}, //Drone tigerdog
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}, //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}, //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }}, //Heavy security drone
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }}, //Heavy security drone
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }}, //Heavy security drone
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(190195895) }}}; //Heavy security drone
 					perk.randomizerMenuStrings = new string[]{
 						$"+4x {Core.TT("Heavy Security")} {Core.TT("Drones")}",
 						$"+2x {Core.TT("Tactical Combat")} {Core.TT("Drones")}",
@@ -3892,23 +3884,23 @@ namespace FFU_Bleeding_Edge {
 					perk.extraModules = new Perk.Pool[0];
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon dual EMP").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon gatling Tiger").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1249253086) }, //weapon dual EMP
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(412909021, 1086561640, ShipModule.Type.Weapon) }}, //weapon gatling Tiger
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigerlaser MK2").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon EMP energyball 3x Tiger").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(306184114) }, //weapon tigerlaser MK2
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(876704941, 1317545673, ShipModule.Type.Weapon) }}, //weapon EMP energyball 3x Tiger
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon tigermissile x2").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon EMP energyball 3x Tiger").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(97880399) }, //weapon tigermissile x2
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(876704941, 1317545673, ShipModule.Type.Weapon) }}, //weapon EMP energyball 3x Tiger
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 6 smalltrapho").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 15 medium").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(833760257) }, //reactor 6 smalltrapho
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}, //reactor 15 medium
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 10 small").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 20 fusion").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(813614528) }, //reactor 10 small
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(423938228) }}, //reactor 20 fusion
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 2crew tiger").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 3crew plastarmor").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(171768739) }, //bridge 2crew tiger
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(436212146) }}}; //bridge 3crew plastarmor
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[4].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"+{perk.moduleReplacements[3].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -3930,18 +3922,18 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield tigership").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shieldbat tiger").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1427874574, 1386797426, ShipModule.Type.ShieldGen) }}, //shield tigership //shield 4 solitary
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1424188745, 1179432425, ShipModule.Type.ShieldGen) }}}; //shieldbat tiger //shieldbat 3 generic alien
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 01 greencrystal").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 06 rotor blue").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1503624866) }, //warp 01 greencrystal
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(45815679) }}, //warp 06 rotor blue
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 01 tiger").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 04 xblack").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(362626339) }, //engine 01 tiger
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(366713264) }}, //engine 04 xblack
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 2 saucer old").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 10 tiger").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(948524677) }, //sensor 2 saucer old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(160051026) }}}; //sensor 10 tiger
 					perk.randomizerMenuStrings = new string[]{
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
 						$"+{perk.moduleReplacements[2].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -3963,22 +3955,22 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "dronebay 1 basic").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "medbay5 biofluid bath").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator diy").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(383658151) }}, //dronebay 1 basic
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1197296009) }}, //medbay5 biofluid bath
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1515661102) }}}; //explosives combinator diy
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FE armor").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab 1xgood").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(619214127) }, //multicontainer FE armor
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1448350571) }}, //lab 1xgood
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel container tiger").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 4 greenhouse").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1061408062) }, //fuel container tiger
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(728608876) }}, //garden 4 greenhouse
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer OME mechanical").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(920367928) }, //multicontainer OME mechanical
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1165288718) }}, //multicontainer FEO-1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-1").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1008150789) }, //multicontainer ESM-1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(426751082) }}}; //multicontainer ESM-2
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+{perk.moduleReplacements[0].newModulePrefabRef.Prefab.GetComponent<ShipModule>().displayName} {Core.TT("Upgrade")}",
@@ -4000,14 +3992,14 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-7500);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel processor 2").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "ECM 02 terran").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Stealth decryptor 2 new human tec").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "5 Human PD").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1482294420) }}, //fuel processor 2
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(738383845) }}, //ECM 02 terran
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1276182163) }}, //Stealth decryptor 2 new human tec
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1468502746) }}}; //5 Human PD
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "dream recorder 2").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1813199311) }, //dream recorder 2
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(41460892) }}}; //cryosleep 6x human standard
 					perk.randomizerMenuStrings = new string[]{
 						$"+1x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
@@ -4030,24 +4022,24 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-50);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-5000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 11 biostasis").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 33 biostasis nice worm").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "artifactmodule tec 35 data core makk").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}, //artifactmodule tec 11 biostasis
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}, //artifactmodule tec 11 biostasis
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}, //artifactmodule tec 11 biostasis
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}, //artifactmodule tec 11 biostasis
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}, //artifactmodule tec 11 biostasis
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(957508477) }}, //artifactmodule tec 11 biostasis
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}, //artifactmodule tec 33 biostasis nice worm
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}, //artifactmodule tec 33 biostasis nice worm
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}, //artifactmodule tec 33 biostasis nice worm
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}, //artifactmodule tec 33 biostasis nice worm
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}, //artifactmodule tec 33 biostasis nice worm
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(685017033) }}, //artifactmodule tec 33 biostasis nice worm
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }}, //artifactmodule tec 35 data core makk
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }}, //artifactmodule tec 35 data core makk
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }}, //artifactmodule tec 35 data core makk
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }}, //artifactmodule tec 35 data core makk
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }}, //artifactmodule tec 35 data core makk
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1316302015) }}}; //artifactmodule tec 35 data core makk
 					perk.randomizerMenuStrings = new string[]{
 						$"+6x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+6x {Core.TT("Packed")} {perk.extraModules[6].Prefabs[0].GetComponent<ShipModule>().displayName}",
@@ -4068,12 +4060,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-50);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-25000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "weapon tigermissile large" : "weapon ancientrockets x3")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "weapon tigermissile large" : "weapon ancientrockets x3")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "weapon EMP energyball 3x Tiger" : "weapon exoticscannon1")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "weapon EMP energyball 3x Tiger" : "weapon exoticscannon1")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "weapon gatling Tiger" : "weapon Segmented cannonx2 C")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "weapon gatling Tiger" : "weapon Segmented cannonx2 C")).gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1571322820, 469527491, ShipModule.Type.Weapon) }}, //weapon tigermissile large //weapon ancientrockets x3
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1571322820, 469527491, ShipModule.Type.Weapon) }}, //weapon tigermissile large //weapon ancientrockets x3
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(876704941, 1317545673, ShipModule.Type.Weapon) }}, //weapon EMP energyball 3x Tiger //weapon rare warp shield breaker EMP
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(876704941, 1317545673, ShipModule.Type.Weapon) }}, //weapon EMP energyball 3x Tiger //weapon rare warp shield breaker EMP
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(412909021, 1086561640, ShipModule.Type.Weapon) }}, //weapon gatling Tiger //weapon Segmented cannonx2 C
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(412909021, 1086561640, ShipModule.Type.Weapon) }}}; //weapon gatling Tiger //weapon Segmented cannonx2 C
 					perk.randomizerMenuStrings = new string[]{
 						$"+2x {Core.TT("Packed")} {perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName}",
 						$"+2x {Core.TT("Packed")} {perk.extraModules[2].Prefabs[0].GetComponent<ShipModule>().displayName}",
@@ -4094,20 +4086,20 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-50);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-20000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Monolith nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Monolith nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "11 EMP nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "04 Fueltank nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger 8x nuke launcher" : "08d Spearhead nuke launcher")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger 8x nuke launcher" : "08d Spearhead nuke launcher")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08c Green nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "08c Green nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger intruderbot nuke launcher" : "99 pirate spawner launcher 1")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "Tiger intruderbot nuke launcher" : "99 pirate spawner launcher 1")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "15 Black nuke launcher").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "15 Black nuke launcher").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1851270005) }}, //Monolith nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1851270005) }}, //Monolith nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2106923011) }}, //11 EMP nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(2106923011) }}, //11 EMP nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(780823633) }}, //04 Fueltank nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(780823633) }}, //04 Fueltank nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120466776, 342953834, ShipModule.Type.Weapon_Nuke) }}, //Tiger 8x nuke launcher //08d Spearhead nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(120466776, 342953834, ShipModule.Type.Weapon_Nuke) }}, //Tiger 8x nuke launcher //08d Spearhead nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(22001514) }}, //08c Green nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(22001514) }}, //08c Green nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(381835966, 1043100994, ShipModule.Type.Weapon_Nuke) }}, //Tiger intruderbot nuke launcher //99 pirate spawner launcher 1
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(381835966, 1043100994, ShipModule.Type.Weapon_Nuke) }}, //Tiger intruderbot nuke launcher //99 pirate spawner launcher 1
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1558344950) }}, //15 Black nuke launcher
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1558344950) }}}; //15 Black nuke launcher
 					perk.randomizerMenuStrings = new string[]{
 						$"+14x {Core.TT("Packed Nukes (2x Each)")}: " +
 							$"{perk.extraModules[0].Prefabs[0].GetComponent<ShipModule>().displayName.Replace(" Nuke", string.Empty)}, " +
@@ -4158,65 +4150,65 @@ namespace FFU_Bleeding_Edge {
 					perk.extraModules = new Perk.Pool[0];
 					perk.moduleReplacements = new Perk.ModuleReplacement[] {
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "metals container 2 medium").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Stealth decryptor 3 newest human tec").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1448463490) }, //metals container 2 medium
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1276182160) }}, //Stealth decryptor 3 newest human tec
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer DIY EE").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(825891570) }, //multicontainer DIY EE
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(41460892) }}, //cryosleep 6x human standard
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "organics container 0 diy").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "medbay4 stem celler").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1449641283) }, //organics container 0 diy
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1304112764) }}, //medbay4 stem celler
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "synthetics container 0 diy").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(165493307) }, //synthetics container 0 diy
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(426751082) }}, //multicontainer ESM-2
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel container 1").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1391027202) }, //fuel container 1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1165288718) }}, //multicontainer FEO-1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 2x human small").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "shieldbat tiger" : "shieldbat 3 generic alien")).gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(41460888) }, //cryosleep 2x human small
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1424188745, 1179432425, ShipModule.Type.ShieldGen) }}, //shieldbat tiger //shieldbat 3 generic alien
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "shield 1 round old").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "shield tigership" : "shield 4 solitary")).gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1518301159) }, //shield 1 round old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1427874574, 1386797426, ShipModule.Type.ShieldGen) }}, //shield tigership //shield 4 solitary
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 8 sunpanel old s1").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "sensor 9 sunpanel new s2").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1451617742) }, //sensor 8 sunpanel old s1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(171954197) }}, //sensor 9 sunpanel new s2
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "03 Barrel nuke launcher").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "10 White nuke launcher").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(949056369) }, //03 Barrel nuke launcher
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1392399452) }}, //10 White nuke launcher
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon DIY Minicannon ancient 2,3").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "weapon tigermissile large" : "weapon exoticscannon1")).gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1780996798) }, //weapon DIY Minicannon ancient 2,3
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1571322820, 1983239915, ShipModule.Type.Weapon) }}, //weapon tigermissile large //weapon exoticscannon1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon ATK-MK1").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "weapon tigermissile large" : "weapon exoticscannon1")).gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1281856982) }, //weapon ATK-MK1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1571322820, 1983239915, ShipModule.Type.Weapon) }}, //weapon tigermissile large //weapon exoticscannon1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "weapon DIY exoticslaser").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "weapon tigermissile large" : "weapon exoticscannon1")).gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2075523594) }, //weapon DIY exoticslaser
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1571322820, 1983239915, ShipModule.Type.Weapon) }}, //weapon tigermissile large //weapon exoticscannon1
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "5 Human PD").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "2 Tiger PD").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1468502746) }, //5 Human PD
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(938711464) }}, //2 Tiger PD
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 01 greencrystal").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "warp 07 rotor glass").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1503624866) }, //warp 01 greencrystal
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1559705412) }}, //warp 07 rotor glass
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 01 primitive").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "engine 2 F-gulper").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(497175846) }, //engine 01 primitive
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1119228548) }}, //engine 2 F-gulper
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 1 DIY").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "garden 4 greenhouse").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1902866107) }, //garden 1 DIY
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(728608876) }}, //garden 4 greenhouse
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab module diy x2").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "lab 1xgood").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(665713195) }, //lab module diy x2
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1448350571) }}, //lab 1xgood
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "fuel combinator 1A old").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 22 cube").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1531409027) }, //fuel combinator 1A old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1699316752) }}, //reactor 22 cube
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 13 classic cooled").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "reactor 22 cube").gameObject }},
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(549367690) }, //reactor 13 classic cooled
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1699316752) }}, //reactor 22 cube
 						new Perk.ModuleReplacement {
-							oldModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 3crew").gameObject },
-							newModulePrefabRef = new PrefabRef { Prefab = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "bridge 3crew metalarmor").gameObject }}};
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2085174639) }, //bridge 3crew
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1148319565) }}}; //bridge 3crew metalarmor
 					perk.randomizerMenuStrings = new string[]{
 						$"+{Core.TT("Bridge, Shields & CIWS")} {Core.TT("Upgrade")}",
 						$"+{Core.TT("Reactors, Engines & Drive")} {Core.TT("Upgrade")}",
@@ -4238,12 +4230,12 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-50);
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-50000);
 					perk.extraModules = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == (FFU_BE_Defs.flagDLC_SupPak ? "shieldbat tiger" : "shieldbat 3 generic alien")).gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "Stealth decryptor 3 newest human tec").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "cryosleep 6x human standard").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer ESM-2").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "multicontainer FEO-1").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedModulesList.Find(x => x.name == "explosives combinator tiger").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1424188745, 1179432425, ShipModule.Type.ShieldGen) }}, //shieldbat tiger //shieldbat 3 generic alien
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1276182160) }}, //Stealth decryptor 3 newest human tec
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(41460892) }}, //cryosleep 6x human standard
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(426751082) }}, //multicontainer ESM-2
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1165288718) }}, //multicontainer FEO-1
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDModuleGO(1363987393) }}}; //explosives combinator tiger
 					perk.randomizerMenuStrings = new string[]{
 						$"+{Core.TT("Packed Storages & State-of-Art Factory")}",
 						$"+1x {Core.TT("Packed")} {perk.extraModules[1].Prefabs[0].GetComponent<ShipModule>().displayName}",
@@ -4265,18 +4257,18 @@ namespace FFU_Bleeding_Edge {
 					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue();
 					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-25000);
 					perk.extraCrew = new Perk.Pool[]{
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider pirates").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider pirates").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider pirates").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Drone tigerspider pirates").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }},
-						new Perk.Pool{ Prefabs = new GameObject[]{ FFU_BE_Defs.prefabModdedCrewList.Find(x => x.name == "Combat Drone Humanoid").gameObject }}};
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1351800556) }}, //Drone tigerspider pirates
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1351800556) }}, //Drone tigerspider pirates
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1351800556) }}, //Drone tigerspider pirates
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(1351800556) }}, //Drone tigerspider pirates
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}, //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}, //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}, //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}, //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}, //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}, //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}, //Combat Drone Humanoid
+						new Perk.Pool{ Prefabs = new GameObject[]{ GetPrefabIDCrewGO(826379097) }}}; //Combat Drone Humanoid
 					perk.randomizerMenuStrings = new string[]{
 						$"+8x {Core.TT("Tactical Combat")} {Core.TT("Drones")}",
 						$"+4x {Core.TT("Assault Maintanance")} {Core.TT("Drones")}",
@@ -4286,10 +4278,81 @@ namespace FFU_Bleeding_Edge {
 					perk.repCost = 20;
 					break;
 					//Riggy Perks
-					//case 905925927: //Perk module container experimental random for Riggy
-					//break;
-					//case 260900693: //Perk module container FO for Riggy
-					//break;
+					case 260900693: //Perk module container FO for Riggy
+					perk.displayName = Core.TT($"Mining Union Exchange");
+					perk.description = Core.TT($"After tapping into our connection, we've manged to contact Mining Union. In exchange for providing credits and some exotic materials, they will be more than happy to refurbish some modules on this decommissioned mining vessel.");
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-100);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
+					perk.extraModules = new Perk.Pool[0];
+					perk.moduleReplacements = new Perk.ModuleReplacement[] {
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(171768739) }, //bridge 2crew tiger
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(436212146) }}, //bridge 3crew plastarmor
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(241738085) }, //dronebay 0 diy
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(383658151) }}, //dronebay 1 basic
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1451617742) }, //sensor 8 sunpanel old s1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(680853891) }}, //sensor 11 sophisiticated s2
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1554868377) }, //reactor 9 small old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1633550495) }}}; //reactor 15 medium
+					perk.randomizerMenuStrings = new string[]{
+						$"+{Core.TT("Bridge Compartment")} {Core.TT("Upgrade")}",
+						$"+{Core.TT("Drone Repair Bay")} {Core.TT("Upgrade")}",
+						$"+{Core.TT("Sensor Array")} {Core.TT("Upgrade")}",
+						$"+{Core.TT("Ship Reactors")} {Core.TT("Upgrade")}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
+					break;
+					case 905925927: //Perk module container experimental random for Riggy
+					perk.displayName = Core.TT($"Mysterious Upgrade Cache");
+					perk.description = Core.TT($"An mysterious strangers approached us with. They were in dire need of credits and exotic materials, and as repayment they're willing to use their mysterious knowledge to upgrade some of the modules on our ship.");
+					perk.randomizerResources.organics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.fuel = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.metals = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.synthetics = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.explosives = FFU_BE_Defs.NewExactValue();
+					perk.randomizerResources.exotics = FFU_BE_Defs.NewExactValue(-100);
+					perk.randomizerResources.credits = FFU_BE_Defs.NewExactValue(-10000);
+					perk.extraModules = new Perk.Pool[0];
+					perk.moduleReplacements = new Perk.ModuleReplacement[] {
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1503624866) }, //warp 01 greencrystal
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2018774202) }}, //warp 05 rotor metal
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(813097155) }, //shield 3 brass, single
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1646813987) }}, //shield 4 greendome
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1398713621) }, //cryosleep 1 DIY
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(2059107150) }}, //cryosleep 8x insect
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(166404798) }, //oilcake converter
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1832274586) }}, //garden 3 shroomery
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(373200662) }, //synthetics cooker 1
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1832274586) }}, //garden 3 shroomery
+						new Perk.ModuleReplacement {
+							oldModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1531409027) }, //fuel combinator 1A old
+							newModulePrefabRef = new PrefabRef { Prefab = GetPrefabIDModuleGO(1832274586) }}}; //garden 3 shroomery
+					perk.randomizerMenuStrings = new string[]{
+						$"+{Core.TT("Warp Drive")} {Core.TT("Upgrade")}",
+						$"+{Core.TT("Shield Systems")} {Core.TT("Upgrade")}",
+						$"+{Core.TT("Cryosleep Bays")} {Core.TT("Upgrade")}",
+						$"+{Core.TT("Greenhouses")} {Core.TT("Replacement")}",
+						$"{perk.randomizerResources.credits.minValue} {Core.TT("Credits")}",
+						$"{perk.randomizerResources.exotics.minValue} {Core.TT("Exotics")}" };
+					if (!storedPerkSprites.ContainsKey("Something_Mysterious")) storedPerkSprites.Add("Something_Mysterious", perk.menuSprite);
+					perk.isUnlockedByDefault = true;
+					perk.repCost = 10;
+					break;
 					//Exception Perks
 					case 463511730: //Perk Exception extra artifacts
 					perk.displayName = Core.TT($"Original Biomodular Interior");
@@ -4455,16 +4518,46 @@ namespace FFU_Bleeding_Edge {
 			AssignNewSpriteToPerkID(285860403, storedPerkSprites["Random_Nuke_Sprite"]);
 			AssignNewSpriteToPerkID(1461582440, storedPerkSprites["Red_Ripper_Crew_Sprite"]);
 			AssignNewSpriteToPerkID(462414045, storedPerkSprites["Random_Module_Sprite"]);
+			AssignNewSpriteToPerkID(260900693, storedPerkSprites["Deal_Handshake_Sprite"]);
 			if (FFU_BE_Defs.dumpObjectDatas) Debug.LogWarning(perksData);
 		}
-		private static GameObject GetPrefabIDCrewGO(int PrefabID) {
+		private static GameObject GetPrefabIDCrewGO(int PrefabID, int BackupID = 0) {
 			GameObject CrewGO = FFU_BE_Defs.prefabModdedCrewList.Find(x => x.PrefabId == PrefabID)?.gameObject;
-			if (CrewGO == null) Debug.LogError($"Crewmember with Prefab ID #{PrefabID} doesn't exist!");
+			if (CrewGO == null) {
+				if (BackupID > 0) {
+					CrewGO = FFU_BE_Defs.prefabModdedCrewList.Find(x => x.PrefabId == BackupID)?.gameObject;
+					if (CrewGO != null) Debug.LogWarning($"Crewmember with Prefab ID #{PrefabID} not found, using crewmember with Backup ID #{BackupID} instead!");
+					else {
+						CrewGO = FFU_BE_Defs.prefabModdedCrewList.RandomElement().gameObject;
+						Debug.LogWarning($"Crewmember with Prefab ID #{PrefabID} or Backup ID #{BackupID} not found, using random crewmember instead!");
+					}
+				} else {
+					CrewGO = FFU_BE_Defs.prefabModdedCrewList.RandomElement().gameObject;
+					Debug.LogWarning($"Crewmember with Prefab ID #{PrefabID}, nor Backup ID was specified, using random crewmember instead!");
+				}
+			}
 			return CrewGO;
 		}
-		private static GameObject GetPrefabIDModuleGO(int PrefabID) {
+		private static GameObject GetPrefabIDModuleGO(int PrefabID, int BackupID = 0, ShipModule.Type RandomType = ShipModule.Type.None) {
 			GameObject ModuleGO = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == PrefabID)?.gameObject;
-			if (ModuleGO == null) Debug.LogError($"Module with Prefab ID #{PrefabID} doesn't exist!");
+			if (ModuleGO == null) {
+				if (BackupID > 0) {
+					ModuleGO = FFU_BE_Defs.prefabModdedModulesList.Find(x => x.PrefabId == BackupID)?.gameObject;
+					if (ModuleGO != null) Debug.LogWarning($"Module with Prefab ID #{PrefabID} not found, using module with Backup ID #{BackupID} instead!");
+					else {
+						if (RandomType != ShipModule.Type.None) {
+							ModuleGO = FFU_BE_Defs.prefabModdedModulesList.FindAll(x => x.type == RandomType).RandomElement().gameObject;
+							Debug.LogWarning($"Module with Prefab ID #{PrefabID} or Backup ID #{BackupID} not found, using random module of {RandomType} type instead!");
+						} else {
+							ModuleGO = FFU_BE_Defs.prefabModdedModulesList.RandomElement().gameObject;
+							Debug.LogWarning($"Module with Prefab ID #{PrefabID} or Backup ID #{BackupID} not found, nor type was specified, using random module instead!");
+						}
+					}
+				} else {
+					ModuleGO = FFU_BE_Defs.prefabModdedModulesList.RandomElement().gameObject;
+					Debug.LogWarning($"Module with Prefab ID #{PrefabID}, nor Backup ID or type were specified, using random module instead!");
+				}
+			}
 			return ModuleGO;
 		}
 		private static void AssignNewSpriteToPerkID(int perkID, Sprite newSprite) {
