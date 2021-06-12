@@ -49,9 +49,10 @@ namespace RST.PlaymakerAction {
 			fsm = CreateIfNeeded.Do(UISkin.Instance.resultsPrefab);
 			FsmVariables fsmVariables = fsm.FsmVariables;
 			POI current = POI.Current;
-			fsmVariables.GetFsmString("title").Value = ChoicePanel.GetTitle(base.Fsm, title);
+			fsmVariables.GetFsmString("title").Value = ChoicePanel.GetTitle(base.Fsm, title, this);
 			fsmVariables.GetFsmObject("picture").Value = Pool<Sprite>.TakeRandomItem(picturePool.Value as SpritePool, picture.Value as Sprite, current);
-			string text = Localization.TT(Pool<string>.TakeRandomItem(textPool.Value as StringPool, text2, current));
+			StringPool stringPool = PrefabFinder.ReLookup<StringPool>(textPool.Value);
+			string text = (stringPool != null && stringPool.items.Count > 0) ? Localization.TT(Pool<string>.TakeRandomItem(stringPool, null, current), stringPool) : Localization.TT(text2, this);
 			fsmVariables.GetFsmString("text").Value = ChoicePanel.MakeReplacements(text, replacements);
 			fsmVariables.GetFsmBool("resources given").Value = resourcesGiven;
 			PlayerData pd = PlayerDatas.Me;
@@ -127,7 +128,7 @@ namespace RST.PlaymakerAction {
 			fsmVariables.GetFsmFloat("module dmg percent max").Value = moduleDmgPercentMax.Value;
 			fsmVariables.GetFsmBool("dontDoLargeBg").Value = dontDoLargeBg.Value;
 			fsmVariables.GetFsmBool("crewDidntDie").Value = crewDidntDie.Value;
-			object[] array = fsmVariables.GetFsmArray("choiceTexts").Values = choiceTexts.stringValues;
+			object[] array2 = fsmVariables.GetFsmArray("localizedChoiceTexts").Values = Array.ConvertAll(choiceTexts.stringValues, (string cs) => Localization.TT(cs, this));
 			fsmVariables.GetFsmBool("tutorial mode").Value = noPopup.Value;
 			fsmVariables.GetFsmString("reason to display").Value = reasonToDisplay.Value;
 			audioCtx = AudioPlayWithFade.Enter(base.Fsm.GameObject, audioClip.Value as AudioClip, audioNoFade.Value);

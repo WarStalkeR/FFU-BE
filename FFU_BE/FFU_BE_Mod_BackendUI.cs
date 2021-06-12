@@ -311,42 +311,46 @@ namespace RST.UI {
 		public extern void orig_NewGameBeginnerClicked();
 		public extern void orig_NewGameChallengingClicked();
 		public extern void orig_NewGameHardcoreClicked();
+		public Transform buttonPanel => transform.GetChild(1).GetChild(0);
+		public Transform buttonBeginner => buttonPanel.GetChild(2);
+		public Transform buttonChallenging => buttonPanel.GetChild(3);
+		public Transform buttonHardcore => buttonPanel.GetChild(4);
 		public Text textTutorialButton => startTutorialButton.transform.GetChild(0).GetComponent<Text>();
 		public Text textBeginnerButton => startBeginnerButton.transform.GetChild(0).GetComponent<Text>();
 		public Text textChallengeButton => startChallengingButton.transform.GetChild(0).GetComponent<Text>();
 		public Text textHardcoreButton => startHardcoreButton.transform.GetChild(0).GetComponent<Text>();
-		public GameObject entryBeginnerItemsGO => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(2).GetChild(3).gameObject;
-		public Text entryButton1TextA => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(0).GetChild(0).GetComponent<Text>();
-		public Text entryButton1TextB => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(1).GetChild(0).GetComponent<Text>();
-		public Text entryButton1TextC => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(2).GetChild(0).GetComponent<Text>();
-		public Text entryButton2TextA => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(0).GetChild(0).GetComponent<Text>();
-		public Text entryButton2TextB => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>();
-		public Text entryButton2TextC => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(2).GetChild(0).GetComponent<Text>();
-		public Text entryButton3TextA => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(0).GetChild(0).GetComponent<Text>();
-		public Text entryButton3TextB => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(1).GetChild(0).GetComponent<Text>();
-		public Text entryButton3TextC => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(2).GetChild(0).GetComponent<Text>();
-		public Image entryButton1SignA => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(0).GetChild(2).GetComponent<Image>();
-		public Image entryButton1SignB => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(1).GetChild(2).GetComponent<Image>();
-		public Image entryButton1SignC => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(3).GetChild(2).GetChild(2).GetComponent<Image>();
-		public Image entryButton2SignA => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(0).GetChild(2).GetComponent<Image>();
-		public Image entryButton2SignB => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(1).GetChild(2).GetComponent<Image>();
-		public Image entryButton2SignC => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(2).GetChild(2).GetChild(2).GetComponent<Image>();
-		public Image entryButton3SignA => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(0).GetChild(2).GetComponent<Image>();
-		public Image entryButton3SignB => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(1).GetChild(2).GetComponent<Image>();
-		public Image entryButton3SignC => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(3).GetChild(2).GetChild(2).GetComponent<Image>();
-		public Image entryButton1Background => transform.GetChild(1).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>();
-		public Image entryButton2Background => transform.GetChild(1).GetChild(0).GetChild(3).GetChild(0).GetChild(0).GetComponent<Image>();
-		public Image entryButton3Background => transform.GetChild(1).GetChild(0).GetChild(4).GetChild(0).GetChild(0).GetComponent<Image>();
+		public GameObject entryBeginnerItemsGO => buttonBeginner.GetChild(1).GetChild(2).GetChild(3).gameObject;
+		public Text entryButtonBText1 => buttonBeginner.GetChild(1).GetChild(0).GetChild(0).GetComponent<Text>();
+		public Text entryButtonBText2 => buttonBeginner.GetChild(1).GetChild(1).GetChild(0).GetComponent<Text>();
+		public Text entryButtonBText3 => buttonBeginner.GetChild(1).GetChild(2).GetChild(0).GetComponent<Text>();
+		public Text entryButtonCText1 => buttonChallenging.GetChild(1).GetChild(0).GetChild(0).GetComponent<Text>();
+		public Text entryButtonCText2 => buttonChallenging.GetChild(1).GetChild(1).GetChild(0).GetComponent<Text>();
+		public Text entryButtonCText3 => buttonChallenging.GetChild(1).GetChild(2).GetChild(0).GetComponent<Text>();
+		public Text entryButtonHText1 => buttonHardcore.GetChild(1).GetChild(0).GetChild(0).GetComponent<Text>();
+		public Text entryButtonHText2 => buttonHardcore.GetChild(1).GetChild(1).GetChild(0).GetComponent<Text>();
+		public Text entryButtonHText3 => buttonHardcore.GetChild(1).GetChild(2).GetChild(0).GetComponent<Text>();
+		public Image entryButtonBSign1 => buttonBeginner.GetChild(1).GetChild(0).GetChild(2).GetComponent<Image>();
+		public Image entryButtonBSign2 => buttonBeginner.GetChild(1).GetChild(1).GetChild(2).GetComponent<Image>();
+		public Image entryButtonBSign3 => buttonBeginner.GetChild(1).GetChild(2).GetChild(2).GetComponent<Image>();
+		public Image entryButtonCSign1 => buttonChallenging.GetChild(1).GetChild(0).GetChild(2).GetComponent<Image>();
+		public Image entryButtonCSign2 => buttonChallenging.GetChild(1).GetChild(1).GetChild(2).GetComponent<Image>();
+		public Image entryButtonCSign3 => buttonChallenging.GetChild(1).GetChild(2).GetChild(2).GetComponent<Image>();
+		public Image entryButtonHSign1 => buttonHardcore.GetChild(1).GetChild(0).GetChild(2).GetComponent<Image>();
+		public Image entryButtonHSign2 => buttonHardcore.GetChild(1).GetChild(1).GetChild(2).GetComponent<Image>();
+		public Image entryButtonHSign3 => buttonHardcore.GetChild(1).GetChild(2).GetChild(2).GetComponent<Image>();
+		public Image entryButtonBBackground => buttonBeginner.GetChild(0).GetChild(0).GetComponent<Image>();
+		public Image entryButtonCBackground => buttonChallenging.GetChild(0).GetChild(0).GetComponent<Image>();
+		public Image entryButtonHBackground => buttonHardcore.GetChild(0).GetChild(0).GetComponent<Image>();
 		private bool isIDDQDmode;
 		private void OnEnable() {
 			orig_OnEnable();
 			entryBeginnerItemsGO.SetActive(false);
 			if (!FFU_BE_Defs.dataMenuSpritesLoaded) {
-				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButton2SignA.sprite);
-				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButton2SignC.sprite);
-				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButton1Background.sprite);
-				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButton2Background.sprite);
-				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButton3Background.sprite);
+				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButtonCSign1.sprite);
+				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButtonCSign3.sprite);
+				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButtonBBackground.sprite);
+				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButtonCBackground.sprite);
+				FFU_BE_Defs.dataMenuSpritesSet.Add(entryButtonHBackground.sprite);
 				FFU_BE_Defs.dataMenuSpritesLoaded = true;
 			}
 			textTutorialButton.text = Core.TT(Datas.diffTextTut);
@@ -383,54 +387,54 @@ namespace RST.UI {
 		}
 		private void UpdateDifficultySprites(bool isDifficult) {
 			if (isDifficult) {
-				entryButton1Background.sprite = FFU_BE_Defs.dataMenuSpritesSet[3];
-				entryButton2Background.sprite = FFU_BE_Defs.dataMenuSpritesSet[4];
-				entryButton3Background.sprite = FFU_BE_Defs.dataMenuSpritesSet[4];
-				entryButton1SignA.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
-				entryButton1SignB.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
-				entryButton1SignC.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
-				entryButton2SignA.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
-				entryButton2SignB.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
-				entryButton2SignC.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
-				entryButton3SignA.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
-				entryButton3SignB.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
-				entryButton3SignC.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonBBackground.sprite = FFU_BE_Defs.dataMenuSpritesSet[3];
+				entryButtonCBackground.sprite = FFU_BE_Defs.dataMenuSpritesSet[4];
+				entryButtonHBackground.sprite = FFU_BE_Defs.dataMenuSpritesSet[4];
+				entryButtonBSign1.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonBSign2.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonBSign3.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonCSign1.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonCSign2.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonCSign3.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonHSign1.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonHSign2.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonHSign3.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
 			} else {
-				entryButton1Background.sprite = FFU_BE_Defs.dataMenuSpritesSet[2];
-				entryButton2Background.sprite = FFU_BE_Defs.dataMenuSpritesSet[2];
-				entryButton3Background.sprite = FFU_BE_Defs.dataMenuSpritesSet[3];
-				entryButton1SignA.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
-				entryButton1SignB.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
-				entryButton1SignC.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
-				entryButton2SignA.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
-				entryButton2SignB.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
-				entryButton2SignC.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
-				entryButton3SignA.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
-				entryButton3SignB.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
-				entryButton3SignC.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonBBackground.sprite = FFU_BE_Defs.dataMenuSpritesSet[2];
+				entryButtonCBackground.sprite = FFU_BE_Defs.dataMenuSpritesSet[2];
+				entryButtonHBackground.sprite = FFU_BE_Defs.dataMenuSpritesSet[3];
+				entryButtonBSign1.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
+				entryButtonBSign2.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
+				entryButtonBSign3.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
+				entryButtonCSign1.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
+				entryButtonCSign2.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
+				entryButtonCSign3.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonHSign1.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
+				entryButtonHSign2.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonHSign3.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
 			}
 		}
 		private void UpdateDifficultyHints(bool isDifficult) {
 			if (isDifficult) {
-				entryButton1TextA.text = Core.TT(Datas.diffPauseNo);
-				entryButton1TextB.text = Core.TT(Datas.diffTechMed);
-				entryButton1TextC.text = Core.TT(Datas.diffBonusBrut);
-				entryButton2TextA.text = Core.TT(Datas.diffPauseNo);
-				entryButton2TextB.text = Core.TT(Datas.diffTechHigh);
-				entryButton2TextC.text = Core.TT(Datas.diffBonusIns);
-				entryButton3TextA.text = Core.TT(Datas.diffPauseNo);
-				entryButton3TextB.text = Core.TT(Datas.diffTechUltra);
-				entryButton3TextC.text = Core.TT(Datas.diffBonusNight);
+				entryButtonBText1.text = Core.TT(Datas.diffPauseNo);
+				entryButtonBText2.text = Core.TT(Datas.diffTechMed);
+				entryButtonBText3.text = Core.TT(Datas.diffBonusBrut);
+				entryButtonCText1.text = Core.TT(Datas.diffPauseNo);
+				entryButtonCText2.text = Core.TT(Datas.diffTechHigh);
+				entryButtonCText3.text = Core.TT(Datas.diffBonusIns);
+				entryButtonHText1.text = Core.TT(Datas.diffPauseNo);
+				entryButtonHText2.text = Core.TT(Datas.diffTechUltra);
+				entryButtonHText3.text = Core.TT(Datas.diffBonusNight);
 			} else {
-				entryButton1TextA.text = Core.TT(Datas.diffPauseYes); 
-				entryButton1TextB.text = Core.TT(Datas.diffTechNone);
-				entryButton1TextC.text = Core.TT(Datas.diffBonusEasy);
-				entryButton2TextA.text = Core.TT(Datas.diffPauseYes); 
-				entryButton2TextB.text = Core.TT(Datas.diffTechNone);
-				entryButton2TextC.text = Core.TT(Datas.diffBonusMed);
-				entryButton3TextA.text = Core.TT(Datas.diffPauseYes);
-				entryButton3TextB.text = Core.TT(Datas.diffTechLow);
-				entryButton3TextC.text = Core.TT(Datas.diffBonusHard);
+				entryButtonBText1.text = Core.TT(Datas.diffPauseYes); 
+				entryButtonBText2.text = Core.TT(Datas.diffTechNone);
+				entryButtonBText3.text = Core.TT(Datas.diffBonusEasy);
+				entryButtonCText1.text = Core.TT(Datas.diffPauseYes); 
+				entryButtonCText2.text = Core.TT(Datas.diffTechNone);
+				entryButtonCText3.text = Core.TT(Datas.diffBonusMed);
+				entryButtonHText1.text = Core.TT(Datas.diffPauseYes);
+				entryButtonHText2.text = Core.TT(Datas.diffTechLow);
+				entryButtonHText3.text = Core.TT(Datas.diffBonusHard);
 			}
 		}
 	}

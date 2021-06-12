@@ -1005,8 +1005,8 @@ namespace RST.UI {
 			if (item == null) return;
 			ModuleSlot.Upgrade slotUpgrade = item.slotUpgrade;
 			if (slotUpgrade != null) {
-				text.text = (slotUpgrade.isDowngrade && confirmSlotDowngrade) ? Localization.TT("CONFIRM DOWNGRADE?") : Localization.TT(slotUpgrade.text);
-				hoverable.HoverText = Localization.TT(slotUpgrade.UpgradeToSlotPrefab.description);
+				text.text = (slotUpgrade.isDowngrade && confirmSlotDowngrade) ? Localization.TT("CONFIRM DOWNGRADE?") : Localization.TT(slotUpgrade.text, item.slot);
+				hoverable.HoverText = Localization.TT(slotUpgrade.UpgradeToSlotPrefab.description, item.slot);
 				if (item.slot.UpgradeWouldDestroyShip(slotUpgrade)) {
 					HoverableUI hoverableUI = hoverable;
 					hoverableUI.HoverText = hoverableUI.HoverText + "\n<color=red>" + Localization.TT("Button disabled, because it would destroy the ship") + "</color>";
@@ -1017,7 +1017,7 @@ namespace RST.UI {
 			}
 			ShipModule craftableModulePrefab = item.craftableModulePrefab;
 			if (craftableModulePrefab != null) {
-				hoverable.HoverText = Localization.TT(FFU_BE_Mod_Information.GetCraftableModuleDescription(craftableModulePrefab));
+				hoverable.HoverText = Localization.TT(FFU_BE_Mod_Information.GetCraftableModuleDescription(craftableModulePrefab), craftableModulePrefab);
 				costUi.Update(craftableModulePrefab.craftCost, true, pr);
 				button.interactable = item.slot.CanCraft(craftableModulePrefab) && craftableModulePrefab.craftCost.CheckHasEnough(pr);
 			}
@@ -1064,6 +1064,16 @@ namespace RST.UI {
 		[MonoModIgnore] private void SafeUpdateField(Text text, float value, ref float prevValue, string format = "{0}") { }
 		[MonoModIgnore] private void UpdateGroupedDmg(bool showShieldIcon, bool showShipIcon, bool showModuleIcon, string value) { }
 		[MonoModIgnore] private static void DoSkillIcon(HoverableUI skillIcon, bool shouldShow, ShipModule m) { }
+		[MonoModIgnore] private static string LocalizedPer {get {return Localization.TT("per"); }}
+		[MonoModIgnore] private static string LocalizedRu {get {return Localization.TT("ru"); }}
+		[MonoModIgnore] private static string LocalizedS {get {return Localization.TT("s"); }}
+		private static string LocalizedM {get {return Localization.TT("m"); }}
+		private static string LocalizedEMP {get {return Localization.TT("EMP"); }}
+		private static string LocalizedHP {get {return Localization.TT("HP"); }}
+		private static string LocalizedSP {get {return Localization.TT("SP"); }}
+		private static string LocalizedHit {get {return Localization.TT("Hit"); }}
+		private static string LocalizedMin {get {return Localization.TT("min."); }}
+		private static string LocalizedGWh {get {return Localization.TT("GW/h"); }}
 		private bool doWeaponHovers = false;
 		private bool doNukeHovers = false;
 		private bool doPointDefHovers = false;
@@ -1250,25 +1260,24 @@ namespace RST.UI {
 			WeaponModule weapon = m.Weapon;
 			ShootAtDamageDealer.Damage damage = weapon.ProjectileOrBeamPrefab.GetDamage(weapon);
 			Projectile projectile = weapon.ProjectileOrBeamPrefab as Projectile;
-			string perArg = Localization.TT("per");
 			GunnerySkillEffects gunnerySkillEffects = WorldRules.Instance.gunnerySkillEffects;
 			if (weapon.accuracy != 0) {
 				weaponAccuracy.SetActiveIfNeeded();
 				int effAccuracy = gunnerySkillEffects.EffectiveAccuracy(weapon);
-				weaponAccuracy.effects.text = weapon.accuracy != effAccuracy ? $"{altPreClr}{preColor}{effAccuracy * healthPercent:0} Δ{Localization.TT("m")}{aftColor}{altAftClr}" : $"{preColor}{effAccuracy * healthPercent:0} Δ{Localization.TT("m")}{aftColor}";
-				weaponAccuracy.skillBonus.text = "+" + gunnerySkillEffects.skillPointAccuracyBonus.ToString("0.0") + " " + perArg;
+				weaponAccuracy.effects.text = weapon.accuracy != effAccuracy ? $"{altPreClr}{preColor}{effAccuracy * healthPercent:0} Δ{LocalizedM}{aftColor}{altAftClr}" : $"{preColor}{effAccuracy * healthPercent:0} Δ{LocalizedM}{aftColor}";
+				weaponAccuracy.skillBonus.text = "+" + gunnerySkillEffects.skillPointAccuracyBonus.ToString("0.0") + " " + LocalizedPer;
 				SortOrder(weaponAccuracy, 10);
 			}
 			if (weapon.reloadInterval != 0f) {
 				weaponReloadTime.SetActiveIfNeeded();
 				float effReload = gunnerySkillEffects.EffectiveReloadTime(weapon);
-				weaponReloadTime.effects.text = weapon.reloadInterval != effReload ? $"{altPreClr}{preColor}{effReload / healthPercent:0.0}{Localization.TT("s")}{aftColor}{altAftClr}" : $"{preColor}{effReload / healthPercent:0.0}{Localization.TT("s")}{aftColor}";
-				weaponReloadTime.skillBonus.text = $"-{((!weapon.reloadIntervalTakesNoBonuses) ? gunnerySkillEffects.skillPointBonusPercent : 0)}% {perArg}";
+				weaponReloadTime.effects.text = weapon.reloadInterval != effReload ? $"{altPreClr}{preColor}{effReload / healthPercent:0.0}{LocalizedS}{aftColor}{altAftClr}" : $"{preColor}{effReload / healthPercent:0.0}{LocalizedS}{aftColor}";
+				weaponReloadTime.skillBonus.text = $"-{((!weapon.reloadIntervalTakesNoBonuses) ? gunnerySkillEffects.skillPointBonusPercent : 0)}% {LocalizedPer}";
 				SortOrder(weaponReloadTime, 20);
 			}
 			_ = weapon.tracksTarget;
-			if (projectile != null) SafeUpdateField(30, sensorSectorRadarRange, projectile.speed * 100f, ref prevProjSpeed, "{0:0} " + Localization.TT("m") + "/" + Localization.TT("s"));
-			SafeUpdateField(40, dmgAreaText, damage.damageAreaRadius * 10f, ref prevWeaponDmgArea, "{0:0.##}" + Localization.TT("m"));
+			if (projectile != null) SafeUpdateField(30, sensorSectorRadarRange, projectile.speed * 100f, ref prevProjSpeed, "{0:0} " + LocalizedM + "/" + LocalizedS);
+			SafeUpdateField(40, dmgAreaText, damage.damageAreaRadius * 10f, ref prevWeaponDmgArea, "{0:0.##}" + LocalizedM);
 			if (damage.shieldDmg != 0 && damage.shieldDmg == damage.shipDmg && damage.shipDmg == damage.moduleDmg) {
 				if (!groupedDmg.activeSelf) groupedDmg.SetActive(true);
 				UpdateGroupedDmg(true, true, true, $"{weapon.magazineSize}x{damage.shieldDmg}");
@@ -1299,13 +1308,13 @@ namespace RST.UI {
 			DoWeaponFireChance(damage.fireChanceLevel);
 			SortOrder(dmgToCrewText, 90);
 			SortOrder(fireChanceText, 100);
-			SafeUpdateField(110, empOverloadText, damage.moduleOverloadSeconds, ref prevEMPoverload, Localization.TT("EMP") + " " + "{0:0}" + Localization.TT("s"));
+			SafeUpdateField(110, empOverloadText, damage.moduleOverloadSeconds, ref prevEMPoverload, LocalizedEMP + " " + "{0:0}" + LocalizedS);
 			SortOrder(empOverloadText, 110);
 			weaponIgnoresShieldGo.SetActive(damage.ignoresShield);
 			weaponNeverDeflectsGo.SetActive(damage.neverDeflect);
 			SortOrder(weaponIgnoresShieldGo, 120);
 			SortOrder(weaponNeverDeflectsGo, 130);
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			Ship ship = m.Ship;
 			ResourceValueGroup resourcesPerShot = weapon.resourcesPerShot;
 			SafeUpdateField(organicsPerShotText, resourcesPerShot.organics, ref prevOrganics, "{0:0}");
@@ -1344,8 +1353,8 @@ namespace RST.UI {
 			SortOrder(weaponTracksTargetGo, 10);
 			SortOrder(weaponIgnoresShieldGo, 20);
 			SortOrder(weaponNeverDeflectsGo, 30);
-			if (homingMovement != null) SafeUpdateField(40, sensorSectorRadarRange, homingMovement.force * 10f, ref prevProjSpeed, "{0:0} " + Localization.TT("m") + "/" + Localization.TT("s") + "²");
-			SafeUpdateField(50, dmgAreaText, damage.damageAreaRadius * 10f, ref prevWeaponDmgArea, "{0:0.##}" + Localization.TT("m"));
+			if (homingMovement != null) SafeUpdateField(40, sensorSectorRadarRange, homingMovement.force * 10f, ref prevProjSpeed, "{0:0} " + LocalizedM + "/" + LocalizedS + "²");
+			SafeUpdateField(50, dmgAreaText, damage.damageAreaRadius * 10f, ref prevWeaponDmgArea, "{0:0.##}" + LocalizedM);
 			_ = weapon.tracksTarget;
 			if (damage.shieldDmg != 0 && damage.shieldDmg == damage.shipDmg && damage.shipDmg == damage.moduleDmg) {
 				if (!groupedDmg.activeSelf) groupedDmg.SetActive(true);
@@ -1377,10 +1386,10 @@ namespace RST.UI {
 			DoWeaponFireChance(damage.fireChanceLevel);
 			SortOrder(dmgToCrewText, 100);
 			SortOrder(fireChanceText, 110);
-			SafeUpdateField(120, empOverloadText, damage.moduleOverloadSeconds, ref prevEMPoverload, Localization.TT("EMP") + " " + "{0:0}" + Localization.TT("s"));
+			SafeUpdateField(120, empOverloadText, damage.moduleOverloadSeconds, ref prevEMPoverload, LocalizedEMP + " " + "{0:0}" + LocalizedS);
 			SortOrder(empOverloadText, 120);
 			SafeUpdateField(130, crewText, weapon.ProjectileOrBeamPrefab.spawnIntruderCount > 0 ? $"{FFU_BE_Defs.GetIntruderCountFromName(m) * 2f:0} ~ {FFU_BE_Defs.GetIntruderCountFromName(m) * 5f:0} {Core.TT("Units")}" : null);
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doNukeHovers) {
 				UpdateHoverFlags(doNukeHovers: true);
 				weaponTracksTargetHover.HoverText = $"{Localization.TT("Shows if capital missile has tracking and homing capabilities.")}";
@@ -1398,21 +1407,20 @@ namespace RST.UI {
 			PointDefenceModule pointDefence = m.PointDefence;
 			PointDefDamageDealer projectileOrBeamPrefab = pointDefence.ProjectileOrBeamPrefab;
 			ResourceValueGroup resourcesPerShot = pointDefence.resourcesPerShot;
-			string argPer = Localization.TT("per");
 			GunnerySkillEffects gunnerySkillEffects = WorldRules.Instance.gunnerySkillEffects;
 			pointDefReloadTime.SetActiveIfNeeded();
 			float pdEffReload = pointDefence.reloadInterval * gunnerySkillEffects.EffectiveSkillMultiplier(m, true);
-			pointDefReloadTime.effects.text = pointDefence.reloadInterval != pdEffReload ? $"{altPreClr}{preColor}{pdEffReload / healthPercent:0.00}{Localization.TT("s")}{aftColor}{altAftClr}" : $"{preColor}{pdEffReload / healthPercent:0.00}{Localization.TT("s")}{aftColor}";
-			pointDefReloadTime.skillBonus.text = $"-{gunnerySkillEffects.skillPointBonusPercent}% {argPer}";
+			pointDefReloadTime.effects.text = pointDefence.reloadInterval != pdEffReload ? $"{altPreClr}{preColor}{pdEffReload / healthPercent:0.00}{LocalizedS}{aftColor}{altAftClr}" : $"{preColor}{pdEffReload / healthPercent:0.00}{LocalizedS}{aftColor}";
+			pointDefReloadTime.skillBonus.text = $"-{gunnerySkillEffects.skillPointBonusPercent}% {LocalizedPer}";
 			SortOrder(pointDefReloadTime, 10);
 			pointDefCoverRadius.SetActiveIfNeeded();
 			float pdEffRadius = pointDefence.EffectiveCoverRadius;
-			pointDefCoverRadius.effects.text = pointDefence.coverRadius != pdEffRadius ? $"{altPreClr}{preColor}{pdEffRadius * 10f * healthPercent:0.0}{Localization.TT("m")}{aftColor}{altAftClr}" : $"{preColor}{pdEffRadius * 10f * healthPercent:0.0}{Localization.TT("m")}{aftColor}";
-			pointDefCoverRadius.skillBonus.text = $"+{gunnerySkillEffects.skillPointBonusPercent}% {argPer}";
+			pointDefCoverRadius.effects.text = pointDefence.coverRadius != pdEffRadius ? $"{altPreClr}{preColor}{pdEffRadius * 10f * healthPercent:0.0}{LocalizedM}{aftColor}{altAftClr}" : $"{preColor}{pdEffRadius * 10f * healthPercent:0.0}{LocalizedM}{aftColor}";
+			pointDefCoverRadius.skillBonus.text = $"+{gunnerySkillEffects.skillPointBonusPercent}% {LocalizedPer}";
 			SortOrder(pointDefCoverRadius, 20);
-			SafeUpdateField(30, pointDefDmgToProjectilesText, $"{projectileOrBeamPrefab.projectileDmg:0} {Localization.TT("HP")}/{Localization.TT("Hit")}");
+			SafeUpdateField(30, pointDefDmgToProjectilesText, $"{projectileOrBeamPrefab.projectileDmg:0} {LocalizedHP}/{LocalizedHit}");
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			Ship ship = m.Ship;
 			SafeUpdateField(organicsPerShotText, resourcesPerShot.organics, ref prevOrganics, "{0:0}");
 			SafeUpdateField(fuelPerShotText, resourcesPerShot.fuel, ref prevFuel, "{0:0}");
@@ -1438,15 +1446,15 @@ namespace RST.UI {
 		[MonoModReplace] private void DoEngine() {
 		/// Updated Engine Information
 			EngineModule engine = m.Engine;
-			SafeUpdateField(10, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(10, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + LocalizedRu + "/" + LocalizedS + aftColor);
 			SafeUpdateField(20, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
-			SafeUpdateField(30, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(40, fireChanceText, $"+{preColor}{engine.overchargeEvasionAdd * healthPercent:0} °/{Localization.TT("min.")}{aftColor}");
-			SafeUpdateField(50, empOverloadText, $"-{m.overchargePowerNeed:0} {Localization.TT("GW/h")}");
-			SafeUpdateField(60, medbayHealSpeedText, $"{m.overchargeSeconds:0}{Localization.TT("s")}");
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(30, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + LocalizedMin + aftColor);
+			SafeUpdateField(40, fireChanceText, $"+{preColor}{engine.overchargeEvasionAdd * healthPercent:0} °/{LocalizedMin}{aftColor}");
+			SafeUpdateField(50, empOverloadText, $"-{m.overchargePowerNeed:0} {LocalizedGWh}");
+			SafeUpdateField(60, medbayHealSpeedText, $"{m.overchargeSeconds:0}{LocalizedS}");
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (m.HasFullHealth) DoResourceConsPerDist(engine.ConsumedPerDistance, m);
 			else {
 				DoResourceConsPerDist(engine.ConsumedPerDistance * (1f / healthPercent), m);
@@ -1497,14 +1505,14 @@ namespace RST.UI {
 				sensorStarmapRadarRange.SetActiveIfNeeded();
 				SensorSkillEffects sensorSkillEffects = WorldRules.Instance.sensorSkillEffects;
 				float starRadRng = sensor.starmapRadarRange * sensorSkillEffects.EffectiveSkillMultiplier(m, false);
-				sensorStarmapRadarRange.effects.text = sensor.starmapRadarRange != starRadRng ? $" {altPreClr}{preColor}<size=18>{starRadRng * healthPercent:0}{Localization.TT("ru")}</size>{aftColor}{altAftClr}" : $" {preColor}<size=18>{starRadRng * healthPercent:0}{Localization.TT("ru")}</size>{aftColor}";
-				sensorStarmapRadarRange.skillBonus.text = $"+{sensorSkillEffects.skillPointBonusPercent}% {Localization.TT("per")}";
+				sensorStarmapRadarRange.effects.text = sensor.starmapRadarRange != starRadRng ? $" {altPreClr}{preColor}<size=18>{starRadRng * healthPercent:0}{LocalizedRu}</size>{aftColor}{altAftClr}" : $" {preColor}<size=18>{starRadRng * healthPercent:0}{LocalizedRu}</size>{aftColor}";
+				sensorStarmapRadarRange.skillBonus.text = $"+{sensorSkillEffects.skillPointBonusPercent}% {LocalizedPer}";
 				sensorStarmapRadarRange.hoverable.HoverText = string.Format(MonoBehaviourExtended.TT("Starmap radar range.\nShip will use max value if multiple sensors are present.\nIncreased by sensor skill(+{0}% per operator sensor skill point)"), sensorSkillEffects.skillPointBonusPercent);
 				SortOrder(sensorStarmapRadarRange, 20);
 			}
-			SafeUpdateField(30, sensorSectorRadarRange, sensor.sectorRadarRange > 0 ? $"{preColor}{sensor.sectorRadarRange * healthPercent:0}{Localization.TT("ru")}{aftColor}" : null);
-			SafeUpdateField(40, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(30, sensorSectorRadarRange, sensor.sectorRadarRange > 0 ? $"{preColor}{sensor.sectorRadarRange * healthPercent:0}{LocalizedRu}{aftColor}" : null);
+			SafeUpdateField(40, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + LocalizedM + "</size>" + aftColor);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doSensorHovers) {
 				UpdateHoverFlags(doSensorHovers: true);
 				sensorStarmapRadarRange.hoverable.HoverText = $"{Localization.TT("Shows active sensor array range that reveals accurate information about objects around your ship.")}";
@@ -1520,15 +1528,15 @@ namespace RST.UI {
 			bridgeEvasion.SetActiveIfNeeded();
 			BridgeSkillEffects bridgeSkillEffects = WorldRules.Instance.bridgeSkillEffects;
 			int bridgeEva = bridgeSkillEffects.EffectiveSkillBonusPercent(m);
-			bridgeEvasion.effects.text = (m.shipEvasionPercentAdd != bridgeEva) ? $"{altPreClr}{preColor}{m.shipEvasionPercentAdd + bridgeEva * healthPercent:0} °/{Localization.TT("min.")}{aftColor}{altAftClr}" : $"{preColor}{m.shipEvasionPercentAdd + bridgeEva * healthPercent:0} °/{Localization.TT("min.")}{aftColor}";
-			bridgeEvasion.skillBonus.text = string.Format("+{0} {1}", bridgeSkillEffects.skillPointBonusPercent, Localization.TT("per"));
+			bridgeEvasion.effects.text = (m.shipEvasionPercentAdd != bridgeEva) ? $"{altPreClr}{preColor}{m.shipEvasionPercentAdd + bridgeEva * healthPercent:0} °/{LocalizedMin}{aftColor}{altAftClr}" : $"{preColor}{m.shipEvasionPercentAdd + bridgeEva * healthPercent:0} °/{LocalizedMin}{aftColor}";
+			bridgeEvasion.skillBonus.text = string.Format("+{0} {1}", bridgeSkillEffects.skillPointBonusPercent, LocalizedPer);
 			SafeUpdateField(10, crewText, $"{m.CurrentLocalOpsCount}/{m.operatorSpots.Length} <size=16>{Localization.TT("Officers")}</size>");
 			SortOrder(bridgeRemoteOpsGo, 20);
 			SortOrder(bridgeEvasion, 30);
-			SafeUpdateField(40, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(40, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + LocalizedM + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doBridgeHovers) {
 				UpdateHoverFlags(doBridgeHovers: true);
 				crewOpsHover.HoverText = $"{Localization.TT("Shows current occupancy and limit of how much crewmembers can operate bridge at the same time.")}";
@@ -1547,15 +1555,15 @@ namespace RST.UI {
 			if (shieldGen.reloadInterval != 0f) {
 				shieldReloadTime.SetActiveIfNeeded();
 				float shieldNum = shieldGen.reloadInterval * shieldSkillEffects.EffectiveSkillMultiplier(m, true);
-				shieldReloadTime.effects.text = (shieldGen.reloadInterval != shieldNum) ? $"{altPreClr}{preColor}{shieldNum / healthPercent:0.00} {Localization.TT("s")}/{Localization.TT("SP")}{aftColor}{altAftClr}" : $"{preColor}{shieldNum / healthPercent:0.00}{aftColor} {Localization.TT("s")}/{Localization.TT("SP")}";
-				shieldReloadTime.skillBonus.text = string.Format("-{0}% {1}", shieldSkillEffects.skillPointBonusPercent, Localization.TT("per"));
+				shieldReloadTime.effects.text = (shieldGen.reloadInterval != shieldNum) ? $"{altPreClr}{preColor}{shieldNum / healthPercent:0.00} {LocalizedS}/{LocalizedSP}{aftColor}{altAftClr}" : $"{preColor}{shieldNum / healthPercent:0.00}{aftColor} {LocalizedS}/{LocalizedSP}";
+				shieldReloadTime.skillBonus.text = string.Format("-{0}% {1}", shieldSkillEffects.skillPointBonusPercent, LocalizedPer);
 				SortOrder(shieldReloadTime, 10);
 			}
-			SafeUpdateField(20, sMaxShieldBonusText, m.HasFullHealth ? shieldGen.maxShieldAdd : shieldGen.maxShieldAdd * healthPercent, ref prevShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(30, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(20, sMaxShieldBonusText, m.HasFullHealth ? shieldGen.maxShieldAdd : shieldGen.maxShieldAdd * healthPercent, ref prevShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(30, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
 			SafeUpdateField(40, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
-			SafeUpdateField(50, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(50, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + LocalizedMin + aftColor);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doShieldHovers) {
 				UpdateHoverFlags(doShieldHovers: true);
 				shieldReloadTime.hoverable.HoverText = $"{Localization.TT("Shows how much time it takes for shield generator to restore a single shield point.")}";
@@ -1575,15 +1583,15 @@ namespace RST.UI {
 			WarpSkillEffects warpSkillEffects = WorldRules.Instance.warpSkillEffects;
 			warpReloadTime.SetActiveIfNeeded();
 			float warpNum = warp.reloadInterval * warpSkillEffects.EffectiveSkillMultiplier(m, true);
-			warpReloadTime.effects.text = warp.reloadInterval != warpNum ? $"{altPreClr}{preColor}{warpNum / Mathf.Pow(healthPercent, 2):0.00}{Localization.TT("s")}{aftColor}{altAftClr}" : $"{preColor}{warpNum / Mathf.Pow(healthPercent, 2):0.00}{Localization.TT("s")}{aftColor}";
-			warpReloadTime.skillBonus.text = string.Format("-{0}% {1}", warpSkillEffects.skillPointBonusPercent, Localization.TT("per"));
+			warpReloadTime.effects.text = warp.reloadInterval != warpNum ? $"{altPreClr}{preColor}{warpNum / Mathf.Pow(healthPercent, 2):0.00}{LocalizedS}{aftColor}{altAftClr}" : $"{preColor}{warpNum / Mathf.Pow(healthPercent, 2):0.00}{LocalizedS}{aftColor}";
+			warpReloadTime.skillBonus.text = string.Format("-{0}% {1}", warpSkillEffects.skillPointBonusPercent, LocalizedPer);
 			SortOrder(warpReloadTime, 10);
-			SafeUpdateField(220, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(220, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + LocalizedRu + "/" + LocalizedS + aftColor);
 			SafeUpdateField(240, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
-			SafeUpdateField(260, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(260, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + LocalizedMin + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doWarpHovers) {
 				UpdateHoverFlags(doWarpHovers: true);
 				warpReloadTime.hoverable.HoverText = $"{Localization.TT("Shows how much time warp drive needs to spool up before initiating jump.")}";
@@ -1602,13 +1610,13 @@ namespace RST.UI {
 			int reactorNum = isOvercharged ? reactor.powerCapacity + reactor.overchargePowerCapacityAdd : reactor.powerCapacity;
 			string rPreClr = isOvercharged ? "<color=lime>" : null;
 			string rAftClr = isOvercharged ? "</color>" : null;
-			SafeUpdateField(10, reactorPowerProdText, $"{rPreClr}{preColor}{reactorNum * healthPercent:0} {Localization.TT("GW/h")}{aftColor}{rAftClr}");
-			SafeUpdateField(20, empOverloadText, $"+{reactor.overchargePowerCapacityAdd:0} {Localization.TT("GW/h")}");
-			SafeUpdateField(30, medbayHealSpeedText, $"{m.overchargeSeconds:0}{Localization.TT("s")}");
-			SafeUpdateField(260, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(10, reactorPowerProdText, $"{rPreClr}{preColor}{reactorNum * healthPercent:0} {LocalizedGWh}{aftColor}{rAftClr}");
+			SafeUpdateField(20, empOverloadText, $"+{reactor.overchargePowerCapacityAdd:0} {LocalizedGWh}");
+			SafeUpdateField(30, medbayHealSpeedText, $"{m.overchargeSeconds:0}{LocalizedS}");
+			SafeUpdateField(260, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + LocalizedRu + "/" + LocalizedS + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			DoResourceConsPerDist(reactor.ConsumedPerDistance, m);
 			if (!doReactorHovers) {
 				UpdateHoverFlags(doReactorHovers: true);
@@ -1629,10 +1637,10 @@ namespace RST.UI {
 			int synPerHp = (int)medbay.resourcesPerHp.synthetics;
 			SafeUpdateField(10, medbayHealSpotsText, $"<size=16>{CrewmemberTypesText(medbay.acceptCrewTypes)}</size>");
 			SafeUpdateField(20, crewText, $"{m.CurrentLocalOpsCount}/{m.operatorSpots.Length} <size=16>{Localization.TT("Patients")}</size>");
-			SafeUpdateField(30, medbayHealSpeedText, m.HasFullHealth ? medbay.secondsPerHp : medbay.secondsPerHp / Mathf.Pow(healthPercent, 2), ref prevHealingInvSpeed, preColor + "{0:0.00}" + Localization.TT("s") + aftColor);
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(30, medbayHealSpeedText, m.HasFullHealth ? medbay.secondsPerHp : medbay.secondsPerHp / Mathf.Pow(healthPercent, 2), ref prevHealingInvSpeed, preColor + "{0:0.00}" + LocalizedS + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			PlayerData playerData = PlayerDatas.Get(m.Ownership.GetOwner());
 			SafeUpdateField(medbayOrganicsPerHpText, orgPerHp, ref prevOrganicsPerHp);
 			SafeUpdateField(medbaySyntheticsPerHpText, synPerHp, ref prevSyntheticsPerHp);
@@ -1663,11 +1671,11 @@ namespace RST.UI {
 				if (materialsConverter.produceRecipes[recipeNum].exotics > 0) SafeUpdateField(60, exoticsProdText, $"<size=15>{preColor}{prodAmt / 10:0.#}: {recipeCost}{aftColor}</size>");
 				if (materialsConverter.produceRecipes[recipeNum].credits > 0) SafeUpdateField(70, creditsProdText, $"<size=15>{preColor}{prodAmt * 10:0.#}: {recipeCost}{aftColor}</size>");
 			}
-			SafeUpdateField(100, medbayHealSpeedText, $"{materialsConverter.maxWarmUpPoints:0}{Localization.TT("s")}");
-			SafeUpdateField(110, dmgAreaText, $"{materialsConverter.maxWarmUpPoints / materialsConverter.warmUpDissipation:0}{Localization.TT("s")}");
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(100, medbayHealSpeedText, $"{materialsConverter.maxWarmUpPoints:0}{LocalizedS}");
+			SafeUpdateField(110, dmgAreaText, $"{materialsConverter.maxWarmUpPoints / materialsConverter.warmUpDissipation:0}{LocalizedS}");
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doConverterHovers) {
 				UpdateHoverFlags(doConverterHovers: true);
 				organicsProdHover.HoverText = $"{Localization.TT("Shows how much organics material converter produces per minute, if active.")}";
@@ -1687,13 +1695,13 @@ namespace RST.UI {
 		}
 		[MonoModReplace] private void DoFighter() {
 		/// Updated Fighter Bay Information
-			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + LocalizedRu + "/" + LocalizedS + aftColor);
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
-			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + LocalizedMin + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + LocalizedM + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doFighterHovers) {
 				UpdateHoverFlags(doFighterHovers: true);
 				sSpeedBonusHover.HoverText = $"{Localization.TT("Shows interstellar travel speed increase fighter bay provides to the ship.")}";
@@ -1726,9 +1734,9 @@ namespace RST.UI {
 			SafeUpdateField(40, syntheticsContCurText, (maxSynthetics == 0) ? null : (synthetics + " / " + maxSynthetics));
 			SafeUpdateField(50, explosivesContCurText, (maxExplosives == 0) ? null : (explosives + " / " + maxExplosives));
 			SafeUpdateField(60, exoticsContCurText, (maxExotics == 0) ? null : (exotics + " / " + maxExotics));
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doContainerHovers) {
 				UpdateHoverFlags(doContainerHovers: true);
 				organicsContCurHover.HoverText = $"{Localization.TT("Shows how much organic substances can be stored in a container.")}";
@@ -1746,9 +1754,9 @@ namespace RST.UI {
 		/// Updated Module Storage Information
 			storageSizeText.alignment = TextAnchor.MiddleLeft;
 			SafeUpdateField(10, storageSizeText, m.Storage.slotCount.ToString());
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doStorageHovers) {
 				UpdateHoverFlags(doStorageHovers: true);
 				storageSizeHover.HoverText = $"{Localization.TT("Shows how much modules can be stored in the module storage compartment.")}";
@@ -1765,17 +1773,17 @@ namespace RST.UI {
 			removesOpResCons.SetActive(true);
 			SafeUpdateField(10, crewText, $"{m.CurrentLocalOpsCount}/{m.operatorSpots.Length} <size=16>{Localization.TT("Farmers")}</size>");
 			SortOrder(removesOpResCons, 20);
-			SafeUpdateField(30, creditsProdText, farmSkillProd.credits > 0 ? $"{(farmProdPerDist.credits > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.credits * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.credits > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(40, organicsProdText, farmSkillProd.organics > 0 ? $"{(farmProdPerDist.organics > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.organics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.organics > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(50, fuelProdText, farmSkillProd.fuel > 0 ? $"{(farmProdPerDist.fuel > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.fuel * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.fuel > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(60, metalsProdText, farmSkillProd.metals > 0 ? $"{(farmProdPerDist.metals > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.metals * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.metals > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(70, syntheticsProdText, farmSkillProd.synthetics > 0 ? $"{(farmProdPerDist.synthetics > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.synthetics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.synthetics > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(80, explosivesProdText, farmSkillProd.explosives > 0 ? $"{(farmProdPerDist.explosives > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.explosives * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.explosives > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(90, exoticsProdText, farmSkillProd.exotics > 0 ? $"{(farmProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.exotics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(farmProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(100, gardenOrganicsProdBonusText, $" {farm.producedPerSkillPoint.organics:0.0}/100{Localization.TT("ru")} /");
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(30, creditsProdText, farmSkillProd.credits > 0 ? $"{(farmProdPerDist.credits > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.credits * 100:0.#}/100{LocalizedRu}{aftColor}{(farmProdPerDist.credits > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(40, organicsProdText, farmSkillProd.organics > 0 ? $"{(farmProdPerDist.organics > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.organics * 100:0.#}/100{LocalizedRu}{aftColor}{(farmProdPerDist.organics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(50, fuelProdText, farmSkillProd.fuel > 0 ? $"{(farmProdPerDist.fuel > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.fuel * 100:0.#}/100{LocalizedRu}{aftColor}{(farmProdPerDist.fuel > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(60, metalsProdText, farmSkillProd.metals > 0 ? $"{(farmProdPerDist.metals > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.metals * 100:0.#}/100{LocalizedRu}{aftColor}{(farmProdPerDist.metals > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(70, syntheticsProdText, farmSkillProd.synthetics > 0 ? $"{(farmProdPerDist.synthetics > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.synthetics * 100:0.#}/100{LocalizedRu}{aftColor}{(farmProdPerDist.synthetics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(80, explosivesProdText, farmSkillProd.explosives > 0 ? $"{(farmProdPerDist.explosives > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.explosives * 100:0.#}/100{LocalizedRu}{aftColor}{(farmProdPerDist.explosives > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(90, exoticsProdText, farmSkillProd.exotics > 0 ? $"{(farmProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{farmProdPerDist.exotics * 100:0.#}/100{LocalizedRu}{aftColor}{(farmProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(100, gardenOrganicsProdBonusText, $" {farm.producedPerSkillPoint.organics:0.0}/100{LocalizedRu} /");
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doGardenHovers) {
 				UpdateHoverFlags(doGardenHovers: true);
 				crewOpsHover.HoverText = $"{Localization.TT("Shows current occupancy and limit of how much farmers can work in the greenhouse at the same time.")}";
@@ -1802,19 +1810,19 @@ namespace RST.UI {
 			float researchSpeed = FFU_BE_Defs.GetResearchFromRVG(laboratoryOutput) * FFU_BE_Defs.tierResearchSpeedMult;
 			float reversingSpeed = FFU_BE_Defs.GetReverseFromRVG(laboratoryOutput) * FFU_BE_Defs.moduleResearchSpeedMult;
 			SafeUpdateField(10, crewText, $"{m.CurrentLocalOpsCount}/{m.operatorSpots.Length} <size=16>{Localization.TT("Scientists")}</size>");
-			SafeUpdateField(20, sEvasionBonusText, $"{researchSpeed * 100f:0.0##}/100{Localization.TT("ru")}");
-			SafeUpdateField(30, sAccuracyBonusText, $"<size=18>{reversingSpeed * 100f:0.0##}/100{Localization.TT("ru")}</size>");
-			SafeUpdateField(40, creditsProdText, labSkillProd.credits > 0 ? $"{(labProdPerDist.credits > 0 ? altPreClr : null)}{preColor}{labProdPerDist.credits * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.credits > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(50, organicsProdText, labSkillProd.organics > 0 ? $"{(labProdPerDist.organics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.organics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.organics > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(60, fuelProdText, labSkillProd.fuel > 0 ? $"{(labProdPerDist.fuel > 0 ? altPreClr : null)}{preColor}{labProdPerDist.fuel * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.fuel > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(70, metalsProdText, labSkillProd.metals > 0 ? $"{(labProdPerDist.metals > 0 ? altPreClr : null)}{preColor}{labProdPerDist.metals * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.metals > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(80, syntheticsProdText, labSkillProd.synthetics > 0 ? $"{(labProdPerDist.synthetics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.synthetics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.synthetics > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(90, explosivesProdText, labSkillProd.explosives > 0 ? $"{(labProdPerDist.explosives > 0 ? altPreClr : null)}{preColor}{labProdPerDist.explosives * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.explosives > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(100, exoticsProdText, labSkillProd.exotics > 0 ? $"{(labProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.exotics * 100:0.#}/100{Localization.TT("ru")}{aftColor}{(labProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
-			SafeUpdateField(110, researchCreditsProdBonusText, $" {lab.producedPerSkillPoint.credits:0.0}/100{Localization.TT("ru")} /");
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(20, sEvasionBonusText, $"{researchSpeed * 100f:0.0##}/100{LocalizedRu}");
+			SafeUpdateField(30, sAccuracyBonusText, $"<size=18>{reversingSpeed * 100f:0.0##}/100{LocalizedRu}</size>");
+			SafeUpdateField(40, creditsProdText, labSkillProd.credits > 0 ? $"{(labProdPerDist.credits > 0 ? altPreClr : null)}{preColor}{labProdPerDist.credits * 100:0.#}/100{LocalizedRu}{aftColor}{(labProdPerDist.credits > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(50, organicsProdText, labSkillProd.organics > 0 ? $"{(labProdPerDist.organics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.organics * 100:0.#}/100{LocalizedRu}{aftColor}{(labProdPerDist.organics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(60, fuelProdText, labSkillProd.fuel > 0 ? $"{(labProdPerDist.fuel > 0 ? altPreClr : null)}{preColor}{labProdPerDist.fuel * 100:0.#}/100{LocalizedRu}{aftColor}{(labProdPerDist.fuel > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(70, metalsProdText, labSkillProd.metals > 0 ? $"{(labProdPerDist.metals > 0 ? altPreClr : null)}{preColor}{labProdPerDist.metals * 100:0.#}/100{LocalizedRu}{aftColor}{(labProdPerDist.metals > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(80, syntheticsProdText, labSkillProd.synthetics > 0 ? $"{(labProdPerDist.synthetics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.synthetics * 100:0.#}/100{LocalizedRu}{aftColor}{(labProdPerDist.synthetics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(90, explosivesProdText, labSkillProd.explosives > 0 ? $"{(labProdPerDist.explosives > 0 ? altPreClr : null)}{preColor}{labProdPerDist.explosives * 100:0.#}/100{LocalizedRu}{aftColor}{(labProdPerDist.explosives > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(100, exoticsProdText, labSkillProd.exotics > 0 ? $"{(labProdPerDist.exotics > 0 ? altPreClr : null)}{preColor}{labProdPerDist.exotics * 100:0.#}/100{LocalizedRu}{aftColor}{(labProdPerDist.exotics > 0 ? altAftClr : null)}" : null);
+			SafeUpdateField(110, researchCreditsProdBonusText, $" {lab.producedPerSkillPoint.credits:0.0}/100{LocalizedRu} /");
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doResearchHovers) {
 				UpdateHoverFlags(doResearchHovers: true);
 				crewOpsHover.HoverText = $"{Localization.TT("Shows current occupancy and limit of how much scientists can work in the laboratory at the same time.")}";
@@ -1839,12 +1847,12 @@ namespace RST.UI {
 			removesOpResCons.SetActive(true);
 			SafeUpdateField(10, crewText, $"{m.CurrentLocalOpsCount}/{m.operatorSpots.Length} <size=16>{Localization.TT("Occupied")}</size>");
 			SortOrder(removesOpResCons, 20);
-			SafeUpdateField(30, medbayHealSpotsText, cryo.healOneCrewHp ? $"{preColor}{cryo.healOneCrewHpDistance.minValue / healthPercent:0}{Localization.TT("ru")} ~ {cryo.healOneCrewHpDistance.maxValue / healthPercent:0}{Localization.TT("ru")}{aftColor}" : null);
-			SafeUpdateField(40, sensorSectorRadarRange, cryo.genDreamCredits ? $"{preColor}{cryo.genDreamCreditsDistance.minValue / healthPercent:0}{Localization.TT("ru")} ~ {cryo.genDreamCreditsDistance.maxValue / healthPercent:0}{Localization.TT("ru")}{aftColor}" : null);
+			SafeUpdateField(30, medbayHealSpotsText, cryo.healOneCrewHp ? $"{preColor}{cryo.healOneCrewHpDistance.minValue / healthPercent:0}{LocalizedRu} ~ {cryo.healOneCrewHpDistance.maxValue / healthPercent:0}{LocalizedRu}{aftColor}" : null);
+			SafeUpdateField(40, sensorSectorRadarRange, cryo.genDreamCredits ? $"{preColor}{cryo.genDreamCreditsDistance.minValue / healthPercent:0}{LocalizedRu} ~ {cryo.genDreamCreditsDistance.maxValue / healthPercent:0}{LocalizedRu}{aftColor}" : null);
 			SafeUpdateField(50, creditsProdText, cryo.genDreamCredits ? $"{preColor}${cryo.creditsPerDream.minValue * healthPercent:0.#} ~ ${cryo.creditsPerDream.maxValue * healthPercent:0.#}{aftColor}" : null);
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doCryosleepHovers) {
 				UpdateHoverFlags(doCryosleepHovers: true);
 				crewOpsHover.HoverText = $"{Localization.TT("Shows current occupancy and limit of how much crewmembers can be put into cryosleep at the same time.")}";
@@ -1859,13 +1867,13 @@ namespace RST.UI {
 		}
 		[MonoModReplace] private void DoStealthDecryptorSensor() {
 		/// Updated Stealth Generator Information
-			SafeUpdateField(10, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, altPreClr + preColor + "{0:0.#} " + Localization.TT("m") + "³" + aftColor + altAftClr);
-			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(10, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, altPreClr + preColor + "{0:0.#} " + LocalizedM + "³" + aftColor + altAftClr);
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + LocalizedRu + "/" + LocalizedS + aftColor);
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
-			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + LocalizedMin + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + LocalizedM + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
 			if (!doStealthHovers) {
 				UpdateHoverFlags(doStealthHovers: true);
 				starmapStealthDetMaxHover.HoverText = $"{Localization.TT("Shows by how much stealth generator reduces ship's signature.")}";
@@ -1879,13 +1887,13 @@ namespace RST.UI {
 		}
 		[MonoModReplace] private void DoPassiveECM() {
 		/// Updated Countermeasure Arrays Information
-			SafeUpdateField(10, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, altPreClr + preColor + "{0:0.#} " + Localization.TT("m") + "³" + aftColor + altAftClr);
-			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(10, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, altPreClr + preColor + "{0:0.#} " + LocalizedM + "³" + aftColor + altAftClr);
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + LocalizedRu + "/" + LocalizedS + aftColor);
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
-			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + LocalizedMin + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + LocalizedM + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
 			if (!doPassiveHovers) {
 				UpdateHoverFlags(doPassiveHovers: true);
 				starmapStealthDetMaxHover.HoverText = $"{Localization.TT("Shows by how much countermeasure module reduces ship's signature.")}";
@@ -1899,13 +1907,13 @@ namespace RST.UI {
 		}
 		[MonoModReplace] private void DoIntegrity() {
 		/// Updated Starship Armor Information
-			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + LocalizedRu + "/" + LocalizedS + aftColor);
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
-			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + LocalizedMin + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + LocalizedM + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doIntegrityHovers) {
 				UpdateHoverFlags(doIntegrityHovers: true);
 				sSpeedBonusHover.HoverText = $"{Localization.TT("Shows interstellar travel speed increase armor provides to the ship.")}";
@@ -1919,13 +1927,13 @@ namespace RST.UI {
 		}
 		[MonoModReplace] private void DoDecoy() {
 		/// Updated Decoy Modules Information
-			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + LocalizedRu + "/" + LocalizedS + aftColor);
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
-			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + LocalizedMin + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + LocalizedM + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doDecoyHovers) {
 				UpdateHoverFlags(doDecoyHovers: true);
 				sSpeedBonusHover.HoverText = $"{Localization.TT("Shows interstellar travel speed increase decoy module provides to the ship.")}";
@@ -1945,13 +1953,13 @@ namespace RST.UI {
 			SafeUpdateField(30, dmgToCrewText, FFU_BE_Mod_Information.IsCacheModule(m) && FFU_BE_Mod_Information.GetCacheHPLimit(m) > 0 ? $"{FFU_BE_Mod_Information.GetCacheHPLimit(m)} <size=16>{Localization.TT("Limit")}</size>" : null);
 			if (m.Ownership.GetOwner() == Ownership.Owner.Me) SafeUpdateField(40, pointDefDmgToProjectilesText, FFU_BE_Mod_Information.IsCacheModule(m) && !FFU_BE_Mod_Information.GetCacheWeapons(m).IsEmpty() ? $"<size=14>{GetSelectedWeapon()}</size>" : null);
 			SafeUpdateField(50, storageSizeText, FFU_BE_Mod_Information.IsCacheModule(m) && !FFU_BE_Mod_Information.GetCacheWeapons(m).IsEmpty() ? $"<size=14>{string.Join("\n", FFU_BE_Mod_Information.GetCacheWeapons(m, " "))}</size>" : null);
-			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + Localization.TT("ru") + "/" + Localization.TT("s") + aftColor);
+			SafeUpdateField(200, sSpeedBonusText, m.HasFullHealth ? m.starmapSpeedAdd : m.starmapSpeedAdd * healthPercent, ref prevStarmapSpeedAdd, preColor + "{0:0.0} " + LocalizedRu + "/" + LocalizedS + aftColor);
 			SafeUpdateField(220, sAsteroidDeflBonusText, m.HasFullHealth ? m.asteroidDeflectionPercentAdd : m.asteroidDeflectionPercentAdd * healthPercent, ref prevAsteroidDefl, preColor + "{0:0}%" + aftColor);
-			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + Localization.TT("m") + "</size>" + aftColor);
-			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + Localization.TT("SP") + aftColor);
-			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + Localization.TT("HP"));
-			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + Localization.TT("m") + "³");
+			SafeUpdateField(240, sEvasionBonusText, m.HasFullHealth ? m.shipEvasionPercentAdd : m.shipEvasionPercentAdd * healthPercent, ref prevShipEvasionPercentAdd, preColor + "{0:0} °/" + LocalizedMin + aftColor);
+			SafeUpdateField(260, sAccuracyBonusText, m.HasFullHealth ? m.shipAccuracyPercentAdd : m.shipAccuracyPercentAdd * healthPercent, ref prevSAccuracyBonus, preColor + "<size=18>" + "{0:0}% Δ" + LocalizedM + "</size>" + aftColor);
+			SafeUpdateField(280, sMaxShieldBonusText, m.HasFullHealth ? m.maxShieldAdd : m.maxShieldAdd * healthPercent, ref prevMaxShieldAdd, preColor + "{0:0} " + LocalizedSP + aftColor);
+			SafeUpdateField(300, sMaxHealthBonusText, m.maxHealthAdd, ref prevMaxHealthAdd, "{0:0} " + LocalizedHP);
+			SafeUpdateField(500, starmapStealthDetMaxText, FFU_BE_Defs.GetModuleEnergyEmission(m), ref prevEnergyEmission, "{0:0.#} " + LocalizedM + "³");
 			if (!doOtherHovers) {
 				UpdateHoverFlags(doOtherHovers: true);
 				crewOpsHover.HoverText = $"{Localization.TT("Shows how much equipment or upgrade sets cache contains.")}";
@@ -2026,14 +2034,14 @@ namespace RST.UI {
 			float explosivesProd = rp.explosives * 60f / secondsPerConversion;
 			float exoticsProd = rp.exotics * 60f / secondsPerConversion;
 			float creditsProd = rp.credits * 60f / secondsPerConversion;
-			SafeUpdateField(10, creditsProdText, m.HasFullHealth ? creditsProd : creditsProd * healthPercent, ref prevCredits, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(20, organicsProdText, m.HasFullHealth ? organicsProd : organicsProd * healthPercent, ref prevOrganics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(30, fuelProdText, m.HasFullHealth ? fuelProd : fuelProd * healthPercent, ref prevFuel, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(40, metalsProdText, m.HasFullHealth ? metalsProd : metalsProd * healthPercent, ref prevMetals, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(50, syntheticsProdText, m.HasFullHealth ? syntheticsProd : syntheticsProd * healthPercent, ref prevSynth, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(60, explosivesProdText, m.HasFullHealth ? explosivesProd : explosivesProd * healthPercent, ref prevExpl, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			SafeUpdateField(70, exoticsContCurText, m.HasFullHealth ? exoticsProd : exoticsProd * healthPercent, ref prevExotics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
-			//SafeUpdateField(70, exoticsProdText, m.HasFullHealth ? exoticsProd : exoticsProd * healthPercent, ref prevExotics, preColor + "{0:0}/" + Localization.TT("min.") + aftColor);
+			SafeUpdateField(10, creditsProdText, m.HasFullHealth ? creditsProd : creditsProd * healthPercent, ref prevCredits, preColor + "{0:0}/" + LocalizedMin + aftColor);
+			SafeUpdateField(20, organicsProdText, m.HasFullHealth ? organicsProd : organicsProd * healthPercent, ref prevOrganics, preColor + "{0:0}/" + LocalizedMin + aftColor);
+			SafeUpdateField(30, fuelProdText, m.HasFullHealth ? fuelProd : fuelProd * healthPercent, ref prevFuel, preColor + "{0:0}/" + LocalizedMin + aftColor);
+			SafeUpdateField(40, metalsProdText, m.HasFullHealth ? metalsProd : metalsProd * healthPercent, ref prevMetals, preColor + "{0:0}/" + LocalizedMin + aftColor);
+			SafeUpdateField(50, syntheticsProdText, m.HasFullHealth ? syntheticsProd : syntheticsProd * healthPercent, ref prevSynth, preColor + "{0:0}/" + LocalizedMin + aftColor);
+			SafeUpdateField(60, explosivesProdText, m.HasFullHealth ? explosivesProd : explosivesProd * healthPercent, ref prevExpl, preColor + "{0:0}/" + LocalizedMin + aftColor);
+			SafeUpdateField(70, exoticsContCurText, m.HasFullHealth ? exoticsProd : exoticsProd * healthPercent, ref prevExotics, preColor + "{0:0}/" + LocalizedMin + aftColor);
+			//SafeUpdateField(70, exoticsProdText, m.HasFullHealth ? exoticsProd : exoticsProd * healthPercent, ref prevExotics, preColor + "{0:0}/" + LocalizedMin + aftColor);
 		}
 		[MonoModReplace] private void DoResourceConsPerSecond(ResourceValueGroup rc, float secondsPerConversion) {
 		/// Sorted Resource Consumption Per Second
@@ -2043,12 +2051,12 @@ namespace RST.UI {
 			float syntheticsCons = rc.synthetics * 60f / secondsPerConversion;
 			float explosivesCons = rc.explosives * 60f / secondsPerConversion;
 			float exoticsCons = rc.exotics * 60f / secondsPerConversion;
-			SafeUpdateField(110, organicsConsText, organicsCons, ref prevOrganicsCons, "{0:0}/" + Localization.TT("min."));
-			SafeUpdateField(120, fuelConsText, fuelCons, ref prevFuelCons, "{0:0}/" + Localization.TT("min."));
-			SafeUpdateField(130, metalsConsText, metalsCons, ref prevMetalsCons, "{0:0}/" + Localization.TT("min."));
-			SafeUpdateField(140, syntheticsConsText, syntheticsCons, ref prevSynthCons, "{0:0}/" + Localization.TT("min."));
-			SafeUpdateField(150, explosivesConsText, explosivesCons, ref prevExplCons, "{0:0}/" + Localization.TT("min."));
-			SafeUpdateField(160, exoticsConsText, exoticsCons, ref prevExoticsCons, "{0:0}/" + Localization.TT("min."));
+			SafeUpdateField(110, organicsConsText, organicsCons, ref prevOrganicsCons, "{0:0}/" + LocalizedMin);
+			SafeUpdateField(120, fuelConsText, fuelCons, ref prevFuelCons, "{0:0}/" + LocalizedMin);
+			SafeUpdateField(130, metalsConsText, metalsCons, ref prevMetalsCons, "{0:0}/" + LocalizedMin);
+			SafeUpdateField(140, syntheticsConsText, syntheticsCons, ref prevSynthCons, "{0:0}/" + LocalizedMin);
+			SafeUpdateField(150, explosivesConsText, explosivesCons, ref prevExplCons, "{0:0}/" + LocalizedMin);
+			SafeUpdateField(160, exoticsConsText, exoticsCons, ref prevExoticsCons, "{0:0}/" + LocalizedMin);
 		}
 		private string DoConverterRecipeCost(ResourceValueGroup recipe) {
 			string costText = "";

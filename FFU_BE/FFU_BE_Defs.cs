@@ -14,7 +14,7 @@ using System;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "1.0.3.0";
+		public static string modVersion = "1.0.3.5";
 		//Temporary Data
 		public static bool flagDLC_SupPak = false;
 		public static bool flagDLC_OldEnm = false;
@@ -417,24 +417,41 @@ namespace FFU_Bleeding_Edge {
 				RecalculateEnergyEmission();
 			}
 			if (firstRun) {
-				Debug.LogWarning("Loading modded data and custom variables for the first time...");
+				Debug.LogWarning("Detecting DLCs...");
 				InitDLCsDetection();
+				Debug.LogWarning("Updating Game Texts...");
 				InitGameTextUpdate();
+				Debug.LogWarning("Updating World Variables...");
 				InitWorldPermVariables();
+				Debug.LogWarning("Updating Game Interface...");
 				InitGameInterfaceUpdate();
+				Debug.LogWarning("Initializing Damage Tokens...");
 				InitDamageTokensPrefabList();
+				Debug.LogWarning("Initializing Damage Dealers...");
 				InitDamageDealersPrefabList();
+				Debug.LogWarning("Initializing Firearms...");
 				FFU_BE_Mod_Crewmembers.InitFirearmsList();
+				Debug.LogWarning("Initializing Crew Types...");
 				FFU_BE_Mod_Crewmembers.InitCrewTypesList();
+				Debug.LogWarning("Initializing Space Pods...");
 				FFU_BE_Mod_Crewmembers.InitSpacePodsList();
+				Debug.LogWarning("Initializing Ship Slots...");
 				FFU_BE_Mod_Modules.InitShipSlotsList();
+				Debug.LogWarning("Initializing Ship Modules...");
 				FFU_BE_Mod_Modules.InitShipModulesList();
+				Debug.LogWarning("Initializing Module Malfunctions...");
 				FFU_BE_Mod_Modules.InitModuleMalfunctions();
+				Debug.LogWarning("Initializing Selectable Perks...");
 				FFU_BE_Mod_Spaceships.InitSelectablePerks();
+				Debug.LogWarning("Initializing Starting Ship Crews...");
 				FFU_BE_Mod_Spaceships.InitShipCoreCrewmembers();
+				Debug.LogWarning("Initializing Starting Ship Resources...");
 				FFU_BE_Mod_Spaceships.InitShipResourcePrefabs();
+				Debug.LogWarning("Initializing Spaceships...");
 				FFU_BE_Mod_Spaceships.InitSpaceShipsPrefabList();
+				Debug.LogWarning("Allocating Unused Perks...");
 				FFU_BE_Mod_Spaceships.InitLockedPerksAllocation();
+				Debug.LogWarning("Loading Custom Variables...");
 				//ES2.Save(FFU_BE_Base.allPerksList, "permanent.es2?tag=unlockedItemIds");
 				//foreach (Fleet fleet in Resources.FindObjectsOfTypeAll<Fleet>()) Debug.LogWarning($"Fleet: {fleet.name}");
 				if (ES2.Exists("start.es2?tag=researchProgress")) researchProgress = ES2.Load<float>("start.es2?tag=researchProgress");
