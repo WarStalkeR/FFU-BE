@@ -338,6 +338,15 @@ namespace RST.UI {
 		public Image entryButtonHSign1 => buttonHardcore.GetChild(1).GetChild(0).GetChild(2).GetComponent<Image>();
 		public Image entryButtonHSign2 => buttonHardcore.GetChild(1).GetChild(1).GetChild(2).GetComponent<Image>();
 		public Image entryButtonHSign3 => buttonHardcore.GetChild(1).GetChild(2).GetChild(2).GetComponent<Image>();
+		public Image entryButtonBColor1 => buttonBeginner.GetChild(1).GetChild(0).GetChild(1).GetComponent<Image>();
+		public Image entryButtonBColor2 => buttonBeginner.GetChild(1).GetChild(1).GetChild(1).GetComponent<Image>();
+		public Image entryButtonBColor3 => buttonBeginner.GetChild(1).GetChild(2).GetChild(1).GetComponent<Image>();
+		public Image entryButtonCColor1 => buttonChallenging.GetChild(1).GetChild(0).GetChild(1).GetComponent<Image>();
+		public Image entryButtonCColor2 => buttonChallenging.GetChild(1).GetChild(1).GetChild(1).GetComponent<Image>();
+		public Image entryButtonCColor3 => buttonChallenging.GetChild(1).GetChild(2).GetChild(1).GetComponent<Image>();
+		public Image entryButtonHColor1 => buttonHardcore.GetChild(1).GetChild(0).GetChild(1).GetComponent<Image>();
+		public Image entryButtonHColor2 => buttonHardcore.GetChild(1).GetChild(1).GetChild(1).GetComponent<Image>();
+		public Image entryButtonHColor3 => buttonHardcore.GetChild(1).GetChild(2).GetChild(1).GetComponent<Image>();
 		public Image entryButtonBBackground => buttonBeginner.GetChild(0).GetChild(0).GetComponent<Image>();
 		public Image entryButtonCBackground => buttonChallenging.GetChild(0).GetChild(0).GetComponent<Image>();
 		public Image entryButtonHBackground => buttonHardcore.GetChild(0).GetChild(0).GetComponent<Image>();
@@ -399,6 +408,15 @@ namespace RST.UI {
 				entryButtonHSign1.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
 				entryButtonHSign2.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
 				entryButtonHSign3.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonBColor1.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonBColor2.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonBColor3.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonCColor1.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonCColor2.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonCColor3.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonHColor1.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonHColor2.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonHColor3.color = new Color { r = 1, g = 0, b = 0, a = 1 };
 			} else {
 				entryButtonBBackground.sprite = FFU_BE_Defs.dataMenuSpritesSet[2];
 				entryButtonCBackground.sprite = FFU_BE_Defs.dataMenuSpritesSet[2];
@@ -412,6 +430,15 @@ namespace RST.UI {
 				entryButtonHSign1.sprite = FFU_BE_Defs.dataMenuSpritesSet[0];
 				entryButtonHSign2.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
 				entryButtonHSign3.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
+				entryButtonBColor1.color = new Color { r = 0, g = 1, b = 0, a = 1 };
+				entryButtonBColor2.color = new Color { r = 0, g = 1, b = 0, a = 1 };
+				entryButtonBColor3.color = new Color { r = 0, g = 1, b = 0, a = 1 };
+				entryButtonCColor1.color = new Color { r = 0, g = 1, b = 0, a = 1 };
+				entryButtonCColor2.color = new Color { r = 0, g = 1, b = 0, a = 1 };
+				entryButtonCColor3.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonHColor1.color = new Color { r = 0, g = 1, b = 0, a = 1 };
+				entryButtonHColor2.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonHColor3.color = new Color { r = 1, g = 0, b = 0, a = 1 };
 			}
 		}
 		private void UpdateDifficultyHints(bool isDifficult) {
