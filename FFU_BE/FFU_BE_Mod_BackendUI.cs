@@ -409,10 +409,10 @@ namespace RST.UI {
 				entryButtonHSign2.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
 				entryButtonHSign3.sprite = FFU_BE_Defs.dataMenuSpritesSet[1];
 				entryButtonBColor1.color = new Color { r = 1, g = 0, b = 0, a = 1 };
-				entryButtonBColor2.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonBColor2.color = new Color { r = 1, g = 0.7f, b = 0, a = 1 };
 				entryButtonBColor3.color = new Color { r = 1, g = 0, b = 0, a = 1 };
 				entryButtonCColor1.color = new Color { r = 1, g = 0, b = 0, a = 1 };
-				entryButtonCColor2.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonCColor2.color = new Color { r = 1, g = 0.4f, b = 0, a = 1 };
 				entryButtonCColor3.color = new Color { r = 1, g = 0, b = 0, a = 1 };
 				entryButtonHColor1.color = new Color { r = 1, g = 0, b = 0, a = 1 };
 				entryButtonHColor2.color = new Color { r = 1, g = 0, b = 0, a = 1 };
@@ -437,7 +437,7 @@ namespace RST.UI {
 				entryButtonCColor2.color = new Color { r = 0, g = 1, b = 0, a = 1 };
 				entryButtonCColor3.color = new Color { r = 1, g = 0, b = 0, a = 1 };
 				entryButtonHColor1.color = new Color { r = 0, g = 1, b = 0, a = 1 };
-				entryButtonHColor2.color = new Color { r = 1, g = 0, b = 0, a = 1 };
+				entryButtonHColor2.color = new Color { r = 1, g = 1, b = 0, a = 1 };
 				entryButtonHColor3.color = new Color { r = 1, g = 0, b = 0, a = 1 };
 			}
 		}
