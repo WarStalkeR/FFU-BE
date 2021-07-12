@@ -12,7 +12,7 @@ namespace FFU_Bleeding_Edge {
 		public static readonly string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\LocalLow\Interactive Fate\Shortest Trip To Earth\";
 		public static readonly string modConfDir = @"ModsConf\";
 		public static readonly string modConfFile = @"FFU_Bleeding_Edge.ini";
-		private static readonly string[] shipEntries = { "Tigerfish", "NukeRunner", "RogueRat", "Exception", "Weirdship", "EasyTiger", "Atlas", "Roundship", "BattleTiger", "Engiship", "Bluestar", "Gardenship", "Endurance" };
+		private static readonly string[] shipEntries = { "Tigerfish", "NukeRunner", "RogueRat", "Exception", "Weirdship", "EasyTiger", "Atlas", "Roundship", "Engiship", "Bluestar", "Gardenship", "BattleTiger", "Shybettle", "Endurance" };
 		private static int GetShipPrefabID(string shipType) {
 			switch (shipType) {
 				case "Tigerfish": return 516057105;
@@ -27,6 +27,7 @@ namespace FFU_Bleeding_Edge {
 				case "Roundship": return 1251918188;
 				case "Engiship": return 853503871;
 				case "BattleTiger": return 1452660923;
+				case "Shybettle": return 42388666;
 				case "Endurance": return 1939804939;
 				default: return -1;
 			}
@@ -45,6 +46,7 @@ namespace FFU_Bleeding_Edge {
 				case 1251918188: return "Warpshell";
 				case 853503871: return "Riggy";
 				case 1452660923: return "Battle Tiger";
+				case 42388666: return "Shybettle";
 				case 1939804939: return "Endurance";
 				default: return "???";
 			}
@@ -198,18 +200,21 @@ namespace FFU_Bleeding_Edge {
 			modConfig["CrewSpawn"]["shipEasyTiger"] = "826379097*4|1727276051*2";
 			modConfig["CrewSpawn"]["shipRoundship"] = "826379097*2|488555786*6";
 			modConfig["CrewSpawn"]["shipWeirdship"] = "488555786*2|768455465*2";
-			modConfig["CrewSpawn"]["shipBattleTiger"] = "826379097*4|190195895*2|1481089982*2|1727276051*2";
 			modConfig["CrewSpawn"]["shipEngiship"] = "826379097*2|190195895*2|1351800556*4";
 			modConfig["CrewSpawn"]["shipBluestar"] = "421109168*4|1481089982*4";
 			modConfig["CrewSpawn"]["shipGardenship"] = "826379097*4|1481089982*2";
+			modConfig["CrewSpawn"]["shipBattleTiger"] = "826379097*4|190195895*2|1481089982*2|1727276051*2";
+			modConfig["CrewSpawn"]["shipShybettle"] = "768455465*4|928833842*4|488555786*4";
 			modConfig["CrewSpawn"]["shipEndurance"] = "826379097*4|190195895*4|1351800556*4";
 			modConfig.Save(appDataPath + modConfDir + modConfFile);
 		}
 		public static List<int> allPerksList = new List<int>(new int[] {
+			42388666,
 			66885230,
 			487234563,
 			516057105,
 			578937222,
+			853503871,
 			1106792042,
 			1251918188,
 			1772361532,
@@ -412,6 +417,7 @@ namespace FFU_Bleeding_Edge {
 			2140969742
 		});
 		public static List<int> allShipsList = new List<int>(new int[] {
+			42388666,
 			66885230,
 			487234563,
 			516057105,

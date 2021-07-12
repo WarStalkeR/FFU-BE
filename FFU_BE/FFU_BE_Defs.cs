@@ -14,7 +14,7 @@ using System;
 
 namespace FFU_Bleeding_Edge {
 	public class FFU_BE_Defs {
-		public static string modVersion = "1.0.3.5";
+		public static string modVersion = "1.0.4.0";
 		//Temporary Data
 		public static bool flagDLC_SupPak = false;
 		public static bool flagDLC_OldEnm = false;
@@ -377,6 +377,10 @@ namespace FFU_Bleeding_Edge {
 				new KeyValuePair<int, int>(190195895, 2),
 				new KeyValuePair<int, int>(1481089982, 2),
 				new KeyValuePair<int, int>(1727276051, 2)})},
+			{ 42388666, new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
+				new KeyValuePair<int, int>(768455465, 4),
+				new KeyValuePair<int, int>(928833842, 4),
+				new KeyValuePair<int, int>(488555786, 4)})},
 			{ 1939804939, new List<KeyValuePair<int, int>>(new KeyValuePair<int, int>[]{
 				new KeyValuePair<int, int>(826379097, 4),
 				new KeyValuePair<int, int>(190195895, 4),
@@ -390,10 +394,11 @@ namespace FFU_Bleeding_Edge {
 			{ 1920692188, new List<KeyValuePair<int, int>>()},	//_EasyTiger
 			{ 1251918188, new List<KeyValuePair<int, int>>()},	//_Roundship
 			{ 1809014558, new List<KeyValuePair<int, int>>()},	//_Weirdship
-			{ 1452660923, new List<KeyValuePair<int, int>>()},	//_BattleTiger
 			{ 853503871,  new List<KeyValuePair<int, int>>()},	//_Engiship
 			{ 1772361532, new List<KeyValuePair<int, int>>()},	//_Bluestar
 			{ 1106792042, new List<KeyValuePair<int, int>>()},	//_Gardenship
+			{ 1452660923, new List<KeyValuePair<int, int>>()},	//_BattleTiger
+			{ 42388666,   new List<KeyValuePair<int, int>>()},	//_WarBug
 			{ 1939804939, new List<KeyValuePair<int, int>>()}};	//_Endurance
 		public static void LoadModPropsAndFeatures() {
 			if (!firstRun) {

@@ -112,13 +112,17 @@ namespace RST.UI {
 		public ResourceValueGroup SourceRes { get; private set; }
 		public ResourceValueGroup TargetRes { get; private set; }
 		private Image uiIcon => transform.GetChild(1).GetComponent<Image>();
-		private Sprite sOrganicsImg => transform.GetChild(2).GetChild(1).GetComponent<Image>().sprite;
+		private Sprite sOrganicsImg => transform.GetChild(2).GetChild(2).GetComponent<Image>().sprite;
 		private Sprite sFuelImg => transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite;
-		private Sprite sMetalsImg => transform.GetChild(2).GetChild(5).GetComponent<Image>().sprite;
-		private Sprite sSyntheticsImg => transform.GetChild(2).GetChild(2).GetComponent<Image>().sprite;
-		private Sprite sExplosivesImg => transform.GetChild(2).GetChild(3).GetComponent<Image>().sprite;
-		private Sprite sExoticsImg => transform.GetChild(2).GetChild(4).GetComponent<Image>().sprite;
-		private Sprite sCreditsImg => transform.GetChild(2).GetChild(6).GetComponent<Image>().sprite;
+		private Sprite sMetalsImg => transform.GetChild(2).GetChild(10).GetComponent<Image>().sprite;
+		private Sprite sSyntheticsImg => transform.GetChild(2).GetChild(4).GetComponent<Image>().sprite;
+		private Sprite sExplosivesImg => transform.GetChild(2).GetChild(6).GetComponent<Image>().sprite;
+		private Sprite sExoticsImg => transform.GetChild(2).GetChild(8).GetComponent<Image>().sprite;
+		private Sprite sCreditsImg => transform.GetChild(2).GetChild(12).GetComponent<Image>().sprite;
+		private Transform uiConversionCost => transform.GetChild(2);
+		private Transform uiExcessWarning => transform.GetChild(7);
+		private Image uiConvCostExotics => transform.GetChild(2).GetChild(8).GetComponent<Image>();
+		private Image uiConvResultExotics => transform.GetChild(6).GetChild(4).GetComponent<Image>();
 		public void FillWithDataFrom(MaterialsConverterModule converter, int recipeNum) {
 			Converter = converter;
 			selectedCoversionRecipe = recipeNum;
@@ -222,8 +226,9 @@ namespace RST.UI {
 			plus.onClick.AddListener(PlusClicked);
 			allocateExcessButton.onClick.AddListener(AllocateExcessClicked);
 			convButton.onClick.AddListener(ConvertClicked);
-			adjustPosition(transform.GetChild(3), -45, 0, 0);
-			transform.GetChild(7).GetChild(4).GetComponent<Image>().sprite = transform.GetChild(3).GetChild(8).GetComponent<Image>().sprite;
+			adjustPosition(uiExcessWarning, -25, 0, 0);
+			adjustPosition(uiConversionCost, -45, 0, 0);
+			uiConvResultExotics.sprite = uiConvCostExotics.sprite;
 		}
 		private void OnDisable() {
 			minus.onClick.RemoveListener(MinusClicked);

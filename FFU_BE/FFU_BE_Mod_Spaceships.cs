@@ -4589,10 +4589,11 @@ namespace FFU_Bleeding_Edge {
 					case "00 Easy Tiger": shipPrefabID = 1920692188; break;
 					case "08 Roundship": shipPrefabID = 1251918188; break;
 					case "03 Weirdship": shipPrefabID = 1809014558; break;
-					case "BattleTiger": shipPrefabID = 1452660923; break;
 					case "Engiship": shipPrefabID = 853503871; break;
 					case "07 Bluestar MK III scientific": shipPrefabID = 1772361532; break;
 					case "05 Gardenship": shipPrefabID = 1106792042; break;
+					case "BattleTiger": shipPrefabID = 1452660923; break;
+					case "WarBug": shipPrefabID = 42388666; break;
 					case "10 Endurance": shipPrefabID = 1939804939; break;
 				}
 				if (shipPrefabID > 0) {
@@ -4698,16 +4699,6 @@ namespace FFU_Bleeding_Edge {
 					resSet.credits = FFU_BE_Defs.NewExactValue(40000);
 					FFU_BE_Defs.prefabResourceSets.Add(resSet);
 					break;
-					case "BattleTiger":
-					resSet.organics = FFU_BE_Defs.NewExactValue(10000);
-					resSet.fuel = FFU_BE_Defs.NewExactValue(15000);
-					resSet.metals = FFU_BE_Defs.NewExactValue(12500);
-					resSet.synthetics = FFU_BE_Defs.NewExactValue(12500);
-					resSet.explosives = FFU_BE_Defs.NewExactValue(15000);
-					resSet.exotics = FFU_BE_Defs.NewExactValue(1250);
-					resSet.credits = FFU_BE_Defs.NewExactValue(125000);
-					FFU_BE_Defs.prefabResourceSets.Add(resSet);
-					break;
 					case "Engiship":
 					resSet.organics = FFU_BE_Defs.NewExactValue(5000);
 					resSet.fuel = FFU_BE_Defs.NewExactValue(15000);
@@ -4736,6 +4727,26 @@ namespace FFU_Bleeding_Edge {
 					resSet.explosives = FFU_BE_Defs.NewExactValue(4500);
 					resSet.exotics = FFU_BE_Defs.NewExactValue(250);
 					resSet.credits = FFU_BE_Defs.NewExactValue(50000);
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+					case "BattleTiger":
+					resSet.organics = FFU_BE_Defs.NewExactValue(10000);
+					resSet.fuel = FFU_BE_Defs.NewExactValue(15000);
+					resSet.metals = FFU_BE_Defs.NewExactValue(12500);
+					resSet.synthetics = FFU_BE_Defs.NewExactValue(12500);
+					resSet.explosives = FFU_BE_Defs.NewExactValue(15000);
+					resSet.exotics = FFU_BE_Defs.NewExactValue(1250);
+					resSet.credits = FFU_BE_Defs.NewExactValue(125000);
+					FFU_BE_Defs.prefabResourceSets.Add(resSet);
+					break;
+					case "WarBug":
+					resSet.organics = FFU_BE_Defs.NewExactValue(15000);
+					resSet.fuel = FFU_BE_Defs.NewExactValue(12500);
+					resSet.metals = FFU_BE_Defs.NewExactValue(12500);
+					resSet.synthetics = FFU_BE_Defs.NewExactValue(12500);
+					resSet.explosives = FFU_BE_Defs.NewExactValue(15000);
+					resSet.exotics = FFU_BE_Defs.NewExactValue(1500);
+					resSet.credits = FFU_BE_Defs.NewExactValue(125000);
 					FFU_BE_Defs.prefabResourceSets.Add(resSet);
 					break;
 					case "10 Endurance":
@@ -4819,14 +4830,6 @@ namespace FFU_Bleeding_Edge {
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 36));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
-					case 1452660923: //BattleTiger
-					ship.MaxHealthAdd = 700;
-					ship.survivabilityText = "GUD";
-					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 350));
-					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Shielded Door"));
-					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 54));
-					FFU_BE_Defs.prefabShipsList.Add(ship);
-					break;
 					case 853503871: //Engiship
 					ship.MaxHealthAdd = 550;
 					ship.survivabilityText = "GUD";
@@ -4851,6 +4854,22 @@ namespace FFU_Bleeding_Edge {
 					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 42));
 					FFU_BE_Defs.prefabShipsList.Add(ship);
 					break;
+					case 1452660923: //BattleTiger
+					ship.MaxHealthAdd = 700;
+					ship.survivabilityText = "EPIC";
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 350));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Shielded Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 54));
+					FFU_BE_Defs.prefabShipsList.Add(ship);
+					break;
+					case 42388666: //WarBug
+					ship.MaxHealthAdd = 800;
+					ship.survivabilityText = "EPIC";
+					FFU_BE_Defs.shipPrefabsDoorHealth.Add(new KeyValuePair<int, int>(ship.PrefabId, 375));
+					FFU_BE_Defs.shipPrefabsDoorName.Add(new KeyValuePair<int, string>(ship.PrefabId, "Biofiber Door"));
+					FFU_BE_Defs.shipPrefabsStorageSize.Add(new KeyValuePair<int, int>(ship.PrefabId, 48));
+					FFU_BE_Defs.prefabShipsList.Add(ship);
+					break;
 					case 1939804939: //10 Endurance
 					ship.MaxHealthAdd = 600;
 					ship.survivabilityText = "EPIC";
@@ -4872,10 +4891,11 @@ namespace FFU_Bleeding_Edge {
 			if (shipPrefabID == 1920692188) return idx; idx++; //Easy Tiger
 			if (shipPrefabID == 1251918188) return idx; idx++; //Roundship
 			if (shipPrefabID == 1809014558) return idx; idx++; //Weirdship
-			if (shipPrefabID == 1452660923) return idx; idx++; //BattleTiger
 			if (shipPrefabID == 853503871) return idx; idx++; //Engiship
 			if (shipPrefabID == 1772361532) return idx; idx++; //Bluestar
 			if (shipPrefabID == 1106792042) return idx; idx++; //Gardenship
+			if (shipPrefabID == 1452660923) return idx; idx++; //BattleTiger
+			if (shipPrefabID == 42388666) return idx; idx++; //WarBug
 			if (shipPrefabID == 1939804939) return idx; idx++; //Endurance
 			return idx + 100;
 		}
